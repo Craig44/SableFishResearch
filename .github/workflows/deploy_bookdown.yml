@@ -16,37 +16,14 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: |
-            any::rmarkdown
-            any::devtools
+            any::ggplot2
+            any::dplyr
             any::knitr
+            any::rmarkdown
             any::bookdown
-            any::bayesplot
             any::purrr
-            any::DHARMa
             any::mvtnorm
-            any::testthat
             any::tidyr
-          dependencies: '"hard"'
-      - name: Install Casal2
-        env:
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # https://github.com/settings/tokens
-        run: Rscript -e 'devtools::install_github("https://github.com/NIWAFisheriesModelling/CASAL2", subdir="R-libraries/casal2", ref = "HEAD")'
-
-      - name: Build r4Casal2
-        env:
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # https://github.com/settings/tokens
-        run: Rscript -e 'devtools::build(path = getwd())'
-
-      - name: artifact r4Casal2
-        uses: actions/upload-artifact@v1
-        with:
-          name: r4Casal2.tar.gz
-          path: r4Casal2_1.0.0.tar.gz
-
-      - name: Install r4Casal2
-        env:
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # https://github.com/settings/tokens
-        run: Rscript -e "devtools::install_github('NIWAFisheriesModelling/r4Casal2', build_vignettes  = F,dependencies = F)"
 
       - name: Render Gitbook
         run: Rscript -e 'bookdown::render_book(input = "GitBook")'
@@ -55,8 +32,6 @@ jobs:
         with:
           name: _book
           path: GitBook/_book/
-      - name: Run Unittests for r4Casal2
-        run: Rscript -e 'library(r4Casal2); testthat::test_dir("tests/testthat/")'
 
 # Need to first create an empty gh-pages branch
 # see https://pkgdown.r-lib.org/reference/deploy_site_github.html
@@ -84,39 +59,5 @@ jobs:
           build_dir: _book/                     # "_site/" by default
           branch: gh-pages      #
 
-## test it on windows
-  Windows:
-    name: Windows-Build
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@v2
-      - uses: r-lib/actions/setup-pandoc@v2
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: |
-            any::rmarkdown
-            any::devtools
-            any::knitr
-            any::bookdown
-            any::bayesplot
-            any::purrr
-            any::DHARMa
-            any::mvtnorm
-            any::testthat
-            any::tidyr
-          dependencies: '"hard"'
-      - name: Install Casal2
-        env:
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # https://github.com/settings/tokens
-        run: Rscript -e "remotes::install_github(repo = 'NIWAFisheriesModelling/CASAL2', subdir='R-libraries/casal2', ref = 'HEAD', dependencies = F)"
-
-      - name: Install r4Casal2
-        env:
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # https://github.com/settings/tokens
-        run: Rscript -e "remotes::install_github(repo = 'NIWAFisheriesModelling/r4Casal2', dependencies = F)"
-
-      - name: Run Unittests for r4Casal2
-        run: Rscript -e "library(r4Casal2); testthat::test_dir(path = file.path('tests', 'testthat'))"
 
 
