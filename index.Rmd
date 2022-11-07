@@ -5,15 +5,18 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
+includes:
+ before_body: preamble-mathjax.tex
 #url: https:///r4Casal2/
 # cover-image: path to the social sharing image like images/cover.jpg
 description: |
   This book demonstrates documents my post doctoral research relating to the SableFish fishery.
 link-citations: yes
 #github-repo: https://github.com/NIWAFisheriesModelling/r4Casal2
+
 ---
 
-# Sablefish stock assessment research
+# Overview
 
 This Gitbook documents our research for the Sablefish stock assessment in the Bering sea and Aluetian islands.
 

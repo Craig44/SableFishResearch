@@ -1,0 +1,10 @@
+# Describing the current Stock assessment model {#modeldescription}
+The latest published stock assessment [@goethel2021assessment] is a sexually disaggregated integrated age-structured model. Let $\bm{N}$. The process model follows Equation \@ref(eq:processmodel),
+
+\begin{equation} 
+  N_{a,s,y} = f\left(N_{a-1,s,y-1}\right) 
+  (\#eq:processmodel)
+\end{equation} 
+
+See equation \@ref(eq:processmodel)
+

@@ -1,0 +1,6 @@
+# A list of objectives/milestones that we have set along the project life {#objectives}
+
+
+- [ ] Translate current stock assessment (Chapter \@ref(modeldescription)) from ADMB to TMB. Planned date of completion is December 1 2022. There are a few reasons for this
+- [ ] Develop a spatailly explicit estimation model in TMB that generalises the current assessment model. Still need to give this a lot of thought especially how we want to integrate the tagging data (Chapter \@ref(tagdata))
+

@@ -1,0 +1,4 @@
+# Tagging data and studies {#tagdata}
+Since 1972 there have been approximately 400 000 sablefish tagged in Alaksa waters, of which over 38 500 have been recovered. Although there is extensive and long term tagging data, this information is not currently directly included in the stock assessment [@goethel2021assessment].
+
+Recent movment studies on Sablefish i.e., @hanselman2015move have highlighted the dyanmic nature of Sablefish movement.
