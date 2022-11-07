@@ -1,0 +1,39 @@
+--- 
+title: "SableFish stock assessment"
+author: "C.Marsh"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+#url: https:///r4Casal2/
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This book demonstrates documents my post doctoral research relating to the SableFish fishery.
+link-citations: yes
+#github-repo: https://github.com/NIWAFisheriesModelling/r4Casal2
+---
+
+# cover-image: path to the social sharing image like images/cover.jpg
+
+Placeholder
+
+
+
+<!--chapter:end:index.Rmd-->
+
+# Current model description {#modeldescription}
+
+
+
+
+
+
+
+<!--chapter:end:01-ListOfKeyFunctionsWithDescription.Rmd-->
+
+`r if (knitr::is_html_output()) '
+# References {-}
+'`
+
+<!--chapter:end:10-references.Rmd-->
+
