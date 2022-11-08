@@ -31,7 +31,7 @@
   
   
 
-<link rel="next" href="modeldescription.html"/>
+<link rel="next" href="objectives.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -119,6 +119,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -133,14 +155,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">r4Casal2</a></li>
+<li><a href="./">Sablefish Research</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Sablefish stock assessment research</a></li>
-<li class="chapter" data-level="2" data-path="modeldescription.html"><a href="modeldescription.html"><i class="fa fa-check"></i><b>2</b> Current model description</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="2" data-path="objectives.html"><a href="objectives.html"><i class="fa fa-check"></i><b>2</b> A list of objectives/milestones that we have set along the project life</a></li>
+<li class="chapter" data-level="3" data-path="modeldescription.html"><a href="modeldescription.html"><i class="fa fa-check"></i><b>3</b> Describing the current Stock assessment model</a></li>
+<li class="chapter" data-level="4" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>4</b> Tagging data and studies</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
-<li><a href="https://github.com/NIWAFisheriesModelling/r4Casal2" target="blank">Github Repo here</a></li>
+<li><a href="https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment" target="blank">NOAA Website</a></li>
 
 </ul>
 
@@ -164,8 +188,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p class="author"><em>C.Marsh</em></p>
 <p class="date"><em>2022-11-08</em></p>
 </div>
-<div id="sablefish-stock-assessment-research" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Sablefish stock assessment research<a href="index.html#sablefish-stock-assessment-research" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="overview" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Overview<a href="index.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This Gitbook documents our research for the Sablefish stock assessment in the Bering sea and Aluetian islands.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TMB)</span>
 <span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#library(stockassessmenthelper)</span></span>
@@ -181,7 +205,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 
-<a href="modeldescription.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="objectives.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -212,7 +236,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/NIWAFisheriesModelling/r4Casal2/edit/main/index.Rmd",
+"link": "https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment/index.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -235,6 +259,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

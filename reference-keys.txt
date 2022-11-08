@@ -1,2 +1,5 @@
-sablefish-stock-assessment-research
+eq:processmodel
+overview
+objectives
 modeldescription
+tagdata
