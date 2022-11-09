@@ -101,6 +101,8 @@ R_1, & a = a_0\\
 \end{align*}
 
 ### Population dynamics \left(\(f\left(.\right)\)\right) {-}
+Describe the annual cycle for the model
+
 
 
 
