@@ -4,12 +4,12 @@ The latest published stock assessment [@goethel2021assessment] is a sexually dis
 \begin{equation} 
   \boldsymbol{N_{y,s}} = 
   \begin{cases}
-  g\left(\boldsymbol{N_{y-1,s}}\right), & y = 1959 \text{ Initial model year}\\
-  f\left(\boldsymbol{N_{y-1,s}}\right), & y > 1959
+  g\left(\boldsymbol{\theta}\right), & y = 1959 \text{ Initial model year}\\
+  f\left(\boldsymbol{N_{y-1,s}}|\boldsymbol{\theta}\right), & y > 1959
   \end{cases}
   (\#eq:processmodel)
 \end{equation} 
-where, \(g(.)\) is the function describing initial conditions for the partition and \(f(.)\) is the function that applies populations dyanmics each year i.e., birth, death, growth and migration. See Section \@ref(symbols) \& \@ref(modelequations) for a detailed description of \(g(.)\) and \(f(.)\).
+where, \(g(.)\) is the function describing initial conditions for the partition and \(f(.)\) is the function that applies populations dyanmics each year i.e., birth, death, growth and migration. See Section \@ref(symbols) \& \@ref(modelequations) for a detailed description of \(g(.)\) and \(f(.)\) and \(\boldsymbol{\theta}\) is the set of estimable (not all are estimated) parameters.
 
 ## Symbol Notation {#symbols}
 +----------------------------+-----------------------------------------------------------------------------+
@@ -89,7 +89,8 @@ where, \(g(.)\) is the function describing initial conditions for the partition 
 
 ## Model equations {#modelequations}
 
-### Initialisation {-}
+### Initialisation \left(\(g\left(.\right)\)\right) {-}
+
 \begin{align*}
 N_{a,1,s} = 
 \begin{cases}
@@ -98,6 +99,8 @@ R_1, & a = a_0\\
 \exp( \mu_r) \exp-( a - 1) ( M + F_{hist} * \mu_{LL} * S^{LL}_{a - 1,1})(1 - \exp( M + F_{hist} * \mu_{LL} * S^{LL}_{a - 1,1}))^{-1}, &  a = a+
 \end{cases}
 \end{align*}
+
+### Population dynamics \left(\(f\left(.\right)\)\right) {-}
 
 
 
