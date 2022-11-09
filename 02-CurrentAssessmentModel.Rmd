@@ -1,10 +1,105 @@
-# Describing the current Stock assessment model {#modeldescription}
-The latest published stock assessment [@goethel2021assessment] is a sexually disaggregated integrated age-structured model. Let $\bm{N}$. The process model follows Equation \@ref(eq:processmodel),
+# Current Stock assessment model {#modeldescription}
+The latest published stock assessment [@goethel2021assessment] is a sexually disaggregated integrated age-structured model. Let \(\boldsymbol{N_{y,s}}\) denote a vector of ages in year \(y\) for sex \(s\) (the partition) i.e., \(\boldsymbol{N_{y,s}} = (N_{1,y,s}, N_{2,y,s}, \dots, N_{a+,y,s})^T\). The general process model is sequential and follows the general Equation \@ref(eq:processmodel),
 
 \begin{equation} 
-  N_{a,s,y} = f\left(N_{a-1,s,y-1}\right) 
+  \boldsymbol{N_{y,s}} = 
+  \begin{cases}
+  g\left(\boldsymbol{N_{y-1,s}}\right), & y = 1959 \text{ Initial model year}\\
+  f\left(\boldsymbol{N_{y-1,s}}\right), & y > 1959
+  \end{cases}
   (\#eq:processmodel)
 \end{equation} 
+where, \(g(.)\) is the function describing initial conditions for the partition and \(f(.)\) is the function that applies populations dyanmics each year i.e., birth, death, growth and migration. See Section \@ref(symbols) \& \@ref(modelequations) for a detailed description of \(g(.)\) and \(f(.)\).
 
-See equation \@ref(eq:processmodel)
+## Symbol Notation {#symbols}
++----------------------------+-----------------------------------------------------------------------------+
+| Symbol                     | Description                            
++============================+=============================================================================+
+| \(y\)                      | Year, \(y = 1960, \dots, T\) 
++----------------------------+-----------------------------------------------------------------------------+
+| \(T\)                      | Terminal year of the model
++----------------------------+-----------------------------------------------------------------------------+
+| \(A\)                      | Model age cohort, i.e., \(a = a_0, a_0 + 1\) **Is this ycs?**
++----------------------------+-----------------------------------------------------------------------------+
+| \(a_0\)                    | Recruitment age to the model. at age - 2 **???**
++----------------------------+-----------------------------------------------------------------------------+
+| \(a+\)                     | Plus-group age class (oldest age considered plus all older ages)
++----------------------------+-----------------------------------------------------------------------------+
+| \(L\)                      | length class
++----------------------------+-----------------------------------------------------------------------------+
+| \(n_L\)                    | Number of length classes
++----------------------------+-----------------------------------------------------------------------------+
+| \(g\)                      | gear type index, i.e. longline survey, longline fishery, trawl fishery
++----------------------------+-----------------------------------------------------------------------------+
+| \(x\)                      | log-likelihoos index
++----------------------------+-----------------------------------------------------------------------------+
+| \(\bar{w}_{a,y, s}\)       | Average weight at age \(a\), year \(y\) and sex \(s\)
++----------------------------+-----------------------------------------------------------------------------+
+| \(\phi_{a,y}\)             | Proportion of female mature by age and year
++----------------------------+-----------------------------------------------------------------------------+
+| \(\ln \mu_{r}\)            | Average log-recruitment
++----------------------------+-----------------------------------------------------------------------------+
+| \(\ln \mu_{f}\)            | Average log-fishing mortality
++----------------------------+-----------------------------------------------------------------------------+
+| \(\phi_{y,g}\)             | annual fishing mortality deviation by gear (log space)
++----------------------------+-----------------------------------------------------------------------------+
+| \(\tau_{y}\)               | annual recruitment deviation \(\sim LogNormal\left(0,\sigma_r\right)\)
++----------------------------+-----------------------------------------------------------------------------+
+| \(\sigma_r\)               | Recruitment standard deviation
++----------------------------+-----------------------------------------------------------------------------+
+| \(N_{a,y,s}\)              | Numbers of fish at age \(a\) in year \(y\) of sex \(s\)
++----------------------------+-----------------------------------------------------------------------------+
+| \(M\)                      | Natural mortality
++----------------------------+-----------------------------------------------------------------------------+
+| \(F_{a,y,g}\)              | Fishing mortality for year \(y\), age \(a\) and gear \(g\)
++----------------------------+-----------------------------------------------------------------------------+
+| \(F_{hist}\)               | Historical proportion of Fishing mortality 
++----------------------------+-----------------------------------------------------------------------------+
+| \(Z_{a,y}\)                | Total mortality for year \(y\), age \(a\) \(=\sum\limits_g F_{a,y,g} + M\)
++----------------------------+-----------------------------------------------------------------------------+
+| \(R_{y}\)                  | Total mortality for year \(y\), age \(a\) \(=\sum\limits_g F_{a,y,g} + M\)
++----------------------------+-----------------------------------------------------------------------------+
+| \(B_{y}\)                  | Spawning biomass in year \(y\)
++----------------------------+-----------------------------------------------------------------------------+
+| \(S^g_{a,y,s}\)            | Selectivity at age \(a\) for gear type \(g\) and sex \(s\)
++----------------------------+-----------------------------------------------------------------------------+
+| \(a_50\)                   | age at 50\% selection for ascending limb 
++----------------------------+-----------------------------------------------------------------------------+
+| \(d_50\)                   | age at 50\% selection for descending limb 
++----------------------------+-----------------------------------------------------------------------------+
+| \(\delta\)                 | slope/shape parameters for different logistic curves
++----------------------------+-----------------------------------------------------------------------------+
+| \(\boldsymbol{A}\)         | ageing-error matrix dimensions \(a+ \times a+\)
++----------------------------+-----------------------------------------------------------------------------+
+| \(\boldsymbol{A}^l_s\)     | age to length conversion matrix by sex. dimensions  \(a+ \times n_L\)
++----------------------------+-----------------------------------------------------------------------------+
+| \(q_g\)                    | abundance index catchability coeffecient by gear
++----------------------------+-----------------------------------------------------------------------------+
+| \(\lambda_x\)              | Statistical weight (penalty) for component \(x\)
++----------------------------+-----------------------------------------------------------------------------+
+| \(P^g_{l,y,s}\)            | Observed proportions at length for gear \(g\) in year \(y\) and sex \(s\)
++----------------------------+-----------------------------------------------------------------------------+
+| \(P^g_{a,y,s}\)            | Observed proportions at age for gear \(g\) in year \(y\) and sex \(s\)
++----------------------------+-----------------------------------------------------------------------------+
+| \(\psi^g_{y}\)             | assumed sample size for gear \(g\) in year \(y\) (for multinomial likelihood)
++----------------------------+-----------------------------------------------------------------------------+
+| \(n_g\)                    | Number of years that age (or length) composition is available for gear \(g\)
++----------------------------+-----------------------------------------------------------------------------+
+
+
+## Model equations {#modelequations}
+
+### Initialisation {-}
+\begin{align*}
+N_{a,1,s} = 
+\begin{cases}
+R_1, & a = a_0\\
+\exp\bigg( \mu_r + \tau_{a_0 - a + 1}\bigg) \exp-\bigg( a - a_0\bigg) \bigg( M + F_{hist} * \mu_{LL} * S^{LL}_{a,1}\bigg), & a_0 < a < a+\\
+\exp( \mu_r) \exp-( a - 1) ( M + F_{hist} * \mu_{LL} * S^{LL}_{a - 1,1})(1 - \exp( M + F_{hist} * \mu_{LL} * S^{LL}_{a - 1,1}))^{-1}, &  a = a+
+\end{cases}
+\end{align*}
+
+
+
+
 
