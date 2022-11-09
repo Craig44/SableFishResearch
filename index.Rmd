@@ -22,12 +22,12 @@ This Gitbook documents our research for the Sablefish stock assessment in the Be
 
 
 ```{r install_packages, results = 'hide', message=FALSE, warning=FALSE}
-library(TMB)
+#library(TMB)
 #library(stockassessmenthelper)
-library(ggplot2)
-library(dplyr)
-library(reshape2)
-library(tidyr)
+#library(ggplot2)
+#library(dplyr)
+#library(reshape2)
+#library(tidyr)
 ```
 ```{r include=FALSE}
 # automatically create a bib database for R packages
