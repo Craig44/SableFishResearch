@@ -2,4 +2,6 @@ eq:processmodel
 overview
 objectives
 modeldescription
+symbols
+modelequations
 tagdata
