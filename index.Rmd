@@ -10,7 +10,7 @@ includes:
 #url: https:///r4Casal2/
 # cover-image: path to the social sharing image like images/cover.jpg
 description: |
-  This book demonstrates documents my post doctoral research relating to the SableFish fishery.
+  This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery.
 link-citations: yes
 #github-repo: https://github.com/NIWAFisheriesModelling/r4Casal2
 
@@ -18,7 +18,7 @@ link-citations: yes
 
 # Overview
 
-This Gitbook documents our research for the Sablefish stock assessment in the Bering sea and Aluetian islands.
+This Gitbook documents our research for the Alaska sablefish (*Anoplopoma fimbria*) stock assessment.
 
 
 ```{r install_packages, results = 'hide', message=FALSE, warning=FALSE}
