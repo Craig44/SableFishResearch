@@ -5,25 +5,25 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Current Stock assessment model | SableFish stock assessment</title>
-  <meta name="description" content="This book demonstrates documents my post doctoral research relating to the SableFish fishery." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="description" content="This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery." />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Current Stock assessment model | SableFish stock assessment" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="This book demonstrates documents my post doctoral research relating to the SableFish fishery." />
+  <meta property="og:description" content="This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 3 Current Stock assessment model | SableFish stock assessment" />
   
-  <meta name="twitter:description" content="This book demonstrates documents my post doctoral research relating to the SableFish fishery." />
+  <meta name="twitter:description" content="This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery." />
   
 
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-11-09" />
+<meta name="date" content="2022-11-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -167,6 +167,10 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#initialisation-gleft.right"><i class="fa fa-check"></i>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#population-dynamics-fleft.right"><i class="fa fa-check"></i>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#calculating-numbers-at-length"><i class="fa fa-check"></i>Calculating numbers at length</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-age"><i class="fa fa-check"></i>Catch at age</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#determining-selectivities-for-fisheries-and-surveys"><i class="fa fa-check"></i>Determining selectivities for fisheries and surveys</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#observations-for-fisheries-and-surveys"><i class="fa fa-check"></i>Observations for fisheries and surveys</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>4</b> Tagging data and studies</a></li>
@@ -193,7 +197,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="modeldescription" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Current Stock assessment model<a href="modeldescription.html#modeldescription" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>The latest published stock assessment <span class="citation">(<a href="#ref-goethel2021assessment" role="doc-biblioref">Goethel et al. 2021</a>)</span> is a sexually disaggregated integrated age-structured model. Let <span class="math inline">\(\boldsymbol{N_{y,s}}\)</span> denote a vector of ages in year <span class="math inline">\(y\)</span> for sex <span class="math inline">\(s\)</span> (the partition) i.e., <span class="math inline">\(\boldsymbol{N_{y,s}} = (N_{1,y,s}, N_{2,y,s}, \dots, N_{a+,y,s})^T\)</span>. The general process model is sequential and follows the general Equation <a href="modeldescription.html#eq:processmodel">(3.1)</a>,</p>
+<p>The latest published stock assessment <span class="citation">(<a href="#ref-goethel2021assessment" role="doc-biblioref">Goethel et al. 2021</a>)</span> is a sexually disaggregated integrated age-structured model. Let <span class="math inline">\(\boldsymbol{N_{y,s}}\)</span> denote a vector of ages in year <span class="math inline">\(y\)</span> for sex <span class="math inline">\(s\)</span> (the partition) i.e., <span class="math inline">\(\boldsymbol{N_{y,s}} = (N_{1,y,s}, N_{2,y,s}, \dots, N_{a_+,y,s})^T\)</span>. The general process model is sequential and follows the general Equation <a href="modeldescription.html#eq:processmodel">(3.1)</a>,</p>
 <p><span class="math display" id="eq:processmodel">\[\begin{equation}
   \boldsymbol{N_{y,s}} =
   \begin{cases}
@@ -226,23 +230,39 @@ where, <span class="math inline">\(g(.)\)</span> is the function describing init
 <td>Terminal year of the model</td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(A\)</span></td>
-<td>Model age cohort, i.e., <span class="math inline">\(a = a_0, a_0 + 1\)</span> <strong>Is this ycs?</strong></td>
+<td><span class="math inline">\(s\)</span></td>
+<td>Sex index <span class="math inline">\(s \in \{1,2\}\)</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(a_0\)</span></td>
-<td>Recruitment age to the model. at age - 2 <strong>???</strong></td>
+<td><span class="math inline">\(r\)</span></td>
+<td>Region index <span class="math inline">\(r \in \{1, \dots, n_r\}\)</span></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(a+\)</span></td>
-<td>Plus-group age class (oldest age considered plus all older ages)</td>
+<td><span class="math inline">\(n_r\)</span></td>
+<td>number of modeled regions</td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(L\)</span></td>
+<td><span class="math inline">\(a\)</span></td>
+<td>Model age cohort, i.e., <span class="math inline">\(a = a_0, a_0 + 1, \dots\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(a_{1}\)</span></td>
+<td>Recruitment age to the model = 2</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(a_+\)</span></td>
+<td>Plus-group age class (oldest age considered plus all older ages)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(n_a\)</span></td>
+<td>Number of age classes modeled <span class="math inline">\(a_+ \ - a_1\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(l\)</span></td>
 <td>length class</td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(n_L\)</span></td>
+<td><span class="math inline">\(n_l\)</span></td>
 <td>Number of length classes</td>
 </tr>
 <tr class="even">
@@ -327,11 +347,11 @@ where, <span class="math inline">\(g(.)\)</span> is the function describing init
 </tr>
 <tr class="even">
 <td><span class="math inline">\(\boldsymbol{A}\)</span></td>
-<td>ageing-error matrix dimensions <span class="math inline">\(a+ \times a+\)</span></td>
+<td>ageing-error matrix dimensions <span class="math inline">\(n_a \ \times \ n_a\)</span></td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(\boldsymbol{A}^l_s\)</span></td>
-<td>age to length conversion matrix by sex. dimensions <span class="math inline">\(a+ \times n_L\)</span></td>
+<td>age to length conversion matrix by sex. dimensions <span class="math inline">\(n_a \ \times \ n_l\)</span></td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(q_g\)</span></td>
@@ -367,15 +387,185 @@ where, <span class="math inline">\(g(.)\)</span> is the function describing init
 <p><span class="math display">\[\begin{align*}
 N_{a,1,s} =
 \begin{cases}
-R_1, &amp; a = a_0\\
-\exp\bigg( \mu_r + \tau_{a_0 - a + 1}\bigg) \exp-\bigg( a - a_0\bigg) \bigg( M + F_{hist} * \mu_{LL} * S^{LL}_{a,1}\bigg), &amp; a_0 &lt; a &lt; a+\\
-\exp( \mu_r) \exp-( a - 1) ( M + F_{hist} * \mu_{LL} * S^{LL}_{a - 1,1})(1 - \exp( M + F_{hist} * \mu_{LL} * S^{LL}_{a - 1,1}))^{-1}, &amp;  a = a+
+R_1, &amp; a = a_1\\
+\exp\bigg( \mu_r + \tau_{a_1 - a + 1}\bigg) \exp-\bigg( a - a_1\bigg) \bigg( M + F_{hist} * \mu_{LL} * S^{LL}_{a,1}\bigg), &amp; a_0 &lt; a &lt; a_+\\
+\exp( \mu_r) \exp-( a - 1) ( M + F_{hist} * \mu_{LL} * S^{LL}_{a - 1,1})(1 - \exp( M + F_{hist} * \mu_{LL} * S^{LL}_{a - 1,1}))^{-1}, &amp;  a = a_+
 \end{cases}
 \end{align*}\]</span></p>
 </div>
 <div id="population-dynamics-fleft.right" class="section level3 unnumbered hasAnchor">
 <h3>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)<a href="modeldescription.html#population-dynamics-fleft.right" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Describe the annual cycle for the model</p>
+</div>
+<div id="calculating-numbers-at-length" class="section level3 unnumbered hasAnchor">
+<h3>Calculating numbers at length<a href="modeldescription.html#calculating-numbers-at-length" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For each year that has a length based observation, numbers at length denoted by <span class="math inline">\(\boldsymbol{N^l}_{y,s} = (N^l_{1,y,s}, \dots, N^l_{n_l,y,s})^T\)</span> (dimension of <span class="math inline">\(\boldsymbol{N^l}_{y,s}\)</span> is <span class="math inline">\(n_l \ \times \ 1\)</span>) were calculated for each sex. This involved multiplying the numbers at age through a age-length transition matrix denoted by <span class="math inline">\(\boldsymbol{A}^l_{y,s}\)</span> (dimensions of <span class="math inline">\(\boldsymbol{A}^l_{y,s}\)</span> are <span class="math inline">\(n_a \ \times \ n_l\)</span> and its rows must sum to 1). The calculation follows Equation <a href="modeldescription.html#eq:agelengthtransition">(3.2)</a>,</p>
+<p><span class="math display" id="eq:agelengthtransition">\[\begin{equation}
+  \boldsymbol{N^l}_{y,s} =  \left(\boldsymbol{A}^l_{y,s} \right)^T \ \times \ \boldsymbol{N_{y,s}}
+  \tag{3.2}
+\end{equation}\]</span>
+where, <span class="math inline">\(\boldsymbol{N_{y,s}}\)</span> is a column vector of numbers at age (dimension <span class="math inline">\(n_a \ \times \ 1\)</span>) at the beginning of year <span class="math inline">\(y\)</span> for sex <span class="math inline">\(s\)</span>.</p>
+</div>
+<div id="catch-at-age" class="section level3 unnumbered hasAnchor">
+<h3>Catch at age<a href="modeldescription.html#catch-at-age" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Catch at age for gear type <span class="math inline">\(g\)</span> denoted by <span class="math inline">\(\boldsymbol{C^g}_{a,y,s}\)</span></p>
+<p><span class="math display" id="eq:catchatage">\[\begin{equation}
+  \boldsymbol{C^g}_{a,y,s} = \frac{F^g_{a,y,s}}{Z_{a,y,s}}   N_{a,y,s} \left(1 - S_{a,y,s} \right)
+  \tag{3.3}
+\end{equation}\]</span></p>
+</div>
+<div id="determining-selectivities-for-fisheries-and-surveys" class="section level3 unnumbered hasAnchor">
+<h3>Determining selectivities for fisheries and surveys<a href="modeldescription.html#determining-selectivities-for-fisheries-and-surveys" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The ADMB model has a hard coded number of selectivities. Some of them relate to changes in the fishery and so represent time-varying blocks. We want to spell these out and simplify for the TMB model. There are nine selectivities labelled <code>fish1</code>, <code>fish2</code>, <code>fish3</code>, <code>fish4</code>, <code>fish5</code>, <code>srv1</code>, <code>srv2</code> and <code>srv10</code>.</p>
+<table>
+<colgroup>
+<col width="27%" />
+<col width="72%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>label</th>
+<th>Selectivity description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>fish1</code></td>
+<td>Longline selectivity from 1960-1994</td>
+</tr>
+<tr class="even">
+<td><code>fish2</code></td>
+<td>Not sure if this is used, maybe this is used for <code>srv6</code>?</td>
+</tr>
+<tr class="odd">
+<td><code>fish3</code></td>
+<td>Trawl selectivity from 1960 - <span class="math inline">\(T\)</span></td>
+</tr>
+<tr class="even">
+<td><code>fish4</code></td>
+<td>Longline selectivity from 1995 -<span class="math inline">\(\ IFQ_y\)</span> (<span class="math inline">\(IFQ_y\)</span> can = <span class="math inline">\(T\)</span></td>
+</tr>
+<tr class="odd">
+<td><code>fish5</code></td>
+<td>Longline selectivity from <span class="math inline">\(IFQ_y \ - \ T\)</span> if there is post IFQ block</td>
+</tr>
+<tr class="even">
+<td><code>srv1</code></td>
+<td>Domestic Longline survey selectivity</td>
+</tr>
+<tr class="odd">
+<td><code>srv2</code></td>
+<td>Japanese Longline survey selectivity</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="observations-for-fisheries-and-surveys" class="section level3 unnumbered hasAnchor">
+<h3>Observations for fisheries and surveys<a href="modeldescription.html#observations-for-fisheries-and-surveys" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="27%" />
+<col width="72%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>label</th>
+<th>Relative Abundance description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>srv1</code></td>
+<td>Biomass domestic longline survey uses both <code>srv1_sel</code> and <code>srv10_sel</code></td>
+</tr>
+<tr class="even">
+<td><code>srv3</code></td>
+<td>Abundance domestic longline survey uses both <code>srv1_sel</code> and <code>srv10_sel</code></td>
+</tr>
+<tr class="odd">
+<td><code>srv2</code></td>
+<td>Biomass survey uses both <code>srv2_sel</code> and <code>srv9_sel</code></td>
+</tr>
+<tr class="even">
+<td><code>srv4</code></td>
+<td>Abundance survey uses both <code>srv2_sel</code> and <code>srv9_sel</code></td>
+</tr>
+<tr class="odd">
+<td><code>srv5</code></td>
+<td>Longline fishery CPUE <code>fish1_sel</code>, <code>fish4_sel</code>, <code>fish5_sel</code></td>
+</tr>
+<tr class="even">
+<td><code>srv6</code></td>
+<td>Japanese LL fishery CPUE</td>
+</tr>
+<tr class="odd">
+<td><code>srv7</code></td>
+<td>NMFS bottom trawl survey (currently GOA only; fit in model)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col width="27%" />
+<col width="72%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>label</th>
+<th>Composition description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ac_fish1</code></td>
+<td>Longline Fishery Age Comp (sex aggregated)</td>
+</tr>
+<tr class="even">
+<td><code>sc_fish1</code></td>
+<td>Longline Fishery LF (sex dis-aggregrated)</td>
+</tr>
+<tr class="odd">
+<td><code>sc_fish3</code></td>
+<td>Trawl Fishery LF (sex disaggregrated)</td>
+</tr>
+<tr class="even">
+<td><code>sc_fish2</code></td>
+<td>LF for japaneses Longline fishery (sex aggregrated) (basically a survey now)</td>
+</tr>
+<tr class="odd">
+<td><code>sc_fish4</code></td>
+<td>LF for japaneses Longline fishery (sex aggregrated) (basically a survey now)</td>
+</tr>
+<tr class="even">
+<td><code>fish_size</code></td>
+<td>LF From japaneses trawl survey? (sex aggregrated)</td>
+</tr>
+<tr class="odd">
+<td><code>ac_srv1</code></td>
+<td>Domestic Longline Survey AF (sex aggregated)</td>
+</tr>
+<tr class="even">
+<td><code>sc_srv1</code></td>
+<td>Domestic Longline Survey LF (sex disaggregrated)</td>
+</tr>
+<tr class="odd">
+<td><code>ac_srv2</code></td>
+<td>Japanese Longline Survey AF (sex aggregated)</td>
+</tr>
+<tr class="even">
+<td><code>sc_srv2</code></td>
+<td>Japanese Longline Survey LF (sex disaggregrated)</td>
+</tr>
+<tr class="odd">
+<td><code>ac_srv7</code></td>
+<td>NMFS bottom trawl survey AF (sex aggregated)</td>
+</tr>
+<tr class="even">
+<td><code>sc_srv7</code></td>
+<td>NMFS bottom trawl survey LF (sex disaggregrated)</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>

@@ -5,25 +5,25 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>SableFish stock assessment</title>
-  <meta name="description" content="This book demonstrates documents my post doctoral research relating to the SableFish fishery." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="description" content="This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery." />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
   <meta property="og:title" content="SableFish stock assessment" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="This book demonstrates documents my post doctoral research relating to the SableFish fishery." />
+  <meta property="og:description" content="This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="SableFish stock assessment" />
   
-  <meta name="twitter:description" content="This book demonstrates documents my post doctoral research relating to the SableFish fishery." />
+  <meta name="twitter:description" content="This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery." />
   
 
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-11-09" />
+<meta name="date" content="2022-11-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -167,6 +167,10 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#initialisation-gleft.right"><i class="fa fa-check"></i>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#population-dynamics-fleft.right"><i class="fa fa-check"></i>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#calculating-numbers-at-length"><i class="fa fa-check"></i>Calculating numbers at length</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-age"><i class="fa fa-check"></i>Catch at age</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#determining-selectivities-for-fisheries-and-surveys"><i class="fa fa-check"></i>Determining selectivities for fisheries and surveys</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#observations-for-fisheries-and-surveys"><i class="fa fa-check"></i>Observations for fisheries and surveys</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>4</b> Tagging data and studies</a></li>
@@ -194,11 +198,11 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">SableFish stock assessment</h1>
 <p class="author"><em>C.Marsh</em></p>
-<p class="date"><em>2022-11-09</em></p>
+<p class="date"><em>2022-11-14</em></p>
 </div>
 <div id="overview" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Overview<a href="index.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This Gitbook documents our research for the Sablefish stock assessment in the Bering sea and Aluetian islands.</p>
+<p>This Gitbook documents our research for the Alaska sablefish (<em>Anoplopoma fimbria</em>) stock assessment.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(TMB)</span></span>
 <span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#library(stockassessmenthelper)</span></span>
 <span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#library(ggplot2)</span></span>

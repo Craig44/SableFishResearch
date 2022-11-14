@@ -1,4 +1,6 @@
 eq:processmodel
+eq:agelengthtransition
+eq:catchatage
 overview
 objectives
 modeldescription
