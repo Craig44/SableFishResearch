@@ -75,6 +75,15 @@ logis<- function(X,a50,a95)
 {
   1/(1+19^((a50-X)/a95)) 
 }
+#' logit_general bounds X which is between [lb,ub] to -inf -> inf based on the logit transformation
+#' @param X scalar range [lb,ub]
+#' @param ub upper bound for X
+#' @param lb lower bound for X
+#' @return Y to be between [-inf, inf]
+logit_general = function(X, lb, ub) {
+  X1 = (X - lb) / (ub - lb)
+  log(X1/(1 - X1))
+}
 ```
 
 
