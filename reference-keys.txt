@@ -1,9 +1,14 @@
 eq:processmodel
+eq:observationmodel
 eq:agelengthtransition
 eq:catchatage
+eq:richardsgrowth
+eq:lengthatrelease
+eq:lengthatrecapture
 overview
 objectives
 modeldescription
 symbols
 modelequations
+observationsection
 tagdata

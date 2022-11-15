@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-11-14" />
+<meta name="date" content="2022-11-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -163,17 +163,30 @@ div.csl-indent {
 <li class="chapter" data-level="3" data-path="modeldescription.html"><a href="modeldescription.html"><i class="fa fa-check"></i><b>3</b> Current Stock assessment model</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="modeldescription.html"><a href="modeldescription.html#symbols"><i class="fa fa-check"></i><b>3.1</b> Symbol Notation</a></li>
-<li class="chapter" data-level="3.2" data-path="modeldescription.html"><a href="modeldescription.html#modelequations"><i class="fa fa-check"></i><b>3.2</b> Model equations</a>
+<li class="chapter" data-level="3.2" data-path="modeldescription.html"><a href="modeldescription.html#modelequations"><i class="fa fa-check"></i><b>3.2</b> Process equations</a>
 <ul>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#initialisation-gleft.right"><i class="fa fa-check"></i>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#population-dynamics-fleft.right"><i class="fa fa-check"></i>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#determining-selectivities-for-fisheries-and-surveys"><i class="fa fa-check"></i>Determining selectivities for fisheries and surveys</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="modeldescription.html"><a href="modeldescription.html#observationsection"><i class="fa fa-check"></i><b>3.3</b> Observation equations</a>
+<ul>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#calculating-numbers-at-length"><i class="fa fa-check"></i>Calculating numbers at length</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-age"><i class="fa fa-check"></i>Catch at age</a></li>
-<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#determining-selectivities-for-fisheries-and-surveys"><i class="fa fa-check"></i>Determining selectivities for fisheries and surveys</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#observations-for-fisheries-and-surveys"><i class="fa fa-check"></i>Observations for fisheries and surveys</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#inference"><i class="fa fa-check"></i>Inference</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>4</b> Tagging data and studies</a></li>
+<li class="chapter" data-level="4" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>4</b> Tagging data and studies</a>
+<ul>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#laslettevesonpolacheck-lep"><i class="fa fa-check"></i>Laslett–Eveson–Polacheck (LEP)</a>
+<ul>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#age-at-length-growth-model"><i class="fa fa-check"></i>Age-at-length growth model</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tag-recapture-growth-data"><i class="fa fa-check"></i>Tag recapture growth data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#simulation-test-the-lep-method"><i class="fa fa-check"></i>Simulation test the “LEP” method</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#next-steps"><i class="fa fa-check"></i>Next steps</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment" target="blank">NOAA Website</a></li>
@@ -202,11 +215,17 @@ div.csl-indent {
   \boldsymbol{N_{y,s}} =
   \begin{cases}
   g\left(\boldsymbol{\theta}\right), &amp; y = 1959 \text{ Initial model year}\\
-  f\left(\boldsymbol{N_{y-1,s}}|\boldsymbol{\theta}\right), &amp; y &gt; 1959
+  f\left(\boldsymbol{N_{y-1,s}}|\boldsymbol{\theta}\right), &amp; y &gt; 1959 \\
   \end{cases}
   \tag{3.1}
 \end{equation}\]</span>
 where, <span class="math inline">\(g(.)\)</span> is the function describing initial conditions for the partition and <span class="math inline">\(f(.)\)</span> is the function that applies populations dyanmics each year i.e., birth, death, growth and migration. See Section <a href="modeldescription.html#symbols">3.1</a> &amp; <a href="modeldescription.html#modelequations">3.2</a> for a detailed description of <span class="math inline">\(g(.)\)</span> and <span class="math inline">\(f(.)\)</span> and <span class="math inline">\(\boldsymbol{\theta}\)</span> is the set of estimable (not all are estimated) parameters.</p>
+<p>Maximum Likelihood Estimates (MLE) for estimated parameters <span class="math inline">\(\widehat{\boldsymbol{\theta}}_{MLE}\)</span> are evaluated,
+<span class="math display" id="eq:observationmodel">\[\begin{equation}
+    \widehat{\boldsymbol{\theta}}_{MLE} = \underset{\boldsymbol{\theta}}{\arg\max} \left( L\left(\boldsymbol{\theta} | \boldsymbol{y^{obs}}\right) \right)
+      \tag{3.2}
+\end{equation}\]</span>
+where, <span class="math inline">\(\boldsymbol{y^{obs}}\)</span> is a set of observations and <span class="math inline">\(L\left( . \right)\)</span> is an objective function that is made up of priors/penalties and log-likelihood. See Section <a href="modeldescription.html#observationsection">3.3</a></p>
 <div id="symbols" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Symbol Notation<a href="modeldescription.html#symbols" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <table>
@@ -282,98 +301,102 @@ where, <span class="math inline">\(g(.)\)</span> is the function describing init
 <td>Proportion of female mature by age and year</td>
 </tr>
 <tr class="even">
+<td><span class="math inline">\(p^s_{y}\)</span></td>
+<td>Proportion of recruits for sex <span class="math inline">\(s\)</span>. Often assumed = 0.5</td>
+</tr>
+<tr class="odd">
 <td><span class="math inline">\(\ln \mu_{r}\)</span></td>
 <td>Average log-recruitment</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><span class="math inline">\(\ln \mu_{f}\)</span></td>
 <td>Average log-fishing mortality</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><span class="math inline">\(\phi_{y,g}\)</span></td>
 <td>annual fishing mortality deviation by gear (log space)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><span class="math inline">\(\tau_{y}\)</span></td>
 <td>annual recruitment deviation <span class="math inline">\(\sim LogNormal\left(0,\sigma_r\right)\)</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><span class="math inline">\(\sigma_r\)</span></td>
 <td>Recruitment standard deviation</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><span class="math inline">\(N_{a,y,s}\)</span></td>
 <td>Numbers of fish at age <span class="math inline">\(a\)</span> in year <span class="math inline">\(y\)</span> of sex <span class="math inline">\(s\)</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><span class="math inline">\(M\)</span></td>
 <td>Natural mortality</td>
 </tr>
-<tr class="odd">
-<td><span class="math inline">\(F_{a,y,g}\)</span></td>
+<tr class="even">
+<td><span class="math inline">\(F^g_{a,y}\)</span></td>
 <td>Fishing mortality for year <span class="math inline">\(y\)</span>, age <span class="math inline">\(a\)</span> and gear <span class="math inline">\(g\)</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><span class="math inline">\(F_{hist}\)</span></td>
 <td>Historical proportion of Fishing mortality</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><span class="math inline">\(Z_{a,y}\)</span></td>
-<td>Total mortality for year <span class="math inline">\(y\)</span>, age <span class="math inline">\(a\)</span> <span class="math inline">\(=\sum\limits_g F_{a,y,g} + M\)</span></td>
+<td>Total mortality for year <span class="math inline">\(y\)</span>, age <span class="math inline">\(a\)</span> <span class="math inline">\(=\sum\limits_g F^g_{a,y} + M\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(R_{y}\)</span></td>
+<td>Annual recruitment</td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(R_{y}\)</span></td>
-<td>Total mortality for year <span class="math inline">\(y\)</span>, age <span class="math inline">\(a\)</span> <span class="math inline">\(=\sum\limits_g F_{a,y,g} + M\)</span></td>
-</tr>
-<tr class="odd">
 <td><span class="math inline">\(B_{y}\)</span></td>
 <td>Spawning biomass in year <span class="math inline">\(y\)</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><span class="math inline">\(S^g_{a,y,s}\)</span></td>
 <td>Selectivity at age <span class="math inline">\(a\)</span> for gear type <span class="math inline">\(g\)</span> and sex <span class="math inline">\(s\)</span></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><span class="math inline">\(a_50\)</span></td>
 <td>age at 50% selection for ascending limb</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><span class="math inline">\(d_50\)</span></td>
 <td>age at 50% selection for descending limb</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><span class="math inline">\(\delta\)</span></td>
 <td>slope/shape parameters for different logistic curves</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><span class="math inline">\(\boldsymbol{A}\)</span></td>
 <td>ageing-error matrix dimensions <span class="math inline">\(n_a \ \times \ n_a\)</span></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><span class="math inline">\(\boldsymbol{A}^l_s\)</span></td>
 <td>age to length conversion matrix by sex. dimensions <span class="math inline">\(n_a \ \times \ n_l\)</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><span class="math inline">\(q_g\)</span></td>
 <td>abundance index catchability coeffecient by gear</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><span class="math inline">\(\lambda_x\)</span></td>
 <td>Statistical weight (penalty) for component <span class="math inline">\(x\)</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><span class="math inline">\(P^g_{l,y,s}\)</span></td>
 <td>Observed proportions at length for gear <span class="math inline">\(g\)</span> in year <span class="math inline">\(y\)</span> and sex <span class="math inline">\(s\)</span></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><span class="math inline">\(P^g_{a,y,s}\)</span></td>
 <td>Observed proportions at age for gear <span class="math inline">\(g\)</span> in year <span class="math inline">\(y\)</span> and sex <span class="math inline">\(s\)</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><span class="math inline">\(\psi^g_{y}\)</span></td>
 <td>assumed sample size for gear <span class="math inline">\(g\)</span> in year <span class="math inline">\(y\)</span> (for multinomial likelihood</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><span class="math inline">\(n_g\)</span></td>
 <td>Number of years that age (or length) composition is available for gear <span class="math inline">\(g\)</span></td>
 </tr>
@@ -381,7 +404,7 @@ where, <span class="math inline">\(g(.)\)</span> is the function describing init
 </table>
 </div>
 <div id="modelequations" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Model equations<a href="modeldescription.html#modelequations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">3.2</span> Process equations<a href="modeldescription.html#modelequations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="initialisation-gleft.right" class="section level3 unnumbered hasAnchor">
 <h3>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)<a href="modeldescription.html#initialisation-gleft.right" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><span class="math display">\[\begin{align*}
@@ -395,24 +418,24 @@ R_1, &amp; a = a_1\\
 </div>
 <div id="population-dynamics-fleft.right" class="section level3 unnumbered hasAnchor">
 <h3>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)<a href="modeldescription.html#population-dynamics-fleft.right" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Describe the annual cycle for the model</p>
-</div>
-<div id="calculating-numbers-at-length" class="section level3 unnumbered hasAnchor">
-<h3>Calculating numbers at length<a href="modeldescription.html#calculating-numbers-at-length" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>For each year that has a length based observation, numbers at length denoted by <span class="math inline">\(\boldsymbol{N^l}_{y,s} = (N^l_{1,y,s}, \dots, N^l_{n_l,y,s})^T\)</span> (dimension of <span class="math inline">\(\boldsymbol{N^l}_{y,s}\)</span> is <span class="math inline">\(n_l \ \times \ 1\)</span>) were calculated for each sex. This involved multiplying the numbers at age through a age-length transition matrix denoted by <span class="math inline">\(\boldsymbol{A}^l_{y,s}\)</span> (dimensions of <span class="math inline">\(\boldsymbol{A}^l_{y,s}\)</span> are <span class="math inline">\(n_a \ \times \ n_l\)</span> and its rows must sum to 1). The calculation follows Equation <a href="modeldescription.html#eq:agelengthtransition">(3.2)</a>,</p>
-<p><span class="math display" id="eq:agelengthtransition">\[\begin{equation}
-  \boldsymbol{N^l}_{y,s} =  \left(\boldsymbol{A}^l_{y,s} \right)^T \ \times \ \boldsymbol{N_{y,s}}
-  \tag{3.2}
-\end{equation}\]</span>
-where, <span class="math inline">\(\boldsymbol{N_{y,s}}\)</span> is a column vector of numbers at age (dimension <span class="math inline">\(n_a \ \times \ 1\)</span>) at the beginning of year <span class="math inline">\(y\)</span> for sex <span class="math inline">\(s\)</span>.</p>
-</div>
-<div id="catch-at-age" class="section level3 unnumbered hasAnchor">
-<h3>Catch at age<a href="modeldescription.html#catch-at-age" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Catch at age for gear type <span class="math inline">\(g\)</span> denoted by <span class="math inline">\(\boldsymbol{C^g}_{a,y,s}\)</span></p>
-<p><span class="math display" id="eq:catchatage">\[\begin{equation}
-  \boldsymbol{C^g}_{a,y,s} = \frac{F^g_{a,y,s}}{Z_{a,y,s}}   N_{a,y,s} \left(1 - S_{a,y,s} \right)
-  \tag{3.3}
-\end{equation}\]</span></p>
+<p>The assessment assumes a closed population that is only effected by mortality (natural and fishing), recruitment and growth. Mortality is applied assuming</p>
+<p><span class="math display">\[
+Z_{a,y,s} = M + \sum_g F^g_{y} S^g_{a,y,s}
+\]</span>
+where, <span class="math inline">\(S^g_{a,y,s}\)</span> is the fishery selectivity and <span class="math inline">\(F^g_{y}\)</span> is the annual estimated fishing mortality. The annual cycle follows,</p>
+<p><span class="math display">\[\begin{align*}
+N_{a,y,s} =
+\begin{cases}
+p^s_{y} R_y, &amp; a = a_1\\
+N_{a - 1,y - 1,s} \times
+\exp\bigg( -Z_{a - 1,y - 1,s} \bigg), &amp; a_0 &lt; a &lt; a_+\\
+\exp\bigg( -Z_{a - 1,y - 1,s} \bigg) + \exp\bigg( -Z_{a,y - 1,s} \bigg), &amp;  a = a_+
+\end{cases}
+\end{align*}\]</span>
+where,
+<span class="math display">\[
+R_y = \exp\{\mu_r + \tau_y + 0.5\sigma_R^2\}
+\]</span></p>
 </div>
 <div id="determining-selectivities-for-fisheries-and-surveys" class="section level3 unnumbered hasAnchor">
 <h3>Determining selectivities for fisheries and surveys<a href="modeldescription.html#determining-selectivities-for-fisheries-and-surveys" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -459,6 +482,26 @@ where, <span class="math inline">\(\boldsymbol{N_{y,s}}\)</span> is a column vec
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div id="observationsection" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Observation equations<a href="modeldescription.html#observationsection" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="calculating-numbers-at-length" class="section level3 unnumbered hasAnchor">
+<h3>Calculating numbers at length<a href="modeldescription.html#calculating-numbers-at-length" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For each year that has a length based observation, numbers at length denoted by <span class="math inline">\(\boldsymbol{N^l}_{y,s} = (N^l_{1,y,s}, \dots, N^l_{n_l,y,s})^T\)</span> (dimension of <span class="math inline">\(\boldsymbol{N^l}_{y,s}\)</span> is <span class="math inline">\(n_l \ \times \ 1\)</span>) were calculated for each sex. This involved multiplying the numbers at age through a age-length transition matrix denoted by <span class="math inline">\(\boldsymbol{A}^l_{y,s}\)</span> (dimensions of <span class="math inline">\(\boldsymbol{A}^l_{y,s}\)</span> are <span class="math inline">\(n_a \ \times \ n_l\)</span> and its rows must sum to 1). The calculation follows Equation <a href="modeldescription.html#eq:agelengthtransition">(3.3)</a>,</p>
+<p><span class="math display" id="eq:agelengthtransition">\[\begin{equation}
+  \boldsymbol{N^l}_{y,s} =  \left(\boldsymbol{A}^l_{y,s} \right)^T \ \times \ \boldsymbol{N_{y,s}}
+  \tag{3.3}
+\end{equation}\]</span>
+where, <span class="math inline">\(\boldsymbol{N_{y,s}}\)</span> is a column vector of numbers at age (dimension <span class="math inline">\(n_a \ \times \ 1\)</span>) at the beginning of year <span class="math inline">\(y\)</span> for sex <span class="math inline">\(s\)</span>.</p>
+</div>
+<div id="catch-at-age" class="section level3 unnumbered hasAnchor">
+<h3>Catch at age<a href="modeldescription.html#catch-at-age" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Catch at age for gear type <span class="math inline">\(g\)</span> denoted by <span class="math inline">\(\boldsymbol{C^g}_{a,y,s}\)</span></p>
+<p><span class="math display" id="eq:catchatage">\[\begin{equation}
+  \boldsymbol{C^g}_{a,y,s} = \frac{F^g_{a,y,s}}{Z_{a,y,s}}   N_{a,y,s} \left(1 - S_{a,y,s} \right)
+  \tag{3.4}
+\end{equation}\]</span></p>
 </div>
 <div id="observations-for-fisheries-and-surveys" class="section level3 unnumbered hasAnchor">
 <h3>Observations for fisheries and surveys<a href="modeldescription.html#observations-for-fisheries-and-surveys" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -566,8 +609,28 @@ where, <span class="math inline">\(\boldsymbol{N_{y,s}}\)</span> is a column vec
 </tr>
 </tbody>
 </table>
-
 </div>
+</div>
+<div id="inference" class="section level2 unnumbered hasAnchor">
+<h2>Inference<a href="modeldescription.html#inference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>If random effects are considered the joint probability model follows,
+<span class="math display">\[\begin{equation}
+    Pr\left[ \boldsymbol{y^{obs}}, \boldsymbol{u}| \boldsymbol{\theta} \right]  = Pr\left[\boldsymbol{y^{obs}} |\boldsymbol{\theta^f}, \boldsymbol{u} \right] Pr\left[\boldsymbol{u} |\boldsymbol{\theta^h} \right]
+    \end{equation}\]</span></p>
+<p>Inference is conducted by maximising the marginal likelihood noting <span class="math inline">\(L\left(\boldsymbol{\theta} | \boldsymbol{y^{obs}} \right) \propto Pr\left[ \boldsymbol{y^{obs}} | \boldsymbol{\theta} \right]\)</span>
+<span class="math display">\[\begin{equation}\label{eq:marginal_ll}
+    L\left(\boldsymbol{\theta} | \boldsymbol{y^{obs}}\right) = \int \left(Pr\left[\boldsymbol{y^{obs}} |\boldsymbol{\theta^f}, \boldsymbol{\theta^g}, \boldsymbol{u} \right] Pr\left[\boldsymbol{u} |\boldsymbol{\theta^h} \right] \right) \boldsymbol{du}
+    \end{equation}\]</span>
+In general this integral is not tractable, and so approximations are necessary. The software used here implement the Laplace approximation, which relies on Gaussian assumptions.</p>
+<p>Maximum Likelihood Estimates (MLE) for fixed effect parameters <span class="math inline">\(\widehat{\boldsymbol{\theta}}_{MLE}\)</span> are evaluated,
+<span class="math display">\[\begin{equation}
+    \widehat{\boldsymbol{\theta}}_{MLE} = \underset{\boldsymbol{\theta}}{\arg\max} \left( L\left(\boldsymbol{\theta} | \boldsymbol{y^{obs}}\right) \right)
+\end{equation}\]</span></p>
+<p>and Empirical Bayes estimates are evaluated for <span class="math inline">\(\widehat{\boldsymbol{u}}\)</span>, which are used model diagnostics and other model quantities,
+<span class="math display">\[\begin{equation}
+\widehat{\boldsymbol{u}} = \underset{\boldsymbol{u}}{\arg\max} \left( Pr\left[ \boldsymbol{y^{obs}}, \boldsymbol{u}| \widehat{\boldsymbol{\theta}}_{MLE} \right] \right)
+\end{equation}\]</span></p>
+
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
