@@ -22,10 +22,10 @@ This Gitbook documents our research for the Alaska sablefish (*Anoplopoma fimbri
 
 
 ```{r install_packages, results = 'hide', message=FALSE, warning=FALSE}
-#library(TMB)
+library(TMB)
 #library(stockassessmenthelper)
-#library(ggplot2)
-#library(dplyr)
+library(ggplot2)
+library(dplyr)
 #library(reshape2)
 #library(tidyr)
 ```
