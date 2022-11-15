@@ -45,6 +45,8 @@ where, \(g(.)\) is the function describing initial conditions for the partition 
 +----------------------------+-----------------------------------------------------------------------------+
 | \(\phi_{a,y}\)             | Proportion of female mature by age and year
 +----------------------------+-----------------------------------------------------------------------------+
+| \(p^s_{y}\)                | Proportion of recruits for sex \(s\). Often assumed = 0.5
++----------------------------+-----------------------------------------------------------------------------+
 | \(\ln \mu_{r}\)            | Average log-recruitment
 +----------------------------+-----------------------------------------------------------------------------+
 | \(\ln \mu_{f}\)            | Average log-fishing mortality
@@ -59,13 +61,13 @@ where, \(g(.)\) is the function describing initial conditions for the partition 
 +----------------------------+-----------------------------------------------------------------------------+
 | \(M\)                      | Natural mortality
 +----------------------------+-----------------------------------------------------------------------------+
-| \(F_{a,y,g}\)              | Fishing mortality for year \(y\), age \(a\) and gear \(g\)
+| \(F^g_{a,y}\)              | Fishing mortality for year \(y\), age \(a\) and gear \(g\)
 +----------------------------+-----------------------------------------------------------------------------+
 | \(F_{hist}\)               | Historical proportion of Fishing mortality 
 +----------------------------+-----------------------------------------------------------------------------+
-| \(Z_{a,y}\)                | Total mortality for year \(y\), age \(a\) \(=\sum\limits_g F_{a,y,g} + M\)
+| \(Z_{a,y}\)                | Total mortality for year \(y\), age \(a\) \(=\sum\limits_g F^g_{a,y} + M\)
 +----------------------------+-----------------------------------------------------------------------------+
-| \(R_{y}\)                  | Total mortality for year \(y\), age \(a\) \(=\sum\limits_g F_{a,y,g} + M\)
+| \(R_{y}\)                  | Annual recruitment
 +----------------------------+-----------------------------------------------------------------------------+
 | \(B_{y}\)                  | Spawning biomass in year \(y\)
 +----------------------------+-----------------------------------------------------------------------------+
@@ -109,9 +111,27 @@ R_1, & a = a_1\\
 \end{align*}
 
 ### Population dynamics \left(\(f\left(.\right)\)\right) {-}
-Describe the annual cycle for the model
+The assessment assumes a closed population that is only effected by mortality (natural and fishing), recruitment and growth. Mortality is applied assuming 
+
+\[
+Z_{a,y,s} = M + \sum_g F^g_{y} S^g_{a,y,s}
+\]
+where, \(S^g_{a,y,s}\) is the fishery selectivity and \(F^g_{y}\) is the annual estimated fishing mortality. The annual cycle follows,
 
 
+\begin{align*}
+N_{a,y,s} = 
+\begin{cases}
+p^s_{y} R_y, & a = a_1\\
+N_{a - 1,y - 1,s} \times 
+\exp\bigg( Z_{a - 1,y - 1,s} \bigg), & a_0 < a < a_+\\
+\exp\bigg( Z_{a - 1,y - 1,s} \bigg) + \exp\bigg( Z_{a,y - 1,s} \bigg), &  a = a_+
+\end{cases}
+\end{align*}
+where,
+\[
+R_y = \exp\{\mu_r + \tau_y + 0.5\sigma_R^2\}
+\]
 
 ### Calculating numbers at length {-}
 For each year that has a length based observation, numbers at length denoted by \(\boldsymbol{N^l}_{y,s} = (N^l_{1,y,s}, \dots, N^l_{n_l,y,s})^T\) (dimension of \(\boldsymbol{N^l}_{y,s}\) is \(n_l \ \times \ 1\)) were calculated for each sex. This involved multiplying the numbers at age through a age-length transition matrix denoted by \(\boldsymbol{A}^l_{y,s}\) (dimensions of \(\boldsymbol{A}^l_{y,s}\) are \(n_a \ \times \ n_l\) and its rows must sum to 1). The calculation follows Equation \@ref(eq:agelengthtransition),
