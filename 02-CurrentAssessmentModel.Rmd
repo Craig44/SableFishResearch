@@ -5,11 +5,19 @@ The latest published stock assessment [@goethel2021assessment] is a sexually dis
   \boldsymbol{N_{y,s}} = 
   \begin{cases}
   g\left(\boldsymbol{\theta}\right), & y = 1959 \text{ Initial model year}\\
-  f\left(\boldsymbol{N_{y-1,s}}|\boldsymbol{\theta}\right), & y > 1959
+  f\left(\boldsymbol{N_{y-1,s}}|\boldsymbol{\theta}\right), & y > 1959 \\
   \end{cases}
   (\#eq:processmodel)
 \end{equation} 
 where, \(g(.)\) is the function describing initial conditions for the partition and \(f(.)\) is the function that applies populations dyanmics each year i.e., birth, death, growth and migration. See Section \@ref(symbols) \& \@ref(modelequations) for a detailed description of \(g(.)\) and \(f(.)\) and \(\boldsymbol{\theta}\) is the set of estimable (not all are estimated) parameters.
+
+
+Maximum Likelihood Estimates (MLE) for estimated parameters \(\widehat{\boldsymbol{\theta}}_{MLE}\) are evaluated,
+\begin{equation}
+	\widehat{\boldsymbol{\theta}}_{MLE} = \underset{\boldsymbol{\theta}}{\arg\max} \left( L\left(\boldsymbol{\theta} | \boldsymbol{y^{obs}}\right) \right)
+	  (\#eq:observationmodel)
+\end{equation}
+where, \(\boldsymbol{y^{obs}}\) is a set of observations and \(L\left( . \right)\) is an objective function that is made up of priors/penalties and log-likelihood. See Section \@ref(observationsection)
 
 ## Symbol Notation {#symbols}
 +----------------------------+-----------------------------------------------------------------------------+
@@ -97,10 +105,9 @@ where, \(g(.)\) is the function describing initial conditions for the partition 
 +----------------------------+-----------------------------------------------------------------------------+
 
 
-## Model equations {#modelequations}
+## Process equations {#modelequations}
 
 ### Initialisation \left(\(g\left(.\right)\)\right) {-}
-
 \begin{align*}
 N_{a,1,s} = 
 \begin{cases}
@@ -124,32 +131,14 @@ N_{a,y,s} =
 \begin{cases}
 p^s_{y} R_y, & a = a_1\\
 N_{a - 1,y - 1,s} \times 
-\exp\bigg( Z_{a - 1,y - 1,s} \bigg), & a_0 < a < a_+\\
-\exp\bigg( Z_{a - 1,y - 1,s} \bigg) + \exp\bigg( Z_{a,y - 1,s} \bigg), &  a = a_+
+\exp\bigg( -Z_{a - 1,y - 1,s} \bigg), & a_0 < a < a_+\\
+\exp\bigg( -Z_{a - 1,y - 1,s} \bigg) + \exp\bigg( -Z_{a,y - 1,s} \bigg), &  a = a_+
 \end{cases}
 \end{align*}
 where,
 \[
 R_y = \exp\{\mu_r + \tau_y + 0.5\sigma_R^2\}
 \]
-
-### Calculating numbers at length {-}
-For each year that has a length based observation, numbers at length denoted by \(\boldsymbol{N^l}_{y,s} = (N^l_{1,y,s}, \dots, N^l_{n_l,y,s})^T\) (dimension of \(\boldsymbol{N^l}_{y,s}\) is \(n_l \ \times \ 1\)) were calculated for each sex. This involved multiplying the numbers at age through a age-length transition matrix denoted by \(\boldsymbol{A}^l_{y,s}\) (dimensions of \(\boldsymbol{A}^l_{y,s}\) are \(n_a \ \times \ n_l\) and its rows must sum to 1). The calculation follows Equation \@ref(eq:agelengthtransition),
-
-\begin{equation} 
-  \boldsymbol{N^l}_{y,s} =  \left(\boldsymbol{A}^l_{y,s} \right)^T \ \times \ \boldsymbol{N_{y,s}}
-  (\#eq:agelengthtransition)
-\end{equation} 
-where, \(\boldsymbol{N_{y,s}}\) is a column vector of numbers at age (dimension \(n_a \ \times \ 1\)) at the beginning of year \(y\) for sex \(s\).
-
-
-### Catch at age {-}
-Catch at age for gear type \(g\) denoted by \(\boldsymbol{C^g}_{a,y,s}\)
-
-\begin{equation} 
-  \boldsymbol{C^g}_{a,y,s} = \frac{F^g_{a,y,s}}{Z_{a,y,s}}   N_{a,y,s} \left(1 - S_{a,y,s} \right)
-  (\#eq:catchatage)
-\end{equation} 
 
 
 ### Determining selectivities for fisheries and surveys {-}
@@ -175,8 +164,28 @@ The ADMB model has a hard coded number of selectivities. Some of them relate to 
 +----------------------------+-----------------------------------------------------------------------------+
 
 
-### Observations for fisheries and surveys {-}
+## Observation equations {#observationsection}
 
+### Calculating numbers at length {-}
+For each year that has a length based observation, numbers at length denoted by \(\boldsymbol{N^l}_{y,s} = (N^l_{1,y,s}, \dots, N^l_{n_l,y,s})^T\) (dimension of \(\boldsymbol{N^l}_{y,s}\) is \(n_l \ \times \ 1\)) were calculated for each sex. This involved multiplying the numbers at age through a age-length transition matrix denoted by \(\boldsymbol{A}^l_{y,s}\) (dimensions of \(\boldsymbol{A}^l_{y,s}\) are \(n_a \ \times \ n_l\) and its rows must sum to 1). The calculation follows Equation \@ref(eq:agelengthtransition),
+
+\begin{equation} 
+  \boldsymbol{N^l}_{y,s} =  \left(\boldsymbol{A}^l_{y,s} \right)^T \ \times \ \boldsymbol{N_{y,s}}
+  (\#eq:agelengthtransition)
+\end{equation} 
+where, \(\boldsymbol{N_{y,s}}\) is a column vector of numbers at age (dimension \(n_a \ \times \ 1\)) at the beginning of year \(y\) for sex \(s\).
+
+
+### Catch at age {-}
+Catch at age for gear type \(g\) denoted by \(\boldsymbol{C^g}_{a,y,s}\)
+
+\begin{equation} 
+  \boldsymbol{C^g}_{a,y,s} = \frac{F^g_{a,y,s}}{Z_{a,y,s}}   N_{a,y,s} \left(1 - S_{a,y,s} \right)
+  (\#eq:catchatage)
+\end{equation} 
+
+
+### Observations for fisheries and surveys {-}
 
 +----------------------------+-----------------------------------------------------------------------------+
 | label                      | Relative Abundance description                            
@@ -225,4 +234,27 @@ The ADMB model has a hard coded number of selectivities. Some of them relate to 
 +----------------------------+-----------------------------------------------------------------------------+
 | `sc_srv7`                  | NMFS bottom trawl survey LF (sex disaggregrated)
 +----------------------------+-----------------------------------------------------------------------------+
+
+## Inference {-}
+If random effects are considered the joint probability model follows,
+	\begin{equation}
+	Pr\left[ \boldsymbol{y^{obs}}, \boldsymbol{u}| \boldsymbol{\theta} \right]  = Pr\left[\boldsymbol{y^{obs}} |\boldsymbol{\theta^f}, \boldsymbol{u} \right] Pr\left[\boldsymbol{u} |\boldsymbol{\theta^h} \right] 
+	\end{equation}
+
+Inference is conducted by maximising the marginal likelihood noting \( L\left(\boldsymbol{\theta} | \boldsymbol{y^{obs}} \right) \propto Pr\left[ \boldsymbol{y^{obs}} | \boldsymbol{\theta} \right]\)
+	\begin{equation}\label{eq:marginal_ll}
+	L\left(\boldsymbol{\theta} | \boldsymbol{y^{obs}}\right) = \int \left(Pr\left[\boldsymbol{y^{obs}} |\boldsymbol{\theta^f}, \boldsymbol{\theta^g}, \boldsymbol{u} \right] Pr\left[\boldsymbol{u} |\boldsymbol{\theta^h} \right] \right) \boldsymbol{du}
+	\end{equation}
+In general this integral is not tractable, and so approximations are necessary. The software used here implement the Laplace approximation, which relies on Gaussian assumptions.
+
+Maximum Likelihood Estimates (MLE) for fixed effect parameters \(\widehat{\boldsymbol{\theta}}_{MLE}\) are evaluated,
+\begin{equation}
+	\widehat{\boldsymbol{\theta}}_{MLE} = \underset{\boldsymbol{\theta}}{\arg\max} \left( L\left(\boldsymbol{\theta} | \boldsymbol{y^{obs}}\right) \right)
+\end{equation}
+
+and Empirical Bayes estimates are evaluated for \(\widehat{\boldsymbol{u}}\), which are used model diagnostics and other model quantities,
+\begin{equation}
+\widehat{\boldsymbol{u}} = \underset{\boldsymbol{u}}{\arg\max} \left( Pr\left[ \boldsymbol{y^{obs}}, \boldsymbol{u}| \widehat{\boldsymbol{\theta}}_{MLE} \right] \right)
+\end{equation}
+
 
