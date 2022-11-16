@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Tagging data and studies | SableFish stock assessment</title>
+  <title>Chapter 5 Tagging data and studies | SableFish stock assessment</title>
   <meta name="description" content="This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery." />
   <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Tagging data and studies | SableFish stock assessment" />
+  <meta property="og:title" content="Chapter 5 Tagging data and studies | SableFish stock assessment" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Tagging data and studies | SableFish stock assessment" />
+  <meta name="twitter:title" content="Chapter 5 Tagging data and studies | SableFish stock assessment" />
   
   <meta name="twitter:description" content="This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery." />
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="modeldescription.html"/>
+<link rel="prev" href="sexratios.html"/>
 <link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -179,7 +179,8 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#inference"><i class="fa fa-check"></i>Inference</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#todo"><i class="fa fa-check"></i>TODO</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>4</b> Tagging data and studies</a>
+<li class="chapter" data-level="4" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>4</b> Exploring methods for sex ratios in age and length composition data</a></li>
+<li class="chapter" data-level="5" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>5</b> Tagging data and studies</a>
 <ul>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#laslettevesonpolacheck-lep"><i class="fa fa-check"></i>Laslett–Eveson–Polacheck (LEP)</a>
 <ul>
@@ -210,8 +211,8 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="tagdata" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Tagging data and studies<a href="tagdata.html#tagdata" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="tagdata" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Tagging data and studies<a href="tagdata.html#tagdata" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Since 1972 there have been approximately 400 000 sablefish tagged in Alaska waters, of which over 38 500 have been recovered. Although there is extensive and long term tagging data, this information is not currently directly included in the stock assessment <span class="citation">(<a href="#ref-goethel2021assessment" role="doc-biblioref">Goethel et al. 2021</a>)</span>.</p>
 <div id="laslettevesonpolacheck-lep" class="section level2 unnumbered hasAnchor">
 <h2>Laslett–Eveson–Polacheck (LEP)<a href="tagdata.html#laslettevesonpolacheck-lep" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -222,7 +223,7 @@ div.csl-indent {
 <p>We start by using the Richards growth curve following <span class="citation">Aires-da-Silva et al. (<a href="#ref-aires2015improved" role="doc-biblioref">2015</a>)</span> (but this could be extended). The Richards growth formulation follows</p>
 <p><span class="math display" id="eq:richardsgrowth">\[\begin{equation}
   \bar{l}_{a} = L_{\infty} \left( 1 + \frac{1}{p} \exp \{-K(a - a_0)\}\right)^{-p}
-  \tag{4.1}
+  \tag{5.1}
 \end{equation}\]</span>
 where, <span class="math inline">\(\bar{l}_{a}\)</span> is the mean length at age <span class="math inline">\(a\)</span>, <span class="math inline">\(L_{\infty}\)</span> is the asymptotic length, <span class="math inline">\(K\)</span> is the growth coefficient and <span class="math inline">\(p\)</span> is a shape parameter that is related to the ratio <span class="math inline">\(\bar{l}_{a} / L_{\infty}\)</span> at the inflexion point.</p>
 </div>
@@ -266,12 +267,12 @@ where, <span class="math inline">\(\bar{l}_{a}\)</span> is the mean length at ag
 <p>The sub-models for the release and recapture lengths follow,
 <span class="math display" id="eq:lengthatrelease">\[\begin{equation}
   l_{1,i} = L_{\infty} \left( 1 + \frac{1}{p} \exp \{-K(a_{1,i} - a_0)\}\right)^{-p}
-  \tag{4.2}
+  \tag{5.2}
 \end{equation}\]</span></p>
 <p>and,
 <span class="math display" id="eq:lengthatrecapture">\[\begin{equation}
   l_{2,i} = L_{\infty} \left( 1 + \frac{1}{p} \exp \{-K(a_{1,i} + \Delta_t - a_0)\}\right)^{-p}
-  \tag{4.3}
+  \tag{5.3}
 \end{equation}\]</span></p>
 <p>The above growth model assumes that we know the age at recovery <span class="math inline">\(a_{2,i}\)</span>. The problem we have is, we have 22 569 tag recoveries with length information but only a handful of these have been aged. This is dealt with by modelling <span class="math inline">\(a_{1,i}\)</span> as a random effect i.e., <span class="math inline">\(a_{1,i} \sim LN \left(\mu, \sigma^2\right)\)</span>.</p>
 <p>What confuses is me here is how to assign a hyper distribution like the one above for the random effect variables <span class="math inline">\(a_{1,i}\)</span>. <span class="math inline">\(a_{1,i}\)</span> is expected to vary quite a bit because tagged fish at release have a broad length frequency and thus is expected to have a broad age at release? (ask someone about this because I may be misunderstanding something).</p>
@@ -383,7 +384,7 @@ where, <span class="math inline">\(\bar{l}_{a}\)</span> is the mean length at ag
 <p><span class="math display">\[
 l_{1,i} \sim \mathcal{N} \left(\bar{l}_{1,a}, \sigma = \bar{l}_{1,a} \times cv\right)
 \]</span>
-where the mean length at age release (<span class="math inline">\(\bar{l}_{1,a}\)</span>) follows the Richards growth curve defined in Equation <a href="tagdata.html#eq:richardsgrowth">(4.1)</a>. The age used to derive the mean length at age was a random sample with replacement from the population in shown in the earlier figure. Time at liberty was drawn from a Poisson distribution with a rate parameter randomly drawn from a uniform distribution between 100-600 days. The age at recovery <span class="math inline">\(a_{2,i} = a_{1,i} + \Delta_t\)</span>. An approximation was made when calculating the length at recovery. The length increment (<span class="math inline">\(l_{\Delta_t}\)</span>) was simulated using a Log Normal distribution with the median set based on the difference between mean length at release age and mean length at recovery age. This was to ensure all recovered fish positively grew at a rate expected by the growth model (less than ideal but will do for now).
+where the mean length at age release (<span class="math inline">\(\bar{l}_{1,a}\)</span>) follows the Richards growth curve defined in Equation <a href="tagdata.html#eq:richardsgrowth">(5.1)</a>. The age used to derive the mean length at age was a random sample with replacement from the population in shown in the earlier figure. Time at liberty was drawn from a Poisson distribution with a rate parameter randomly drawn from a uniform distribution between 100-600 days. The age at recovery <span class="math inline">\(a_{2,i} = a_{1,i} + \Delta_t\)</span>. An approximation was made when calculating the length at recovery. The length increment (<span class="math inline">\(l_{\Delta_t}\)</span>) was simulated using a Log Normal distribution with the median set based on the difference between mean length at release age and mean length at recovery age. This was to ensure all recovered fish positively grew at a rate expected by the growth model (less than ideal but will do for now).
 <span class="math display">\[
 l_{i,\Delta_t} \sim \mathcal{LN} \left(\ln (\bar{l}_{a_{2,i}} - \bar{l}_{a_{1,i}}), \sigma = cv\right)
 \]</span></p>
@@ -468,7 +469,7 @@ Schnute, Jon. 1981. <span>“A Versatile Growth Model with Statistically Stable 
           </div>
         </div>
       </div>
-<a href="modeldescription.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sexratios.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

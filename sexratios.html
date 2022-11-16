@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | SableFish stock assessment</title>
+  <title>Chapter 4 Exploring methods for sex ratios in age and length composition data | SableFish stock assessment</title>
   <meta name="description" content="This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery." />
   <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | SableFish stock assessment" />
+  <meta property="og:title" content="Chapter 4 Exploring methods for sex ratios in age and length composition data | SableFish stock assessment" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | SableFish stock assessment" />
+  <meta name="twitter:title" content="Chapter 4 Exploring methods for sex ratios in age and length composition data | SableFish stock assessment" />
   
   <meta name="twitter:description" content="This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tagdata.html"/>
-
+<link rel="prev" href="modeldescription.html"/>
+<link rel="next" href="tagdata.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -211,34 +211,29 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered hasAnchor">
-<h1>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="sexratios" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Exploring methods for sex ratios in age and length composition data<a href="sexratios.html#sexratios" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>One of the needed improvements is dealing with sex ratios in the compositional data. Currently there is no observational information on sex ratio in the Sablefish stock assessment (Chapter <a href="modeldescription.html#modeldescription">3</a>) (Caveat is users can provide an observed sex ratio for observations etc which is similar to the approach in <span class="citation">Ward et al. (<a href="#ref-ward2019assessing" role="doc-biblioref">2019</a>)</span>). I am aware of two approaches for supplying observations that will provide information on sex ratio. The was taken from Casal2 <span class="citation">(<a href="#ref-doonan2016casal2" role="doc-biblioref">Doonan et al. 2016</a>)</span> which calculates proportions for a year to sum to one over sex and age. Catch at age (in numbers) for both sexes is denoted by <span class="math inline">\(\boldsymbol{C^k}_{a,y} = (\boldsymbol{C^k}_{a,y,1},\boldsymbol{C^k}_{a,y,2})\)</span>, where <span class="math inline">\(\boldsymbol{C^k}_{a,y,1}\)</span> is the catch at age for males and <span class="math inline">\(\boldsymbol{C^k}_{a,y,2}\)</span> is for females, and</p>
+<p><span class="math display">\[
+\boldsymbol{P^k}_{a,y} = \frac{\boldsymbol{C^k}_{a,y}}{\sum_a \sum_s \boldsymbol{C^k}_{a,y,s}}
+\]</span></p>
+<p>The second approach is to provide a specific sex ratio observation over all ages or lengths as done in the New Zealand rock lobster stock assessment <span class="citation">(<a href="#ref-webber2021rapid" role="doc-biblioref">Webber, Rudd, and Starr 2021</a>)</span>.</p>
+<p><span class="math display">\[
+R^k_{y,s} = \frac{\sum_a \boldsymbol{C^k}_{a,y,s}}{\sum_a \sum_s \boldsymbol{C^k}_{a,y,s}}
+\]</span></p>
+<p>A simple simulation experiment was conducted to explore the benefits of each approach. There were two OM scenarios that we wanted to explore, the first was that the true population had a 50:50 sex ratio and the observations had skewed sex ratios due to the selectivity i.e., availability to the survey fishery. Second the selectivity was constant for both sexes but the sex ratio was skewed at recruitment.</p>
 
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div class="csl-entry">
-Aires-da-Silva, Alexandre M, Mark N Maunder, Kurt M Schaefer, and Daniel W Fuller. 2015. <span>“Improved Growth Estimates from Integrated Analysis of Direct Aging and Tag–Recapture Data: An Illustration with Bigeye Tuna (<em>Thunnus Obesus</em>) of the Eastern Pacific Ocean with Implications for Management.”</span> <em>Fisheries Research</em> 163: 119–26.
 </div>
-<div class="csl-entry">
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-doonan2016casal2" class="csl-entry">
 Doonan, Ian, Kath Large, Alistair Dunn, Scott Rasmussen, Craig Marsh, and Sophie Mormede. 2016. <span>“Casal2: New Zealand’s Integrated Population Modelling Tool.”</span> <em>Fisheries Research</em> 183: 498–505.
 </div>
-<div class="csl-entry">
-Eveson, J Paige, Geoff M Laslett, and Tom Polacheck. 2004. <span>“An Integrated Model for Growth Incorporating Tag Recapture, Length Frequency, and Direct Aging Data.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 61 (2): 292–306.
-</div>
-<div class="csl-entry">
-Goethel, DR, DH Hanselman, CJ Rodgveller, KH Fenski, SK Shotwell, KB Echave, PW Malecha, A Siwicke, and CR Lunsford. 2021. <span>“Assessment of the Sablefish Stock in Alaska.”</span> <em>Stock Assessment and Fishery Evaluation Report for the Groundfish Resources of the Gulf of Alaska and the Bering Sea/Aleutian Islands as Projected for</em>.
-</div>
-<div class="csl-entry">
-Laslett, Geoff M, J Paige Eveson, and Tom Polacheck. 2002. <span>“A Flexible Maximum Likelihood Approach for Fitting Growth Curves to Tag Recapture Data.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 59 (6): 976–86.
-</div>
-<div class="csl-entry">
-Schnute, Jon. 1981. <span>“A Versatile Growth Model with Statistically Stable Parameters.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 38 (9): 1128–40.
-</div>
-<div class="csl-entry">
+<div id="ref-ward2019assessing" class="csl-entry">
 Ward, Eric J, Helena Delgado-Nordmann, Richard E Brenner, Anne H Beaudreau, Steven D Moffitt, and Andrew O Shelton. 2019. <span>“Assessing Long-Term Changes in Sex Ratios of Pacific Herring in Prince William Sound, Alaska.”</span> <em>Fisheries Research</em> 211: 300–308.
 </div>
-<div class="csl-entry">
+<div id="ref-webber2021rapid" class="csl-entry">
 Webber, DN, MB Rudd, and PJ Starr. 2021. <span>“Rapid Updates for New Zealand Rock Lobster (Jasus Edwardsii) Stocks in 2020.”</span> <em>New Zealand Fisheries Assessment Report</em> 61: 34.
-</div>
 </div>
 </div>
             </section>
@@ -246,8 +241,8 @@ Webber, DN, MB Rudd, and PJ Starr. 2021. <span>“Rapid Updates for New Zealand 
           </div>
         </div>
       </div>
-<a href="tagdata.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="modeldescription.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tagdata.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -278,7 +273,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment/10-references.Rmd",
+"link": "https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment/03-DealWithSexRatios.Rmd",
 "text": "Edit"
 },
 "history": {
