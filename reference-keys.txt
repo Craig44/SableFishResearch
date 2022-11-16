@@ -1,7 +1,9 @@
 eq:processmodel
 eq:observationmodel
-eq:agelengthtransition
 eq:catchatage
+eq:surveyage
+eq:relativeindex
+eq:agelengthtransition
 eq:richardsgrowth
 eq:lengthatrelease
 eq:lengthatrecapture

@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-11-15" />
+<meta name="date" content="2022-11-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -171,11 +171,13 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="modeldescription.html"><a href="modeldescription.html#observationsection"><i class="fa fa-check"></i><b>3.3</b> Observation equations</a>
 <ul>
-<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#calculating-numbers-at-length"><i class="fa fa-check"></i>Calculating numbers at length</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-age"><i class="fa fa-check"></i>Catch at age</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#relative-abundance-indices"><i class="fa fa-check"></i>Relative abundance indices</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-length"><i class="fa fa-check"></i>Catch at length</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#observations-for-fisheries-and-surveys"><i class="fa fa-check"></i>Observations for fisheries and surveys</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#inference"><i class="fa fa-check"></i>Inference</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#todo"><i class="fa fa-check"></i>TODO</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>4</b> Tagging data and studies</a>
 <ul>
@@ -486,22 +488,60 @@ R_y = \exp\{\mu_r + \tau_y + 0.5\sigma_R^2\}
 </div>
 <div id="observationsection" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Observation equations<a href="modeldescription.html#observationsection" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="calculating-numbers-at-length" class="section level3 unnumbered hasAnchor">
-<h3>Calculating numbers at length<a href="modeldescription.html#calculating-numbers-at-length" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>For each year that has a length based observation, numbers at length denoted by <span class="math inline">\(\boldsymbol{N^l}_{y,s} = (N^l_{1,y,s}, \dots, N^l_{n_l,y,s})^T\)</span> (dimension of <span class="math inline">\(\boldsymbol{N^l}_{y,s}\)</span> is <span class="math inline">\(n_l \ \times \ 1\)</span>) were calculated for each sex. This involved multiplying the numbers at age through a age-length transition matrix denoted by <span class="math inline">\(\boldsymbol{A}^l_{y,s}\)</span> (dimensions of <span class="math inline">\(\boldsymbol{A}^l_{y,s}\)</span> are <span class="math inline">\(n_a \ \times \ n_l\)</span> and its rows must sum to 1). The calculation follows Equation <a href="modeldescription.html#eq:agelengthtransition">(3.3)</a>,</p>
-<p><span class="math display" id="eq:agelengthtransition">\[\begin{equation}
-  \boldsymbol{N^l}_{y,s} =  \left(\boldsymbol{A}^l_{y,s} \right)^T \ \times \ \boldsymbol{N_{y,s}}
-  \tag{3.3}
-\end{equation}\]</span>
-where, <span class="math inline">\(\boldsymbol{N_{y,s}}\)</span> is a column vector of numbers at age (dimension <span class="math inline">\(n_a \ \times \ 1\)</span>) at the beginning of year <span class="math inline">\(y\)</span> for sex <span class="math inline">\(s\)</span>.</p>
-</div>
+<p>Three are three observational types in the current Sablefish stock assessment
+- Relative abundance indices
+- Age composition (aggregated over sex)
+- Length composition (disaggregated by sex)</p>
+<p>These three observation types come from both fishery dependent i.e., observer programs and CPUE and fishery independent i.e., research surveys.</p>
 <div id="catch-at-age" class="section level3 unnumbered hasAnchor">
 <h3>Catch at age<a href="modeldescription.html#catch-at-age" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Catch at age for gear type <span class="math inline">\(g\)</span> denoted by <span class="math inline">\(\boldsymbol{C^g}_{a,y,s}\)</span></p>
+<p>Fishery dependent catch at age observations for gear type <span class="math inline">\(g\)</span> denoted by <span class="math inline">\(\boldsymbol{C^g}_{a,y,s}\)</span> are calculated as follows</p>
 <p><span class="math display" id="eq:catchatage">\[\begin{equation}
   \boldsymbol{C^g}_{a,y,s} = \frac{F^g_{a,y,s}}{Z_{a,y,s}}   N_{a,y,s} \left(1 - S_{a,y,s} \right)
+  \tag{3.3}
+\end{equation}\]</span>
+Currently all age observations are sex aggregated which means the model expected values before applying ageing error is
+<span class="math display">\[
+  \boldsymbol{C^g}_{a,y} = 0.5 \sum_s \frac{\boldsymbol{C^g}_{a,y,s}}{\sum_a\boldsymbol{C^g}_{a,y,s}}
+\]</span>
+why the 0.5? should be omitted going forward. Ageing error is then incorporated and the values are normalized so that they are proportions, before being passed to the multinomial log-likelihood function.</p>
+<p>Survey age composition is similar but instead of being a function of <span class="math inline">\(F\)</span> it is calculated at the beginning of the year. For survey <span class="math inline">\(k\)</span> the numbers at age are denoted by <span class="math inline">\(\boldsymbol{C^k}_{a,y}\)</span> and calculated following
+<span class="math display" id="eq:surveyage">\[\begin{equation}
+  \boldsymbol{C^k}_{a,y} = p^s N_{a,y,s} S^k_{y,a,s}
   \tag{3.4}
 \end{equation}\]</span></p>
+<p>I am not sure exactly what the timing of these surveys are, but do we need to account for som mid-year mortality? or changes in timing of the survey? if so we could easily replace
+<span class="math display">\[
+N_{a,y,s}
+\]</span>
+with
+<span class="math display">\[
+N_{a,y,s} \exp\{-p^k_y Z_{a,y,s}\}
+\]</span>
+where,<span class="math inline">\(p^k_y\)</span> is the proportion of mortality that we want to account for in year <span class="math inline">\(y\)</span> for survey <span class="math inline">\(k\)</span>.</p>
+<p>The survey numbers at age are then adjusted for ageing error and normalised so they sum to one for each year.</p>
+</div>
+<div id="relative-abundance-indices" class="section level3 unnumbered hasAnchor">
+<h3>Relative abundance indices<a href="modeldescription.html#relative-abundance-indices" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display" id="eq:relativeindex">\[\begin{equation}
+  \widehat{I}^g_{y} = \sum_s\sum_a p^s N_{a,y,s} \exp \{-0.5 Z_{a,y,s}\} S^g_{y,a,s} \bar{w}_{a,y,s}
+  \tag{3.5}
+\end{equation}\]</span>
+where, <span class="math inline">\(\bar{w}_{a,y,s}\)</span> is mean weight at age, this can be omitted if the observation is in numbers i.e., abundance instead of biomass and <span class="math inline">\(p^s\)</span> is the proportion for each sex. This is currently a user input, but should be dealt within the model either as having different sex selectivities or through the sex ratio of recruitment.</p>
+<p>A list of slight improvements</p>
+<ul>
+<li>change how sex ratio is handled</li>
+<li>fishery dependent abundance indices i.e., CPUE change <span class="math inline">\(N_{a,y,s} \exp \{-0.5 Z_{a,y,s}\}\)</span> with <span class="math inline">\(\boldsymbol{C^g}_{a,y,s}\)</span> which is calculated in the catch at age observations.</li>
+</ul>
+</div>
+<div id="catch-at-length" class="section level3 unnumbered hasAnchor">
+<h3>Catch at length<a href="modeldescription.html#catch-at-length" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For each year that has a length frequency observation, numbers at length denoted by <span class="math inline">\(\boldsymbol{C^l}_{y,s} = (C^l_{1,y,s}, \dots, C^l_{n_l,y,s})^T\)</span> (dimension of <span class="math inline">\(\boldsymbol{C^l}_{y,s}\)</span> is <span class="math inline">\(n_l \ \times \ 1\)</span>) were calculated for each sex. This involved multiplying the catch at age (see above for how it is calculated) through an age-length transition matrix denoted by <span class="math inline">\(\boldsymbol{A}^l_{y,s}\)</span> (dimensions of <span class="math inline">\(\boldsymbol{A}^l_{y,s}\)</span> are <span class="math inline">\(n_a \ \times \ n_l\)</span> and its rows must sum to 1). The calculation follows Equation <a href="modeldescription.html#eq:agelengthtransition">(3.6)</a>,</p>
+<p><span class="math display" id="eq:agelengthtransition">\[\begin{equation}
+  \boldsymbol{C^l}_{y,s} =  \left(\boldsymbol{A}^l_{y,s} \right)^T \ \times \ \boldsymbol{C_{y,s}}
+  \tag{3.6}
+\end{equation}\]</span>
+where, <span class="math inline">\(\boldsymbol{C_{y,s}}\)</span> is a column vector of numbers at age (dimension <span class="math inline">\(n_a \ \times \ 1\)</span>) at the beginning of year <span class="math inline">\(y\)</span> for sex <span class="math inline">\(s\)</span>.</p>
 </div>
 <div id="observations-for-fisheries-and-surveys" class="section level3 unnumbered hasAnchor">
 <h3>Observations for fisheries and surveys<a href="modeldescription.html#observations-for-fisheries-and-surveys" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -630,6 +670,14 @@ In general this integral is not tractable, and so approximations are necessary. 
 <span class="math display">\[\begin{equation}
 \widehat{\boldsymbol{u}} = \underset{\boldsymbol{u}}{\arg\max} \left( Pr\left[ \boldsymbol{y^{obs}}, \boldsymbol{u}| \widehat{\boldsymbol{\theta}}_{MLE} \right] \right)
 \end{equation}\]</span></p>
+</div>
+<div id="todo" class="section level2 unnumbered hasAnchor">
+<h2>TODO<a href="modeldescription.html#todo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Build a validate function to help catch users setting up parameters or data structures that will cause a crash once supplied to TMB.</li>
+<li>Self test</li>
+<li>change some parameter containers. In the ADMB model the often share parameters between male and females. Particularly for selectivity parameters. However TMB will not allow us to fix/map parameters across different arrays or vectors. This means we will want to join the male and female selectivity parameter objects into a single object so that we can share parameters between the sexes.</li>
+</ul>
 
 </div>
 </div>
