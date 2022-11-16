@@ -109,17 +109,20 @@ R_0 = 200000
 M = 0.29
 ages = 1:20
 n_ages = length(ages)
+#plot(ages, mean_length_at_age, type = "l", lwd = 3, xlab = "Age", ylab = "Length (cm)")
+sel_at_age = logis(ages, sel_a50, sel_ato95)
+
 ## numbers at age
 N_age = vector(length = n_ages, "numeric")
 for (age_ndx in 1:n_ages) 
   N_age[age_ndx] = R_0 * exp(-ages[age_ndx] * M) * exp(rnorm(1,0,0.7))
+
+N_age = N_age * sel_at_age ## vulnerable numbers at age
+
 plot(ages, N_age, ylab = "Numbers", xlab = "Age", main = "Population age-structure", type = "o")
 
 ## plot growth
 mean_length_at_age = richards_growth(ages, p, k, t_0, L_inf)
-#plot(ages, mean_length_at_age, type = "l", lwd = 3, xlab = "Age", ylab = "Length (cm)")
-sel_at_age = logis(ages, sel_a50, sel_ato95)
-N_age = N_age * sel_at_age ## vulnerable numbers at age
 ## randomly sample 1000 individuals with replacement for otolithing no ageing error!!
 ## 
 individual_age_length_df = NULL
@@ -221,8 +224,8 @@ MLE_mixed_all = nlminb(start = obj_mixed_all$par, objective = obj_mixed_all$fn, 
 MLE_mixed_all$convergence
 MLE_mixed_all_rep = obj_mixed_all$report(obj_mixed_all$env$last.par.best)
 MLE_mixed_all_sd_rep = sdreport(obj_mixed_all)
-plot(ages, MLE_mixed_all_rep$mean_length_at_age, type = "l", lwd = 3, col = "blue", xlab = "Age", ylab = "Length (cm)", ylim = c(0, 240))
-lines(ages, mean_length_at_age, col = "gold", lty = 3, lwd = 3)
+plot(ages, MLE_mixed_all_rep$mean_length_at_age, type = "l", lwd = 3, col = "red", xlab = "Age", ylab = "Length (cm)", ylim = c(0, 240))
+lines(ages, mean_length_at_age, col = "blue", lty = 3, lwd = 3)
 legend('bottomright', legend = c("LEP obs error","True"), col = c("red", "blue"), lty = c(1,2), lwd = 3)
 
 ```

@@ -165,24 +165,71 @@ The ADMB model has a hard coded number of selectivities. Some of them relate to 
 
 
 ## Observation equations {#observationsection}
+Three are three observational types in the current Sablefish stock assessment
+- Relative abundance indices
+- Age composition (aggregated over sex)
+- Length composition (disaggregated by sex)
 
-### Calculating numbers at length {-}
-For each year that has a length based observation, numbers at length denoted by \(\boldsymbol{N^l}_{y,s} = (N^l_{1,y,s}, \dots, N^l_{n_l,y,s})^T\) (dimension of \(\boldsymbol{N^l}_{y,s}\) is \(n_l \ \times \ 1\)) were calculated for each sex. This involved multiplying the numbers at age through a age-length transition matrix denoted by \(\boldsymbol{A}^l_{y,s}\) (dimensions of \(\boldsymbol{A}^l_{y,s}\) are \(n_a \ \times \ n_l\) and its rows must sum to 1). The calculation follows Equation \@ref(eq:agelengthtransition),
-
-\begin{equation} 
-  \boldsymbol{N^l}_{y,s} =  \left(\boldsymbol{A}^l_{y,s} \right)^T \ \times \ \boldsymbol{N_{y,s}}
-  (\#eq:agelengthtransition)
-\end{equation} 
-where, \(\boldsymbol{N_{y,s}}\) is a column vector of numbers at age (dimension \(n_a \ \times \ 1\)) at the beginning of year \(y\) for sex \(s\).
+These three observation types come from both fishery dependent i.e., observer programs and CPUE and fishery independent i.e., research surveys.
 
 
 ### Catch at age {-}
-Catch at age for gear type \(g\) denoted by \(\boldsymbol{C^g}_{a,y,s}\)
+Fishery dependent catch at age observations for gear type \(g\) denoted by \(\boldsymbol{C^g}_{a,y,s}\) are calculated as follows
 
 \begin{equation} 
   \boldsymbol{C^g}_{a,y,s} = \frac{F^g_{a,y,s}}{Z_{a,y,s}}   N_{a,y,s} \left(1 - S_{a,y,s} \right)
   (\#eq:catchatage)
 \end{equation} 
+Currently all age observations are sex aggregated which means the model expected values before applying ageing error is
+\[
+  \boldsymbol{C^g}_{a,y} = 0.5 \sum_s \frac{\boldsymbol{C^g}_{a,y,s}}{\sum_a\boldsymbol{C^g}_{a,y,s}}
+\]
+why the 0.5? should be omitted going forward. Ageing error is then incorporated and the values are normalized so that they are proportions, before being passed to the multinomial log-likelihood function.
+
+
+
+Survey age composition is similar but instead of being a function of \(F\) it is calculated at the beginning of the year. For survey \(k\) the numbers at age are denoted by \(\boldsymbol{C^k}_{a,y}\) and calculated following
+\begin{equation} 
+  \boldsymbol{C^k}_{a,y} = p^s N_{a,y,s} S^k_{y,a,s}
+  (\#eq:surveyage)
+\end{equation} 
+
+I am not sure exactly what the timing of these surveys are, but do we need to account for som mid-year mortality? or changes in timing of the survey? if so we could easily replace 
+\[
+N_{a,y,s}
+\]
+with
+\[
+N_{a,y,s} \exp\{-p^k_y Z_{a,y,s}\} 
+\]
+where,\(p^k_y\) is the proportion of mortality that we want to account for in year \(y\) for survey \(k\).
+
+The survey numbers at age are then adjusted for ageing error and normalised so they sum to one for each year.
+
+
+### Relative abundance indices {-}
+\begin{equation} 
+  \widehat{I}^g_{y} = \sum_s\sum_a p^s N_{a,y,s} \exp \{-0.5 Z_{a,y,s}\} S^g_{y,a,s} \bar{w}_{a,y,s}
+  (\#eq:relativeindex)
+\end{equation} 
+where, \(\bar{w}_{a,y,s}\) is mean weight at age, this can be omitted if the observation is in numbers i.e., abundance instead of biomass and \(p^s\) is the proportion for each sex. This is currently a user input, but should be dealt within the model either as having different sex selectivities or through the sex ratio of recruitment.
+
+A list of slight improvements
+
+- change how sex ratio is handled
+- fishery dependent abundance indices i.e., CPUE change \(N_{a,y,s} \exp \{-0.5 Z_{a,y,s}\}\) with \(\boldsymbol{C^g}_{a,y,s}\) which is calculated in the catch at age observations.
+
+### Catch at length {-}
+
+For each year that has a length frequency observation, numbers at length denoted by \(\boldsymbol{C^l}_{y,s} = (C^l_{1,y,s}, \dots, C^l_{n_l,y,s})^T\) (dimension of \(\boldsymbol{C^l}_{y,s}\) is \(n_l \ \times \ 1\)) were calculated for each sex. This involved multiplying the catch at age (see above for how it is calculated) through an age-length transition matrix denoted by \(\boldsymbol{A}^l_{y,s}\) (dimensions of \(\boldsymbol{A}^l_{y,s}\) are \(n_a \ \times \ n_l\) and its rows must sum to 1). The calculation follows Equation \@ref(eq:agelengthtransition),
+
+\begin{equation} 
+  \boldsymbol{C^l}_{y,s} =  \left(\boldsymbol{A}^l_{y,s} \right)^T \ \times \ \boldsymbol{C_{y,s}}
+  (\#eq:agelengthtransition)
+\end{equation} 
+where, \(\boldsymbol{C_{y,s}}\) is a column vector of numbers at age (dimension \(n_a \ \times \ 1\)) at the beginning of year \(y\) for sex \(s\).
+
+
 
 
 ### Observations for fisheries and surveys {-}
@@ -258,3 +305,7 @@ and Empirical Bayes estimates are evaluated for \(\widehat{\boldsymbol{u}}\), wh
 \end{equation}
 
 
+## TODO {-}
+- Build a validate function to help catch users setting up parameters or data structures that will cause a crash once supplied to TMB.
+- Self test
+- change some parameter containers. In the ADMB model the often share parameters between male and females. Particularly for selectivity parameters. However TMB will not allow us to fix/map parameters across different arrays or vectors. This means we will want to join the male and female selectivity parameter objects into a single object so that we can share parameters between the sexes.
