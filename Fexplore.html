@@ -181,11 +181,12 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>4</b> Exploring methods for sex ratios in age and length composition data</a>
 <ul>
+<li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#set-up-a-simulation"><i class="fa fa-check"></i>Set up a simulation</a></li>
 <li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#other-things-to-consider"><i class="fa fa-check"></i>Other things to consider</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="Fexplore.html"><a href="Fexplore.html"><i class="fa fa-check"></i><b>5</b> Exploring alternative fishing mortality parameterisations (F)</a>
 <ul>
-<li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#set-up-a-simulation"><i class="fa fa-check"></i>Set up a simulation</a></li>
+<li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#set-up-a-simulation-1"><i class="fa fa-check"></i>Set up a simulation</a></li>
 <li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#other-things-to-consider-1"><i class="fa fa-check"></i>Other things to consider</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>6</b> Tagging data and studies</a>
@@ -233,91 +234,90 @@ div.csl-indent {
 <p>The arguments for the discrete approximation is that there is an analytical solution for <span class="math inline">\(U\)</span> and so is fast to calculate expected catch, where as <span class="math inline">\(F\)</span> has to be either solved numerically or estimated as a free parameter.</p>
 <p>Chris Francis’s wrote a response to this paper <span class="citation">(<a href="#ref-francisCommentBranch" role="doc-biblioref">Francis 2010</a>)</span> where he argues the discrete formulation does not preclude the multiple encounters and that only the data can truly tell us which catch equation is the best one to use.</p>
 <p>The relationship between <span class="math inline">\(F\)</span> (Instantaneous fishing mortality) and <span class="math inline">\(U\)</span> exploitation rate for a simple scenario (single fishery) is given in the following R code.</p>
-<div id="set-up-a-simulation" class="section level2 unnumbered hasAnchor">
-<h2>Set up a simulation<a href="Fexplore.html#set-up-a-simulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="Fexplore.html#cb2-1" aria-hidden="true" tabindex="-1"></a>bio_params <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb2-2"><a href="Fexplore.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">ages =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
-<span id="cb2-3"><a href="Fexplore.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">L_inf =</span> <span class="dv">58</span>,</span>
-<span id="cb2-4"><a href="Fexplore.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">K =</span> <span class="fl">0.133</span>,</span>
-<span id="cb2-5"><a href="Fexplore.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">t0 =</span> <span class="dv">0</span>,</span>
-<span id="cb2-6"><a href="Fexplore.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">M =</span> <span class="fl">0.15</span>,</span>
-<span id="cb2-7"><a href="Fexplore.html#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="fl">2.08e-9</span>, <span class="do">## tonnes</span></span>
-<span id="cb2-8"><a href="Fexplore.html#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="fl">3.5</span>,</span>
-<span id="cb2-9"><a href="Fexplore.html#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_a50 =</span> <span class="fl">6.3</span>,</span>
-<span id="cb2-10"><a href="Fexplore.html#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_ato95 =</span> <span class="fl">1.2</span>,</span>
-<span id="cb2-11"><a href="Fexplore.html#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma =</span> <span class="fl">0.6</span>,</span>
-<span id="cb2-12"><a href="Fexplore.html#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">h =</span> <span class="fl">0.85</span>,</span>
-<span id="cb2-13"><a href="Fexplore.html#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma_r =</span> <span class="fl">0.6</span>,</span>
-<span id="cb2-14"><a href="Fexplore.html#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">R0 =</span> <span class="dv">8234132</span>,</span>
-<span id="cb2-15"><a href="Fexplore.html#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">plus_group =</span> <span class="dv">1</span> <span class="co"># 0 = No, 1 = Yes</span></span>
-<span id="cb2-16"><a href="Fexplore.html#cb2-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-17"><a href="Fexplore.html#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="Fexplore.html#cb2-18" aria-hidden="true" tabindex="-1"></a>other_params <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb2-19"><a href="Fexplore.html#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_a50 =</span> <span class="fl">3.6</span>,</span>
-<span id="cb2-20"><a href="Fexplore.html#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_ato95 =</span> <span class="dv">2</span>,</span>
-<span id="cb2-21"><a href="Fexplore.html#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_q =</span> <span class="fl">0.2</span>,</span>
-<span id="cb2-22"><a href="Fexplore.html#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_a50 =</span> <span class="dv">5</span>,</span>
-<span id="cb2-23"><a href="Fexplore.html#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_ato95 =</span> <span class="dv">2</span>,</span>
-<span id="cb2-24"><a href="Fexplore.html#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">ssb_prop_Z =</span> <span class="fl">0.5</span>,</span>
-<span id="cb2-25"><a href="Fexplore.html#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_prop_Z =</span> <span class="fl">0.5</span>,</span>
-<span id="cb2-26"><a href="Fexplore.html#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_age_error =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.4</span>),  <span class="do">## sd, rho (ignored if iid)</span></span>
-<span id="cb2-27"><a href="Fexplore.html#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">fishery_age_error =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.4</span>),  <span class="do">## sd, rho (ignored if iid)</span></span>
-<span id="cb2-28"><a href="Fexplore.html#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_bio_cv =</span> <span class="fu">c</span>(<span class="fl">0.1</span>)</span>
-<span id="cb2-29"><a href="Fexplore.html#cb2-29" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-30"><a href="Fexplore.html#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-31"><a href="Fexplore.html#cb2-31" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">=</span> bio_params<span class="sc">$</span>ages</span>
-<span id="cb2-32"><a href="Fexplore.html#cb2-32" aria-hidden="true" tabindex="-1"></a>max_age <span class="ot">=</span> <span class="fu">max</span>(bio_params<span class="sc">$</span>ages)</span>
-<span id="cb2-33"><a href="Fexplore.html#cb2-33" aria-hidden="true" tabindex="-1"></a>n_years <span class="ot">=</span> <span class="dv">30</span></span>
-<span id="cb2-34"><a href="Fexplore.html#cb2-34" aria-hidden="true" tabindex="-1"></a>years <span class="ot">=</span> (<span class="dv">2020</span> <span class="sc">-</span> n_years <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="dv">2020</span></span>
-<span id="cb2-35"><a href="Fexplore.html#cb2-35" aria-hidden="true" tabindex="-1"></a>n_ages <span class="ot">=</span> <span class="fu">length</span>(ages)</span>
-<span id="cb2-36"><a href="Fexplore.html#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="do">## annual fishing mortality</span></span>
-<span id="cb2-37"><a href="Fexplore.html#cb2-37" aria-hidden="true" tabindex="-1"></a>start_F <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.05</span>, <span class="at">to =</span> <span class="fl">0.2</span>, <span class="at">length =</span> <span class="dv">10</span>)), <span class="fl">0.1</span>), <span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fl">0.13</span>), <span class="fl">0.1</span>), <span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fl">0.07</span>), <span class="fl">0.1</span>))</span>
-<span id="cb2-38"><a href="Fexplore.html#cb2-38" aria-hidden="true" tabindex="-1"></a>recruit_devs <span class="ot">=</span> <span class="fu">log</span>(<span class="fu">rlnorm</span>(n_years, <span class="sc">-</span><span class="fl">0.5</span> <span class="sc">*</span> bio_params<span class="sc">$</span>sigma_r <span class="sc">*</span> bio_params<span class="sc">$</span>sigma_r, bio_params<span class="sc">$</span>sigma_r))</span>
-<span id="cb2-39"><a href="Fexplore.html#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-40"><a href="Fexplore.html#cb2-40" aria-hidden="true" tabindex="-1"></a>length_at_age <span class="ot">=</span> <span class="fu">vonbert</span>(bio_params<span class="sc">$</span>ages, bio_params<span class="sc">$</span>K, bio_params<span class="sc">$</span>L_inf, bio_params<span class="sc">$</span>t0)</span>
-<span id="cb2-41"><a href="Fexplore.html#cb2-41" aria-hidden="true" tabindex="-1"></a>fishery_ogive <span class="ot">=</span> <span class="fu">logis</span>(bio_params<span class="sc">$</span>ages, other_params<span class="sc">$</span>f_a50, other_params<span class="sc">$</span>f_ato95)</span>
-<span id="cb2-42"><a href="Fexplore.html#cb2-42" aria-hidden="true" tabindex="-1"></a>survey_ogive <span class="ot">=</span> <span class="fu">logis</span>(bio_params<span class="sc">$</span>ages, other_params<span class="sc">$</span>s_a50, other_params<span class="sc">$</span>s_ato95)</span>
-<span id="cb2-43"><a href="Fexplore.html#cb2-43" aria-hidden="true" tabindex="-1"></a>mat_age <span class="ot">=</span> <span class="fu">logis</span>(bio_params<span class="sc">$</span>ages, bio_params<span class="sc">$</span>m_a50, bio_params<span class="sc">$</span>m_ato95)</span>
-<span id="cb2-44"><a href="Fexplore.html#cb2-44" aria-hidden="true" tabindex="-1"></a>weight_at_age <span class="ot">=</span> bio_params<span class="sc">$</span>a <span class="sc">*</span> length_at_age<span class="sc">^</span>bio_params<span class="sc">$</span>b</span>
-<span id="cb2-45"><a href="Fexplore.html#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-46"><a href="Fexplore.html#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="do">## observation temporal frequency</span></span>
-<span id="cb2-47"><a href="Fexplore.html#cb2-47" aria-hidden="true" tabindex="-1"></a>survey_year_obs <span class="ot">=</span> years</span>
-<span id="cb2-48"><a href="Fexplore.html#cb2-48" aria-hidden="true" tabindex="-1"></a>survey_ages <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span></span>
-<span id="cb2-49"><a href="Fexplore.html#cb2-49" aria-hidden="true" tabindex="-1"></a>fishery_year_obs <span class="ot">=</span> years</span>
-<span id="cb2-50"><a href="Fexplore.html#cb2-50" aria-hidden="true" tabindex="-1"></a>fishery_ages <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="Fexplore.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
-<span id="cb3-2"><a href="Fexplore.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Build TMB OM with Multinomial</span></span>
-<span id="cb3-3"><a href="Fexplore.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
-<span id="cb3-4"><a href="Fexplore.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#dyn.unload(dynlib(file.path(&quot;TMB&quot;,&quot;SimpleAgeStructuredModel&quot;)))</span></span>
-<span id="cb3-5"><a href="Fexplore.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">compile</span>(<span class="fu">file.path</span>(<span class="st">&quot;TMB&quot;</span>,<span class="st">&quot;SimpleAgeStructuredModel.cpp&quot;</span>), <span class="at">flags =</span> <span class="st">&quot;&quot;</span>,<span class="at">DLLFLAGS=</span><span class="st">&quot;&quot;</span>);</span></code></pre></div>
+<div id="set-up-a-simulation-1" class="section level2 unnumbered hasAnchor">
+<h2>Set up a simulation<a href="Fexplore.html#set-up-a-simulation-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="Fexplore.html#cb10-1" aria-hidden="true" tabindex="-1"></a>bio_params <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb10-2"><a href="Fexplore.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">ages =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb10-3"><a href="Fexplore.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">L_inf =</span> <span class="dv">58</span>,</span>
+<span id="cb10-4"><a href="Fexplore.html#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">K =</span> <span class="fl">0.133</span>,</span>
+<span id="cb10-5"><a href="Fexplore.html#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">t0 =</span> <span class="dv">0</span>,</span>
+<span id="cb10-6"><a href="Fexplore.html#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">M =</span> <span class="fl">0.15</span>,</span>
+<span id="cb10-7"><a href="Fexplore.html#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="fl">2.08e-9</span>, <span class="do">## tonnes</span></span>
+<span id="cb10-8"><a href="Fexplore.html#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="fl">3.5</span>,</span>
+<span id="cb10-9"><a href="Fexplore.html#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_a50 =</span> <span class="fl">6.3</span>,</span>
+<span id="cb10-10"><a href="Fexplore.html#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_ato95 =</span> <span class="fl">1.2</span>,</span>
+<span id="cb10-11"><a href="Fexplore.html#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma =</span> <span class="fl">0.6</span>,</span>
+<span id="cb10-12"><a href="Fexplore.html#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">h =</span> <span class="fl">0.85</span>,</span>
+<span id="cb10-13"><a href="Fexplore.html#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma_r =</span> <span class="fl">0.6</span>,</span>
+<span id="cb10-14"><a href="Fexplore.html#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">R0 =</span> <span class="dv">8234132</span>,</span>
+<span id="cb10-15"><a href="Fexplore.html#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">plus_group =</span> <span class="dv">1</span> <span class="co"># 0 = No, 1 = Yes</span></span>
+<span id="cb10-16"><a href="Fexplore.html#cb10-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-17"><a href="Fexplore.html#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="Fexplore.html#cb10-18" aria-hidden="true" tabindex="-1"></a>other_params <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb10-19"><a href="Fexplore.html#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_a50 =</span> <span class="fl">3.6</span>,</span>
+<span id="cb10-20"><a href="Fexplore.html#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_ato95 =</span> <span class="dv">2</span>,</span>
+<span id="cb10-21"><a href="Fexplore.html#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_q =</span> <span class="fl">0.2</span>,</span>
+<span id="cb10-22"><a href="Fexplore.html#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_a50 =</span> <span class="dv">5</span>,</span>
+<span id="cb10-23"><a href="Fexplore.html#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_ato95 =</span> <span class="dv">2</span>,</span>
+<span id="cb10-24"><a href="Fexplore.html#cb10-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">ssb_prop_Z =</span> <span class="fl">0.5</span>,</span>
+<span id="cb10-25"><a href="Fexplore.html#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_prop_Z =</span> <span class="fl">0.5</span>,</span>
+<span id="cb10-26"><a href="Fexplore.html#cb10-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_age_error =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.4</span>),  <span class="do">## sd, rho (ignored if iid)</span></span>
+<span id="cb10-27"><a href="Fexplore.html#cb10-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">fishery_age_error =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.4</span>),  <span class="do">## sd, rho (ignored if iid)</span></span>
+<span id="cb10-28"><a href="Fexplore.html#cb10-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_bio_cv =</span> <span class="fu">c</span>(<span class="fl">0.1</span>)</span>
+<span id="cb10-29"><a href="Fexplore.html#cb10-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-30"><a href="Fexplore.html#cb10-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-31"><a href="Fexplore.html#cb10-31" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">=</span> bio_params<span class="sc">$</span>ages</span>
+<span id="cb10-32"><a href="Fexplore.html#cb10-32" aria-hidden="true" tabindex="-1"></a>max_age <span class="ot">=</span> <span class="fu">max</span>(bio_params<span class="sc">$</span>ages)</span>
+<span id="cb10-33"><a href="Fexplore.html#cb10-33" aria-hidden="true" tabindex="-1"></a>n_years <span class="ot">=</span> <span class="dv">30</span></span>
+<span id="cb10-34"><a href="Fexplore.html#cb10-34" aria-hidden="true" tabindex="-1"></a>years <span class="ot">=</span> (<span class="dv">2020</span> <span class="sc">-</span> n_years <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="dv">2020</span></span>
+<span id="cb10-35"><a href="Fexplore.html#cb10-35" aria-hidden="true" tabindex="-1"></a>n_ages <span class="ot">=</span> <span class="fu">length</span>(ages)</span>
+<span id="cb10-36"><a href="Fexplore.html#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="do">## annual fishing mortality</span></span>
+<span id="cb10-37"><a href="Fexplore.html#cb10-37" aria-hidden="true" tabindex="-1"></a>start_F <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.05</span>, <span class="at">to =</span> <span class="fl">0.2</span>, <span class="at">length =</span> <span class="dv">10</span>)), <span class="fl">0.1</span>), <span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fl">0.13</span>), <span class="fl">0.1</span>), <span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fl">0.07</span>), <span class="fl">0.1</span>))</span>
+<span id="cb10-38"><a href="Fexplore.html#cb10-38" aria-hidden="true" tabindex="-1"></a>recruit_devs <span class="ot">=</span> <span class="fu">log</span>(<span class="fu">rlnorm</span>(n_years, <span class="sc">-</span><span class="fl">0.5</span> <span class="sc">*</span> bio_params<span class="sc">$</span>sigma_r <span class="sc">*</span> bio_params<span class="sc">$</span>sigma_r, bio_params<span class="sc">$</span>sigma_r))</span>
+<span id="cb10-39"><a href="Fexplore.html#cb10-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-40"><a href="Fexplore.html#cb10-40" aria-hidden="true" tabindex="-1"></a>length_at_age <span class="ot">=</span> <span class="fu">vonbert</span>(bio_params<span class="sc">$</span>ages, bio_params<span class="sc">$</span>K, bio_params<span class="sc">$</span>L_inf, bio_params<span class="sc">$</span>t0)</span>
+<span id="cb10-41"><a href="Fexplore.html#cb10-41" aria-hidden="true" tabindex="-1"></a>fishery_ogive <span class="ot">=</span> <span class="fu">logis</span>(bio_params<span class="sc">$</span>ages, other_params<span class="sc">$</span>f_a50, other_params<span class="sc">$</span>f_ato95)</span>
+<span id="cb10-42"><a href="Fexplore.html#cb10-42" aria-hidden="true" tabindex="-1"></a>survey_ogive <span class="ot">=</span> <span class="fu">logis</span>(bio_params<span class="sc">$</span>ages, other_params<span class="sc">$</span>s_a50, other_params<span class="sc">$</span>s_ato95)</span>
+<span id="cb10-43"><a href="Fexplore.html#cb10-43" aria-hidden="true" tabindex="-1"></a>mat_age <span class="ot">=</span> <span class="fu">logis</span>(bio_params<span class="sc">$</span>ages, bio_params<span class="sc">$</span>m_a50, bio_params<span class="sc">$</span>m_ato95)</span>
+<span id="cb10-44"><a href="Fexplore.html#cb10-44" aria-hidden="true" tabindex="-1"></a>weight_at_age <span class="ot">=</span> bio_params<span class="sc">$</span>a <span class="sc">*</span> length_at_age<span class="sc">^</span>bio_params<span class="sc">$</span>b</span>
+<span id="cb10-45"><a href="Fexplore.html#cb10-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-46"><a href="Fexplore.html#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="do">## observation temporal frequency</span></span>
+<span id="cb10-47"><a href="Fexplore.html#cb10-47" aria-hidden="true" tabindex="-1"></a>survey_year_obs <span class="ot">=</span> years</span>
+<span id="cb10-48"><a href="Fexplore.html#cb10-48" aria-hidden="true" tabindex="-1"></a>survey_ages <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span></span>
+<span id="cb10-49"><a href="Fexplore.html#cb10-49" aria-hidden="true" tabindex="-1"></a>fishery_year_obs <span class="ot">=</span> years</span>
+<span id="cb10-50"><a href="Fexplore.html#cb10-50" aria-hidden="true" tabindex="-1"></a>fishery_ages <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="Fexplore.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
+<span id="cb11-2"><a href="Fexplore.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Build TMB OM with Multinomial</span></span>
+<span id="cb11-3"><a href="Fexplore.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
+<span id="cb11-4"><a href="Fexplore.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#dyn.unload(dynlib(file.path(&quot;TMB&quot;,&quot;SimpleAgeStructuredModel&quot;)))</span></span>
+<span id="cb11-5"><a href="Fexplore.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">compile</span>(<span class="fu">file.path</span>(<span class="st">&quot;TMB&quot;</span>,<span class="st">&quot;SimpleAgeStructuredModel.cpp&quot;</span>), <span class="at">flags =</span> <span class="st">&quot;&quot;</span>,<span class="at">DLLFLAGS=</span><span class="st">&quot;&quot;</span>);</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="Fexplore.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dyn.load</span>(<span class="fu">dynlib</span>(<span class="fu">file.path</span>(<span class="st">&quot;TMB&quot;</span>,<span class="st">&quot;SimpleAgeStructuredModel&quot;</span>)))</span>
-<span id="cb5-2"><a href="Fexplore.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">## tolerance form model convergence, all gradients need to be less than this.</span></span>
-<span id="cb5-3"><a href="Fexplore.html#cb5-3" aria-hidden="true" tabindex="-1"></a>grad_tol <span class="ot">=</span> <span class="fl">0.001</span></span>
-<span id="cb5-4"><a href="Fexplore.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># these parameters we are not estimating.</span></span>
-<span id="cb5-5"><a href="Fexplore.html#cb5-5" aria-hidden="true" tabindex="-1"></a>na_map <span class="ot">=</span> <span class="fu">fix_pars</span>(<span class="at">par_list =</span> true_pars, <span class="at">pars_to_exclude =</span> <span class="fu">c</span>(<span class="st">&quot;ln_catch_sd&quot;</span>, <span class="st">&quot;trans_survey_error&quot;</span>, <span class="st">&quot;trans_fishery_error&quot;</span>,<span class="st">&quot;ln_extra_survey_cv&quot;</span>,<span class="st">&quot;ln_sigma_r&quot;</span>))</span>
-<span id="cb5-6"><a href="Fexplore.html#cb5-6" aria-hidden="true" tabindex="-1"></a>ASM_obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(TMB_data, true_pars, <span class="at">DLL=</span> <span class="st">&quot;SimpleAgeStructuredModel&quot;</span>, <span class="at">map =</span> na_map)</span></code></pre></div>
-<pre><code>## Constructing atomic invpd
-## Constructing atomic D_lgamma</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="Fexplore.html#cb7-1" aria-hidden="true" tabindex="-1"></a>true_report <span class="ot">=</span> ASM_obj<span class="sc">$</span><span class="fu">report</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="Fexplore.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
-<span id="cb8-2"><a href="Fexplore.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Self Test</span></span>
-<span id="cb8-3"><a href="Fexplore.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
-<span id="cb8-4"><a href="Fexplore.html#cb8-4" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">=</span> <span class="dv">100</span></span>
-<span id="cb8-5"><a href="Fexplore.html#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="Fexplore.html#cb8-6" aria-hidden="true" tabindex="-1"></a>est_pars <span class="ot">=</span> <span class="cn">NULL</span></span>
-<span id="cb8-7"><a href="Fexplore.html#cb8-7" aria-hidden="true" tabindex="-1"></a>ssbs <span class="ot">=</span> <span class="cn">NULL</span></span>
-<span id="cb8-8"><a href="Fexplore.html#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(sim_iter <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sims) {</span>
-<span id="cb8-9"><a href="Fexplore.html#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(sim_iter <span class="sc">%%</span> <span class="dv">10</span> <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb8-10"><a href="Fexplore.html#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;iter = &quot;</span>, sim_iter, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb8-11"><a href="Fexplore.html#cb8-11" aria-hidden="true" tabindex="-1"></a>  sim_data <span class="ot">=</span> ASM_obj<span class="sc">$</span><span class="fu">simulate</span>(<span class="at">complete =</span> T)</span>
-<span id="cb8-12"><a href="Fexplore.html#cb8-12" aria-hidden="true" tabindex="-1"></a>  start_pars <span class="ot">=</span> <span class="fu">ran_start_vals</span>(<span class="at">covar =</span> <span class="st">&quot;ar1&quot;</span>)</span>
-<span id="cb8-13"><a href="Fexplore.html#cb8-13" aria-hidden="true" tabindex="-1"></a>  est_model <span class="ot">=</span> <span class="fu">MakeADFun</span>(sim_data, start_pars, <span class="at">DLL=</span> <span class="st">&quot;SimpleAgeStructuredModel&quot;</span>, <span class="at">map =</span> na_map, <span class="at">silent =</span> T)</span>
-<span id="cb8-14"><a href="Fexplore.html#cb8-14" aria-hidden="true" tabindex="-1"></a>  opt_modelc <span class="ot">=</span> <span class="fu">nlminb</span>(est_model<span class="sc">$</span>par, est_model<span class="sc">$</span>fn, est_model<span class="sc">$</span>gr, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">iter.max =</span> <span class="dv">10000</span>, <span class="at">eval.max =</span> <span class="dv">10000</span>))</span>
-<span id="cb8-15"><a href="Fexplore.html#cb8-15" aria-hidden="true" tabindex="-1"></a>  est_pars <span class="ot">=</span> <span class="fu">rbind</span>(est_pars, opt_modelc<span class="sc">$</span>par)</span>
-<span id="cb8-16"><a href="Fexplore.html#cb8-16" aria-hidden="true" tabindex="-1"></a>  est_rep <span class="ot">=</span> est_model<span class="sc">$</span><span class="fu">report</span>(opt_modelc<span class="sc">$</span>par)</span>
-<span id="cb8-17"><a href="Fexplore.html#cb8-17" aria-hidden="true" tabindex="-1"></a>  ssbs <span class="ot">=</span> <span class="fu">rbind</span>(ssbs, est_rep<span class="sc">$</span>ssb)</span>
-<span id="cb8-18"><a href="Fexplore.html#cb8-18" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="Fexplore.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dyn.load</span>(<span class="fu">dynlib</span>(<span class="fu">file.path</span>(<span class="st">&quot;TMB&quot;</span>,<span class="st">&quot;SimpleAgeStructuredModel&quot;</span>)))</span>
+<span id="cb13-2"><a href="Fexplore.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="do">## tolerance form model convergence, all gradients need to be less than this.</span></span>
+<span id="cb13-3"><a href="Fexplore.html#cb13-3" aria-hidden="true" tabindex="-1"></a>grad_tol <span class="ot">=</span> <span class="fl">0.001</span></span>
+<span id="cb13-4"><a href="Fexplore.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># these parameters we are not estimating.</span></span>
+<span id="cb13-5"><a href="Fexplore.html#cb13-5" aria-hidden="true" tabindex="-1"></a>na_map <span class="ot">=</span> <span class="fu">fix_pars</span>(<span class="at">par_list =</span> true_pars, <span class="at">pars_to_exclude =</span> <span class="fu">c</span>(<span class="st">&quot;ln_catch_sd&quot;</span>, <span class="st">&quot;trans_survey_error&quot;</span>, <span class="st">&quot;trans_fishery_error&quot;</span>,<span class="st">&quot;ln_extra_survey_cv&quot;</span>,<span class="st">&quot;ln_sigma_r&quot;</span>))</span>
+<span id="cb13-6"><a href="Fexplore.html#cb13-6" aria-hidden="true" tabindex="-1"></a>ASM_obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(TMB_data, true_pars, <span class="at">DLL=</span> <span class="st">&quot;SimpleAgeStructuredModel&quot;</span>, <span class="at">map =</span> na_map)</span></code></pre></div>
+<pre><code>## Constructing atomic invpd</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="Fexplore.html#cb15-1" aria-hidden="true" tabindex="-1"></a>true_report <span class="ot">=</span> ASM_obj<span class="sc">$</span><span class="fu">report</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="Fexplore.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
+<span id="cb16-2"><a href="Fexplore.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Self Test</span></span>
+<span id="cb16-3"><a href="Fexplore.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
+<span id="cb16-4"><a href="Fexplore.html#cb16-4" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb16-5"><a href="Fexplore.html#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="Fexplore.html#cb16-6" aria-hidden="true" tabindex="-1"></a>est_pars <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb16-7"><a href="Fexplore.html#cb16-7" aria-hidden="true" tabindex="-1"></a>ssbs <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb16-8"><a href="Fexplore.html#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(sim_iter <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sims) {</span>
+<span id="cb16-9"><a href="Fexplore.html#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(sim_iter <span class="sc">%%</span> <span class="dv">10</span> <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb16-10"><a href="Fexplore.html#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;iter = &quot;</span>, sim_iter, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb16-11"><a href="Fexplore.html#cb16-11" aria-hidden="true" tabindex="-1"></a>  sim_data <span class="ot">=</span> ASM_obj<span class="sc">$</span><span class="fu">simulate</span>(<span class="at">complete =</span> T)</span>
+<span id="cb16-12"><a href="Fexplore.html#cb16-12" aria-hidden="true" tabindex="-1"></a>  start_pars <span class="ot">=</span> <span class="fu">ran_start_vals</span>(<span class="at">covar =</span> <span class="st">&quot;ar1&quot;</span>)</span>
+<span id="cb16-13"><a href="Fexplore.html#cb16-13" aria-hidden="true" tabindex="-1"></a>  est_model <span class="ot">=</span> <span class="fu">MakeADFun</span>(sim_data, start_pars, <span class="at">DLL=</span> <span class="st">&quot;SimpleAgeStructuredModel&quot;</span>, <span class="at">map =</span> na_map, <span class="at">silent =</span> T)</span>
+<span id="cb16-14"><a href="Fexplore.html#cb16-14" aria-hidden="true" tabindex="-1"></a>  opt_modelc <span class="ot">=</span> <span class="fu">nlminb</span>(est_model<span class="sc">$</span>par, est_model<span class="sc">$</span>fn, est_model<span class="sc">$</span>gr, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">iter.max =</span> <span class="dv">10000</span>, <span class="at">eval.max =</span> <span class="dv">10000</span>))</span>
+<span id="cb16-15"><a href="Fexplore.html#cb16-15" aria-hidden="true" tabindex="-1"></a>  est_pars <span class="ot">=</span> <span class="fu">rbind</span>(est_pars, opt_modelc<span class="sc">$</span>par)</span>
+<span id="cb16-16"><a href="Fexplore.html#cb16-16" aria-hidden="true" tabindex="-1"></a>  est_rep <span class="ot">=</span> est_model<span class="sc">$</span><span class="fu">report</span>(opt_modelc<span class="sc">$</span>par)</span>
+<span id="cb16-17"><a href="Fexplore.html#cb16-17" aria-hidden="true" tabindex="-1"></a>  ssbs <span class="ot">=</span> <span class="fu">rbind</span>(ssbs, est_rep<span class="sc">$</span>ssb)</span>
+<span id="cb16-18"><a href="Fexplore.html#cb16-18" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## iter =  10 
 ## iter =  20 
 ## iter =  30 
@@ -328,14 +328,14 @@ div.csl-indent {
 ## iter =  80 
 ## iter =  90 
 ## iter =  100</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="Fexplore.html#cb10-1" aria-hidden="true" tabindex="-1"></a>molten_ssbs <span class="ot">=</span> <span class="fu">melt</span>(ssbs)</span>
-<span id="cb10-2"><a href="Fexplore.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(molten_ssbs) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;sim&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;value&quot;</span>)</span>
-<span id="cb10-3"><a href="Fexplore.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb10-4"><a href="Fexplore.html#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span>molten_ssbs, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> value, <span class="at">group =</span> sim)) <span class="sc">+</span></span>
-<span id="cb10-5"><a href="Fexplore.html#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">year =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">31</span>, <span class="at">value =</span> true_report<span class="sc">$</span>ssb),<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> value), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb10-6"><a href="Fexplore.html#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb10-7"><a href="Fexplore.html#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="at">y =</span> <span class="st">&quot;SSB (t)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb10-8"><a href="Fexplore.html#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="Fexplore.html#cb18-1" aria-hidden="true" tabindex="-1"></a>molten_ssbs <span class="ot">=</span> <span class="fu">melt</span>(ssbs)</span>
+<span id="cb18-2"><a href="Fexplore.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(molten_ssbs) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;sim&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;value&quot;</span>)</span>
+<span id="cb18-3"><a href="Fexplore.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb18-4"><a href="Fexplore.html#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span>molten_ssbs, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> value, <span class="at">group =</span> sim)) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="Fexplore.html#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">year =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">31</span>, <span class="at">value =</span> true_report<span class="sc">$</span>ssb),<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> value), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="Fexplore.html#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb18-7"><a href="Fexplore.html#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="at">y =</span> <span class="st">&quot;SSB (t)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb18-8"><a href="Fexplore.html#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/self_test-1.png" width="672" /></p>
 </div>
 <div id="other-things-to-consider-1" class="section level2 unnumbered hasAnchor">
