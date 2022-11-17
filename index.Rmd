@@ -83,6 +83,33 @@ logis<- function(X,a50,a95)
 {
   1/(1+19^((a50-X)/a95)) 
 }
+
+#' bound_unit constrains Y from -inf -> inf to be between -1 -> 1 
+#' @param Y scalar range [-inf, inf]
+#' @return X to be between [-1,1] 
+bound_unit = function(Y) {
+  return(Y / sqrt(1.0 + Y * Y))
+}
+
+#' inv_bound_unit constrains Y from -inf -> inf to be between -1 -> 1 
+#' @param X scalar range [-1,1] 
+#' @return Y to be between [-inf, inf]
+inv_bound_unit = function(X) {
+  return(sqrt((X*X) / (1 - X*X)) * ifelse(X < 0, -1, 1))
+}
+#' logit bounds X which is between 0-1 to -inf -> inf based on the logit transformation
+#' equivalent to qlogis(X)
+#' @param X scalar range [0,1]
+#' @return Y to be between [-inf, inf]
+logit = function(X) {
+  log(X / (1 - X)) 
+}
+#' invlogit Inverse logit transformation, equivalent to plogis(Y)
+#' @param Y scalar between [-inf, inf] 
+#' @return X between [0,1]
+invlogit<- function(Y) {
+  1/(1 + exp(-Y))
+}
 #' logit_general bounds X which is between [lb,ub] to -inf -> inf based on the logit transformation
 #' @param X scalar range [lb,ub]
 #' @param ub upper bound for X
@@ -91,6 +118,15 @@ logis<- function(X,a50,a95)
 logit_general = function(X, lb, ub) {
   X1 = (X - lb) / (ub - lb)
   log(X1/(1 - X1))
+}
+#' invlogit_general bounds X which is between -inf -> inf to [lb,ub] based on the logit transformation
+#' @param Y scalar range [-inf, inf]
+#' @param ub upper bound for X
+#' @param lb lower bound for X
+#' @return X to be between [lb,ub]
+invlogit_general = function(Y, lb, ub) {
+  Y1 = 1 / (1 + exp(-Y))
+  lb + (ub - lb)*Y1
 }
 
 ```
