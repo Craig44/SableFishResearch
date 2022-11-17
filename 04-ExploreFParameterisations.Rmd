@@ -1,0 +1,236 @@
+# Exploring alternative fishing mortality parameterisations (F) {#Fexplore}
+
+The current Alaskan Sablefish stock assessment (Chapter \@ref(modeldescription)), fishing mortality has estimable parameters for each gear \(g\) and year \(y\). This parametersation poses to potential problems. The first is that the number of parameters will increase as the number of gears increase. The fishery is currently going through a transformation whereby there is a switch from longline to pots. The second consideration is how how to set this up in a spatially explicit model where catch have an added spatial dimension. There are two alternative approaches to the current approach which treat \(F\) as a derived quantity rather than an estimable parameter. The first is to use newton rahpson methods to solve \(F\) as is done in the "hybrid" method of Stock Synthesis [@methot2013stock]. The second ...
+
+
+
+A quick overview of the commonly applied fishing dynamics applied in stock assessment models. A good general overview is by @branch2009differences. They compare the continuous Baranov Catch equation [@baranov1918question] vs Pope's discrete formulation [@pope1972investigation]. Arguments for using the continuous case is that $M$ and $F$ occur simultaneously, also with the continuous case, $F$ allows for multiple event encounters, this is assuming a fleet has the same selectivity and availability, that a fish that escapes one net can be caught in another. In contrast, the discrete formulation only allows a fish to be caught or escape from an instantaneous event. I have summarized the benefits of the continuous equation in the following list,
+
+*  Allows the entire population to be caught (not sure this is that relevant)
+*  Allows simultaneous $M$ and $F$, no need to worry about order of operations. From a coding/practical perspective this is quite attractive. Once you have an F and M you can easily derive all mid-mortality quantities. Where as using the \(U\) approach you need save the population before and after to interpolate to derive mid-mortality quantities.
+*  $F$ effects Composition data, where as in the discrete case composition is independent of $U$.
+*  Allows for multiple catch events of an individual
+*  Can fit to catch thus allows for uncertainty in catches
+
+The arguments for the discrete approximation is that there is an analytical solution for \(U\) and so is fast to calculate expected catch, where as $F$ has to be either solved numerically or estimated as a free parameter. 
+ 
+Chris Francis's wrote a response to this paper [@francisCommentBranch] where he argues the discrete formulation does not preclude the multiple encounters and that only the data can truly tell us which catch equation is the best one to use.
+ 
+The relationship between $F$ (Instantaneous fishing mortality) and $U$ exploitation rate for a simple scenario (single fishery) is given in the following R code.
+
+## Set up a simulation {-}
+```{r illustrate_F_vs_U_sim}
+bio_params = list(
+  ages = 1:20,
+  L_inf = 58,
+  K = 0.133,
+  t0 = 0,
+  M = 0.15,
+  a = 2.08e-9, ## tonnes
+  b = 3.5,
+  m_a50 = 6.3,
+  m_ato95 = 1.2,
+  sigma = 0.6,
+  h = 0.85,
+  sigma_r = 0.6,
+  R0 = 8234132,
+  plus_group = 1 # 0 = No, 1 = Yes
+)
+
+other_params = list(
+  s_a50 = 3.6,
+  s_ato95 = 2,
+  s_q = 0.2,
+  f_a50 = 5,
+  f_ato95 = 2,
+  ssb_prop_Z = 0.5,
+  survey_prop_Z = 0.5,
+  survey_age_error = c(0.5, 0.4),  ## sd, rho (ignored if iid)
+  fishery_age_error = c(0.5, 0.4),  ## sd, rho (ignored if iid)
+  survey_bio_cv = c(0.1)
+)
+
+ages = bio_params$ages
+max_age = max(bio_params$ages)
+n_years = 30
+years = (2020 - n_years + 1):2020
+n_ages = length(ages)
+## annual fishing mortality
+start_F = c(rlnorm(10, log(seq(from = 0.05, to = 0.2, length = 10)), 0.1), rlnorm(10, log(0.13), 0.1), rlnorm(10, log(0.07), 0.1))
+recruit_devs = log(rlnorm(n_years, -0.5 * bio_params$sigma_r * bio_params$sigma_r, bio_params$sigma_r))
+
+length_at_age = vonbert(bio_params$ages, bio_params$K, bio_params$L_inf, bio_params$t0)
+fishery_ogive = logis(bio_params$ages, other_params$f_a50, other_params$f_ato95)
+survey_ogive = logis(bio_params$ages, other_params$s_a50, other_params$s_ato95)
+mat_age = logis(bio_params$ages, bio_params$m_a50, bio_params$m_ato95)
+weight_at_age = bio_params$a * length_at_age^bio_params$b
+
+## observation temporal frequency
+survey_year_obs = years
+survey_ages = 1:20
+fishery_year_obs = years
+fishery_ages = 1:20
+```
+
+```{r pop_tmb_objects, echo = F, eval = T}
+#' create a function for simulating starting values for model robustness
+#' @param n <integer> number of draws you want
+#' @param dist <string> distribution to use to draw starting values, allowed "unif", "norm" 
+#' @param LB <scalar> Lower bound of starting value, shouldn't use lower bound of parameter
+#' @param UB <scalar> Upper Bound of starting balues.
+#' @param dist_pars <vector> has distributional parameters, i.e for norm = c(mu, sigma)
+#' @return vector of starting values
+ran_start = function(n = 100, dist = "unif", LB = -Inf, UB = Inf, dist_pars = NULL) {
+  if (!any(dist %in% c("unif", "norm")))
+    stop("parameter 'dist', needs to be either unif or norm")
+  start_vals = vector();
+  if (dist == "unif") {
+    start_vals = runif(n, LB, UB)
+  } else if (dist == "norm") {
+    start_vals = rnorm(n, dist_pars[1],dist_pars[2])
+    start_vals[start_vals < LB] = LB
+    start_vals[start_vals > UB] = UB
+    
+  } else {
+    stop("something went wrong")
+  }
+  return(start_vals)
+}
+
+TMB_data = list()
+TMB_data$ages = ages
+TMB_data$maxAgePlusGroup = bio_params$plus_group
+TMB_data$years = years
+TMB_data$nyears = length(TMB_data$years)
+TMB_data$nages = length(TMB_data$ages)
+
+## No ageing error
+TMB_data$ageing_error_matrix = matrix(0, nrow = TMB_data$nages, ncol = TMB_data$nages)
+diag(TMB_data$ageing_error_matrix) = 1;
+
+TMB_data$survey_year_indicator = as.integer(TMB_data$years %in% survey_year_obs)
+TMB_data$survey_obs = rnorm(sum(TMB_data$survey_year_indicator), 100, 4)
+TMB_data$survey_cv = rep(0.05,sum(TMB_data$survey_year_indicator))
+TMB_data$survey_min_age = min(survey_ages)
+TMB_data$survey_max_age = max(survey_ages)
+TMB_data$survey_comp_type = 0 ## 0 = prop at age, 1 = numbers at age
+TMB_data$survey_age_plus_group = 1
+TMB_data$survey_comp_likelihood = 1 ## 0 = MVN (can be applied to both comp_type), 1 = Multinomial, 2 = dirichlet-multinomial
+TMB_data$survey_sample_time = rep(0.5,sum(TMB_data$survey_year_indicator))
+TMB_data$survey_covar_structure = 1 # if survey_comp_likelihood == 1 (MVN); 1 = iid, 2 = us_covstruct, 3 = cs_covstruct Compound Symmetry, 5 = ar1
+TMB_data$survey_trans_comp = matrix(5, nrow = length(TMB_data$survey_min_age:TMB_data$survey_max_age) - ifelse(TMB_data$survey_comp_likelihood == 0, 1, 0), ncol = sum(TMB_data$survey_year_indicator))
+
+TMB_data$fishery_year_indicator = as.integer(TMB_data$years %in% fishery_year_obs)
+TMB_data$fishery_min_age = min(fishery_ages)
+TMB_data$fishery_max_age = max(fishery_ages)
+TMB_data$fishery_comp_type = 0 ## 0 = prop at age, 1 = numbers
+TMB_data$fishery_age_plus_group = 1
+TMB_data$fishery_covar_structure = 1 # if survey_comp_likelihood == 1 (MVN); 1 = iid, 2 = us_covstruct, 3 = cs_covstruct Compound Symmetry, 5 = ar1
+TMB_data$fishery_comp_likelihood = 1 ## 0 = MVN (can be applied to both comp_type), 1 = Multinomial, 2 = dirichlet-multinomial
+TMB_data$fishery_trans_comp = matrix(5, nrow = length(TMB_data$fishery_min_age:TMB_data$fishery_max_age) - ifelse(TMB_data$fishery_comp_likelihood == 0, 1, 0), ncol = sum(TMB_data$fishery_year_indicator))
+
+TMB_data$catches = rep(1000, n_years)# this will be overriden in the simulate() call
+TMB_data$ycs_estimated = rep(1, n_years)
+TMB_data$standardise_ycs = 0;
+
+TMB_data$catchMeanLength = TMB_data$stockMeanLength = matrix(length_at_age, byrow = F, ncol = TMB_data$nyears, nrow = TMB_data$nages)
+TMB_data$propMat = matrix(mat_age, byrow = F, ncol = TMB_data$nyears, nrow = TMB_data$nages)
+TMB_data$natMor = bio_params$M
+TMB_data$steepness = bio_params$h
+TMB_data$stockRecruitmentModelCode = 2 ## BH
+TMB_data$propZ_ssb = rep(other_params$ssb_prop_Z, TMB_data$nyears)
+TMB_data$propZ_survey = rep(other_params$survey_prop_Z, TMB_data$nyears)
+TMB_data$sel_ato95_bounds = c(0.1,20)
+TMB_data$sel_a50_bounds = c(0.1,20)
+TMB_data$mean_weight_a = bio_params$a
+TMB_data$mean_weight_b = bio_params$b
+## The same parameters as OM, to check for consistency
+true_pars = list(
+  ln_R0 = log(bio_params$R0),
+  ln_ycs_est =  log(exp(recruit_devs[TMB_data$ycs_estimated == 1] - 0.5*bio_params$sigma_r^2)),
+  ln_sigma_r = log( bio_params$sigma_r),
+  ln_extra_survey_cv = log(0.0001),
+  trans_survey_error = c(log(0.29), inv_bound_unit(0.55)),
+  trans_fishery_error = c(log(0.38), inv_bound_unit(0.25)),
+  logit_f_a50 = logit_general(other_params$f_a50, TMB_data$sel_a50_bounds[1], TMB_data$sel_a50_bounds[2]),
+  logit_f_ato95 = logit_general(other_params$f_ato95, TMB_data$sel_ato95_bounds[1], TMB_data$sel_ato95_bounds[2]),
+  logit_survey_a50 = logit_general(other_params$s_a50, TMB_data$sel_a50_bounds[1], TMB_data$sel_a50_bounds[2]),
+  logit_survey_ato95 = logit_general(other_params$s_ato95, TMB_data$sel_ato95_bounds[1], TMB_data$sel_ato95_bounds[2]),
+  logit_surveyQ = qlogis(other_params$s_q),
+  ln_F = log(start_F),
+  ln_catch_sd = log(0.02)
+)
+
+ran_start_vals = function(covar = "iid") {
+  start_params = list()
+  start_params$ln_R0 = ran_start(n = 1, LB = log(bio_params$R0 * 0.2), UB = log(bio_params$R0 * 2))
+  start_params$ln_ycs_est = ran_start(n = sum(TMB_data$ycs_estimated), LB = -1, UB = 1)
+  start_params$ln_sigma_r = log(ran_start(n = 1,LB = 0.2, UB = 1))
+  start_params$ln_extra_survey_cv = log(0.01)
+  start_params$trans_survey_error = c(log(ran_start(n = 1, LB = 0.1, UB = 0.6)))
+  start_params$trans_fishery_error = c(log(ran_start(n = 1, LB = 0.1, UB = 0.6)))
+  if (covar == "ar1") {
+    start_params$trans_survey_error  = c(start_params$trans_survey_error, inv_bound_unit(ran_start(n = 1, LB = -0.5, UB = 0.5)))
+    start_params$trans_fishery_error  = c(start_params$trans_fishery_error, inv_bound_unit(ran_start(n = 1, LB = -0.5, UB = 0.5)))
+  }
+  start_params$logit_f_a50 = logit_general(ran_start(n = 1, LB = 3, UB = 8),TMB_data$sel_a50_bounds[1], TMB_data$sel_a50_bounds[2])
+  start_params$logit_f_ato95 = logit_general(ran_start(n = 1, LB = 3, UB = 8), TMB_data$sel_ato95_bounds[1], TMB_data$sel_ato95_bounds[2])
+  start_params$logit_survey_a50 = logit_general(ran_start(n = 1, LB = 3 , UB = 8),TMB_data$sel_a50_bounds[1], TMB_data$sel_a50_bounds[2])
+  start_params$logit_survey_ato95 = logit_general(ran_start(n = 1, LB = 3, UB = 8), TMB_data$sel_ato95_bounds[1], TMB_data$sel_ato95_bounds[2])
+  start_params$logit_surveyQ = qlogis(ran_start(n = 1, LB = 0.04, UB = 0.3))
+  start_params$ln_F = log(ran_start(n = TMB_data$nyears, LB = 0.02, UB = 0.4))
+  start_params$ln_catch_sd = log(0.02)
+  return(start_params)
+}
+
+```
+```{r build_tmb_objects, echo = T, eval = T}
+##################################
+### Build TMB OM with Multinomial
+##################################
+dyn.unload(dynlib(file.path("TMB","SimpleAgeStructuredModel")))
+compile(file.path("TMB","SimpleAgeStructuredModel.cpp"), flags = "",DLLFLAGS="");
+dyn.load(dynlib(file.path("TMB","SimpleAgeStructuredModel")))
+## tolerance form model convergence, all gradients need to be less than this.
+grad_tol = 0.001
+# these parameters we are not estimating.
+na_map = fix_pars(par_list = true_pars, pars_to_exclude = c("ln_catch_sd", "trans_survey_error", "trans_fishery_error","ln_extra_survey_cv","ln_sigma_r"))
+ASM_obj <- MakeADFun(TMB_data, true_pars, DLL= "SimpleAgeStructuredModel", map = na_map)
+true_report = ASM_obj$report()
+```
+
+
+
+```{r self_test, echo = T, eval = T}
+##################################
+### Self Test
+##################################
+n_sims = 100
+
+est_pars = NULL
+ssbs = NULL
+for(sim_iter in 1:n_sims) {
+  if(sim_iter %% 10 == 0)
+    cat("iter = ", sim_iter, "\n")
+  sim_data = ASM_obj$simulate(complete = T)
+  start_pars = ran_start_vals(covar = "ar1")
+  est_model = MakeADFun(sim_data, start_pars, DLL= "SimpleAgeStructuredModel", map = na_map, silent = T)
+  opt_modelc = nlminb(est_model$par, est_model$fn, est_model$gr, control = list(iter.max = 10000, eval.max = 10000))
+  est_pars = rbind(est_pars, opt_modelc$par)
+  est_rep = est_model$report(opt_modelc$par)
+  ssbs = rbind(ssbs, est_rep$ssb)
+}
+molten_ssbs = melt(ssbs)
+colnames(molten_ssbs) = c("sim", "year", "value")
+ggplot() +
+  geom_line(data =molten_ssbs, aes(x = year, y = value, group = sim)) +
+  geom_line(data = data.frame(year = 1:31, value = true_report$ssb),aes(x = year, y = value), col = "red", linetype = "dashed", linewidth = 1.2) +
+  ylim(0,NA) +
+  labs(x = "Time", y = "SSB (t)") +
+  theme_bw()
+```
+
+
+## Other things to consider {-}
+
+

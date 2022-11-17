@@ -1,6 +1,6 @@
 # Exploring methods for sex ratios in age and length composition data {#sexratios}
 
-One of the needed improvements is dealing with sex ratios in the compositional data. Currently there is no observational information on sex ratio in the Sablefish stock assessment (Chapter \@ref(modeldescription)) (Caveat is users can provide an observed sex ratio for observations etc which is similar to the approach in @ward2019assessing). I am aware of two approaches for supplying observations that will provide information on sex ratio. The was taken from Casal2 [@doonan2016casal2] which calculates proportions for a year to sum to one over sex and age. Catch at age (in numbers) for both sexes is denoted by \(\boldsymbol{C^k}_{a,y} = (\boldsymbol{C^k}_{a,y,1},\boldsymbol{C^k}_{a,y,2})\), where \(\boldsymbol{C^k}_{a,y,1}\) is the catch at age for males and \(\boldsymbol{C^k}_{a,y,2}\) is for females, and 
+One of the needed improvements is dealing with sex ratios in the compositional data. Currently it is difficult to see how there is any information on sex ratio in the Sablefish stock assessment given how the observations are structured (Chapter \@ref(modeldescription)) (Caveat is users can provide an observed sex ratio for observations etc which is similar to the approach in @ward2019assessing). I am aware of two approaches for supplying observations that in theory should provide information on sex ratio. The first was taken from Casal2 [@doonan2016casal2]. This treats sexed composition data for a year as a single proportion i.e., proportions across all ages and sexes sum to one for each year of observation. Catch at age (in numbers) for both sexes is denoted by \(\boldsymbol{C^k}_{a,y} = (\boldsymbol{C^k}_{a,y,1},\boldsymbol{C^k}_{a,y,2})\), where \(\boldsymbol{C^k}_{a,y,1}\) is the catch at age for males and \(\boldsymbol{C^k}_{a,y,2}\) is for females, and 
 
 \[
 \boldsymbol{P^k}_{a,y} = \frac{\boldsymbol{C^k}_{a,y}}{\sum_a \sum_s \boldsymbol{C^k}_{a,y,s}}
@@ -20,5 +20,10 @@ A simple simulation experiment was conducted to explore the benefits of each app
 
 
 
+
+## Other things to consider {-}
+
+
+- LF observations with sexual dimorphism in growth. A possible reason LF's could be influencing assessment output is due to mis-specified growth ala 
 
 
