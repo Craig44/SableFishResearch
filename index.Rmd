@@ -129,6 +129,77 @@ invlogit_general = function(Y, lb, ub) {
   lb + (ub - lb)*Y1
 }
 
+#' fix_pars 
+#' @author C.Marsh
+#' @description TMB helper function this function returns a list of factors used in the map argument of the MakeADFun function
+#' values with <NA> will not be estimated.
+#' @param par_list a named list that you give to the par argument in the MakeADFun
+#' @param pars_to_exclude a vector of strings with names of parameters you want to FIX in the objective object.
+#' @param vec_elements_to_exclude a named list (names %in% pars_to_exclude) with number of elements = length(vec_pars_to_adjust). each list element 
+#' @param array_elements_to_exclude a named list (names %in% pars_to_exclude) with a matrix each row corresponds to an element with the first column being the array row index and second column being the array column index to fix
+
+#' contains a vector of elements that we want to exclude from estimation.
+#' @return a list of factors used in the MakeADFun function
+#' @export
+fix_pars <- function(par_list, pars_to_exclude, vec_elements_to_exclude = NULL, array_elements_to_exclude = NULL) {
+  if (!any(pars_to_exclude %in% names(par_list))) {
+    stop(paste0("The parameters ", paste(pars_to_exclude[!pars_to_exclude %in% names(par_list)],collapse = " ")," in exclusion parameters could not be found in the 'par_list', please sort this out"))
+  }
+  pars = names(par_list)
+  mapped_pars = list();
+  if (!is.null(vec_elements_to_exclude)) {
+    if (!all(names(vec_elements_to_exclude) %in% pars_to_exclude))
+      stop("parameters names in vec_elements_to_exclude, need to also be in pars_to_exclude")
+  }
+  if (!is.null(array_elements_to_exclude)) {
+    if (!all(names(array_elements_to_exclude) %in% pars_to_exclude))
+      stop("parameters names in array_elements_to_exclude, need to also be in pars_to_exclude")
+  }
+  param_factor = 1;
+  for(i in 1:length(pars)) {
+    if (pars[i] %in% pars_to_exclude) {
+      params_in_this_par = par_list[[pars[i]]];
+      if (pars[i] %in% names(vec_elements_to_exclude)) {
+        include_element_index = c(1:length(params_in_this_par))[-vec_elements_to_exclude[[pars[i]]]]
+        params_vals = factor(rep(NA, length(params_in_this_par)), levels = factor(param_factor:(param_factor + length(include_element_index) - 1)))
+        params_vals[include_element_index] = factor(param_factor:(param_factor + length(include_element_index) - 1))#, levels = factor(include_element_index))
+        param_factor = param_factor + length(include_element_index)
+        mapped_pars[[pars[i]]] = params_vals;
+      } else if(pars[i] %in% names(array_elements_to_exclude)) {
+        elements_to_drop = array_elements_to_exclude[[pars[i]]]
+        mapped_vector = rep(NA, length(params_in_this_par))
+        first_param_factor = param_factor
+        vec_ndx = 1;
+        ## TMB converts arrays to vectors down columns (not by rows)
+        for(col_ndx in 1:ncol(params_in_this_par)) {
+          for(row_ndx in 1:nrow(params_in_this_par)) {
+            ## check if we need to drop this value
+            for(drop_ndx in 1:nrow(elements_to_drop)) {
+              if(!((row_ndx == elements_to_drop[drop_ndx, 1]) &  (col_ndx == elements_to_drop[drop_ndx, 2]))) {
+                mapped_vector[vec_ndx] = param_factor
+                param_factor = param_factor + 1
+              }
+            }
+            vec_ndx = vec_ndx + 1;
+          }
+        }
+        mapped_vector = factor(mapped_vector, levels = first_param_factor:max(mapped_vector, na.rm = T))
+        mapped_pars[[pars[i]]] = mapped_vector;
+      } else {
+        ## exclude entire parameters
+        mapped_pars[[pars[i]]] = rep(factor(NA),length(params_in_this_par));
+        n_params_to_exclude = nrow(vec_elements_to_exclude[[pars[i]]])
+      }
+    } else {
+      params_in_this_par = par_list[[pars[i]]];
+      params_vals = factor(param_factor:(param_factor + length(params_in_this_par) - 1))
+      param_factor = param_factor + length(params_in_this_par)
+      mapped_pars[[pars[i]]] = params_vals
+    }
+  }
+  return(mapped_pars);
+}
+
 ```
 
 ```{r include=FALSE}
