@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-11-16" />
+<meta name="date" content="2022-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -179,8 +179,16 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#inference"><i class="fa fa-check"></i>Inference</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#todo"><i class="fa fa-check"></i>TODO</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>4</b> Exploring methods for sex ratios in age and length composition data</a></li>
-<li class="chapter" data-level="5" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>5</b> Tagging data and studies</a>
+<li class="chapter" data-level="4" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>4</b> Exploring methods for sex ratios in age and length composition data</a>
+<ul>
+<li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#other-things-to-consider"><i class="fa fa-check"></i>Other things to consider</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="Fexplore.html"><a href="Fexplore.html"><i class="fa fa-check"></i><b>5</b> Exploring alternative fishing mortality parameterisations (F)</a>
+<ul>
+<li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#set-up-a-simulation"><i class="fa fa-check"></i>Set up a simulation</a></li>
+<li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#other-things-to-consider-1"><i class="fa fa-check"></i>Other things to consider</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>6</b> Tagging data and studies</a>
 <ul>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#laslettevesonpolacheck-lep"><i class="fa fa-check"></i>Laslett–Eveson–Polacheck (LEP)</a>
 <ul>
@@ -678,6 +686,7 @@ In general this integral is not tractable, and so approximations are necessary. 
 <li>Build a validate function to help catch users setting up parameters or data structures that will cause a crash once supplied to TMB.</li>
 <li>Self test</li>
 <li>change some parameter containers. In the ADMB model the often share parameters between male and females. Particularly for selectivity parameters. However TMB will not allow us to fix/map parameters across different arrays or vectors. This means we will want to join the male and female selectivity parameter objects into a single object so that we can share parameters between the sexes.</li>
+<li>Change array column casting from <code>vector&lt;Type&gt;(array.col(i))</code> to <code>array.col(i).vec()</code></li>
 </ul>
 
 </div>

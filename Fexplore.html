@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Exploring alternative fishing mortality parameterisations (F) | SableFish stock assessment</title>
+  <meta name="description" content="This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery." />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Exploring alternative fishing mortality parameterisations (F) | SableFish stock assessment" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Exploring alternative fishing mortality parameterisations (F) | SableFish stock assessment" />
+  
+  <meta name="twitter:description" content="This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery." />
+  
+
+<meta name="author" content="C.Marsh" />
+
+
+<meta name="date" content="2022-11-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="sexratios.html"/>
+<link rel="next" href="tagdata.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Sablefish Research</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="2" data-path="objectives.html"><a href="objectives.html"><i class="fa fa-check"></i><b>2</b> A list of objectives/milestones that we have set along the project life</a></li>
+<li class="chapter" data-level="3" data-path="modeldescription.html"><a href="modeldescription.html"><i class="fa fa-check"></i><b>3</b> Current Stock assessment model</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="modeldescription.html"><a href="modeldescription.html#symbols"><i class="fa fa-check"></i><b>3.1</b> Symbol Notation</a></li>
+<li class="chapter" data-level="3.2" data-path="modeldescription.html"><a href="modeldescription.html#modelequations"><i class="fa fa-check"></i><b>3.2</b> Process equations</a>
+<ul>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#initialisation-gleft.right"><i class="fa fa-check"></i>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#population-dynamics-fleft.right"><i class="fa fa-check"></i>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#determining-selectivities-for-fisheries-and-surveys"><i class="fa fa-check"></i>Determining selectivities for fisheries and surveys</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="modeldescription.html"><a href="modeldescription.html#observationsection"><i class="fa fa-check"></i><b>3.3</b> Observation equations</a>
+<ul>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-age"><i class="fa fa-check"></i>Catch at age</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#relative-abundance-indices"><i class="fa fa-check"></i>Relative abundance indices</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-length"><i class="fa fa-check"></i>Catch at length</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#observations-for-fisheries-and-surveys"><i class="fa fa-check"></i>Observations for fisheries and surveys</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#inference"><i class="fa fa-check"></i>Inference</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#todo"><i class="fa fa-check"></i>TODO</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>4</b> Exploring methods for sex ratios in age and length composition data</a>
+<ul>
+<li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#other-things-to-consider"><i class="fa fa-check"></i>Other things to consider</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="Fexplore.html"><a href="Fexplore.html"><i class="fa fa-check"></i><b>5</b> Exploring alternative fishing mortality parameterisations (F)</a>
+<ul>
+<li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#set-up-a-simulation"><i class="fa fa-check"></i>Set up a simulation</a></li>
+<li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#other-things-to-consider-1"><i class="fa fa-check"></i>Other things to consider</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>6</b> Tagging data and studies</a>
+<ul>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#laslettevesonpolacheck-lep"><i class="fa fa-check"></i>Laslett–Eveson–Polacheck (LEP)</a>
+<ul>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#age-at-length-growth-model"><i class="fa fa-check"></i>Age-at-length growth model</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tag-recapture-growth-data"><i class="fa fa-check"></i>Tag recapture growth data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#simulation-test-the-lep-method"><i class="fa fa-check"></i>Simulation test the “LEP” method</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#next-steps"><i class="fa fa-check"></i>Next steps</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment" target="blank">NOAA Website</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SableFish stock assessment</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="Fexplore" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Exploring alternative fishing mortality parameterisations (F)<a href="Fexplore.html#Fexplore" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The current Alaskan Sablefish stock assessment (Chapter <a href="modeldescription.html#modeldescription">3</a>), fishing mortality has estimable parameters for each gear <span class="math inline">\(g\)</span> and year <span class="math inline">\(y\)</span>. This parametersation poses to potential problems. The first is that the number of parameters will increase as the number of gears increase. The fishery is currently going through a transformation whereby there is a switch from longline to pots. The second consideration is how how to set this up in a spatially explicit model where catch have an added spatial dimension. There are two alternative approaches to the current approach which treat <span class="math inline">\(F\)</span> as a derived quantity rather than an estimable parameter. The first is to use newton rahpson methods to solve <span class="math inline">\(F\)</span> as is done in the “hybrid” method of Stock Synthesis <span class="citation">(<a href="#ref-methot2013stock" role="doc-biblioref">Methot Jr and Wetzel 2013</a>)</span>. The second …</p>
+<p>A quick overview of the commonly applied fishing dynamics applied in stock assessment models. A good general overview is by <span class="citation">Branch (<a href="#ref-branch2009differences" role="doc-biblioref">2009</a>)</span>. They compare the continuous Baranov Catch equation <span class="citation">(<a href="#ref-baranov1918question" role="doc-biblioref">Baranov 1918</a>)</span> vs Pope’s discrete formulation <span class="citation">(<a href="#ref-pope1972investigation" role="doc-biblioref">Pope 1972</a>)</span>. Arguments for using the continuous case is that <span class="math inline">\(M\)</span> and <span class="math inline">\(F\)</span> occur simultaneously, also with the continuous case, <span class="math inline">\(F\)</span> allows for multiple event encounters, this is assuming a fleet has the same selectivity and availability, that a fish that escapes one net can be caught in another. In contrast, the discrete formulation only allows a fish to be caught or escape from an instantaneous event. I have summarized the benefits of the continuous equation in the following list,</p>
+<ul>
+<li>Allows the entire population to be caught (not sure this is that relevant)</li>
+<li>Allows simultaneous <span class="math inline">\(M\)</span> and <span class="math inline">\(F\)</span>, no need to worry about order of operations. From a coding/practical perspective this is quite attractive. Once you have an F and M you can easily derive all mid-mortality quantities. Where as using the <span class="math inline">\(U\)</span> approach you need save the population before and after to interpolate to derive mid-mortality quantities.</li>
+<li><span class="math inline">\(F\)</span> effects Composition data, where as in the discrete case composition is independent of <span class="math inline">\(U\)</span>.</li>
+<li>Allows for multiple catch events of an individual</li>
+<li>Can fit to catch thus allows for uncertainty in catches</li>
+</ul>
+<p>The arguments for the discrete approximation is that there is an analytical solution for <span class="math inline">\(U\)</span> and so is fast to calculate expected catch, where as <span class="math inline">\(F\)</span> has to be either solved numerically or estimated as a free parameter.</p>
+<p>Chris Francis’s wrote a response to this paper <span class="citation">(<a href="#ref-francisCommentBranch" role="doc-biblioref">Francis 2010</a>)</span> where he argues the discrete formulation does not preclude the multiple encounters and that only the data can truly tell us which catch equation is the best one to use.</p>
+<p>The relationship between <span class="math inline">\(F\)</span> (Instantaneous fishing mortality) and <span class="math inline">\(U\)</span> exploitation rate for a simple scenario (single fishery) is given in the following R code.</p>
+<div id="set-up-a-simulation" class="section level2 unnumbered hasAnchor">
+<h2>Set up a simulation<a href="Fexplore.html#set-up-a-simulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="Fexplore.html#cb2-1" aria-hidden="true" tabindex="-1"></a>bio_params <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb2-2"><a href="Fexplore.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">ages =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb2-3"><a href="Fexplore.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">L_inf =</span> <span class="dv">58</span>,</span>
+<span id="cb2-4"><a href="Fexplore.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">K =</span> <span class="fl">0.133</span>,</span>
+<span id="cb2-5"><a href="Fexplore.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">t0 =</span> <span class="dv">0</span>,</span>
+<span id="cb2-6"><a href="Fexplore.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">M =</span> <span class="fl">0.15</span>,</span>
+<span id="cb2-7"><a href="Fexplore.html#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="fl">2.08e-9</span>, <span class="do">## tonnes</span></span>
+<span id="cb2-8"><a href="Fexplore.html#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="fl">3.5</span>,</span>
+<span id="cb2-9"><a href="Fexplore.html#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_a50 =</span> <span class="fl">6.3</span>,</span>
+<span id="cb2-10"><a href="Fexplore.html#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_ato95 =</span> <span class="fl">1.2</span>,</span>
+<span id="cb2-11"><a href="Fexplore.html#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma =</span> <span class="fl">0.6</span>,</span>
+<span id="cb2-12"><a href="Fexplore.html#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">h =</span> <span class="fl">0.85</span>,</span>
+<span id="cb2-13"><a href="Fexplore.html#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma_r =</span> <span class="fl">0.6</span>,</span>
+<span id="cb2-14"><a href="Fexplore.html#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">R0 =</span> <span class="dv">8234132</span>,</span>
+<span id="cb2-15"><a href="Fexplore.html#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">plus_group =</span> <span class="dv">1</span> <span class="co"># 0 = No, 1 = Yes</span></span>
+<span id="cb2-16"><a href="Fexplore.html#cb2-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-17"><a href="Fexplore.html#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="Fexplore.html#cb2-18" aria-hidden="true" tabindex="-1"></a>other_params <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb2-19"><a href="Fexplore.html#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_a50 =</span> <span class="fl">3.6</span>,</span>
+<span id="cb2-20"><a href="Fexplore.html#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_ato95 =</span> <span class="dv">2</span>,</span>
+<span id="cb2-21"><a href="Fexplore.html#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_q =</span> <span class="fl">0.2</span>,</span>
+<span id="cb2-22"><a href="Fexplore.html#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_a50 =</span> <span class="dv">5</span>,</span>
+<span id="cb2-23"><a href="Fexplore.html#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_ato95 =</span> <span class="dv">2</span>,</span>
+<span id="cb2-24"><a href="Fexplore.html#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">ssb_prop_Z =</span> <span class="fl">0.5</span>,</span>
+<span id="cb2-25"><a href="Fexplore.html#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_prop_Z =</span> <span class="fl">0.5</span>,</span>
+<span id="cb2-26"><a href="Fexplore.html#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_age_error =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.4</span>),  <span class="do">## sd, rho (ignored if iid)</span></span>
+<span id="cb2-27"><a href="Fexplore.html#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">fishery_age_error =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.4</span>),  <span class="do">## sd, rho (ignored if iid)</span></span>
+<span id="cb2-28"><a href="Fexplore.html#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_bio_cv =</span> <span class="fu">c</span>(<span class="fl">0.1</span>)</span>
+<span id="cb2-29"><a href="Fexplore.html#cb2-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-30"><a href="Fexplore.html#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="Fexplore.html#cb2-31" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">=</span> bio_params<span class="sc">$</span>ages</span>
+<span id="cb2-32"><a href="Fexplore.html#cb2-32" aria-hidden="true" tabindex="-1"></a>max_age <span class="ot">=</span> <span class="fu">max</span>(bio_params<span class="sc">$</span>ages)</span>
+<span id="cb2-33"><a href="Fexplore.html#cb2-33" aria-hidden="true" tabindex="-1"></a>n_years <span class="ot">=</span> <span class="dv">30</span></span>
+<span id="cb2-34"><a href="Fexplore.html#cb2-34" aria-hidden="true" tabindex="-1"></a>years <span class="ot">=</span> (<span class="dv">2020</span> <span class="sc">-</span> n_years <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="dv">2020</span></span>
+<span id="cb2-35"><a href="Fexplore.html#cb2-35" aria-hidden="true" tabindex="-1"></a>n_ages <span class="ot">=</span> <span class="fu">length</span>(ages)</span>
+<span id="cb2-36"><a href="Fexplore.html#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="do">## annual fishing mortality</span></span>
+<span id="cb2-37"><a href="Fexplore.html#cb2-37" aria-hidden="true" tabindex="-1"></a>start_F <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.05</span>, <span class="at">to =</span> <span class="fl">0.2</span>, <span class="at">length =</span> <span class="dv">10</span>)), <span class="fl">0.1</span>), <span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fl">0.13</span>), <span class="fl">0.1</span>), <span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fl">0.07</span>), <span class="fl">0.1</span>))</span>
+<span id="cb2-38"><a href="Fexplore.html#cb2-38" aria-hidden="true" tabindex="-1"></a>recruit_devs <span class="ot">=</span> <span class="fu">log</span>(<span class="fu">rlnorm</span>(n_years, <span class="sc">-</span><span class="fl">0.5</span> <span class="sc">*</span> bio_params<span class="sc">$</span>sigma_r <span class="sc">*</span> bio_params<span class="sc">$</span>sigma_r, bio_params<span class="sc">$</span>sigma_r))</span>
+<span id="cb2-39"><a href="Fexplore.html#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="Fexplore.html#cb2-40" aria-hidden="true" tabindex="-1"></a>length_at_age <span class="ot">=</span> <span class="fu">vonbert</span>(bio_params<span class="sc">$</span>ages, bio_params<span class="sc">$</span>K, bio_params<span class="sc">$</span>L_inf, bio_params<span class="sc">$</span>t0)</span>
+<span id="cb2-41"><a href="Fexplore.html#cb2-41" aria-hidden="true" tabindex="-1"></a>fishery_ogive <span class="ot">=</span> <span class="fu">logis</span>(bio_params<span class="sc">$</span>ages, other_params<span class="sc">$</span>f_a50, other_params<span class="sc">$</span>f_ato95)</span>
+<span id="cb2-42"><a href="Fexplore.html#cb2-42" aria-hidden="true" tabindex="-1"></a>survey_ogive <span class="ot">=</span> <span class="fu">logis</span>(bio_params<span class="sc">$</span>ages, other_params<span class="sc">$</span>s_a50, other_params<span class="sc">$</span>s_ato95)</span>
+<span id="cb2-43"><a href="Fexplore.html#cb2-43" aria-hidden="true" tabindex="-1"></a>mat_age <span class="ot">=</span> <span class="fu">logis</span>(bio_params<span class="sc">$</span>ages, bio_params<span class="sc">$</span>m_a50, bio_params<span class="sc">$</span>m_ato95)</span>
+<span id="cb2-44"><a href="Fexplore.html#cb2-44" aria-hidden="true" tabindex="-1"></a>weight_at_age <span class="ot">=</span> bio_params<span class="sc">$</span>a <span class="sc">*</span> length_at_age<span class="sc">^</span>bio_params<span class="sc">$</span>b</span>
+<span id="cb2-45"><a href="Fexplore.html#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-46"><a href="Fexplore.html#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="do">## observation temporal frequency</span></span>
+<span id="cb2-47"><a href="Fexplore.html#cb2-47" aria-hidden="true" tabindex="-1"></a>survey_year_obs <span class="ot">=</span> years</span>
+<span id="cb2-48"><a href="Fexplore.html#cb2-48" aria-hidden="true" tabindex="-1"></a>survey_ages <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span></span>
+<span id="cb2-49"><a href="Fexplore.html#cb2-49" aria-hidden="true" tabindex="-1"></a>fishery_year_obs <span class="ot">=</span> years</span>
+<span id="cb2-50"><a href="Fexplore.html#cb2-50" aria-hidden="true" tabindex="-1"></a>fishery_ages <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="Fexplore.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
+<span id="cb3-2"><a href="Fexplore.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Build TMB OM with Multinomial</span></span>
+<span id="cb3-3"><a href="Fexplore.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
+<span id="cb3-4"><a href="Fexplore.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#dyn.unload(dynlib(file.path(&quot;TMB&quot;,&quot;SimpleAgeStructuredModel&quot;)))</span></span>
+<span id="cb3-5"><a href="Fexplore.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">compile</span>(<span class="fu">file.path</span>(<span class="st">&quot;TMB&quot;</span>,<span class="st">&quot;SimpleAgeStructuredModel.cpp&quot;</span>), <span class="at">flags =</span> <span class="st">&quot;&quot;</span>,<span class="at">DLLFLAGS=</span><span class="st">&quot;&quot;</span>);</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="Fexplore.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dyn.load</span>(<span class="fu">dynlib</span>(<span class="fu">file.path</span>(<span class="st">&quot;TMB&quot;</span>,<span class="st">&quot;SimpleAgeStructuredModel&quot;</span>)))</span>
+<span id="cb5-2"><a href="Fexplore.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">## tolerance form model convergence, all gradients need to be less than this.</span></span>
+<span id="cb5-3"><a href="Fexplore.html#cb5-3" aria-hidden="true" tabindex="-1"></a>grad_tol <span class="ot">=</span> <span class="fl">0.001</span></span>
+<span id="cb5-4"><a href="Fexplore.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># these parameters we are not estimating.</span></span>
+<span id="cb5-5"><a href="Fexplore.html#cb5-5" aria-hidden="true" tabindex="-1"></a>na_map <span class="ot">=</span> <span class="fu">fix_pars</span>(<span class="at">par_list =</span> true_pars, <span class="at">pars_to_exclude =</span> <span class="fu">c</span>(<span class="st">&quot;ln_catch_sd&quot;</span>, <span class="st">&quot;trans_survey_error&quot;</span>, <span class="st">&quot;trans_fishery_error&quot;</span>,<span class="st">&quot;ln_extra_survey_cv&quot;</span>,<span class="st">&quot;ln_sigma_r&quot;</span>))</span>
+<span id="cb5-6"><a href="Fexplore.html#cb5-6" aria-hidden="true" tabindex="-1"></a>ASM_obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(TMB_data, true_pars, <span class="at">DLL=</span> <span class="st">&quot;SimpleAgeStructuredModel&quot;</span>, <span class="at">map =</span> na_map)</span></code></pre></div>
+<pre><code>## Constructing atomic invpd
+## Constructing atomic D_lgamma</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="Fexplore.html#cb7-1" aria-hidden="true" tabindex="-1"></a>true_report <span class="ot">=</span> ASM_obj<span class="sc">$</span><span class="fu">report</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="Fexplore.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
+<span id="cb8-2"><a href="Fexplore.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Self Test</span></span>
+<span id="cb8-3"><a href="Fexplore.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
+<span id="cb8-4"><a href="Fexplore.html#cb8-4" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb8-5"><a href="Fexplore.html#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="Fexplore.html#cb8-6" aria-hidden="true" tabindex="-1"></a>est_pars <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb8-7"><a href="Fexplore.html#cb8-7" aria-hidden="true" tabindex="-1"></a>ssbs <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb8-8"><a href="Fexplore.html#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(sim_iter <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sims) {</span>
+<span id="cb8-9"><a href="Fexplore.html#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(sim_iter <span class="sc">%%</span> <span class="dv">10</span> <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb8-10"><a href="Fexplore.html#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;iter = &quot;</span>, sim_iter, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb8-11"><a href="Fexplore.html#cb8-11" aria-hidden="true" tabindex="-1"></a>  sim_data <span class="ot">=</span> ASM_obj<span class="sc">$</span><span class="fu">simulate</span>(<span class="at">complete =</span> T)</span>
+<span id="cb8-12"><a href="Fexplore.html#cb8-12" aria-hidden="true" tabindex="-1"></a>  start_pars <span class="ot">=</span> <span class="fu">ran_start_vals</span>(<span class="at">covar =</span> <span class="st">&quot;ar1&quot;</span>)</span>
+<span id="cb8-13"><a href="Fexplore.html#cb8-13" aria-hidden="true" tabindex="-1"></a>  est_model <span class="ot">=</span> <span class="fu">MakeADFun</span>(sim_data, start_pars, <span class="at">DLL=</span> <span class="st">&quot;SimpleAgeStructuredModel&quot;</span>, <span class="at">map =</span> na_map, <span class="at">silent =</span> T)</span>
+<span id="cb8-14"><a href="Fexplore.html#cb8-14" aria-hidden="true" tabindex="-1"></a>  opt_modelc <span class="ot">=</span> <span class="fu">nlminb</span>(est_model<span class="sc">$</span>par, est_model<span class="sc">$</span>fn, est_model<span class="sc">$</span>gr, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">iter.max =</span> <span class="dv">10000</span>, <span class="at">eval.max =</span> <span class="dv">10000</span>))</span>
+<span id="cb8-15"><a href="Fexplore.html#cb8-15" aria-hidden="true" tabindex="-1"></a>  est_pars <span class="ot">=</span> <span class="fu">rbind</span>(est_pars, opt_modelc<span class="sc">$</span>par)</span>
+<span id="cb8-16"><a href="Fexplore.html#cb8-16" aria-hidden="true" tabindex="-1"></a>  est_rep <span class="ot">=</span> est_model<span class="sc">$</span><span class="fu">report</span>(opt_modelc<span class="sc">$</span>par)</span>
+<span id="cb8-17"><a href="Fexplore.html#cb8-17" aria-hidden="true" tabindex="-1"></a>  ssbs <span class="ot">=</span> <span class="fu">rbind</span>(ssbs, est_rep<span class="sc">$</span>ssb)</span>
+<span id="cb8-18"><a href="Fexplore.html#cb8-18" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## iter =  10 
+## iter =  20 
+## iter =  30 
+## iter =  40 
+## iter =  50 
+## iter =  60 
+## iter =  70 
+## iter =  80 
+## iter =  90 
+## iter =  100</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="Fexplore.html#cb10-1" aria-hidden="true" tabindex="-1"></a>molten_ssbs <span class="ot">=</span> <span class="fu">melt</span>(ssbs)</span>
+<span id="cb10-2"><a href="Fexplore.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(molten_ssbs) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;sim&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;value&quot;</span>)</span>
+<span id="cb10-3"><a href="Fexplore.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-4"><a href="Fexplore.html#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span>molten_ssbs, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> value, <span class="at">group =</span> sim)) <span class="sc">+</span></span>
+<span id="cb10-5"><a href="Fexplore.html#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">year =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">31</span>, <span class="at">value =</span> true_report<span class="sc">$</span>ssb),<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> value), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="Fexplore.html#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb10-7"><a href="Fexplore.html#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="at">y =</span> <span class="st">&quot;SSB (t)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb10-8"><a href="Fexplore.html#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/self_test-1.png" width="672" /></p>
+</div>
+<div id="other-things-to-consider-1" class="section level2 unnumbered hasAnchor">
+<h2>Other things to consider<a href="Fexplore.html#other-things-to-consider-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-baranov1918question" class="csl-entry">
+Baranov, TI. 1918. <span>“On the Question of the Biological Basis of Fisheries.”</span> <em>Nauchnyi Issledovatelskii Ikhtiologicheskii Institut Isvestia</em> 1: 81–128.
+</div>
+<div id="ref-branch2009differences" class="csl-entry">
+Branch, Trevor A. 2009. <span>“Differences in Predicted Catch Composition Between Two Widely Used Catch Equation Formulations.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 66 (1): 126–32.
+</div>
+<div id="ref-francisCommentBranch" class="csl-entry">
+Francis, R I C Chris. 2010. <span>“Comment on "<span>D</span>ifferences in Predicted Catch Composition Between Two Widely Used Catch Equation Formulations".”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 67 (4): 763–65.
+</div>
+<div id="ref-methot2013stock" class="csl-entry">
+Methot Jr, Richard D, and Chantell R Wetzel. 2013. <span>“Stock Synthesis: A Biological and Statistical Framework for Fish Stock Assessment and Fishery Management.”</span> <em>Fisheries Research</em> 142: 86–99.
+</div>
+<div id="ref-pope1972investigation" class="csl-entry">
+Pope, JG. 1972. <span>“An Investigation of the Accuracy of Virtual Population Analysis Using Cohort Analysis.”</span> <em>ICNAF Research Bulletin</em> 9 (10): 65–74.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sexratios.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tagdata.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment/04-ExploreFParameterisations.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
