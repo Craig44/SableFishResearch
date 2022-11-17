@@ -165,7 +165,7 @@ ran_start_vals = function(covar = "iid") {
 ##################################
 ### Build TMB OM with Multinomial
 ##################################
-dyn.unload(dynlib(file.path("TMB","SimpleAgeStructuredModel")))
+#dyn.unload(dynlib(file.path("TMB","SimpleAgeStructuredModel")))
 compile(file.path("TMB","SimpleAgeStructuredModel.cpp"), flags = "",DLLFLAGS="");
 dyn.load(dynlib(file.path("TMB","SimpleAgeStructuredModel")))
 ## tolerance form model convergence, all gradients need to be less than this.
