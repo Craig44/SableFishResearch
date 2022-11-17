@@ -73,29 +73,6 @@ fishery_ages = 1:20
 ```
 
 ```{r pop_tmb_objects, echo = F, eval = T}
-#' create a function for simulating starting values for model robustness
-#' @param n <integer> number of draws you want
-#' @param dist <string> distribution to use to draw starting values, allowed "unif", "norm" 
-#' @param LB <scalar> Lower bound of starting value, shouldn't use lower bound of parameter
-#' @param UB <scalar> Upper Bound of starting balues.
-#' @param dist_pars <vector> has distributional parameters, i.e for norm = c(mu, sigma)
-#' @return vector of starting values
-ran_start = function(n = 100, dist = "unif", LB = -Inf, UB = Inf, dist_pars = NULL) {
-  if (!any(dist %in% c("unif", "norm")))
-    stop("parameter 'dist', needs to be either unif or norm")
-  start_vals = vector();
-  if (dist == "unif") {
-    start_vals = runif(n, LB, UB)
-  } else if (dist == "norm") {
-    start_vals = rnorm(n, dist_pars[1],dist_pars[2])
-    start_vals[start_vals < LB] = LB
-    start_vals[start_vals > UB] = UB
-    
-  } else {
-    stop("something went wrong")
-  }
-  return(start_vals)
-}
 
 TMB_data = list()
 TMB_data$ages = ages

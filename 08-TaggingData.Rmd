@@ -56,37 +56,6 @@ What confuses is me here is how to assign a hyper distribution like the one abov
 
 ## Simulation test the "LEP" method {-}
 
-```{r, setup_funs, echo = T, eval = T}
-#'
-#' richards_growth provides the mean length at a give age
-#' @param age true age
-#' @param p is the shape parameter
-#' @param k is the growth coefficient
-#' @param l_inf is the asymptotic length
-#' @param t_0 corresponds to an inflexion point on the curve.
-#' @return mean length at age
-#'
-richards_growth = function(age, p, k, t_0, l_inf) {
-  mean_length = l_inf * (1 + 1 / p * exp(-k * (age - t_0)))^-p
-}
-#' Logistic selectivity
-#' @export
-logis<- function(X,a50,a95)
-{
-  1/(1+19^((a50-X)/a95)) 
-}
-#' logit_general bounds X which is between [lb,ub] to -inf -> inf based on the logit transformation
-#' @param X scalar range [lb,ub]
-#' @param ub upper bound for X
-#' @param lb lower bound for X
-#' @return Y to be between [-inf, inf]
-logit_general = function(X, lb, ub) {
-  X1 = (X - lb) / (ub - lb)
-  log(X1/(1 - X1))
-}
-```
-
-
 ```{r, simulate_data, echo = T, eval = T}
 ## going to use parameters from Aires-da-Silva et al. (2015) Table 1 integrated analysis
 L_inf = 200.8

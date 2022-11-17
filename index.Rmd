@@ -29,6 +29,72 @@ library(dplyr)
 #library(reshape2)
 #library(tidyr)
 ```
+
+```{r auxillary_functions,echo = F,eval =T, results = 'hide', message=FALSE, warning=FALSE}
+#' vonbert applies the Von Bertalanffy age-length relationship
+#' @param age take an age look in globe scope for the rest of parameters
+#' @param L_inf asympototic length
+#' @param K growth rate parameter
+#' @param t0 age for length = 0
+#' @export
+#' @return mean length at age
+vonbert <- function(age,K,L_inf,t0) {
+  return(L_inf * (1-exp(-K*(age -t0))))
+}
+#'
+#' richards_growth provides the mean length at a give age
+#' @param age true age
+#' @param p is the shape parameter
+#' @param k is the growth coefficient
+#' @param l_inf is the asymptotic length
+#' @param t_0 corresponds to an inflexion point on the curve.
+#' @return mean length at age
+#'
+richards_growth = function(age, p, k, t_0, l_inf) {
+  mean_length = l_inf * (1 + 1 / p * exp(-k * (age - t_0)))^-p
+}
+#' create a function for simulating starting values for model robustness
+#' @param n <integer> number of draws you want
+#' @param dist <string> distribution to use to draw starting values, allowed "unif", "norm" 
+#' @param LB <scalar> Lower bound of starting value, shouldn't use lower bound of parameter
+#' @param UB <scalar> Upper Bound of starting balues.
+#' @param dist_pars <vector> has distributional parameters, i.e for norm = c(mu, sigma)
+#' @return vector of starting values
+ran_start = function(n = 100, dist = "unif", LB = -Inf, UB = Inf, dist_pars = NULL) {
+  if (!any(dist %in% c("unif", "norm")))
+    stop("parameter 'dist', needs to be either unif or norm")
+  start_vals = vector();
+  if (dist == "unif") {
+    start_vals = runif(n, LB, UB)
+  } else if (dist == "norm") {
+    start_vals = rnorm(n, dist_pars[1],dist_pars[2])
+    start_vals[start_vals < LB] = LB
+    start_vals[start_vals > UB] = UB
+    
+  } else {
+    stop("something went wrong")
+  }
+  return(start_vals)
+}
+
+#' Logistic selectivity
+#' @export
+logis<- function(X,a50,a95)
+{
+  1/(1+19^((a50-X)/a95)) 
+}
+#' logit_general bounds X which is between [lb,ub] to -inf -> inf based on the logit transformation
+#' @param X scalar range [lb,ub]
+#' @param ub upper bound for X
+#' @param lb lower bound for X
+#' @return Y to be between [-inf, inf]
+logit_general = function(X, lb, ub) {
+  X1 = (X - lb) / (ub - lb)
+  log(X1/(1 - X1))
+}
+
+```
+
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
