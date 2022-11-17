@@ -1,9 +1,14 @@
 # Tagging data and studies {#tagdata}
 Since 1972 there have been approximately 400 000 sablefish tagged in Alaska waters, of which over 38 500 have been recovered. Although there is extensive and long term tagging data, this information is not currently directly included in the stock assessment [@goethel2021assessment].
 
+## Integration in age-structured models {-}
 
 
-## Laslett–Eveson–Polacheck (LEP) {-}
+
+
+
+
+## Growth estimation using the Laslett–Eveson–Polacheck (LEP) {-}
 Going to investigate the use of “Laslett–Eveson–Polacheck (LEP)” based on @laslett2002flexible \& @eveson2004integrated as described in @aires2015improved.
 
 

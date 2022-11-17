@@ -17,11 +17,11 @@ where, \(N^{eff, k}_{y}\) is the effective sample size for this survey and year.
 The second approach (approach 2) is to treat composition for each sex seperately that is proportions at age or length for a sex will sum to one, but also provide a specific sex ratio observation over all ages or lengths as done in the New Zealand rock lobster stock assessment [@webber2021rapid]. 
 
 \[
-R^k_{y,s} = \frac{\sum_a \boldsymbol{C^k}_{a,y,s}}{\sum_a \sum_s \boldsymbol{C^k}_{a,y,s}}, \quad  \sum_s R^k_{y,s} = 1
+R^k_{y,s} = \frac{\sum_a \{C^k}_{a,y,s}}{\sum_a \sum_s \{C^k}_{a,y,s}}, \quad  \sum_s R^k_{y,s} = 1
 \]
 and,
 \[
-P^k_{a, y,s} = \frac{\boldsymbol{C^k}_{a,y,s}}{\sum_a \boldsymbol{C^k}_{a,y,s}}, \quad  \sum_a P^k_{a, y,s} = 1 \ .
+P^k_{a, y,s} = \frac{\{C^k}_{a,y,s}}{\sum_a \{C^k}_{a,y,s}}, \quad  \sum_a P^k_{a, y,s} = 1 \ .
 \]
 The likelihood assumptions for this model are,
 \[
@@ -35,11 +35,11 @@ where, \(N^{eff, k}_{y,s}\) is the effective sample size.
 
 
 
-
+## Simulation testing {-}
 A simple simulation experiment was conducted to explore the benefits of each approach. There were two OM scenarios that we wanted to explore, the first was that the true population had a 50:50 sex ratio and the observations had skewed sex ratios due to the selectivity i.e., availability to the survey fishery. Second the selectivity was constant for both sexes but the sex ratio was skewed at recruitment.
 
 
-## Set up a simulation {-}
+
 ```{r setup}
 bio_params = list(
   ages = 1:20,
@@ -185,7 +185,7 @@ true_pars = list(
 ```
 
 
-```{r compile_sex_plot}
+```{r compile_sex_plot, warning=F}
 ##################################
 ### Build TMB OM with Multinomial
 ##################################
@@ -196,11 +196,11 @@ dyn.load(dynlib(file.path("TMB","SexDisaggregatedAgeStructuredModel")))
 grad_tol = 0.001
 # these parameters we are not estimating.
 na_map = fix_pars(par_list = true_pars, pars_to_exclude = c("logit_survey_alpha_f","logit_f_alpha_f","ln_catch_sd","ln_extra_survey_cv","ln_sigma_r", "logit_proportion_male"))
-ASM_obj <- MakeADFun(TMB_data, true_pars, DLL= "SexDisaggregatedAgeStructuredModel", map = na_map)
+ASM_obj <- MakeADFun(TMB_data, true_pars, DLL= "SexDisaggregatedAgeStructuredModel", map = na_map,checkParameterOrder=FALSE)
 TMB_data_alt = TMB_data
 TMB_data_alt$survey_AF_type = 1
 TMB_data_alt$fishery_AF_type = 1
-ASM_obj_alt_sex <- MakeADFun(TMB_data_alt, true_pars, DLL= "SexDisaggregatedAgeStructuredModel", map = na_map)
+ASM_obj_alt_sex <- MakeADFun(TMB_data_alt, true_pars, DLL= "SexDisaggregatedAgeStructuredModel", map = na_map,checkParameterOrder=FALSE)
 
 ##################################
 ### Generate predictions from both methods to compare
