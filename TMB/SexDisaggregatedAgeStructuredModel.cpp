@@ -161,11 +161,13 @@ Type objective_function<Type>::operator() () {
   DATA_VECTOR_INDICATOR(survey_index_keep, survey_obs);  // For one-step predictions
   
   DATA_ARRAY(survey_AF_obs);            // numbers of fish dimensions= n_ages x 2 (males then females) : n_survey_years
-  DATA_INTEGER(survey_AF_type);           // 0 = sex disaggregated (each sex sums = 1), 1 = 
+  DATA_INTEGER(survey_AF_type);         // 0 = sex disaggregated (each sex sums = 1), 1 = 
+  DATA_VECTOR(survey_numbers_male);  // if  survey_AF_type = 0, then this observation is used in the joint negative loglikelihood 
   
   DATA_IVECTOR(fishery_year_indicator);  // 1 = calculate, 0 = ignore
   DATA_ARRAY(fishery_AF_obs);            // numbers of fish dimensions= n_ages x 2 (males then females) : n_survey_years
-  DATA_INTEGER(fishery_AF_type);           // 0 = sex disaggregated (each sex sums = 1), 1 = 
+  DATA_INTEGER(fishery_AF_type);         // 0 = sex disaggregated (each sex sums = 1), 1 = 
+  DATA_VECTOR(fishery_numbers_male);  // if  fishery_AF_type = 0, then this observation is used in the joint negative loglikelihood 
   
   
   DATA_IVECTOR(ycs_estimated);    // 1 = estimated, 0 = ignore
@@ -272,7 +274,7 @@ Type objective_function<Type>::operator() () {
   vector<Type> survey_ato95 = invlogit_general(logit_survey_ato95, sel_ato95_bounds(0), sel_ato95_bounds(1));
   vector<Type> f_a50 = invlogit_general(logit_f_a50, sel_a50_bounds(0), sel_a50_bounds(1));
   vector<Type> f_ato95 = invlogit_general(logit_f_ato95, sel_ato95_bounds(0), sel_ato95_bounds(1));
-  Type survey_alpha_f = invlogit_general(logit_survey_alpha_f, sel_ato95_bounds(0), sel_ato95_bounds(1));
+  Type survey_alpha_f = invlogit_general(logit_survey_alpha_f, sel_alpha_bounds(0), sel_alpha_bounds(1));
   Type f_alpha_f = invlogit_general(logit_f_alpha_f, sel_alpha_bounds(0), sel_alpha_bounds(1));
   
   Type survey_Q = invlogit(logit_surveyQ);
@@ -293,6 +295,14 @@ Type objective_function<Type>::operator() () {
 
   array<Type> survey_comp_fitted(survey_AF_obs.dim);
   array<Type> fishery_comp_fitted(fishery_AF_obs.dim);
+  array<Type> survey_numbers_by_sex(survey_numbers_male.size(), 2); 
+  array<Type> fishery_numbers_by_sex(fishery_numbers_male.size(), 2); 
+  survey_numbers_by_sex.fill(0.0);
+  fishery_numbers_by_sex.fill(0.0);
+  vector<Type> survey_proportion_male_fitted(survey_numbers_male.size()); 
+  vector<Type> fishery_proportion_male_fitted(fishery_numbers_male.size()); 
+  
+  
   
   array<Type> predlogN(nages,2); 
   vector<Type> temp_partition_m(nages); 
@@ -318,9 +328,11 @@ Type objective_function<Type>::operator() () {
   }
   
   // Calculate vulnerable biomass and U
+  Type survey_sex_ratio_nll = 0;
   Type survey_comp_nll = 0;
   Type survey_index_nll = 0;
   Type fishery_comp_nll = 0;
+  Type fishery_sex_ratio_nll = 0;
   Type catch_nll = 0.0;
   Type sum1 = 0.0;
   Type sum2 = 0.0;
@@ -338,8 +350,8 @@ Type objective_function<Type>::operator() () {
       fishery_selectivity(age_ndx, sex_iter) = Type(1)/(Type(1) + pow(Type(19),((f_a50(sex_iter) - ages(age_ndx))/f_ato95(sex_iter))));
       survey_selectivity(age_ndx, sex_iter) = Type(1)/(Type(1) + pow(Type(19),((survey_a50(sex_iter) - ages(age_ndx))/survey_ato95(sex_iter))));
       if(sex_iter == 1) {
-        fishery_selectivity(age_ndx, sex_iter) *= survey_alpha_f;
-        survey_selectivity(age_ndx, sex_iter) *= f_alpha_f;
+        fishery_selectivity(age_ndx, sex_iter) *= f_alpha_f;
+        survey_selectivity(age_ndx, sex_iter) *= survey_alpha_f;
       }
     }
   }
@@ -450,6 +462,7 @@ Type objective_function<Type>::operator() () {
         for(age_ndx = 0; age_ndx < nages; ++age_ndx) {
           survey_partition(age_ndx, sex_iter) = survey_Q * survey_selectivity(age_ndx, sex_iter) * N(age_ndx, year_ndx,sex_iter) * exp(-(Z_ay(age_ndx, year_ndx,sex_iter)) * propZ_survey(iter));
           survey_index_fitted(iter) += survey_partition(age_ndx, sex_iter) * stockMeanWeight(age_ndx, year_ndx, sex_iter);
+          survey_numbers_by_sex(iter, sex_iter) += survey_partition(age_ndx, sex_iter);
         }
       }
       // ageing error and store in fitted
@@ -472,15 +485,17 @@ Type objective_function<Type>::operator() () {
     if (fishery_year_indicator(year_ndx) == 1) {
       fishery_partition.fill(0.0);
       for(sex_iter = 0; sex_iter < 2; ++sex_iter) {
-        for(age_ndx = 0; age_ndx < nages; ++age_ndx)
+        for(age_ndx = 0; age_ndx < nages; ++age_ndx) {
           fishery_partition(age_ndx, sex_iter) = N(age_ndx, year_ndx, sex_iter)  * (1 - exp(- Z_ay(age_ndx, year_ndx, sex_iter))) * F_ay(age_ndx, year_ndx, sex_iter) / Z_ay(age_ndx, year_ndx, sex_iter);
+          fishery_numbers_by_sex(iter, sex_iter) += fishery_partition(age_ndx, sex_iter);
+        }
       }
       // ageing error  
       for(sex_iter = 0; sex_iter < 2; ++sex_iter) {
         temp_partition.fill(0.0);
         for (int a1 = 0; a1 < nages; ++a1) {
           for (int a2 = 0; a2 < nages; ++a2) 
-            temp_partition[a2] += fishery_partition(a1) * ageing_error_matrix(a1,a2);
+            temp_partition[a2] += fishery_partition(a1, sex_iter) * ageing_error_matrix(a1,a2);
         }
         for(age_ndx = 0; age_ndx < nages; ++age_ndx) 
           fishery_comp_fitted(age_ndx + (sex_iter * nages), iter) = temp_partition(age_ndx);
@@ -522,6 +537,14 @@ Type objective_function<Type>::operator() () {
             }
           }
         }
+        
+        // do the sex ratio component
+        survey_proportion_male_fitted(iter) = survey_numbers_by_sex(iter, 0) / (survey_numbers_by_sex(iter, 0) + survey_numbers_by_sex(iter, 1));
+        survey_sex_ratio_nll -= dbinom(survey_numbers_male(iter), sum(survey_AF_obs.col(iter).vec()) , survey_proportion_male_fitted(iter), true);
+        SIMULATE {
+          survey_numbers_male(iter) = rbinom(sum(survey_AF_obs.col(iter).vec()), survey_proportion_male_fitted(iter));
+        }
+        
       } else {
         // Sexes combined
         survey_comp_fitted.col(iter) /= survey_comp_fitted.col(iter).vec().sum();
@@ -563,6 +586,12 @@ Type objective_function<Type>::operator() () {
             }
           }
         }
+        // do the sex ratio component
+        fishery_proportion_male_fitted(iter) = fishery_numbers_by_sex(iter, 0) / (fishery_numbers_by_sex(iter, 0) + fishery_numbers_by_sex(iter, 1));
+        fishery_sex_ratio_nll -= dbinom(fishery_numbers_male(iter), sum(fishery_AF_obs.col(iter).vec()) , fishery_proportion_male_fitted(iter), true);
+        SIMULATE {
+          fishery_numbers_male(iter) = rbinom(sum(fishery_AF_obs.col(iter).vec()), fishery_proportion_male_fitted(iter));
+        }
       } else {
         // Sexes combined
         fishery_comp_fitted.col(iter) /= fishery_comp_fitted.col(iter).vec().sum();
@@ -587,10 +616,13 @@ Type objective_function<Type>::operator() () {
     REPORT(fishery_AF_obs);
     REPORT(catches);
     REPORT( survey_obs );
+    REPORT( survey_numbers_male );
+    REPORT( fishery_numbers_male );
+    
   }
   
   
-  Type joint_nll = fishery_comp_nll + survey_comp_nll + survey_index_nll + recruit_nll + catch_nll;
+  Type joint_nll = fishery_comp_nll + survey_comp_nll + survey_index_nll + recruit_nll + catch_nll + survey_sex_ratio_nll;
   if (isNA(joint_nll))
     error("joint_nll = NA");
   //std::cout << "Joint ll = " << joint_ll << " catch pen1 = " << catch_pen << " catch pen2 = " << catch_pen2 <<"\n";
@@ -608,6 +640,8 @@ Type objective_function<Type>::operator() () {
   
   REPORT( fishery_selectivity );
   REPORT( survey_selectivity );
+  REPORT(f_alpha_f);
+  REPORT(survey_alpha_f);
   
   REPORT( N );
   REPORT( ycs );
@@ -634,7 +668,9 @@ Type objective_function<Type>::operator() () {
   REPORT(stockMeanWeight);
   REPORT(catchMeanWeight);
   
-
+  REPORT(survey_proportion_male_fitted); 
+  REPORT(survey_numbers_by_sex); 
+  
   // ADREPORT(logN);
   // ADREPORT(logF);
   return joint_nll; // we are minimising with nlminb

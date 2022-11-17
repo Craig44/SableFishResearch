@@ -1,9 +1,9 @@
 # Exploring methods for sex ratios in age and length composition data {#sexratios}
 
-One of the needed improvements is dealing with sex ratios in the compositional data. Currently it is difficult to see how there is any information on sex ratio in the Sablefish stock assessment given how the observations are structured (Chapter \@ref(modeldescription)) (Caveat is users can provide an observed sex ratio for observations etc which is similar to the approach in @ward2019assessing). I am aware of two approaches for supplying observations that in theory should provide information on sex ratio. The first was taken from Casal2 [@doonan2016casal2]. This treats sexed composition data for a year as a single proportion i.e., proportions across all ages and sexes sum to one for each year of observation. Catch at age (in numbers) for both sexes is denoted by \(\boldsymbol{C^k}_{a,y} = (\boldsymbol{C^k}_{a,y,1},\boldsymbol{C^k}_{a,y,2})\), where \(\boldsymbol{C^k}_{a,y,1}\) is the catch at age for males and \(\boldsymbol{C^k}_{a,y,2}\) is for females, and 
+One of the needed improvements is dealing with sex ratios in the compositional data. Currently it is difficult to see how there is any information on sex ratio in the Sablefish stock assessment given how the observations are structured (Chapter \@ref(modeldescription)) (Caveat is users can provide an observed sex ratio for observations etc which is similar to the approach in @ward2019assessing). I am aware of two approaches for supplying observations that in theory should provide information on sex ratio. The first was taken from Casal2 [@doonan2016casal2]. This treats sexed composition data for a year as a single proportion i.e., proportions across all ages and sexes sum to one for each year of observation. Catch at age (in numbers) for both sexes is denoted by \(\boldsymbol{C^k}_{y} = (\boldsymbol{C^k}_{a,y,1},\boldsymbol{C^k}_{a,y,2})\), where \(\boldsymbol{C^k}_{a,y,1}\) is the catch at age for males and \(\boldsymbol{C^k}_{a,y,2}\) is for females, and 
 
 \[
-\boldsymbol{P^k}_{a,y} = \frac{\boldsymbol{C^k}_{a,y}}{\sum_a \sum_s \boldsymbol{C^k}_{a,y,s}}
+\boldsymbol{P^k}_{y} = \frac{(\boldsymbol{C^k}_{a,y,1},\boldsymbol{C^k}_{a,y,2})}{\sum_a \sum_s \boldsymbol{C^k}_{a,y,s}}, \quad \sum \boldsymbol{P^k}_{y} = 1
 \]
 
 
@@ -11,15 +11,195 @@ The second approach is to provide a specific sex ratio observation over all ages
 
 
 \[
-R^k_{y,s} = \frac{\sum_a \boldsymbol{C^k}_{a,y,s}}{\sum_a \sum_s \boldsymbol{C^k}_{a,y,s}}
+R^k_{y,s} = \frac{\sum_a \boldsymbol{C^k}_{a,y,s}}{\sum_a \sum_s \boldsymbol{C^k}_{a,y,s}}, \quad  \sum_s R^k_{y,s} = 1
 \]
 
 
 A simple simulation experiment was conducted to explore the benefits of each approach. There were two OM scenarios that we wanted to explore, the first was that the true population had a 50:50 sex ratio and the observations had skewed sex ratios due to the selectivity i.e., availability to the survey fishery. Second the selectivity was constant for both sexes but the sex ratio was skewed at recruitment.
 
 
+## Set up a simulation {-}
+```{r setup}
+bio_params = list(
+  ages = 1:20,
+  L_inf_m = 58,
+  K_m = 0.133,
+  t0_m = 0,
+  L_inf_f = 62,
+  K_f = 0.143,
+  t0_f = 0,
+  M = 0.15,
+  a_m = 2.18e-9, ## tonnes
+  b_m = 3.2,
+  a_f = 2.08e-9, ## tonnes
+  b_f = 3.3,
+  m_a50 = 2.3,
+  m_ato95 = 1.2,
+  sigma = 0.6,
+  h = 0.85,
+  sigma_r = 0.6,
+  R0 = 8234132,
+  plus_group = 1 # 0 = No, 1 = Yes
+)
+
+other_params = list(
+  s_a50_m = 3.6,
+  s_ato95_m = 2,
+  s_a50_f = 4.6,
+  s_ato95_f = 1.4,
+  s_q = 0.2,
+  s_alpha = 1,
+  f_a50_m = 4.2,
+  f_ato95_m = 1.17,
+  f_a50_f = 4.7,
+  f_ato95_f = 1.76,
+  f_alpha = 1,
+  ssb_prop_Z = 0.5,
+  survey_prop_Z = 0.5,
+  survey_age_error = c(0.5, 0.4),  ## sd, rho (ignored if iid)
+  fishery_age_error = c(0.5, 0.4),  ## sd, rho (ignored if iid)
+  survey_bio_cv = c(0.1)
+)
+
+ages = bio_params$ages
+max_age = max(bio_params$ages)
+n_years = 30
+years = (2020 - n_years + 1):2020
+n_ages = length(ages)
+## annual fishing mortality
+start_F = c(rlnorm(10, log(seq(from = 0.02, to = 0.1, length = 10)), 0.1), rlnorm(10, log(0.08), 0.1), rlnorm(10, log(0.07), 0.1))
+recruit_devs = log(rlnorm(n_years, -0.5 * bio_params$sigma_r * bio_params$sigma_r, bio_params$sigma_r))
+```
 
 
+```{r Build_tmp_sex, echo = F, eval = T}
+##################
+## Plot Biology
+##################
+length_at_age_m = vonbert(bio_params$ages, bio_params$K_m, bio_params$L_inf_m, bio_params$t0_m)
+length_at_age_f = vonbert(bio_params$ages, bio_params$K_f, bio_params$L_inf_f, bio_params$t0_f)
+fishery_ogive_m = logis(bio_params$ages, other_params$f_a50_m, other_params$f_ato95_m)
+fishery_ogive_f = logis(bio_params$ages, other_params$f_a50_f, other_params$f_ato95_f)
+
+survey_ogive_m = logis(bio_params$ages, other_params$s_a50_m, other_params$s_ato95_m)
+survey_ogive_f = logis(bio_params$ages, other_params$s_a50_f, other_params$s_ato95_f)
+mat_age = logis(bio_params$ages, bio_params$m_a50, bio_params$m_ato95)
+weight_at_age_m = bio_params$a_m * length_at_age_m^bio_params$b_m
+weight_at_age_f = bio_params$a_m * length_at_age_f^bio_params$b_f
+
+## can change these if we want biennial surveys, or truncated observatons.
+## Using the ALN method doesn't allow zeros so consider truncating tail ages.
+survey_year_obs = seq(from = min(years), to = max(years), by = 2)
+survey_ages = ages
+fishery_year_obs = seq(from = min(years) + 1, to = max(years), by = 2)
+fishery_ages = ages
+
+############
+## Build a multinomial model to double check estimability of all parameters
+## In this case we have 'good' data, annual data, no ageing error.
+##  survey index cv = 0.05
+##  year effective sample size = 1000
+############
+TMB_data = list()
+TMB_data$ages = ages
+TMB_data$maxAgePlusGroup = 1;
+TMB_data$years = years
+TMB_data$nyears = length(TMB_data$years)
+TMB_data$nages = length(TMB_data$ages)
+
+## No ageing error
+TMB_data$ageing_error_matrix = matrix(0, nrow = TMB_data$nages, ncol = TMB_data$nages)
+diag(TMB_data$ageing_error_matrix) = 1;
+
+TMB_data$survey_year_indicator = as.integer(TMB_data$years %in% survey_year_obs)
+TMB_data$survey_obs = rnorm(sum(TMB_data$survey_year_indicator), 100, 4)
+TMB_data$survey_cv = rep(0.15,sum(TMB_data$survey_year_indicator))
+TMB_data$survey_sample_time = rep(0.5,sum(TMB_data$survey_year_indicator))
+TMB_data$survey_AF_obs = array(2, dim = c(n_ages * 2, sum(TMB_data$survey_year_indicator)))
+TMB_data$survey_AF_type = 0;
+TMB_data$survey_numbers_male = colSums(TMB_data$survey_AF_obs)/ 2
+TMB_data$fishery_year_indicator = as.integer(TMB_data$years %in% fishery_year_obs)
+TMB_data$fishery_AF_obs = array(2, dim = c(n_ages * 2, sum(TMB_data$fishery_year_indicator)))
+TMB_data$fishery_AF_type = 0;
+TMB_data$fishery_numbers_male = colSums(TMB_data$fishery_AF_obs)/ 2
+TMB_data$catches = rep(1000, n_years)# this will be overriden in the simulate() call
+TMB_data$ycs_estimated = rep(1, n_years)
+TMB_data$standardise_ycs = 0;
+
+TMB_data$catchMeanLength = TMB_data$stockMeanLength = array(0, dim = c(TMB_data$nages, TMB_data$nyears,2))
+TMB_data$catchMeanLength[,,1] = TMB_data$stockMeanLength[,,1] = matrix(length_at_age_m, byrow = F, ncol = TMB_data$nyears, nrow = TMB_data$nages)
+TMB_data$catchMeanLength[,,2] = TMB_data$stockMeanLength[,,2] =  matrix(length_at_age_f, byrow = F, ncol = TMB_data$nyears, nrow = TMB_data$nages)
+
+TMB_data$prop_mature = matrix(mat_age, byrow = F, ncol = TMB_data$nyears, nrow = TMB_data$nages)
+TMB_data$natMor = bio_params$M
+TMB_data$steepness = bio_params$h
+TMB_data$stockRecruitmentModelCode = 2 ## BH
+TMB_data$propZ_ssb = rep(other_params$ssb_prop_Z, TMB_data$nyears)
+TMB_data$propZ_survey = rep(other_params$survey_prop_Z, TMB_data$nyears)
+TMB_data$sel_ato95_bounds = c(0.1,20)
+TMB_data$sel_a50_bounds = c(0.1,20)
+TMB_data$sel_alpha_bounds = c(0.5, 2)
+
+TMB_data$mean_weight_a = c(bio_params$a_m,bio_params$a_f) 
+TMB_data$mean_weight_b = c(bio_params$b_m,bio_params$b_f)
+
+
+## The same parameters as OM, to check for consistency
+true_pars = list(
+  ln_R0 = log(bio_params$R0),
+  ln_ycs_est =  log(exp(recruit_devs[TMB_data$ycs_estimated == 1] - 0.5*bio_params$sigma_r^2)),
+  ln_sigma_r = log( bio_params$sigma_r),
+  ln_extra_survey_cv = log(0.0001),
+  logit_f_a50 = logit_general(c(other_params$f_a50_m, other_params$f_a50_f), TMB_data$sel_a50_bounds[1], TMB_data$sel_a50_bounds[2]),
+  logit_f_ato95 = logit_general(c(other_params$f_ato95_m, other_params$f_ato95_f), TMB_data$sel_ato95_bounds[1], TMB_data$sel_ato95_bounds[2]),
+  logit_f_alpha_f = logit_general(other_params$f_alpha, TMB_data$sel_alpha_bounds[1], TMB_data$sel_alpha_bounds[2]),
+  logit_survey_a50 = logit_general(c(other_params$s_a50_m, other_params$s_a50_f), TMB_data$sel_a50_bounds[1], TMB_data$sel_a50_bounds[2]),
+  logit_survey_ato95 = logit_general(c(other_params$s_ato95_m, other_params$s_ato95_f), TMB_data$sel_ato95_bounds[1], TMB_data$sel_ato95_bounds[2]),
+  logit_surveyQ = qlogis(other_params$s_q),
+  logit_survey_alpha_f = logit_general(other_params$s_alpha, TMB_data$sel_alpha_bounds[1], TMB_data$sel_alpha_bounds[2]),
+  ln_F = log(start_F),
+  logit_proportion_male = rep(0, TMB_data$nyears),
+  ln_catch_sd = log(0.02)
+)
+```
+
+
+```{r compile_sex_plot}
+##################################
+### Build TMB OM with Multinomial
+##################################
+#dyn.unload(dynlib(file.path(DIR$book,"TMB","SexDisaggregatedAgeStructuredModel")))
+compile(file.path("TMB","SexDisaggregatedAgeStructuredModel.cpp"), flags = "-Wignored-attributes -O3",DLLFLAGS="");
+dyn.load(dynlib(file.path("TMB","SexDisaggregatedAgeStructuredModel")))
+## tolerance form model convergence, all gradients need to be less than this.
+grad_tol = 0.001
+# these parameters we are not estimating.
+na_map = fix_pars(par_list = true_pars, pars_to_exclude = c("logit_survey_alpha_f","logit_f_alpha_f","ln_catch_sd","ln_extra_survey_cv","ln_sigma_r", "logit_proportion_male"))
+ASM_obj <- MakeADFun(TMB_data, true_pars, DLL= "SexDisaggregatedAgeStructuredModel", map = na_map)
+TMB_data_alt = TMB_data
+TMB_data_alt$survey_AF_type = 1
+TMB_data_alt$fishery_AF_type = 1
+ASM_obj_alt_sex <- MakeADFun(TMB_data_alt, true_pars, DLL= "SexDisaggregatedAgeStructuredModel", map = na_map)
+
+##################################
+### Generate predictions from both methods to compare
+##################################
+sim_data = ASM_obj$simulate(complete = T)
+sim_data_alt = ASM_obj_alt_sex$simulate(complete = T)
+
+par(mfrow = c(2,2))
+plot(survey_ages, sim_data_alt$survey_comp_fitted[1:n_ages,9], type = "l", lwd = 3, ylab = "Survey predicted values", main = "Approach 1", xlab = "", ylim = c(0,0.2))
+lines(survey_ages, sim_data_alt$survey_comp_fitted[(n_ages + 1):(n_ages*2),9], type = "l", lwd = 3, lty = 2, col = "red")
+plot(survey_ages, sim_data$survey_comp_fitted[1:n_ages,9], type = "l", lwd = 3, ylab = "", main = "Approach 2", xlab = "", ylim = c(0,0.2))
+lines(survey_ages, sim_data$survey_comp_fitted[(n_ages + 1):(n_ages*2),9], type = "l", lwd = 3, lty = 2, col = "red")
+
+plot(fishery_ages, sim_data_alt$fishery_comp_fitted[1:n_ages,9], type = "l", lwd = 3, ylab = "Fishery predicted values", main = "", xlab = "", ylim = c(0,0.3))
+lines(fishery_ages, sim_data_alt$fishery_comp_fitted[(n_ages + 1):(n_ages*2),9], type = "l", lwd = 3, lty = 2, col = "red")
+
+plot(fishery_ages, sim_data$fishery_comp_fitted[1:n_ages,9], type = "l", lwd = 3, ylab = "", main = "", xlab = "", ylim = c(0,0.3))
+lines(fishery_ages, sim_data$fishery_comp_fitted[(n_ages + 1):(n_ages*2),9], type = "l", lwd = 3, lty = 2, col = "red")
+legend('topright', legend = c("Male","Feale"), col = c("black", "red"), lty = c(1,2), lwd = 3)
+```
 
 ## Other things to consider {-}
 
