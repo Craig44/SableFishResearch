@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Exploring methods for sex ratios in age and length composition data | SableFish stock assessment</title>
-  <meta name="description" content="This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery." />
+  <title>Chapter 4 Exploring methods for sex ratios in age and length composition data | Alaskan sablefish research</title>
+  <meta name="description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Exploring methods for sex ratios in age and length composition data | SableFish stock assessment" />
+  <meta property="og:title" content="Chapter 4 Exploring methods for sex ratios in age and length composition data | Alaskan sablefish research" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery." />
+  <meta property="og:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Exploring methods for sex ratios in age and length composition data | SableFish stock assessment" />
+  <meta name="twitter:title" content="Chapter 4 Exploring methods for sex ratios in age and length composition data | Alaskan sablefish research" />
   
-  <meta name="twitter:description" content="This Gitbook documents my post doctoral research relating to the Alaskan Sablefish fishery." />
+  <meta name="twitter:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   
 
 <meta name="author" content="C.Marsh" />
@@ -181,17 +181,18 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>4</b> Exploring methods for sex ratios in age and length composition data</a>
 <ul>
-<li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#set-up-a-simulation"><i class="fa fa-check"></i>Set up a simulation</a></li>
+<li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#simulation-testing"><i class="fa fa-check"></i>Simulation testing</a></li>
 <li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#other-things-to-consider"><i class="fa fa-check"></i>Other things to consider</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="Fexplore.html"><a href="Fexplore.html"><i class="fa fa-check"></i><b>5</b> Exploring alternative fishing mortality parameterisations (F)</a>
 <ul>
-<li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#set-up-a-simulation-1"><i class="fa fa-check"></i>Set up a simulation</a></li>
+<li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#set-up-a-simulation"><i class="fa fa-check"></i>Set up a simulation</a></li>
 <li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#other-things-to-consider-1"><i class="fa fa-check"></i>Other things to consider</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>6</b> Tagging data and studies</a>
 <ul>
-<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#laslettevesonpolacheck-lep"><i class="fa fa-check"></i>Laslett–Eveson–Polacheck (LEP)</a>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#integration-in-age-structured-models"><i class="fa fa-check"></i>Integration in age-structured models</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#growth-estimation-using-the-laslettevesonpolacheck-lep"><i class="fa fa-check"></i>Growth estimation using the Laslett–Eveson–Polacheck (LEP)</a>
 <ul>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#age-at-length-growth-model"><i class="fa fa-check"></i>Age-at-length growth model</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tag-recapture-growth-data"><i class="fa fa-check"></i>Tag recapture growth data</a></li>
@@ -212,7 +213,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SableFish stock assessment</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Alaskan sablefish research</a>
           </h1>
         </div>
 
@@ -233,11 +234,11 @@ where, <span class="math inline">\(C^k_{a,y,1}\)</span> is the catch at age (num
 where, <span class="math inline">\(N^{eff, k}_{y}\)</span> is the effective sample size for this survey and year.</p>
 <p>The second approach (approach 2) is to treat composition for each sex seperately that is proportions at age or length for a sex will sum to one, but also provide a specific sex ratio observation over all ages or lengths as done in the New Zealand rock lobster stock assessment <span class="citation">(<a href="#ref-webber2021rapid" role="doc-biblioref">Webber, Rudd, and Starr 2021</a>)</span>.</p>
 <p><span class="math display">\[
-R^k_{y,s} = \frac{\sum_a \boldsymbol{C^k}_{a,y,s}}{\sum_a \sum_s \boldsymbol{C^k}_{a,y,s}}, \quad  \sum_s R^k_{y,s} = 1
+R^k_{y,s} = \frac{\sum_a \{C^k}_{a,y,s}}{\sum_a \sum_s \{C^k}_{a,y,s}}, \quad  \sum_s R^k_{y,s} = 1
 \]</span>
 and,
 <span class="math display">\[
-P^k_{a, y,s} = \frac{\boldsymbol{C^k}_{a,y,s}}{\sum_a \boldsymbol{C^k}_{a,y,s}}, \quad  \sum_a P^k_{a, y,s} = 1 \ .
+P^k_{a, y,s} = \frac{\{C^k}_{a,y,s}}{\sum_a \{C^k}_{a,y,s}}, \quad  \sum_a P^k_{a, y,s} = 1 \ .
 \]</span>
 The likelihood assumptions for this model are,
 <span class="math display">\[
@@ -248,9 +249,9 @@ and,
 \boldsymbol{P}^k_{y,s} \sim Multinomial(\mathbb{E}[\boldsymbol{P}^k_{a, y,s}], N^{eff, k}_{y,s}) \ .
 \]</span>
 where, <span class="math inline">\(N^{eff, k}_{y,s}\)</span> is the effective sample size.</p>
+<div id="simulation-testing" class="section level2 unnumbered hasAnchor">
+<h2>Simulation testing<a href="sexratios.html#simulation-testing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A simple simulation experiment was conducted to explore the benefits of each approach. There were two OM scenarios that we wanted to explore, the first was that the true population had a 50:50 sex ratio and the observations had skewed sex ratios due to the selectivity i.e., availability to the survey fishery. Second the selectivity was constant for both sexes but the sex ratio was skewed at recruitment.</p>
-<div id="set-up-a-simulation" class="section level2 unnumbered hasAnchor">
-<h2>Set up a simulation<a href="sexratios.html#set-up-a-simulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="sexratios.html#cb2-1" aria-hidden="true" tabindex="-1"></a>bio_params <span class="ot">=</span> <span class="fu">list</span>(</span>
 <span id="cb2-2"><a href="sexratios.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">ages =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
 <span id="cb2-3"><a href="sexratios.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">L_inf_m =</span> <span class="dv">58</span>,</span>
@@ -311,58 +312,31 @@ where, <span class="math inline">\(N^{eff, k}_{y,s}\)</span> is the effective sa
 <span id="cb5-3"><a href="sexratios.html#cb5-3" aria-hidden="true" tabindex="-1"></a>grad_tol <span class="ot">=</span> <span class="fl">0.001</span></span>
 <span id="cb5-4"><a href="sexratios.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># these parameters we are not estimating.</span></span>
 <span id="cb5-5"><a href="sexratios.html#cb5-5" aria-hidden="true" tabindex="-1"></a>na_map <span class="ot">=</span> <span class="fu">fix_pars</span>(<span class="at">par_list =</span> true_pars, <span class="at">pars_to_exclude =</span> <span class="fu">c</span>(<span class="st">&quot;logit_survey_alpha_f&quot;</span>,<span class="st">&quot;logit_f_alpha_f&quot;</span>,<span class="st">&quot;ln_catch_sd&quot;</span>,<span class="st">&quot;ln_extra_survey_cv&quot;</span>,<span class="st">&quot;ln_sigma_r&quot;</span>, <span class="st">&quot;logit_proportion_male&quot;</span>))</span>
-<span id="cb5-6"><a href="sexratios.html#cb5-6" aria-hidden="true" tabindex="-1"></a>ASM_obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(TMB_data, true_pars, <span class="at">DLL=</span> <span class="st">&quot;SexDisaggregatedAgeStructuredModel&quot;</span>, <span class="at">map =</span> na_map)</span></code></pre></div>
-<pre><code>## Order of parameters:
-##  [1] &quot;ln_R0&quot;                 &quot;ln_ycs_est&quot;            &quot;ln_sigma_r&quot;           
-##  [4] &quot;ln_extra_survey_cv&quot;    &quot;logit_f_a50&quot;           &quot;logit_f_ato95&quot;        
-##  [7] &quot;logit_f_alpha_f&quot;       &quot;logit_survey_a50&quot;      &quot;logit_survey_ato95&quot;   
-## [10] &quot;logit_surveyQ&quot;         &quot;logit_survey_alpha_f&quot;  &quot;ln_F&quot;                 
-## [13] &quot;logit_proportion_male&quot; &quot;ln_catch_sd&quot;          
-## Not matching template order:
-##  [1] &quot;ln_R0&quot;                 &quot;ln_ycs_est&quot;            &quot;ln_sigma_r&quot;           
-##  [4] &quot;ln_extra_survey_cv&quot;    &quot;logit_f_a50&quot;           &quot;logit_f_ato95&quot;        
-##  [7] &quot;logit_f_alpha_f&quot;       &quot;logit_survey_a50&quot;      &quot;logit_survey_ato95&quot;   
-## [10] &quot;logit_survey_alpha_f&quot;  &quot;logit_surveyQ&quot;         &quot;ln_F&quot;                 
-## [13] &quot;ln_catch_sd&quot;           &quot;logit_proportion_male&quot;
-## Your parameter list has been re-ordered.
-## (Disable this warning with checkParameterOrder=FALSE)
-## Constructing atomic D_lgamma</code></pre>
+<span id="cb5-6"><a href="sexratios.html#cb5-6" aria-hidden="true" tabindex="-1"></a>ASM_obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(TMB_data, true_pars, <span class="at">DLL=</span> <span class="st">&quot;SexDisaggregatedAgeStructuredModel&quot;</span>, <span class="at">map =</span> na_map,<span class="at">checkParameterOrder=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## Constructing atomic D_lgamma</code></pre>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="sexratios.html#cb7-1" aria-hidden="true" tabindex="-1"></a>TMB_data_alt <span class="ot">=</span> TMB_data</span>
 <span id="cb7-2"><a href="sexratios.html#cb7-2" aria-hidden="true" tabindex="-1"></a>TMB_data_alt<span class="sc">$</span>survey_AF_type <span class="ot">=</span> <span class="dv">1</span></span>
 <span id="cb7-3"><a href="sexratios.html#cb7-3" aria-hidden="true" tabindex="-1"></a>TMB_data_alt<span class="sc">$</span>fishery_AF_type <span class="ot">=</span> <span class="dv">1</span></span>
-<span id="cb7-4"><a href="sexratios.html#cb7-4" aria-hidden="true" tabindex="-1"></a>ASM_obj_alt_sex <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(TMB_data_alt, true_pars, <span class="at">DLL=</span> <span class="st">&quot;SexDisaggregatedAgeStructuredModel&quot;</span>, <span class="at">map =</span> na_map)</span></code></pre></div>
-<pre><code>## Order of parameters:
-##  [1] &quot;ln_R0&quot;                 &quot;ln_ycs_est&quot;            &quot;ln_sigma_r&quot;           
-##  [4] &quot;ln_extra_survey_cv&quot;    &quot;logit_f_a50&quot;           &quot;logit_f_ato95&quot;        
-##  [7] &quot;logit_f_alpha_f&quot;       &quot;logit_survey_a50&quot;      &quot;logit_survey_ato95&quot;   
-## [10] &quot;logit_surveyQ&quot;         &quot;logit_survey_alpha_f&quot;  &quot;ln_F&quot;                 
-## [13] &quot;logit_proportion_male&quot; &quot;ln_catch_sd&quot;          
-## Not matching template order:
-##  [1] &quot;ln_R0&quot;                 &quot;ln_ycs_est&quot;            &quot;ln_sigma_r&quot;           
-##  [4] &quot;ln_extra_survey_cv&quot;    &quot;logit_f_a50&quot;           &quot;logit_f_ato95&quot;        
-##  [7] &quot;logit_f_alpha_f&quot;       &quot;logit_survey_a50&quot;      &quot;logit_survey_ato95&quot;   
-## [10] &quot;logit_survey_alpha_f&quot;  &quot;logit_surveyQ&quot;         &quot;ln_F&quot;                 
-## [13] &quot;ln_catch_sd&quot;           &quot;logit_proportion_male&quot;
-## Your parameter list has been re-ordered.
-## (Disable this warning with checkParameterOrder=FALSE)</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="sexratios.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
-<span id="cb9-2"><a href="sexratios.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Generate predictions from both methods to compare</span></span>
-<span id="cb9-3"><a href="sexratios.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
-<span id="cb9-4"><a href="sexratios.html#cb9-4" aria-hidden="true" tabindex="-1"></a>sim_data <span class="ot">=</span> ASM_obj<span class="sc">$</span><span class="fu">simulate</span>(<span class="at">complete =</span> T)</span>
-<span id="cb9-5"><a href="sexratios.html#cb9-5" aria-hidden="true" tabindex="-1"></a>sim_data_alt <span class="ot">=</span> ASM_obj_alt_sex<span class="sc">$</span><span class="fu">simulate</span>(<span class="at">complete =</span> T)</span>
-<span id="cb9-6"><a href="sexratios.html#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="sexratios.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb9-8"><a href="sexratios.html#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(survey_ages, sim_data_alt<span class="sc">$</span>survey_comp_fitted[<span class="dv">1</span><span class="sc">:</span>n_ages,<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">ylab =</span> <span class="st">&quot;Survey predicted values&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Approach 1&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
-<span id="cb9-9"><a href="sexratios.html#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(survey_ages, sim_data_alt<span class="sc">$</span>survey_comp_fitted[(n_ages <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(n_ages<span class="sc">*</span><span class="dv">2</span>),<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb9-10"><a href="sexratios.html#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(survey_ages, sim_data<span class="sc">$</span>survey_comp_fitted[<span class="dv">1</span><span class="sc">:</span>n_ages,<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Approach 2&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
-<span id="cb9-11"><a href="sexratios.html#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(survey_ages, sim_data<span class="sc">$</span>survey_comp_fitted[(n_ages <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(n_ages<span class="sc">*</span><span class="dv">2</span>),<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb9-12"><a href="sexratios.html#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="sexratios.html#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fishery_ages, sim_data_alt<span class="sc">$</span>fishery_comp_fitted[<span class="dv">1</span><span class="sc">:</span>n_ages,<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">ylab =</span> <span class="st">&quot;Fishery predicted values&quot;</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.3</span>))</span>
-<span id="cb9-14"><a href="sexratios.html#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fishery_ages, sim_data_alt<span class="sc">$</span>fishery_comp_fitted[(n_ages <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(n_ages<span class="sc">*</span><span class="dv">2</span>),<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb9-15"><a href="sexratios.html#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="sexratios.html#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fishery_ages, sim_data<span class="sc">$</span>fishery_comp_fitted[<span class="dv">1</span><span class="sc">:</span>n_ages,<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.3</span>))</span>
-<span id="cb9-17"><a href="sexratios.html#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fishery_ages, sim_data<span class="sc">$</span>fishery_comp_fitted[(n_ages <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(n_ages<span class="sc">*</span><span class="dv">2</span>),<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb9-18"><a href="sexratios.html#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&#39;topright&#39;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Male&quot;</span>,<span class="st">&quot;Feale&quot;</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">lwd =</span> <span class="dv">3</span>)</span></code></pre></div>
+<span id="cb7-4"><a href="sexratios.html#cb7-4" aria-hidden="true" tabindex="-1"></a>ASM_obj_alt_sex <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(TMB_data_alt, true_pars, <span class="at">DLL=</span> <span class="st">&quot;SexDisaggregatedAgeStructuredModel&quot;</span>, <span class="at">map =</span> na_map,<span class="at">checkParameterOrder=</span><span class="cn">FALSE</span>)</span>
+<span id="cb7-5"><a href="sexratios.html#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="sexratios.html#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
+<span id="cb7-7"><a href="sexratios.html#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="do">### Generate predictions from both methods to compare</span></span>
+<span id="cb7-8"><a href="sexratios.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
+<span id="cb7-9"><a href="sexratios.html#cb7-9" aria-hidden="true" tabindex="-1"></a>sim_data <span class="ot">=</span> ASM_obj<span class="sc">$</span><span class="fu">simulate</span>(<span class="at">complete =</span> T)</span>
+<span id="cb7-10"><a href="sexratios.html#cb7-10" aria-hidden="true" tabindex="-1"></a>sim_data_alt <span class="ot">=</span> ASM_obj_alt_sex<span class="sc">$</span><span class="fu">simulate</span>(<span class="at">complete =</span> T)</span>
+<span id="cb7-11"><a href="sexratios.html#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="sexratios.html#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb7-13"><a href="sexratios.html#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(survey_ages, sim_data_alt<span class="sc">$</span>survey_comp_fitted[<span class="dv">1</span><span class="sc">:</span>n_ages,<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">ylab =</span> <span class="st">&quot;Survey predicted values&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Approach 1&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
+<span id="cb7-14"><a href="sexratios.html#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(survey_ages, sim_data_alt<span class="sc">$</span>survey_comp_fitted[(n_ages <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(n_ages<span class="sc">*</span><span class="dv">2</span>),<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb7-15"><a href="sexratios.html#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(survey_ages, sim_data<span class="sc">$</span>survey_comp_fitted[<span class="dv">1</span><span class="sc">:</span>n_ages,<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Approach 2&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
+<span id="cb7-16"><a href="sexratios.html#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(survey_ages, sim_data<span class="sc">$</span>survey_comp_fitted[(n_ages <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(n_ages<span class="sc">*</span><span class="dv">2</span>),<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb7-17"><a href="sexratios.html#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="sexratios.html#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fishery_ages, sim_data_alt<span class="sc">$</span>fishery_comp_fitted[<span class="dv">1</span><span class="sc">:</span>n_ages,<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">ylab =</span> <span class="st">&quot;Fishery predicted values&quot;</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.3</span>))</span>
+<span id="cb7-19"><a href="sexratios.html#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fishery_ages, sim_data_alt<span class="sc">$</span>fishery_comp_fitted[(n_ages <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(n_ages<span class="sc">*</span><span class="dv">2</span>),<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb7-20"><a href="sexratios.html#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="sexratios.html#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fishery_ages, sim_data<span class="sc">$</span>fishery_comp_fitted[<span class="dv">1</span><span class="sc">:</span>n_ages,<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.3</span>))</span>
+<span id="cb7-22"><a href="sexratios.html#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fishery_ages, sim_data<span class="sc">$</span>fishery_comp_fitted[(n_ages <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(n_ages<span class="sc">*</span><span class="dv">2</span>),<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb7-23"><a href="sexratios.html#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&#39;topright&#39;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Male&quot;</span>,<span class="st">&quot;Feale&quot;</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">lwd =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/compile_sex_plot-1.png" width="672" /></p>
 </div>
 <div id="other-things-to-consider" class="section level2 unnumbered hasAnchor">
