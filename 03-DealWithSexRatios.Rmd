@@ -1,18 +1,39 @@
 # Exploring methods for sex ratios in age and length composition data {#sexratios}
 
-One of the needed improvements is dealing with sex ratios in the compositional data. Currently it is difficult to see how there is any information on sex ratio in the Sablefish stock assessment given how the observations are structured (Chapter \@ref(modeldescription)) (Caveat is users can provide an observed sex ratio for observations etc which is similar to the approach in @ward2019assessing). I am aware of two approaches for supplying observations that in theory should provide information on sex ratio. The first was taken from Casal2 [@doonan2016casal2]. This treats sexed composition data for a year as a single proportion i.e., proportions across all ages and sexes sum to one for each year of observation. Catch at age (in numbers) for both sexes is denoted by \(\boldsymbol{C^k}_{y} = (\boldsymbol{C^k}_{a,y,1},\boldsymbol{C^k}_{a,y,2})\), where \(\boldsymbol{C^k}_{a,y,1}\) is the catch at age for males and \(\boldsymbol{C^k}_{a,y,2}\) is for females, and 
+One of the needed improvements is dealing with sex ratios in the compositional data. Currently it is difficult to see how there is any information on sex ratio in the Sablefish stock assessment given how the observations are structured (Chapter \@ref(modeldescription)) (Caveat is users can provide an observed sex ratio for observations etc which is similar to the approach in @ward2019assessing). I am aware of two approaches for supplying observations that in theory should provide information on sex ratio. The first (approach 1) was taken from Casal2 [@doonan2016casal2]. This treats sexed composition data for a year as a single proportion i.e., proportions across all ages and sexes sum to one for each year of observation
 
 \[
-\boldsymbol{P^k}_{y} = \frac{(\boldsymbol{C^k}_{a,y,1},\boldsymbol{C^k}_{a,y,2})}{\sum_a \sum_s \boldsymbol{C^k}_{a,y,s}}, \quad \sum \boldsymbol{P^k}_{y} = 1
+\boldsymbol{P}^k_{y} = \frac{(C^k_{a,y,1},C^k_{a,y,2})}{\sum_a \sum_s C^k_{a,y,s}}, \quad \sum \boldsymbol{P}^k_{y} = 1
 \]
+where, \(C^k_{a,y,1}\) is the catch at age (numbers) for males in year \(y\), age \(a\) and survey \(k\). \(\boldsymbol{P}^k_{y}\) is a proportion vector that sums to one that covers both sexes and corresponding ages. The likelihood contribution for this approach follows  
+\[
+\boldsymbol{P}^k_{y} \sim Multinomial(\mathbb{E}[\boldsymbol{P}^k_{y}], N^{eff, k}_{y}) \ .
+\]
+where, \(N^{eff, k}_{y}\) is the effective sample size for this survey and year.
 
 
-The second approach is to provide a specific sex ratio observation over all ages or lengths as done in the New Zealand rock lobster stock assessment [@webber2021rapid]. 
 
+
+The second approach (approach 2) is to treat composition for each sex seperately that is proportions at age or length for a sex will sum to one, but also provide a specific sex ratio observation over all ages or lengths as done in the New Zealand rock lobster stock assessment [@webber2021rapid]. 
 
 \[
 R^k_{y,s} = \frac{\sum_a \boldsymbol{C^k}_{a,y,s}}{\sum_a \sum_s \boldsymbol{C^k}_{a,y,s}}, \quad  \sum_s R^k_{y,s} = 1
 \]
+and,
+\[
+P^k_{a, y,s} = \frac{\boldsymbol{C^k}_{a,y,s}}{\sum_a \boldsymbol{C^k}_{a,y,s}}, \quad  \sum_a P^k_{a, y,s} = 1 \ .
+\]
+The likelihood assumptions for this model are,
+\[
+R^k_{y,s} \sim Binomial(\mathbb{E}[R^k_{y,s}], \sum_s N^{eff, k}_{y,s})
+\]
+and,
+\[
+\boldsymbol{P}^k_{y,s} \sim Multinomial(\mathbb{E}[\boldsymbol{P}^k_{a, y,s}], N^{eff, k}_{y,s}) \ .
+\]
+where, \(N^{eff, k}_{y,s}\) is the effective sample size.
+
+
 
 
 A simple simulation experiment was conducted to explore the benefits of each approach. There were two OM scenarios that we wanted to explore, the first was that the true population had a 50:50 sex ratio and the observations had skewed sex ratios due to the selectivity i.e., availability to the survey fishery. Second the selectivity was constant for both sexes but the sex ratio was skewed at recruitment.
