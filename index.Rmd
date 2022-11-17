@@ -26,7 +26,7 @@ library(TMB)
 #library(stockassessmenthelper)
 library(ggplot2)
 library(dplyr)
-#library(reshape2)
+library(reshape2)
 #library(tidyr)
 ```
 
