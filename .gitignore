@@ -28,3 +28,7 @@ _book/references.html
 _book/search_index.json
 _book/style.css
 _book/tagdata.html
+_book/
+_bookdown_files/
+*.o
+*.dll

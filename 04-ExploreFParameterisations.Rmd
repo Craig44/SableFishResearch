@@ -1,25 +1,83 @@
 # Exploring alternative fishing mortality parameterisations (F) {#Fexplore}
 
-The current Alaskan Sablefish stock assessment (Chapter \@ref(modeldescription)), fishing mortality has estimable parameters for each gear \(g\) and year \(y\). This parametersation poses to potential problems. The first is that the number of parameters will increase as the number of gears increase. The fishery is currently going through a transformation whereby there is a switch from longline to pots. The second consideration is how how to set this up in a spatially explicit model where catch have an added spatial dimension. There are two alternative approaches to the current approach which treat \(F\) as a derived quantity rather than an estimable parameter. The first is to use newton rahpson methods to solve \(F\) as is done in the "hybrid" method of Stock Synthesis [@methot2013stock]. The second ...
+The current Alaskan sablefish stock assessment (Chapter \@ref(modeldescription)) estimates annual fishing mortality values for each gear \(g\) denoted by \(F^g_{y}\). This parametersation poses to potential problems when considering future assessment models and spatial models. The first is, the number of parameters will increase as the number of gears increase. The fishery is currently going through a transformation whereby there is a switch from longline to pots. The second consideration is how to set this up in a spatially explicit model where catch have an added spatial dimension. There are two alternative approaches to the current approach which treat \(F\) as a derived quantity rather than an estimable parameter. The first is to use Newton Raphson method to solve for \(F^g_{y}\). This is the recommended approach in Stock Synthesis [@methot2013stock], termed the "hybrid" approach. The previous two methods assume the Baranov catch equation for mortality [@baranov1918question]. An alternative is to assume Popes discrete formulation [@pope1972investigation] which uses exploitation proportions (sometimes called harvest rates or fishing pressure) and has a closed form solution.
 
-
-
-A quick overview of the commonly applied fishing dynamics applied in stock assessment models. A good general overview is by @branch2009differences. They compare the continuous Baranov Catch equation [@baranov1918question] vs Pope's discrete formulation [@pope1972investigation]. Arguments for using the continuous case is that $M$ and $F$ occur simultaneously, also with the continuous case, $F$ allows for multiple event encounters, this is assuming a fleet has the same selectivity and availability, that a fish that escapes one net can be caught in another. In contrast, the discrete formulation only allows a fish to be caught or escape from an instantaneous event. I have summarized the benefits of the continuous equation in the following list,
+A good general overview on these methods can be found in @branch2009differences. They describe and compared the continuous Baranov catch equation [@baranov1918question] with Pope's discrete formulation [@pope1972investigation]. Arguments for using the continuous case is that $M$ and $F$ occur simultaneously, also with the continuous case, $F$ allows for multiple event encounters, this is assuming a fleet has the same selectivity and availability, that a fish that escapes one net can be caught in another. In contrast, the discrete formulation only allows a fish to be caught or escape from an instantaneous event. I have tried to summarize the benefits of the continuous equation in the following list,
 
 *  Allows the entire population to be caught (not sure this is that relevant)
-*  Allows simultaneous $M$ and $F$, no need to worry about order of operations. From a coding/practical perspective this is quite attractive. Once you have an F and M you can easily derive all mid-mortality quantities. Where as using the \(U\) approach you need save the population before and after to interpolate to derive mid-mortality quantities.
-*  $F$ effects Composition data, where as in the discrete case composition is independent of $U$.
+*  Allows simultaneous $M$ and $F$, no need to worry about order of operations. From a coding/practical perspective this is quite attractive. Once you have an F and M you can easily derive all mid-mortality quantities. Where as using a \(U\) approach you need save the population before and after to interpolate to derive mid-mortality quantities.
+*  The magnitude of $F$ effects composition data, where as in the discrete case, composition is independent of the magniture of $U$.
 *  Allows for multiple catch events of an individual
-*  Can fit to catch thus allows for uncertainty in catches
+*  Can fit to catch observations thus allows for uncertainty in catches. In practice the uncertainty/variance on catch is very small i.e., coeffecient of variations ranging from 0.01 to 0.1. This essentially states catch is observed with high confidence and in my opinion isn't that much different to saying catch is known exactly. Note often this high precision on observed catch is needed in order to make the \(F\)'s identifiable. This high precision also muddies the "degrees of freedom" for the model. Although the \(F\)'s look like independent and free parameters they are heavily constrained by the assumptiosn on observed catch variance.
 
-The arguments for the discrete approximation is that there is an analytical solution for \(U\) and so is fast to calculate expected catch, where as $F$ has to be either solved numerically or estimated as a free parameter. 
+
+The arguments for the discrete approximation is that there is an analytical solution for \(U\) and so is fast to calculate expected catch, where as $F$ has to be either solved numerically or estimated as a free parameter (as mentioned earlier). 
  
 Chris Francis's wrote a response to this paper [@francisCommentBranch] where he argues the discrete formulation does not preclude the multiple encounters and that only the data can truly tell us which catch equation is the best one to use.
- 
-The relationship between $F$ (Instantaneous fishing mortality) and $U$ exploitation rate for a simple scenario (single fishery) is given in the following R code.
+
+- Need to make a point about how there may be Automatic differentiation issues with the \(U\) approach. Because there is an `if(U > 0.99)` which can cause a fork in the chain rule which can equal a coding nightmare.
+
+The relationship between $F$ (Instantaneous fishing mortality) and $U$ exploitation rate for a simple scenario (single fishery) is illustrated in the following R code.
+
+
+```{r illustrate_F_vs_U_sim}
+## Params
+ages = 1:20
+R0 = 1000
+M = 0.2
+a50 = 3.4
+ato95 = 2.4
+A = length(ages)
+N_age = vector()
+N_age[1] = R0
+set.seed(123)
+for(age_ndx in 2:A)
+  N_age[age_ndx] = N_age[age_ndx - 1] * exp(-M) * exp(rnorm(1,0,0.5))
+barplot(height = N_age, names = ages)
+# selectivity at age
+S_age = stockassessmenthelper:::logis_sel(ages, a50, ato95)
+## No selectivity
+u_range = seq(0,0.8,by = 0.02)
+F_range = -log(1 - u_range)
+# 1 - exp(-F_range) # back calculate U
+```
+
+
+
+```{r illustrate_F_vs_U, fig.fullwidth=T}
+## the application throught time.
+N_1 = 100
+par(mfrow = c(2,2), mar = c(2,2,2,1), oma = c(3,2,2,0))
+Fs = c(0.2,0.6,1,1.4)
+for(i in 1:length(Fs)) {
+  F_t = Fs[i]
+  U_t = 1 - exp(-F_t)
+  M = 0.5
+  time_ = seq(0,1, by = 0.001)
+  change_over_time = N_1 * exp(-(F_t+M)*time_)
+  change_over_time_alt = N_1 * exp(-M*time_[time_<0.5]) 
+  change_over_time_alt = c(change_over_time_alt, change_over_time_alt[length(change_over_time_alt)] * (1 - U_t))
+  change_over_time_alt = c(change_over_time_alt, change_over_time_alt[length(change_over_time_alt)] * exp(-M*time_[time_ < 0.5]) )
+  
+  plot(1,1, type = "n", xlab = "", ylab = "", ylim = c(0,100), xlim = c(0,1), xaxt = "n", yaxt = "n", cex.main = 1.5,cex.lab = 1.5, main = substitute(paste(F[y], " = ", this_F, " M = ", M), list(this_F = F_t, M= M)))#paste0(, " = ", F_t))
+  lines(time_, change_over_time, lwd = 4)
+  lines(time_, change_over_time_alt, lwd = 4, col = "red")
+  if (i > 2)
+    axis(side = 1, tick = T, at = c(0,1), labels = c("y", "y+1"), cex.axis = 2)
+  if (i == 1)
+    legend('bottomleft', legend = c("Baranov","Discrete"), lwd = 3, col = c("black","red"), cex = 0.8)
+}
+mtext(side = 1, text = "Time", outer = T, line = 0.7, cex = 1.3)
+mtext(side = 2, text = "N", outer = T, line = -1, cex = 1.3)
+```
+
+
 
 ## Set up a simulation {-}
-```{r illustrate_F_vs_U_sim}
+To explore the three methods described above a simple simulation was conducted for a simple age-structured stock assessment. The purpose was to check that the derived methods were reliable so that we can implement them in the spatial model that is development.
+
+
+```{r setup_first_sim}
 bio_params = list(
   ages = 1:20,
   L_inf = 58,
@@ -180,7 +238,7 @@ true_report = ASM_obj$report()
 
 ```{r self_test, echo = T, eval = T}
 ##################################
-### Self Test
+### Self Test with estimable F's
 ##################################
 n_sims = 100
 
