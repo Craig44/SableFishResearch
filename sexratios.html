@@ -270,12 +270,13 @@ where, <span class="math inline">\(N^{eff, k}_{y,s}\)</span> is the effective sa
 <ul>
 <li>LF observations with sexual dimorphism in growth. A possible reason LF’s could be influencing assessment output is due to mis-specified growth à la <span class="citation">Minte-Vera et al. (<a href="#ref-minte2017get" role="doc-biblioref">2017</a>)</span></li>
 <li>Sample size between the two approaches</li>
-<li>Actual sex ratio skewed in the recruitment process, rather than just a selectivity effect which was of focus in the following simulation .</li>
+<li>Actual sex ratio skewed in the recruitment process, rather than just a selectivity effect which was of focus in the following simulation</li>
+<li>Look at the effect on <span class="math inline">\(F\)</span>’s I only summarised SSB and selectivities</li>
 </ul>
 </div>
 <div id="operating-model-om-parameters" class="section level3 hasAnchor" number="4.1.2">
 <h3><span class="header-section-number">4.1.2</span> Operating Model (OM) Parameters<a href="sexratios.html#operating-model-om-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="sexratios.html#cb2-1" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">=</span> <span class="dv">100</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="sexratios.html#cb2-1" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">=</span> <span class="dv">250</span></span>
 <span id="cb2-2"><a href="sexratios.html#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="sexratios.html#cb2-3" aria-hidden="true" tabindex="-1"></a>bio_params <span class="ot">=</span> <span class="fu">list</span>(</span>
 <span id="cb2-4"><a href="sexratios.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ages =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
@@ -349,7 +350,7 @@ S^{female}_a = \alpha/(1+19^{(a_{50}-a)/a_{to95})})
 <p>Although this scenario assumed both male and female had the same max selectivity I wanted to see the effect of estimating this additional parameter.</p>
 <div id="em-1-using-approach-1" class="section level4 unnumbered hasAnchor">
 <h4>EM 1 (using approach 1)<a href="sexratios.html#em-1-using-approach-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  7.735343e-07</code></pre>
+<pre><code>## max gradient from 100 simualtions =  2.148523e-06</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_1_EM_1-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario1EM1ssb"></span>
 <img src="_main_files/figure-html/runscenario1EM1ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
@@ -360,7 +361,7 @@ Figure 4.2: Absolute SSBs, red line OM (truth), black lines are the estimated va
 </div>
 <div id="em-2-using-approach-2" class="section level4 unnumbered hasAnchor">
 <h4>EM 2 (using approach 2)<a href="sexratios.html#em-2-using-approach-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  1.008376e-05</code></pre>
+<pre><code>## max gradient from 100 simualtions =  0.01003628</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_1_EM_2-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario1EM2ssb"></span>
 <img src="_main_files/figure-html/runscenario1EM2ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
@@ -376,7 +377,7 @@ Figure 4.3: Absolute SSBs, red line OM (truth), black lines are the estimated va
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="sexratios.html#cb5-1" aria-hidden="true" tabindex="-1"></a>true_pars<span class="sc">$</span>logit_f_alpha_f <span class="ot">=</span> <span class="fu">logit_general</span>(<span class="fl">1.2</span>, TMB_data<span class="sc">$</span>sel_alpha_bounds[<span class="dv">1</span>], TMB_data<span class="sc">$</span>sel_alpha_bounds[<span class="dv">2</span>])</span></code></pre></div>
 <div id="em-1-using-approach-1-1" class="section level4 unnumbered hasAnchor">
 <h4>EM 1 (using approach 1)<a href="sexratios.html#em-1-using-approach-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  2.209329e-06</code></pre>
+<pre><code>## max gradient from 100 simualtions =  0.09063815</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_2_EM_1-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario2EM1ssb"></span>
 <img src="_main_files/figure-html/runscenario2EM1ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
@@ -387,7 +388,7 @@ Figure 4.4: Absolute SSBs, red line OM (truth), black lines are the estimated va
 </div>
 <div id="em-2-using-approach-2-1" class="section level4 unnumbered hasAnchor">
 <h4>EM 2 (using approach 2)<a href="sexratios.html#em-2-using-approach-2-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  7.067668e-06</code></pre>
+<pre><code>## max gradient from 100 simualtions =  1.558348e-05</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_2_EM_2-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario2EM2ssb"></span>
 <img src="_main_files/figure-html/runscenario2EM2ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
@@ -398,7 +399,7 @@ Figure 4.5: Absolute SSBs, red line OM (truth), black lines are the estimated va
 </div>
 <div id="em-3-using-approach-1-with-female-fixed-at-alpha-1" class="section level4 unnumbered hasAnchor">
 <h4>EM 3 (using approach 1 with female fixed at <span class="math inline">\(\alpha = 1\)</span>)<a href="sexratios.html#em-3-using-approach-1-with-female-fixed-at-alpha-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  2.407385e-06</code></pre>
+<pre><code>## max gradient from 100 simualtions =  1.886556e-06</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_2_EM_3-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario2EM3ssb"></span>
 <img src="_main_files/figure-html/runscenario2EM3ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
@@ -480,7 +481,8 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "subsection"
+"collapse": "subsection",
+"depth": 1
 }
 });
 });

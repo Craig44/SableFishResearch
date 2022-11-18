@@ -235,7 +235,14 @@ div.csl-indent {
 </div>
 <div id="overview" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Overview<a href="index.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This Gitbook documents my/our research for the Alaska sablefish (<em>Anoplopoma fimbria</em>).</p>
+<p>This Gitbook documents my/our research for the Alaska sablefish (<em>Anoplopoma fimbria</em>). The objective is to develop and explore a spatially explicit stock assessment for Alaskan sablefish. However, there will be many other topics that I will likely only scratch the surface on. The following outlines the chapters in this document</p>
+<ul>
+<li><p>Chapter <a href="objectives.html#objectives">2</a> is a list of objectives that we have set or accomplished during this research project. Some of our research cannot be in this book/repo due to the confidential nature of the data. This checklist should include tasks for the wider research</p></li>
+<li><p>Chapter <a href="modeldescription.html#modeldescription">3</a> documents the current stock assessment model and assumptions (work in progress). This first is the first step of the project and helps me get a grasp of data and dynamics that are important</p></li>
+<li><p>Chapter <a href="sexratios.html#sexratios">4</a> explores how to include sex disaggregated composition observations that can include sex ratio information. It conducts a simple simulation to investigate two different approaches than what is currently done in the assessment</p></li>
+<li><p>Chapter <a href="Fexplore.html#Fexplore">5</a> explores how to parameterise fishing mortality. The current approach is to estimate an annual fishing mortality parameter for each gear. I feel slightly uncomfortable about this approach moving towards a spatial model as the number of estimated parameters will explode. This chapter looks at two alternative approaches that either derive fishing mortality estimates using a Newton Raphson solver which is borrowed from the Stock Synthesis “hybrid” approach <span class="citation">(<a href="#ref-methot2013stock" role="doc-biblioref">Methot Jr and Wetzel 2013</a>)</span> and Pope’s discrete approach <span class="citation">(<a href="#ref-pope1972investigation" role="doc-biblioref">Pope 1972</a>)</span> which uses exploitation rates. All of these methods have been used in literature for decades and we don’t wish to identify a “best” methods. The aim is to do a simulation and make sure these two approaches are numerical stability and have good convergence properties under a range of fishing patterns.</p></li>
+<li><p>Chapter <a href="tagdata.html#tagdata">6</a> describes the tagging data and how it can be used within a spatial model but also used in a panmictic model for informing population dynamics such as growth.</p></li>
+</ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TMB)</span>
 <span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#library(stockassessmenthelper)</span></span>
 <span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -243,6 +250,15 @@ div.csl-indent {
 <span id="cb1-5"><a href="index.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
 <span id="cb1-6"><a href="index.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span></code></pre></div>
 
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-methot2013stock" class="csl-entry">
+Methot Jr, Richard D, and Chantell R Wetzel. 2013. <span>“Stock Synthesis: A Biological and Statistical Framework for Fish Stock Assessment and Fishery Management.”</span> <em>Fisheries Research</em> 142: 86–99.
+</div>
+<div id="ref-pope1972investigation" class="csl-entry">
+Pope, JG. 1972. <span>“An Investigation of the Accuracy of Virtual Population Analysis Using Cohort Analysis.”</span> <em>ICNAF Research Bulletin</em> 9 (10): 65–74.
+</div>
 </div>
             </section>
 
@@ -298,7 +314,8 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "subsection"
+"collapse": "subsection",
+"depth": 1
 }
 });
 });
