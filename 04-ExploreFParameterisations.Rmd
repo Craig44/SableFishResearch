@@ -35,7 +35,7 @@ for(age_ndx in 2:A)
   N_age[age_ndx] = N_age[age_ndx - 1] * exp(-M) * exp(rnorm(1,0,0.5))
 barplot(height = N_age, names = ages)
 # selectivity at age
-S_age = stockassessmenthelper:::logis_sel(ages, a50, ato95)
+S_age = logis(ages, a50, ato95)
 ## No selectivity
 u_range = seq(0,0.8,by = 0.02)
 F_range = -log(1 - u_range)
