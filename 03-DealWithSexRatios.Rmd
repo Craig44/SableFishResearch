@@ -48,12 +48,13 @@ In summary both approaches resulted in similar estimates in selectivities and SS
 ### Future research that was not considered in this simple simulation {-}
 - LF observations with sexual dimorphism in growth. A possible reason LF's could be influencing assessment output is due to mis-specified growth à la @minte2017get 
 - Sample size between the two approaches
-- Actual sex ratio skewed in the recruitment process, rather than just a selectivity effect which was of focus in the following simulation .
+- Actual sex ratio skewed in the recruitment process, rather than just a selectivity effect which was of focus in the following simulation
+- Look at the effect on \(F\)'s I only summarised SSB and selectivities
 
 ### Operating Model (OM) Parameters 
 
 ```{r setup}
-n_sims = 100
+n_sims = 250
 
 bio_params = list(
   ages = 1:20,

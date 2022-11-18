@@ -2,6 +2,7 @@ bookdown::gitbook:
   css: style.css
   config:
     toc:
+      depth: 1
       before: |
         <li><a href="./">Sablefish Research</a></li>
       after: |

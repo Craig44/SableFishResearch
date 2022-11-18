@@ -12,13 +12,28 @@ includes:
 description: |
   This Gitbook documents my post-doctoral research relating to Alaskan sablefish.
 link-citations: yes
-#github-repo: https://github.com/NIWAFisheriesModelling/r4Casal2
 
 ---
 
 # Overview
 
-This Gitbook documents my/our research for the Alaska sablefish (*Anoplopoma fimbria*).
+This Gitbook documents my/our research for the Alaska sablefish (*Anoplopoma fimbria*). The objective is to develop and explore a spatially explicit stock assessment for Alaskan sablefish. However, there will be many other topics that I will likely only scratch the surface on. The following outlines the chapters in this document
+
+- Chapter \@ref(objectives) is a list of objectives that we have set or accomplished during this research project. Some of our research cannot be in this book/repo due to the confidential nature of the data. This checklist should include tasks for the wider research
+
+- Chapter \@ref(modeldescription) documents the current stock assessment model and assumptions (work in progress). This first is the first step of the project and helps me get a grasp of data and dynamics that are important
+
+- Chapter \@ref(sexratios) explores how to include sex disaggregated composition observations that can include sex ratio information. It conducts a simple simulation to investigate two different approaches than what is currently done in the assessment
+
+
+- Chapter \@ref(Fexplore) explores how to parameterise fishing mortality. The current approach is to estimate an annual fishing mortality parameter for each gear. I feel slightly uncomfortable about this approach moving towards a spatial model as the number of estimated parameters will explode. This chapter looks at two alternative approaches that either derive fishing mortality estimates using a Newton Raphson solver which is borrowed from the Stock Synthesis "hybrid" approach [@methot2013stock] and Pope's discrete approach [@pope1972investigation] which uses exploitation rates. All of these methods have been used in literature for decades and we don't wish to identify a "best" methods. The aim is to do a simulation and make sure these two approaches are numerical stability and have good convergence properties under a range of fishing patterns.
+
+
+- Chapter \@ref(tagdata) describes the tagging data and how it can be used within a spatial model but also used in a panmictic model for informing population dynamics such as growth.
+
+
+
+
 
 
 ```{r install_packages, results = 'hide', message=FALSE, warning=FALSE}
