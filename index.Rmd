@@ -27,7 +27,7 @@ library(TMB)
 library(ggplot2)
 library(dplyr)
 library(reshape2)
-#library(tidyr)
+library(gridExtra)
 ```
 
 ```{r auxillary_functions,echo = F,eval =T, results = 'hide', message=FALSE, warning=FALSE}
@@ -198,6 +198,20 @@ fix_pars <- function(par_list, pars_to_exclude, vec_elements_to_exclude = NULL, 
     }
   }
   return(mapped_pars);
+}
+#' get_list_obj gets names objects out of simulated TMB reports.
+#' @param est_ls a list of length n_sims
+#' @param object_label a charachter that points to a name of an element of the TMB report
+#' @return a matrix 
+
+get_list_obj = function(est_ls, object_label) {
+  val = Reduce(rbind, lapply(X = est_ls, FUN = function(x){
+    temp = x[[object_label]]
+    temp
+    }))
+  elements = nrow(val) / length(est_ls)
+  
+  cbind(sort(rep(1:length(est_ls), elements)), val)
 }
 
 ```

@@ -391,7 +391,7 @@ Type objective_function<Type>::operator() () {
   N(0, 0, 0) = R0 * proportion_male(0);
   N(0, 0, 1) = R0 * (1 - proportion_male(0));
   
-  for(age_ndx = 1; age_ndx < (nages - 1); ++age_ndx) {
+  for(age_ndx = 0; age_ndx < nages; ++age_ndx) {
     ssb(0) += N(age_ndx, 0, 1) * exp(-natMor * propZ_ssb(0))  * stockMeanWeight(age_ndx, 0, 1) * prop_mature(age_ndx, 0);
     ssb(0) += N(age_ndx, 0, 0) * exp(-natMor * propZ_ssb(0))  * stockMeanWeight(age_ndx, 0, 0) * prop_mature(age_ndx, 0);
   }
