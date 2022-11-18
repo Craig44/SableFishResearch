@@ -257,4 +257,100 @@ ggplot() +
 
 ## Other things to consider {-}
 
-## Appendix {-}
+## Appendix - Hybrid approach {-}
+The hybrid fishing mortality process uses the methods and algorithms applied in Stock Synthesis [@methot2013stock]. The descriptions below are heavily based on the text describing this approach in the Appendix of [@methot2013stock].
+
+This process begins by calculating popes discrete approximation, and then converts this to Baranov fishing mortality coefficients. A tuning algorithm is then done to tune these coefficients to match input catch nearly exactly, rather than the full Baranov approach.
+
+Total mortality, denoted by \(Z_{a,y,s,r}\) for sex \(s\), region \(r\), age \(a\) and year \(y\) will hereby be denoted by \(Z_{a,y,s}\) i.e., drop the region index. This is because mortality rates are calculated independently (in isolation) among regions (**NOTE** consider parallelising this in the model).
+
+\begin{equation*}
+	Z_{a,y,s} = M_{a,y,s} + \sum\limits_{f} S^g_{y,s} F^g_y
+\end{equation*}
+
+where, \( M_{a,s}\) is the natural mortality rate, \( F^g_y\) is fishing mortality and \(S^g_{a,s}\) is the selectivity.
+
+The hybrid fishing mortality method allows the \(F\) values to be "tuned" to match input catch nearly exactly, rather than estimating them as free model parameters. The process begins by calculating mid year exploitation rate using Pope’s approximation. This exploitation rate is then converted to an approximation of the Baranov continuous \(F\). The \(F\) values for all fisheries operating in that year and region are then tuned over a set number of iterations (`f_iterations`) to match the observed catch for each fishery with its corresponding \(F\). Differentiability is achieved by the use of Pope's approximation to obtain the starting value for each \(F\) and then the use of a fixed number of tuning iterations, typically 4. Tests from Stock Synthesis have shown that modelling \(F\) as hybrid versus \(F\) as a parameter has trivial impact on the estimates of the variances of other model derived quantities. 
+
+The hybrid method calculates the harvest rate using the Pope's approximation then converts to an approximation of the corresponding F as:
+
+\begin{align}
+	V^g_{y} &= \sum\limits_s\sum\limits_a N_{a,y,s} \exp\left(-\delta_t M_{a,s}\right) \nonumber \\
+	\tilde{U}^g_{y} &= \frac{C^g_{y}}{V^g_{y} + 0.1 C^g_{y}}\\
+	j^g_{y} &= \left(1 + \exp \left(30 (\tilde{U}^g_{y} - 0.95) \right)\right)^{-1}\\
+	U^g_{y} &= 	j_{t,f} \tilde{U}^g_{y} + 0.95 (1 - j^g_{y} )\\
+	\tilde{F}^g_{y} &= \frac{-\log\left(1 - U^g_{y}\right)}{\delta_t}
+\end{align}
+
+where, \(C^{g}_y\) is the observed catch, \(\delta_t\) is the duration of the period of observation within the year. In most situations where the entire catch has been observed in a time-step. This should be one. \(V^g_{y}\) is partway vulnerable biomass and \(\tilde{F}^g_{y}\) is the initial \(F\).
+
+The formulation above is designed so that high exploitation rates (above 0.95) are converted into an F that corresponds to a harvest rate of close to 0.95, thus providing a more robust starting point for subsequent iterative adjustment of this F. The logistic joiner, \(j\), is used at other places in Stock Synthesis to link across discontinuities.
+
+The tuning algorithm begins by setting \(F^g_{y} = \tilde{F}^g_{y}\) and repeating the following algorithm `f_iteration` times.
+
+\[
+\widehat{C}_{a,y,s}  = \sum\limits_g {F}^g_{y}\left(S^g_{a,s} N_{a,y,s}\right) \lambda^*_{a,y,s}
+\]
+
+where, \( \lambda^*_{a,y,s}\) denotes the survivorship and is calculated as:
+
+\begin{equation}
+ \lambda^*_{a,y,s} = \frac{1 - \exp\left(-\delta_t Z_{a,y,s}  \right) }{Z_{a,y,s}}
+   (\#eq:survival)
+\end{equation}
+
+Total fishing mortality is then adjusted over several fixed number of iterations (typically four, but more in high F and multiple fishery situations). The first step is to calculate the ratio of the total observed catch over all fleets to the predicted total catch according to the current F estimates. This ratio provides an overall adjustment factor to bring the total mortality closer to what it will be after adjusting the individual \(F\) values.
+
+\[
+\widehat{C}_{y}  =  \sum\limits_g \sum\limits_s\sum\limits_a {F}^g_{y}\left(S^g_{a,s} N_{a,y,s}\right) \lambda^*_{a,y,s}
+\]
+
+This is different from Equation~A.1.25 in the Appendix of [@methot2013stock]. They include \(Z_{a,y,s}\) in the denominator of \({F}^g_{y}\), which is a type error because \(Z_{a,y,s}\) is already included in \(\lambda^*_{a,y,s}\), see Equation~\ref{eq:survival}.
+
+\[
+Z^{adj}_t = \frac{\sum\limits_g C^g_{y}}{\widehat{C}_{y}}
+\]
+
+The total mortality if this adjuster was applied to all the Fs is then calculated:
+
+\[
+Z^*_{a,y,s} = M_{a,s} + Z^{adj}_t \left(Z_{a,y,s} -M_{a,s} \right)
+\]
+
+\[
+\lambda^*_{a,y,s} = \frac{1 - \exp\left(-\delta_t Z^*_{a,y,s}  \right) }{Z^*_{a,y,s}}
+\]
+
+The adjusted mortality rate is used to calculate the total removals for each fishery, and then the new \(F\) estimate is calculated by the ratio of observed catch to total removals, with a constraint to prevent unreasonably high \(F\) calculations (`max_f`):
+
+\begin{align*}
+	\tilde{V}^g_{y} &= \sum\limits_s\sum\limits_a \left(N_{a,y,s} \bar{w}_{a,y,s}S^g_{a,s} \right)\lambda^*_{a,y,s} \\
+	F^{g*}_{y} &= \frac{C^g_{y}}{\tilde{V}^g_{y} + 0.0001}\\
+	j^{g*}_{y} &= \left(1 + \exp \left(30 (F^{g*}_{y} - 0.95 F_{max}) \right)\right)^{-1}\\
+\end{align*}
+
+where, \(F_{max}\) is a user defined maximum fishing mortality `f_max`. The \(F\) at the end of each tuning iteration follows: 
+
+\[
+F^g_{y} = j^{g*}_{y} F^{g*}_{y} + \left(1 - j^{g*}_{y}\right)F_{max}
+\]
+
+After the tuning algorithm removals at age, and other derived quantities are recorded. The final total mortality is updated
+\[
+	Z_{a,y,s} = M_{a,s} + \sum\limits_{g} S^g_{a,s} F^g_{y}
+\]
+
+This process generates catch at age and sex for each year (and region) (\(\widehat{C}^g_{a,y,s}\)) which can be accessed by `process_removals` observations. Numbers at age are calculated as
+
+\[
+\widehat{C}^g_{a,y,s} = \frac{F^g_{a,s,y}}{Z_{a,y,s}} N_{a,y,s} \exp\left(-Z_{a,y,s}\right)
+\]
+
+Total catch is the summed over all sexes and age 
+
+\[
+\widehat{C}^g_{y} = \sum\limits_s\sum\limits_a \widehat{C}^g_{a,y,s}  \bar{w}_{a,y,s}
+\]
+
+where \(\bar{w}_{a,y,s}\) is the mean weight
+

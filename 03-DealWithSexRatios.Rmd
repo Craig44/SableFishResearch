@@ -6,7 +6,7 @@ An immediate improvement in the current stock assessment (Chapter \@ref(modeldes
 Before developing a spatially explicit model stock assessment model, I wanted to tidy some loose ends that may come back and bite me in the proverbial butt once we explore the spatially sex disaggregated stock assessment model in anger. These things are exponentially more easier to deal with in "simpler" models. My general intention is to drop length data when we have well sampled age data, currently they both go into the model together. For age composition data I want to structure the observations so that there is potential information on sex ratio. The current assessment can be given information on sex ratio for generating model predicted values which is similar to the approach in @ward2019assessing. Howver, I personally think this should be dealt within the model.
 
 
-I am aware of two approaches for supplying observations that in theory should provide information on sex ratio. The first (approach 1) was taken from Casal2 [@doonan2016casal2]. This treats sexed composition data for a year as a single proportion i.e., proportions across all ages and sexes sum to one for each year,
+I am aware of two approaches for supplying observations that in theory should provide information on sex ratio. The first ("Approach 1") was taken from Casal2 [@doonan2016casal2]. This treats sexed composition data for a year as a single proportion i.e., proportions across all ages and sexes sum to one for each year,
 
 \[
 \boldsymbol{P}^k_{y} = \frac{(C^k_{a,y,1},C^k_{a,y,2})}{\sum_a \sum_s C^k_{a,y,s}}, \quad \sum \boldsymbol{P}^k_{y} = 1
@@ -18,7 +18,7 @@ where, \(C^k_{a,y,1}\) is the catch at age (numbers) for males in year \(y\), ag
 where, \(N^{eff, k}_{y}\) is the effective sample size for this survey and year.
 
 
-The second approach (approach 2) is to treat composition for each sex seperately that is proportions at age or length for a sex will sum to one, but also provide a specific sex ratio observation over all ages or lengths as done in the New Zealand rock lobster stock assessment [@webber2021rapid]. 
+The second approach ("Approach 2") is to treat composition for each sex seperately that is proportions at age or length for a sex will sum to one, but also provide a specific sex ratio observation over all ages or lengths as done in the New Zealand rock lobster stock assessment [@webber2021rapid]. 
 
 \[
 R^k_{y,s} = \frac{\sum_a C^k_{a,y,s}}{\sum_a \sum_s C^k_{a,y,s}}, \quad  \sum_s R^k_{y,s} = 1
@@ -44,6 +44,8 @@ To explore the utility of these two approaches we conducted a simple simulation 
 ### Results
 In summary both approaches resulted in similar estimates in selectivities and SSBs. I prefer Approach 1 as it is a single observation compared with Approach 2 which has two observation types, but this simulation showed at least within the very small assumptions explored here they resulted in similar performance. This was all I was after in order to move forward to the spatial model.
 
+
+Another consideration about "Approach 2" is if the selectivity shape differs between sexes i.e., lower age at 50\% retention. Then due to the sex ratio being derived by summing numbers over all ages, and the natural exponential decay in successive age-cohorts, selectivies that capture more younger fish will result in higher sex ratios. "Approach 1"
 
 ### Future research that was not considered in this simple simulation {-}
 - LF observations with sexual dimorphism in growth. A possible reason LF's could be influencing assessment output is due to mis-specified growth à la @minte2017get 
@@ -367,7 +369,7 @@ ggplot() +
   theme_bw()
 ```
 
-```{r runscenario1EM1Fs, warning=F, echo = F, eval = T, fig.cap="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs"}
+```{r runscenario1EM1Fs, warning=F, echo = F, eval = T, fig.cap="Annual fishing mortality, red line OM (truth), black lines are the estimated values form EMs"}
 ## plpt SSBs
 ggplot() +
   geom_line(data = molten_Fs, aes(x = as.numeric(as.character(year)), y = F, group = Sim)) +
@@ -461,7 +463,7 @@ ggplot() +
   theme_bw()
 ```
 
-```{r runscenario1EM2Fs, warning=F, echo = F, eval = T, fig.cap="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs"}
+```{r runscenario1EM2Fs, warning=F, echo = F, eval = T, fig.cap="Annual fishing mortality, red line OM (truth), black lines are the estimated values form EMs"}
 ## plpt SSBs
 ggplot() +
   geom_line(data = molten_Fs, aes(x = as.numeric(as.character(year)), y = F, group = Sim)) +
@@ -473,7 +475,7 @@ ggplot() +
 
 
 #### EM 3 (using approach 1 with female fixed at \(\alpha = 1\)) {-}
-```{r run_scenario_2_EM_3, warning=F, echo = F, eval = T}
+```{r run_scenario_1_EM_3, warning=F, echo = F, eval = T}
 ##################################
 ### Simulate 100 data sets for Scenario 1
 ##################################
@@ -560,7 +562,7 @@ ggplot() +
 ```
 
 
-```{r runscenario1EM3Fs, warning=F, echo = F, eval = T, fig.cap="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs"}
+```{r runscenario1EM3Fs, warning=F, echo = F, eval = T, fig.cap="Annual fishing mortality, red line OM (truth), black lines are the estimated values form EMs"}
 ## plpt SSBs
 ggplot() +
   geom_line(data = molten_Fs, aes(x = as.numeric(as.character(year)), y = F, group = Sim)) +
@@ -670,7 +672,7 @@ ggplot() +
 ```
 
 
-```{r runscenario2EM1Fs, warning=F, echo = F, eval = T, fig.cap="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs"}
+```{r runscenario2EM1Fs, warning=F, echo = F, eval = T, fig.cap="Annual fishing mortality, red line OM (truth), black lines are the estimated values form EMs"}
 ## plpt SSBs
 ggplot() +
   geom_line(data = molten_Fs, aes(x = as.numeric(as.character(year)), y = F, group = Sim)) +
@@ -765,7 +767,7 @@ ggplot() +
 ```
 
 
-```{r runscenario2EM2Fs, warning=F, echo = F, eval = T, fig.cap="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs"}
+```{r runscenario2EM2Fs, warning=F, echo = F, eval = T, fig.cap="Annual fishing mortality, red line OM (truth), black lines are the estimated values form EMs"}
 ## plpt SSBs
 ggplot() +
   geom_line(data = molten_Fs, aes(x = as.numeric(as.character(year)), y = F, group = Sim)) +
@@ -862,7 +864,7 @@ ggplot() +
 ```
 
 
-```{r runscenario2EM3Fs, warning=F, echo = F, eval = T, fig.cap="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs"}
+```{r runscenario2EM3Fs, warning=F, echo = F, eval = T, fig.cap="Annual fishing mortality, red line OM (truth), black lines are the estimated values form EMs"}
 ## plpt SSBs
 ggplot() +
   geom_line(data = molten_Fs, aes(x = as.numeric(as.character(year)), y = F, group = Sim)) +
