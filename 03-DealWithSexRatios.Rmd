@@ -38,7 +38,7 @@ and,
 where, \(N^{eff, k}_{y,s}\) is the effective sample size.
 
 
-## Simulations!! {#sexSimulation}
+## A simple simulation {#sexSimulation}
 To explore the utility of these two approaches we conducted a simple simulation using a sexually disaggregated age-structured model (see Section \@ref(sexSimulation)). The Operating Model (OM) used in the simulation assumed a 50:50 sex ratio during the recruitment process however the OM did assume different growth and selectivity among the sexes.
 
 ### Results
@@ -229,6 +229,7 @@ dyn.load(dynlib(file.path("TMB","SexDisaggregatedAgeStructuredModel")))
 grad_tol = 0.001
 # these parameters we are not estimating.
 na_map = fix_pars(par_list = true_pars, pars_to_exclude = c("ln_catch_sd","ln_extra_survey_cv","ln_sigma_r", "logit_proportion_male"))
+na_map_fix_alphas = fix_pars(par_list = true_pars, pars_to_exclude = c("logit_survey_alpha_f","logit_f_alpha_f","ln_catch_sd","ln_extra_survey_cv","ln_sigma_r", "logit_proportion_male"))
 ASM_obj <- MakeADFun(TMB_data, true_pars, DLL= "SexDisaggregatedAgeStructuredModel", map = na_map,checkParameterOrder=T)
 
 #invlogit_general(true_pars$logit_survey_alpha_f, TMB_data$sel_alpha_bounds[1], TMB_data$sel_alpha_bounds[2])
@@ -280,6 +281,9 @@ S^{female}_a = \alpha/(1+19^{(a_{50}-a)/a_{to95})})
 
 Although this scenario assumed both male and female had the same max selectivity I wanted to see the effect of estimating this additional parameter.
 
+A third EM (EM3) was also explored, this structured compositional data using Approach 1 but fixed the female \(\alpha\) = 1 in Equation \@ref(eq:femaleselectivity). This is often the default approach. For scenario 1 this should be the best performing EM as it has the \(\alpha\) set at the values of the OM.
+
+
 #### EM 1 (using approach 1) {-}
 ```{r run_scenario_1_EM_1, warning=F, echo = F, eval = T}
 ##################################
@@ -317,7 +321,9 @@ sel_survey = get_list_obj(est_ls = est_list_alt, object_label = "survey_selectiv
 sel_survey_df = data.frame(sim = factor(sel_survey[,1]), male = sel_survey[,2], female = sel_survey[,3], age = ages)
 sel_fishery = get_list_obj(est_ls = est_list_alt, object_label = "fishery_selectivity")
 sel_fishery_df = data.frame(sim = factor(sel_fishery[,1]), male = sel_fishery[,2], female = sel_fishery[,3], age = ages)
-
+annual_fs = get_list_obj(est_ls = est_list_alt, object_label = "annual_F")
+colnames(annual_fs) = c("Sim", as.character(TMB_data$years))
+molten_Fs = melt(as.data.frame(annual_fs), id.vars = "Sim", variable.name = "year", value.name = "F")
 ## plot selectivities
 male_s_sel = ggplot(data  = sel_survey_df) +
   geom_line(aes(x = age, y = male, group = factor(sim), alpha = 0.3, col = "EMs"), linewidth = 1.3) +
@@ -361,7 +367,15 @@ ggplot() +
   theme_bw()
 ```
 
-
+```{r runscenario1EM1Fs, warning=F, echo = F, eval = T, fig.cap="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs"}
+## plpt SSBs
+ggplot() +
+  geom_line(data = molten_Fs, aes(x = as.numeric(as.character(year)), y = F, group = Sim)) +
+  geom_line(data = data.frame(year = TMB_data$years, value = true_report$annual_F),aes(x = year, y = value), col = "red", linetype = "dashed", linewidth = 1.2) +
+  ylim(0,NA) +
+  labs(x = "Time", y = "F") +
+  theme_bw()
+```
 
 #### EM 2 (using approach 2) {-}
 ```{r run_scenario_1_EM_2, warning=F, echo = F, eval = T}
@@ -400,6 +414,9 @@ sel_survey = get_list_obj(est_ls = est_list, object_label = "survey_selectivity"
 sel_survey_df = data.frame(sim = factor(sel_survey[,1]), male = sel_survey[,2], female = sel_survey[,3], age = ages)
 sel_fishery = get_list_obj(est_ls = est_list, object_label = "fishery_selectivity")
 sel_fishery_df = data.frame(sim = factor(sel_fishery[,1]), male = sel_fishery[,2], female = sel_fishery[,3], age = ages)
+annual_fs = get_list_obj(est_ls = est_list, object_label = "annual_F")
+colnames(annual_fs) = c("Sim", as.character(TMB_data$years))
+molten_Fs = melt(as.data.frame(annual_fs), id.vars = "Sim", variable.name = "year", value.name = "F")
 
 ## plot selectivities
 male_s_sel = ggplot(data  = sel_survey_df) +
@@ -444,15 +461,125 @@ ggplot() +
   theme_bw()
 ```
 
+```{r runscenario1EM2Fs, warning=F, echo = F, eval = T, fig.cap="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs"}
+## plpt SSBs
+ggplot() +
+  geom_line(data = molten_Fs, aes(x = as.numeric(as.character(year)), y = F, group = Sim)) +
+  geom_line(data = data.frame(year = TMB_data$years, value = true_report$annual_F),aes(x = year, y = value), col = "red", linetype = "dashed", linewidth = 1.2) +
+  ylim(0,NA) +
+  labs(x = "Time", y = "F") +
+  theme_bw()
+```
+
+
+#### EM 3 (using approach 1 with female fixed at \(\alpha = 1\)) {-}
+```{r run_scenario_2_EM_3, warning=F, echo = F, eval = T}
+##################################
+### Simulate 100 data sets for Scenario 1
+##################################
+est_pars = NULL
+ssbs = NULL
+convergence = NULL
+max_grad = NULL
+est_list = list()
+for(sim_iter in 1:n_sims) {
+  #if(sim_iter %% 10 == 0)
+  #  cat("iter = ", sim_iter, "\n")
+  sim_data = ASM_obj_alt_sex$simulate(complete = T)
+  start_pars = ran_start_vals()
+  start_pars$logit_survey_alpha_f = logit_general(1, TMB_data$sel_alpha_bounds[1], TMB_data$sel_alpha_bounds[2])
+  start_pars$logit_f_alpha_f = logit_general(1, TMB_data$sel_alpha_bounds[1], TMB_data$sel_alpha_bounds[2])
+
+  est_model = MakeADFun(sim_data, start_pars, DLL= "SexDisaggregatedAgeStructuredModel", map = na_map_fix_alphas, silent = T)
+  opt_modelc = nlminb(est_model$par, est_model$fn, est_model$gr, control = list(iter.max = 10000, eval.max = 10000))
+  ## Do two newton steps to try get parameters closer to the solution
+  for(i in 1:2) {
+    g = as.numeric(est_model$gr(opt_modelc$par))
+    h = optimHess(opt_modelc$par, fn = est_model$fn, gr = est_model$gr)
+    opt_modelc$par = opt_modelc$par - solve(h,g)
+    opt_modelc$objective = est_model$fn(opt_modelc$par)
+  }
+  convergence[sim_iter] = opt_modelc$convergence
+  max_grad[sim_iter] = max(abs(est_model$gr(est_model$env$last.par.best)))
+  est_pars = rbind(est_pars, opt_modelc$par)
+  est_rep = est_model$report(opt_modelc$par)
+  ssbs = rbind(ssbs, est_rep$ssb)
+  est_list[[sim_iter]] = est_rep
+}
+cat("max gradient from 100 simualtions = ", max(max_grad), "\n")
+R0s = get_list_obj(est_ls = est_list, object_label = "R0")
+sel_survey = get_list_obj(est_ls = est_list, object_label = "survey_selectivity")
+sel_survey_df = data.frame(sim = factor(sel_survey[,1]), male = sel_survey[,2], female = sel_survey[,3], age = ages)
+sel_fishery = get_list_obj(est_ls = est_list, object_label = "fishery_selectivity")
+sel_fishery_df = data.frame(sim = factor(sel_fishery[,1]), male = sel_fishery[,2], female = sel_fishery[,3], age = ages)
+annual_fs = get_list_obj(est_ls = est_list, object_label = "annual_F")
+colnames(annual_fs) = c("Sim", as.character(TMB_data$years))
+molten_Fs = melt(as.data.frame(annual_fs), id.vars = "Sim", variable.name = "year", value.name = "F")
+
+## plot selectivities
+male_s_sel = ggplot(data  = sel_survey_df) +
+  geom_line(aes(x = age, y = male, group = factor(sim), alpha = 0.3, col = "EMs"), linewidth = 1.3) +
+  geom_line(data = data.frame(age = ages, male = true_report$survey_selectivity[,1]), aes(x = age, y = male, col = "OM"), linewidth= 1.2, linetype = "dashed")+
+  guides(alpha = "none") +
+  labs(x = "Age", y = "Selectivity", title = "Survey - Male", col = "")+
+  theme_bw()
+
+female_s_sel = ggplot(data  = sel_survey_df) +
+  geom_line(aes(x = age, y = female, group = factor(sim), alpha = 0.3, col = "EMs"), linewidth = 1.3) +
+  geom_line(data = data.frame(age = ages, female = true_report$survey_selectivity[,2]), aes(x = age, y = female, col = "OM"), linewidth= 1.2, linetype = "dashed")+
+  guides(alpha = "none") +
+  labs(x = "Age", y = "Selectivity", title = "Survey - Female", col = "")+
+  theme_bw()
+male_f_sel = ggplot(data  = sel_fishery_df) +
+  geom_line(aes(x = age, y = male, group = factor(sim), alpha = 0.3, col = "EMs"), linewidth = 1.3) +
+  geom_line(data = data.frame(age = ages, male = true_report$fishery_selectivity[,1]), aes(x = age, y = male, col = "OM"), linewidth= 1.2, linetype = "dashed")+
+  guides(alpha = "none") +
+  labs(x = "Age", y = "Selectivity", title = "Fishery - Male", col = "")+
+  theme_bw()
+
+female_f_sel = ggplot(data  = sel_fishery_df) +
+  geom_line(aes(x = age, y = female, group = factor(sim), alpha = 0.3, col = "EMs"), linewidth = 1.3) +
+  geom_line(data = data.frame(age = ages, female = true_report$fishery_selectivity[,2]), aes(x = age, y = female, col = "OM"), linewidth= 1.2, linetype = "dashed")+
+  guides(alpha = "none") +
+  labs(x = "Age", y = "Selectivity", title = "Fishery - Female", col = "")+
+  theme_bw()
+
+grid.arrange(grobs = list(male_s_sel, female_s_sel, male_f_sel, female_f_sel), ncol= 2)
+```
+
+```{r runscenario1EM3ssb, warning=F, echo = F, eval = T, fig.cap="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs"}
+## plpt SSBs
+molten_ssbs = melt(ssbs)
+colnames(molten_ssbs) = c("sim", "year", "value")
+ggplot() +
+  geom_line(data =molten_ssbs, aes(x = year, y = value, group = sim)) +
+  geom_line(data = data.frame(year = 1:31, value = true_report$ssb),aes(x = year, y = value), col = "red", linetype = "dashed", linewidth = 1.2) +
+  ylim(0,NA) +
+  labs(x = "Time", y = "SSB (t)") +
+  theme_bw()
+```
+
+
+```{r runscenario1EM3Fs, warning=F, echo = F, eval = T, fig.cap="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs"}
+## plpt SSBs
+ggplot() +
+  geom_line(data = molten_Fs, aes(x = as.numeric(as.character(year)), y = F, group = Sim)) +
+  geom_line(data = data.frame(year = TMB_data$years, value = true_report$annual_F),aes(x = year, y = value), col = "red", linetype = "dashed", linewidth = 1.2) +
+  ylim(0,NA) +
+  labs(x = "Time", y = "F") +
+  theme_bw()
+```
+
+
+
 ### Scenario 2 
-The second scenario assumed sex ratio was 50:50 at recruitment and females were more selective than males to the fishery. This was done by setting \alpha = 1.2 in Equation \@ref(eq:femaleselectivity). A third EM (EM3) was introduced for Approach 1, which fixed the female \alpha = 1. This is often the default approach. This is a side interest on biases when assessments assume equal selection between males and females when in fact there is selectivity difference.
+The second scenario assumed sex ratio was 50:50 at recruitment and females were more selective than males to the fishery. This was done by setting \(\alpha\) = 1.2 in Equation \@ref(eq:femaleselectivity). 
 
 ```{r ChangeOMSceneario2, warning=F, echo = T, eval = T}
 true_pars$logit_f_alpha_f = logit_general(1.2, TMB_data$sel_alpha_bounds[1], TMB_data$sel_alpha_bounds[2])
 ```
 
 ```{r RecompileTMBForScenario2, echo = F, eval = T, results = 'hide', warning=FALSE, message=FALSE, error = FALSE}
-na_map_fix_alphas = fix_pars(par_list = true_pars, pars_to_exclude = c("logit_survey_alpha_f","logit_f_alpha_f","ln_catch_sd","ln_extra_survey_cv","ln_sigma_r", "logit_proportion_male"))
 ASM_obj <- MakeADFun(TMB_data, true_pars, DLL= "SexDisaggregatedAgeStructuredModel", map = na_map_fix_alphas, checkParameterOrder=T)
 ASM_obj_alt_sex <- MakeADFun(TMB_data_alt, true_pars, DLL= "SexDisaggregatedAgeStructuredModel", map = na_map_fix_alphas, checkParameterOrder=T)
 true_report = ASM_obj$report()
@@ -495,6 +622,9 @@ sel_survey = get_list_obj(est_ls = est_list_alt, object_label = "survey_selectiv
 sel_survey_df = data.frame(sim = factor(sel_survey[,1]), male = sel_survey[,2], female = sel_survey[,3], age = ages)
 sel_fishery = get_list_obj(est_ls = est_list_alt, object_label = "fishery_selectivity")
 sel_fishery_df = data.frame(sim = factor(sel_fishery[,1]), male = sel_fishery[,2], female = sel_fishery[,3], age = ages)
+annual_fs = get_list_obj(est_ls = est_list_alt, object_label = "annual_F")
+colnames(annual_fs) = c("Sim", as.character(TMB_data$years))
+molten_Fs = melt(as.data.frame(annual_fs), id.vars = "Sim", variable.name = "year", value.name = "F")
 
 ## plot selectivities
 male_s_sel = ggplot(data  = sel_survey_df) +
@@ -540,6 +670,15 @@ ggplot() +
 ```
 
 
+```{r runscenario2EM1Fs, warning=F, echo = F, eval = T, fig.cap="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs"}
+## plpt SSBs
+ggplot() +
+  geom_line(data = molten_Fs, aes(x = as.numeric(as.character(year)), y = F, group = Sim)) +
+  geom_line(data = data.frame(year = TMB_data$years, value = true_report$annual_F),aes(x = year, y = value), col = "red", linetype = "dashed", linewidth = 1.2) +
+  ylim(0,NA) +
+  labs(x = "Time", y = "F") +
+  theme_bw()
+```
 
 #### EM 2 (using approach 2) {-}
 ```{r run_scenario_2_EM_2, warning=F, echo = F, eval = T}
@@ -578,6 +717,9 @@ sel_survey = get_list_obj(est_ls = est_list, object_label = "survey_selectivity"
 sel_survey_df = data.frame(sim = factor(sel_survey[,1]), male = sel_survey[,2], female = sel_survey[,3], age = ages)
 sel_fishery = get_list_obj(est_ls = est_list, object_label = "fishery_selectivity")
 sel_fishery_df = data.frame(sim = factor(sel_fishery[,1]), male = sel_fishery[,2], female = sel_fishery[,3], age = ages)
+annual_fs = get_list_obj(est_ls = est_list, object_label = "annual_F")
+colnames(annual_fs) = c("Sim", as.character(TMB_data$years))
+molten_Fs = melt(as.data.frame(annual_fs), id.vars = "Sim", variable.name = "year", value.name = "F")
 
 ## plot selectivities
 male_s_sel = ggplot(data  = sel_survey_df) +
@@ -623,6 +765,15 @@ ggplot() +
 ```
 
 
+```{r runscenario2EM2Fs, warning=F, echo = F, eval = T, fig.cap="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs"}
+## plpt SSBs
+ggplot() +
+  geom_line(data = molten_Fs, aes(x = as.numeric(as.character(year)), y = F, group = Sim)) +
+  geom_line(data = data.frame(year = TMB_data$years, value = true_report$annual_F),aes(x = year, y = value), col = "red", linetype = "dashed", linewidth = 1.2) +
+  ylim(0,NA) +
+  labs(x = "Time", y = "F") +
+  theme_bw()
+```
 #### EM 3 (using approach 1 with female fixed at \(\alpha = 1\)) {-}
 ```{r run_scenario_2_EM_3, warning=F, echo = F, eval = T}
 ##################################
@@ -636,7 +787,7 @@ est_list = list()
 for(sim_iter in 1:n_sims) {
   #if(sim_iter %% 10 == 0)
   #  cat("iter = ", sim_iter, "\n")
-  sim_data = ASM_obj$simulate(complete = T)
+  sim_data = ASM_obj_alt_sex$simulate(complete = T)
   start_pars = ran_start_vals()
   start_pars$logit_survey_alpha_f = logit_general(1, TMB_data$sel_alpha_bounds[1], TMB_data$sel_alpha_bounds[2])
   start_pars$logit_f_alpha_f = logit_general(1, TMB_data$sel_alpha_bounds[1], TMB_data$sel_alpha_bounds[2])
@@ -663,6 +814,9 @@ sel_survey = get_list_obj(est_ls = est_list, object_label = "survey_selectivity"
 sel_survey_df = data.frame(sim = factor(sel_survey[,1]), male = sel_survey[,2], female = sel_survey[,3], age = ages)
 sel_fishery = get_list_obj(est_ls = est_list, object_label = "fishery_selectivity")
 sel_fishery_df = data.frame(sim = factor(sel_fishery[,1]), male = sel_fishery[,2], female = sel_fishery[,3], age = ages)
+annual_fs = get_list_obj(est_ls = est_list, object_label = "annual_F")
+colnames(annual_fs) = c("Sim", as.character(TMB_data$years))
+molten_Fs = melt(as.data.frame(annual_fs), id.vars = "Sim", variable.name = "year", value.name = "F")
 
 ## plot selectivities
 male_s_sel = ggplot(data  = sel_survey_df) +
@@ -708,6 +862,15 @@ ggplot() +
 ```
 
 
+```{r runscenario2EM3Fs, warning=F, echo = F, eval = T, fig.cap="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs"}
+## plpt SSBs
+ggplot() +
+  geom_line(data = molten_Fs, aes(x = as.numeric(as.character(year)), y = F, group = Sim)) +
+  geom_line(data = data.frame(year = TMB_data$years, value = true_report$annual_F),aes(x = year, y = value), col = "red", linetype = "dashed", linewidth = 1.2) +
+  ylim(0,NA) +
+  labs(x = "Time", y = "F") +
+  theme_bw()
+```
 
 
 

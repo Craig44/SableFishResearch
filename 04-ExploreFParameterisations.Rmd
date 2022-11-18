@@ -21,30 +21,24 @@ The relationship between $F$ (Instantaneous fishing mortality) and $U$ exploitat
 
 
 ```{r illustrate_F_vs_U_sim}
-## Params
-ages = 1:20
-R0 = 1000
-M = 0.2
-a50 = 3.4
-ato95 = 2.4
-A = length(ages)
-N_age = vector()
-N_age[1] = R0
-set.seed(123)
-for(age_ndx in 2:A)
-  N_age[age_ndx] = N_age[age_ndx - 1] * exp(-M) * exp(rnorm(1,0,0.5))
-barplot(height = N_age, names = ages)
-# selectivity at age
-S_age = logis(ages, a50, ato95)
-## No selectivity
-u_range = seq(0,0.8,by = 0.02)
-F_range = -log(1 - u_range)
-# 1 - exp(-F_range) # back calculate U
+exploitation_rates = seq(0,0.8,by = 0.02)
+## calculate F given a U
+fishing_mortalites = -log(1 - exploitation_rates)
+## back calculate U given a F
+# 1 - exp(-fishing_mortalites) 
 ```
 
 
 
-```{r illustrateFvsU, fig.fullwidth=T}
+The objective of this simulation
+
+- Is the method efficient i.e., no loss of speed.
+- Is the method numerically stable (No NaNs during optimization), particularly under high fishing pressure
+
+
+
+
+```{r illustrateFvsU, echo = F, eval = T, fig.fullwidth=T, fig.cap="Illustration of how mortality is applied to an age cohort continuously over time (y)."}
 ## the application throught time.
 N_1 = 100
 par(mfrow = c(2,2), mar = c(2,2,2,1), oma = c(3,2,2,0))
@@ -65,7 +59,7 @@ for(i in 1:length(Fs)) {
   if (i > 2)
     axis(side = 1, tick = T, at = c(0,1), labels = c("y", "y+1"), cex.axis = 2)
   if (i == 1)
-    legend('bottomleft', legend = c("Baranov","Discrete"), lwd = 3, col = c("black","red"), cex = 0.8)
+    legend('bottomleft', legend = c("F","U"), lwd = 3, col = c("black","red"), cex = 0.8)
 }
 mtext(side = 1, text = "Time", outer = T, line = 0.7, cex = 1.3)
 mtext(side = 2, text = "N", outer = T, line = -1, cex = 1.3)
@@ -130,7 +124,7 @@ fishery_year_obs = years
 fishery_ages = 1:20
 ```
 
-```{r poptmbobjects, echo = F, eval = T}
+```{r poptmbobjects, echo = F, eval = T, results = 'hide', warning=FALSE, message=FALSE, error = FALSE}
 
 TMB_data = list()
 TMB_data$ages = ages
@@ -217,9 +211,6 @@ ran_start_vals = function(covar = "iid") {
   start_params$ln_catch_sd = log(0.02)
   return(start_params)
 }
-
-```
-```{r buildtmbobjects, echo = T, eval = T}
 ##################################
 ### Build TMB OM with Multinomial
 ##################################
@@ -233,8 +224,6 @@ na_map = fix_pars(par_list = true_pars, pars_to_exclude = c("ln_catch_sd", "tran
 ASM_obj <- MakeADFun(TMB_data, true_pars, DLL= "SimpleAgeStructuredModel", map = na_map)
 true_report = ASM_obj$report()
 ```
-
-
 
 ```{r self_test, echo = T, eval = T}
 ##################################
@@ -268,4 +257,4 @@ ggplot() +
 
 ## Other things to consider {-}
 
-
+## Appendix {-}
