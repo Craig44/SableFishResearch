@@ -181,7 +181,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>4</b> Exploring methods for sex ratios in age and length composition data</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="sexratios.html"><a href="sexratios.html#sexSimulation"><i class="fa fa-check"></i><b>4.1</b> Simulations!!</a>
+<li class="chapter" data-level="4.1" data-path="sexratios.html"><a href="sexratios.html#sexSimulation"><i class="fa fa-check"></i><b>4.1</b> A simple simulation</a>
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="sexratios.html"><a href="sexratios.html#results"><i class="fa fa-check"></i><b>4.1.1</b> Results</a></li>
 <li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#future-research-that-was-not-considered-in-this-simple-simulation"><i class="fa fa-check"></i>Future research that was not considered in this simple simulation</a></li>
@@ -194,6 +194,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#set-up-a-simulation"><i class="fa fa-check"></i>Set up a simulation</a></li>
 <li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#other-things-to-consider"><i class="fa fa-check"></i>Other things to consider</a></li>
+<li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#appendix---hybrid-approach"><i class="fa fa-check"></i>Appendix - Hybrid approach</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>6</b> Tagging data and studies</a>
 <ul>
@@ -240,7 +241,7 @@ div.csl-indent {
 <li><p>Chapter <a href="objectives.html#objectives">2</a> is a list of objectives that we have set or accomplished during this research project. Some of our research cannot be in this book/repo due to the confidential nature of the data. This checklist should include tasks for the wider research</p></li>
 <li><p>Chapter <a href="modeldescription.html#modeldescription">3</a> documents the current stock assessment model and assumptions (work in progress). This first is the first step of the project and helps me get a grasp of data and dynamics that are important</p></li>
 <li><p>Chapter <a href="sexratios.html#sexratios">4</a> explores how to include sex disaggregated composition observations that can include sex ratio information. It conducts a simple simulation to investigate two different approaches than what is currently done in the assessment</p></li>
-<li><p>Chapter <a href="Fexplore.html#Fexplore">5</a> explores how to parameterise fishing mortality. The current approach is to estimate an annual fishing mortality parameter for each gear. I feel slightly uncomfortable about this approach moving towards a spatial model as the number of estimated parameters will explode. This chapter looks at two alternative approaches that either derive fishing mortality estimates using a Newton Raphson solver which is borrowed from the Stock Synthesis “hybrid” approach <span class="citation">(<a href="#ref-methot2013stock" role="doc-biblioref">Methot Jr and Wetzel 2013</a>)</span> and Pope’s discrete approach <span class="citation">(<a href="#ref-pope1972investigation" role="doc-biblioref">Pope 1972</a>)</span> which uses exploitation rates. All of these methods have been used in literature for decades and we don’t wish to identify a “best” methods. The aim is to do a simulation and make sure these two approaches are numerical stability and have good convergence properties under a range of fishing patterns.</p></li>
+<li><p>Chapter <a href="Fexplore.html#Fexplore">5</a> explores how to parameterise fishing mortality. The current approach is to estimate an annual fishing mortality parameter for each gear. I feel slightly uncomfortable about this approach moving towards a spatial model as the number of estimated parameters will explode. This chapter looks at two alternative approaches that either derive fishing mortality estimates using a Newton Raphson solver which is borrowed from the Stock Synthesis “hybrid” approach <span class="citation">(<a href="#ref-methot2013stock" role="doc-biblioref">Methot Jr and Wetzel 2013</a>)</span> and Pope’s discrete approach <span class="citation">(<a href="#ref-pope1972investigation" role="doc-biblioref">Pope 1972</a>)</span> which uses exploitation rates. All of these methods have been applied in the literature for decades. The aim of this chapter is to do a simulation and make sure the considered approaches are efficient and numerically stability under a range of fishing patterns</p></li>
 <li><p>Chapter <a href="tagdata.html#tagdata">6</a> describes the tagging data and how it can be used within a spatial model but also used in a panmictic model for informing population dynamics such as growth.</p></li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TMB)</span>

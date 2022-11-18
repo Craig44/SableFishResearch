@@ -181,7 +181,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>4</b> Exploring methods for sex ratios in age and length composition data</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="sexratios.html"><a href="sexratios.html#sexSimulation"><i class="fa fa-check"></i><b>4.1</b> Simulations!!</a>
+<li class="chapter" data-level="4.1" data-path="sexratios.html"><a href="sexratios.html#sexSimulation"><i class="fa fa-check"></i><b>4.1</b> A simple simulation</a>
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="sexratios.html"><a href="sexratios.html#results"><i class="fa fa-check"></i><b>4.1.1</b> Results</a></li>
 <li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#future-research-that-was-not-considered-in-this-simple-simulation"><i class="fa fa-check"></i>Future research that was not considered in this simple simulation</a></li>
@@ -194,6 +194,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#set-up-a-simulation"><i class="fa fa-check"></i>Set up a simulation</a></li>
 <li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#other-things-to-consider"><i class="fa fa-check"></i>Other things to consider</a></li>
+<li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#appendix---hybrid-approach"><i class="fa fa-check"></i>Appendix - Hybrid approach</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>6</b> Tagging data and studies</a>
 <ul>
@@ -232,7 +233,7 @@ div.csl-indent {
 <h1><span class="header-section-number">Chapter 4</span> Exploring methods for sex ratios in age and length composition data<a href="sexratios.html#sexratios" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>An immediate improvement in the current stock assessment (Chapter <a href="modeldescription.html#modeldescription">3</a>) relates to how sexually disaggregated compositional data are handled. Currently LF’s are separated by sex (needed for the different growths) and age compositional data are aggregated over both sexes. Although LFs are disaggregated by sex and should (in theory) be sufficient to estimate sex specific selectivities. It is not ideal to use LFs to estimate age-based selectivities because older cohorts “smush” into single modes and age information is lost.</p>
 <p>Before developing a spatially explicit model stock assessment model, I wanted to tidy some loose ends that may come back and bite me in the proverbial butt once we explore the spatially sex disaggregated stock assessment model in anger. These things are exponentially more easier to deal with in “simpler” models. My general intention is to drop length data when we have well sampled age data, currently they both go into the model together. For age composition data I want to structure the observations so that there is potential information on sex ratio. The current assessment can be given information on sex ratio for generating model predicted values which is similar to the approach in <span class="citation">Ward et al. (<a href="#ref-ward2019assessing" role="doc-biblioref">2019</a>)</span>. Howver, I personally think this should be dealt within the model.</p>
-<p>I am aware of two approaches for supplying observations that in theory should provide information on sex ratio. The first (approach 1) was taken from Casal2 <span class="citation">(<a href="#ref-doonan2016casal2" role="doc-biblioref">Doonan et al. 2016</a>)</span>. This treats sexed composition data for a year as a single proportion i.e., proportions across all ages and sexes sum to one for each year,</p>
+<p>I am aware of two approaches for supplying observations that in theory should provide information on sex ratio. The first (“Approach 1”) was taken from Casal2 <span class="citation">(<a href="#ref-doonan2016casal2" role="doc-biblioref">Doonan et al. 2016</a>)</span>. This treats sexed composition data for a year as a single proportion i.e., proportions across all ages and sexes sum to one for each year,</p>
 <p><span class="math display">\[
 \boldsymbol{P}^k_{y} = \frac{(C^k_{a,y,1},C^k_{a,y,2})}{\sum_a \sum_s C^k_{a,y,s}}, \quad \sum \boldsymbol{P}^k_{y} = 1
 \]</span>
@@ -241,7 +242,7 @@ where, <span class="math inline">\(C^k_{a,y,1}\)</span> is the catch at age (num
 \boldsymbol{P}^k_{y} \sim Multinomial(\mathbb{E}[\boldsymbol{P}^k_{y}], N^{eff, k}_{y}) \ .
 \]</span>
 where, <span class="math inline">\(N^{eff, k}_{y}\)</span> is the effective sample size for this survey and year.</p>
-<p>The second approach (approach 2) is to treat composition for each sex seperately that is proportions at age or length for a sex will sum to one, but also provide a specific sex ratio observation over all ages or lengths as done in the New Zealand rock lobster stock assessment <span class="citation">(<a href="#ref-webber2021rapid" role="doc-biblioref">Webber, Rudd, and Starr 2021</a>)</span>.</p>
+<p>The second approach (“Approach 2”) is to treat composition for each sex seperately that is proportions at age or length for a sex will sum to one, but also provide a specific sex ratio observation over all ages or lengths as done in the New Zealand rock lobster stock assessment <span class="citation">(<a href="#ref-webber2021rapid" role="doc-biblioref">Webber, Rudd, and Starr 2021</a>)</span>.</p>
 <p><span class="math display">\[
 R^k_{y,s} = \frac{\sum_a C^k_{a,y,s}}{\sum_a \sum_s C^k_{a,y,s}}, \quad  \sum_s R^k_{y,s} = 1
 \]</span>
@@ -259,11 +260,12 @@ and,
 \]</span>
 where, <span class="math inline">\(N^{eff, k}_{y,s}\)</span> is the effective sample size.</p>
 <div id="sexSimulation" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Simulations!!<a href="sexratios.html#sexSimulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">4.1</span> A simple simulation<a href="sexratios.html#sexSimulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To explore the utility of these two approaches we conducted a simple simulation using a sexually disaggregated age-structured model (see Section <a href="sexratios.html#sexSimulation">4.1</a>). The Operating Model (OM) used in the simulation assumed a 50:50 sex ratio during the recruitment process however the OM did assume different growth and selectivity among the sexes.</p>
 <div id="results" class="section level3 hasAnchor" number="4.1.1">
 <h3><span class="header-section-number">4.1.1</span> Results<a href="sexratios.html#results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In summary both approaches resulted in similar estimates in selectivities and SSBs. I prefer Approach 1 as it is a single observation compared with Approach 2 which has two observation types, but this simulation showed at least within the very small assumptions explored here they resulted in similar performance. This was all I was after in order to move forward to the spatial model.</p>
+<p>Another consideration about “Approach 2” is if the selectivity shape differs between sexes i.e., lower age at 50% retention. Then due to the sex ratio being derived by summing numbers over all ages, and the natural exponential decay in successive age-cohorts, selectivies that capture more younger fish will result in higher sex ratios. “Approach 1”</p>
 </div>
 <div id="future-research-that-was-not-considered-in-this-simple-simulation" class="section level3 unnumbered hasAnchor">
 <h3>Future research that was not considered in this simple simulation<a href="sexratios.html#future-research-that-was-not-considered-in-this-simple-simulation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -348,9 +350,10 @@ S^{female}_a = \alpha/(1+19^{(a_{50}-a)/a_{to95})})
       \tag{4.2}
 \end{equation}\]</span></p>
 <p>Although this scenario assumed both male and female had the same max selectivity I wanted to see the effect of estimating this additional parameter.</p>
+<p>A third EM (EM3) was also explored, this structured compositional data using Approach 1 but fixed the female <span class="math inline">\(\alpha\)</span> = 1 in Equation <a href="sexratios.html#eq:femaleselectivity">(4.2)</a>. This is often the default approach. For scenario 1 this should be the best performing EM as it has the <span class="math inline">\(\alpha\)</span> set at the values of the OM.</p>
 <div id="em-1-using-approach-1" class="section level4 unnumbered hasAnchor">
 <h4>EM 1 (using approach 1)<a href="sexratios.html#em-1-using-approach-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  2.148523e-06</code></pre>
+<pre><code>## max gradient from 100 simualtions =  2.377173e-06</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_1_EM_1-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario1EM1ssb"></span>
 <img src="_main_files/figure-html/runscenario1EM1ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
@@ -358,53 +361,100 @@ S^{female}_a = \alpha/(1+19^{(a_{50}-a)/a_{to95})})
 Figure 4.2: Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs
 </p>
 </div>
+<div class="figure"><span style="display:block;" id="fig:runscenario1EM1Fs"></span>
+<img src="_main_files/figure-html/runscenario1EM1Fs-1.png" alt="Annual fishing mortality, red line OM (truth), black lines are the estimated values form EMs" width="672" />
+<p class="caption">
+Figure 4.3: Annual fishing mortality, red line OM (truth), black lines are the estimated values form EMs
+</p>
+</div>
 </div>
 <div id="em-2-using-approach-2" class="section level4 unnumbered hasAnchor">
 <h4>EM 2 (using approach 2)<a href="sexratios.html#em-2-using-approach-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  0.01003628</code></pre>
+<pre><code>## max gradient from 100 simualtions =  1.50488e-05</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_1_EM_2-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario1EM2ssb"></span>
 <img src="_main_files/figure-html/runscenario1EM2ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
 <p class="caption">
-Figure 4.3: Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs
+Figure 4.4: Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:runscenario1EM2Fs"></span>
+<img src="_main_files/figure-html/runscenario1EM2Fs-1.png" alt="Annual fishing mortality, red line OM (truth), black lines are the estimated values form EMs" width="672" />
+<p class="caption">
+Figure 4.5: Annual fishing mortality, red line OM (truth), black lines are the estimated values form EMs
+</p>
+</div>
+</div>
+<div id="em-3-using-approach-1-with-female-fixed-at-alpha-1" class="section level4 unnumbered hasAnchor">
+<h4>EM 3 (using approach 1 with female fixed at <span class="math inline">\(\alpha = 1\)</span>)<a href="sexratios.html#em-3-using-approach-1-with-female-fixed-at-alpha-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>## max gradient from 100 simualtions =  7.474285e-06</code></pre>
+<p><img src="_main_files/figure-html/run_scenario_1_EM_3-1.png" width="672" /></p>
+<div class="figure"><span style="display:block;" id="fig:runscenario1EM3ssb"></span>
+<img src="_main_files/figure-html/runscenario1EM3ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
+<p class="caption">
+Figure 4.6: Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:runscenario1EM3Fs"></span>
+<img src="_main_files/figure-html/runscenario1EM3Fs-1.png" alt="Annual fishing mortality, red line OM (truth), black lines are the estimated values form EMs" width="672" />
+<p class="caption">
+Figure 4.7: Annual fishing mortality, red line OM (truth), black lines are the estimated values form EMs
 </p>
 </div>
 </div>
 </div>
 <div id="scenario-2" class="section level3 hasAnchor" number="4.1.4">
 <h3><span class="header-section-number">4.1.4</span> Scenario 2<a href="sexratios.html#scenario-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The second scenario assumed sex ratio was 50:50 at recruitment and females were more selective than males to the fishery. This was done by setting = 1.2 in Equation <a href="sexratios.html#eq:femaleselectivity">(4.2)</a>. A third EM (EM3) was introduced for Approach 1, which fixed the female = 1. This is often the default approach. This is a side interest on biases when assessments assume equal selection between males and females when in fact there is selectivity difference.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="sexratios.html#cb5-1" aria-hidden="true" tabindex="-1"></a>true_pars<span class="sc">$</span>logit_f_alpha_f <span class="ot">=</span> <span class="fu">logit_general</span>(<span class="fl">1.2</span>, TMB_data<span class="sc">$</span>sel_alpha_bounds[<span class="dv">1</span>], TMB_data<span class="sc">$</span>sel_alpha_bounds[<span class="dv">2</span>])</span></code></pre></div>
+<p>The second scenario assumed sex ratio was 50:50 at recruitment and females were more selective than males to the fishery. This was done by setting <span class="math inline">\(\alpha\)</span> = 1.2 in Equation <a href="sexratios.html#eq:femaleselectivity">(4.2)</a>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="sexratios.html#cb6-1" aria-hidden="true" tabindex="-1"></a>true_pars<span class="sc">$</span>logit_f_alpha_f <span class="ot">=</span> <span class="fu">logit_general</span>(<span class="fl">1.2</span>, TMB_data<span class="sc">$</span>sel_alpha_bounds[<span class="dv">1</span>], TMB_data<span class="sc">$</span>sel_alpha_bounds[<span class="dv">2</span>])</span></code></pre></div>
 <div id="em-1-using-approach-1-1" class="section level4 unnumbered hasAnchor">
 <h4>EM 1 (using approach 1)<a href="sexratios.html#em-1-using-approach-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  0.09063815</code></pre>
+<pre><code>## max gradient from 100 simualtions =  1.543505e-06</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_2_EM_1-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario2EM1ssb"></span>
 <img src="_main_files/figure-html/runscenario2EM1ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
 <p class="caption">
-Figure 4.4: Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs
+Figure 4.8: Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:runscenario2EM1Fs"></span>
+<img src="_main_files/figure-html/runscenario2EM1Fs-1.png" alt="Annual fishing mortality, red line OM (truth), black lines are the estimated values form EMs" width="672" />
+<p class="caption">
+Figure 4.9: Annual fishing mortality, red line OM (truth), black lines are the estimated values form EMs
 </p>
 </div>
 </div>
 <div id="em-2-using-approach-2-1" class="section level4 unnumbered hasAnchor">
 <h4>EM 2 (using approach 2)<a href="sexratios.html#em-2-using-approach-2-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  1.558348e-05</code></pre>
+<pre><code>## max gradient from 100 simualtions =  1.922348e-05</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_2_EM_2-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario2EM2ssb"></span>
 <img src="_main_files/figure-html/runscenario2EM2ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
 <p class="caption">
-Figure 4.5: Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs
+Figure 4.10: Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:runscenario2EM2Fs"></span>
+<img src="_main_files/figure-html/runscenario2EM2Fs-1.png" alt="Annual fishing mortality, red line OM (truth), black lines are the estimated values form EMs" width="672" />
+<p class="caption">
+Figure 4.11: Annual fishing mortality, red line OM (truth), black lines are the estimated values form EMs
 </p>
 </div>
 </div>
-<div id="em-3-using-approach-1-with-female-fixed-at-alpha-1" class="section level4 unnumbered hasAnchor">
-<h4>EM 3 (using approach 1 with female fixed at <span class="math inline">\(\alpha = 1\)</span>)<a href="sexratios.html#em-3-using-approach-1-with-female-fixed-at-alpha-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  1.886556e-06</code></pre>
+<div id="em-3-using-approach-1-with-female-fixed-at-alpha-1-1" class="section level4 unnumbered hasAnchor">
+<h4>EM 3 (using approach 1 with female fixed at <span class="math inline">\(\alpha = 1\)</span>)<a href="sexratios.html#em-3-using-approach-1-with-female-fixed-at-alpha-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>## max gradient from 100 simualtions =  3.283357e-06</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_2_EM_3-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario2EM3ssb"></span>
 <img src="_main_files/figure-html/runscenario2EM3ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
 <p class="caption">
-Figure 4.6: Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs
+Figure 4.12: Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:runscenario2EM3Fs"></span>
+<img src="_main_files/figure-html/runscenario2EM3Fs-1.png" alt="Annual fishing mortality, red line OM (truth), black lines are the estimated values form EMs" width="672" />
+<p class="caption">
+Figure 4.13: Annual fishing mortality, red line OM (truth), black lines are the estimated values form EMs
 </p>
 </div>
 
