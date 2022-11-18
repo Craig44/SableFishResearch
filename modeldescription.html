@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-11-17" />
+<meta name="date" content="2022-11-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -162,20 +162,20 @@ div.csl-indent {
 <li class="chapter" data-level="2" data-path="objectives.html"><a href="objectives.html"><i class="fa fa-check"></i><b>2</b> A list of objectives/milestones that we have set along the project life</a></li>
 <li class="chapter" data-level="3" data-path="modeldescription.html"><a href="modeldescription.html"><i class="fa fa-check"></i><b>3</b> Current Stock assessment model</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="modeldescription.html"><a href="modeldescription.html#symbols"><i class="fa fa-check"></i><b>3.1</b> Symbol Notation</a></li>
-<li class="chapter" data-level="3.2" data-path="modeldescription.html"><a href="modeldescription.html#modelequations"><i class="fa fa-check"></i><b>3.2</b> Process equations</a>
+<li class="chapter" data-level="3.1" data-path="modeldescription.html"><a href="modeldescription.html#modelequations"><i class="fa fa-check"></i><b>3.1</b> Process equations</a>
 <ul>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#initialisation-gleft.right"><i class="fa fa-check"></i>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#population-dynamics-fleft.right"><i class="fa fa-check"></i>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#determining-selectivities-for-fisheries-and-surveys"><i class="fa fa-check"></i>Determining selectivities for fisheries and surveys</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="modeldescription.html"><a href="modeldescription.html#observationsection"><i class="fa fa-check"></i><b>3.3</b> Observation equations</a>
+<li class="chapter" data-level="3.2" data-path="modeldescription.html"><a href="modeldescription.html#observationsection"><i class="fa fa-check"></i><b>3.2</b> Observation equations</a>
 <ul>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-age"><i class="fa fa-check"></i>Catch at age</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#relative-abundance-indices"><i class="fa fa-check"></i>Relative abundance indices</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-length"><i class="fa fa-check"></i>Catch at length</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#observations-for-fisheries-and-surveys"><i class="fa fa-check"></i>Observations for fisheries and surveys</a></li>
 </ul></li>
+<li class="chapter" data-level="3.3" data-path="modeldescription.html"><a href="modeldescription.html#symbols"><i class="fa fa-check"></i><b>3.3</b> Symbol Notation</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#inference"><i class="fa fa-check"></i>Inference</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#todo"><i class="fa fa-check"></i>TODO</a></li>
 </ul></li>
@@ -200,6 +200,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#simulation-test-the-lep-method"><i class="fa fa-check"></i>Simulation test the “LEP” method</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#next-steps"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="refpoints.html"><a href="refpoints.html"><i class="fa fa-check"></i><b>7</b> Review/summarise reference points</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment" target="blank">NOAA Website</a></li>
@@ -232,15 +233,261 @@ div.csl-indent {
   \end{cases}
   \tag{3.1}
 \end{equation}\]</span>
-where, <span class="math inline">\(g(.)\)</span> is the function describing initial conditions for the partition and <span class="math inline">\(f(.)\)</span> is the function that applies populations dyanmics each year i.e., birth, death, growth and migration. See Section <a href="modeldescription.html#symbols">3.1</a> &amp; <a href="modeldescription.html#modelequations">3.2</a> for a detailed description of <span class="math inline">\(g(.)\)</span> and <span class="math inline">\(f(.)\)</span> and <span class="math inline">\(\boldsymbol{\theta}\)</span> is the set of estimable (not all are estimated) parameters.</p>
+where, <span class="math inline">\(g(.)\)</span> is the function describing initial conditions for the partition and <span class="math inline">\(f(.)\)</span> is the function that applies populations dyanmics each year i.e., birth, death, growth and migration. See Section <a href="modeldescription.html#symbols">3.3</a> &amp; <a href="modeldescription.html#modelequations">3.1</a> for a detailed description of <span class="math inline">\(g(.)\)</span> and <span class="math inline">\(f(.)\)</span> and <span class="math inline">\(\boldsymbol{\theta}\)</span> is the set of estimable (not all are estimated) parameters.</p>
 <p>Maximum Likelihood Estimates (MLE) for estimated parameters <span class="math inline">\(\widehat{\boldsymbol{\theta}}_{MLE}\)</span> are evaluated,
 <span class="math display" id="eq:observationmodel">\[\begin{equation}
     \widehat{\boldsymbol{\theta}}_{MLE} = \underset{\boldsymbol{\theta}}{\arg\max} \left( L\left(\boldsymbol{\theta} | \boldsymbol{y^{obs}}\right) \right)
       \tag{3.2}
 \end{equation}\]</span>
-where, <span class="math inline">\(\boldsymbol{y^{obs}}\)</span> is a set of observations and <span class="math inline">\(L\left( . \right)\)</span> is an objective function that is made up of priors/penalties and log-likelihood. See Section <a href="modeldescription.html#observationsection">3.3</a></p>
-<div id="symbols" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Symbol Notation<a href="modeldescription.html#symbols" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+where, <span class="math inline">\(\boldsymbol{y^{obs}}\)</span> is a set of observations and <span class="math inline">\(L\left( . \right)\)</span> is an objective function that is made up of priors/penalties and log-likelihood. See Section <a href="modeldescription.html#observationsection">3.2</a></p>
+<div id="modelequations" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Process equations<a href="modeldescription.html#modelequations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="initialisation-gleft.right" class="section level3 unnumbered hasAnchor">
+<h3>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)<a href="modeldescription.html#initialisation-gleft.right" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display">\[\begin{align*}
+N_{a,1,s} =
+\begin{cases}
+R_1, &amp; a = a_1\\
+\exp\bigg( \mu_r + \tau_{a_1 - a + 1}\bigg) \exp-\bigg( a - a_1\bigg) \bigg( M + F_{hist} * \mu_{LL} * S^{LL}_{a,1}\bigg), &amp; a_0 &lt; a &lt; a_+\\
+\exp( \mu_r) \exp-( a - 1) ( M + F_{hist} * \mu_{LL} * S^{LL}_{a - 1,1})(1 - \exp( M + F_{hist} * \mu_{LL} * S^{LL}_{a - 1,1}))^{-1}, &amp;  a = a_+
+\end{cases}
+\end{align*}\]</span></p>
+</div>
+<div id="population-dynamics-fleft.right" class="section level3 unnumbered hasAnchor">
+<h3>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)<a href="modeldescription.html#population-dynamics-fleft.right" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The assessment assumes a closed population that is only effected by mortality (natural and fishing), recruitment and growth. Mortality is applied assuming</p>
+<p><span class="math display">\[
+Z_{a,y,s} = M + \sum_g F^g_{y} S^g_{a,y,s}
+\]</span>
+where, <span class="math inline">\(S^g_{a,y,s}\)</span> is the fishery selectivity and <span class="math inline">\(F^g_{y}\)</span> is the annual estimated fishing mortality. The annual cycle follows,</p>
+<p><span class="math display">\[\begin{align*}
+N_{a,y,s} =
+\begin{cases}
+p^s_{y} R_y, &amp; a = a_1\\
+N_{a - 1,y - 1,s} \times
+\exp\bigg( -Z_{a - 1,y - 1,s} \bigg), &amp; a_0 &lt; a &lt; a_+\\
+\exp\bigg( -Z_{a - 1,y - 1,s} \bigg) + \exp\bigg( -Z_{a,y - 1,s} \bigg), &amp;  a = a_+
+\end{cases}
+\end{align*}\]</span>
+where,
+<span class="math display">\[
+R_y = \exp\{\mu_r + \tau_y + 0.5\sigma_R^2\}
+\]</span></p>
+</div>
+<div id="determining-selectivities-for-fisheries-and-surveys" class="section level3 unnumbered hasAnchor">
+<h3>Determining selectivities for fisheries and surveys<a href="modeldescription.html#determining-selectivities-for-fisheries-and-surveys" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The ADMB model has a hard coded number of selectivities. Some of them relate to changes in the fishery and so represent time-varying blocks. We want to spell these out and simplify for the TMB model. There are nine selectivities labelled <code>fish1</code>, <code>fish2</code>, <code>fish3</code>, <code>fish4</code>, <code>fish5</code>, <code>srv1</code>, <code>srv2</code> and <code>srv10</code>.</p>
+<table>
+<colgroup>
+<col width="27%" />
+<col width="72%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>label</th>
+<th>Selectivity description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>fish1</code></td>
+<td>Longline selectivity from 1960-1994</td>
+</tr>
+<tr class="even">
+<td><code>fish2</code></td>
+<td>Not sure if this is used, maybe this is used for <code>srv6</code>?</td>
+</tr>
+<tr class="odd">
+<td><code>fish3</code></td>
+<td>Trawl selectivity from 1960 - <span class="math inline">\(T\)</span></td>
+</tr>
+<tr class="even">
+<td><code>fish4</code></td>
+<td>Longline selectivity from 1995 -<span class="math inline">\(\ IFQ_y\)</span> (<span class="math inline">\(IFQ_y\)</span> can = <span class="math inline">\(T\)</span></td>
+</tr>
+<tr class="odd">
+<td><code>fish5</code></td>
+<td>Longline selectivity from <span class="math inline">\(IFQ_y \ - \ T\)</span> if there is post IFQ block</td>
+</tr>
+<tr class="even">
+<td><code>srv1</code></td>
+<td>Domestic Longline survey selectivity</td>
+</tr>
+<tr class="odd">
+<td><code>srv2</code></td>
+<td>Japanese Longline survey selectivity</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="observationsection" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Observation equations<a href="modeldescription.html#observationsection" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Three are three observational types in the current Sablefish stock assessment
+- Relative abundance indices
+- Age composition (aggregated over sex)
+- Length composition (disaggregated by sex)</p>
+<p>These three observation types come from both fishery dependent i.e., observer programs and CPUE and fishery independent i.e., research surveys.</p>
+<div id="catch-at-age" class="section level3 unnumbered hasAnchor">
+<h3>Catch at age<a href="modeldescription.html#catch-at-age" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Fishery dependent catch at age observations for gear type <span class="math inline">\(g\)</span> denoted by <span class="math inline">\(\boldsymbol{C^g}_{a,y,s}\)</span> are calculated as follows</p>
+<p><span class="math display" id="eq:catchatage">\[\begin{equation}
+  \boldsymbol{C^g}_{a,y,s} = \frac{F^g_{a,y,s}}{Z_{a,y,s}}   N_{a,y,s} \left(1 - S_{a,y,s} \right)
+  \tag{3.3}
+\end{equation}\]</span>
+Currently all age observations are sex aggregated which means the model expected values before applying ageing error is
+<span class="math display">\[
+  \boldsymbol{C^g}_{a,y} = 0.5 \sum_s \frac{\boldsymbol{C^g}_{a,y,s}}{\sum_a\boldsymbol{C^g}_{a,y,s}}
+\]</span>
+why the 0.5? should be omitted going forward. Ageing error is then incorporated and the values are normalized so that they are proportions, before being passed to the multinomial log-likelihood function.</p>
+<p>Survey age composition is similar but instead of being a function of <span class="math inline">\(F\)</span> it is calculated at the beginning of the year. For survey <span class="math inline">\(k\)</span> the numbers at age are denoted by <span class="math inline">\(\boldsymbol{C^k}_{a,y}\)</span> and calculated following
+<span class="math display" id="eq:surveyage">\[\begin{equation}
+  \boldsymbol{C^k}_{a,y} = p^s N_{a,y,s} S^k_{y,a,s}
+  \tag{3.4}
+\end{equation}\]</span></p>
+<p>I am not sure exactly what the timing of these surveys are, but do we need to account for som mid-year mortality? or changes in timing of the survey? if so we could easily replace
+<span class="math display">\[
+N_{a,y,s}
+\]</span>
+with
+<span class="math display">\[
+N_{a,y,s} \exp\{-p^k_y Z_{a,y,s}\}
+\]</span>
+where,<span class="math inline">\(p^k_y\)</span> is the proportion of mortality that we want to account for in year <span class="math inline">\(y\)</span> for survey <span class="math inline">\(k\)</span>.</p>
+<p>The survey numbers at age are then adjusted for ageing error and normalised so they sum to one for each year.</p>
+</div>
+<div id="relative-abundance-indices" class="section level3 unnumbered hasAnchor">
+<h3>Relative abundance indices<a href="modeldescription.html#relative-abundance-indices" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display" id="eq:relativeindex">\[\begin{equation}
+  \widehat{I}^g_{y} = \sum_s\sum_a p^s N_{a,y,s} \exp \{-0.5 Z_{a,y,s}\} S^g_{y,a,s} \bar{w}_{a,y,s}
+  \tag{3.5}
+\end{equation}\]</span>
+where, <span class="math inline">\(\bar{w}_{a,y,s}\)</span> is mean weight at age, this can be omitted if the observation is in numbers i.e., abundance instead of biomass and <span class="math inline">\(p^s\)</span> is the proportion for each sex. This is currently a user input, but should be dealt within the model either as having different sex selectivities or through the sex ratio of recruitment.</p>
+<p>A list of slight improvements</p>
+<ul>
+<li>change how sex ratio is handled</li>
+<li>fishery dependent abundance indices i.e., CPUE change <span class="math inline">\(N_{a,y,s} \exp \{-0.5 Z_{a,y,s}\}\)</span> with <span class="math inline">\(\boldsymbol{C^g}_{a,y,s}\)</span> which is calculated in the catch at age observations.</li>
+</ul>
+</div>
+<div id="catch-at-length" class="section level3 unnumbered hasAnchor">
+<h3>Catch at length<a href="modeldescription.html#catch-at-length" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For each year that has a length frequency observation, numbers at length denoted by <span class="math inline">\(\boldsymbol{C^l}_{y,s} = (C^l_{1,y,s}, \dots, C^l_{n_l,y,s})^T\)</span> (dimension of <span class="math inline">\(\boldsymbol{C^l}_{y,s}\)</span> is <span class="math inline">\(n_l \ \times \ 1\)</span>) were calculated for each sex. This involved multiplying the catch at age (see above for how it is calculated) through an age-length transition matrix denoted by <span class="math inline">\(\boldsymbol{A}^l_{y,s}\)</span> (dimensions of <span class="math inline">\(\boldsymbol{A}^l_{y,s}\)</span> are <span class="math inline">\(n_a \ \times \ n_l\)</span> and its rows must sum to 1). The calculation follows Equation <a href="modeldescription.html#eq:agelengthtransition">(3.6)</a>,</p>
+<p><span class="math display" id="eq:agelengthtransition">\[\begin{equation}
+  \boldsymbol{C^l}_{y,s} =  \left(\boldsymbol{A}^l_{y,s} \right)^T \ \times \ \boldsymbol{C_{y,s}}
+  \tag{3.6}
+\end{equation}\]</span>
+where, <span class="math inline">\(\boldsymbol{C_{y,s}}\)</span> is a column vector of numbers at age (dimension <span class="math inline">\(n_a \ \times \ 1\)</span>) at the beginning of year <span class="math inline">\(y\)</span> for sex <span class="math inline">\(s\)</span>.</p>
+</div>
+<div id="observations-for-fisheries-and-surveys" class="section level3 unnumbered hasAnchor">
+<h3>Observations for fisheries and surveys<a href="modeldescription.html#observations-for-fisheries-and-surveys" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="27%" />
+<col width="72%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>label</th>
+<th>Relative Abundance description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>srv1</code></td>
+<td>Biomass domestic longline survey uses both <code>srv1_sel</code> and <code>srv10_sel</code></td>
+</tr>
+<tr class="even">
+<td><code>srv3</code></td>
+<td>Abundance domestic longline survey uses both <code>srv1_sel</code> and <code>srv10_sel</code></td>
+</tr>
+<tr class="odd">
+<td><code>srv2</code></td>
+<td>Biomass survey uses both <code>srv2_sel</code> and <code>srv9_sel</code></td>
+</tr>
+<tr class="even">
+<td><code>srv4</code></td>
+<td>Abundance survey uses both <code>srv2_sel</code> and <code>srv9_sel</code></td>
+</tr>
+<tr class="odd">
+<td><code>srv5</code></td>
+<td>Longline fishery CPUE <code>fish1_sel</code>, <code>fish4_sel</code>, <code>fish5_sel</code></td>
+</tr>
+<tr class="even">
+<td><code>srv6</code></td>
+<td>Japanese LL fishery CPUE</td>
+</tr>
+<tr class="odd">
+<td><code>srv7</code></td>
+<td>NMFS bottom trawl survey (currently GOA only; fit in model)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col width="27%" />
+<col width="72%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>label</th>
+<th>Composition description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ac_fish1</code></td>
+<td>Longline Fishery Age Comp (sex aggregated)</td>
+</tr>
+<tr class="even">
+<td><code>sc_fish1</code></td>
+<td>Longline Fishery LF (sex dis-aggregrated)</td>
+</tr>
+<tr class="odd">
+<td><code>sc_fish3</code></td>
+<td>Trawl Fishery LF (sex disaggregrated)</td>
+</tr>
+<tr class="even">
+<td><code>sc_fish2</code></td>
+<td>LF for japaneses Longline fishery (sex aggregrated) (basically a survey now)</td>
+</tr>
+<tr class="odd">
+<td><code>sc_fish4</code></td>
+<td>LF for japaneses Longline fishery (sex aggregrated) (basically a survey now)</td>
+</tr>
+<tr class="even">
+<td><code>fish_size</code></td>
+<td>LF From japaneses trawl survey? (sex aggregrated)</td>
+</tr>
+<tr class="odd">
+<td><code>ac_srv1</code></td>
+<td>Domestic Longline Survey AF (sex aggregated)</td>
+</tr>
+<tr class="even">
+<td><code>sc_srv1</code></td>
+<td>Domestic Longline Survey LF (sex disaggregrated)</td>
+</tr>
+<tr class="odd">
+<td><code>ac_srv2</code></td>
+<td>Japanese Longline Survey AF (sex aggregated)</td>
+</tr>
+<tr class="even">
+<td><code>sc_srv2</code></td>
+<td>Japanese Longline Survey LF (sex disaggregrated)</td>
+</tr>
+<tr class="odd">
+<td><code>ac_srv7</code></td>
+<td>NMFS bottom trawl survey AF (sex aggregated)</td>
+</tr>
+<tr class="even">
+<td><code>sc_srv7</code></td>
+<td>NMFS bottom trawl survey LF (sex disaggregrated)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="symbols" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Symbol Notation<a href="modeldescription.html#symbols" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <table>
 <colgroup>
 <col width="27%" />
@@ -415,252 +662,6 @@ where, <span class="math inline">\(\boldsymbol{y^{obs}}\)</span> is a set of obs
 </tr>
 </tbody>
 </table>
-</div>
-<div id="modelequations" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Process equations<a href="modeldescription.html#modelequations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="initialisation-gleft.right" class="section level3 unnumbered hasAnchor">
-<h3>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)<a href="modeldescription.html#initialisation-gleft.right" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><span class="math display">\[\begin{align*}
-N_{a,1,s} =
-\begin{cases}
-R_1, &amp; a = a_1\\
-\exp\bigg( \mu_r + \tau_{a_1 - a + 1}\bigg) \exp-\bigg( a - a_1\bigg) \bigg( M + F_{hist} * \mu_{LL} * S^{LL}_{a,1}\bigg), &amp; a_0 &lt; a &lt; a_+\\
-\exp( \mu_r) \exp-( a - 1) ( M + F_{hist} * \mu_{LL} * S^{LL}_{a - 1,1})(1 - \exp( M + F_{hist} * \mu_{LL} * S^{LL}_{a - 1,1}))^{-1}, &amp;  a = a_+
-\end{cases}
-\end{align*}\]</span></p>
-</div>
-<div id="population-dynamics-fleft.right" class="section level3 unnumbered hasAnchor">
-<h3>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)<a href="modeldescription.html#population-dynamics-fleft.right" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The assessment assumes a closed population that is only effected by mortality (natural and fishing), recruitment and growth. Mortality is applied assuming</p>
-<p><span class="math display">\[
-Z_{a,y,s} = M + \sum_g F^g_{y} S^g_{a,y,s}
-\]</span>
-where, <span class="math inline">\(S^g_{a,y,s}\)</span> is the fishery selectivity and <span class="math inline">\(F^g_{y}\)</span> is the annual estimated fishing mortality. The annual cycle follows,</p>
-<p><span class="math display">\[\begin{align*}
-N_{a,y,s} =
-\begin{cases}
-p^s_{y} R_y, &amp; a = a_1\\
-N_{a - 1,y - 1,s} \times
-\exp\bigg( -Z_{a - 1,y - 1,s} \bigg), &amp; a_0 &lt; a &lt; a_+\\
-\exp\bigg( -Z_{a - 1,y - 1,s} \bigg) + \exp\bigg( -Z_{a,y - 1,s} \bigg), &amp;  a = a_+
-\end{cases}
-\end{align*}\]</span>
-where,
-<span class="math display">\[
-R_y = \exp\{\mu_r + \tau_y + 0.5\sigma_R^2\}
-\]</span></p>
-</div>
-<div id="determining-selectivities-for-fisheries-and-surveys" class="section level3 unnumbered hasAnchor">
-<h3>Determining selectivities for fisheries and surveys<a href="modeldescription.html#determining-selectivities-for-fisheries-and-surveys" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The ADMB model has a hard coded number of selectivities. Some of them relate to changes in the fishery and so represent time-varying blocks. We want to spell these out and simplify for the TMB model. There are nine selectivities labelled <code>fish1</code>, <code>fish2</code>, <code>fish3</code>, <code>fish4</code>, <code>fish5</code>, <code>srv1</code>, <code>srv2</code> and <code>srv10</code>.</p>
-<table>
-<colgroup>
-<col width="27%" />
-<col width="72%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>label</th>
-<th>Selectivity description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>fish1</code></td>
-<td>Longline selectivity from 1960-1994</td>
-</tr>
-<tr class="even">
-<td><code>fish2</code></td>
-<td>Not sure if this is used, maybe this is used for <code>srv6</code>?</td>
-</tr>
-<tr class="odd">
-<td><code>fish3</code></td>
-<td>Trawl selectivity from 1960 - <span class="math inline">\(T\)</span></td>
-</tr>
-<tr class="even">
-<td><code>fish4</code></td>
-<td>Longline selectivity from 1995 -<span class="math inline">\(\ IFQ_y\)</span> (<span class="math inline">\(IFQ_y\)</span> can = <span class="math inline">\(T\)</span></td>
-</tr>
-<tr class="odd">
-<td><code>fish5</code></td>
-<td>Longline selectivity from <span class="math inline">\(IFQ_y \ - \ T\)</span> if there is post IFQ block</td>
-</tr>
-<tr class="even">
-<td><code>srv1</code></td>
-<td>Domestic Longline survey selectivity</td>
-</tr>
-<tr class="odd">
-<td><code>srv2</code></td>
-<td>Japanese Longline survey selectivity</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="observationsection" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Observation equations<a href="modeldescription.html#observationsection" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Three are three observational types in the current Sablefish stock assessment
-- Relative abundance indices
-- Age composition (aggregated over sex)
-- Length composition (disaggregated by sex)</p>
-<p>These three observation types come from both fishery dependent i.e., observer programs and CPUE and fishery independent i.e., research surveys.</p>
-<div id="catch-at-age" class="section level3 unnumbered hasAnchor">
-<h3>Catch at age<a href="modeldescription.html#catch-at-age" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Fishery dependent catch at age observations for gear type <span class="math inline">\(g\)</span> denoted by <span class="math inline">\(\boldsymbol{C^g}_{a,y,s}\)</span> are calculated as follows</p>
-<p><span class="math display" id="eq:catchatage">\[\begin{equation}
-  \boldsymbol{C^g}_{a,y,s} = \frac{F^g_{a,y,s}}{Z_{a,y,s}}   N_{a,y,s} \left(1 - S_{a,y,s} \right)
-  \tag{3.3}
-\end{equation}\]</span>
-Currently all age observations are sex aggregated which means the model expected values before applying ageing error is
-<span class="math display">\[
-  \boldsymbol{C^g}_{a,y} = 0.5 \sum_s \frac{\boldsymbol{C^g}_{a,y,s}}{\sum_a\boldsymbol{C^g}_{a,y,s}}
-\]</span>
-why the 0.5? should be omitted going forward. Ageing error is then incorporated and the values are normalized so that they are proportions, before being passed to the multinomial log-likelihood function.</p>
-<p>Survey age composition is similar but instead of being a function of <span class="math inline">\(F\)</span> it is calculated at the beginning of the year. For survey <span class="math inline">\(k\)</span> the numbers at age are denoted by <span class="math inline">\(\boldsymbol{C^k}_{a,y}\)</span> and calculated following
-<span class="math display" id="eq:surveyage">\[\begin{equation}
-  \boldsymbol{C^k}_{a,y} = p^s N_{a,y,s} S^k_{y,a,s}
-  \tag{3.4}
-\end{equation}\]</span></p>
-<p>I am not sure exactly what the timing of these surveys are, but do we need to account for som mid-year mortality? or changes in timing of the survey? if so we could easily replace
-<span class="math display">\[
-N_{a,y,s}
-\]</span>
-with
-<span class="math display">\[
-N_{a,y,s} \exp\{-p^k_y Z_{a,y,s}\}
-\]</span>
-where,<span class="math inline">\(p^k_y\)</span> is the proportion of mortality that we want to account for in year <span class="math inline">\(y\)</span> for survey <span class="math inline">\(k\)</span>.</p>
-<p>The survey numbers at age are then adjusted for ageing error and normalised so they sum to one for each year.</p>
-</div>
-<div id="relative-abundance-indices" class="section level3 unnumbered hasAnchor">
-<h3>Relative abundance indices<a href="modeldescription.html#relative-abundance-indices" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><span class="math display" id="eq:relativeindex">\[\begin{equation}
-  \widehat{I}^g_{y} = \sum_s\sum_a p^s N_{a,y,s} \exp \{-0.5 Z_{a,y,s}\} S^g_{y,a,s} \bar{w}_{a,y,s}
-  \tag{3.5}
-\end{equation}\]</span>
-where, <span class="math inline">\(\bar{w}_{a,y,s}\)</span> is mean weight at age, this can be omitted if the observation is in numbers i.e., abundance instead of biomass and <span class="math inline">\(p^s\)</span> is the proportion for each sex. This is currently a user input, but should be dealt within the model either as having different sex selectivities or through the sex ratio of recruitment.</p>
-<p>A list of slight improvements</p>
-<ul>
-<li>change how sex ratio is handled</li>
-<li>fishery dependent abundance indices i.e., CPUE change <span class="math inline">\(N_{a,y,s} \exp \{-0.5 Z_{a,y,s}\}\)</span> with <span class="math inline">\(\boldsymbol{C^g}_{a,y,s}\)</span> which is calculated in the catch at age observations.</li>
-</ul>
-</div>
-<div id="catch-at-length" class="section level3 unnumbered hasAnchor">
-<h3>Catch at length<a href="modeldescription.html#catch-at-length" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>For each year that has a length frequency observation, numbers at length denoted by <span class="math inline">\(\boldsymbol{C^l}_{y,s} = (C^l_{1,y,s}, \dots, C^l_{n_l,y,s})^T\)</span> (dimension of <span class="math inline">\(\boldsymbol{C^l}_{y,s}\)</span> is <span class="math inline">\(n_l \ \times \ 1\)</span>) were calculated for each sex. This involved multiplying the catch at age (see above for how it is calculated) through an age-length transition matrix denoted by <span class="math inline">\(\boldsymbol{A}^l_{y,s}\)</span> (dimensions of <span class="math inline">\(\boldsymbol{A}^l_{y,s}\)</span> are <span class="math inline">\(n_a \ \times \ n_l\)</span> and its rows must sum to 1). The calculation follows Equation <a href="modeldescription.html#eq:agelengthtransition">(3.6)</a>,</p>
-<p><span class="math display" id="eq:agelengthtransition">\[\begin{equation}
-  \boldsymbol{C^l}_{y,s} =  \left(\boldsymbol{A}^l_{y,s} \right)^T \ \times \ \boldsymbol{C_{y,s}}
-  \tag{3.6}
-\end{equation}\]</span>
-where, <span class="math inline">\(\boldsymbol{C_{y,s}}\)</span> is a column vector of numbers at age (dimension <span class="math inline">\(n_a \ \times \ 1\)</span>) at the beginning of year <span class="math inline">\(y\)</span> for sex <span class="math inline">\(s\)</span>.</p>
-</div>
-<div id="observations-for-fisheries-and-surveys" class="section level3 unnumbered hasAnchor">
-<h3>Observations for fisheries and surveys<a href="modeldescription.html#observations-for-fisheries-and-surveys" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<table>
-<colgroup>
-<col width="27%" />
-<col width="72%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>label</th>
-<th>Relative Abundance description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>srv1</code></td>
-<td>Biomass domestic longline survey uses both <code>srv1_sel</code> and <code>srv10_sel</code></td>
-</tr>
-<tr class="even">
-<td><code>srv3</code></td>
-<td>Abundance domestic longline survey uses both <code>srv1_sel</code> and <code>srv10_sel</code></td>
-</tr>
-<tr class="odd">
-<td><code>srv2</code></td>
-<td>Biomass survey uses both <code>srv2_sel</code> and <code>srv9_sel</code></td>
-</tr>
-<tr class="even">
-<td><code>srv4</code></td>
-<td>Abundance survey uses both <code>srv2_sel</code> and <code>srv9_sel</code></td>
-</tr>
-<tr class="odd">
-<td><code>srv5</code></td>
-<td>Longline fishery CPUE <code>fish1_sel</code>, <code>fish4_sel</code>, <code>fish5_sel</code></td>
-</tr>
-<tr class="even">
-<td><code>srv6</code></td>
-<td>Japanese LL fishery CPUE</td>
-</tr>
-<tr class="odd">
-<td><code>srv7</code></td>
-<td>NMFS bottom trawl survey (currently GOA only; fit in model)</td>
-</tr>
-</tbody>
-</table>
-<table>
-<colgroup>
-<col width="27%" />
-<col width="72%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>label</th>
-<th>Composition description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>ac_fish1</code></td>
-<td>Longline Fishery Age Comp (sex aggregated)</td>
-</tr>
-<tr class="even">
-<td><code>sc_fish1</code></td>
-<td>Longline Fishery LF (sex dis-aggregrated)</td>
-</tr>
-<tr class="odd">
-<td><code>sc_fish3</code></td>
-<td>Trawl Fishery LF (sex disaggregrated)</td>
-</tr>
-<tr class="even">
-<td><code>sc_fish2</code></td>
-<td>LF for japaneses Longline fishery (sex aggregrated) (basically a survey now)</td>
-</tr>
-<tr class="odd">
-<td><code>sc_fish4</code></td>
-<td>LF for japaneses Longline fishery (sex aggregrated) (basically a survey now)</td>
-</tr>
-<tr class="even">
-<td><code>fish_size</code></td>
-<td>LF From japaneses trawl survey? (sex aggregrated)</td>
-</tr>
-<tr class="odd">
-<td><code>ac_srv1</code></td>
-<td>Domestic Longline Survey AF (sex aggregated)</td>
-</tr>
-<tr class="even">
-<td><code>sc_srv1</code></td>
-<td>Domestic Longline Survey LF (sex disaggregrated)</td>
-</tr>
-<tr class="odd">
-<td><code>ac_srv2</code></td>
-<td>Japanese Longline Survey AF (sex aggregated)</td>
-</tr>
-<tr class="even">
-<td><code>sc_srv2</code></td>
-<td>Japanese Longline Survey LF (sex disaggregrated)</td>
-</tr>
-<tr class="odd">
-<td><code>ac_srv7</code></td>
-<td>NMFS bottom trawl survey AF (sex aggregated)</td>
-</tr>
-<tr class="even">
-<td><code>sc_srv7</code></td>
-<td>NMFS bottom trawl survey LF (sex disaggregrated)</td>
-</tr>
-</tbody>
-</table>
-</div>
 </div>
 <div id="inference" class="section level2 unnumbered hasAnchor">
 <h2>Inference<a href="modeldescription.html#inference" class="anchor-section" aria-label="Anchor link to header"></a></h2>

@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-11-17" />
+<meta name="date" content="2022-11-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -162,20 +162,20 @@ div.csl-indent {
 <li class="chapter" data-level="2" data-path="objectives.html"><a href="objectives.html"><i class="fa fa-check"></i><b>2</b> A list of objectives/milestones that we have set along the project life</a></li>
 <li class="chapter" data-level="3" data-path="modeldescription.html"><a href="modeldescription.html"><i class="fa fa-check"></i><b>3</b> Current Stock assessment model</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="modeldescription.html"><a href="modeldescription.html#symbols"><i class="fa fa-check"></i><b>3.1</b> Symbol Notation</a></li>
-<li class="chapter" data-level="3.2" data-path="modeldescription.html"><a href="modeldescription.html#modelequations"><i class="fa fa-check"></i><b>3.2</b> Process equations</a>
+<li class="chapter" data-level="3.1" data-path="modeldescription.html"><a href="modeldescription.html#modelequations"><i class="fa fa-check"></i><b>3.1</b> Process equations</a>
 <ul>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#initialisation-gleft.right"><i class="fa fa-check"></i>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#population-dynamics-fleft.right"><i class="fa fa-check"></i>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#determining-selectivities-for-fisheries-and-surveys"><i class="fa fa-check"></i>Determining selectivities for fisheries and surveys</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="modeldescription.html"><a href="modeldescription.html#observationsection"><i class="fa fa-check"></i><b>3.3</b> Observation equations</a>
+<li class="chapter" data-level="3.2" data-path="modeldescription.html"><a href="modeldescription.html#observationsection"><i class="fa fa-check"></i><b>3.2</b> Observation equations</a>
 <ul>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-age"><i class="fa fa-check"></i>Catch at age</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#relative-abundance-indices"><i class="fa fa-check"></i>Relative abundance indices</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-length"><i class="fa fa-check"></i>Catch at length</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#observations-for-fisheries-and-surveys"><i class="fa fa-check"></i>Observations for fisheries and surveys</a></li>
 </ul></li>
+<li class="chapter" data-level="3.3" data-path="modeldescription.html"><a href="modeldescription.html#symbols"><i class="fa fa-check"></i><b>3.3</b> Symbol Notation</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#inference"><i class="fa fa-check"></i>Inference</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#todo"><i class="fa fa-check"></i>TODO</a></li>
 </ul></li>
@@ -200,6 +200,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#simulation-test-the-lep-method"><i class="fa fa-check"></i>Simulation test the “LEP” method</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#next-steps"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="refpoints.html"><a href="refpoints.html"><i class="fa fa-check"></i><b>7</b> Review/summarise reference points</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment" target="blank">NOAA Website</a></li>
@@ -223,7 +224,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="sexratios" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Exploring methods for sex ratios in age and length composition data<a href="sexratios.html#sexratios" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>One of the needed improvements is dealing with sex ratios in the compositional data. Currently it is difficult to see how there is any information on sex ratio in the Sablefish stock assessment given how the observations are structured (Chapter <a href="modeldescription.html#modeldescription">3</a>) (Caveat is users can provide an observed sex ratio for observations etc which is similar to the approach in <span class="citation">Ward et al. (<a href="#ref-ward2019assessing" role="doc-biblioref">2019</a>)</span>). I am aware of two approaches for supplying observations that in theory should provide information on sex ratio. The first (approach 1) was taken from Casal2 <span class="citation">(<a href="#ref-doonan2016casal2" role="doc-biblioref">Doonan et al. 2016</a>)</span>. This treats sexed composition data for a year as a single proportion i.e., proportions across all ages and sexes sum to one for each year of observation</p>
+<p>One of the needed improvements is dealing with sex ratios in the compositional data. Currently it is difficult to see how there is any information on sex ratio in the Alaskan sablefish stock assessment given how the observations are structured (Chapter <a href="modeldescription.html#modeldescription">3</a>) (Caveat is users can provide an observed sex ratio for observations etc which is similar to the approach in <span class="citation">Ward et al. (<a href="#ref-ward2019assessing" role="doc-biblioref">2019</a>)</span>). I am aware of two approaches for supplying observations that in theory should provide information on sex ratio. The first (approach 1) was taken from Casal2 <span class="citation">(<a href="#ref-doonan2016casal2" role="doc-biblioref">Doonan et al. 2016</a>)</span>. This treats sexed composition data for a year as a single proportion i.e., proportions across all ages and sexes sum to one for each year,</p>
 <p><span class="math display">\[
 \boldsymbol{P}^k_{y} = \frac{(C^k_{a,y,1},C^k_{a,y,2})}{\sum_a \sum_s C^k_{a,y,s}}, \quad \sum \boldsymbol{P}^k_{y} = 1
 \]</span>

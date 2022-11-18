@@ -10,9 +10,10 @@ eq:lengthatrecapture
 overview
 objectives
 modeldescription
-symbols
 modelequations
 observationsection
+symbols
 sexratios
 Fexplore
 tagdata
+refpoints
