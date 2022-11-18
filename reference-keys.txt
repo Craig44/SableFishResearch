@@ -4,6 +4,14 @@ eq:catchatage
 eq:surveyage
 eq:relativeindex
 eq:agelengthtransition
+fig:compilesexplot
+eq:maleselectivity
+eq:femaleselectivity
+fig:runscenario1EM1ssb
+fig:runscenario1EM2ssb
+fig:runscenario2EM1ssb
+fig:runscenario2EM2ssb
+fig:runscenario2EM3ssb
 eq:richardsgrowth
 eq:lengthatrelease
 eq:lengthatrecapture
@@ -14,6 +22,11 @@ modelequations
 observationsection
 symbols
 sexratios
+sexSimulation
+results
+operating-model-om-parameters
+scenario-1
+scenario-2
 Fexplore
 tagdata
 refpoints

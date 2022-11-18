@@ -181,13 +181,19 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>4</b> Exploring methods for sex ratios in age and length composition data</a>
 <ul>
-<li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#simulation-testing"><i class="fa fa-check"></i>Simulation testing</a></li>
-<li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#other-things-to-consider"><i class="fa fa-check"></i>Other things to consider</a></li>
+<li class="chapter" data-level="4.1" data-path="sexratios.html"><a href="sexratios.html#sexSimulation"><i class="fa fa-check"></i><b>4.1</b> Simulations!!</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="sexratios.html"><a href="sexratios.html#results"><i class="fa fa-check"></i><b>4.1.1</b> Results</a></li>
+<li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#future-research-that-was-not-considered-in-this-simple-simulation"><i class="fa fa-check"></i>Future research that was not considered in this simple simulation</a></li>
+<li class="chapter" data-level="4.1.2" data-path="sexratios.html"><a href="sexratios.html#operating-model-om-parameters"><i class="fa fa-check"></i><b>4.1.2</b> Operating Model (OM) Parameters</a></li>
+<li class="chapter" data-level="4.1.3" data-path="sexratios.html"><a href="sexratios.html#scenario-1"><i class="fa fa-check"></i><b>4.1.3</b> Scenario 1</a></li>
+<li class="chapter" data-level="4.1.4" data-path="sexratios.html"><a href="sexratios.html#scenario-2"><i class="fa fa-check"></i><b>4.1.4</b> Scenario 2</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="Fexplore.html"><a href="Fexplore.html"><i class="fa fa-check"></i><b>5</b> Exploring alternative fishing mortality parameterisations (F)</a>
 <ul>
 <li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#set-up-a-simulation"><i class="fa fa-check"></i>Set up a simulation</a></li>
-<li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#other-things-to-consider-1"><i class="fa fa-check"></i>Other things to consider</a></li>
+<li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#other-things-to-consider"><i class="fa fa-check"></i>Other things to consider</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>6</b> Tagging data and studies</a>
 <ul>
@@ -224,7 +230,9 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="sexratios" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Exploring methods for sex ratios in age and length composition data<a href="sexratios.html#sexratios" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>One of the needed improvements is dealing with sex ratios in the compositional data. Currently it is difficult to see how there is any information on sex ratio in the Alaskan sablefish stock assessment given how the observations are structured (Chapter <a href="modeldescription.html#modeldescription">3</a>) (Caveat is users can provide an observed sex ratio for observations etc which is similar to the approach in <span class="citation">Ward et al. (<a href="#ref-ward2019assessing" role="doc-biblioref">2019</a>)</span>). I am aware of two approaches for supplying observations that in theory should provide information on sex ratio. The first (approach 1) was taken from Casal2 <span class="citation">(<a href="#ref-doonan2016casal2" role="doc-biblioref">Doonan et al. 2016</a>)</span>. This treats sexed composition data for a year as a single proportion i.e., proportions across all ages and sexes sum to one for each year,</p>
+<p>An immediate improvement in the current stock assessment (Chapter <a href="modeldescription.html#modeldescription">3</a>) relates to how sexually disaggregated compositional data are handled. Currently LF’s are separated by sex (needed for the different growths) and age compositional data are aggregated over both sexes. Although LFs are disaggregated by sex and should (in theory) be sufficient to estimate sex specific selectivities. It is not ideal to use LFs to estimate age-based selectivities because older cohorts “smush” into single modes and age information is lost.</p>
+<p>Before developing a spatially explicit model stock assessment model, I wanted to tidy some loose ends that may come back and bite me in the proverbial butt once we explore the spatially sex disaggregated stock assessment model in anger. These things are exponentially more easier to deal with in “simpler” models. My general intention is to drop length data when we have well sampled age data, currently they both go into the model together. For age composition data I want to structure the observations so that there is potential information on sex ratio. The current assessment can be given information on sex ratio for generating model predicted values which is similar to the approach in <span class="citation">Ward et al. (<a href="#ref-ward2019assessing" role="doc-biblioref">2019</a>)</span>. Howver, I personally think this should be dealt within the model.</p>
+<p>I am aware of two approaches for supplying observations that in theory should provide information on sex ratio. The first (approach 1) was taken from Casal2 <span class="citation">(<a href="#ref-doonan2016casal2" role="doc-biblioref">Doonan et al. 2016</a>)</span>. This treats sexed composition data for a year as a single proportion i.e., proportions across all ages and sexes sum to one for each year,</p>
 <p><span class="math display">\[
 \boldsymbol{P}^k_{y} = \frac{(C^k_{a,y,1},C^k_{a,y,2})}{\sum_a \sum_s C^k_{a,y,s}}, \quad \sum \boldsymbol{P}^k_{y} = 1
 \]</span>
@@ -235,11 +243,11 @@ where, <span class="math inline">\(C^k_{a,y,1}\)</span> is the catch at age (num
 where, <span class="math inline">\(N^{eff, k}_{y}\)</span> is the effective sample size for this survey and year.</p>
 <p>The second approach (approach 2) is to treat composition for each sex seperately that is proportions at age or length for a sex will sum to one, but also provide a specific sex ratio observation over all ages or lengths as done in the New Zealand rock lobster stock assessment <span class="citation">(<a href="#ref-webber2021rapid" role="doc-biblioref">Webber, Rudd, and Starr 2021</a>)</span>.</p>
 <p><span class="math display">\[
-R^k_{y,s} = \frac{\sum_a \{C^k}_{a,y,s}}{\sum_a \sum_s \{C^k}_{a,y,s}}, \quad  \sum_s R^k_{y,s} = 1
+R^k_{y,s} = \frac{\sum_a C^k_{a,y,s}}{\sum_a \sum_s C^k_{a,y,s}}, \quad  \sum_s R^k_{y,s} = 1
 \]</span>
 and,
 <span class="math display">\[
-P^k_{a, y,s} = \frac{\{C^k}_{a,y,s}}{\sum_a \{C^k}_{a,y,s}}, \quad  \sum_a P^k_{a, y,s} = 1 \ .
+P^k_{a, y,s} = \frac{C^k_{a,y,s}}{\sum_a C^k_{a,y,s}}, \quad  \sum_a P^k_{a, y,s} = 1 \ .
 \]</span>
 The likelihood assumptions for this model are,
 <span class="math display">\[
@@ -250,108 +258,166 @@ and,
 \boldsymbol{P}^k_{y,s} \sim Multinomial(\mathbb{E}[\boldsymbol{P}^k_{a, y,s}], N^{eff, k}_{y,s}) \ .
 \]</span>
 where, <span class="math inline">\(N^{eff, k}_{y,s}\)</span> is the effective sample size.</p>
-<div id="simulation-testing" class="section level2 unnumbered hasAnchor">
-<h2>Simulation testing<a href="sexratios.html#simulation-testing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A simple simulation experiment was conducted to explore the benefits of each approach. There were two OM scenarios that we wanted to explore, the first was that the true population had a 50:50 sex ratio and the observations had skewed sex ratios due to the selectivity i.e., availability to the survey fishery. Second the selectivity was constant for both sexes but the sex ratio was skewed at recruitment.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="sexratios.html#cb2-1" aria-hidden="true" tabindex="-1"></a>bio_params <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb2-2"><a href="sexratios.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">ages =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
-<span id="cb2-3"><a href="sexratios.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">L_inf_m =</span> <span class="dv">58</span>,</span>
-<span id="cb2-4"><a href="sexratios.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">K_m =</span> <span class="fl">0.133</span>,</span>
-<span id="cb2-5"><a href="sexratios.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">t0_m =</span> <span class="dv">0</span>,</span>
-<span id="cb2-6"><a href="sexratios.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">L_inf_f =</span> <span class="dv">62</span>,</span>
-<span id="cb2-7"><a href="sexratios.html#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">K_f =</span> <span class="fl">0.143</span>,</span>
-<span id="cb2-8"><a href="sexratios.html#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">t0_f =</span> <span class="dv">0</span>,</span>
-<span id="cb2-9"><a href="sexratios.html#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">M =</span> <span class="fl">0.15</span>,</span>
-<span id="cb2-10"><a href="sexratios.html#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">a_m =</span> <span class="fl">2.18e-9</span>, <span class="do">## tonnes</span></span>
-<span id="cb2-11"><a href="sexratios.html#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">b_m =</span> <span class="fl">3.2</span>,</span>
-<span id="cb2-12"><a href="sexratios.html#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">a_f =</span> <span class="fl">2.08e-9</span>, <span class="do">## tonnes</span></span>
-<span id="cb2-13"><a href="sexratios.html#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">b_f =</span> <span class="fl">3.3</span>,</span>
-<span id="cb2-14"><a href="sexratios.html#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_a50 =</span> <span class="fl">2.3</span>,</span>
-<span id="cb2-15"><a href="sexratios.html#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_ato95 =</span> <span class="fl">1.2</span>,</span>
-<span id="cb2-16"><a href="sexratios.html#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma =</span> <span class="fl">0.6</span>,</span>
-<span id="cb2-17"><a href="sexratios.html#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">h =</span> <span class="fl">0.85</span>,</span>
-<span id="cb2-18"><a href="sexratios.html#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma_r =</span> <span class="fl">0.6</span>,</span>
-<span id="cb2-19"><a href="sexratios.html#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">R0 =</span> <span class="dv">8234132</span>,</span>
-<span id="cb2-20"><a href="sexratios.html#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">plus_group =</span> <span class="dv">1</span> <span class="co"># 0 = No, 1 = Yes</span></span>
-<span id="cb2-21"><a href="sexratios.html#cb2-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-22"><a href="sexratios.html#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="sexratios.html#cb2-23" aria-hidden="true" tabindex="-1"></a>other_params <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb2-24"><a href="sexratios.html#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_a50_m =</span> <span class="fl">3.6</span>,</span>
-<span id="cb2-25"><a href="sexratios.html#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_ato95_m =</span> <span class="dv">2</span>,</span>
-<span id="cb2-26"><a href="sexratios.html#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_a50_f =</span> <span class="fl">4.6</span>,</span>
-<span id="cb2-27"><a href="sexratios.html#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_ato95_f =</span> <span class="fl">1.4</span>,</span>
-<span id="cb2-28"><a href="sexratios.html#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_q =</span> <span class="fl">0.2</span>,</span>
-<span id="cb2-29"><a href="sexratios.html#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_alpha =</span> <span class="dv">1</span>,</span>
-<span id="cb2-30"><a href="sexratios.html#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_a50_m =</span> <span class="fl">4.2</span>,</span>
-<span id="cb2-31"><a href="sexratios.html#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_ato95_m =</span> <span class="fl">1.17</span>,</span>
-<span id="cb2-32"><a href="sexratios.html#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_a50_f =</span> <span class="fl">4.7</span>,</span>
-<span id="cb2-33"><a href="sexratios.html#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_ato95_f =</span> <span class="fl">1.76</span>,</span>
-<span id="cb2-34"><a href="sexratios.html#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_alpha =</span> <span class="dv">1</span>,</span>
-<span id="cb2-35"><a href="sexratios.html#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">ssb_prop_Z =</span> <span class="fl">0.5</span>,</span>
-<span id="cb2-36"><a href="sexratios.html#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_prop_Z =</span> <span class="fl">0.5</span>,</span>
-<span id="cb2-37"><a href="sexratios.html#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_age_error =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.4</span>),  <span class="do">## sd, rho (ignored if iid)</span></span>
-<span id="cb2-38"><a href="sexratios.html#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">fishery_age_error =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.4</span>),  <span class="do">## sd, rho (ignored if iid)</span></span>
-<span id="cb2-39"><a href="sexratios.html#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_bio_cv =</span> <span class="fu">c</span>(<span class="fl">0.1</span>)</span>
-<span id="cb2-40"><a href="sexratios.html#cb2-40" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-41"><a href="sexratios.html#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-42"><a href="sexratios.html#cb2-42" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">=</span> bio_params<span class="sc">$</span>ages</span>
-<span id="cb2-43"><a href="sexratios.html#cb2-43" aria-hidden="true" tabindex="-1"></a>max_age <span class="ot">=</span> <span class="fu">max</span>(bio_params<span class="sc">$</span>ages)</span>
-<span id="cb2-44"><a href="sexratios.html#cb2-44" aria-hidden="true" tabindex="-1"></a>n_years <span class="ot">=</span> <span class="dv">30</span></span>
-<span id="cb2-45"><a href="sexratios.html#cb2-45" aria-hidden="true" tabindex="-1"></a>years <span class="ot">=</span> (<span class="dv">2020</span> <span class="sc">-</span> n_years <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="dv">2020</span></span>
-<span id="cb2-46"><a href="sexratios.html#cb2-46" aria-hidden="true" tabindex="-1"></a>n_ages <span class="ot">=</span> <span class="fu">length</span>(ages)</span>
-<span id="cb2-47"><a href="sexratios.html#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="do">## annual fishing mortality</span></span>
-<span id="cb2-48"><a href="sexratios.html#cb2-48" aria-hidden="true" tabindex="-1"></a>start_F <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.02</span>, <span class="at">to =</span> <span class="fl">0.1</span>, <span class="at">length =</span> <span class="dv">10</span>)), <span class="fl">0.1</span>), <span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fl">0.08</span>), <span class="fl">0.1</span>), <span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fl">0.07</span>), <span class="fl">0.1</span>))</span>
-<span id="cb2-49"><a href="sexratios.html#cb2-49" aria-hidden="true" tabindex="-1"></a>recruit_devs <span class="ot">=</span> <span class="fu">log</span>(<span class="fu">rlnorm</span>(n_years, <span class="sc">-</span><span class="fl">0.5</span> <span class="sc">*</span> bio_params<span class="sc">$</span>sigma_r <span class="sc">*</span> bio_params<span class="sc">$</span>sigma_r, bio_params<span class="sc">$</span>sigma_r))</span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="sexratios.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
-<span id="cb3-2"><a href="sexratios.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Build TMB OM with Multinomial</span></span>
-<span id="cb3-3"><a href="sexratios.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
-<span id="cb3-4"><a href="sexratios.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#dyn.unload(dynlib(file.path(DIR$book,&quot;TMB&quot;,&quot;SexDisaggregatedAgeStructuredModel&quot;)))</span></span>
-<span id="cb3-5"><a href="sexratios.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">compile</span>(<span class="fu">file.path</span>(<span class="st">&quot;TMB&quot;</span>,<span class="st">&quot;SexDisaggregatedAgeStructuredModel.cpp&quot;</span>), <span class="at">flags =</span> <span class="st">&quot;-Wignored-attributes -O3&quot;</span>,<span class="at">DLLFLAGS=</span><span class="st">&quot;&quot;</span>);</span></code></pre></div>
-<pre><code>## [1] 0</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="sexratios.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dyn.load</span>(<span class="fu">dynlib</span>(<span class="fu">file.path</span>(<span class="st">&quot;TMB&quot;</span>,<span class="st">&quot;SexDisaggregatedAgeStructuredModel&quot;</span>)))</span>
-<span id="cb5-2"><a href="sexratios.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">## tolerance form model convergence, all gradients need to be less than this.</span></span>
-<span id="cb5-3"><a href="sexratios.html#cb5-3" aria-hidden="true" tabindex="-1"></a>grad_tol <span class="ot">=</span> <span class="fl">0.001</span></span>
-<span id="cb5-4"><a href="sexratios.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># these parameters we are not estimating.</span></span>
-<span id="cb5-5"><a href="sexratios.html#cb5-5" aria-hidden="true" tabindex="-1"></a>na_map <span class="ot">=</span> <span class="fu">fix_pars</span>(<span class="at">par_list =</span> true_pars, <span class="at">pars_to_exclude =</span> <span class="fu">c</span>(<span class="st">&quot;logit_survey_alpha_f&quot;</span>,<span class="st">&quot;logit_f_alpha_f&quot;</span>,<span class="st">&quot;ln_catch_sd&quot;</span>,<span class="st">&quot;ln_extra_survey_cv&quot;</span>,<span class="st">&quot;ln_sigma_r&quot;</span>, <span class="st">&quot;logit_proportion_male&quot;</span>))</span>
-<span id="cb5-6"><a href="sexratios.html#cb5-6" aria-hidden="true" tabindex="-1"></a>ASM_obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(TMB_data, true_pars, <span class="at">DLL=</span> <span class="st">&quot;SexDisaggregatedAgeStructuredModel&quot;</span>, <span class="at">map =</span> na_map,<span class="at">checkParameterOrder=</span><span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>## Constructing atomic D_lgamma</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="sexratios.html#cb7-1" aria-hidden="true" tabindex="-1"></a>TMB_data_alt <span class="ot">=</span> TMB_data</span>
-<span id="cb7-2"><a href="sexratios.html#cb7-2" aria-hidden="true" tabindex="-1"></a>TMB_data_alt<span class="sc">$</span>survey_AF_type <span class="ot">=</span> <span class="dv">1</span></span>
-<span id="cb7-3"><a href="sexratios.html#cb7-3" aria-hidden="true" tabindex="-1"></a>TMB_data_alt<span class="sc">$</span>fishery_AF_type <span class="ot">=</span> <span class="dv">1</span></span>
-<span id="cb7-4"><a href="sexratios.html#cb7-4" aria-hidden="true" tabindex="-1"></a>ASM_obj_alt_sex <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(TMB_data_alt, true_pars, <span class="at">DLL=</span> <span class="st">&quot;SexDisaggregatedAgeStructuredModel&quot;</span>, <span class="at">map =</span> na_map,<span class="at">checkParameterOrder=</span><span class="cn">FALSE</span>)</span>
-<span id="cb7-5"><a href="sexratios.html#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="sexratios.html#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
-<span id="cb7-7"><a href="sexratios.html#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="do">### Generate predictions from both methods to compare</span></span>
-<span id="cb7-8"><a href="sexratios.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
-<span id="cb7-9"><a href="sexratios.html#cb7-9" aria-hidden="true" tabindex="-1"></a>sim_data <span class="ot">=</span> ASM_obj<span class="sc">$</span><span class="fu">simulate</span>(<span class="at">complete =</span> T)</span>
-<span id="cb7-10"><a href="sexratios.html#cb7-10" aria-hidden="true" tabindex="-1"></a>sim_data_alt <span class="ot">=</span> ASM_obj_alt_sex<span class="sc">$</span><span class="fu">simulate</span>(<span class="at">complete =</span> T)</span>
-<span id="cb7-11"><a href="sexratios.html#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="sexratios.html#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb7-13"><a href="sexratios.html#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(survey_ages, sim_data_alt<span class="sc">$</span>survey_comp_fitted[<span class="dv">1</span><span class="sc">:</span>n_ages,<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">ylab =</span> <span class="st">&quot;Survey predicted values&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Approach 1&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
-<span id="cb7-14"><a href="sexratios.html#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(survey_ages, sim_data_alt<span class="sc">$</span>survey_comp_fitted[(n_ages <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(n_ages<span class="sc">*</span><span class="dv">2</span>),<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb7-15"><a href="sexratios.html#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(survey_ages, sim_data<span class="sc">$</span>survey_comp_fitted[<span class="dv">1</span><span class="sc">:</span>n_ages,<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Approach 2&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.2</span>))</span>
-<span id="cb7-16"><a href="sexratios.html#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(survey_ages, sim_data<span class="sc">$</span>survey_comp_fitted[(n_ages <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(n_ages<span class="sc">*</span><span class="dv">2</span>),<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb7-17"><a href="sexratios.html#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-18"><a href="sexratios.html#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fishery_ages, sim_data_alt<span class="sc">$</span>fishery_comp_fitted[<span class="dv">1</span><span class="sc">:</span>n_ages,<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">ylab =</span> <span class="st">&quot;Fishery predicted values&quot;</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.3</span>))</span>
-<span id="cb7-19"><a href="sexratios.html#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fishery_ages, sim_data_alt<span class="sc">$</span>fishery_comp_fitted[(n_ages <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(n_ages<span class="sc">*</span><span class="dv">2</span>),<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb7-20"><a href="sexratios.html#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-21"><a href="sexratios.html#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fishery_ages, sim_data<span class="sc">$</span>fishery_comp_fitted[<span class="dv">1</span><span class="sc">:</span>n_ages,<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.3</span>))</span>
-<span id="cb7-22"><a href="sexratios.html#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(fishery_ages, sim_data<span class="sc">$</span>fishery_comp_fitted[(n_ages <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span>(n_ages<span class="sc">*</span><span class="dv">2</span>),<span class="dv">9</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb7-23"><a href="sexratios.html#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&#39;topright&#39;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Male&quot;</span>,<span class="st">&quot;Feale&quot;</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">lwd =</span> <span class="dv">3</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/compile_sex_plot-1.png" width="672" /></p>
+<div id="sexSimulation" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Simulations!!<a href="sexratios.html#sexSimulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To explore the utility of these two approaches we conducted a simple simulation using a sexually disaggregated age-structured model (see Section <a href="sexratios.html#sexSimulation">4.1</a>). The Operating Model (OM) used in the simulation assumed a 50:50 sex ratio during the recruitment process however the OM did assume different growth and selectivity among the sexes.</p>
+<div id="results" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Results<a href="sexratios.html#results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In summary both approaches resulted in similar estimates in selectivities and SSBs. I prefer Approach 1 as it is a single observation compared with Approach 2 which has two observation types, but this simulation showed at least within the very small assumptions explored here they resulted in similar performance. This was all I was after in order to move forward to the spatial model.</p>
 </div>
-<div id="other-things-to-consider" class="section level2 unnumbered hasAnchor">
-<h2>Other things to consider<a href="sexratios.html#other-things-to-consider" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="future-research-that-was-not-considered-in-this-simple-simulation" class="section level3 unnumbered hasAnchor">
+<h3>Future research that was not considered in this simple simulation<a href="sexratios.html#future-research-that-was-not-considered-in-this-simple-simulation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>LF observations with sexual dimorphism in growth. A possible reason LF’s could be influencing assessment output is due to mis-specified growth ala</li>
+<li>LF observations with sexual dimorphism in growth. A possible reason LF’s could be influencing assessment output is due to mis-specified growth à la <span class="citation">Minte-Vera et al. (<a href="#ref-minte2017get" role="doc-biblioref">2017</a>)</span></li>
+<li>Sample size between the two approaches</li>
+<li>Actual sex ratio skewed in the recruitment process, rather than just a selectivity effect which was of focus in the following simulation .</li>
 </ul>
+</div>
+<div id="operating-model-om-parameters" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Operating Model (OM) Parameters<a href="sexratios.html#operating-model-om-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="sexratios.html#cb2-1" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb2-2"><a href="sexratios.html#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="sexratios.html#cb2-3" aria-hidden="true" tabindex="-1"></a>bio_params <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb2-4"><a href="sexratios.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ages =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb2-5"><a href="sexratios.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">L_inf_m =</span> <span class="dv">58</span>,</span>
+<span id="cb2-6"><a href="sexratios.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">K_m =</span> <span class="fl">0.133</span>,</span>
+<span id="cb2-7"><a href="sexratios.html#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">t0_m =</span> <span class="dv">0</span>,</span>
+<span id="cb2-8"><a href="sexratios.html#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">L_inf_f =</span> <span class="dv">62</span>,</span>
+<span id="cb2-9"><a href="sexratios.html#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">K_f =</span> <span class="fl">0.143</span>,</span>
+<span id="cb2-10"><a href="sexratios.html#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">t0_f =</span> <span class="dv">0</span>,</span>
+<span id="cb2-11"><a href="sexratios.html#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">M =</span> <span class="fl">0.15</span>,</span>
+<span id="cb2-12"><a href="sexratios.html#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">a_m =</span> <span class="fl">2.18e-9</span>, <span class="do">## tonnes</span></span>
+<span id="cb2-13"><a href="sexratios.html#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">b_m =</span> <span class="fl">3.2</span>,</span>
+<span id="cb2-14"><a href="sexratios.html#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">a_f =</span> <span class="fl">2.08e-9</span>, <span class="do">## tonnes</span></span>
+<span id="cb2-15"><a href="sexratios.html#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">b_f =</span> <span class="fl">3.3</span>,</span>
+<span id="cb2-16"><a href="sexratios.html#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_a50 =</span> <span class="fl">2.3</span>,</span>
+<span id="cb2-17"><a href="sexratios.html#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_ato95 =</span> <span class="fl">1.2</span>,</span>
+<span id="cb2-18"><a href="sexratios.html#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma =</span> <span class="fl">0.6</span>,</span>
+<span id="cb2-19"><a href="sexratios.html#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">h =</span> <span class="fl">0.85</span>,</span>
+<span id="cb2-20"><a href="sexratios.html#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma_r =</span> <span class="fl">0.6</span>,</span>
+<span id="cb2-21"><a href="sexratios.html#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">R0 =</span> <span class="dv">8234132</span>,</span>
+<span id="cb2-22"><a href="sexratios.html#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">plus_group =</span> <span class="dv">1</span> <span class="co"># 0 = No, 1 = Yes</span></span>
+<span id="cb2-23"><a href="sexratios.html#cb2-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-24"><a href="sexratios.html#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="sexratios.html#cb2-25" aria-hidden="true" tabindex="-1"></a>other_params <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb2-26"><a href="sexratios.html#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_a50_m =</span> <span class="fl">3.6</span>,</span>
+<span id="cb2-27"><a href="sexratios.html#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_ato95_m =</span> <span class="dv">2</span>,</span>
+<span id="cb2-28"><a href="sexratios.html#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_a50_f =</span> <span class="fl">4.6</span>,</span>
+<span id="cb2-29"><a href="sexratios.html#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_ato95_f =</span> <span class="fl">1.4</span>,</span>
+<span id="cb2-30"><a href="sexratios.html#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_q =</span> <span class="fl">0.2</span>,</span>
+<span id="cb2-31"><a href="sexratios.html#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_alpha =</span> <span class="dv">1</span>,</span>
+<span id="cb2-32"><a href="sexratios.html#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_a50_m =</span> <span class="fl">4.2</span>,</span>
+<span id="cb2-33"><a href="sexratios.html#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_ato95_m =</span> <span class="fl">1.17</span>,</span>
+<span id="cb2-34"><a href="sexratios.html#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_a50_f =</span> <span class="fl">4.7</span>,</span>
+<span id="cb2-35"><a href="sexratios.html#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_ato95_f =</span> <span class="fl">1.76</span>,</span>
+<span id="cb2-36"><a href="sexratios.html#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_alpha =</span> <span class="dv">1</span>,</span>
+<span id="cb2-37"><a href="sexratios.html#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">ssb_prop_Z =</span> <span class="fl">0.5</span>,</span>
+<span id="cb2-38"><a href="sexratios.html#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_prop_Z =</span> <span class="fl">0.5</span>,</span>
+<span id="cb2-39"><a href="sexratios.html#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_age_error =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.4</span>),  <span class="do">## sd, rho (ignored if iid)</span></span>
+<span id="cb2-40"><a href="sexratios.html#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">fishery_age_error =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.4</span>),  <span class="do">## sd, rho (ignored if iid)</span></span>
+<span id="cb2-41"><a href="sexratios.html#cb2-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_bio_cv =</span> <span class="fu">c</span>(<span class="fl">0.1</span>)</span>
+<span id="cb2-42"><a href="sexratios.html#cb2-42" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-43"><a href="sexratios.html#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-44"><a href="sexratios.html#cb2-44" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">=</span> bio_params<span class="sc">$</span>ages</span>
+<span id="cb2-45"><a href="sexratios.html#cb2-45" aria-hidden="true" tabindex="-1"></a>max_age <span class="ot">=</span> <span class="fu">max</span>(bio_params<span class="sc">$</span>ages)</span>
+<span id="cb2-46"><a href="sexratios.html#cb2-46" aria-hidden="true" tabindex="-1"></a>n_years <span class="ot">=</span> <span class="dv">30</span></span>
+<span id="cb2-47"><a href="sexratios.html#cb2-47" aria-hidden="true" tabindex="-1"></a>years <span class="ot">=</span> (<span class="dv">2020</span> <span class="sc">-</span> n_years <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="dv">2020</span></span>
+<span id="cb2-48"><a href="sexratios.html#cb2-48" aria-hidden="true" tabindex="-1"></a>n_ages <span class="ot">=</span> <span class="fu">length</span>(ages)</span>
+<span id="cb2-49"><a href="sexratios.html#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="do">## annual fishing mortality</span></span>
+<span id="cb2-50"><a href="sexratios.html#cb2-50" aria-hidden="true" tabindex="-1"></a>start_F <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.02</span>, <span class="at">to =</span> <span class="fl">0.1</span>, <span class="at">length =</span> <span class="dv">10</span>)), <span class="fl">0.1</span>), <span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fl">0.1</span>), <span class="fl">0.1</span>), <span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fl">0.07</span>), <span class="fl">0.1</span>))</span>
+<span id="cb2-51"><a href="sexratios.html#cb2-51" aria-hidden="true" tabindex="-1"></a>recruit_devs <span class="ot">=</span> <span class="fu">log</span>(<span class="fu">rlnorm</span>(n_years, <span class="sc">-</span><span class="fl">0.5</span> <span class="sc">*</span> bio_params<span class="sc">$</span>sigma_r <span class="sc">*</span> bio_params<span class="sc">$</span>sigma_r, bio_params<span class="sc">$</span>sigma_r))</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:compilesexplot"></span>
+<img src="_main_files/figure-html/compilesexplot-1.png" alt="Examples of the two approaches for the survey (top row) and fishery (bottom row). The black and red line in approach 1 will sum to one, where as the black line and red line in approach will each sum to one. Approach 2 has an extra observation which is the proportion male (not shown)." width="672" />
+<p class="caption">
+Figure 4.1: Examples of the two approaches for the survey (top row) and fishery (bottom row). The black and red line in approach 1 will sum to one, where as the black line and red line in approach will each sum to one. Approach 2 has an extra observation which is the proportion male (not shown).
+</p>
+</div>
+</div>
+<div id="scenario-1" class="section level3 hasAnchor" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Scenario 1<a href="sexratios.html#scenario-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The first simulation assumed the OM had 50:50 males and female sex ratio at recruitment, and selectivities were as described in the above OM section. We simulated 100 data sets for each of the two approach’s for sexually disaggregated compositional data outlined in the introduction. These were then fitted to in two EM’s, where the EM’s differed in the approach they used. Both EM’s estimated a scalar on the female selectivity that allowed females to be more or less selected compared to males for both the fishery and survey. This was done be introducing an estimable <span class="math inline">\(\alpha\)</span> parameter into the selectivity. Males selectivities were constrained to have a max value = 1 using,
+<span class="math display" id="eq:maleselectivity">\[\begin{equation}
+S^{male}_a = 1/(1+19^{(a_{50}-a)/a_{to95})})
+      \tag{4.1}
 
+\end{equation}\]</span>
+where as the female was
+<span class="math display" id="eq:femaleselectivity">\[\begin{equation}
+S^{female}_a = \alpha/(1+19^{(a_{50}-a)/a_{to95})})
+      \tag{4.2}
+\end{equation}\]</span></p>
+<p>Although this scenario assumed both male and female had the same max selectivity I wanted to see the effect of estimating this additional parameter.</p>
+<div id="em-1-using-approach-1" class="section level4 unnumbered hasAnchor">
+<h4>EM 1 (using approach 1)<a href="sexratios.html#em-1-using-approach-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>## max gradient from 100 simualtions =  7.735343e-07</code></pre>
+<p><img src="_main_files/figure-html/run_scenario_1_EM_1-1.png" width="672" /></p>
+<div class="figure"><span style="display:block;" id="fig:runscenario1EM1ssb"></span>
+<img src="_main_files/figure-html/runscenario1EM1ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
+<p class="caption">
+Figure 4.2: Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs
+</p>
+</div>
+</div>
+<div id="em-2-using-approach-2" class="section level4 unnumbered hasAnchor">
+<h4>EM 2 (using approach 2)<a href="sexratios.html#em-2-using-approach-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>## max gradient from 100 simualtions =  1.008376e-05</code></pre>
+<p><img src="_main_files/figure-html/run_scenario_1_EM_2-1.png" width="672" /></p>
+<div class="figure"><span style="display:block;" id="fig:runscenario1EM2ssb"></span>
+<img src="_main_files/figure-html/runscenario1EM2ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
+<p class="caption">
+Figure 4.3: Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs
+</p>
+</div>
+</div>
+</div>
+<div id="scenario-2" class="section level3 hasAnchor" number="4.1.4">
+<h3><span class="header-section-number">4.1.4</span> Scenario 2<a href="sexratios.html#scenario-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The second scenario assumed sex ratio was 50:50 at recruitment and females were more selective than males to the fishery. This was done by setting = 1.2 in Equation <a href="sexratios.html#eq:femaleselectivity">(4.2)</a>. A third EM (EM3) was introduced for Approach 1, which fixed the female = 1. This is often the default approach. This is a side interest on biases when assessments assume equal selection between males and females when in fact there is selectivity difference.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="sexratios.html#cb5-1" aria-hidden="true" tabindex="-1"></a>true_pars<span class="sc">$</span>logit_f_alpha_f <span class="ot">=</span> <span class="fu">logit_general</span>(<span class="fl">1.2</span>, TMB_data<span class="sc">$</span>sel_alpha_bounds[<span class="dv">1</span>], TMB_data<span class="sc">$</span>sel_alpha_bounds[<span class="dv">2</span>])</span></code></pre></div>
+<div id="em-1-using-approach-1-1" class="section level4 unnumbered hasAnchor">
+<h4>EM 1 (using approach 1)<a href="sexratios.html#em-1-using-approach-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>## max gradient from 100 simualtions =  2.209329e-06</code></pre>
+<p><img src="_main_files/figure-html/run_scenario_2_EM_1-1.png" width="672" /></p>
+<div class="figure"><span style="display:block;" id="fig:runscenario2EM1ssb"></span>
+<img src="_main_files/figure-html/runscenario2EM1ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
+<p class="caption">
+Figure 4.4: Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs
+</p>
+</div>
+</div>
+<div id="em-2-using-approach-2-1" class="section level4 unnumbered hasAnchor">
+<h4>EM 2 (using approach 2)<a href="sexratios.html#em-2-using-approach-2-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>## max gradient from 100 simualtions =  7.067668e-06</code></pre>
+<p><img src="_main_files/figure-html/run_scenario_2_EM_2-1.png" width="672" /></p>
+<div class="figure"><span style="display:block;" id="fig:runscenario2EM2ssb"></span>
+<img src="_main_files/figure-html/runscenario2EM2ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
+<p class="caption">
+Figure 4.5: Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs
+</p>
+</div>
+</div>
+<div id="em-3-using-approach-1-with-female-fixed-at-alpha-1" class="section level4 unnumbered hasAnchor">
+<h4>EM 3 (using approach 1 with female fixed at <span class="math inline">\(\alpha = 1\)</span>)<a href="sexratios.html#em-3-using-approach-1-with-female-fixed-at-alpha-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>## max gradient from 100 simualtions =  2.407385e-06</code></pre>
+<p><img src="_main_files/figure-html/run_scenario_2_EM_3-1.png" width="672" /></p>
+<div class="figure"><span style="display:block;" id="fig:runscenario2EM3ssb"></span>
+<img src="_main_files/figure-html/runscenario2EM3ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
+<p class="caption">
+Figure 4.6: Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs
+</p>
+</div>
+
+</div>
+</div>
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-doonan2016casal2" class="csl-entry">
 Doonan, Ian, Kath Large, Alistair Dunn, Scott Rasmussen, Craig Marsh, and Sophie Mormede. 2016. <span>“Casal2: New Zealand’s Integrated Population Modelling Tool.”</span> <em>Fisheries Research</em> 183: 498–505.
+</div>
+<div id="ref-minte2017get" class="csl-entry">
+Minte-Vera, Carolina V, Mark N Maunder, Alexandre M Aires-da-Silva, Keisuke Satoh, and Koji Uosaki. 2017. <span>“Get the Biology Right, or Use Size-Composition Data at Your Own Risk.”</span> <em>Fisheries Research</em> 192: 114–25.
 </div>
 <div id="ref-ward2019assessing" class="csl-entry">
 Ward, Eric J, Helena Delgado-Nordmann, Richard E Brenner, Anne H Beaudreau, Steven D Moffitt, and Andrew O Shelton. 2019. <span>“Assessing Long-Term Changes in Sex Ratios of Pacific Herring in Prince William Sound, Alaska.”</span> <em>Fisheries Research</em> 211: 300–308.
