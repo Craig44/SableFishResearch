@@ -68,7 +68,7 @@ mtext(side = 2, text = "N", outer = T, line = -1, cex = 1.3)
 
 
 ## Set up a simulation {-}
-To explore the three methods described above a simple simulation was conducted for a simple age-structured stock assessment. The purpose was to check that the derived methods were reliable so that we can implement them in the spatial model that is development.
+To explore the above described methods a simple simulation was conducted using a simple age-structured stock assessment operating model. The model assumed 15 seperate fisheries all with a common selectivity. The purpose was to check that the derived methods were reliable (provided unbiased stock quantities) and that they are computationally efficient.
 
 
 ```{r setupfirstsim}
@@ -125,137 +125,234 @@ fishery_ages = 1:20
 ```
 
 ```{r poptmbobjects, echo = F, eval = T, results = 'hide', warning=FALSE, message=FALSE, error = FALSE}
-
+############
+## Build a multinomial model to double check estimability of all parameters
+## In this case we have 'good' data, annual data, no ageing error.
+##  survey index cv = 0.05
+##  year effective sample size = 1000
+############
 TMB_data = list()
 TMB_data$ages = ages
 TMB_data$maxAgePlusGroup = bio_params$plus_group
 TMB_data$years = years
-TMB_data$nyears = length(TMB_data$years)
-TMB_data$nages = length(TMB_data$ages)
-
+TMB_data$n_years = length(TMB_data$years)
+TMB_data$n_ages = length(TMB_data$ages)
+TMB_data$n_fisheries = 15
 ## No ageing error
-TMB_data$ageing_error_matrix = matrix(0, nrow = TMB_data$nages, ncol = TMB_data$nages)
+TMB_data$ageing_error_matrix = matrix(0, nrow = TMB_data$n_ages, ncol = TMB_data$n_ages)
 diag(TMB_data$ageing_error_matrix) = 1;
 
 TMB_data$survey_year_indicator = as.integer(TMB_data$years %in% survey_year_obs)
 TMB_data$survey_obs = rnorm(sum(TMB_data$survey_year_indicator), 100, 4)
-TMB_data$survey_cv = rep(0.05,sum(TMB_data$survey_year_indicator))
-TMB_data$survey_min_age = min(survey_ages)
-TMB_data$survey_max_age = max(survey_ages)
-TMB_data$survey_comp_type = 0 ## 0 = prop at age, 1 = numbers at age
-TMB_data$survey_age_plus_group = 1
-TMB_data$survey_comp_likelihood = 1 ## 0 = MVN (can be applied to both comp_type), 1 = Multinomial, 2 = dirichlet-multinomial
+TMB_data$survey_cv = rep(0.15,sum(TMB_data$survey_year_indicator))
 TMB_data$survey_sample_time = rep(0.5,sum(TMB_data$survey_year_indicator))
-TMB_data$survey_covar_structure = 1 # if survey_comp_likelihood == 1 (MVN); 1 = iid, 2 = us_covstruct, 3 = cs_covstruct Compound Symmetry, 5 = ar1
-TMB_data$survey_trans_comp = matrix(5, nrow = length(TMB_data$survey_min_age:TMB_data$survey_max_age) - ifelse(TMB_data$survey_comp_likelihood == 0, 1, 0), ncol = sum(TMB_data$survey_year_indicator))
+TMB_data$survey_AF_obs = matrix(5, nrow = TMB_data$n_ages, ncol = sum(TMB_data$survey_year_indicator))
 
-TMB_data$fishery_year_indicator = as.integer(TMB_data$years %in% fishery_year_obs)
-TMB_data$fishery_min_age = min(fishery_ages)
-TMB_data$fishery_max_age = max(fishery_ages)
-TMB_data$fishery_comp_type = 0 ## 0 = prop at age, 1 = numbers
-TMB_data$fishery_age_plus_group = 1
-TMB_data$fishery_covar_structure = 1 # if survey_comp_likelihood == 1 (MVN); 1 = iid, 2 = us_covstruct, 3 = cs_covstruct Compound Symmetry, 5 = ar1
-TMB_data$fishery_comp_likelihood = 1 ## 0 = MVN (can be applied to both comp_type), 1 = Multinomial, 2 = dirichlet-multinomial
-TMB_data$fishery_trans_comp = matrix(5, nrow = length(TMB_data$fishery_min_age:TMB_data$fishery_max_age) - ifelse(TMB_data$fishery_comp_likelihood == 0, 1, 0), ncol = sum(TMB_data$fishery_year_indicator))
+TMB_data$fishery_year_indicator = array(as.integer(TMB_data$years %in% fishery_year_obs), dim = c(length(fishery_year_obs), TMB_data$n_fisheries))
+TMB_data$fishery_AF_obs = array(5, dim = c(TMB_data$n_ages, length(fishery_year_obs), TMB_data$n_fisheries))
 
-TMB_data$catches = rep(1000, n_years)# this will be overriden in the simulate() call
+TMB_data$catches = array(1000, dim = c(TMB_data$n_years, TMB_data$n_fisheries))# this will be overriden in the simulate() call
+TMB_data$F_method = 0
+TMB_data$F_iterations = 4
+TMB_data$F_max = 3
+
+TMB_data$catch_indicator = array(1, dim = c(TMB_data$n_years, TMB_data$n_fisheries))
 TMB_data$ycs_estimated = rep(1, n_years)
 TMB_data$standardise_ycs = 0;
 
-TMB_data$catchMeanLength = TMB_data$stockMeanLength = matrix(length_at_age, byrow = F, ncol = TMB_data$nyears, nrow = TMB_data$nages)
-TMB_data$propMat = matrix(mat_age, byrow = F, ncol = TMB_data$nyears, nrow = TMB_data$nages)
+TMB_data$catchMeanLength = TMB_data$stockMeanLength = matrix(length_at_age, byrow = F, ncol = TMB_data$n_years, nrow = TMB_data$n_ages)
+TMB_data$propMat = matrix(mat_age, byrow = F, ncol = TMB_data$n_years, nrow = TMB_data$n_ages)
 TMB_data$natMor = bio_params$M
 TMB_data$steepness = bio_params$h
 TMB_data$stockRecruitmentModelCode = 2 ## BH
-TMB_data$propZ_ssb = rep(other_params$ssb_prop_Z, TMB_data$nyears)
-TMB_data$propZ_survey = rep(other_params$survey_prop_Z, TMB_data$nyears)
+TMB_data$propZ_ssb = rep(other_params$ssb_prop_Z, TMB_data$n_years)
+TMB_data$propZ_survey = rep(other_params$survey_prop_Z, TMB_data$n_years)
 TMB_data$sel_ato95_bounds = c(0.1,20)
 TMB_data$sel_a50_bounds = c(0.1,20)
 TMB_data$mean_weight_a = bio_params$a
 TMB_data$mean_weight_b = bio_params$b
+
+
+## fishery_probs
+fishery_probs = rlnorm(TMB_data$n_fisheries, meanlog = log(1), 0.6)
+fishery_probs = fishery_probs / sum(fishery_probs)
+prob_F = rmultinom(n = TMB_data$n_years, size = 500, prob = fishery_probs)
+prob_F = (sweep(prob_F, MARGIN = 2, FUN = "/", STATS = colSums(prob_F)))
+F_by_fishery = sweep(prob_F, MARGIN = 2, FUN = "*", STATS = start_F)
+
 ## The same parameters as OM, to check for consistency
 true_pars = list(
   ln_R0 = log(bio_params$R0),
   ln_ycs_est =  log(exp(recruit_devs[TMB_data$ycs_estimated == 1] - 0.5*bio_params$sigma_r^2)),
   ln_sigma_r = log( bio_params$sigma_r),
   ln_extra_survey_cv = log(0.0001),
-  trans_survey_error = c(log(0.29), inv_bound_unit(0.55)),
-  trans_fishery_error = c(log(0.38), inv_bound_unit(0.25)),
-  logit_f_a50 = logit_general(other_params$f_a50, TMB_data$sel_a50_bounds[1], TMB_data$sel_a50_bounds[2]),
-  logit_f_ato95 = logit_general(other_params$f_ato95, TMB_data$sel_ato95_bounds[1], TMB_data$sel_ato95_bounds[2]),
+  logit_f_a50 = logit_general(rep(other_params$f_a50, TMB_data$n_fisheries), TMB_data$sel_a50_bounds[1], TMB_data$sel_a50_bounds[2]),
+  logit_f_ato95 = logit_general(rep(other_params$f_ato95, TMB_data$n_fisheries), TMB_data$sel_ato95_bounds[1], TMB_data$sel_ato95_bounds[2]),
   logit_survey_a50 = logit_general(other_params$s_a50, TMB_data$sel_a50_bounds[1], TMB_data$sel_a50_bounds[2]),
   logit_survey_ato95 = logit_general(other_params$s_ato95, TMB_data$sel_ato95_bounds[1], TMB_data$sel_ato95_bounds[2]),
   logit_surveyQ = qlogis(other_params$s_q),
-  ln_F = log(start_F),
+  ln_F = array(log(F_by_fishery), dim = c(TMB_data$n_fisheries,TMB_data$n_years)),
   ln_catch_sd = log(0.02)
 )
 
-ran_start_vals = function(covar = "iid") {
+ran_start_vals = function() {
   start_params = list()
   start_params$ln_R0 = ran_start(n = 1, LB = log(bio_params$R0 * 0.2), UB = log(bio_params$R0 * 2))
   start_params$ln_ycs_est = ran_start(n = sum(TMB_data$ycs_estimated), LB = -1, UB = 1)
   start_params$ln_sigma_r = log(ran_start(n = 1,LB = 0.2, UB = 1))
   start_params$ln_extra_survey_cv = log(0.01)
-  start_params$trans_survey_error = c(log(ran_start(n = 1, LB = 0.1, UB = 0.6)))
-  start_params$trans_fishery_error = c(log(ran_start(n = 1, LB = 0.1, UB = 0.6)))
-  if (covar == "ar1") {
-    start_params$trans_survey_error  = c(start_params$trans_survey_error, inv_bound_unit(ran_start(n = 1, LB = -0.5, UB = 0.5)))
-    start_params$trans_fishery_error  = c(start_params$trans_fishery_error, inv_bound_unit(ran_start(n = 1, LB = -0.5, UB = 0.5)))
-  }
-  start_params$logit_f_a50 = logit_general(ran_start(n = 1, LB = 3, UB = 8),TMB_data$sel_a50_bounds[1], TMB_data$sel_a50_bounds[2])
-  start_params$logit_f_ato95 = logit_general(ran_start(n = 1, LB = 3, UB = 8), TMB_data$sel_ato95_bounds[1], TMB_data$sel_ato95_bounds[2])
+  start_params$logit_f_a50 = logit_general(rep(ran_start(n = 1, LB = 3, UB = 8), TMB_data$n_fisheries),TMB_data$sel_a50_bounds[1], TMB_data$sel_a50_bounds[2])
+  start_params$logit_f_ato95 = logit_general(rep(ran_start(n = 1, LB = 3, UB = 8), TMB_data$n_fisheries), TMB_data$sel_ato95_bounds[1], TMB_data$sel_ato95_bounds[2])
   start_params$logit_survey_a50 = logit_general(ran_start(n = 1, LB = 3 , UB = 8),TMB_data$sel_a50_bounds[1], TMB_data$sel_a50_bounds[2])
   start_params$logit_survey_ato95 = logit_general(ran_start(n = 1, LB = 3, UB = 8), TMB_data$sel_ato95_bounds[1], TMB_data$sel_ato95_bounds[2])
-  start_params$logit_surveyQ = qlogis(ran_start(n = 1, LB = 0.04, UB = 0.3))
-  start_params$ln_F = log(ran_start(n = TMB_data$nyears, LB = 0.02, UB = 0.4))
+  start_params$logit_surveyQ = qlogis(ran_start(n = 1, LB = 0.01, UB = 0.3))
+  start_params$ln_F = array(log(ran_start(n = TMB_data$n_years * TMB_data$n_fisheries, LB = 0.02, UB = 0.4)), dim = c(TMB_data$n_fisheries,TMB_data$n_years))
   start_params$ln_catch_sd = log(0.02)
   return(start_params)
 }
 ##################################
 ### Build TMB OM with Multinomial
 ##################################
-#dyn.unload(dynlib(file.path("TMB","SimpleAgeStructuredModel")))
-compile(file.path("TMB","SimpleAgeStructuredModel.cpp"), flags = "",DLLFLAGS="");
-dyn.load(dynlib(file.path("TMB","SimpleAgeStructuredModel")))
+#dyn.unload(dynlib(file.path("TMB","SimpleAgestructuredModelMultiFs")))
+compile(file.path("TMB","SimpleAgestructuredModelMultiFs.cpp"), flags = "-Wignored-attributes -O3",DLLFLAGS="");
+dyn.load(dynlib(file.path("TMB","SimpleAgestructuredModelMultiFs")))
 ## tolerance form model convergence, all gradients need to be less than this.
 grad_tol = 0.001
 # these parameters we are not estimating.
-na_map = fix_pars(par_list = true_pars, pars_to_exclude = c("ln_catch_sd", "trans_survey_error", "trans_fishery_error","ln_extra_survey_cv","ln_sigma_r"))
-ASM_obj <- MakeADFun(TMB_data, true_pars, DLL= "SimpleAgeStructuredModel", map = na_map)
+na_map = fix_pars(par_list = true_pars, pars_to_exclude = c("ln_catch_sd", "ln_extra_survey_cv","ln_sigma_r", "logit_f_a50", "logit_f_ato95"),
+                  vec_elements_to_exclude = list(logit_f_a50 = 2:length(true_pars$logit_f_a50), logit_f_ato95 = 2:length(true_pars$logit_f_ato95)))
+na_map = set_pars_to_be_the_same(par_list = true_pars, map = na_map,
+                                 base_parameters = append(rep(list(logit_f_a50 = c(1)), TMB_data$n_fisheries - 1),rep(list(logit_f_ato95 = c(1)), TMB_data$n_fisheries - 1)),
+                                 copy_parameters = list(
+                                   logit_f_a50 = 2,
+                                   logit_f_a50 = 3,
+                                   logit_f_a50 = 4,
+                                   logit_f_a50 = 5,
+                                   logit_f_a50 = 6,
+                                   logit_f_a50 = 7,
+                                   logit_f_a50 = 8,
+                                   logit_f_a50 = 9,
+                                   logit_f_a50 = 10,
+                                   logit_f_a50 = 11,
+                                   logit_f_a50 = 12,
+                                   logit_f_a50 = 13,
+                                   logit_f_a50 = 14,
+                                   logit_f_a50 = 15,
+                                   logit_f_ato95 = 2,
+                                   logit_f_ato95 = 3,
+                                   logit_f_ato95 = 4,
+                                   logit_f_ato95 = 5,
+                                   logit_f_ato95 = 6,
+                                   logit_f_ato95 = 7,
+                                   logit_f_ato95 = 8,
+                                   logit_f_ato95 = 9,
+                                   logit_f_ato95 = 10,
+                                   logit_f_ato95 = 11,
+                                   logit_f_ato95 = 12,
+                                   logit_f_ato95 = 13,
+                                   logit_f_ato95 = 14,
+                                   logit_f_ato95 = 15
+                                   )
+                                 )
+na_map$logit_f_a50
+na_map$logit_f_ato95
+
+
+na_map_hybrid = fix_pars(par_list = true_pars, pars_to_exclude = c("ln_catch_sd", "ln_extra_survey_cv","ln_sigma_r", "ln_F", "logit_f_a50", "logit_f_ato95"),
+                         vec_elements_to_exclude = list(logit_f_a50 = 2:length(true_pars$logit_f_a50), logit_f_ato95 = 2:length(true_pars$logit_f_ato95)))
+na_map_hybrid = set_pars_to_be_the_same(par_list = true_pars, map = na_map_hybrid,
+                                 base_parameters = append(rep(list(logit_f_a50 = c(1)), TMB_data$n_fisheries - 1),rep(list(logit_f_ato95 = c(1)), TMB_data$n_fisheries - 1)),
+                                 copy_parameters = list(
+                                   logit_f_a50 = 2,
+                                   logit_f_a50 = 3,
+                                   logit_f_a50 = 4,
+                                   logit_f_a50 = 5,
+                                   logit_f_a50 = 6,
+                                   logit_f_a50 = 7,
+                                   logit_f_a50 = 8,
+                                   logit_f_a50 = 9,
+                                   logit_f_a50 = 10,
+                                   logit_f_a50 = 11,
+                                   logit_f_a50 = 12,
+                                   logit_f_a50 = 13,
+                                   logit_f_a50 = 14,
+                                   logit_f_a50 = 15,
+                                   logit_f_ato95 = 2,
+                                   logit_f_ato95 = 3,
+                                   logit_f_ato95 = 4,
+                                   logit_f_ato95 = 5,
+                                   logit_f_ato95 = 6,
+                                   logit_f_ato95 = 7,
+                                   logit_f_ato95 = 8,
+                                   logit_f_ato95 = 9,
+                                   logit_f_ato95 = 10,
+                                   logit_f_ato95 = 11,
+                                   logit_f_ato95 = 12,
+                                   logit_f_ato95 = 13,
+                                   logit_f_ato95 = 14,
+                                   logit_f_ato95 = 15
+                                   )
+)
+ASM_obj <- MakeADFun(TMB_data, true_pars, DLL= "SimpleAgestructuredModelMultiFs", map = na_map, checkParameterOrder = T)
 true_report = ASM_obj$report()
+TMB_data_alt = TMB_data
+TMB_data_alt$F_method = 1
+ASM_obj_hybrid_F <- MakeADFun(TMB_data_alt, true_pars, DLL= "SimpleAgestructuredModelMultiFs", map = na_map, checkParameterOrder = T)
 ```
 
 ```{r self_test, echo = T, eval = T}
-##################################
-### Self Test with estimable F's
-##################################
-n_sims = 10
+## simulate data
+set.seed(123)
+sim_data = ASM_obj$simulate(complete = T)
 
-est_pars = NULL
-ssbs = NULL
-for(sim_iter in 1:n_sims) {
-  if(sim_iter %% 10 == 0)
-    cat("iter = ", sim_iter, "\n")
-  sim_data = ASM_obj$simulate(complete = T)
-  start_pars = ran_start_vals(covar = "ar1")
-  est_model = MakeADFun(sim_data, start_pars, DLL= "SimpleAgeStructuredModel", map = na_map, silent = T)
-  opt_modelc = nlminb(est_model$par, est_model$fn, est_model$gr, control = list(iter.max = 10000, eval.max = 10000))
-  est_pars = rbind(est_pars, opt_modelc$par)
-  est_rep = est_model$report(opt_modelc$par)
-  ssbs = rbind(ssbs, est_rep$ssb)
-}
-molten_ssbs = melt(ssbs)
-colnames(molten_ssbs) = c("sim", "year", "value")
-ggplot() +
-  geom_line(data =molten_ssbs, aes(x = year, y = value, group = sim)) +
-  geom_line(data = data.frame(year = 1:31, value = true_report$ssb),aes(x = year, y = value), col = "red", linetype = "dashed", linewidth = 1.2) +
-  ylim(0,NA) +
-  labs(x = "Time", y = "SSB (t)") +
-  theme_bw()
+## Build AD TMB functions
+start_pars = ran_start_vals()
+est_model_est_F = MakeADFun(sim_data, true_pars, DLL= "SimpleAgestructuredModelMultiFs", map = na_map, silent = T)
+sim_data$F_method = 1
+sim_data$F_iterations = 4
+est_model_hybrid_F = MakeADFun(sim_data, true_pars, DLL= "SimpleAgestructuredModelMultiFs", map = na_map_hybrid, silent = T)
+## optimise
+opt_model_est_F = nlminb(est_model_est_F$par, est_model_est_F$fn, est_model_est_F$gr, control = list(iter.max = 10000, eval.max = 10000))
+opt_model_hybrid_F = nlminb(est_model_hybrid_F$par, est_model_hybrid_F$fn, est_model_hybrid_F$gr, control = list(iter.max = 10000, eval.max = 10000))
+
+## look at the number of iterations used to solve
+opt_model_hybrid_F$iterations
+opt_model_est_F$iterations
+
+## get reports = 
+rep_est_hybrid = est_model_hybrid_F$report(est_model_hybrid_F$env$last.par.best)
+rep_est_F = est_model_est_F$report(est_model_est_F$env$last.par.best)
+
+plot(TMB_data$years, rep_est_hybrid$ssb[-1], type = "l", lwd = 3, xlab = "Year", ylab = "SSB", ylim = c(0,46000))
+lines(TMB_data$years, rep_est_F$ssb[-1], type = "l", lwd = 3, lty = 2, col = "purple")
+lines(TMB_data$years, sim_data$ssb[-1], type = "l", lwd = 4, lty = 3, col = "red")
+legend("topright", col = c("black", "purple", "red"), legend = c("Hybrid", "Est F", "OM"), lwd = 3)
 ```
 
 
-## Other things to consider {-}
+```{r firstbenchmarks, echo = T, eval = T}
+est_F_bench = benchmark(obj = est_model_est_F, n = 1000)
+hybrid_F_bench = benchmark(obj = est_model_hybrid_F, n = 1000)
+est_F_bench
+hybrid_F_bench
+```
+
+
+
+```{r secondbenchmarks, echo = T, eval = T}
+ben_est_F <- benchmark(obj = est_model_est_F, n=20,expr=expression(do.call("optim",obj)))
+ben_hybrid_F <- benchmark(obj = est_model_hybrid_F, n=20,expr=expression(do.call("optim",obj)))
+ben_est_F
+ben_hybrid_F
+```
+
+
+These results have highlighted the following
+
+- Both the Free \(F\) and hybrid estimate very similar model quantities i.e., SSB's and F's
+- The Free \(F\) method is much faster on average for a single gradient calculation and function call compared to the hybrid method
+- However, the hybrid method requires less iterations due to there being less estimated parameters. For this simulation where we assumed 15 fisheries both optimised in similar amounts of time
+
 
 ## Appendix - Hybrid approach {-}
 The hybrid fishing mortality process uses the methods and algorithms applied in Stock Synthesis [@methot2013stock]. The descriptions below are heavily based on the text describing this approach in the Appendix of [@methot2013stock].
@@ -278,7 +375,7 @@ The hybrid method calculates the harvest rate using the Pope's approximation the
 	V^g_{y} &= \sum\limits_s\sum\limits_a N_{a,y,s} \exp\left(-\delta_t M_{a,s}\right) \nonumber \\
 	\tilde{U}^g_{y} &= \frac{C^g_{y}}{V^g_{y} + 0.1 C^g_{y}}\\
 	j^g_{y} &= \left(1 + \exp \left(30 (\tilde{U}^g_{y} - 0.95) \right)\right)^{-1}\\
-	U^g_{y} &= 	j_{t,f} \tilde{U}^g_{y} + 0.95 (1 - j^g_{y} )\\
+	U^g_{y} &= 	j^g_{y} \tilde{U}^g_{y} + 0.95 (1 - j^g_{y} )\\
 	\tilde{F}^g_{y} &= \frac{-\log\left(1 - U^g_{y}\right)}{\delta_t}
 \end{align}
 
@@ -289,7 +386,7 @@ The formulation above is designed so that high exploitation rates (above 0.95) a
 The tuning algorithm begins by setting \(F^g_{y} = \tilde{F}^g_{y}\) and repeating the following algorithm `f_iteration` times.
 
 \[
-\widehat{C}_{a,y,s}  = \sum\limits_g {F}^g_{y}\left(S^g_{a,s} N_{a,y,s}\right) \lambda^*_{a,y,s}
+\widehat{C}_{a,y,s}  = \sum\limits_g {F}^g_{y}S^g_{a,s} N_{a,y,s}\bar{w}_{a,y,s} \lambda^*_{a,y,s}
 \]
 
 where, \( \lambda^*_{a,y,s}\) denotes the survivorship and is calculated as:
@@ -305,16 +402,16 @@ Total fishing mortality is then adjusted over several fixed number of iterations
 \widehat{C}_{y}  =  \sum\limits_g \sum\limits_s\sum\limits_a {F}^g_{y}\left(S^g_{a,s} N_{a,y,s}\right) \lambda^*_{a,y,s}
 \]
 
-This is different from Equation~A.1.25 in the Appendix of [@methot2013stock]. They include \(Z_{a,y,s}\) in the denominator of \({F}^g_{y}\), which is a type error because \(Z_{a,y,s}\) is already included in \(\lambda^*_{a,y,s}\), see Equation~\ref{eq:survival}.
+This is different from Equation A.1.25 in the Appendix of [@methot2013stock]. They include \(Z_{a,y,s}\) in the denominator when describing \({F}^g_{y}\), I think this is a typo error because \(Z_{a,y,s}\) is already included in the denominator when calculating \(\lambda^*_{a,y,s}\) (see Equation \@ref(eq:survival)).
 
 \[
-Z^{adj}_t = \frac{\sum\limits_g C^g_{y}}{\widehat{C}_{y}}
+Z^{adj}_y = \frac{\sum\limits_g C^g_{y}}{\widehat{C}_{y}}
 \]
 
 The total mortality if this adjuster was applied to all the Fs is then calculated:
 
 \[
-Z^*_{a,y,s} = M_{a,s} + Z^{adj}_t \left(Z_{a,y,s} -M_{a,s} \right)
+Z^*_{a,y,s} = M_{a,s} + Z^{adj}_y \left(Z_{a,y,s} -M_{a,s} \right)
 \]
 
 \[

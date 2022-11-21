@@ -163,18 +163,21 @@ Type objective_function<Type>::operator() () {
   
   DATA_ARRAY(survey_AF_obs);            // numbers at age. dim: n_ages x sum(survey_year_indicator) 
   DATA_ARRAY_INDICATOR(keep_survey_comp, survey_AF_obs);
-
+  
   DATA_IARRAY(fishery_year_indicator);  // 1 = calculate, 0 = ignore,   nyear x nfisheries
-  DATA_ARRAY(fishery_AF_obs);        // numbers at age. dim: n_ages x sum(fishery_year_indicator)
+  DATA_ARRAY(fishery_AF_obs);        // numbers at age. dim: n_ages x sum(fishery_year_indicator) * n_fisheries
   DATA_ARRAY_INDICATOR(keep_fishery_comp, fishery_AF_obs);
   
   DATA_IVECTOR(ycs_estimated);    // 1 = estimated, 0 = ignore
   DATA_INTEGER(standardise_ycs);  // 1 = yes, 0 = No
-  DATA_INTEGER(F_method);         // 0 = estimate F's as free parameters, 1 = Hybrid method
   
   // Catch info
   DATA_IARRAY(catch_indicator);       // length = n_years x n_fisheries. 0 = no catch this year for fishery, 1 = yes catch
   DATA_ARRAY(catches);                // length = n_years x n_fisheries
+  DATA_SCALAR(F_max);                 // max F = 2.56
+  DATA_INTEGER(F_iterations);         // should be between 2-5
+  DATA_INTEGER(F_method );            // 0 = estimate F's as free parameters, 1 = Hybrid method
+  
   DATA_VECTOR(propZ_ssb);             // proportion of Z for SSB, length n_years
   DATA_VECTOR(propZ_survey);          // proportion of Z for SSB, length n_years
   // Biological info
@@ -200,7 +203,7 @@ Type objective_function<Type>::operator() () {
   PARAMETER_VECTOR(ln_ycs_est);           // length(recruit_devs) = sum(ycs_estimated)
   PARAMETER(ln_sigma_r);                    // logistic fishery ogive
   PARAMETER( ln_extra_survey_cv );          // Additional survey cv.
-
+  
   PARAMETER_VECTOR(logit_f_a50);            // logistic fishery ogive parameters for each fishery
   PARAMETER_VECTOR(logit_f_ato95);          // logistic fishery ogive parameters for each fishery
   
@@ -271,24 +274,26 @@ Type objective_function<Type>::operator() () {
   vector<Type> ssb(n_years + 1);
   ssb.setZero();
   array<Type> annual_Fs(n_fisheries, n_years);
+
   if(F_method == 0)
     annual_Fs = exp(ln_F);
   // else with the hybrid method we need to calculate it on the fly
   array<Type> F_ayf(n_ages, n_years, n_fisheries);
   F_ayf.fill(0.0);
   array<Type> Z_ay(n_ages, n_years);
-  Z_ay.fill(0.0);
+  Z_ay.fill(natMor);
   // Fitted value containers
   vector<Type> survey_index_fitted(survey_obs.size());
   survey_index_fitted.fill(0.0);
   // If ALR comp, then need to adjust fitted value containers, because dims derived on input observation container
   array<Type> survey_AF_fitted(survey_AF_obs.dim);
-
+  
   array<Type> fishery_AF_fitted(fishery_AF_obs.dim);
-
- 
+  
+  
   // ll densities
   vector<Type> predlogN(n_ages); 
+  vector<Type> current_partition(n_ages); 
   vector<Type> temp_partition(n_ages); 
   vector<Type> temp_partition_obs(n_ages); 
   
@@ -296,11 +301,14 @@ Type objective_function<Type>::operator() () {
   vector<Type> fishery_partition(n_ages); 
   
   array<Type> pred_catches(n_years, n_fisheries);
+  pred_catches.fill(0.0);
+  
   vector<Type> survey_yearly_numbers(survey_AF_obs.dim[1]);
   survey_yearly_numbers.setZero();
   array<Type> fishery_yearly_numbers(fishery_AF_obs.dim[1], fishery_AF_obs.dim[2]);
-
+  
   array<Type> fishery_selectivity(n_ages, n_fisheries);
+  
   vector<Type> survey_selectivity(n_ages);
   vector<Type> survey_sd(survey_cv.size());
   
@@ -325,18 +333,21 @@ Type objective_function<Type>::operator() () {
     survey_selectivity(age_ndx) = Type(1)/(Type(1) + pow(Type(19),((survey_a50 - ages(age_ndx))/survey_ato95)));
   
   for(fishery_ndx = 0; fishery_ndx < n_fisheries; ++fishery_ndx) {
-    for(age_ndx = 0; age_ndx < n_ages; ++age_ndx)
+    for(age_ndx = 0; age_ndx < n_ages; ++age_ndx) {
       fishery_selectivity(age_ndx, fishery_ndx) = Type(1)/(Type(1) + pow(Type(19),((f_a50(fishery_ndx) - ages(age_ndx))/f_ato95(fishery_ndx))));
+    }
   }
-  for(fishery_ndx = 0; fishery_ndx < n_fisheries; ++fishery_ndx) {
-    for(year_ndx = 0; year_ndx < n_years; year_ndx++) {
-      for(age_ndx = 0; age_ndx < n_ages; ++age_ndx) {
-        F_ayf(age_ndx, year_ndx, fishery_ndx) = fishery_selectivity(age_ndx) * annual_Fs(fishery_ndx, year_ndx);
-        Z_ay(age_ndx, year_ndx) =  F_ayf(age_ndx, year_ndx, fishery_ndx) + natMor;
+  // pre cache these values as we are estimating them and so have them available
+  if(F_method == 0) {
+    for(fishery_ndx = 0; fishery_ndx < n_fisheries; ++fishery_ndx) {
+      for(year_ndx = 0; year_ndx < n_years; year_ndx++) {
+        for(age_ndx = 0; age_ndx < n_ages; ++age_ndx) {
+          F_ayf(age_ndx, year_ndx, fishery_ndx) = fishery_selectivity(age_ndx) * annual_Fs(fishery_ndx, year_ndx);
+          Z_ay(age_ndx, year_ndx) += F_ayf(age_ndx, year_ndx, fishery_ndx);
+        }
       }
     }
   }
-   
   /*
    * Initialise first year
    */
@@ -357,11 +368,26 @@ Type objective_function<Type>::operator() () {
   //for(age_ndx = 0; age_ndx < n_ages; ++age_ndx) 
   //  N(age_ndx, 0) *= exp(-natMor);
   
+  
+  vector<Type> vulnerable_bio(n_fisheries);
+  vector<Type> init_popes_rate(n_fisheries);
+  vector<Type> steep_jointer(n_fisheries);
+  vector<Type> init_F(n_fisheries);
+  vector<Type> temp_Z_vals(n_ages);
+  vector<Type> survivorship(n_ages);
+  
+  vector<Type> exploitation_rate(n_fisheries);
+  Type exp_half_m =  exp(-natMor*0.5); // called many times in hybrid F calculation, good to cache
+  Type interim_total_catch = 0;// interim catch over all fisheries in current year
+  Type total_catch_this_year = 0;
+  Type z_adjustment;
   /*
    * Start Model
    */
   
   for(year_ndx = 1; year_ndx <= n_years; year_ndx++) {
+    vulnerable_bio.setZero();
+    temp_partition = N.col(year_ndx - 1);
     //----------------
     //Recuritment
     //----------------
@@ -372,9 +398,85 @@ Type objective_function<Type>::operator() () {
     } else{
       error("SR model code not recognized");
     }
+    //temp_partition(0) = exp(predlogN(0));
+    // hybrid F algorithm
+    // - calculate vulnerable/initF
+    // - For f_iterations
+    // -- calculate Z and lambda (survivorship)
+    // -- adjust
+    if(F_method == 1) {
+      // calculate vulnerable and initial calculations
+      for(fishery_ndx = 0; fishery_ndx < n_fisheries; ++fishery_ndx) {
+        if(fishery_ndx == 0) {
+          total_catch_this_year = catches(year_ndx - 1, fishery_ndx);
+        } else {
+          total_catch_this_year += catches(year_ndx - 1, fishery_ndx);
+        }
+        vulnerable_bio(fishery_ndx) = (N.col(year_ndx - 1).vec() * fishery_selectivity.col(fishery_ndx).vec() * exp_half_m * catchMeanWeight.col(year_ndx - 1).vec()).sum();
+        init_popes_rate(fishery_ndx) = catches(year_ndx - 1, fishery_ndx) / (vulnerable_bio(fishery_ndx) + 0.1 * catches(year_ndx - 1, fishery_ndx)); //  Pope's rate  robust A.1.22 of SS appendix
+        steep_jointer(fishery_ndx) = 1.0 / (1.0 + exp(30.0 * (init_popes_rate(fishery_ndx) - 0.95))); // steep logistic joiner at harvest rate of 0.95 //steep logistic joiner at harvest rate of 0.95
+        exploitation_rate(fishery_ndx) = steep_jointer(fishery_ndx)  * init_popes_rate(fishery_ndx) + (1.0 - steep_jointer(fishery_ndx) ) * 0.95;
+        init_F(fishery_ndx) = -log(1.0 - exploitation_rate(fishery_ndx));
+      }
+      
+      // Now solve;
+      for(int f_iter = 0; f_iter < F_iterations; ++f_iter) {
+        
+        interim_total_catch = 0;
+        //initialise Z container with M
+        for(age_ndx = 0; age_ndx < n_ages; ++age_ndx)
+          temp_Z_vals(age_ndx) = natMor;
+        // Use calculate an initial Z
+        for(fishery_ndx = 0; fishery_ndx < n_fisheries; ++fishery_ndx) {
+          for(age_ndx = 0; age_ndx < n_ages; ++age_ndx) {
+            temp_Z_vals(age_ndx) += init_F(fishery_ndx) * fishery_selectivity(age_ndx, fishery_ndx);
+          }
+        }
+        // The survivorship is calculated as:
+        for(age_ndx = 0; age_ndx < n_ages; ++age_ndx) {
+          survivorship(age_ndx) = (1.0 - exp(-temp_Z_vals(age_ndx))) / temp_Z_vals(age_ndx);
+        }
+        
+        // Calculate the expected total catch that would occur with the current Hrates and Z
+        for(fishery_ndx = 0; fishery_ndx < n_fisheries; ++fishery_ndx)  {
+          interim_total_catch += (N.col(year_ndx - 1).vec() * init_F(fishery_ndx) * fishery_selectivity.col(fishery_ndx).vec() * survivorship * catchMeanWeight.col(year_ndx - 1).vec()).sum();
+        }
+        // make Z adjustments
+        z_adjustment = total_catch_this_year / (interim_total_catch + 0.0001);
+        //interim_catch_store(year_ndx - 1, f_iter, fishery_ndx) = interim_total_catch;
+        for(age_ndx = 0; age_ndx < n_ages; ++age_ndx) {
+          temp_Z_vals(age_ndx) = natMor + z_adjustment * (temp_Z_vals(age_ndx) - natMor);
+          survivorship(age_ndx) = (1.0 - exp(-temp_Z_vals(age_ndx))) / temp_Z_vals(age_ndx);
+        }
+        
+        // Now re-calculate a new pope rate using a vulnerable biomass based
+        // on the newly adjusted F
+        for(fishery_ndx = 0; fishery_ndx < n_fisheries; ++fishery_ndx) {
+          vulnerable_bio(fishery_ndx) = (N.col(year_ndx - 1).vec() * fishery_selectivity.col(fishery_ndx).vec() * catchMeanWeight.col(year_ndx - 1).vec() * survivorship).sum() ;
+          exploitation_rate(fishery_ndx) = catches(year_ndx - 1, fishery_ndx) / (vulnerable_bio(fishery_ndx) + 0.0001); //  Pope's rate  robust A.1.22 of SS appendix
+          steep_jointer(fishery_ndx) = 1.0 / (1.0 + exp(30.0 * (exploitation_rate(fishery_ndx) - 0.95 * F_max))); // steep logistic joiner at harvest rate of 0.95 //steep logistic joiner at harvest rate of 0.95
+          init_F(fishery_ndx) = steep_jointer(fishery_ndx) * exploitation_rate(fishery_ndx) + (1.0 - steep_jointer(fishery_ndx)) * F_max; 
+          annual_Fs(fishery_ndx, year_ndx - 1) = init_F(fishery_ndx);
+        }
+      }
+       
+      // Cache F and Z calculations
+      for(fishery_ndx = 0; fishery_ndx < n_fisheries; ++fishery_ndx) {
+       for(age_ndx = 0; age_ndx < n_ages; ++age_ndx) {
+         F_ayf(age_ndx, year_ndx - 1, fishery_ndx) = fishery_selectivity(age_ndx, fishery_ndx) * annual_Fs(fishery_ndx, year_ndx - 1);
+         Z_ay(age_ndx, year_ndx - 1) +=  F_ayf(age_ndx, year_ndx - 1, fishery_ndx);
+        }
+      }
+    }
     
+    // Calculate SSBs an interpolation bewtween the year, starting with previous years Paritition
+    for(age_ndx = 0; age_ndx < n_ages; ++age_ndx) {
+      ssb(year_ndx) += N(age_ndx, year_ndx - 1) * exp(-Z_ay(age_ndx, year_ndx - 1) * propZ_ssb(year_ndx - 1)) * propMat(age_ndx, year_ndx - 1) * stockMeanWeight(age_ndx, year_ndx - 1);
+      for(fishery_ndx = 0; fishery_ndx < n_fisheries; ++fishery_ndx)
+        pred_catches(year_ndx - 1, fishery_ndx) +=  F_ayf(age_ndx, year_ndx - 1, fishery_ndx) / Z_ay(age_ndx, year_ndx - 1) * N(age_ndx, year_ndx - 1) * (1 - exp(-Z_ay(age_ndx, year_ndx - 1))) * catchMeanWeight(age_ndx, year_ndx - 1);
+    }
     //----------------
-    // F + M + ageing
+    // Apply F + M + ageing
     //----------------
     for(age_ndx = 1; age_ndx < n_ages; ++age_ndx) 
       predlogN(age_ndx) = log(N(age_ndx - 1, year_ndx - 1)) - Z_ay(age_ndx - 1, year_ndx - 1);
@@ -386,13 +488,7 @@ Type objective_function<Type>::operator() () {
     
     // Transform from log space
     N.col(year_ndx) = exp(predlogN);
-    
-    // Calculate SSBs an interpolation bewtween the year, starting with previous years Paritition
-    for(age_ndx = 0; age_ndx < n_ages; ++age_ndx) {
-      ssb(year_ndx) += N(age_ndx, year_ndx - 1) * exp(-Z_ay(age_ndx, year_ndx - 1) * propZ_ssb(year_ndx - 1)) * propMat(age_ndx, year_ndx - 1) * stockMeanWeight(age_ndx, year_ndx - 1);
-      for(fishery_ndx = 0; fishery_ndx < n_fisheries; ++fishery_ndx)
-        pred_catches(year_ndx - 1, fishery_ndx) += exp(log(N(age_ndx, year_ndx - 1)) + log(F_ayf(age_ndx, year_ndx - 1, fishery_ndx)) - log(Z_ay(age_ndx, year_ndx - 1)) + log(1 - exp(-Z_ay(age_ndx, year_ndx - 1)))) * catchMeanWeight(age_ndx, year_ndx - 1);
-    }
+
   }
   //
   // Observational Model
@@ -465,7 +561,7 @@ Type objective_function<Type>::operator() () {
     }
   }
   
-
+  
   
   for(fishery_ndx = 0; fishery_ndx < n_fisheries; ++fishery_ndx) {
     iter = 0;
@@ -540,7 +636,7 @@ Type objective_function<Type>::operator() () {
   
   REPORT( catch_sd );
   REPORT( fishery_AF_fitted );
-
+  
   REPORT( F_ayf );  
   REPORT( Z_ay );
   ADREPORT( ssb );

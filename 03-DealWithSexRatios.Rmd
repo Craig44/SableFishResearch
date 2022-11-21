@@ -52,7 +52,7 @@ Another consideration about "Approach 2" is if the selectivity shape differs bet
 - Sample size between the two approaches
 - Actual sex ratio skewed in the recruitment process, rather than just a selectivity effect which was of focus in the following simulation
 - Look at the effect on \(F\)'s I only summarised SSB and selectivities
-
+- Look at some residuals to see if that is a way to discredit some of these models
 ### Operating Model (OM) Parameters 
 
 ```{r setup}

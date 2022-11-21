@@ -143,7 +143,6 @@ invlogit_general = function(Y, lb, ub) {
   Y1 = 1 / (1 + exp(-Y))
   lb + (ub - lb)*Y1
 }
-
 #' fix_pars 
 #' @author C.Marsh
 #' @description TMB helper function this function returns a list of factors used in the map argument of the MakeADFun function
@@ -214,6 +213,49 @@ fix_pars <- function(par_list, pars_to_exclude, vec_elements_to_exclude = NULL, 
   }
   return(mapped_pars);
 }
+
+
+#' set_pars_to_be_the_same 
+#' @author C.Marsh
+#' @description TMB helper function this function returns a list of factors used in the map argument of the MakeADFun function
+#' values with the same factor level will be estimated as the same value
+#' @details TMB will estimate parameters based on the index specified in by the map argument in MakeADFun
+#' so parameters with the same factor in map will be estimated as the same value.
+#' NOTE: this only works for within the same parameter. It doesn't work across parameters.
+#' @param par_list a named list that you give to the par argument in the MakeADFun
+#' @param map a list of factors that has been created by fix_pars(). parameters that you want fixed to other values should be set to <NA> in this object
+#' @param base_parameters a named list (names) each element contains one index that will be used to set the value in copy_parameters
+#' @param copy_parameters a named list (names) each element contains one index that will be set equal to the corresponding base_parameters
+#' @return a list of factors used in the MakeADFun function
+#' @export
+set_pars_to_be_the_same <- function(par_list, map, base_parameters, copy_parameters) {
+  if(length(base_parameters) != length(copy_parameters))
+    stop("the number of elements in base_parameters must be the same as copy_parameters. Please check these")
+  if(!class(map) == "list")
+    stop("map needs to be a list")
+  if(!any(names(base_parameters) %in% names(par_list)))
+    stop(!paste0("The parameters in base_parameters ", paste(names(base_parameters)[!names(base_parameters) %in% names(par_list)],collapse = " ")," could not be found in the 'par_list', please sort this out"))
+  if(!any(names(copy_parameters) %in% names(par_list)))
+    stop(!paste0("The parameters in copy_parameters ", paste(names(copy_parameters)[!names(copy_parameters) %in% names(par_list)],collapse = " ")," could not be found in the 'par_list', please sort this out"))
+  pars = names(par_list)
+  
+  for(i in 1:length(base_parameters)) {
+    if(is.na(map[[names(base_parameters)[i]]][base_parameters[[i]]]))
+      stop(paste0("In base_parameters for parameter ", names(base_parameters)[i], " at ndx ", base_parameters[[i]], ". We found an NA. This cannot be, please check"))
+    if(!is.na(map[[names(copy_parameters)[i]]][copy_parameters[[i]]]))
+      stop(paste0("In copy_parameters for parameter ", names(base_parameters)[i], " at ndx ", base_parameters[[i]], ". Was not an NA. This must be an NA value in 'map', please check"))
+
+    temp_copy_parm = map[[names(copy_parameters)[i]]]
+    temp_copy_parm = as.numeric(as.character(temp_copy_parm))
+    base_value = as.numeric(as.character(map[[names(base_parameters)[i]]][base_parameters[[i]]]))
+    temp_copy_parm[copy_parameters[[i]]] = base_value
+    lvls = unique(temp_copy_parm[!is.na(temp_copy_parm)])
+    map[[names(copy_parameters)[i]]] = factor(temp_copy_parm, levels = lvls)
+  }
+  
+  return(map);
+}
+
 #' get_list_obj gets names objects out of simulated TMB reports.
 #' @param est_ls a list of length n_sims
 #' @param object_label a charachter that points to a name of an element of the TMB report
