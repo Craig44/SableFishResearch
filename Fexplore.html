@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-11-18" />
+<meta name="date" content="2022-11-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -185,15 +185,13 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="sexratios.html"><a href="sexratios.html#results"><i class="fa fa-check"></i><b>4.1.1</b> Results</a></li>
 <li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#future-research-that-was-not-considered-in-this-simple-simulation"><i class="fa fa-check"></i>Future research that was not considered in this simple simulation</a></li>
-<li class="chapter" data-level="4.1.2" data-path="sexratios.html"><a href="sexratios.html#operating-model-om-parameters"><i class="fa fa-check"></i><b>4.1.2</b> Operating Model (OM) Parameters</a></li>
-<li class="chapter" data-level="4.1.3" data-path="sexratios.html"><a href="sexratios.html#scenario-1"><i class="fa fa-check"></i><b>4.1.3</b> Scenario 1</a></li>
-<li class="chapter" data-level="4.1.4" data-path="sexratios.html"><a href="sexratios.html#scenario-2"><i class="fa fa-check"></i><b>4.1.4</b> Scenario 2</a></li>
+<li class="chapter" data-level="4.1.2" data-path="sexratios.html"><a href="sexratios.html#scenario-1"><i class="fa fa-check"></i><b>4.1.2</b> Scenario 1</a></li>
+<li class="chapter" data-level="4.1.3" data-path="sexratios.html"><a href="sexratios.html#scenario-2"><i class="fa fa-check"></i><b>4.1.3</b> Scenario 2</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="Fexplore.html"><a href="Fexplore.html"><i class="fa fa-check"></i><b>5</b> Exploring alternative fishing mortality parameterisations (F)</a>
 <ul>
 <li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#set-up-a-simulation"><i class="fa fa-check"></i>Set up a simulation</a></li>
-<li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#other-things-to-consider"><i class="fa fa-check"></i>Other things to consider</a></li>
 <li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#appendix---hybrid-approach"><i class="fa fa-check"></i>Appendix - Hybrid approach</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>6</b> Tagging data and studies</a>
@@ -264,7 +262,7 @@ Figure 5.1: Illustration of how mortality is applied to an age cohort continuous
 </div>
 <div id="set-up-a-simulation" class="section level2 unnumbered hasAnchor">
 <h2>Set up a simulation<a href="Fexplore.html#set-up-a-simulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>To explore the three methods described above a simple simulation was conducted for a simple age-structured stock assessment. The purpose was to check that the derived methods were reliable so that we can implement them in the spatial model that is development.</p>
+<p>To explore the above described methods a simple simulation was conducted using a simple age-structured stock assessment operating model. The model assumed 15 seperate fisheries all with a common selectivity. The purpose was to check that the derived methods were reliable (provided unbiased stock quantities) and that they are computationally efficient.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="Fexplore.html#cb11-1" aria-hidden="true" tabindex="-1"></a>bio_params <span class="ot">=</span> <span class="fu">list</span>(</span>
 <span id="cb11-2"><a href="Fexplore.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">ages =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
 <span id="cb11-3"><a href="Fexplore.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">L_inf =</span> <span class="dv">58</span>,</span>
@@ -315,37 +313,58 @@ Figure 5.1: Illustration of how mortality is applied to an age cohort continuous
 <span id="cb11-48"><a href="Fexplore.html#cb11-48" aria-hidden="true" tabindex="-1"></a>survey_ages <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span></span>
 <span id="cb11-49"><a href="Fexplore.html#cb11-49" aria-hidden="true" tabindex="-1"></a>fishery_year_obs <span class="ot">=</span> years</span>
 <span id="cb11-50"><a href="Fexplore.html#cb11-50" aria-hidden="true" tabindex="-1"></a>fishery_ages <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="Fexplore.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
-<span id="cb12-2"><a href="Fexplore.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Self Test with estimable F&#39;s</span></span>
-<span id="cb12-3"><a href="Fexplore.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="do">##################################</span></span>
-<span id="cb12-4"><a href="Fexplore.html#cb12-4" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">=</span> <span class="dv">10</span></span>
-<span id="cb12-5"><a href="Fexplore.html#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="Fexplore.html#cb12-6" aria-hidden="true" tabindex="-1"></a>est_pars <span class="ot">=</span> <span class="cn">NULL</span></span>
-<span id="cb12-7"><a href="Fexplore.html#cb12-7" aria-hidden="true" tabindex="-1"></a>ssbs <span class="ot">=</span> <span class="cn">NULL</span></span>
-<span id="cb12-8"><a href="Fexplore.html#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(sim_iter <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sims) {</span>
-<span id="cb12-9"><a href="Fexplore.html#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(sim_iter <span class="sc">%%</span> <span class="dv">10</span> <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb12-10"><a href="Fexplore.html#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">&quot;iter = &quot;</span>, sim_iter, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb12-11"><a href="Fexplore.html#cb12-11" aria-hidden="true" tabindex="-1"></a>  sim_data <span class="ot">=</span> ASM_obj<span class="sc">$</span><span class="fu">simulate</span>(<span class="at">complete =</span> T)</span>
-<span id="cb12-12"><a href="Fexplore.html#cb12-12" aria-hidden="true" tabindex="-1"></a>  start_pars <span class="ot">=</span> <span class="fu">ran_start_vals</span>(<span class="at">covar =</span> <span class="st">&quot;ar1&quot;</span>)</span>
-<span id="cb12-13"><a href="Fexplore.html#cb12-13" aria-hidden="true" tabindex="-1"></a>  est_model <span class="ot">=</span> <span class="fu">MakeADFun</span>(sim_data, start_pars, <span class="at">DLL=</span> <span class="st">&quot;SimpleAgeStructuredModel&quot;</span>, <span class="at">map =</span> na_map, <span class="at">silent =</span> T)</span>
-<span id="cb12-14"><a href="Fexplore.html#cb12-14" aria-hidden="true" tabindex="-1"></a>  opt_modelc <span class="ot">=</span> <span class="fu">nlminb</span>(est_model<span class="sc">$</span>par, est_model<span class="sc">$</span>fn, est_model<span class="sc">$</span>gr, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">iter.max =</span> <span class="dv">10000</span>, <span class="at">eval.max =</span> <span class="dv">10000</span>))</span>
-<span id="cb12-15"><a href="Fexplore.html#cb12-15" aria-hidden="true" tabindex="-1"></a>  est_pars <span class="ot">=</span> <span class="fu">rbind</span>(est_pars, opt_modelc<span class="sc">$</span>par)</span>
-<span id="cb12-16"><a href="Fexplore.html#cb12-16" aria-hidden="true" tabindex="-1"></a>  est_rep <span class="ot">=</span> est_model<span class="sc">$</span><span class="fu">report</span>(opt_modelc<span class="sc">$</span>par)</span>
-<span id="cb12-17"><a href="Fexplore.html#cb12-17" aria-hidden="true" tabindex="-1"></a>  ssbs <span class="ot">=</span> <span class="fu">rbind</span>(ssbs, est_rep<span class="sc">$</span>ssb)</span>
-<span id="cb12-18"><a href="Fexplore.html#cb12-18" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<pre><code>## iter =  10</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="Fexplore.html#cb14-1" aria-hidden="true" tabindex="-1"></a>molten_ssbs <span class="ot">=</span> <span class="fu">melt</span>(ssbs)</span>
-<span id="cb14-2"><a href="Fexplore.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(molten_ssbs) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;sim&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;value&quot;</span>)</span>
-<span id="cb14-3"><a href="Fexplore.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb14-4"><a href="Fexplore.html#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span>molten_ssbs, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> value, <span class="at">group =</span> sim)) <span class="sc">+</span></span>
-<span id="cb14-5"><a href="Fexplore.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">year =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">31</span>, <span class="at">value =</span> true_report<span class="sc">$</span>ssb),<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> value), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb14-6"><a href="Fexplore.html#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb14-7"><a href="Fexplore.html#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="at">y =</span> <span class="st">&quot;SSB (t)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb14-8"><a href="Fexplore.html#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="Fexplore.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">## simulate data</span></span>
+<span id="cb12-2"><a href="Fexplore.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb12-3"><a href="Fexplore.html#cb12-3" aria-hidden="true" tabindex="-1"></a>sim_data <span class="ot">=</span> ASM_obj<span class="sc">$</span><span class="fu">simulate</span>(<span class="at">complete =</span> T)</span>
+<span id="cb12-4"><a href="Fexplore.html#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="Fexplore.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Build AD TMB functions</span></span>
+<span id="cb12-6"><a href="Fexplore.html#cb12-6" aria-hidden="true" tabindex="-1"></a>start_pars <span class="ot">=</span> <span class="fu">ran_start_vals</span>()</span>
+<span id="cb12-7"><a href="Fexplore.html#cb12-7" aria-hidden="true" tabindex="-1"></a>est_model_est_F <span class="ot">=</span> <span class="fu">MakeADFun</span>(sim_data, true_pars, <span class="at">DLL=</span> <span class="st">&quot;SimpleAgestructuredModelMultiFs&quot;</span>, <span class="at">map =</span> na_map, <span class="at">silent =</span> T)</span>
+<span id="cb12-8"><a href="Fexplore.html#cb12-8" aria-hidden="true" tabindex="-1"></a>sim_data<span class="sc">$</span>F_method <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb12-9"><a href="Fexplore.html#cb12-9" aria-hidden="true" tabindex="-1"></a>sim_data<span class="sc">$</span>F_iterations <span class="ot">=</span> <span class="dv">4</span></span>
+<span id="cb12-10"><a href="Fexplore.html#cb12-10" aria-hidden="true" tabindex="-1"></a>est_model_hybrid_F <span class="ot">=</span> <span class="fu">MakeADFun</span>(sim_data, true_pars, <span class="at">DLL=</span> <span class="st">&quot;SimpleAgestructuredModelMultiFs&quot;</span>, <span class="at">map =</span> na_map_hybrid, <span class="at">silent =</span> T)</span>
+<span id="cb12-11"><a href="Fexplore.html#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="do">## optimise</span></span>
+<span id="cb12-12"><a href="Fexplore.html#cb12-12" aria-hidden="true" tabindex="-1"></a>opt_model_est_F <span class="ot">=</span> <span class="fu">nlminb</span>(est_model_est_F<span class="sc">$</span>par, est_model_est_F<span class="sc">$</span>fn, est_model_est_F<span class="sc">$</span>gr, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">iter.max =</span> <span class="dv">10000</span>, <span class="at">eval.max =</span> <span class="dv">10000</span>))</span>
+<span id="cb12-13"><a href="Fexplore.html#cb12-13" aria-hidden="true" tabindex="-1"></a>opt_model_hybrid_F <span class="ot">=</span> <span class="fu">nlminb</span>(est_model_hybrid_F<span class="sc">$</span>par, est_model_hybrid_F<span class="sc">$</span>fn, est_model_hybrid_F<span class="sc">$</span>gr, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">iter.max =</span> <span class="dv">10000</span>, <span class="at">eval.max =</span> <span class="dv">10000</span>))</span>
+<span id="cb12-14"><a href="Fexplore.html#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="Fexplore.html#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="do">## look at the number of iterations used to solve</span></span>
+<span id="cb12-16"><a href="Fexplore.html#cb12-16" aria-hidden="true" tabindex="-1"></a>opt_model_hybrid_F<span class="sc">$</span>iterations</span></code></pre></div>
+<pre><code>## [1] 184</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="Fexplore.html#cb14-1" aria-hidden="true" tabindex="-1"></a>opt_model_est_F<span class="sc">$</span>iterations</span></code></pre></div>
+<pre><code>## [1] 660</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="Fexplore.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="do">## get reports = </span></span>
+<span id="cb16-2"><a href="Fexplore.html#cb16-2" aria-hidden="true" tabindex="-1"></a>rep_est_hybrid <span class="ot">=</span> est_model_hybrid_F<span class="sc">$</span><span class="fu">report</span>(est_model_hybrid_F<span class="sc">$</span>env<span class="sc">$</span>last.par.best)</span>
+<span id="cb16-3"><a href="Fexplore.html#cb16-3" aria-hidden="true" tabindex="-1"></a>rep_est_F <span class="ot">=</span> est_model_est_F<span class="sc">$</span><span class="fu">report</span>(est_model_est_F<span class="sc">$</span>env<span class="sc">$</span>last.par.best)</span>
+<span id="cb16-4"><a href="Fexplore.html#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="Fexplore.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(TMB_data<span class="sc">$</span>years, rep_est_hybrid<span class="sc">$</span>ssb[<span class="sc">-</span><span class="dv">1</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">xlab =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;SSB&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">46000</span>))</span>
+<span id="cb16-6"><a href="Fexplore.html#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(TMB_data<span class="sc">$</span>years, rep_est_F<span class="sc">$</span>ssb[<span class="sc">-</span><span class="dv">1</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;purple&quot;</span>)</span>
+<span id="cb16-7"><a href="Fexplore.html#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(TMB_data<span class="sc">$</span>years, sim_data<span class="sc">$</span>ssb[<span class="sc">-</span><span class="dv">1</span>], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">4</span>, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb16-8"><a href="Fexplore.html#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;purple&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Hybrid&quot;</span>, <span class="st">&quot;Est F&quot;</span>, <span class="st">&quot;OM&quot;</span>), <span class="at">lwd =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/self_test-1.png" width="672" /></p>
-</div>
-<div id="other-things-to-consider" class="section level2 unnumbered hasAnchor">
-<h2>Other things to consider<a href="Fexplore.html#other-things-to-consider" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="Fexplore.html#cb17-1" aria-hidden="true" tabindex="-1"></a>est_F_bench <span class="ot">=</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_est_F, <span class="at">n =</span> <span class="dv">1000</span>)</span>
+<span id="cb17-2"><a href="Fexplore.html#cb17-2" aria-hidden="true" tabindex="-1"></a>hybrid_F_bench <span class="ot">=</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_hybrid_F, <span class="at">n =</span> <span class="dv">1000</span>)</span>
+<span id="cb17-3"><a href="Fexplore.html#cb17-3" aria-hidden="true" tabindex="-1"></a>est_F_bench</span></code></pre></div>
+<pre><code>##                     elapsed
+## template.likelihood   0.801
+## template.gradient     2.607</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="Fexplore.html#cb19-1" aria-hidden="true" tabindex="-1"></a>hybrid_F_bench</span></code></pre></div>
+<pre><code>##                     elapsed
+## template.likelihood   2.056
+## template.gradient     8.199</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="Fexplore.html#cb21-1" aria-hidden="true" tabindex="-1"></a>ben_est_F <span class="ot">&lt;-</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_est_F, <span class="at">n=</span><span class="dv">20</span>,<span class="at">expr=</span><span class="fu">expression</span>(<span class="fu">do.call</span>(<span class="st">&quot;optim&quot;</span>,obj)))</span>
+<span id="cb21-2"><a href="Fexplore.html#cb21-2" aria-hidden="true" tabindex="-1"></a>ben_hybrid_F <span class="ot">&lt;-</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_hybrid_F, <span class="at">n=</span><span class="dv">20</span>,<span class="at">expr=</span><span class="fu">expression</span>(<span class="fu">do.call</span>(<span class="st">&quot;optim&quot;</span>,obj)))</span>
+<span id="cb21-3"><a href="Fexplore.html#cb21-3" aria-hidden="true" tabindex="-1"></a>ben_est_F</span></code></pre></div>
+<pre><code>##                       elapsed
+## do.call(&quot;optim&quot;, obj)  16.236</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="Fexplore.html#cb23-1" aria-hidden="true" tabindex="-1"></a>ben_hybrid_F</span></code></pre></div>
+<pre><code>##                       elapsed
+## do.call(&quot;optim&quot;, obj)  15.067</code></pre>
+<p>These results have highlighted the following</p>
+<ul>
+<li>Both the Free <span class="math inline">\(F\)</span> and hybrid estimate very similar model quantities i.e., SSB’s and F’s</li>
+<li>The Free <span class="math inline">\(F\)</span> method is much faster on average for a single gradient calculation and function call compared to the hybrid method</li>
+<li>However, the hybrid method requires less iterations due to there being less estimated parameters. For this simulation where we assumed 15 fisheries both optimised in similar amounts of time</li>
+</ul>
 </div>
 <div id="appendix---hybrid-approach" class="section level2 unnumbered hasAnchor">
 <h2>Appendix - Hybrid approach<a href="Fexplore.html#appendix---hybrid-approach" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -362,14 +381,14 @@ Figure 5.1: Illustration of how mortality is applied to an age cohort continuous
     V^g_{y} &amp;= \sum\limits_s\sum\limits_a N_{a,y,s} \exp\left(-\delta_t M_{a,s}\right) \nonumber \\
     \tilde{U}^g_{y} &amp;= \frac{C^g_{y}}{V^g_{y} + 0.1 C^g_{y}}\\
     j^g_{y} &amp;= \left(1 + \exp \left(30 (\tilde{U}^g_{y} - 0.95) \right)\right)^{-1}\\
-    U^g_{y} &amp;=  j_{t,f} \tilde{U}^g_{y} + 0.95 (1 - j^g_{y} )\\
+    U^g_{y} &amp;=  j^g_{y} \tilde{U}^g_{y} + 0.95 (1 - j^g_{y} )\\
     \tilde{F}^g_{y} &amp;= \frac{-\log\left(1 - U^g_{y}\right)}{\delta_t}
 \end{align}\]</span></p>
 <p>where, <span class="math inline">\(C^{g}_y\)</span> is the observed catch, <span class="math inline">\(\delta_t\)</span> is the duration of the period of observation within the year. In most situations where the entire catch has been observed in a time-step. This should be one. <span class="math inline">\(V^g_{y}\)</span> is partway vulnerable biomass and <span class="math inline">\(\tilde{F}^g_{y}\)</span> is the initial <span class="math inline">\(F\)</span>.</p>
 <p>The formulation above is designed so that high exploitation rates (above 0.95) are converted into an F that corresponds to a harvest rate of close to 0.95, thus providing a more robust starting point for subsequent iterative adjustment of this F. The logistic joiner, <span class="math inline">\(j\)</span>, is used at other places in Stock Synthesis to link across discontinuities.</p>
 <p>The tuning algorithm begins by setting <span class="math inline">\(F^g_{y} = \tilde{F}^g_{y}\)</span> and repeating the following algorithm <code>f_iteration</code> times.</p>
 <p><span class="math display">\[
-\widehat{C}_{a,y,s}  = \sum\limits_g {F}^g_{y}\left(S^g_{a,s} N_{a,y,s}\right) \lambda^*_{a,y,s}
+\widehat{C}_{a,y,s}  = \sum\limits_g {F}^g_{y}S^g_{a,s} N_{a,y,s}\bar{w}_{a,y,s} \lambda^*_{a,y,s}
 \]</span></p>
 <p>where, <span class="math inline">\(\lambda^*_{a,y,s}\)</span> denotes the survivorship and is calculated as:</p>
 <p><span class="math display" id="eq:survival">\[\begin{equation}
@@ -380,13 +399,13 @@ Figure 5.1: Illustration of how mortality is applied to an age cohort continuous
 <p><span class="math display">\[
 \widehat{C}_{y}  =  \sum\limits_g \sum\limits_s\sum\limits_a {F}^g_{y}\left(S^g_{a,s} N_{a,y,s}\right) \lambda^*_{a,y,s}
 \]</span></p>
-<p>This is different from Equation~A.1.25 in the Appendix of <span class="citation">(<a href="#ref-methot2013stock" role="doc-biblioref">Methot Jr and Wetzel 2013</a>)</span>. They include <span class="math inline">\(Z_{a,y,s}\)</span> in the denominator of <span class="math inline">\({F}^g_{y}\)</span>, which is a type error because <span class="math inline">\(Z_{a,y,s}\)</span> is already included in <span class="math inline">\(\lambda^*_{a,y,s}\)</span>, see Equation~<span class="math inline">\(\ref{eq:survival}\)</span>.</p>
+<p>This is different from Equation A.1.25 in the Appendix of <span class="citation">(<a href="#ref-methot2013stock" role="doc-biblioref">Methot Jr and Wetzel 2013</a>)</span>. They include <span class="math inline">\(Z_{a,y,s}\)</span> in the denominator when describing <span class="math inline">\({F}^g_{y}\)</span>, I think this is a typo error because <span class="math inline">\(Z_{a,y,s}\)</span> is already included in the denominator when calculating <span class="math inline">\(\lambda^*_{a,y,s}\)</span> (see Equation <a href="Fexplore.html#eq:survival">(5.1)</a>).</p>
 <p><span class="math display">\[
-Z^{adj}_t = \frac{\sum\limits_g C^g_{y}}{\widehat{C}_{y}}
+Z^{adj}_y = \frac{\sum\limits_g C^g_{y}}{\widehat{C}_{y}}
 \]</span></p>
 <p>The total mortality if this adjuster was applied to all the Fs is then calculated:</p>
 <p><span class="math display">\[
-Z^*_{a,y,s} = M_{a,s} + Z^{adj}_t \left(Z_{a,y,s} -M_{a,s} \right)
+Z^*_{a,y,s} = M_{a,s} + Z^{adj}_y \left(Z_{a,y,s} -M_{a,s} \right)
 \]</span></p>
 <p><span class="math display">\[
 \lambda^*_{a,y,s} = \frac{1 - \exp\left(-\delta_t Z^*_{a,y,s}  \right) }{Z^*_{a,y,s}}

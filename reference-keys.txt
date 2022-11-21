@@ -33,7 +33,6 @@ symbols
 sexratios
 sexSimulation
 results
-operating-model-om-parameters
 scenario-1
 scenario-2
 Fexplore
