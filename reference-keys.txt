@@ -36,5 +36,6 @@ results
 scenario-1
 scenario-2
 Fexplore
+spatialInit
 tagdata
 refpoints

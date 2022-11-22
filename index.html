@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-11-21" />
+<meta name="date" content="2022-11-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -158,7 +158,11 @@ div.csl-indent {
 <li><a href="./">Sablefish Research</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#future-things-to-consider"><i class="fa fa-check"></i>Future things to consider</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#chapter-overview"><i class="fa fa-check"></i>chapter overview</a></li>
+</ul></li>
 <li class="chapter" data-level="2" data-path="objectives.html"><a href="objectives.html"><i class="fa fa-check"></i><b>2</b> A list of objectives/milestones that we have set along the project life</a></li>
 <li class="chapter" data-level="3" data-path="modeldescription.html"><a href="modeldescription.html"><i class="fa fa-check"></i><b>3</b> Current Stock assessment model</a>
 <ul>
@@ -194,7 +198,8 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#set-up-a-simulation"><i class="fa fa-check"></i>Set up a simulation</a></li>
 <li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#appendix---hybrid-approach"><i class="fa fa-check"></i>Appendix - Hybrid approach</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>6</b> Tagging data and studies</a>
+<li class="chapter" data-level="6" data-path="spatialInit.html"><a href="spatialInit.html"><i class="fa fa-check"></i><b>6</b> How to calculate the plus group in models with markovian movement</a></li>
+<li class="chapter" data-level="7" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>7</b> Tagging data and studies</a>
 <ul>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#integration-in-age-structured-models"><i class="fa fa-check"></i>Integration in age-structured models</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#growth-estimation-using-the-laslettevesonpolacheck-lep"><i class="fa fa-check"></i>Growth estimation using the Laslett–Eveson–Polacheck (LEP)</a>
@@ -205,7 +210,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#simulation-test-the-lep-method"><i class="fa fa-check"></i>Simulation test the “LEP” method</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#next-steps"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="refpoints.html"><a href="refpoints.html"><i class="fa fa-check"></i><b>7</b> Review/summarise reference points</a></li>
+<li class="chapter" data-level="8" data-path="refpoints.html"><a href="refpoints.html"><i class="fa fa-check"></i><b>8</b> Review/summarise reference points</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment" target="blank">NOAA Website</a></li>
@@ -230,17 +235,27 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">Alaskan sablefish research</h1>
 <p class="author"><em>C.Marsh</em></p>
-<p class="date"><em>2022-11-21</em></p>
+<p class="date"><em>2022-11-22</em></p>
 </div>
 <div id="overview" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Overview<a href="index.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This Gitbook documents my/our research for the Alaska sablefish (<em>Anoplopoma fimbria</em>). The objective is to develop and explore a spatially explicit stock assessment for Alaskan sablefish. However, there will be many other topics that I will likely only scratch the surface on. The following outlines the chapters in this document</p>
+<div id="future-things-to-consider" class="section level2 unnumbered hasAnchor">
+<h2>Future things to consider<a href="index.html#future-things-to-consider" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>How to reduce partition dimension when adding tag-release events</li>
+<li></li>
+</ul>
+</div>
+<div id="chapter-overview" class="section level2 unnumbered hasAnchor">
+<h2>chapter overview<a href="index.html#chapter-overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><p>Chapter <a href="objectives.html#objectives">2</a> is a list of objectives that we have set or accomplished during this research project. Some of our research cannot be in this book/repo due to the confidential nature of the data. This checklist should include tasks for the wider research</p></li>
 <li><p>Chapter <a href="modeldescription.html#modeldescription">3</a> documents the current stock assessment model and assumptions (work in progress). This first is the first step of the project and helps me get a grasp of data and dynamics that are important</p></li>
 <li><p>Chapter <a href="sexratios.html#sexratios">4</a> explores how to include sex disaggregated composition observations that can include sex ratio information. It conducts a simple simulation to investigate two different approaches than what is currently done in the assessment</p></li>
 <li><p>Chapter <a href="Fexplore.html#Fexplore">5</a> explores how to parameterise fishing mortality. The current approach is to estimate an annual fishing mortality parameter for each gear. I feel slightly uncomfortable about this approach moving towards a spatial model as the number of estimated parameters will explode. This chapter looks at two alternative approaches that either derive fishing mortality estimates using a Newton Raphson solver which is borrowed from the Stock Synthesis “hybrid” approach <span class="citation">(<a href="#ref-methot2013stock" role="doc-biblioref">Methot Jr and Wetzel 2013</a>)</span> and Pope’s discrete approach <span class="citation">(<a href="#ref-pope1972investigation" role="doc-biblioref">Pope 1972</a>)</span> which uses exploitation rates. All of these methods have been applied in the literature for decades. The aim of this chapter is to do a simulation and make sure the considered approaches are efficient and numerically stability under a range of fishing patterns</p></li>
-<li><p>Chapter <a href="tagdata.html#tagdata">6</a> describes the tagging data and how it can be used within a spatial model but also used in a panmictic model for informing population dynamics such as growth.</p></li>
+<li><p>Chapter <a href="spatialInit.html#spatialInit">6</a> explores how to calculate the plus group in spatially explicit age-structured models that assume markovian movement.</p></li>
+<li><p>Chapter <a href="tagdata.html#tagdata">7</a> describes the tagging data and how it can be used within a spatial model but also used in a panmictic model for informing population dynamics such as growth.</p></li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TMB)</span>
 <span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#library(stockassessmenthelper)</span></span>
@@ -249,6 +264,7 @@ div.csl-indent {
 <span id="cb1-5"><a href="index.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
 <span id="cb1-6"><a href="index.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span></code></pre></div>
 
+</div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">

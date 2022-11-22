@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-11-21" />
+<meta name="date" content="2022-11-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -158,7 +158,11 @@ div.csl-indent {
 <li><a href="./">Sablefish Research</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#future-things-to-consider"><i class="fa fa-check"></i>Future things to consider</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#chapter-overview"><i class="fa fa-check"></i>chapter overview</a></li>
+</ul></li>
 <li class="chapter" data-level="2" data-path="objectives.html"><a href="objectives.html"><i class="fa fa-check"></i><b>2</b> A list of objectives/milestones that we have set along the project life</a></li>
 <li class="chapter" data-level="3" data-path="modeldescription.html"><a href="modeldescription.html"><i class="fa fa-check"></i><b>3</b> Current Stock assessment model</a>
 <ul>
@@ -194,7 +198,8 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#set-up-a-simulation"><i class="fa fa-check"></i>Set up a simulation</a></li>
 <li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#appendix---hybrid-approach"><i class="fa fa-check"></i>Appendix - Hybrid approach</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>6</b> Tagging data and studies</a>
+<li class="chapter" data-level="6" data-path="spatialInit.html"><a href="spatialInit.html"><i class="fa fa-check"></i><b>6</b> How to calculate the plus group in models with markovian movement</a></li>
+<li class="chapter" data-level="7" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>7</b> Tagging data and studies</a>
 <ul>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#integration-in-age-structured-models"><i class="fa fa-check"></i>Integration in age-structured models</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#growth-estimation-using-the-laslettevesonpolacheck-lep"><i class="fa fa-check"></i>Growth estimation using the Laslett–Eveson–Polacheck (LEP)</a>
@@ -205,7 +210,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#simulation-test-the-lep-method"><i class="fa fa-check"></i>Simulation test the “LEP” method</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#next-steps"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="refpoints.html"><a href="refpoints.html"><i class="fa fa-check"></i><b>7</b> Review/summarise reference points</a></li>
+<li class="chapter" data-level="8" data-path="refpoints.html"><a href="refpoints.html"><i class="fa fa-check"></i><b>8</b> Review/summarise reference points</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment" target="blank">NOAA Website</a></li>
@@ -275,7 +280,7 @@ where, <span class="math inline">\(N^{eff, k}_{y,s}\)</span> is the effective sa
 <li>Look at some residuals to see if that is a way to discredit some of these models
 ### Operating Model (OM) Parameters</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="sexratios.html#cb2-1" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">=</span> <span class="dv">250</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="sexratios.html#cb2-1" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">=</span> <span class="dv">100</span></span>
 <span id="cb2-2"><a href="sexratios.html#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="sexratios.html#cb2-3" aria-hidden="true" tabindex="-1"></a>bio_params <span class="ot">=</span> <span class="fu">list</span>(</span>
 <span id="cb2-4"><a href="sexratios.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ages =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
@@ -350,7 +355,7 @@ S^{female}_a = \alpha/(1+19^{(a_{50}-a)/a_{to95})})
 <p>A third EM (EM3) was also explored, this structured compositional data using Approach 1 but fixed the female <span class="math inline">\(\alpha\)</span> = 1 in Equation <a href="sexratios.html#eq:femaleselectivity">(4.2)</a>. This is often the default approach. For scenario 1 this should be the best performing EM as it has the <span class="math inline">\(\alpha\)</span> set at the values of the OM.</p>
 <div id="em-1-using-approach-1" class="section level4 unnumbered hasAnchor">
 <h4>EM 1 (using approach 1)<a href="sexratios.html#em-1-using-approach-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  1.220251e-06</code></pre>
+<pre><code>## max gradient from 100 simualtions =  2.24484e-06</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_1_EM_1-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario1EM1ssb"></span>
 <img src="_main_files/figure-html/runscenario1EM1ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
@@ -367,7 +372,7 @@ Figure 4.3: Annual fishing mortality, red line OM (truth), black lines are the e
 </div>
 <div id="em-2-using-approach-2" class="section level4 unnumbered hasAnchor">
 <h4>EM 2 (using approach 2)<a href="sexratios.html#em-2-using-approach-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  5.812048e-06</code></pre>
+<pre><code>## max gradient from 100 simualtions =  3.855158e-06</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_1_EM_2-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario1EM2ssb"></span>
 <img src="_main_files/figure-html/runscenario1EM2ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
@@ -384,7 +389,7 @@ Figure 4.5: Annual fishing mortality, red line OM (truth), black lines are the e
 </div>
 <div id="em-3-using-approach-1-with-female-fixed-at-alpha-1" class="section level4 unnumbered hasAnchor">
 <h4>EM 3 (using approach 1 with female fixed at <span class="math inline">\(\alpha = 1\)</span>)<a href="sexratios.html#em-3-using-approach-1-with-female-fixed-at-alpha-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  4.361261e-06</code></pre>
+<pre><code>## max gradient from 100 simualtions =  3.709945e-06</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_1_EM_3-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario1EM3ssb"></span>
 <img src="_main_files/figure-html/runscenario1EM3ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
@@ -406,7 +411,7 @@ Figure 4.7: Annual fishing mortality, red line OM (truth), black lines are the e
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="sexratios.html#cb6-1" aria-hidden="true" tabindex="-1"></a>true_pars<span class="sc">$</span>logit_f_alpha_f <span class="ot">=</span> <span class="fu">logit_general</span>(<span class="fl">1.2</span>, TMB_data<span class="sc">$</span>sel_alpha_bounds[<span class="dv">1</span>], TMB_data<span class="sc">$</span>sel_alpha_bounds[<span class="dv">2</span>])</span></code></pre></div>
 <div id="em-1-using-approach-1-1" class="section level4 unnumbered hasAnchor">
 <h4>EM 1 (using approach 1)<a href="sexratios.html#em-1-using-approach-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  4.884721e-06</code></pre>
+<pre><code>## max gradient from 100 simualtions =  2.295653e-06</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_2_EM_1-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario2EM1ssb"></span>
 <img src="_main_files/figure-html/runscenario2EM1ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
@@ -423,7 +428,7 @@ Figure 4.9: Annual fishing mortality, red line OM (truth), black lines are the e
 </div>
 <div id="em-2-using-approach-2-1" class="section level4 unnumbered hasAnchor">
 <h4>EM 2 (using approach 2)<a href="sexratios.html#em-2-using-approach-2-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  6.458301e-05</code></pre>
+<pre><code>## max gradient from 100 simualtions =  1.129917e-05</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_2_EM_2-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario2EM2ssb"></span>
 <img src="_main_files/figure-html/runscenario2EM2ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
@@ -440,7 +445,7 @@ Figure 4.11: Annual fishing mortality, red line OM (truth), black lines are the 
 </div>
 <div id="em-3-using-approach-1-with-female-fixed-at-alpha-1-1" class="section level4 unnumbered hasAnchor">
 <h4>EM 3 (using approach 1 with female fixed at <span class="math inline">\(\alpha = 1\)</span>)<a href="sexratios.html#em-3-using-approach-1-with-female-fixed-at-alpha-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  3.090883e-06</code></pre>
+<pre><code>## max gradient from 100 simualtions =  1.524071e-06</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_2_EM_3-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario2EM3ssb"></span>
 <img src="_main_files/figure-html/runscenario2EM3ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
