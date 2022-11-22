@@ -1,5 +1,7 @@
-# Current Stock assessment model {#modeldescription}
-The latest published stock assessment [@goethel2021assessment] is a sexually disaggregated integrated age-structured model. Let \(\boldsymbol{N_{y,s}}\) denote a vector of ages in year \(y\) for sex \(s\) (the partition) i.e., \(\boldsymbol{N_{y,s}} = (N_{1,y,s}, N_{2,y,s}, \dots, N_{a_+,y,s})^T\). The general process model is sequential and follows the general Equation \@ref(eq:processmodel),
+# Current Alaskan sablefish stock assessment model {#modeldescription}
+The latest published stock assessment [@goethel2021assessment] is a single area model (Chapter \@ref(modeldescription)). This chapter intends to extend this model by allowing it to be spatially disaggregated.
+
+disaggregated integrated age-structured model. Let \(\boldsymbol{N_{y,s}}\) denote a vector of ages in year \(y\) for sex \(s\) (the partition) i.e., \(\boldsymbol{N_{y,s}} = (N_{1,y,s}, N_{2,y,s}, \dots, N_{a_+,y,s})^T\). The general process model is sequential and follows the general Equation \@ref(eq:processmodel),
 
 \begin{equation} 
   \boldsymbol{N_{y,s}} = 
