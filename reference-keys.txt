@@ -30,6 +30,7 @@ modeldescription
 modelequations
 observationsection
 symbols
+spatialmodeldescription
 sexratios
 sexSimulation
 results
