@@ -56,7 +56,7 @@ Another consideration about "Approach 2" is if the selectivity shape differs bet
 ### Operating Model (OM) Parameters 
 
 ```{r setup}
-n_sims = 250
+n_sims = 100
 
 bio_params = list(
   ages = 1:20,
