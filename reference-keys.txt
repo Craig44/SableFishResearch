@@ -21,6 +21,9 @@ fig:runscenario2EM3ssb
 fig:runscenario2EM3Fs
 fig:illustrateFvsU
 eq:survival
+fig:addagelength
+eq:lengthexploit
+eq:tagatagerelease
 eq:richardsgrowth
 eq:lengthatrelease
 eq:lengthatrecapture
@@ -31,6 +34,7 @@ modelequations
 observationsection
 symbols
 spatialmodeldescription
+spatialmodelequations
 sexratios
 sexSimulation
 results
@@ -39,4 +43,6 @@ scenario-2
 Fexplore
 spatialInit
 tagdata
+integrating-tagging-observations-in-spatial-age-structured-models
+growth-estimation-using-the-laslettevesonpolacheck-lep-method
 refpoints

@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-11-22" />
+<meta name="date" content="2022-11-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -179,16 +179,20 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-length"><i class="fa fa-check"></i>Catch at length</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#observations-for-fisheries-and-surveys"><i class="fa fa-check"></i>Observations for fisheries and surveys</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="modeldescription.html"><a href="modeldescription.html#symbols"><i class="fa fa-check"></i><b>3.3</b> Symbol Notation</a></li>
+<li class="chapter" data-level="3.3" data-path="modeldescription.html"><a href="modeldescription.html#symbols"><i class="fa fa-check"></i><b>3.3</b> Symbol Notation</a>
+<ul>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#inference"><i class="fa fa-check"></i>Inference</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#todo"><i class="fa fa-check"></i>TODO</a></li>
 </ul></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html"><i class="fa fa-check"></i><b>4</b> Spatial stock assessment model for Alaskan sablefish</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="modeldescription.html"><a href="modeldescription.html#modelequations"><i class="fa fa-check"></i><b>4.1</b> Process equations</a>
+<li class="chapter" data-level="4.1" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#spatialmodelequations"><i class="fa fa-check"></i><b>4.1</b> Process equations</a>
 <ul>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#initialisation-gleft.right-1"><i class="fa fa-check"></i>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)</a></li>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#population-dynamics-fleft.right-1"><i class="fa fa-check"></i>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#to-consider"><i class="fa fa-check"></i>To consider</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#to-do"><i class="fa fa-check"></i>To DO</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>5</b> Exploring methods for sex ratios in age and length composition data</a>
@@ -209,8 +213,9 @@ div.csl-indent {
 <li class="chapter" data-level="7" data-path="spatialInit.html"><a href="spatialInit.html"><i class="fa fa-check"></i><b>7</b> How to calculate the plus group in models with markovian movement</a></li>
 <li class="chapter" data-level="8" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>8</b> Tagging data and studies</a>
 <ul>
-<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#integration-in-age-structured-models"><i class="fa fa-check"></i>Integration in age-structured models</a></li>
-<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#growth-estimation-using-the-laslettevesonpolacheck-lep"><i class="fa fa-check"></i>Growth estimation using the Laslett–Eveson–Polacheck (LEP)</a>
+<li class="chapter" data-level="8.1" data-path="tagdata.html"><a href="tagdata.html#integrating-tagging-observations-in-spatial-age-structured-models"><i class="fa fa-check"></i><b>8.1</b> Integrating tagging observations in spatial age-structured models</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#releasing-tags"><i class="fa fa-check"></i>Releasing tags</a></li>
+<li class="chapter" data-level="8.2" data-path="tagdata.html"><a href="tagdata.html#growth-estimation-using-the-laslettevesonpolacheck-lep-method"><i class="fa fa-check"></i><b>8.2</b> Growth estimation using the Laslett–Eveson–Polacheck (LEP) method</a>
 <ul>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#age-at-length-growth-model"><i class="fa fa-check"></i>Age-at-length growth model</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tag-recapture-growth-data"><i class="fa fa-check"></i>Tag recapture growth data</a></li>
@@ -342,9 +347,9 @@ Figure 6.1: Illustration of how mortality is applied to an age cohort continuous
 <span id="cb12-14"><a href="Fexplore.html#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-15"><a href="Fexplore.html#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="do">## look at the number of iterations used to solve</span></span>
 <span id="cb12-16"><a href="Fexplore.html#cb12-16" aria-hidden="true" tabindex="-1"></a>opt_model_hybrid_F<span class="sc">$</span>iterations</span></code></pre></div>
-<pre><code>## [1] 183</code></pre>
+<pre><code>## [1] 187</code></pre>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="Fexplore.html#cb14-1" aria-hidden="true" tabindex="-1"></a>opt_model_est_F<span class="sc">$</span>iterations</span></code></pre></div>
-<pre><code>## [1] 598</code></pre>
+<pre><code>## [1] 697</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="Fexplore.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="do">## get reports = </span></span>
 <span id="cb16-2"><a href="Fexplore.html#cb16-2" aria-hidden="true" tabindex="-1"></a>rep_est_hybrid <span class="ot">=</span> est_model_hybrid_F<span class="sc">$</span><span class="fu">report</span>(est_model_hybrid_F<span class="sc">$</span>env<span class="sc">$</span>last.par.best)</span>
 <span id="cb16-3"><a href="Fexplore.html#cb16-3" aria-hidden="true" tabindex="-1"></a>rep_est_F <span class="ot">=</span> est_model_est_F<span class="sc">$</span><span class="fu">report</span>(est_model_est_F<span class="sc">$</span>env<span class="sc">$</span>last.par.best)</span>
@@ -358,20 +363,20 @@ Figure 6.1: Illustration of how mortality is applied to an age cohort continuous
 <span id="cb17-2"><a href="Fexplore.html#cb17-2" aria-hidden="true" tabindex="-1"></a>hybrid_F_bench <span class="ot">=</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_hybrid_F, <span class="at">n =</span> <span class="dv">1000</span>)</span>
 <span id="cb17-3"><a href="Fexplore.html#cb17-3" aria-hidden="true" tabindex="-1"></a>est_F_bench</span></code></pre></div>
 <pre><code>##                     elapsed
-## template.likelihood   1.038
-## template.gradient     3.389</code></pre>
+## template.likelihood   0.805
+## template.gradient     1.570</code></pre>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="Fexplore.html#cb19-1" aria-hidden="true" tabindex="-1"></a>hybrid_F_bench</span></code></pre></div>
 <pre><code>##                     elapsed
-## template.likelihood   2.719
-## template.gradient    10.560</code></pre>
+## template.likelihood   2.068
+## template.gradient     4.259</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="Fexplore.html#cb21-1" aria-hidden="true" tabindex="-1"></a>ben_est_F <span class="ot">&lt;-</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_est_F, <span class="at">n=</span><span class="dv">20</span>,<span class="at">expr=</span><span class="fu">expression</span>(<span class="fu">do.call</span>(<span class="st">&quot;optim&quot;</span>,obj)))</span>
 <span id="cb21-2"><a href="Fexplore.html#cb21-2" aria-hidden="true" tabindex="-1"></a>ben_hybrid_F <span class="ot">&lt;-</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_hybrid_F, <span class="at">n=</span><span class="dv">20</span>,<span class="at">expr=</span><span class="fu">expression</span>(<span class="fu">do.call</span>(<span class="st">&quot;optim&quot;</span>,obj)))</span>
 <span id="cb21-3"><a href="Fexplore.html#cb21-3" aria-hidden="true" tabindex="-1"></a>ben_est_F</span></code></pre></div>
 <pre><code>##                       elapsed
-## do.call(&quot;optim&quot;, obj)  15.243</code></pre>
+## do.call(&quot;optim&quot;, obj)  14.223</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="Fexplore.html#cb23-1" aria-hidden="true" tabindex="-1"></a>ben_hybrid_F</span></code></pre></div>
 <pre><code>##                       elapsed
-## do.call(&quot;optim&quot;, obj)  19.617</code></pre>
+## do.call(&quot;optim&quot;, obj)   11.76</code></pre>
 <p>These results have highlighted the following</p>
 <ul>
 <li>Both the Free <span class="math inline">\(F\)</span> and hybrid estimate very similar model quantities i.e., SSB’s and F’s</li>

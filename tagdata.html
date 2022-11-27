@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-11-22" />
+<meta name="date" content="2022-11-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -179,16 +179,20 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-length"><i class="fa fa-check"></i>Catch at length</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#observations-for-fisheries-and-surveys"><i class="fa fa-check"></i>Observations for fisheries and surveys</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="modeldescription.html"><a href="modeldescription.html#symbols"><i class="fa fa-check"></i><b>3.3</b> Symbol Notation</a></li>
+<li class="chapter" data-level="3.3" data-path="modeldescription.html"><a href="modeldescription.html#symbols"><i class="fa fa-check"></i><b>3.3</b> Symbol Notation</a>
+<ul>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#inference"><i class="fa fa-check"></i>Inference</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#todo"><i class="fa fa-check"></i>TODO</a></li>
 </ul></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html"><i class="fa fa-check"></i><b>4</b> Spatial stock assessment model for Alaskan sablefish</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="modeldescription.html"><a href="modeldescription.html#modelequations"><i class="fa fa-check"></i><b>4.1</b> Process equations</a>
+<li class="chapter" data-level="4.1" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#spatialmodelequations"><i class="fa fa-check"></i><b>4.1</b> Process equations</a>
 <ul>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#initialisation-gleft.right-1"><i class="fa fa-check"></i>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)</a></li>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#population-dynamics-fleft.right-1"><i class="fa fa-check"></i>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#to-consider"><i class="fa fa-check"></i>To consider</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#to-do"><i class="fa fa-check"></i>To DO</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>5</b> Exploring methods for sex ratios in age and length composition data</a>
@@ -209,8 +213,9 @@ div.csl-indent {
 <li class="chapter" data-level="7" data-path="spatialInit.html"><a href="spatialInit.html"><i class="fa fa-check"></i><b>7</b> How to calculate the plus group in models with markovian movement</a></li>
 <li class="chapter" data-level="8" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>8</b> Tagging data and studies</a>
 <ul>
-<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#integration-in-age-structured-models"><i class="fa fa-check"></i>Integration in age-structured models</a></li>
-<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#growth-estimation-using-the-laslettevesonpolacheck-lep"><i class="fa fa-check"></i>Growth estimation using the Laslett–Eveson–Polacheck (LEP)</a>
+<li class="chapter" data-level="8.1" data-path="tagdata.html"><a href="tagdata.html#integrating-tagging-observations-in-spatial-age-structured-models"><i class="fa fa-check"></i><b>8.1</b> Integrating tagging observations in spatial age-structured models</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#releasing-tags"><i class="fa fa-check"></i>Releasing tags</a></li>
+<li class="chapter" data-level="8.2" data-path="tagdata.html"><a href="tagdata.html#growth-estimation-using-the-laslettevesonpolacheck-lep-method"><i class="fa fa-check"></i><b>8.2</b> Growth estimation using the Laslett–Eveson–Polacheck (LEP) method</a>
 <ul>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#age-at-length-growth-model"><i class="fa fa-check"></i>Age-at-length growth model</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tag-recapture-growth-data"><i class="fa fa-check"></i>Tag recapture growth data</a></li>
@@ -243,11 +248,66 @@ div.csl-indent {
 <div id="tagdata" class="section level1 hasAnchor" number="8">
 <h1><span class="header-section-number">Chapter 8</span> Tagging data and studies<a href="tagdata.html#tagdata" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Since 1972 there have been approximately 400 000 sablefish tagged in Alaska waters, of which over 38 500 have been recovered. Although there is extensive and long term tagging data, this information is not currently directly included in the stock assessment <span class="citation">(<a href="#ref-goethel2021assessment" role="doc-biblioref">Goethel et al. 2021</a>)</span>.</p>
-<div id="integration-in-age-structured-models" class="section level2 unnumbered hasAnchor">
-<h2>Integration in age-structured models<a href="tagdata.html#integration-in-age-structured-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="integrating-tagging-observations-in-spatial-age-structured-models" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Integrating tagging observations in spatial age-structured models<a href="tagdata.html#integrating-tagging-observations-in-spatial-age-structured-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This project intends to explore a range of methods for utilising tag-recovery observations in spatially disaggregated age-structured stock assessments.</p>
 </div>
-<div id="growth-estimation-using-the-laslettevesonpolacheck-lep" class="section level2 unnumbered hasAnchor">
-<h2>Growth estimation using the Laslett–Eveson–Polacheck (LEP)<a href="tagdata.html#growth-estimation-using-the-laslettevesonpolacheck-lep" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="releasing-tags" class="section level2 unnumbered hasAnchor">
+<h2>Releasing tags<a href="tagdata.html#releasing-tags" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Tag release events involve releasing a tag-cohort at the beginning of a year within a specific area assumes tag cohort indexed by <span class="math inline">\(k\)</span> has an implied year <span class="math inline">\(y\)</span> and region <span class="math inline">\(r\)</span> index. <span class="math inline">\(\boldsymbol{N}^k\)</span> is used to denote a vector of lengths or ages for tag-cohort <span class="math inline">\(k\)</span>. In general, only the length frequency is known at time of release for each tag-cohort. We explore two different methods for seeding tagged numbers at age for each tag-cohort within spatial age-structured models. The two methods are either do it internal or external. The internal method requires users to supply length frequency for each tag-cohort and the model will use the assumed growth assumptions to convert the lengths to ages. The external approach is to use an age-length key outside of the model to derive an age frequency that can be supplied to the model.</p>
+<p>A frequent assumption of age-structured tagging models in the literature <span class="citation">(<a href="#ref-maunder1998integration" role="doc-biblioref">Maunder 1998</a>; <a href="#ref-vincent2020parameter" role="doc-biblioref">Vincent, Brenden, and Bence 2020</a>)</span> is that the age-frequency of each tag-cohort are known. Due to the fact that ageing is a fatal process, we assume they use an age-length key to convert lengths to ages. If the age-length key is representative of the vulnerable population at the time of tagging, then this method is expected to be have better computational performance. Factors to consider at time of release are; Gear method used to select releases, where releases occur, and time of releases. The internal method can attribute the correct age-distribution if the selectivity/availability by age is correct i.e. using the correct selectivity. Also, if growth is internally estimated within the assessment model, then the internal method may be prefered as to keep the growth assumptions consistent between LF observations and tagging observations.</p>
+<p>One consideration if the tag releases and recoveries are both length-based is the age-length transition assumptions. Due to age-structured modelling growth as length conditional on age. Moving individuals back and forwards through the age-length transition matrix (length <span class="math inline">\(\rightarrow\)</span> age <span class="math inline">\(\rightarrow\)</span> length) will cause “smearing” of length frequencies. This is demonstrated in Figures @(ref:addagelength) and @(ref:showagelengthtransition_problem), and needs to be considered when considering model fitted values for observations and corresponding likelihood assumptions. Given this phenomenon, it could be argued, that the external age-length key approach is better as it makes these assumptions explicit (more transparent). However, both methods will be affected by this growth transition phenomenon to one degree or another.</p>
+<div class="figure"><span style="display:block;" id="fig:addagelength"></span>
+<img src="_main_files/figure-html/addagelength-1.png" alt="An example of theoretical length at age, with overlapping length bins used to describe the effect of going back and fourth through the age-length transition matrix." width="70%" />
+<p class="caption">
+Figure 8.1: An example of theoretical length at age, with overlapping length bins used to describe the effect of going back and fourth through the age-length transition matrix.
+</p>
+</div>
+<pre><code>## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## ℹ Please use `linewidth` instead.</code></pre>
+<div class="figure">
+<img src="_main_files/figure-html/showagelengthtransition_problem-1.png" alt="A visualisation of the effect of going back and forth through an age-length transition matrix. This can happen when tag releases and recaptures are input as length in an age-structured model. The model converts lengths to ages, then reconverts the age to length for observations. This is assuming the same age-length relationship in Figure \@ref(fig:addagelength)" width="100%" />
+<p class="caption">
+(#fig:showagelengthtransition_problem)A visualisation of the effect of going back and forth through an age-length transition matrix. This can happen when tag releases and recaptures are input as length in an age-structured model. The model converts lengths to ages, then reconverts the age to length for observations. This is assuming the same age-length relationship in Figure <a href="tagdata.html#fig:addagelength">8.1</a>
+</p>
+</div>
+<div id="internal-method" class="section level4 unnumbered hasAnchor">
+<h4>Internal method<a href="tagdata.html#internal-method" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Age-structured stock assessment models contain growth models, which describe length conditioned on age. This requires assumptions on the distribution and associated parameters. The default is often the normal distribution with mean length at age denoted by <span class="math inline">\(\bar{l}_a\)</span> with standard deviation parameterised as a coefficient of variation (<span class="math inline">\(\sigma_a = cv*\mu_a\)</span>). This information enables the model to derive a growth transition matrix <span class="math inline">\(P_{l|a}\)</span>. Given the lower and upper limits for each length bin denoted as <span class="math inline">\(\boldsymbol{b} = (b_1, b_2, \dots, b_{max})&#39;\)</span>, the probability of being in length bin <span class="math inline">\(l\)</span> given age <span class="math inline">\(a\)</span></p>
+<p><span class="math display" id="eq:agelengthtransition">\[\begin{equation}
+P_{l|a} =
+\begin{cases}
+\Phi(b_{l + 1}|\mu_a,\sigma_a)\quad &amp;\text{for } l = 1\\
+\Phi(b_{l + 1}|\mu_a,\sigma_a) - \Phi(b_l|\mu_a,\sigma_a)\quad &amp;\text{for } 1 &lt; l &lt; n_l\\
+1 - \Phi(b_{l}|\mu_a,\sigma_a)\quad &amp;\text{for } l = n_l
+\end{cases}
+  \tag{3.6}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\Phi(x|\mu,\sigma)\)</span> is the cumulative normal (but could be generalised to any probability distribution). If growth varies by attributes such as sex, stock or region then this will need to be calculated for each growth model. In the SNA1 stock assessment each stock has a different growth curve and is denote as <span class="math inline">\(P^s_{a|l}\)</span></p>
+<p>At the point a tag cohort is released, the model can derive the length composition of the vulnerable population using the transition matrix derived in Equation (eq:agelengthtransition). Given the number of estimable parameters that govern the age-stricture at a point in time and growth model, an exploitation rate is calculated so that if there are not enough numbers in a length bin to be tagged, a penalty can be added to the objective function to dissuade the combination of parameters that generated this situation. Tag-release by length is a known quantity and so the model must allow for a minimum vulnerable length composition to that released. To enforce this a exploitation like rate by each length <span class="math inline">\((u_l)\)</span> is calculated as follows,
+<span class="math display" id="eq:lengthexploit">\[\begin{equation}
+u_l = \frac{N^k_{l}}{\sum_a}N_{y_k,a,r_k} P_{l|a}
+  \tag{8.1}
+\end{equation}\]</span></p>
+<p>During parameter estimation there are no constraints within the model to trial a set of parameters than will allow <span class="math inline">\(u_l &gt; 1\)</span> i.e. more observed tag-releases than in the vulnerable population. To stop negative numbers at age <span class="math inline">\(u_l\)</span> is set at a level less than 1 and a penalty added to the objective function to discourage parameters from allowing this condition. Finally tag-release at age is calculated as follows,
+<span class="math display" id="eq:tagatagerelease">\[\begin{equation}
+N^k_{a} = N_{y_k,a,r_k}  P_{l|a} u_l
+  \tag{8.2}
+
+\end{equation}\]</span></p>
+<p>Once the tag cohort are created in the model it is assumed that tagged fish are exposed to the same dynamics as un-tagged fish.</p>
+</div>
+<div id="external-method-age-length-key-method" class="section level4 unnumbered hasAnchor">
+<h4>External method (Age-length key method)<a href="tagdata.html#external-method-age-length-key-method" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Once a tag-release event has occurred for tag group <span class="math inline">\(k\)</span>, the only known knowledge is the length distribution <span class="math inline">\(N^k_l\)</span>. Assuming there is an accessible forward age-length key which describes the proportion of ages for a given length bin <span class="math inline">\(\left(P_{a|l}\right)\)</span> that is representative of the vulnerable population to tagging for the same area and time, then the “forward” or “classic” key method can be used <span class="citation">Ailloud and Hoenig (<a href="#ref-ailloud2019general" role="doc-biblioref">2019</a>)</span>. If tag-release coincide with a fishing season you could use fishery-dependent derived age length information, assuming the selectivity curves within a length bin are parallel. If only a subset of fish from each haul is released, it would be better to construct an age-length key from a representative sample of fish that were caught by not-tagged. This would be relevant for single vessel survey release events.
+<span class="math display">\[\begin{equation}
+    N^k_a = \sum\limits_{l = 1}P_{a|l}N^k_l
+\end{equation}\]</span>
+where, <span class="math inline">\(N^k_a\)</span> is used as an known input into the model with no error.</p>
+</div>
+</div>
+<div id="growth-estimation-using-the-laslettevesonpolacheck-lep-method" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Growth estimation using the Laslett–Eveson–Polacheck (LEP) method<a href="tagdata.html#growth-estimation-using-the-laslettevesonpolacheck-lep-method" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Going to investigate the use of “Laslett–Eveson–Polacheck (LEP)” based on <span class="citation">Laslett, Eveson, and Polacheck (<a href="#ref-laslett2002flexible" role="doc-biblioref">2002</a>)</span> &amp; <span class="citation">Eveson, Laslett, and Polacheck (<a href="#ref-eveson2004integrated" role="doc-biblioref">2004</a>)</span> as described in <span class="citation">Aires-da-Silva et al. (<a href="#ref-aires2015improved" role="doc-biblioref">2015</a>)</span>.</p>
 <p>The idea is to use a single growth model that fits to two observational data sets (ideally within the assessment, however we will start outside for now. When including it in the assessment you will also have LF data to help inform growth). The first will describe age-at-length data from direct ageing. The second will be length increment data from tagging experiments.</p>
 <div id="age-at-length-growth-model" class="section level3 unnumbered hasAnchor">
@@ -255,7 +315,7 @@ div.csl-indent {
 <p>We start by using the Richards growth curve following <span class="citation">Aires-da-Silva et al. (<a href="#ref-aires2015improved" role="doc-biblioref">2015</a>)</span> (but this could be extended). The Richards growth formulation follows</p>
 <p><span class="math display" id="eq:richardsgrowth">\[\begin{equation}
   \bar{l}_{a} = L_{\infty} \left( 1 + \frac{1}{p} \exp \{-K(a - a_0)\}\right)^{-p}
-  \tag{8.1}
+  \tag{8.3}
 \end{equation}\]</span>
 where, <span class="math inline">\(\bar{l}_{a}\)</span> is the mean length at age <span class="math inline">\(a\)</span>, <span class="math inline">\(L_{\infty}\)</span> is the asymptotic length, <span class="math inline">\(K\)</span> is the growth coefficient and <span class="math inline">\(p\)</span> is a shape parameter that is related to the ratio <span class="math inline">\(\bar{l}_{a} / L_{\infty}\)</span> at the inflexion point.</p>
 </div>
@@ -299,12 +359,12 @@ where, <span class="math inline">\(\bar{l}_{a}\)</span> is the mean length at ag
 <p>The sub-models for the release and recapture lengths follow,
 <span class="math display" id="eq:lengthatrelease">\[\begin{equation}
   l_{1,i} = L_{\infty} \left( 1 + \frac{1}{p} \exp \{-K(a_{1,i} - a_0)\}\right)^{-p}
-  \tag{8.2}
+  \tag{8.4}
 \end{equation}\]</span></p>
 <p>and,
 <span class="math display" id="eq:lengthatrecapture">\[\begin{equation}
   l_{2,i} = L_{\infty} \left( 1 + \frac{1}{p} \exp \{-K(a_{1,i} + \Delta_t - a_0)\}\right)^{-p}
-  \tag{8.3}
+  \tag{8.5}
 \end{equation}\]</span></p>
 <p>The above growth model assumes that we know the age at recovery <span class="math inline">\(a_{2,i}\)</span>. The problem we have is, we have 22 569 tag recoveries with length information but only a handful of these have been aged. This is dealt with by modelling <span class="math inline">\(a_{1,i}\)</span> as a random effect i.e., <span class="math inline">\(a_{1,i} \sim LN \left(\mu, \sigma^2\right)\)</span>.</p>
 <p>What confuses is me here is how to assign a hyper distribution like the one above for the random effect variables <span class="math inline">\(a_{1,i}\)</span>. <span class="math inline">\(a_{1,i}\)</span> is expected to vary quite a bit because tagged fish at release have a broad length frequency and thus is expected to have a broad age at release? (ask someone about this because I may be misunderstanding something).</p>
@@ -312,84 +372,84 @@ where, <span class="math inline">\(\bar{l}_{a}\)</span> is the mean length at ag
 </div>
 <div id="simulation-test-the-lep-method" class="section level2 unnumbered hasAnchor">
 <h2>Simulation test the “LEP” method<a href="tagdata.html#simulation-test-the-lep-method" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="tagdata.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="do">## going to use parameters from Aires-da-Silva et al. (2015) Table 1 integrated analysis</span></span>
-<span id="cb35-2"><a href="tagdata.html#cb35-2" aria-hidden="true" tabindex="-1"></a>L_inf <span class="ot">=</span> <span class="fl">200.8</span></span>
-<span id="cb35-3"><a href="tagdata.html#cb35-3" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="fl">0.44</span></span>
-<span id="cb35-4"><a href="tagdata.html#cb35-4" aria-hidden="true" tabindex="-1"></a>t_0 <span class="ot">=</span> <span class="fl">1.26</span></span>
-<span id="cb35-5"><a href="tagdata.html#cb35-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">=</span> <span class="sc">-</span><span class="fl">4.27</span></span>
-<span id="cb35-6"><a href="tagdata.html#cb35-6" aria-hidden="true" tabindex="-1"></a>cv <span class="ot">=</span> <span class="fl">0.15</span> <span class="do">## cv of length around length at age</span></span>
-<span id="cb35-7"><a href="tagdata.html#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-8"><a href="tagdata.html#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="do">## selectivity paraemters</span></span>
-<span id="cb35-9"><a href="tagdata.html#cb35-9" aria-hidden="true" tabindex="-1"></a>sel_a50 <span class="ot">=</span> <span class="fl">1.3</span></span>
-<span id="cb35-10"><a href="tagdata.html#cb35-10" aria-hidden="true" tabindex="-1"></a>sel_ato95 <span class="ot">=</span> <span class="fl">0.8</span></span>
-<span id="cb35-11"><a href="tagdata.html#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="do">## sample sizes for simulation</span></span>
-<span id="cb35-12"><a href="tagdata.html#cb35-12" aria-hidden="true" tabindex="-1"></a>n_sample_release <span class="ot">=</span> <span class="dv">1000</span></span>
-<span id="cb35-13"><a href="tagdata.html#cb35-13" aria-hidden="true" tabindex="-1"></a>n_sample_recoveries <span class="ot">=</span> <span class="dv">1000</span> <span class="sc">*</span> <span class="fl">0.1</span> <span class="do">## about the recovery rate from sablefish data</span></span>
-<span id="cb35-14"><a href="tagdata.html#cb35-14" aria-hidden="true" tabindex="-1"></a>n_sample_age_length <span class="ot">=</span> <span class="dv">1000</span></span>
-<span id="cb35-15"><a href="tagdata.html#cb35-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-16"><a href="tagdata.html#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="do">## generate a pseudo age structure</span></span>
-<span id="cb35-17"><a href="tagdata.html#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb35-18"><a href="tagdata.html#cb35-18" aria-hidden="true" tabindex="-1"></a>R_0 <span class="ot">=</span> <span class="dv">200000</span></span>
-<span id="cb35-19"><a href="tagdata.html#cb35-19" aria-hidden="true" tabindex="-1"></a>M <span class="ot">=</span> <span class="fl">0.29</span></span>
-<span id="cb35-20"><a href="tagdata.html#cb35-20" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span></span>
-<span id="cb35-21"><a href="tagdata.html#cb35-21" aria-hidden="true" tabindex="-1"></a>n_ages <span class="ot">=</span> <span class="fu">length</span>(ages)</span>
-<span id="cb35-22"><a href="tagdata.html#cb35-22" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(ages, mean_length_at_age, type = &quot;l&quot;, lwd = 3, xlab = &quot;Age&quot;, ylab = &quot;Length (cm)&quot;)</span></span>
-<span id="cb35-23"><a href="tagdata.html#cb35-23" aria-hidden="true" tabindex="-1"></a>sel_at_age <span class="ot">=</span> <span class="fu">logis</span>(ages, sel_a50, sel_ato95)</span>
-<span id="cb35-24"><a href="tagdata.html#cb35-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-25"><a href="tagdata.html#cb35-25" aria-hidden="true" tabindex="-1"></a><span class="do">## numbers at age</span></span>
-<span id="cb35-26"><a href="tagdata.html#cb35-26" aria-hidden="true" tabindex="-1"></a>N_age <span class="ot">=</span> <span class="fu">vector</span>(<span class="at">length =</span> n_ages, <span class="st">&quot;numeric&quot;</span>)</span>
-<span id="cb35-27"><a href="tagdata.html#cb35-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (age_ndx <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_ages) </span>
-<span id="cb35-28"><a href="tagdata.html#cb35-28" aria-hidden="true" tabindex="-1"></a>  N_age[age_ndx] <span class="ot">=</span> R_0 <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>ages[age_ndx] <span class="sc">*</span> M) <span class="sc">*</span> <span class="fu">exp</span>(<span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.7</span>))</span>
-<span id="cb35-29"><a href="tagdata.html#cb35-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-30"><a href="tagdata.html#cb35-30" aria-hidden="true" tabindex="-1"></a>N_age <span class="ot">=</span> N_age <span class="sc">*</span> sel_at_age <span class="do">## vulnerable numbers at age</span></span>
-<span id="cb35-31"><a href="tagdata.html#cb35-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-32"><a href="tagdata.html#cb35-32" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ages, N_age, <span class="at">ylab =</span> <span class="st">&quot;Numbers&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Population age-structure&quot;</span>, <span class="at">type =</span> <span class="st">&quot;o&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="tagdata.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">## going to use parameters from Aires-da-Silva et al. (2015) Table 1 integrated analysis</span></span>
+<span id="cb36-2"><a href="tagdata.html#cb36-2" aria-hidden="true" tabindex="-1"></a>L_inf <span class="ot">=</span> <span class="fl">200.8</span></span>
+<span id="cb36-3"><a href="tagdata.html#cb36-3" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="fl">0.44</span></span>
+<span id="cb36-4"><a href="tagdata.html#cb36-4" aria-hidden="true" tabindex="-1"></a>t_0 <span class="ot">=</span> <span class="fl">1.26</span></span>
+<span id="cb36-5"><a href="tagdata.html#cb36-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">=</span> <span class="sc">-</span><span class="fl">4.27</span></span>
+<span id="cb36-6"><a href="tagdata.html#cb36-6" aria-hidden="true" tabindex="-1"></a>cv <span class="ot">=</span> <span class="fl">0.15</span> <span class="do">## cv of length around length at age</span></span>
+<span id="cb36-7"><a href="tagdata.html#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="tagdata.html#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="do">## selectivity paraemters</span></span>
+<span id="cb36-9"><a href="tagdata.html#cb36-9" aria-hidden="true" tabindex="-1"></a>sel_a50 <span class="ot">=</span> <span class="fl">1.3</span></span>
+<span id="cb36-10"><a href="tagdata.html#cb36-10" aria-hidden="true" tabindex="-1"></a>sel_ato95 <span class="ot">=</span> <span class="fl">0.8</span></span>
+<span id="cb36-11"><a href="tagdata.html#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="do">## sample sizes for simulation</span></span>
+<span id="cb36-12"><a href="tagdata.html#cb36-12" aria-hidden="true" tabindex="-1"></a>n_sample_release <span class="ot">=</span> <span class="dv">1000</span></span>
+<span id="cb36-13"><a href="tagdata.html#cb36-13" aria-hidden="true" tabindex="-1"></a>n_sample_recoveries <span class="ot">=</span> <span class="dv">1000</span> <span class="sc">*</span> <span class="fl">0.1</span> <span class="do">## about the recovery rate from sablefish data</span></span>
+<span id="cb36-14"><a href="tagdata.html#cb36-14" aria-hidden="true" tabindex="-1"></a>n_sample_age_length <span class="ot">=</span> <span class="dv">1000</span></span>
+<span id="cb36-15"><a href="tagdata.html#cb36-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-16"><a href="tagdata.html#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="do">## generate a pseudo age structure</span></span>
+<span id="cb36-17"><a href="tagdata.html#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb36-18"><a href="tagdata.html#cb36-18" aria-hidden="true" tabindex="-1"></a>R_0 <span class="ot">=</span> <span class="dv">200000</span></span>
+<span id="cb36-19"><a href="tagdata.html#cb36-19" aria-hidden="true" tabindex="-1"></a>M <span class="ot">=</span> <span class="fl">0.29</span></span>
+<span id="cb36-20"><a href="tagdata.html#cb36-20" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span></span>
+<span id="cb36-21"><a href="tagdata.html#cb36-21" aria-hidden="true" tabindex="-1"></a>n_ages <span class="ot">=</span> <span class="fu">length</span>(ages)</span>
+<span id="cb36-22"><a href="tagdata.html#cb36-22" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(ages, mean_length_at_age, type = &quot;l&quot;, lwd = 3, xlab = &quot;Age&quot;, ylab = &quot;Length (cm)&quot;)</span></span>
+<span id="cb36-23"><a href="tagdata.html#cb36-23" aria-hidden="true" tabindex="-1"></a>sel_at_age <span class="ot">=</span> <span class="fu">logis</span>(ages, sel_a50, sel_ato95)</span>
+<span id="cb36-24"><a href="tagdata.html#cb36-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-25"><a href="tagdata.html#cb36-25" aria-hidden="true" tabindex="-1"></a><span class="do">## numbers at age</span></span>
+<span id="cb36-26"><a href="tagdata.html#cb36-26" aria-hidden="true" tabindex="-1"></a>N_age <span class="ot">=</span> <span class="fu">vector</span>(<span class="at">length =</span> n_ages, <span class="st">&quot;numeric&quot;</span>)</span>
+<span id="cb36-27"><a href="tagdata.html#cb36-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (age_ndx <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_ages) </span>
+<span id="cb36-28"><a href="tagdata.html#cb36-28" aria-hidden="true" tabindex="-1"></a>  N_age[age_ndx] <span class="ot">=</span> R_0 <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>ages[age_ndx] <span class="sc">*</span> M) <span class="sc">*</span> <span class="fu">exp</span>(<span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="fl">0.7</span>))</span>
+<span id="cb36-29"><a href="tagdata.html#cb36-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-30"><a href="tagdata.html#cb36-30" aria-hidden="true" tabindex="-1"></a>N_age <span class="ot">=</span> N_age <span class="sc">*</span> sel_at_age <span class="do">## vulnerable numbers at age</span></span>
+<span id="cb36-31"><a href="tagdata.html#cb36-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-32"><a href="tagdata.html#cb36-32" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ages, N_age, <span class="at">ylab =</span> <span class="st">&quot;Numbers&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Population age-structure&quot;</span>, <span class="at">type =</span> <span class="st">&quot;o&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/simulate_data-1.png" width="672" /></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="tagdata.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">## plot growth</span></span>
-<span id="cb36-2"><a href="tagdata.html#cb36-2" aria-hidden="true" tabindex="-1"></a>mean_length_at_age <span class="ot">=</span> <span class="fu">richards_growth</span>(ages, p, k, t_0, L_inf)</span>
-<span id="cb36-3"><a href="tagdata.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="do">## randomly sample 1000 individuals with replacement for otolithing no ageing error!!</span></span>
-<span id="cb36-4"><a href="tagdata.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb36-5"><a href="tagdata.html#cb36-5" aria-hidden="true" tabindex="-1"></a>individual_age_length_df <span class="ot">=</span> <span class="cn">NULL</span></span>
-<span id="cb36-6"><a href="tagdata.html#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sample_age_length) {</span>
-<span id="cb36-7"><a href="tagdata.html#cb36-7" aria-hidden="true" tabindex="-1"></a>  age_i <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>n_ages, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> N_age)</span>
-<span id="cb36-8"><a href="tagdata.html#cb36-8" aria-hidden="true" tabindex="-1"></a>  mean_length_i <span class="ot">=</span> <span class="fu">richards_growth</span>(age_i, p, k, t_0, L_inf)</span>
-<span id="cb36-9"><a href="tagdata.html#cb36-9" aria-hidden="true" tabindex="-1"></a>  length_i <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, mean_length_i, mean_length_i <span class="sc">*</span> cv)</span>
-<span id="cb36-10"><a href="tagdata.html#cb36-10" aria-hidden="true" tabindex="-1"></a>  temp_df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">age =</span> age_i, <span class="at">length =</span> length_i)</span>
-<span id="cb36-11"><a href="tagdata.html#cb36-11" aria-hidden="true" tabindex="-1"></a>  individual_age_length_df <span class="ot">=</span> <span class="fu">rbind</span>(individual_age_length_df, temp_df)</span>
-<span id="cb36-12"><a href="tagdata.html#cb36-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb36-13"><a href="tagdata.html#cb36-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-14"><a href="tagdata.html#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Simulate a tag-recapture experiment </span></span>
-<span id="cb36-15"><a href="tagdata.html#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="co"># releases</span></span>
-<span id="cb36-16"><a href="tagdata.html#cb36-16" aria-hidden="true" tabindex="-1"></a>release_ages <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>n_ages, <span class="at">size =</span> n_sample_release, <span class="at">prob =</span> N_age, <span class="at">replace =</span> T)</span>
-<span id="cb36-17"><a href="tagdata.html#cb36-17" aria-hidden="true" tabindex="-1"></a>release_mean_lengths <span class="ot">=</span> <span class="fu">richards_growth</span>(release_ages, p, k, t_0, L_inf)</span>
-<span id="cb36-18"><a href="tagdata.html#cb36-18" aria-hidden="true" tabindex="-1"></a>release_lengths <span class="ot">=</span> <span class="fu">rnorm</span>(n_sample_release, release_mean_lengths, release_mean_lengths <span class="sc">*</span> cv)</span>
-<span id="cb36-19"><a href="tagdata.html#cb36-19" aria-hidden="true" tabindex="-1"></a>individual_release_df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">release_age =</span> release_ages, <span class="at">release_length =</span> release_lengths, <span class="at">release_mean_length =</span> release_mean_lengths)</span>
-<span id="cb36-20"><a href="tagdata.html#cb36-20" aria-hidden="true" tabindex="-1"></a>individual_release_df<span class="sc">$</span>fish_id <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(individual_release_df)</span>
-<span id="cb36-21"><a href="tagdata.html#cb36-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-22"><a href="tagdata.html#cb36-22" aria-hidden="true" tabindex="-1"></a><span class="co"># recaptures sample uniformly without replacement</span></span>
-<span id="cb36-23"><a href="tagdata.html#cb36-23" aria-hidden="true" tabindex="-1"></a>fish_ndx <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(individual_release_df), <span class="at">size =</span> n_sample_recoveries, <span class="at">replace =</span> F) </span>
-<span id="cb36-24"><a href="tagdata.html#cb36-24" aria-hidden="true" tabindex="-1"></a>individual_recovery_df <span class="ot">=</span> <span class="fu">subset</span>(individual_release_df, <span class="at">subset =</span> individual_release_df<span class="sc">$</span>fish_id <span class="sc">%in%</span> fish_ndx)</span>
-<span id="cb36-25"><a href="tagdata.html#cb36-25" aria-hidden="true" tabindex="-1"></a><span class="do">## time-at liberty days randomly recovered on average between 100-600 days</span></span>
-<span id="cb36-26"><a href="tagdata.html#cb36-26" aria-hidden="true" tabindex="-1"></a>individual_recovery_df<span class="sc">$</span>time_at_liberty <span class="ot">=</span> <span class="fu">rpois</span>(<span class="at">n =</span> n_sample_recoveries, <span class="at">lambda =</span> <span class="fu">runif</span>(n_sample_recoveries,<span class="dv">100</span>,<span class="dv">600</span>))</span>
-<span id="cb36-27"><a href="tagdata.html#cb36-27" aria-hidden="true" tabindex="-1"></a>individual_recovery_df<span class="sc">$</span>recovery_age <span class="ot">=</span> individual_recovery_df<span class="sc">$</span>release_age <span class="sc">+</span> individual_recovery_df<span class="sc">$</span>time_at_liberty<span class="sc">/</span><span class="dv">365</span></span>
-<span id="cb36-28"><a href="tagdata.html#cb36-28" aria-hidden="true" tabindex="-1"></a><span class="do">## how to add the length increment between release and recovery?</span></span>
-<span id="cb36-29"><a href="tagdata.html#cb36-29" aria-hidden="true" tabindex="-1"></a>individual_recovery_df<span class="sc">$</span>recovery_mean_length <span class="ot">=</span> <span class="fu">richards_growth</span>(individual_recovery_df<span class="sc">$</span>recovery_age, p, k, t_0, L_inf)</span>
-<span id="cb36-30"><a href="tagdata.html#cb36-30" aria-hidden="true" tabindex="-1"></a>individual_recovery_df<span class="sc">$</span>recovery_mean_length_increment <span class="ot">=</span> <span class="fu">with</span>(individual_recovery_df, recovery_mean_length <span class="sc">-</span> release_mean_length)</span>
-<span id="cb36-31"><a href="tagdata.html#cb36-31" aria-hidden="true" tabindex="-1"></a>individual_recovery_df<span class="sc">$</span>recovery_length <span class="ot">=</span> <span class="fu">with</span>(individual_recovery_df, release_length <span class="sc">+</span> <span class="fu">rlnorm</span>(n_sample_recoveries, <span class="fu">log</span>(recovery_mean_length_increment), cv))</span>
-<span id="cb36-32"><a href="tagdata.html#cb36-32" aria-hidden="true" tabindex="-1"></a>individual_recovery_df<span class="sc">$</span>growth_change <span class="ot">=</span> individual_recovery_df<span class="sc">$</span>recovery_length <span class="sc">-</span> individual_recovery_df<span class="sc">$</span>release_length </span>
-<span id="cb36-33"><a href="tagdata.html#cb36-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-34"><a href="tagdata.html#cb36-34" aria-hidden="true" tabindex="-1"></a><span class="do">## visualise length at age samples</span></span>
-<span id="cb36-35"><a href="tagdata.html#cb36-35" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(individual_age_length_df, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> length)) <span class="sc">+</span></span>
-<span id="cb36-36"><a href="tagdata.html#cb36-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb36-37"><a href="tagdata.html#cb36-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span> <span class="fu">data.frame</span>(<span class="at">length =</span> mean_length_at_age, <span class="at">age =</span> ages), <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> length), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>, <span class="at">inherit.aes =</span> F) <span class="sc">+</span></span>
-<span id="cb36-38"><a href="tagdata.html#cb36-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Length&quot;</span>) <span class="sc">+</span></span>
-<span id="cb36-39"><a href="tagdata.html#cb36-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="cn">NA</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="tagdata.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="do">## plot growth</span></span>
+<span id="cb37-2"><a href="tagdata.html#cb37-2" aria-hidden="true" tabindex="-1"></a>mean_length_at_age <span class="ot">=</span> <span class="fu">richards_growth</span>(ages, p, k, t_0, L_inf)</span>
+<span id="cb37-3"><a href="tagdata.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="do">## randomly sample 1000 individuals with replacement for otolithing no ageing error!!</span></span>
+<span id="cb37-4"><a href="tagdata.html#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb37-5"><a href="tagdata.html#cb37-5" aria-hidden="true" tabindex="-1"></a>individual_age_length_df <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb37-6"><a href="tagdata.html#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sample_age_length) {</span>
+<span id="cb37-7"><a href="tagdata.html#cb37-7" aria-hidden="true" tabindex="-1"></a>  age_i <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>n_ages, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> N_age)</span>
+<span id="cb37-8"><a href="tagdata.html#cb37-8" aria-hidden="true" tabindex="-1"></a>  mean_length_i <span class="ot">=</span> <span class="fu">richards_growth</span>(age_i, p, k, t_0, L_inf)</span>
+<span id="cb37-9"><a href="tagdata.html#cb37-9" aria-hidden="true" tabindex="-1"></a>  length_i <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, mean_length_i, mean_length_i <span class="sc">*</span> cv)</span>
+<span id="cb37-10"><a href="tagdata.html#cb37-10" aria-hidden="true" tabindex="-1"></a>  temp_df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">age =</span> age_i, <span class="at">length =</span> length_i)</span>
+<span id="cb37-11"><a href="tagdata.html#cb37-11" aria-hidden="true" tabindex="-1"></a>  individual_age_length_df <span class="ot">=</span> <span class="fu">rbind</span>(individual_age_length_df, temp_df)</span>
+<span id="cb37-12"><a href="tagdata.html#cb37-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-13"><a href="tagdata.html#cb37-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-14"><a href="tagdata.html#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Simulate a tag-recapture experiment </span></span>
+<span id="cb37-15"><a href="tagdata.html#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="co"># releases</span></span>
+<span id="cb37-16"><a href="tagdata.html#cb37-16" aria-hidden="true" tabindex="-1"></a>release_ages <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>n_ages, <span class="at">size =</span> n_sample_release, <span class="at">prob =</span> N_age, <span class="at">replace =</span> T)</span>
+<span id="cb37-17"><a href="tagdata.html#cb37-17" aria-hidden="true" tabindex="-1"></a>release_mean_lengths <span class="ot">=</span> <span class="fu">richards_growth</span>(release_ages, p, k, t_0, L_inf)</span>
+<span id="cb37-18"><a href="tagdata.html#cb37-18" aria-hidden="true" tabindex="-1"></a>release_lengths <span class="ot">=</span> <span class="fu">rnorm</span>(n_sample_release, release_mean_lengths, release_mean_lengths <span class="sc">*</span> cv)</span>
+<span id="cb37-19"><a href="tagdata.html#cb37-19" aria-hidden="true" tabindex="-1"></a>individual_release_df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">release_age =</span> release_ages, <span class="at">release_length =</span> release_lengths, <span class="at">release_mean_length =</span> release_mean_lengths)</span>
+<span id="cb37-20"><a href="tagdata.html#cb37-20" aria-hidden="true" tabindex="-1"></a>individual_release_df<span class="sc">$</span>fish_id <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(individual_release_df)</span>
+<span id="cb37-21"><a href="tagdata.html#cb37-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-22"><a href="tagdata.html#cb37-22" aria-hidden="true" tabindex="-1"></a><span class="co"># recaptures sample uniformly without replacement</span></span>
+<span id="cb37-23"><a href="tagdata.html#cb37-23" aria-hidden="true" tabindex="-1"></a>fish_ndx <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(individual_release_df), <span class="at">size =</span> n_sample_recoveries, <span class="at">replace =</span> F) </span>
+<span id="cb37-24"><a href="tagdata.html#cb37-24" aria-hidden="true" tabindex="-1"></a>individual_recovery_df <span class="ot">=</span> <span class="fu">subset</span>(individual_release_df, <span class="at">subset =</span> individual_release_df<span class="sc">$</span>fish_id <span class="sc">%in%</span> fish_ndx)</span>
+<span id="cb37-25"><a href="tagdata.html#cb37-25" aria-hidden="true" tabindex="-1"></a><span class="do">## time-at liberty days randomly recovered on average between 100-600 days</span></span>
+<span id="cb37-26"><a href="tagdata.html#cb37-26" aria-hidden="true" tabindex="-1"></a>individual_recovery_df<span class="sc">$</span>time_at_liberty <span class="ot">=</span> <span class="fu">rpois</span>(<span class="at">n =</span> n_sample_recoveries, <span class="at">lambda =</span> <span class="fu">runif</span>(n_sample_recoveries,<span class="dv">100</span>,<span class="dv">600</span>))</span>
+<span id="cb37-27"><a href="tagdata.html#cb37-27" aria-hidden="true" tabindex="-1"></a>individual_recovery_df<span class="sc">$</span>recovery_age <span class="ot">=</span> individual_recovery_df<span class="sc">$</span>release_age <span class="sc">+</span> individual_recovery_df<span class="sc">$</span>time_at_liberty<span class="sc">/</span><span class="dv">365</span></span>
+<span id="cb37-28"><a href="tagdata.html#cb37-28" aria-hidden="true" tabindex="-1"></a><span class="do">## how to add the length increment between release and recovery?</span></span>
+<span id="cb37-29"><a href="tagdata.html#cb37-29" aria-hidden="true" tabindex="-1"></a>individual_recovery_df<span class="sc">$</span>recovery_mean_length <span class="ot">=</span> <span class="fu">richards_growth</span>(individual_recovery_df<span class="sc">$</span>recovery_age, p, k, t_0, L_inf)</span>
+<span id="cb37-30"><a href="tagdata.html#cb37-30" aria-hidden="true" tabindex="-1"></a>individual_recovery_df<span class="sc">$</span>recovery_mean_length_increment <span class="ot">=</span> <span class="fu">with</span>(individual_recovery_df, recovery_mean_length <span class="sc">-</span> release_mean_length)</span>
+<span id="cb37-31"><a href="tagdata.html#cb37-31" aria-hidden="true" tabindex="-1"></a>individual_recovery_df<span class="sc">$</span>recovery_length <span class="ot">=</span> <span class="fu">with</span>(individual_recovery_df, release_length <span class="sc">+</span> <span class="fu">rlnorm</span>(n_sample_recoveries, <span class="fu">log</span>(recovery_mean_length_increment), cv))</span>
+<span id="cb37-32"><a href="tagdata.html#cb37-32" aria-hidden="true" tabindex="-1"></a>individual_recovery_df<span class="sc">$</span>growth_change <span class="ot">=</span> individual_recovery_df<span class="sc">$</span>recovery_length <span class="sc">-</span> individual_recovery_df<span class="sc">$</span>release_length </span>
+<span id="cb37-33"><a href="tagdata.html#cb37-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-34"><a href="tagdata.html#cb37-34" aria-hidden="true" tabindex="-1"></a><span class="do">## visualise length at age samples</span></span>
+<span id="cb37-35"><a href="tagdata.html#cb37-35" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(individual_age_length_df, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> length)) <span class="sc">+</span></span>
+<span id="cb37-36"><a href="tagdata.html#cb37-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb37-37"><a href="tagdata.html#cb37-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span> <span class="fu">data.frame</span>(<span class="at">length =</span> mean_length_at_age, <span class="at">age =</span> ages), <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> length), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>, <span class="at">inherit.aes =</span> F) <span class="sc">+</span></span>
+<span id="cb37-38"><a href="tagdata.html#cb37-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Length&quot;</span>) <span class="sc">+</span></span>
+<span id="cb37-39"><a href="tagdata.html#cb37-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="cn">NA</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/simulate_data-2.png" width="672" /></p>
 <p>Assumptions in the above OM follow.</p>
 <p><span class="math display">\[
 l_{1,i} \sim \mathcal{N} \left(\bar{l}_{1,a}, \sigma = \bar{l}_{1,a} \times cv\right)
 \]</span>
-where the mean length at age release (<span class="math inline">\(\bar{l}_{1,a}\)</span>) follows the Richards growth curve defined in Equation <a href="tagdata.html#eq:richardsgrowth">(8.1)</a>. The age used to derive the mean length at age was a random sample with replacement from the population in shown in the earlier figure. Time at liberty was drawn from a Poisson distribution with a rate parameter randomly drawn from a uniform distribution between 100-600 days. The age at recovery <span class="math inline">\(a_{2,i} = a_{1,i} + \Delta_t\)</span>. An approximation was made when calculating the length at recovery. The length increment (<span class="math inline">\(l_{\Delta_t}\)</span>) was simulated using a Log Normal distribution with the median set based on the difference between mean length at release age and mean length at recovery age. This was to ensure all recovered fish positively grew at a rate expected by the growth model (less than ideal but will do for now).
+where the mean length at age release (<span class="math inline">\(\bar{l}_{1,a}\)</span>) follows the Richards growth curve defined in Equation <a href="tagdata.html#eq:richardsgrowth">(8.3)</a>. The age used to derive the mean length at age was a random sample with replacement from the population in shown in the earlier figure. Time at liberty was drawn from a Poisson distribution with a rate parameter randomly drawn from a uniform distribution between 100-600 days. The age at recovery <span class="math inline">\(a_{2,i} = a_{1,i} + \Delta_t\)</span>. An approximation was made when calculating the length at recovery. The length increment (<span class="math inline">\(l_{\Delta_t}\)</span>) was simulated using a Log Normal distribution with the median set based on the difference between mean length at release age and mean length at recovery age. This was to ensure all recovered fish positively grew at a rate expected by the growth model (less than ideal but will do for now).
 <span class="math display">\[
 l_{i,\Delta_t} \sim \mathcal{LN} \left(\ln (\bar{l}_{a_{2,i}} - \bar{l}_{a_{1,i}}), \sigma = cv\right)
 \]</span></p>
@@ -397,46 +457,46 @@ l_{i,\Delta_t} \sim \mathcal{LN} \left(\ln (\bar{l}_{a_{2,i}} - \bar{l}_{a_{1,i}
 l_{2,i} = l_{1,i} + l_{i, \Delta_t}
 \]</span>
 In theory we can now pass this data to our LEP model to back estimate growth parameters.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="tagdata.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">file.path</span>(<span class="st">&quot;TMB&quot;</span>))</span>
-<span id="cb37-2"><a href="tagdata.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co">#sink(file = &quot;compile_output.txt&quot;)</span></span>
-<span id="cb37-3"><a href="tagdata.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">compile</span>(<span class="at">file =</span> <span class="st">&quot;LEPgrowth_model.cpp&quot;</span>, <span class="at">flags =</span> <span class="st">&quot;-Wignored-attributes -O3&quot;</span>)</span>
-<span id="cb37-4"><a href="tagdata.html#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co">#sink()</span></span>
-<span id="cb37-5"><a href="tagdata.html#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dyn.load</span>(<span class="fu">dynlib</span>(<span class="st">&quot;LEPgrowth_model&quot;</span>))</span>
-<span id="cb37-6"><a href="tagdata.html#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co">#setwd(DIR$book)</span></span></code></pre></div>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="tagdata.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data</span></span>
-<span id="cb38-2"><a href="tagdata.html#cb38-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">list</span>()</span>
-<span id="cb38-3"><a href="tagdata.html#cb38-3" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>ages_from_age_length <span class="ot">=</span> individual_age_length_df<span class="sc">$</span>age</span>
-<span id="cb38-4"><a href="tagdata.html#cb38-4" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>lengths_from_age_length <span class="ot">=</span> individual_age_length_df<span class="sc">$</span>length</span>
-<span id="cb38-5"><a href="tagdata.html#cb38-5" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>lengths_at_release <span class="ot">=</span> individual_recovery_df<span class="sc">$</span>release_length</span>
-<span id="cb38-6"><a href="tagdata.html#cb38-6" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>lengths_at_recovery <span class="ot">=</span> individual_recovery_df<span class="sc">$</span>recovery_length</span>
-<span id="cb38-7"><a href="tagdata.html#cb38-7" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>time_at_liberty <span class="ot">=</span> individual_recovery_df<span class="sc">$</span>time_at_liberty <span class="sc">/</span> <span class="dv">365</span></span>
-<span id="cb38-8"><a href="tagdata.html#cb38-8" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>ages_for_report <span class="ot">=</span> ages;</span>
-<span id="cb38-9"><a href="tagdata.html#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-10"><a href="tagdata.html#cb38-10" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>p_bounds <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>)</span>
-<span id="cb38-11"><a href="tagdata.html#cb38-11" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>t0_bounds <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">4</span>)</span>
-<span id="cb38-12"><a href="tagdata.html#cb38-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-13"><a href="tagdata.html#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="co"># parameters</span></span>
-<span id="cb38-14"><a href="tagdata.html#cb38-14" aria-hidden="true" tabindex="-1"></a>parameters <span class="ot">=</span> <span class="fu">list</span>()</span>
-<span id="cb38-15"><a href="tagdata.html#cb38-15" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_cv_length_at_age <span class="ot">=</span> <span class="fu">log</span>(cv)</span>
-<span id="cb38-16"><a href="tagdata.html#cb38-16" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_k <span class="ot">=</span> <span class="fu">log</span>(k)</span>
-<span id="cb38-17"><a href="tagdata.html#cb38-17" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_L_inf <span class="ot">=</span> <span class="fu">log</span>(L_inf)</span>
-<span id="cb38-18"><a href="tagdata.html#cb38-18" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>logit_p <span class="ot">=</span>  <span class="fu">logit_general</span>(p, data<span class="sc">$</span>p_bounds[<span class="dv">1</span>],data<span class="sc">$</span>p_bounds[<span class="dv">2</span>])</span>
-<span id="cb38-19"><a href="tagdata.html#cb38-19" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>logit_t0 <span class="ot">=</span>  <span class="fu">logit_general</span>(t_0, data<span class="sc">$</span>t0_bounds[<span class="dv">1</span>],data<span class="sc">$</span>t0_bounds[<span class="dv">2</span>])</span>
-<span id="cb38-20"><a href="tagdata.html#cb38-20" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_cv_length_release <span class="ot">=</span> <span class="fu">log</span>(<span class="fl">0.1</span>)</span>
-<span id="cb38-21"><a href="tagdata.html#cb38-21" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_cv_length_recovery <span class="ot">=</span> <span class="fu">log</span>(<span class="fl">0.1</span>)</span>
-<span id="cb38-22"><a href="tagdata.html#cb38-22" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_age_at_release <span class="ot">=</span> <span class="fu">log</span>(individual_recovery_df<span class="sc">$</span>release_age)</span>
-<span id="cb38-23"><a href="tagdata.html#cb38-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-24"><a href="tagdata.html#cb38-24" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_mu_age_release <span class="ot">=</span> <span class="fu">log</span>(<span class="dv">3</span>)</span>
-<span id="cb38-25"><a href="tagdata.html#cb38-25" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_sd_age_release <span class="ot">=</span> <span class="fu">log</span>(<span class="dv">1</span>)</span>
-<span id="cb38-26"><a href="tagdata.html#cb38-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-27"><a href="tagdata.html#cb38-27" aria-hidden="true" tabindex="-1"></a>obj_mixed_all <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(data, parameters, <span class="at">random =</span> <span class="st">&quot;ln_age_at_release&quot;</span>, <span class="at">DLL=</span><span class="st">&quot;LEPgrowth_model&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="tagdata.html#cb39-1" aria-hidden="true" tabindex="-1"></a>MLE_mixed_all <span class="ot">=</span> <span class="fu">nlminb</span>(<span class="at">start =</span> obj_mixed_all<span class="sc">$</span>par, <span class="at">objective =</span> obj_mixed_all<span class="sc">$</span>fn, <span class="at">gradient  =</span> obj_mixed_all<span class="sc">$</span>gr)</span>
-<span id="cb39-2"><a href="tagdata.html#cb39-2" aria-hidden="true" tabindex="-1"></a>MLE_mixed_all<span class="sc">$</span>convergence</span>
-<span id="cb39-3"><a href="tagdata.html#cb39-3" aria-hidden="true" tabindex="-1"></a>MLE_mixed_all_rep <span class="ot">=</span> obj_mixed_all<span class="sc">$</span><span class="fu">report</span>(obj_mixed_all<span class="sc">$</span>env<span class="sc">$</span>last.par.best)</span>
-<span id="cb39-4"><a href="tagdata.html#cb39-4" aria-hidden="true" tabindex="-1"></a>MLE_mixed_all_sd_rep <span class="ot">=</span> <span class="fu">sdreport</span>(obj_mixed_all)</span>
-<span id="cb39-5"><a href="tagdata.html#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ages, MLE_mixed_all_rep<span class="sc">$</span>mean_length_at_age, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Length (cm)&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">240</span>))</span>
-<span id="cb39-6"><a href="tagdata.html#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(ages, mean_length_at_age, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
-<span id="cb39-7"><a href="tagdata.html#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&#39;bottomright&#39;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;LEP obs error&quot;</span>,<span class="st">&quot;True&quot;</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">lwd =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="tagdata.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="fu">file.path</span>(<span class="st">&quot;TMB&quot;</span>))</span>
+<span id="cb38-2"><a href="tagdata.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co">#sink(file = &quot;compile_output.txt&quot;)</span></span>
+<span id="cb38-3"><a href="tagdata.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">compile</span>(<span class="at">file =</span> <span class="st">&quot;LEPgrowth_model.cpp&quot;</span>, <span class="at">flags =</span> <span class="st">&quot;-Wignored-attributes -O3&quot;</span>)</span>
+<span id="cb38-4"><a href="tagdata.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">#sink()</span></span>
+<span id="cb38-5"><a href="tagdata.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dyn.load</span>(<span class="fu">dynlib</span>(<span class="st">&quot;LEPgrowth_model&quot;</span>))</span>
+<span id="cb38-6"><a href="tagdata.html#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co">#setwd(DIR$book)</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="tagdata.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data</span></span>
+<span id="cb39-2"><a href="tagdata.html#cb39-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb39-3"><a href="tagdata.html#cb39-3" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>ages_from_age_length <span class="ot">=</span> individual_age_length_df<span class="sc">$</span>age</span>
+<span id="cb39-4"><a href="tagdata.html#cb39-4" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>lengths_from_age_length <span class="ot">=</span> individual_age_length_df<span class="sc">$</span>length</span>
+<span id="cb39-5"><a href="tagdata.html#cb39-5" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>lengths_at_release <span class="ot">=</span> individual_recovery_df<span class="sc">$</span>release_length</span>
+<span id="cb39-6"><a href="tagdata.html#cb39-6" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>lengths_at_recovery <span class="ot">=</span> individual_recovery_df<span class="sc">$</span>recovery_length</span>
+<span id="cb39-7"><a href="tagdata.html#cb39-7" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>time_at_liberty <span class="ot">=</span> individual_recovery_df<span class="sc">$</span>time_at_liberty <span class="sc">/</span> <span class="dv">365</span></span>
+<span id="cb39-8"><a href="tagdata.html#cb39-8" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>ages_for_report <span class="ot">=</span> ages;</span>
+<span id="cb39-9"><a href="tagdata.html#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-10"><a href="tagdata.html#cb39-10" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>p_bounds <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span>, <span class="dv">20</span>)</span>
+<span id="cb39-11"><a href="tagdata.html#cb39-11" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>t0_bounds <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">4</span>)</span>
+<span id="cb39-12"><a href="tagdata.html#cb39-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-13"><a href="tagdata.html#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="co"># parameters</span></span>
+<span id="cb39-14"><a href="tagdata.html#cb39-14" aria-hidden="true" tabindex="-1"></a>parameters <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb39-15"><a href="tagdata.html#cb39-15" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_cv_length_at_age <span class="ot">=</span> <span class="fu">log</span>(cv)</span>
+<span id="cb39-16"><a href="tagdata.html#cb39-16" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_k <span class="ot">=</span> <span class="fu">log</span>(k)</span>
+<span id="cb39-17"><a href="tagdata.html#cb39-17" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_L_inf <span class="ot">=</span> <span class="fu">log</span>(L_inf)</span>
+<span id="cb39-18"><a href="tagdata.html#cb39-18" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>logit_p <span class="ot">=</span>  <span class="fu">logit_general</span>(p, data<span class="sc">$</span>p_bounds[<span class="dv">1</span>],data<span class="sc">$</span>p_bounds[<span class="dv">2</span>])</span>
+<span id="cb39-19"><a href="tagdata.html#cb39-19" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>logit_t0 <span class="ot">=</span>  <span class="fu">logit_general</span>(t_0, data<span class="sc">$</span>t0_bounds[<span class="dv">1</span>],data<span class="sc">$</span>t0_bounds[<span class="dv">2</span>])</span>
+<span id="cb39-20"><a href="tagdata.html#cb39-20" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_cv_length_release <span class="ot">=</span> <span class="fu">log</span>(<span class="fl">0.1</span>)</span>
+<span id="cb39-21"><a href="tagdata.html#cb39-21" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_cv_length_recovery <span class="ot">=</span> <span class="fu">log</span>(<span class="fl">0.1</span>)</span>
+<span id="cb39-22"><a href="tagdata.html#cb39-22" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_age_at_release <span class="ot">=</span> <span class="fu">log</span>(individual_recovery_df<span class="sc">$</span>release_age)</span>
+<span id="cb39-23"><a href="tagdata.html#cb39-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-24"><a href="tagdata.html#cb39-24" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_mu_age_release <span class="ot">=</span> <span class="fu">log</span>(<span class="dv">3</span>)</span>
+<span id="cb39-25"><a href="tagdata.html#cb39-25" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_sd_age_release <span class="ot">=</span> <span class="fu">log</span>(<span class="dv">1</span>)</span>
+<span id="cb39-26"><a href="tagdata.html#cb39-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-27"><a href="tagdata.html#cb39-27" aria-hidden="true" tabindex="-1"></a>obj_mixed_all <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(data, parameters, <span class="at">random =</span> <span class="st">&quot;ln_age_at_release&quot;</span>, <span class="at">DLL=</span><span class="st">&quot;LEPgrowth_model&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="tagdata.html#cb40-1" aria-hidden="true" tabindex="-1"></a>MLE_mixed_all <span class="ot">=</span> <span class="fu">nlminb</span>(<span class="at">start =</span> obj_mixed_all<span class="sc">$</span>par, <span class="at">objective =</span> obj_mixed_all<span class="sc">$</span>fn, <span class="at">gradient  =</span> obj_mixed_all<span class="sc">$</span>gr)</span>
+<span id="cb40-2"><a href="tagdata.html#cb40-2" aria-hidden="true" tabindex="-1"></a>MLE_mixed_all<span class="sc">$</span>convergence</span>
+<span id="cb40-3"><a href="tagdata.html#cb40-3" aria-hidden="true" tabindex="-1"></a>MLE_mixed_all_rep <span class="ot">=</span> obj_mixed_all<span class="sc">$</span><span class="fu">report</span>(obj_mixed_all<span class="sc">$</span>env<span class="sc">$</span>last.par.best)</span>
+<span id="cb40-4"><a href="tagdata.html#cb40-4" aria-hidden="true" tabindex="-1"></a>MLE_mixed_all_sd_rep <span class="ot">=</span> <span class="fu">sdreport</span>(obj_mixed_all)</span>
+<span id="cb40-5"><a href="tagdata.html#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ages, MLE_mixed_all_rep<span class="sc">$</span>mean_length_at_age, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Length (cm)&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">240</span>))</span>
+<span id="cb40-6"><a href="tagdata.html#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(ages, mean_length_at_age, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
+<span id="cb40-7"><a href="tagdata.html#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&#39;bottomright&#39;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;LEP obs error&quot;</span>,<span class="st">&quot;True&quot;</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">lwd =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/optimise_TMB_model-1.png" width="672" /></p>
 </div>
 <div id="next-steps" class="section level2 unnumbered hasAnchor">
@@ -453,6 +513,9 @@ In theory we can now pass this data to our LEP model to back estimate growth par
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-ailloud2019general" class="csl-entry">
+Ailloud, Lisa E, and John M Hoenig. 2019. <span>“A General Theory of Age-Length Keys: Combining the Forward and Inverse Keys to Estimate Age Composition from Incomplete Data.”</span> <em>ICES Journal of Marine Science</em> 76 (6): 1515–23.
+</div>
 <div id="ref-aires2015improved" class="csl-entry">
 Aires-da-Silva, Alexandre M, Mark N Maunder, Kurt M Schaefer, and Daniel W Fuller. 2015. <span>“Improved Growth Estimates from Integrated Analysis of Direct Aging and Tag–Recapture Data: An Illustration with Bigeye Tuna (<em>Thunnus Obesus</em>) of the Eastern Pacific Ocean with Implications for Management.”</span> <em>Fisheries Research</em> 163: 119–26.
 </div>
@@ -465,8 +528,14 @@ Goethel, DR, DH Hanselman, CJ Rodgveller, KH Fenski, SK Shotwell, KB Echave, PW 
 <div id="ref-laslett2002flexible" class="csl-entry">
 Laslett, Geoff M, J Paige Eveson, and Tom Polacheck. 2002. <span>“A Flexible Maximum Likelihood Approach for Fitting Growth Curves to Tag Recapture Data.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 59 (6): 976–86.
 </div>
+<div id="ref-maunder1998integration" class="csl-entry">
+Maunder, Mark Nicholas. 1998. <span>“Integration of Tagging and Population Dynamics Models in Fisheries Stock Assessment.”</span> PhD thesis, University of Washington.
+</div>
 <div id="ref-schnute1981versatile" class="csl-entry">
 Schnute, Jon. 1981. <span>“A Versatile Growth Model with Statistically Stable Parameters.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 38 (9): 1128–40.
+</div>
+<div id="ref-vincent2020parameter" class="csl-entry">
+Vincent, Matthew T, Travis O Brenden, and James R Bence. 2020. <span>“Parameter Estimation Performance of a Recapture-Conditioned Integrated Tagging Catch-at-Age Analysis Model.”</span> <em>Fisheries Research</em> 224: 105451.
 </div>
 </div>
             </section>
