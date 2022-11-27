@@ -284,7 +284,7 @@ where, \(\boldsymbol{C_{y,s}}\) is a column vector of numbers at age (dimension 
 +----------------------------+-----------------------------------------------------------------------------+
 
 
-## Inference {-}
+### Inference {-}
 If random effects are considered the joint probability model follows,
 	\begin{equation}
 	Pr\left[ \boldsymbol{y^{obs}}, \boldsymbol{u}| \boldsymbol{\theta} \right]  = Pr\left[\boldsymbol{y^{obs}} |\boldsymbol{\theta^f}, \boldsymbol{u} \right] Pr\left[\boldsymbol{u} |\boldsymbol{\theta^h} \right] 
@@ -307,7 +307,7 @@ and Empirical Bayes estimates are evaluated for \(\widehat{\boldsymbol{u}}\), wh
 \end{equation}
 
 
-## TODO {-}
+### TODO {-}
 - Build a validate function to help catch users setting up parameters or data structures that will cause a crash once supplied to TMB.
 - Self test
 - change some parameter containers. In the ADMB model the often share parameters between male and females. Particularly for selectivity parameters. However TMB will not allow us to fix/map parameters across different arrays or vectors. This means we will want to join the male and female selectivity parameter objects into a single object so that we can share parameters between the sexes.

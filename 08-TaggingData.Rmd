@@ -1,14 +1,189 @@
 # Tagging data and studies {#tagdata}
 Since 1972 there have been approximately 400 000 sablefish tagged in Alaska waters, of which over 38 500 have been recovered. Although there is extensive and long term tagging data, this information is not currently directly included in the stock assessment [@goethel2021assessment].
 
-## Integration in age-structured models {-}
+## Integrating tagging observations in spatial age-structured models
+
+This project intends to explore a range of methods for utilising tag-recovery observations in spatially disaggregated age-structured stock assessments.
+
+
+## Releasing tags {-}
+Tag release events involve releasing a tag-cohort at the beginning of a year within a specific area assumes tag cohort indexed by \(k\) has an implied year \(y\) and region \(r\) index. \(\boldsymbol{N}^k\) is used to denote a vector of lengths or ages for tag-cohort \(k\). In general, only the length frequency is known at time of release for each tag-cohort. We explore two different methods for seeding tagged numbers at age for each tag-cohort within spatial age-structured models. The two methods are either do it internal or external. The internal method requires users to supply length frequency for each tag-cohort and the model will use the assumed growth assumptions to convert the lengths to ages. The external approach is to use an age-length key outside of the model to derive an age frequency that can be supplied to the model. 
+
+A frequent assumption of age-structured tagging models in the literature [@maunder1998integration;@vincent2020parameter] is that the age-frequency of each tag-cohort are known. Due to the fact that ageing is a fatal process, we assume they use an age-length key to convert lengths to ages. If the age-length key is representative of the vulnerable population at the time of tagging, then this method is expected to be have better computational performance. Factors to consider at time of release are; Gear method used to select releases, where releases occur, and time of releases. The internal method can attribute the correct age-distribution if the selectivity/availability by age is correct i.e. using the correct selectivity. Also, if growth is internally estimated within the assessment model, then the internal method may be prefered as to keep the growth assumptions consistent between LF observations and tagging observations.
+
+
+One consideration if the tag releases and recoveries are both length-based is the age-length transition assumptions. Due to age-structured modelling growth as length conditional on age. Moving individuals back and forwards through the age-length transition matrix (length $\rightarrow$ age $\rightarrow$ length) will cause "smearing" of length frequencies. This is demonstrated in Figures \@(ref:addagelength) and \@(ref:showagelengthtransition_problem), and needs to be considered when considering model fitted values for observations and corresponding likelihood assumptions. Given this phenomenon, it could be argued, that the external age-length key approach is better as it makes these assumptions explicit (more transparent). However, both methods will be affected by this growth transition phenomenon to one degree or another. 
+
+```{r addagelength, out.width = '70%', echo = F, eval = T, fig.cap='An example of theoretical length at age, with overlapping length bins used to describe the effect of going back and fourth through the age-length transition matrix.'}
+ages = c(1:30) # as.numeric(names(ibm_out$init_1$values))
+lens_bins = c(seq(from = 4, to = 10, by = 2), 11:81) # ibm_out$model_attributes$length_mid_points
+lens = lens_bins[1:(length(lens_bins) - 1)] + diff(lens_bins) / 2
+
+## simple illustrations
+example_ages = 1:3
+mean_length = c(13,19,24)
+len_bins = seq(10,35,by = 5)
+len_midpoints = len_bins[1:5] + diff(len_bins)/2
+## randomly get some ages and lengths
+Num_age = #rowSums(prob_length_given_age_matrix[c(6,9,13),c(32,35,42,45,50)]) / 100
+  c(1757.704, 4320.569, 3129.675)
+cv = 0.13
+## generate age-length probability transition matrix used in age-based models
+prob_length_given_age = matrix(0.0, nrow = length(example_ages), ncol = length(len_bins) - 1)
+for(age_ndx in 1:length(example_ages)) {
+  for(len_ndx in 2:length(len_bins)) {
+    if (len_ndx == 2) {
+      prob_length_given_age[age_ndx, len_ndx - 1] = pnorm(len_bins[2], mean_length[age_ndx], mean_length[age_ndx] * cv)
+    } else if (len_ndx == length(len_bins)) {
+      prob_length_given_age[age_ndx, len_ndx - 1] = 1 - pnorm(len_bins[length(len_bins) - 1], mean_length[age_ndx], mean_length[age_ndx] * cv)
+    } else {
+      prob_length_given_age[age_ndx, len_ndx - 1] = pnorm(len_bins[len_ndx], mean_length[age_ndx], mean_length[age_ndx] * cv) -  pnorm(len_bins[len_ndx - 1], mean_length[age_ndx], mean_length[age_ndx] * cv)
+    }
+  }
+}
+
+Cols = colorRampPalette(brewer.pal(n = 7, name = "Blues"))(5)[2:5]
+plot(1:40, 1:40, type = "n", xlab = "Length", yaxt = "n", ylab = "Frequency", xlim = c(7,35), ylim = c(0,800), main = "Example length at age distribution")
+temp_lens = 1:40
+probs = seq(0.01,0.99, length = length(temp_lens))
+for(i in 1:length(example_ages)) {
+  lines(y = Num_age[i] * dnorm(temp_lens, mean_length[i], cv *  mean_length[i]) / sum(dnorm(temp_lens, mean_length[i], cv *  mean_length[i])), x = temp_lens, lwd = 3, col = Cols[i])
+}
+text(x = mean_length, y = 238, labels = paste0("a = ",example_ages), cex = 1.1, col= Cols)
+text(x = len_midpoints, y =  773, labels = c(expression(l[1]),expression(l[2]),expression(l[3]),expression(l[4]),expression(l[5])), cex = 1.5, col= "red")
+
+abline(v = len_bins, lty = 2, col = "red", lwd = 2)
+group_name =  c(expression(l[1]),expression(l[2]),expression(l[3]),expression(l[4]),expression(l[5]))
+```
+
+
+```{r showagelengthtransition_problem, out.width = '100%', fig.height= 4, fig.cap="A visualisation of the effect of going back and forth through an age-length transition matrix. This can happen when tag releases and recaptures are input as length in an age-structured model. The model converts lengths to ages, then reconverts the age to length for observations. This is assuming the same age-length relationship in Figure \\@ref(fig:addagelength)", echo = F, eval = T}
+#############
+# A fish in length bin l2
+#############
+# probability of length given age = prob_length_given_age
+#rowSums(prob_length_given_age)
+# What about probability of age given length? re-scale
+prob_age_given_length = sweep(prob_length_given_age, STATS = colSums(prob_length_given_age), MARGIN = 2, FUN = "/")
+
+dimnames(prob_length_given_age) = dimnames(prob_age_given_length)  = list(example_ages, len_midpoints)
+prob_length_given_age_long = melt(prob_length_given_age)
+colnames(prob_length_given_age_long) = c("age", "length","prop")
+prob_length_given_age_long$age = factor(prob_length_given_age_long$age)
+prob_length_given_age_long$length = factor(prob_length_given_age_long$length)
+
+prob_length_given_length_long = melt(prob_age_given_length)
+colnames(prob_length_given_length_long) = c("age", "length","prop")
+prob_length_given_length_long$age = factor(prob_length_given_length_long$age)
+prob_length_given_length_long$length = factor(prob_length_given_length_long$length)
+
+test = ggplot(prob_length_given_length_long, aes(fill=age, y=prop, x=length)) + 
+  geom_bar(position="stack", stat="identity") +
+  xlab("Numbers") +
+  ggtitle("Age composition conditioned on length bin")+
+  scale_x_discrete(labels=group_name)  # Ad
+
+test_alt = ggplot(prob_length_given_age_long, aes(fill=length, y=prop, x=age)) + 
+  geom_bar(position="stack", stat="identity") +
+  xlab("") +
+  ggtitle("Length composition conditioned on age")+
+  scale_fill_discrete(labels=group_name)  # Ad
+
+## In an age based model
+## A single Fish in length bin = 2, equates to the following ages
+age_from_l2 = prob_age_given_length[,2]
+#age_from_l2
+## The model derived lenght distribution of this
+model_length = age_from_l2 %*% prob_length_given_age
+#model_length
+
+P1 = ggplot(data = data.frame(length = factor(len_midpoints), result = c(0,1,0,0,0)), aes(y=result, x=length)) + 
+  geom_bar(position="dodge", stat="identity") +
+  ylab("Numbers") +
+  xlab("Length bin") +
+  ylim(0,1) +
+  ggtitle(substitute(paste("Single fish in length bin = ", l[len_ndx]), list(len_ndx = 2))) +
+  theme(axis.text.x=element_text(size=15),axis.text.y=element_text(size=15),
+        axis.title=element_text(size=15,face="bold"),
+        title =element_text(size=13)) +
+  scale_x_discrete(labels=group_name) +
+  theme_bw()
+
+P2 = ggplot(data = data.frame(age = factor(example_ages), result = age_from_l2), aes(x = age, y = result)) + 
+  geom_bar(position="dodge", stat="identity") +
+  ylab("") +
+  ylim(0,1) +
+  ggtitle(substitute(paste("Age disribution of fish in length bin = ", l[len_ndx]), list(len_ndx = 2))) +
+  theme(axis.text.x=element_text(size=15),axis.text.y=element_text(size=15),
+        axis.title=element_text(size=15,face="bold"),
+        title =element_text(size=13)) +
+  theme_bw()
 
 
 
+P3 = ggplot(data = data.frame(length = factor(len_midpoints), result = as.numeric(model_length)), aes(y=result, x=length)) + 
+  geom_bar(position="dodge", stat="identity") +
+  ylab("") +
+  ylim(0,1) +
+  xlab("Length bin") +
+  ggtitle(substitute(paste("Length distribution of initial fish = ", l[len_ndx]), list(len_ndx = 2))) +
+  theme(axis.text.x=element_text(size=15),axis.text.y=element_text(size=15),
+        axis.title=element_text(size=15,face="bold"),
+        title =element_text(size=13)) +
+  scale_x_discrete(labels=group_name) +
+  theme_bw()# Ad
 
 
+P1 = P1 + geom_segment(aes(x = 4, y = 0.5, xend =5, yend = 0.5, size = 1),
+               arrow = arrow(length = unit(1, "cm")), col = "red") +
+  guides(size = "none")
+P2 = P2 + geom_segment(aes(x = 3.8, y = 0.5, xend =5, yend = 0.5, size = 1),
+                 arrow = arrow(length = unit(1, "cm")), col = "red") +
+  guides(size = "none")
+grid.arrange(grobs = list(P1, P2, P3), nrow = 1)
+```
 
-## Growth estimation using the Laslett–Eveson–Polacheck (LEP) {-}
+#### Internal method {-}
+Age-structured stock assessment models contain growth models, which describe length conditioned on age. This requires assumptions on the distribution and associated parameters. The default is often the normal distribution with mean length at age denoted by \(\bar{l}_a\) with standard deviation parameterised as a coefficient of variation (\(\sigma_a = cv*\mu_a\)). This information enables the model to derive a growth transition matrix \(P_{l|a}\). Given the lower and upper limits for each length bin denoted as \(\boldsymbol{b} = (b_1, b_2, \dots, b_{max})'\), the probability of being in length bin \(l\) given age \(a\)
+
+\begin{equation}
+P_{l|a} = 
+\begin{cases}
+\Phi(b_{l + 1}|\mu_a,\sigma_a)\quad &\text{for } l = 1\\
+\Phi(b_{l + 1}|\mu_a,\sigma_a) - \Phi(b_l|\mu_a,\sigma_a)\quad &\text{for } 1 < l < n_l\\
+1 - \Phi(b_{l}|\mu_a,\sigma_a)\quad &\text{for } l = n_l
+\end{cases}
+  (\#eq:agelengthtransition)
+\end{equation}
+
+
+where \(\Phi(x|\mu,\sigma)\) is the cumulative normal (but could be generalised to any probability distribution). If growth varies by attributes such as sex, stock or region then this will need to be calculated for each growth model. In the SNA1 stock assessment each stock has a different growth curve and is denote as \(P^s_{a|l}\)
+
+At the point a tag cohort is released, the model can derive the length composition of the vulnerable population using the transition matrix derived in Equation \ref(eq:agelengthtransition). Given the number of estimable parameters that govern the age-stricture at a point in time and growth model, an exploitation rate is calculated so that if there are not enough numbers in a length bin to be tagged, a penalty can be added to the objective function to dissuade the combination of parameters that generated this situation. Tag-release by length is a known quantity and so the model must allow for a minimum vulnerable length composition to that released. To enforce this a exploitation like rate by each length \((u_l)\) is calculated as follows,
+\begin{equation}
+u_l = \frac{N^k_{l}}{\sum_a}N_{y_k,a,r_k} P_{l|a}
+  (\#eq:lengthexploit)
+\end{equation}
+
+During parameter estimation there are no constraints within the model to trial a set of parameters than will allow \(u_l > 1\) i.e. more observed tag-releases than in the vulnerable population. To stop negative numbers at age \(u_l\) is set at a level less than 1 and a penalty added to the objective function to discourage parameters from allowing this condition. Finally tag-release at age is calculated as follows,
+\begin{equation}
+N^k_{a} = N_{y_k,a,r_k}  P_{l|a} u_l
+  (\#eq:tagatagerelease)
+
+\end{equation}
+
+Once the tag cohort are created in the model it is assumed that tagged fish are exposed to the same dynamics as un-tagged fish.
+
+
+#### External method (Age-length key method) {-}
+Once a tag-release event has occurred for tag group \(k\), the only known knowledge is the length distribution \(N^k_l\). Assuming there is an accessible forward age-length key which describes the proportion of ages for a given length bin \(\left(P_{a|l}\right)\) that is representative of the vulnerable population to tagging for the same area and time, then the "forward" or "classic" key method can be used @ailloud2019general. If tag-release coincide with a fishing season you could use fishery-dependent derived age length information, assuming the selectivity curves within a length bin are parallel. If only a subset of fish from each haul is released, it would be better to construct an age-length key from a representative sample of fish that were caught by not-tagged. This would be relevant for single vessel survey release events.
+\begin{equation}
+	N^k_a = \sum\limits_{l = 1}P_{a|l}N^k_l
+\end{equation}
+where, \(N^k_a\) is used as an known input into the model with no error. 
+
+
+## Growth estimation using the Laslett–Eveson–Polacheck (LEP) method 
 Going to investigate the use of “Laslett–Eveson–Polacheck (LEP)” based on @laslett2002flexible \& @eveson2004integrated as described in @aires2015improved.
 
 

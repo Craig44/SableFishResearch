@@ -2,8 +2,28 @@
 The latest published stock assessment [@goethel2021assessment] is a sexually disaggregated integrated age-structured model. Let \(\boldsymbol{N_{r,y,s}}\) denote a vector of ages in year \(y\) sex \(s\) in region \(r\) (the partition) i.e., \(\boldsymbol{N_{r,y,s}} = (N_{1,r,y,s}, N_{2,r,y,s}, \dots, N_{a_+,r,y,s})^T\). 
 
 
-## Process equations {#modelequations}
+## Process equations {#spatialmodelequations}
 
 ### Initialisation \left(\(g\left(.\right)\)\right) {-}
 
+\begin{align*}
+N_{a,r,1,s} = 
+\begin{cases}
+R_r 0.5, & a = a_1\\
+N_{a - 1,r,1,s} \exp\bigg( - (M + F_{hist} * \mu_{LL} * S^{LL}_{a,1})\bigg), & a_0 < a < a_+\\
+\exp( \mu_r) \exp-( a - 1) ( M + F_{hist} * \mu_{LL} * S^{LL}_{a - 1,1})(1 - \exp( M + F_{hist} * \mu_{LL} * S^{LL}_{a - 1,1}))^{-1}, &  a = a_+
+\end{cases}
+\end{align*}
+
+
 ### Population dynamics \left(\(f\left(.\right)\)\right) {-}
+
+
+### To consider {-}
+
+- collapse sex and age into a single dimension. See how I coded the sex ratio model (Chapter \@ref(sexratios))
+
+### To DO {-}
+
+- simulation test a spatial model with three areas no tagging data and equilibrium initial conditions
+

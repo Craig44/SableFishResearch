@@ -59,6 +59,7 @@ library(ggplot2)
 library(dplyr)
 library(reshape2)
 library(gridExtra)
+library(RColorBrewer)
 ```
 
 ```{r auxillary_functions,echo = F,eval =T, results = 'hide', message=FALSE, warning=FALSE}
@@ -150,6 +151,38 @@ logit_general = function(X, lb, ub) {
   X1 = (X - lb) / (ub - lb)
   log(X1/(1 - X1))
 }
+
+
+simplex <- function (xk, sum_to_one = TRUE)  {
+  zk = vector()
+  if (!sum_to_one) {
+    xk = xk/sum(xk)
+  }
+  else {
+    if (abs(sum(xk) - 1) > 0.001) 
+      stop("xk needs to sum = 1, otherwise speify sum_to_one = TRUE")
+  }
+  K = length(xk)
+  zk[1] = xk[1]/(1)
+  for (k in 2:(K - 1)) {
+    zk[k] = xk[k]/(1 - sum(xk[1:(k - 1)]))
+  }
+  yk = stats::qlogis(zk) - log(1/(K - 1:(K - 1)))
+  return(yk)
+}
+restoresimplex <- function (yk) {
+  K = length(yk) + 1
+  zk = stats::plogis(yk + log(1/(K - 1:(K - 1))))
+  xk = vector()
+  xk[1] = zk[1]
+  for (k in 2:(K - 1)) {
+    xk[k] = (1 - sum(xk[1:(k - 1)])) * zk[k]
+  }
+  xk[K] = 1 - sum(xk)
+  return(xk)
+}
+
+
 #' invlogit_general bounds X which is between -inf -> inf to [lb,ub] based on the logit transformation
 #' @param Y scalar range [-inf, inf]
 #' @param ub upper bound for X

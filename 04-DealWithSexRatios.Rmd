@@ -42,10 +42,10 @@ where, \(N^{eff, k}_{y,s}\) is the effective sample size.
 To explore the utility of these two approaches we conducted a simple simulation using a sexually disaggregated age-structured model (see Section \@ref(sexSimulation)). The Operating Model (OM) used in the simulation assumed a 50:50 sex ratio during the recruitment process however the OM did assume different growth and selectivity among the sexes.
 
 ### Results
-In summary both approaches resulted in similar estimates in selectivities and SSBs. I prefer Approach 1 as it is a single observation compared with Approach 2 which has two observation types, but this simulation showed at least within the very small assumptions explored here they resulted in similar performance. This was all I was after in order to move forward to the spatial model.
+In summary both approaches resulted in similar estimates in selectivities and SSBs. I prefer Approach 1 as it is a single observation compared with Approach 2 which has two observation types (need to consider how to avoid double counting of samples), but this simulation showed at least within the very small assumptions explored here they resulted in similar performance. This was all I was after in order to move forward to the spatial model.
 
 
-Another consideration about "Approach 2" is if the selectivity shape differs between sexes i.e., lower age at 50\% retention. Then due to the sex ratio being derived by summing numbers over all ages, and the natural exponential decay in successive age-cohorts, selectivies that capture more younger fish will result in higher sex ratios. "Approach 1"
+Another consideration about "Approach 2" is if the selectivity shape differs between sexes i.e., lower age at 50\% retention. Then due to the sex ratio being derived by summing numbers over all ages, and the natural exponential decay in successive age-cohorts, selectivities that capture more younger fish will result in higher sex ratios. "Approach 1"
 
 ### Future research that was not considered in this simple simulation {-}
 - LF observations with sexual dimorphism in growth. A possible reason LF's could be influencing assessment output is due to mis-specified growth à la @minte2017get 
@@ -57,7 +57,7 @@ Another consideration about "Approach 2" is if the selectivity shape differs bet
 
 ```{r setup}
 set.seed(123)
-n_sims = 100
+n_sims = 5
 
 bio_params = list(
   ages = 1:20,
