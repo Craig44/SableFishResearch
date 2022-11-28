@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 How to calculate the plus group in models with markovian movement | Alaskan sablefish research</title>
+  <title>Chapter 7 Initialising the plus group in spatial models | Alaskan sablefish research</title>
   <meta name="description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 How to calculate the plus group in models with markovian movement | Alaskan sablefish research" />
+  <meta property="og:title" content="Chapter 7 Initialising the plus group in spatial models | Alaskan sablefish research" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 How to calculate the plus group in models with markovian movement | Alaskan sablefish research" />
+  <meta name="twitter:title" content="Chapter 7 Initialising the plus group in spatial models | Alaskan sablefish research" />
   
   <meta name="twitter:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-11-27" />
+<meta name="date" content="2022-11-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -195,7 +195,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#to-do"><i class="fa fa-check"></i>To DO</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>5</b> Exploring methods for sex ratios in age and length composition data</a>
+<li class="chapter" data-level="5" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>5</b> Sex ratios in age and length composition data</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="sexratios.html"><a href="sexratios.html#sexSimulation"><i class="fa fa-check"></i><b>5.1</b> A simple simulation</a>
 <ul>
@@ -210,11 +210,12 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#set-up-a-simulation"><i class="fa fa-check"></i>Set up a simulation</a></li>
 <li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#appendix---hybrid-approach"><i class="fa fa-check"></i>Appendix - Hybrid approach</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="spatialInit.html"><a href="spatialInit.html"><i class="fa fa-check"></i><b>7</b> How to calculate the plus group in models with markovian movement</a></li>
+<li class="chapter" data-level="7" data-path="spatialInit.html"><a href="spatialInit.html"><i class="fa fa-check"></i><b>7</b> Initialising the plus group in spatial models</a></li>
 <li class="chapter" data-level="8" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>8</b> Tagging data and studies</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="tagdata.html"><a href="tagdata.html#integrating-tagging-observations-in-spatial-age-structured-models"><i class="fa fa-check"></i><b>8.1</b> Integrating tagging observations in spatial age-structured models</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#releasing-tags"><i class="fa fa-check"></i>Releasing tags</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tag-recovery-observations"><i class="fa fa-check"></i>Tag recovery observations</a></li>
 <li class="chapter" data-level="8.2" data-path="tagdata.html"><a href="tagdata.html#growth-estimation-using-the-laslettevesonpolacheck-lep-method"><i class="fa fa-check"></i><b>8.2</b> Growth estimation using the Laslett–Eveson–Polacheck (LEP) method</a>
 <ul>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#age-at-length-growth-model"><i class="fa fa-check"></i>Age-at-length growth model</a></li>
@@ -246,13 +247,12 @@ div.csl-indent {
 
             <section class="normal" id="section-">
 <div id="spatialInit" class="section level1 hasAnchor" number="7">
-<h1><span class="header-section-number">Chapter 7</span> How to calculate the plus group in models with markovian movement<a href="spatialInit.html#spatialInit" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>In “standard” age-structured models the plus group is calculated using an approximation to the infinite geometric series i.e.,</p>
-<p>Analytically solving the age-structure for the initial state of the partition. The partition consists of a vector of numbers at age for each category denoted by <span class="math inline">\(\textbf{N}\)</span>;
+<h1><span class="header-section-number">Chapter 7</span> Initialising the plus group in spatial models<a href="spatialInit.html#spatialInit" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In single area age-structured models, the plus age group is calculated using a solution to an infinite geometric series. This solution for an age-structured model is used to derive initial (equilibrium) state of the partition. The partition consists of a vector of numbers at age for each category denoted by <span class="math inline">\(\textbf{N}\)</span>;
 <span class="math display">\[
 \textbf{N} = (N_1, N_2, ... , N_{a_+})^T
 \]</span></p>
-<p>where <span class="math inline">\(N_{a_+}\)</span> are the numbers in the plus group. The numbers at age for a closed population with density independent equilibrium state can be defined as,</p>
+<p>where <span class="math inline">\(N_{a_+}\)</span> denotes the numbers in the plus group. The numbers at age for a single area population with no density-dependent processes is derived as,</p>
 <p><span class="math display">\[
 N_a = \left\{ \begin{array}{lcl}
     R_0 &amp; \mbox{for} &amp; a = 1
@@ -262,8 +262,8 @@ N_a = \left\{ \begin{array}{lcl}
     R_0e^{\sum_{i = a_+}^\infty-iM} &amp; \mbox{for} &amp; a = a_+
 \end{array}\right.
 \]</span></p>
-<p>Initialisation for ages <span class="math inline">\(1 \leq a &lt; a_+\)</span> is easy, all you need to do is iterate the model <span class="math inline">\(a_+ - 1\)</span> times and the age classes will be populated with there respected initial numbers at age. It is less simple for the plus group (<span class="math inline">\(N_{a_+}\)</span>) because it can take many iterations to reach the initial state of this age class, denoted by the <span class="math inline">\(\infty\)</span></p>
-<p>So, although the plus group may start at let say 30 years old it actually represents 30 and 31 and 32 up to some biological plausible value lets say 130, but mathematically can be thought of as <span class="math inline">\(\infty\)</span>. The plus group is modelled for practical reasons and care should be given when choosing the cut-off age. The plus group is an infinite geometric series that is defined by the common ratio <span class="math inline">\(r_{a_+}\)</span>.</p>
+<p>Initialization for ages <span class="math inline">\(1 \leq a &lt; a_+\)</span> is easy, all you need to do is iterate the model <span class="math inline">\(a_+ - 1\)</span> times and the age classes will be populated with there respected initial numbers at age. However, for the plus group (<span class="math inline">\(N_{a_+}\)</span>) the solution is needed.</p>
+<p>Although the plus group may start at let say 30 years old, it actually represents 30 and 31 and 32 up to some biological plausible value lets say 130, but mathematically can be thought of as <span class="math inline">\(\infty\)</span>. The plus group is modeled for practical reasons and care should be given when choosing the cut-off maximum age. The plus group is an infinite geometric series that is defined by the common ratio <span class="math inline">\(r_{a_+}\)</span>.</p>
 <p><span class="math display">\[\begin{align}
 N_{a_+} &amp;= R_0e^{\sum_{a = a_+}^\infty-aM}\\
         &amp;= R_0 \frac{e^{M - a_+M}}{1 - e^{-M}}
@@ -282,7 +282,11 @@ N_{a_+} &amp;= R_0e^{\sum_{a = a_+}^\infty-aM}\\
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="spatialInit.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="do">## using the geometric series calculation</span></span>
 <span id="cb27-2"><a href="spatialInit.html#cb27-2" aria-hidden="true" tabindex="-1"></a>R0 <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M <span class="sc">-</span> plus_group_age<span class="sc">*</span>M) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span>M))</span></code></pre></div>
 <pre><code>## [1] 1893568</code></pre>
-<p>The question becomes, how do we calculate this plus group when there is markovian movement as well as? To illustrate the methods that we want will extend the above R-code to have a region and age partition.</p>
+<p>The question becomes, how do we calculate this plus group when there is markovian movement as well as? This code shows how the same infinite geometric series solution works for the plus group with movement. Instead of using just natural mortality (<span class="math inline">\(M\)</span>) you also need how much the plus group accumulates from the movement process. Let <span class="math inline">\(c\)</span> denote the initial accumulation the plus group in a given region receives from ageing, natural mortality and movement. Then the plus group for that region can be</p>
+<p><span class="math display">\[
+N_{a+, r} = N_{a+ - 1, r} \frac{1}{1 - c}
+\]</span>
+where, <span class="math inline">\(N_{a+ - 1, r}\)</span> is the numbers at age for the second to last age cohort in the plus group. The following R code shows how this is equivalent to running the annual cycle for 1000 years.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="spatialInit.html#cb29-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">=</span> <span class="fl">0.1</span></span>
 <span id="cb29-2"><a href="spatialInit.html#cb29-2" aria-hidden="true" tabindex="-1"></a>R0 <span class="ot">=</span> <span class="fl">4e6</span></span>
 <span id="cb29-3"><a href="spatialInit.html#cb29-3" aria-hidden="true" tabindex="-1"></a>n_regions <span class="ot">=</span> <span class="dv">3</span></span>
