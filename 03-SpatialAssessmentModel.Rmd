@@ -4,17 +4,18 @@ The latest published stock assessment [@goethel2021assessment] is a sexually dis
 
 ## Process equations {#spatialmodelequations}
 
+
 ### Initialisation \left(\(g\left(.\right)\)\right) {-}
 
 \begin{align*}
 N_{a,r,1,s} = 
 \begin{cases}
 R_r 0.5, & a = a_1\\
-N_{a - 1,r,1,s} \exp\bigg( - (M + F_{hist} * \mu_{LL} * S^{LL}_{a,1})\bigg), & a_0 < a < a_+\\
-\exp( \mu_r) \exp-( a - 1) ( M + F_{hist} * \mu_{LL} * S^{LL}_{a - 1,1})(1 - \exp( M + F_{hist} * \mu_{LL} * S^{LL}_{a - 1,1}))^{-1}, &  a = a_+
+N_{a - 1,r,1,s} \exp\bigg( - (M + F_{hist} * S^{LL}_{a,1})\bigg), & a_0 < a < a_+\\
+\exp( \mu_r) \exp-( a - 1) ( M + F_{hist} * S^{LL}_{a - 1,1})(1 - \exp( M + F_{hist}* S^{LL}_{a - 1,1}))^{-1}, &  a = a_+
 \end{cases}
 \end{align*}
-
+The plus group
 
 ### Population dynamics \left(\(f\left(.\right)\)\right) {-}
 

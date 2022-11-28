@@ -183,6 +183,28 @@ Once a tag-release event has occurred for tag group \(k\), the only known knowle
 where, \(N^k_a\) is used as an known input into the model with no error. 
 
 
+#### Things to consider for tag release {-}
+
+- we don't have much information regarding sex of tagged fish (36.5\% of recovered tags have sex information). Does this lean towards the internal method? can allocate sex ratio based on vulnerable population which may be important, if there is quite a difference in sex disaggregated selectivities.
+
+
+## Tag recovery observations {-}
+There are tow types of tag-recovery observations that we will consider in this work, tag-release conditioned and tag-recapture conditioned. This conditioning relates to whether we relate recoveries to the release event or whether we only look at the recoveries relative to other recoveries within a year [@vincent2020parameter;@mcgarvey2002estimating]. This conditioning relates more to the log-likelihood formulation rather than the model fitted values. We will also explore two different approaches regarding the scanned fish of which tag-recoveries are a subset. The first is recoveries were entirely from a fishery which requires some understanding or assumptions on reporting rates. The other method assumes scanned fish are known, which is the approach used in the Casal2 [@doonan2016casal2] stock assessment program. This information can be recorded if the scanning is done either by observers who are recording LF's for the catch or scientific/trained staff when shed sampling landed catch. Both these scanning approaches will require an assuming or information on detection rates.
+
+#### Things to consider for tag recovery data {-}
+
+- Years to retain tagged fish in the partition
+- Reporting rates
+- Scan detection rates
+- Mixing time
+- Tag loss
+- Release conditioning vs recapture conditioning
+- likelihood choice?
+
+
+
+
+
 ## Growth estimation using the Laslett–Eveson–Polacheck (LEP) method 
 Going to investigate the use of “Laslett–Eveson–Polacheck (LEP)” based on @laslett2002flexible \& @eveson2004integrated as described in @aires2015improved.
 

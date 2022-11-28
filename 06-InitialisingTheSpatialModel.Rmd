@@ -1,13 +1,11 @@
-# How to calculate the plus group in models with markovian movement {#spatialInit}
+# Initialising the plus group in spatial models {#spatialInit}
 
-In "standard" age-structured models the plus group is calculated using an approximation to the infinite geometric series i.e.,
-
-Analytically solving the age-structure for the initial state of the partition. The partition consists of a vector of numbers at age for each category denoted by \(\textbf{N}\);
+In single area age-structured models, the plus age group is calculated using a solution to an infinite geometric series. This solution for an age-structured model is used to derive initial (equilibrium) state of the partition. The partition consists of a vector of numbers at age for each category denoted by \(\textbf{N}\);
 \[
 \textbf{N} = (N_1, N_2, ... , N_{a_+})^T
 \]
 
-where \(N_{a_+}\) are the numbers in the plus group. The numbers at age for a closed population with density independent equilibrium state can be defined as,
+where \(N_{a_+}\) denotes the numbers in the plus group. The numbers at age for a single area population with no density-dependent processes is derived as,
 
 \[
 N_a = \left\{ \begin{array}{lcl}
@@ -19,16 +17,14 @@ N_a = \left\{ \begin{array}{lcl}
 \end{array}\right.
 \]
 
-Initialisation for ages \(1 \leq a < a_+\) is easy, all you need to do is iterate the model \(a_+ - 1\) times and the age classes will be populated with there respected initial numbers at age. It is less simple for the plus group (\(N_{a_+}\)) because it can take many iterations to reach the initial state of this age class, denoted by the \(\infty\)
+Initialization for ages \(1 \leq a < a_+\) is easy, all you need to do is iterate the model \(a_+ - 1\) times and the age classes will be populated with there respected initial numbers at age. However, for the plus group (\(N_{a_+}\)) the solution is needed.
 
-So, although the plus group may start at let say 30 years old it actually represents 30 and 31 and 32 up to some biological plausible value lets say 130, but mathematically can be thought of as \(\infty\). The plus group is modelled for practical reasons and care should be given when choosing the cut-off age. The plus group is an infinite geometric series that is defined by the common ratio \(r_{a_+}\).
+Although the plus group may start at let say 30 years old, it actually represents 30 and 31 and 32 up to some biological plausible value lets say 130, but mathematically can be thought of as \(\infty\). The plus group is modeled for practical reasons and care should be given when choosing the cut-off maximum age. The plus group is an infinite geometric series that is defined by the common ratio \(r_{a_+}\).
 
 \begin{align}
 N_{a_+} &= R_0e^{\sum_{a = a_+}^\infty-aM}\\
         &= R_0 \frac{e^{M - a_+M}}{1 - e^{-M}}
 \end{align}
-
-
 ```{r illustrateplusGroup}
 M = 0.1
 R0 = 4e6
@@ -44,8 +40,12 @@ N_plus_group
 R0 * exp(-M - plus_group_age*M) / (1 - exp(-M))
 ```
 
-The question becomes, how do we calculate this plus group when there is markovian movement as well as? To illustrate the methods that we want will extend the above R-code to have a region and age partition.
+The question becomes, how do we calculate this plus group when there is markovian movement as well as? This code shows how the same infinite geometric series solution works for the plus group with movement. Instead of using just natural mortality (\(M\)) you also need how much the plus group accumulates from the movement process. Let \(c\) denote the initial accumulation the plus group in a given region receives from ageing, natural mortality and movement. Then the plus group for that region can be 
 
+\[
+N_{a+, r} = N_{a+ - 1, r} \frac{1}{1 - c}
+\]
+where, \(N_{a+ - 1, r}\) is the numbers at age for the second to last age cohort in the plus group. The following R code shows how this is equivalent to running the annual cycle for 1000 years.
 
 ```{r spatialcase}
 M = 0.1

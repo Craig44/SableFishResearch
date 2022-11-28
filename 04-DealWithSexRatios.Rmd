@@ -1,4 +1,4 @@
-# Exploring methods for sex ratios in age and length composition data {#sexratios}
+# Sex ratios in age and length composition data {#sexratios}
 
 An immediate improvement in the current stock assessment (Chapter \@ref(modeldescription)) relates to how sexually disaggregated compositional data are handled. Currently LF's are separated by sex (needed for the different growths) and age compositional data are aggregated over both sexes. Although LFs are disaggregated by sex and should (in theory) be sufficient to estimate sex specific selectivities. It is not ideal to use LFs to estimate age-based selectivities because older cohorts "smush" into single modes and age information is lost.
 
