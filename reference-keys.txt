@@ -22,6 +22,7 @@ fig:runscenario2EM3Fs
 fig:illustrateFvsU
 eq:survival
 fig:LLRegions
+fig:surveycatchgif
 fig:agesamples
 fig:lengthsamples
 fig:femaleCDFagesamples
