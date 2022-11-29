@@ -14,10 +14,10 @@ include_graphics(file.path("Figures", "Longline_areas.png"))
 I am thinking, when it comes to the real data application that we apply a geo-statistical model-based estimator. Currently the survey is a systematic design (Do the visit the same locations each year? obviously ignoring the AI BS switching), but they use a stratified survey estimator for the population mean and variance. I am wondering if this will over state the precision?
 
 
-<!-- (ref:sablefishsurveycatchcaption) A time-series of sablefish catch from the long line survey pooled over 50km by 50km grided cells -->
-<!-- ```{r surveycatchgif, fig.cap="(ref:sablefishsurveycatchcaption)"} -->
-<!-- knitr::include_graphics("Figures/survey_catch.gif") -->
-<!-- ``` -->
+(ref:sablefishsurveycatchcaption) A time-series of sablefish catch from the long line survey pooled over 50km by 50km grided cells
+```{r surveycatchgif, fig.cap="(ref:sablefishsurveycatchcaption)", eval = T, echo = F}
+knitr::include_graphics("Figures/catch.gif")
+```
 
 ### Age-frequency {-}
 

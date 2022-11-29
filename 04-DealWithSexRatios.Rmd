@@ -288,7 +288,7 @@ A third EM (EM3) was also explored, this structured compositional data using App
 
 
 #### EM 1 (using approach 1) {-}
-```{r run_scenario_1_EM_1, warning=F, echo = F, eval = T}
+```{r run_scenario_1_EM_1, warning=F, echo = F, eval = T, cache = TRUE}
 ##################################
 ### Simulate 100 data sets for Scenario 1
 ##################################
@@ -381,7 +381,7 @@ ggplot() +
 ```
 
 #### EM 2 (using approach 2) {-}
-```{r run_scenario_1_EM_2, warning=F, echo = F, eval = T}
+```{r run_scenario_1_EM_2, warning=F, echo = F, eval = T, cache = TRUE}
 ##################################
 ### Simulate 100 data sets for Scenario 1
 ##################################
@@ -476,7 +476,7 @@ ggplot() +
 
 
 #### EM 3 (using approach 1 with female fixed at \(\alpha = 1\)) {-}
-```{r run_scenario_1_EM_3, warning=F, echo = F, eval = T}
+```{r run_scenario_1_EM_3, warning=F, echo = F, eval = T, cache = TRUE}
 ##################################
 ### Simulate 100 data sets for Scenario 1
 ##################################
@@ -589,7 +589,7 @@ true_report = ASM_obj$report()
 ```
 
 #### EM 1 (using approach 1) {-}
-```{r run_scenario_2_EM_1, warning=F, echo = F, eval = T}
+```{r run_scenario_2_EM_1, warning=F, echo = F, eval = T, cache = TRUE}
 ##################################
 ### Simulate 100 data sets for Scenario 1
 ##################################
@@ -684,7 +684,7 @@ ggplot() +
 ```
 
 #### EM 2 (using approach 2) {-}
-```{r run_scenario_2_EM_2, warning=F, echo = F, eval = T}
+```{r run_scenario_2_EM_2, warning=F, echo = F, eval = T, cache = TRUE}
 ##################################
 ### Simulate 100 data sets for Scenario 1
 ##################################
@@ -778,7 +778,7 @@ ggplot() +
   theme_bw()
 ```
 #### EM 3 (using approach 1 with female fixed at \(\alpha = 1\)) {-}
-```{r run_scenario_2_EM_3, warning=F, echo = F, eval = T}
+```{r run_scenario_2_EM_3, warning=F, echo = F, eval = T, cache = TRUE}
 ##################################
 ### Simulate 100 data sets for Scenario 1
 ##################################
