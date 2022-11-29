@@ -4,6 +4,8 @@ eq:catchatage
 eq:surveyage
 eq:relativeindex
 eq:agelengthtransition
+fig:LLRegions
+fig:agesamples
 fig:compilesexplot
 eq:maleselectivity
 eq:femaleselectivity
@@ -22,6 +24,7 @@ fig:runscenario2EM3Fs
 fig:illustrateFvsU
 eq:survival
 fig:addagelength
+fig:showagelengthtransitionproblem
 eq:lengthexploit
 eq:tagatagerelease
 eq:richardsgrowth
@@ -35,6 +38,7 @@ observationsection
 symbols
 spatialmodeldescription
 spatialmodelequations
+dataconsiderationsequations
 sexratios
 sexSimulation
 results
@@ -42,6 +46,7 @@ scenario-1
 scenario-2
 Fexplore
 spatialInit
+spatialmodelInputs
 tagdata
 integrating-tagging-observations-in-spatial-age-structured-models
 growth-estimation-using-the-laslettevesonpolacheck-lep-method

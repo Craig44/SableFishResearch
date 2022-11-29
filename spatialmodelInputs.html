@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Review/summarise reference points | Alaskan sablefish research</title>
+  <title>Chapter 8 Spatial model inputs | Alaskan sablefish research</title>
   <meta name="description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Review/summarise reference points | Alaskan sablefish research" />
+  <meta property="og:title" content="Chapter 8 Spatial model inputs | Alaskan sablefish research" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Review/summarise reference points | Alaskan sablefish research" />
+  <meta name="twitter:title" content="Chapter 8 Spatial model inputs | Alaskan sablefish research" />
   
   <meta name="twitter:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tagdata.html"/>
-<link rel="next" href="references.html"/>
+<link rel="prev" href="spatialInit.html"/>
+<link rel="next" href="tagdata.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -254,48 +254,25 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="refpoints" class="section level1 hasAnchor" number="10">
-<h1><span class="header-section-number">Chapter 10</span> Review/summarise reference points<a href="refpoints.html#refpoints" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Most of my experience with reference points are spawning biomass related i.e., <span class="math inline">\(SSB_y/SSB_0\)</span>. However, many of the reference points outside of New Zealand are <span class="math inline">\(F\)</span> based i.e., <span class="math inline">\(F_{35\%}\)</span> which I don’t really understand. The purpose of this section is to define them mainly to help me understand, but also as a reference for when I forget in the future.</p>
-<table>
-<colgroup>
-<col width="27%" />
-<col width="72%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Symbol</th>
-<th>Description/Calculation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span class="math inline">\(SSB^{\%B_0}_{y}\)</span></td>
-<td><em>Percent <span class="math inline">\(B_0\)</span></em> <span class="math inline">\(= \frac{SSB_y}{B_0}\)</span></td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(SPR\)</span></td>
-<td><em>Spawner per recruit</em> a measure/proxy of population fecundity</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(F_{35\%spr}\)</span></td>
-<td><em><span class="math inline">\(F\)</span> 35%</em> The Fishing mortality that results in a 35% SPR</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(SPR_{msy}\)</span></td>
-<td><em>SPR at MSY</em></td>
-</tr>
-</tbody>
-</table>
+<div id="spatialmodelInputs" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Spatial model inputs<a href="spatialmodelInputs.html#spatialmodelInputs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This chapter describes how raw age/length and catch data were utilised to derive assessment inputs for a myriad of spatially structured assessments. The chapter aims to standardize the methods so that we can easily re-work the data to be fit in an 1,2 or <span class="math inline">\(n_r\)</span> area assessment model.</p>
+<div id="survey-abundance" class="section level2 unnumbered hasAnchor">
+<h2>Survey abundance<a href="spatialmodelInputs.html#survey-abundance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I am thinking, when it comes to the real data application that we apply a geo-statistical model-based estimator. Currently the survey is a systematic design (Do the visit the same locations each year? obviously ignoring the AI BS switching), but they use a stratified survey estimator for the population mean and variance. I am wondering if this will over state the precision?</p>
+</div>
+<div id="survey-age-frequency" class="section level2 unnumbered hasAnchor">
+<h2>Survey age-frequency<a href="spatialmodelInputs.html#survey-age-frequency" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="tagdata.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="spatialInit.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tagdata.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -326,7 +303,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment/09-ReferencePoints.Rmd",
+"link": "https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment/07-CalculatingInputsForSpatialModels.Rmd",
 "text": "Edit"
 },
 "history": {
