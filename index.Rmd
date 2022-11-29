@@ -41,7 +41,7 @@ This Gitbook documents my/our research for the Alaska sablefish (*Anoplopoma fim
 - Chapter \@ref(Fexplore) explores how to parameterise fishing mortality. The current approach is to estimate an annual fishing mortality parameter for each gear. I feel slightly uncomfortable about this approach moving towards a spatial model as the number of estimated parameters will explode. This chapter looks at two alternative approaches that either derive fishing mortality estimates using a Newton Raphson solver which is borrowed from the Stock Synthesis "hybrid" approach [@methot2013stock] and Pope's discrete approach [@pope1972investigation] which uses exploitation rates. All of these methods have been applied in the literature for decades. The aim of this chapter is to do a simulation and make sure the considered approaches are efficient and numerically stability under a range of fishing patterns
 
 
-- Chapter \@ref(spatialInit) explores how to calculate the plus group in spatially explicit age-structured models that assume markovian movement.
+- Chapter \@ref(spatialInit) explores how to calculate the plus group in spatially explicit age-structured models which assume markovian movement.
 
 
 

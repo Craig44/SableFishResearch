@@ -30,8 +30,17 @@ include_graphics(file.path("Figures", "Longline_areas.png"))
 
 
 
-```{r agesamples, out.width = '100%', fig.height= 5, fig.cap="Number of aged fish by sex, region and year.", echo = F, eval = T}
+```{r agesamples, out.width = '100%', fig.height= 5, fig.cap="Number of aged fish by sex, region and year", echo = F, eval = T}
 include_graphics(file.path("Figures", "age_samples_by_year_region_sex.png"))
+```
+
+
+```{r femaleCDFagesamples, out.width = '100%', fig.height= 10, fig.cap="CDF of age frequencies for females", echo = F, eval = T}
+include_graphics(file.path("Figures", "raw_ecdf_AFs_by_year_region_female.png"))
+```
+
+```{r maleCDFagesamples, out.width = '100%', fig.height= 10, fig.cap="CDF of age frequencies for males", echo = F, eval = T}
+include_graphics(file.path("Figures", "raw_ecdf_AFs_by_year_region_male.png"))
 ```
 
 ### To consider {-}
