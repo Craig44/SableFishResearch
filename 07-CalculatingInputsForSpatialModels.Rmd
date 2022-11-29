@@ -1,0 +1,10 @@
+# Spatial model inputs {#spatialmodelInputs}
+
+This chapter describes how raw age/length and catch data were utilised to derive assessment inputs for a myriad of spatially structured assessments. The chapter aims to standardize the methods so that we can easily re-work the data to be fit in an 1,2 or \(n_r\) area assessment model.
+
+
+## Survey abundance {-}
+I am thinking, when it comes to the real data application that we apply a geo-statistical model-based estimator. Currently the survey is a systematic design (Do the visit the same locations each year? obviously ignoring the AI BS switching), but they use a stratified survey estimator for the population mean and variance. I am wondering if this will over state the precision?
+
+
+## Survey age-frequency {-}

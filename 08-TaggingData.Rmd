@@ -57,7 +57,7 @@ group_name =  c(expression(l[1]),expression(l[2]),expression(l[3]),expression(l[
 ```
 
 
-```{r showagelengthtransition_problem, out.width = '100%', fig.height= 4, fig.cap="A visualisation of the effect of going back and forth through an age-length transition matrix. This can happen when tag releases and recaptures are input as length in an age-structured model. The model converts lengths to ages, then reconverts the age to length for observations. This is assuming the same age-length relationship in Figure \\@ref(fig:addagelength)", echo = F, eval = T}
+```{r showagelengthtransitionproblem, out.width = '100%', fig.height= 4, fig.cap="A visualisation of the effect of going back and forth through an age-length transition matrix. This can happen when tag releases and recaptures are input as length in an age-structured model. The model converts lengths to ages, then reconverts the age to length for observations. This is assuming the same age-length relationship in Figure \\@ref(fig:addagelength)", echo = F, eval = T}
 #############
 # A fish in length bin l2
 #############

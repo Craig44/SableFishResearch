@@ -20,6 +20,20 @@ The plus group
 ### Population dynamics \left(\(f\left(.\right)\)\right) {-}
 
 
+
+## Data considerations {#dataconsiderationsequations}
+Spatial resolution to explore.
+
+```{r LLRegions, out.width = '100%', fig.height= 5, fig.cap="The finest spatial resolution that we are considering for Sablefish assessment", echo = F, eval = T}
+include_graphics(file.path("Figures", "Longline_areas.png"))
+```
+
+
+
+```{r agesamples, out.width = '100%', fig.height= 5, fig.cap="Number of aged fish by sex, region and year.", echo = F, eval = T}
+include_graphics(file.path("Figures", "age_samples_by_year_region_sex.png"))
+```
+
 ### To consider {-}
 
 - collapse sex and age into a single dimension. See how I coded the sex ratio model (Chapter \@ref(sexratios))

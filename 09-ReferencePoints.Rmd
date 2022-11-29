@@ -1,6 +1,6 @@
 # Review/summarise reference points {#refpoints}
 
-Most of my experience with reference points are spawning biomass related i.e., \(SSB_y/SSB_0\). However, many of the reference points outside of the US are \(F\) based i.e., \(F_{35\%}\) which I don't really understand. The purpose of this section is to define them mainly to help me understand, but also as a reference for when I forget in the future.
+Most of my experience with reference points are spawning biomass related i.e., \(SSB_y/SSB_0\). However, many of the reference points outside of New Zealand are \(F\) based i.e., \(F_{35\%}\) which I don't really understand. The purpose of this section is to define them mainly to help me understand, but also as a reference for when I forget in the future.
 
 
 +----------------------------+-----------------------------------------------------------------------------+
