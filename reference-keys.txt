@@ -6,8 +6,11 @@ eq:relativeindex
 eq:agelengthtransition
 fig:LLRegions
 fig:agesamples
+fig:lengthsamples
 fig:femaleCDFagesamples
 fig:maleCDFagesamples
+fig:femaleCDFlengthsamples
+fig:maleCDFlengthsamples
 fig:compilesexplot
 eq:maleselectivity
 eq:femaleselectivity
