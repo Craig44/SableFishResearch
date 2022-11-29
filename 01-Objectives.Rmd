@@ -1,9 +1,9 @@
 # A list of objectives/milestones that we have set along the project life {#objectives}
 
 
-- [ ]  Translate current stock assessment (Chapter \@ref(modeldescription)) from ADMB to TMB. Planned date of completion is December 1 2022
-- [ ]  Conduct self test using TMB model. Planned date of completion is December 1 2022
-- [ ]  Consider improvements i.e., sex disaggregated composition data or sex ratio observations (look at the rock lobster assessment) including age-length observations or tag-increment observations to estimate growth internally.
+- [x]  Translate current stock assessment (Chapter \@ref(modeldescription)) from ADMB to TMB. Planned date of completion is December 1 2022
+- [ ]  ~~Conduct self test using TMB stock assessment model. Planned date of completion is December 1 2022~~ I decided not to do this because the assessment had too many bespoke likelihoods
+- [x]  Consider improvements i.e., sex disaggregated composition data or sex ratio observations (look at the rock lobster assessment) including age-length observations or tag-increment observations to estimate growth internally. (Chapter \@ref(sexratios))
 - [ ]  Characterize both fishery and survey data to get an idea of data limitations when considering spatially explicit stock assessment model.
 - [ ]  Develop a spatially explicit estimation model in TMB that generalizes the current assessment model. This requires a lot of thought, especially how we want to integrate the tagging data (Chapter \@ref(tagdata))
 

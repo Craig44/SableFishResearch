@@ -21,45 +21,10 @@ The plus group
 
 
 
-## Data considerations {#dataconsiderationsequations}
-Spatial resolution to explore.
-
-```{r LLRegions, out.width = '100%', fig.height= 5, fig.cap="The finest spatial resolution that we are considering for Sablefish assessment", echo = F, eval = T}
-include_graphics(file.path("Figures", "Longline_areas.png"))
-```
-
-
-
-```{r agesamples, out.width = '100%', fig.height= 5, fig.cap="Number of aged fish by sex, region and year", echo = F, eval = T}
-include_graphics(file.path("Figures", "age_samples_by_year_region_sex.png"))
-```
-
-
-```{r lengthsamples, out.width = '100%', fig.height= 5, fig.cap="Number of fish measured for length by sex, region and year", echo = F, eval = T}
-include_graphics(file.path("Figures", "length_samples_by_year_region_sex.png"))
-```
-
 ### To DO {-}
 
 - simulation test a spatial model with three areas no tagging data and equilibrium initial conditions
 
 ### Appendix {-}
 
-```{r femaleCDFagesamples, out.width = '100%', fig.height= 10, fig.cap="CDF of age frequencies for females", echo = F, eval = T}
-include_graphics(file.path("Figures", "raw_ecdf_AFs_by_year_region_female.png"))
-```
-
-```{r maleCDFagesamples, out.width = '100%', fig.height= 10, fig.cap="CDF of age frequencies for males", echo = F, eval = T}
-include_graphics(file.path("Figures", "raw_ecdf_AFs_by_year_region_male.png"))
-```
-
-
-
-```{r femaleCDFlengthsamples, out.width = '100%', fig.height= 10, fig.cap="CDF of length frequencies for females", echo = F, eval = T}
-include_graphics(file.path("Figures", "raw_ecdf_LFs_by_year_region_female.png"))
-```
-
-```{r maleCDFlengthsamples, out.width = '100%', fig.height= 10, fig.cap="CDF of length frequencies for males", echo = F, eval = T}
-include_graphics(file.path("Figures", "raw_ecdf_LFs_by_year_region_male.png"))
-```
 

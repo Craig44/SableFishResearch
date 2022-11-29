@@ -3,8 +3,58 @@
 This chapter describes how raw age/length and catch data were utilised to derive assessment inputs for a myriad of spatially structured assessments. The chapter aims to standardize the methods so that we can easily re-work the data to be fit in an 1,2 or \(n_r\) area assessment model.
 
 
-## Survey abundance {-}
+```{r LLRegions, out.width = '100%', fig.height= 5, fig.cap="The finest spatial resolution that we are considering for Sablefish assessment", echo = F, eval = T}
+include_graphics(file.path("Figures", "Longline_areas.png"))
+```
+
+
+## Survey data {#surveyData}
+
+### Abundance {-}
 I am thinking, when it comes to the real data application that we apply a geo-statistical model-based estimator. Currently the survey is a systematic design (Do the visit the same locations each year? obviously ignoring the AI BS switching), but they use a stratified survey estimator for the population mean and variance. I am wondering if this will over state the precision?
 
 
-## Survey age-frequency {-}
+<!-- (ref:sablefishsurveycatchcaption) A time-series of sablefish catch from the long line survey pooled over 50km by 50km grided cells -->
+<!-- ```{r surveycatchgif, fig.cap="(ref:sablefishsurveycatchcaption)"} -->
+<!-- knitr::include_graphics("Figures/survey_catch.gif") -->
+<!-- ``` -->
+
+### Age-frequency {-}
+
+```{r agesamples, out.width = '100%', fig.height= 5, fig.cap="Number of aged fish by sex, region and year", echo = F, eval = T}
+include_graphics(file.path("Figures", "age_samples_by_year_region_sex.png"))
+```
+
+
+### Length-frequency {-}
+
+
+```{r lengthsamples, out.width = '100%', fig.height= 5, fig.cap="Number of fish measured for length by sex, region and year", echo = F, eval = T}
+include_graphics(file.path("Figures", "length_samples_by_year_region_sex.png"))
+```
+
+
+## Observer data {#ObserverData}
+
+
+## Catch data {#CatchData}
+
+
+## Appendix {-}
+
+```{r femaleCDFagesamples, out.width = '100%', fig.height= 10, fig.cap="CDF of age frequencies for females", echo = F, eval = T}
+include_graphics(file.path("Figures", "raw_ecdf_AFs_by_year_region_female.png"))
+```
+
+```{r maleCDFagesamples, out.width = '100%', fig.height= 10, fig.cap="CDF of age frequencies for males", echo = F, eval = T}
+include_graphics(file.path("Figures", "raw_ecdf_AFs_by_year_region_male.png"))
+```
+
+
+```{r femaleCDFlengthsamples, out.width = '100%', fig.height= 10, fig.cap="CDF of length frequencies for females", echo = F, eval = T}
+include_graphics(file.path("Figures", "raw_ecdf_LFs_by_year_region_female.png"))
+```
+
+```{r maleCDFlengthsamples, out.width = '100%', fig.height= 10, fig.cap="CDF of length frequencies for males", echo = F, eval = T}
+include_graphics(file.path("Figures", "raw_ecdf_LFs_by_year_region_male.png"))
+```
