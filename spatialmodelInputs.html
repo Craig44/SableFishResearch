@@ -191,9 +191,6 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#initialisation-gleft.right-1"><i class="fa fa-check"></i>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)</a></li>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#population-dynamics-fleft.right-1"><i class="fa fa-check"></i>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)</a></li>
-</ul></li>
-<li class="chapter" data-level="4.2" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#dataconsiderationsequations"><i class="fa fa-check"></i><b>4.2</b> Data considerations</a>
-<ul>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#to-do"><i class="fa fa-check"></i>To DO</a></li>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#appendix"><i class="fa fa-check"></i>Appendix</a></li>
 </ul></li>
@@ -216,8 +213,15 @@ div.csl-indent {
 <li class="chapter" data-level="7" data-path="spatialInit.html"><a href="spatialInit.html"><i class="fa fa-check"></i><b>7</b> Initialising the plus group in spatial models</a></li>
 <li class="chapter" data-level="8" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html"><i class="fa fa-check"></i><b>8</b> Spatial model inputs</a>
 <ul>
-<li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#survey-abundance"><i class="fa fa-check"></i>Survey abundance</a></li>
-<li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#survey-age-frequency"><i class="fa fa-check"></i>Survey age-frequency</a></li>
+<li class="chapter" data-level="8.1" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#surveyData"><i class="fa fa-check"></i><b>8.1</b> Survey data</a>
+<ul>
+<li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#abundance"><i class="fa fa-check"></i>Abundance</a></li>
+<li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#age-frequency"><i class="fa fa-check"></i>Age-frequency</a></li>
+<li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#length-frequency"><i class="fa fa-check"></i>Length-frequency</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#ObserverData"><i class="fa fa-check"></i><b>8.2</b> Observer data</a></li>
+<li class="chapter" data-level="8.3" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#CatchData"><i class="fa fa-check"></i><b>8.3</b> Catch data</a></li>
+<li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#appendix-1"><i class="fa fa-check"></i>Appendix</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>9</b> Tagging data and studies</a>
 <ul>
@@ -257,12 +261,73 @@ div.csl-indent {
 <div id="spatialmodelInputs" class="section level1 hasAnchor" number="8">
 <h1><span class="header-section-number">Chapter 8</span> Spatial model inputs<a href="spatialmodelInputs.html#spatialmodelInputs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This chapter describes how raw age/length and catch data were utilised to derive assessment inputs for a myriad of spatially structured assessments. The chapter aims to standardize the methods so that we can easily re-work the data to be fit in an 1,2 or <span class="math inline">\(n_r\)</span> area assessment model.</p>
-<div id="survey-abundance" class="section level2 unnumbered hasAnchor">
-<h2>Survey abundance<a href="spatialmodelInputs.html#survey-abundance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>I am thinking, when it comes to the real data application that we apply a geo-statistical model-based estimator. Currently the survey is a systematic design (Do the visit the same locations each year? obviously ignoring the AI BS switching), but they use a stratified survey estimator for the population mean and variance. I am wondering if this will over state the precision?</p>
+<div class="figure"><span style="display:block;" id="fig:LLRegions"></span>
+<img src="Figures/Longline_areas.png" alt="The finest spatial resolution that we are considering for Sablefish assessment" width="100%" />
+<p class="caption">
+Figure 8.1: The finest spatial resolution that we are considering for Sablefish assessment
+</p>
 </div>
-<div id="survey-age-frequency" class="section level2 unnumbered hasAnchor">
-<h2>Survey age-frequency<a href="spatialmodelInputs.html#survey-age-frequency" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="surveyData" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Survey data<a href="spatialmodelInputs.html#surveyData" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="abundance" class="section level3 unnumbered hasAnchor">
+<h3>Abundance<a href="spatialmodelInputs.html#abundance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>I am thinking, when it comes to the real data application that we apply a geo-statistical model-based estimator. Currently the survey is a systematic design (Do the visit the same locations each year? obviously ignoring the AI BS switching), but they use a stratified survey estimator for the population mean and variance. I am wondering if this will over state the precision?</p>
+<!-- (ref:sablefishsurveycatchcaption) A time-series of sablefish catch from the long line survey pooled over 50km by 50km grided cells -->
+<!-- ```{r surveycatchgif, fig.cap="(ref:sablefishsurveycatchcaption)"} -->
+<!-- knitr::include_graphics("Figures/survey_catch.gif") -->
+<!-- ``` -->
+</div>
+<div id="age-frequency" class="section level3 unnumbered hasAnchor">
+<h3>Age-frequency<a href="spatialmodelInputs.html#age-frequency" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="figure"><span style="display:block;" id="fig:agesamples"></span>
+<img src="Figures/age_samples_by_year_region_sex.png" alt="Number of aged fish by sex, region and year" width="100%" />
+<p class="caption">
+Figure 8.2: Number of aged fish by sex, region and year
+</p>
+</div>
+</div>
+<div id="length-frequency" class="section level3 unnumbered hasAnchor">
+<h3>Length-frequency<a href="spatialmodelInputs.html#length-frequency" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="figure"><span style="display:block;" id="fig:lengthsamples"></span>
+<img src="Figures/length_samples_by_year_region_sex.png" alt="Number of fish measured for length by sex, region and year" width="100%" />
+<p class="caption">
+Figure 8.3: Number of fish measured for length by sex, region and year
+</p>
+</div>
+</div>
+</div>
+<div id="ObserverData" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Observer data<a href="spatialmodelInputs.html#ObserverData" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="CatchData" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Catch data<a href="spatialmodelInputs.html#CatchData" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="appendix-1" class="section level2 unnumbered hasAnchor">
+<h2>Appendix<a href="spatialmodelInputs.html#appendix-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="figure"><span style="display:block;" id="fig:femaleCDFagesamples"></span>
+<img src="Figures/raw_ecdf_AFs_by_year_region_female.png" alt="CDF of age frequencies for females" width="100%" />
+<p class="caption">
+Figure 8.4: CDF of age frequencies for females
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:maleCDFagesamples"></span>
+<img src="Figures/raw_ecdf_AFs_by_year_region_male.png" alt="CDF of age frequencies for males" width="100%" />
+<p class="caption">
+Figure 8.5: CDF of age frequencies for males
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:femaleCDFlengthsamples"></span>
+<img src="Figures/raw_ecdf_LFs_by_year_region_female.png" alt="CDF of length frequencies for females" width="100%" />
+<p class="caption">
+Figure 8.6: CDF of length frequencies for females
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:maleCDFlengthsamples"></span>
+<img src="Figures/raw_ecdf_LFs_by_year_region_male.png" alt="CDF of length frequencies for males" width="100%" />
+<p class="caption">
+Figure 8.7: CDF of length frequencies for males
+</p>
+</div>
 
 </div>
 </div>
