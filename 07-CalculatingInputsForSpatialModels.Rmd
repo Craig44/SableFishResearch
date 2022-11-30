@@ -3,27 +3,35 @@
 This chapter describes how raw age/length and catch data were utilised to derive assessment inputs for a myriad of spatially structured assessments. The chapter aims to standardize the methods so that we can easily re-work the data to be fit in an 1,2 or \(n_r\) area assessment model.
 
 
+
+
 ```{r LLRegions, out.width = '100%', fig.height= 5, fig.cap="The finest spatial resolution that we are considering for Sablefish assessment", echo = F, eval = T}
 include_graphics(file.path("Figures", "Longline_areas.png"))
 ```
 
 
-## Survey data {#surveyData}
+## Survey Abundance data {#surveyData}
 
-### Abundance {-}
-I am thinking, when it comes to the real data application that we apply a geo-statistical model-based estimator. Currently the survey is a systematic design (Do the visit the same locations each year? obviously ignoring the AI BS switching), but they use a stratified survey estimator for the population mean and variance. I am wondering if this will over state the precision?
+I am thinking, when it comes to the real data application that we apply a geostatistical model-based estimator. The survey is a systematic/fixed design (Do the visit the same locations each year? obviously ignoring the AI BS switching), but use a stratified survey estimator for the population mean and variance. I am wondering if this will over state the precision? A useful reference for changes in survey operators for the Alaskan sablefish is @kimura1997standardizing. "The Japanese long-line gear used in the joint surveys and the NMFS long-line gear are similar in many respects...Differences between Japanese sampling gear and NMFS sampling gear were mostly due to hook and gangion construction"
 
 
-(ref:sablefishsurveycatchcaption) A time-series of sablefish catch from the long line survey pooled over 50km by 50km grided cells
-```{r surveycatchgif, fig.cap="(ref:sablefishsurveycatchcaption)", eval = T, echo = F}
+```{r surveycatchgif, fig.cap="A time-series of sablefish catch from the long line survey pooled over 50km by 50km grided cells", eval = T, echo = F}
 knitr::include_graphics("Figures/catch.gif")
 ```
 
-### Age-frequency {-}
+## Age-frequency {#AFs}
+A big challenge of any spatial stock assessment is deriving spatially disaggregated age-frequency observations from low age sample sizes. For both the long-line survey and fishery we have both age and length data sets. This means there are multiple estimators available. These include direct ageing, length frequency analysis [@andrade2004estimation] (Length frequency analysis decomposes length frequency histograms into age classes) and age-length key [@ailloud2019general;@hoenig2002generalizing]. The forward age-length key method at face value is the most attractive as it reduces sparsity and variation when compared to direct ageing estimators.
+
+
+A note on sablefish otolith samping from the survey.
+"Otolith collections were length-stratified from 1979-94 and random thereafter" pg 9 of @sigler2001alaska
 
 ```{r agesamples, out.width = '100%', fig.height= 5, fig.cap="Number of aged fish by sex, region and year", echo = F, eval = T}
 include_graphics(file.path("Figures", "age_samples_by_year_region_sex.png"))
 ```
+
+### Direct Ageing estimator {-}
+
 
 
 ### Length-frequency {-}
@@ -41,6 +49,22 @@ include_graphics(file.path("Figures", "length_samples_by_year_region_sex.png"))
 
 
 ## Appendix {-}
+
+Sampling notation
++----------------------------+-----------------------------------------------------------------------------+
+| Symbol                     | Description                            
++============================+=============================================================================+
+| \(h\)                      | haul index
++----------------------------+-----------------------------------------------------------------------------+
+| \(C^h\)                    | Catch for haul \(h\) can be numbers or biomass
++----------------------------+-----------------------------------------------------------------------------+
+| \(n^h_l\)                  | number of fish measured for length from haul \(h\) 
++----------------------------+-----------------------------------------------------------------------------+
+| \(n^h_a\)                  | number of fish aged in from haul \(h\). Assumed to be a subsample of \(n^h_l\)
++----------------------------+-----------------------------------------------------------------------------+
+
+
+
 
 ```{r femaleCDFagesamples, out.width = '100%', fig.height= 10, fig.cap="CDF of age frequencies for females", echo = F, eval = T}
 include_graphics(file.path("Figures", "raw_ecdf_AFs_by_year_region_female.png"))

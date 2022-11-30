@@ -1,9 +1,22 @@
 # Tagging data and studies {#tagdata}
 Since 1972 there have been approximately 400 000 sablefish tagged in Alaska waters, of which over 38 500 have been recovered. Although there is extensive and long term tagging data, this information is not currently directly included in the stock assessment [@goethel2021assessment].
 
+
+Historical publications investigating movement of Alaskan sablefish include @heifetz1991movement, @hanselman2015move
+
 ## Integrating tagging observations in spatial age-structured models
 
 This project intends to explore a range of methods for utilising tag-recovery observations in spatially disaggregated age-structured stock assessments.
+
+## Tagging things to consider with relevant references {-}
+
+- Years to retain tagged fish in the partition "After approximately 9 yr the number of recaptures was small and contributed more to the variance associated with the trends in movement than an improved understanding of these trends" @beamish_88
+- Reporting rates [@heifetz2001estimation]
+- Scan detection rates. Is this not a factor of reporting rates?
+- Mixing time and how to deal with it?
+- Tag loss "tag loss in the fist year was approximately 10% and after that approximately 2% per year." @beamish_88
+- Release conditioning vs recapture conditioning [@vincent2020parameter;@mcgarvey2002estimating]
+- likelihood choice? [@hanselman2015move]
 
 
 ## Releasing tags {-}
@@ -189,17 +202,7 @@ where, \(N^k_a\) is used as an known input into the model with no error.
 
 
 ## Tag recovery observations {-}
-There are tow types of tag-recovery observations that we will consider in this work, tag-release conditioned and tag-recapture conditioned. This conditioning relates to whether we relate recoveries to the release event or whether we only look at the recoveries relative to other recoveries within a year [@vincent2020parameter;@mcgarvey2002estimating]. This conditioning relates more to the log-likelihood formulation rather than the model fitted values. We will also explore two different approaches regarding the scanned fish of which tag-recoveries are a subset. The first is recoveries were entirely from a fishery which requires some understanding or assumptions on reporting rates. The other method assumes scanned fish are known, which is the approach used in the Casal2 [@doonan2016casal2] stock assessment program. This information can be recorded if the scanning is done either by observers who are recording LF's for the catch or scientific/trained staff when shed sampling landed catch. Both these scanning approaches will require an assuming or information on detection rates.
-
-#### Things to consider for tag recovery data {-}
-
-- Years to retain tagged fish in the partition
-- Reporting rates
-- Scan detection rates
-- Mixing time
-- Tag loss
-- Release conditioning vs recapture conditioning
-- likelihood choice?
+There are tow types of tag-recovery observations that we will consider in this work, tag-release conditioned and tag-recapture conditioned. This conditioning relates to whether we relate recoveries to the release event or whether we only look at the recoveries relative to other recoveries within a year [@vincent2020parameter;@mcgarvey2002estimating]. This conditioning relates more to the log-likelihood formulation rather than the model expected values. We should also explore two different approaches regarding the scanned fish of which tag-recoveries are a subset. The first is recoveries were entirely from a fishery which requires some understanding or assumptions on reporting rates. The other method assumes scanned fish are known, which is the approach used in the Casal2 [@doonan2016casal2] stock assessment program. This information can be recorded if the scanning is done either by observers who are recording LF's for the catch or scientific/trained staff when shed sampling landed catch. Both these scanning approaches will require an assuming or information on detection rates.
 
 
 

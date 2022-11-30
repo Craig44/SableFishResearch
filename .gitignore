@@ -30,6 +30,7 @@ _book/style.css
 _book/tagdata.html
 _book/
 _bookdown_files/
+_main_cache/
 _main_files/
 *.o
 *.dll
