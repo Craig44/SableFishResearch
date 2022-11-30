@@ -53,6 +53,7 @@ Fexplore
 spatialInit
 spatialmodelInputs
 surveyData
+AFs
 ObserverData
 CatchData
 tagdata

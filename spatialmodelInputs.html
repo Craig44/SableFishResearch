@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-11-29" />
+<meta name="date" content="2022-11-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -213,19 +213,20 @@ div.csl-indent {
 <li class="chapter" data-level="7" data-path="spatialInit.html"><a href="spatialInit.html"><i class="fa fa-check"></i><b>7</b> Initialising the plus group in spatial models</a></li>
 <li class="chapter" data-level="8" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html"><i class="fa fa-check"></i><b>8</b> Spatial model inputs</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#surveyData"><i class="fa fa-check"></i><b>8.1</b> Survey data</a>
+<li class="chapter" data-level="8.1" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#surveyData"><i class="fa fa-check"></i><b>8.1</b> Survey Abundance data</a></li>
+<li class="chapter" data-level="8.2" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#AFs"><i class="fa fa-check"></i><b>8.2</b> Age-frequency</a>
 <ul>
-<li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#abundance"><i class="fa fa-check"></i>Abundance</a></li>
-<li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#age-frequency"><i class="fa fa-check"></i>Age-frequency</a></li>
+<li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#direct-ageing-estimator"><i class="fa fa-check"></i>Direct Ageing estimator</a></li>
 <li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#length-frequency"><i class="fa fa-check"></i>Length-frequency</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#ObserverData"><i class="fa fa-check"></i><b>8.2</b> Observer data</a></li>
-<li class="chapter" data-level="8.3" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#CatchData"><i class="fa fa-check"></i><b>8.3</b> Catch data</a></li>
+<li class="chapter" data-level="8.3" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#ObserverData"><i class="fa fa-check"></i><b>8.3</b> Observer data</a></li>
+<li class="chapter" data-level="8.4" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#CatchData"><i class="fa fa-check"></i><b>8.4</b> Catch data</a></li>
 <li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#appendix-1"><i class="fa fa-check"></i>Appendix</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>9</b> Tagging data and studies</a>
 <ul>
 <li class="chapter" data-level="9.1" data-path="tagdata.html"><a href="tagdata.html#integrating-tagging-observations-in-spatial-age-structured-models"><i class="fa fa-check"></i><b>9.1</b> Integrating tagging observations in spatial age-structured models</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tagging-things-to-consider-with-relevant-references"><i class="fa fa-check"></i>Tagging things to consider with relevant references</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#releasing-tags"><i class="fa fa-check"></i>Releasing tags</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tag-recovery-observations"><i class="fa fa-check"></i>Tag recovery observations</a></li>
 <li class="chapter" data-level="9.2" data-path="tagdata.html"><a href="tagdata.html#growth-estimation-using-the-laslettevesonpolacheck-lep-method"><i class="fa fa-check"></i><b>9.2</b> Growth estimation using the Laslett–Eveson–Polacheck (LEP) method</a>
@@ -268,26 +269,28 @@ Figure 8.1: The finest spatial resolution that we are considering for Sablefish 
 </p>
 </div>
 <div id="surveyData" class="section level2 hasAnchor" number="8.1">
-<h2><span class="header-section-number">8.1</span> Survey data<a href="spatialmodelInputs.html#surveyData" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="abundance" class="section level3 unnumbered hasAnchor">
-<h3>Abundance<a href="spatialmodelInputs.html#abundance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>I am thinking, when it comes to the real data application that we apply a geo-statistical model-based estimator. Currently the survey is a systematic design (Do the visit the same locations each year? obviously ignoring the AI BS switching), but they use a stratified survey estimator for the population mean and variance. I am wondering if this will over state the precision?</p>
-(ref:sablefishsurveycatchcaption) A time-series of sablefish catch from the long line survey pooled over 50km by 50km grided cells
+<h2><span class="header-section-number">8.1</span> Survey Abundance data<a href="spatialmodelInputs.html#surveyData" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I am thinking, when it comes to the real data application that we apply a geostatistical model-based estimator. The survey is a systematic/fixed design (Do the visit the same locations each year? obviously ignoring the AI BS switching), but use a stratified survey estimator for the population mean and variance. I am wondering if this will over state the precision? A useful reference for changes in survey operators for the Alaskan sablefish is <span class="citation">Kimura and Zenger Jr (<a href="#ref-kimura1997standardizing" role="doc-biblioref">1997</a>)</span>. “The Japanese long-line gear used in the joint surveys and the NMFS long-line gear are similar in many respects…Differences between Japanese sampling gear and NMFS sampling gear were mostly due to hook and gangion construction”</p>
 <div class="figure"><span style="display:block;" id="fig:surveycatchgif"></span>
-<img src="Figures/catch.gif" alt="(ref:sablefishsurveycatchcaption)"  />
+<img src="Figures/catch.gif" alt="A time-series of sablefish catch from the long line survey pooled over 50km by 50km grided cells"  />
 <p class="caption">
-Figure 8.2: (ref:sablefishsurveycatchcaption)
+Figure 8.2: A time-series of sablefish catch from the long line survey pooled over 50km by 50km grided cells
 </p>
 </div>
 </div>
-<div id="age-frequency" class="section level3 unnumbered hasAnchor">
-<h3>Age-frequency<a href="spatialmodelInputs.html#age-frequency" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="AFs" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Age-frequency<a href="spatialmodelInputs.html#AFs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A big challenge of any spatial stock assessment is deriving spatially disaggregated age-frequency observations from low age sample sizes. For both the long-line survey and fishery we have both age and length data sets. This means there are multiple estimators available. These include direct ageing, length frequency analysis <span class="citation">(<a href="#ref-andrade2004estimation" role="doc-biblioref">Andrade and Kinas 2004</a>)</span> (Length frequency analysis decomposes length frequency histograms into age classes) and age-length key <span class="citation">(<a href="#ref-ailloud2019general" role="doc-biblioref">Ailloud and Hoenig 2019</a>; <a href="#ref-hoenig2002generalizing" role="doc-biblioref">Hoenig, Choudary Hanumara, and Heisey 2002</a>)</span>. The forward age-length key method at face value is the most attractive as it reduces sparsity and variation when compared to direct ageing estimators.</p>
+<p>A note on sablefish otolith samping from the survey.
+“Otolith collections were length-stratified from 1979-94 and random thereafter” pg 9 of <span class="citation">Sigler, Fujioka, and Lowe (<a href="#ref-sigler2001alaska" role="doc-biblioref">2001</a>)</span></p>
 <div class="figure"><span style="display:block;" id="fig:agesamples"></span>
 <img src="Figures/age_samples_by_year_region_sex.png" alt="Number of aged fish by sex, region and year" width="100%" />
 <p class="caption">
 Figure 8.3: Number of aged fish by sex, region and year
 </p>
 </div>
+<div id="direct-ageing-estimator" class="section level3 unnumbered hasAnchor">
+<h3>Direct Ageing estimator<a href="spatialmodelInputs.html#direct-ageing-estimator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 <div id="length-frequency" class="section level3 unnumbered hasAnchor">
 <h3>Length-frequency<a href="spatialmodelInputs.html#length-frequency" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -299,14 +302,26 @@ Figure 8.4: Number of fish measured for length by sex, region and year
 </div>
 </div>
 </div>
-<div id="ObserverData" class="section level2 hasAnchor" number="8.2">
-<h2><span class="header-section-number">8.2</span> Observer data<a href="spatialmodelInputs.html#ObserverData" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="ObserverData" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Observer data<a href="spatialmodelInputs.html#ObserverData" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
-<div id="CatchData" class="section level2 hasAnchor" number="8.3">
-<h2><span class="header-section-number">8.3</span> Catch data<a href="spatialmodelInputs.html#CatchData" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="CatchData" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Catch data<a href="spatialmodelInputs.html#CatchData" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
 <div id="appendix-1" class="section level2 unnumbered hasAnchor">
 <h2>Appendix<a href="spatialmodelInputs.html#appendix-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Sampling notation
++—————————-+—————————————————————————–+
+| Symbol | Description<br />
++============================+=============================================================================+
+| <span class="math inline">\(h\)</span> | haul index
++—————————-+—————————————————————————–+
+| <span class="math inline">\(C^h\)</span> | Catch for haul <span class="math inline">\(h\)</span> can be numbers or biomass
++—————————-+—————————————————————————–+
+| <span class="math inline">\(n^h_l\)</span> | number of fish measured for length from haul <span class="math inline">\(h\)</span>
++—————————-+—————————————————————————–+
+| <span class="math inline">\(n^h_a\)</span> | number of fish aged in from haul <span class="math inline">\(h\)</span>. Assumed to be a subsample of <span class="math inline">\(n^h_l\)</span>
++—————————-+—————————————————————————–+</p>
 <div class="figure"><span style="display:block;" id="fig:femaleCDFagesamples"></span>
 <img src="Figures/raw_ecdf_AFs_by_year_region_female.png" alt="CDF of age frequencies for females" width="100%" />
 <p class="caption">
@@ -332,6 +347,24 @@ Figure 8.8: CDF of length frequencies for males
 </p>
 </div>
 
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-ailloud2019general" class="csl-entry">
+Ailloud, Lisa E, and John M Hoenig. 2019. <span>“A General Theory of Age-Length Keys: Combining the Forward and Inverse Keys to Estimate Age Composition from Incomplete Data.”</span> <em>ICES Journal of Marine Science</em> 76 (6): 1515–23.
+</div>
+<div id="ref-andrade2004estimation" class="csl-entry">
+Andrade, Humber A, and Paul G Kinas. 2004. <span>“Estimation of Birthdates and Catch-at-Age Using Length Frequency Analysis (LFA), with Application for Skipjack Tuna (Katsuwonus Pelamis) Caught in the Southwest Atlantic.”</span> <em>ICES Journal of Marine Science</em> 61 (5): 798–811.
+</div>
+<div id="ref-hoenig2002generalizing" class="csl-entry">
+Hoenig, John M, R Choudary Hanumara, and Dennis M Heisey. 2002. <span>“Generalizing Double and Triple Sampling for Repeated Surveys and Partial Verification.”</span> <em>Biometrical Journal: Journal of Mathematical Methods in Biosciences</em> 44 (5): 603–18.
+</div>
+<div id="ref-kimura1997standardizing" class="csl-entry">
+Kimura, Daniel K, and Harold H Zenger Jr. 1997. <span>“Standardizing Sablefish (Anoplopoma Fimbria) Long-Line Survey Abundance Indices by Modeling the Log-Ratio of Paired Comparative Fishing Cpues.”</span> <em>ICES Journal of Marine Science</em> 54 (1): 48–59.
+</div>
+<div id="ref-sigler2001alaska" class="csl-entry">
+Sigler, Michael F, Jeffrey T Fujioka, and Sandra A Lowe. 2001. <span>“Alaska Sablefish Assessment for 2001.”</span> <em>Stock Assessment and Fishery Evaluation Report for the Groundfish Fisheries of the Bering Sea and Aleutian Islands</em>.
 </div>
 </div>
             </section>
