@@ -1,2 +1,2 @@
-Public documentation of my postdoc to keep my accountable!! please go to the following link to view the online Gitbook https://craig44.github.io/SableFishResearch
+A public Gitbook (may be a bit scrappy) of my postdoc to keep me accountable!! See here https://craig44.github.io/SableFishResearch
 
