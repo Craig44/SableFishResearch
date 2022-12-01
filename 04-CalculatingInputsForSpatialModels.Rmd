@@ -45,12 +45,34 @@ include_graphics(file.path("Figures", "length_samples_by_year_region_sex.png"))
 ## Observer data {#ObserverData}
 
 
+## Growth data {#Growth}
+```{r agelengthbysex, echo=FALSE,out.width="61%", fig.height=6,fig.cap="Age-length by sex",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c(file.path("Figures","raw_growth_by_sex.png")))
+``` 
+
+
+
+```{r malegrowth, echo=FALSE,out.width="49%", fig.height=5,fig.cap="Male age-length by region (left panel) and decade (right panel)",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c(file.path("Figures","raw_male_growth_by_region.png"),file.path("Figures","raw_male_growth_by_decade.png")))
+``` 
+
+
+```{r femalegrowth, echo=FALSE,out.width="49%", fig.height=5,fig.cap="Female age-length by region (left panel) and decade (right panel)",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c(file.path("Figures","raw_female_growth_by_region.png"),file.path("Figures","raw_female_growth_by_decade.png")))
+``` 
+
+
+
+
+
 ## Catch data {#CatchData}
 
 
 ## Appendix {-}
 
 Sampling notation
+
+
 +----------------------------+-----------------------------------------------------------------------------+
 | Symbol                     | Description                            
 +============================+=============================================================================+
