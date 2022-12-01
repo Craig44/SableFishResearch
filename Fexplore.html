@@ -202,7 +202,8 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#length-frequency"><i class="fa fa-check"></i>Length-frequency</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#ObserverData"><i class="fa fa-check"></i><b>5.3</b> Observer data</a></li>
-<li class="chapter" data-level="5.4" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#CatchData"><i class="fa fa-check"></i><b>5.4</b> Catch data</a></li>
+<li class="chapter" data-level="5.4" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#Growth"><i class="fa fa-check"></i><b>5.4</b> Growth data</a></li>
+<li class="chapter" data-level="5.5" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#CatchData"><i class="fa fa-check"></i><b>5.5</b> Catch data</a></li>
 <li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#appendix-1"><i class="fa fa-check"></i>Appendix</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>6</b> Tagging data and studies</a>
@@ -361,7 +362,7 @@ Figure 9.1: Illustration of how mortality is applied to an age cohort continuous
 <span id="cb18-16"><a href="Fexplore.html#cb18-16" aria-hidden="true" tabindex="-1"></a>opt_model_hybrid_F<span class="sc">$</span>iterations</span></code></pre></div>
 <pre><code>## [1] 187</code></pre>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="Fexplore.html#cb20-1" aria-hidden="true" tabindex="-1"></a>opt_model_est_F<span class="sc">$</span>iterations</span></code></pre></div>
-<pre><code>## [1] 697</code></pre>
+<pre><code>## [1] 673</code></pre>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="Fexplore.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="do">## get reports = </span></span>
 <span id="cb22-2"><a href="Fexplore.html#cb22-2" aria-hidden="true" tabindex="-1"></a>rep_est_hybrid <span class="ot">=</span> est_model_hybrid_F<span class="sc">$</span><span class="fu">report</span>(est_model_hybrid_F<span class="sc">$</span>env<span class="sc">$</span>last.par.best)</span>
 <span id="cb22-3"><a href="Fexplore.html#cb22-3" aria-hidden="true" tabindex="-1"></a>rep_est_F <span class="ot">=</span> est_model_est_F<span class="sc">$</span><span class="fu">report</span>(est_model_est_F<span class="sc">$</span>env<span class="sc">$</span>last.par.best)</span>
@@ -375,20 +376,20 @@ Figure 9.1: Illustration of how mortality is applied to an age cohort continuous
 <span id="cb23-2"><a href="Fexplore.html#cb23-2" aria-hidden="true" tabindex="-1"></a>hybrid_F_bench <span class="ot">=</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_hybrid_F, <span class="at">n =</span> <span class="dv">1000</span>)</span>
 <span id="cb23-3"><a href="Fexplore.html#cb23-3" aria-hidden="true" tabindex="-1"></a>est_F_bench</span></code></pre></div>
 <pre><code>##                     elapsed
-## template.likelihood   0.766
-## template.gradient     1.491</code></pre>
+## template.likelihood   0.821
+## template.gradient     1.640</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="Fexplore.html#cb25-1" aria-hidden="true" tabindex="-1"></a>hybrid_F_bench</span></code></pre></div>
 <pre><code>##                     elapsed
-## template.likelihood   2.042
-## template.gradient     4.221</code></pre>
+## template.likelihood   2.216
+## template.gradient     4.581</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="Fexplore.html#cb27-1" aria-hidden="true" tabindex="-1"></a>ben_est_F <span class="ot">&lt;-</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_est_F, <span class="at">n=</span><span class="dv">20</span>,<span class="at">expr=</span><span class="fu">expression</span>(<span class="fu">do.call</span>(<span class="st">&quot;optim&quot;</span>,obj)))</span>
 <span id="cb27-2"><a href="Fexplore.html#cb27-2" aria-hidden="true" tabindex="-1"></a>ben_hybrid_F <span class="ot">&lt;-</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_hybrid_F, <span class="at">n=</span><span class="dv">20</span>,<span class="at">expr=</span><span class="fu">expression</span>(<span class="fu">do.call</span>(<span class="st">&quot;optim&quot;</span>,obj)))</span>
 <span id="cb27-3"><a href="Fexplore.html#cb27-3" aria-hidden="true" tabindex="-1"></a>ben_est_F</span></code></pre></div>
 <pre><code>##                       elapsed
-## do.call(&quot;optim&quot;, obj)  13.463</code></pre>
+## do.call(&quot;optim&quot;, obj)  14.688</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="Fexplore.html#cb29-1" aria-hidden="true" tabindex="-1"></a>ben_hybrid_F</span></code></pre></div>
 <pre><code>##                       elapsed
-## do.call(&quot;optim&quot;, obj)  11.762</code></pre>
+## do.call(&quot;optim&quot;, obj)  13.213</code></pre>
 <p>These results have highlighted the following</p>
 <ul>
 <li>Both the Free <span class="math inline">\(F\)</span> and hybrid estimate very similar model quantities i.e., SSB’s and F’s</li>

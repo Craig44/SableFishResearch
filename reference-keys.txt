@@ -8,6 +8,9 @@ fig:LLRegions
 fig:surveycatchgif
 fig:agesamples
 fig:lengthsamples
+fig:agelengthbysex
+fig:malegrowth
+fig:femalegrowth
 fig:femaleCDFagesamples
 fig:maleCDFagesamples
 fig:femaleCDFlengthsamples
@@ -48,6 +51,7 @@ spatialmodelInputs
 surveyData
 AFs
 ObserverData
+Growth
 CatchData
 tagdata
 integrating-tagging-observations-in-spatial-age-structured-models

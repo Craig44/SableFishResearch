@@ -202,7 +202,8 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#length-frequency"><i class="fa fa-check"></i>Length-frequency</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#ObserverData"><i class="fa fa-check"></i><b>5.3</b> Observer data</a></li>
-<li class="chapter" data-level="5.4" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#CatchData"><i class="fa fa-check"></i><b>5.4</b> Catch data</a></li>
+<li class="chapter" data-level="5.4" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#Growth"><i class="fa fa-check"></i><b>5.4</b> Growth data</a></li>
+<li class="chapter" data-level="5.5" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#CatchData"><i class="fa fa-check"></i><b>5.5</b> Catch data</a></li>
 <li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#appendix-1"><i class="fa fa-check"></i>Appendix</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>6</b> Tagging data and studies</a>
@@ -303,51 +304,97 @@ Figure 5.4: Number of fish measured for length by sex, region and year
 <div id="ObserverData" class="section level2 hasAnchor" number="5.3">
 <h2><span class="header-section-number">5.3</span> Observer data<a href="spatialmodelInputs.html#ObserverData" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
-<div id="CatchData" class="section level2 hasAnchor" number="5.4">
-<h2><span class="header-section-number">5.4</span> Catch data<a href="spatialmodelInputs.html#CatchData" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="Growth" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Growth data<a href="spatialmodelInputs.html#Growth" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:agelengthbysex"></span>
+<img src="Figures/raw_growth_by_sex.png" alt="Age-length by sex" width="61%" />
+<p class="caption">
+Figure 5.5: Age-length by sex
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:malegrowth"></span>
+<img src="Figures/raw_male_growth_by_region.png" alt="Male age-length by region (left panel) and decade (right panel)" width="49%" /><img src="Figures/raw_male_growth_by_decade.png" alt="Male age-length by region (left panel) and decade (right panel)" width="49%" />
+<p class="caption">
+Figure 5.6: Male age-length by region (left panel) and decade (right panel)
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:femalegrowth"></span>
+<img src="Figures/raw_female_growth_by_region.png" alt="Female age-length by region (left panel) and decade (right panel)" width="49%" /><img src="Figures/raw_female_growth_by_decade.png" alt="Female age-length by region (left panel) and decade (right panel)" width="49%" />
+<p class="caption">
+Figure 5.7: Female age-length by region (left panel) and decade (right panel)
+</p>
+</div>
+</div>
+<div id="CatchData" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Catch data<a href="spatialmodelInputs.html#CatchData" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
 <div id="appendix-1" class="section level2 unnumbered hasAnchor">
 <h2>Appendix<a href="spatialmodelInputs.html#appendix-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Sampling notation
-+—————————-+—————————————————————————–+
-| Symbol | Description<br />
-+============================+=============================================================================+
-| <span class="math inline">\(h\)</span> | haul index
-+—————————-+—————————————————————————–+
-| <span class="math inline">\(i\)</span> | an individual fish index
-+—————————-+—————————————————————————–+
-| <span class="math inline">\(a_i\)</span> | age of individual <span class="math inline">\(i\)</span>
-+—————————-+—————————————————————————–+
-| <span class="math inline">\(l_i\)</span> | length of individual <span class="math inline">\(i\)</span>
-+—————————-+—————————————————————————–+
-| <span class="math inline">\(C^h\)</span> | Catch for haul <span class="math inline">\(h\)</span> can be numbers or biomass
-+—————————-+—————————————————————————–+
-| <span class="math inline">\(n^h_l\)</span> | number of fish measured for length from haul <span class="math inline">\(h\)</span>
-+—————————-+—————————————————————————–+
-| <span class="math inline">\(n^h_a\)</span> | number age samples in haul <span class="math inline">\(h\)</span>. Assumed to be a subsample of <span class="math inline">\(n^h_l\)</span>
-+—————————-+—————————————————————————–+</p>
+<p>Sampling notation</p>
+<table>
+<colgroup>
+<col width="27%" />
+<col width="72%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(h\)</span></td>
+<td>haul index</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(i\)</span></td>
+<td>an individual fish index</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(a_i\)</span></td>
+<td>age of individual <span class="math inline">\(i\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(l_i\)</span></td>
+<td>length of individual <span class="math inline">\(i\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(C^h\)</span></td>
+<td>Catch for haul <span class="math inline">\(h\)</span> can be numbers or biomass</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(n^h_l\)</span></td>
+<td>number of fish measured for length from haul <span class="math inline">\(h\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(n^h_a\)</span></td>
+<td>number age samples in haul <span class="math inline">\(h\)</span>. Assumed to be a subsample of <span class="math inline">\(n^h_l\)</span></td>
+</tr>
+</tbody>
+</table>
 <div class="figure"><span style="display:block;" id="fig:femaleCDFagesamples"></span>
 <img src="Figures/raw_ecdf_AFs_by_year_region_female.png" alt="CDF of age frequencies for females" width="100%" />
 <p class="caption">
-Figure 5.5: CDF of age frequencies for females
+Figure 5.8: CDF of age frequencies for females
 </p>
 </div>
 <div class="figure"><span style="display:block;" id="fig:maleCDFagesamples"></span>
 <img src="Figures/raw_ecdf_AFs_by_year_region_male.png" alt="CDF of age frequencies for males" width="100%" />
 <p class="caption">
-Figure 5.6: CDF of age frequencies for males
+Figure 5.9: CDF of age frequencies for males
 </p>
 </div>
 <div class="figure"><span style="display:block;" id="fig:femaleCDFlengthsamples"></span>
 <img src="Figures/raw_ecdf_LFs_by_year_region_female.png" alt="CDF of length frequencies for females" width="100%" />
 <p class="caption">
-Figure 5.7: CDF of length frequencies for females
+Figure 5.10: CDF of length frequencies for females
 </p>
 </div>
 <div class="figure"><span style="display:block;" id="fig:maleCDFlengthsamples"></span>
 <img src="Figures/raw_ecdf_LFs_by_year_region_male.png" alt="CDF of length frequencies for males" width="100%" />
 <p class="caption">
-Figure 5.8: CDF of length frequencies for males
+Figure 5.11: CDF of length frequencies for males
 </p>
 </div>
 
