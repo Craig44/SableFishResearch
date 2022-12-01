@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-11-30" />
+<meta name="date" content="2022-12-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -170,14 +170,12 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#initialisation-gleft.right"><i class="fa fa-check"></i>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#population-dynamics-fleft.right"><i class="fa fa-check"></i>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)</a></li>
-<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#determining-selectivities-for-fisheries-and-surveys"><i class="fa fa-check"></i>Determining selectivities for fisheries and surveys</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="modeldescription.html"><a href="modeldescription.html#observationsection"><i class="fa fa-check"></i><b>3.2</b> Observation equations</a>
 <ul>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-age"><i class="fa fa-check"></i>Catch at age</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#relative-abundance-indices"><i class="fa fa-check"></i>Relative abundance indices</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-length"><i class="fa fa-check"></i>Catch at length</a></li>
-<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#observations-for-fisheries-and-surveys"><i class="fa fa-check"></i>Observations for fisheries and surveys</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="modeldescription.html"><a href="modeldescription.html#symbols"><i class="fa fa-check"></i><b>3.3</b> Symbol Notation</a>
 <ul>
@@ -312,52 +310,6 @@ where,
 R_y = \exp\{\mu_r + \tau_y + 0.5\sigma_R^2\}
 \]</span></p>
 </div>
-<div id="determining-selectivities-for-fisheries-and-surveys" class="section level3 unnumbered hasAnchor">
-<h3>Determining selectivities for fisheries and surveys<a href="modeldescription.html#determining-selectivities-for-fisheries-and-surveys" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The ADMB model has a hard coded number of selectivities. Some of them relate to changes in the fishery and so represent time-varying blocks. We want to spell these out and simplify for the TMB model. There are nine selectivities labelled <code>fish1</code>, <code>fish2</code>, <code>fish3</code>, <code>fish4</code>, <code>fish5</code>, <code>srv1</code>, <code>srv2</code> and <code>srv10</code>.</p>
-<table>
-<colgroup>
-<col width="27%" />
-<col width="72%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>label</th>
-<th>Selectivity description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>fish1</code></td>
-<td>Longline selectivity from 1960-1994</td>
-</tr>
-<tr class="even">
-<td><code>fish2</code></td>
-<td>Not sure if this is used, maybe this is used for <code>srv6</code>?</td>
-</tr>
-<tr class="odd">
-<td><code>fish3</code></td>
-<td>Trawl selectivity from 1960 - <span class="math inline">\(T\)</span></td>
-</tr>
-<tr class="even">
-<td><code>fish4</code></td>
-<td>Longline selectivity from 1995 -<span class="math inline">\(\ IFQ_y\)</span> (<span class="math inline">\(IFQ_y\)</span> can = <span class="math inline">\(T\)</span></td>
-</tr>
-<tr class="odd">
-<td><code>fish5</code></td>
-<td>Longline selectivity from <span class="math inline">\(IFQ_y \ - \ T\)</span> if there is post IFQ block</td>
-</tr>
-<tr class="even">
-<td><code>srv1</code></td>
-<td>Domestic Longline survey selectivity</td>
-</tr>
-<tr class="odd">
-<td><code>srv2</code></td>
-<td>Japanese Longline survey selectivity</td>
-</tr>
-</tbody>
-</table>
-</div>
 </div>
 <div id="observationsection" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Observation equations<a href="modeldescription.html#observationsection" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -415,113 +367,70 @@ where, <span class="math inline">\(\bar{w}_{a,y,s}\)</span> is mean weight at ag
   \tag{3.6}
 \end{equation}\]</span>
 where, <span class="math inline">\(\boldsymbol{C_{y,s}}\)</span> is a column vector of numbers at age (dimension <span class="math inline">\(n_a \ \times \ 1\)</span>) at the beginning of year <span class="math inline">\(y\)</span> for sex <span class="math inline">\(s\)</span>.</p>
-</div>
-<div id="observations-for-fisheries-and-surveys" class="section level3 unnumbered hasAnchor">
-<h3>Observations for fisheries and surveys<a href="modeldescription.html#observations-for-fisheries-and-surveys" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<table>
-<colgroup>
-<col width="27%" />
-<col width="72%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>label</th>
-<th>Relative Abundance description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>srv1</code></td>
-<td>Biomass domestic longline survey uses both <code>srv1_sel</code> and <code>srv10_sel</code></td>
-</tr>
-<tr class="even">
-<td><code>srv3</code></td>
-<td>Abundance domestic longline survey uses both <code>srv1_sel</code> and <code>srv10_sel</code></td>
-</tr>
-<tr class="odd">
-<td><code>srv2</code></td>
-<td>Biomass survey uses both <code>srv2_sel</code> and <code>srv9_sel</code></td>
-</tr>
-<tr class="even">
-<td><code>srv4</code></td>
-<td>Abundance survey uses both <code>srv2_sel</code> and <code>srv9_sel</code></td>
-</tr>
-<tr class="odd">
-<td><code>srv5</code></td>
-<td>Longline fishery CPUE <code>fish1_sel</code>, <code>fish4_sel</code>, <code>fish5_sel</code></td>
-</tr>
-<tr class="even">
-<td><code>srv6</code></td>
-<td>Japanese LL fishery CPUE</td>
-</tr>
-<tr class="odd">
-<td><code>srv7</code></td>
-<td>NMFS bottom trawl survey (currently GOA only; fit in model)</td>
-</tr>
-</tbody>
-</table>
-<table>
-<colgroup>
-<col width="27%" />
-<col width="72%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>label</th>
-<th>Composition description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>ac_fish1</code></td>
-<td>Longline Fishery Age Comp (sex aggregated)</td>
-</tr>
-<tr class="even">
-<td><code>sc_fish1</code></td>
-<td>Longline Fishery LF (sex dis-aggregrated)</td>
-</tr>
-<tr class="odd">
-<td><code>sc_fish3</code></td>
-<td>Trawl Fishery LF (sex disaggregrated)</td>
-</tr>
-<tr class="even">
-<td><code>sc_fish2</code></td>
-<td>LF for japaneses Longline fishery (sex aggregrated) (basically a survey now)</td>
-</tr>
-<tr class="odd">
-<td><code>sc_fish4</code></td>
-<td>LF for japaneses Longline fishery (sex aggregrated) (basically a survey now)</td>
-</tr>
-<tr class="even">
-<td><code>fish_size</code></td>
-<td>LF From japaneses trawl survey? (sex aggregrated)</td>
-</tr>
-<tr class="odd">
-<td><code>ac_srv1</code></td>
-<td>Domestic Longline Survey AF (sex aggregated)</td>
-</tr>
-<tr class="even">
-<td><code>sc_srv1</code></td>
-<td>Domestic Longline Survey LF (sex disaggregrated)</td>
-</tr>
-<tr class="odd">
-<td><code>ac_srv2</code></td>
-<td>Japanese Longline Survey AF (sex aggregated)</td>
-</tr>
-<tr class="even">
-<td><code>sc_srv2</code></td>
-<td>Japanese Longline Survey LF (sex disaggregrated)</td>
-</tr>
-<tr class="odd">
-<td><code>ac_srv7</code></td>
-<td>NMFS bottom trawl survey AF (sex aggregated)</td>
-</tr>
-<tr class="even">
-<td><code>sc_srv7</code></td>
-<td>NMFS bottom trawl survey LF (sex disaggregrated)</td>
-</tr>
-</tbody>
-</table>
+<!-- ### Determining selectivities for fisheries and surveys {-} -->
+<!-- The ADMB model has a hard coded number of selectivities. Some of them relate to changes in the fishery and so represent time-varying blocks. We want to spell these out and simplify for the TMB model. There are nine selectivities labelled `fish1`, `fish2`, `fish3`, `fish4`, `fish5`, `srv1`, `srv2` and `srv10`. -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | label                      | Selectivity description                             -->
+<!-- +============================+=============================================================================+ -->
+<!-- | `fish1`                    | Longline selectivity from 1960-1994 -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `fish2`                    | Not sure if this is used, maybe this is used for `srv6`? -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `fish3`                    | Trawl selectivity from 1960 - \(T\) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `fish4`                    | Longline selectivity from 1995 -\( \ IFQ_y\) (\(IFQ_y\) can = \(T\) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `fish5`                    | Longline selectivity from \(IFQ_y \ - \ T\) if there is post IFQ block -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `srv1`                     | Domestic Longline survey selectivity -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `srv2`                     | Japanese Longline survey selectivity -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- ### Observations for fisheries and surveys {-} -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | label                      | Relative Abundance description                             -->
+<!-- +============================+=============================================================================+ -->
+<!-- | `srv1`                     | Biomass domestic longline survey uses both `srv1_sel` and `srv10_sel` -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `srv3`                     | Abundance domestic longline survey uses both `srv1_sel` and `srv10_sel` -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `srv2`                     | Biomass survey uses both `srv2_sel` and `srv9_sel` -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `srv4`                     | Abundance survey uses both `srv2_sel` and `srv9_sel` -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `srv5`                     | Longline fishery CPUE `fish1_sel`, `fish4_sel`, `fish5_sel` -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `srv6`                     | Japanese LL fishery CPUE -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `srv7`                     | NMFS bottom trawl survey (currently GOA only; fit in model) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | label                      | Composition description                             -->
+<!-- +============================+=============================================================================+ -->
+<!-- | `ac_fish1`                 | Longline Fishery Age Comp (sex aggregated) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `sc_fish1`                 | Longline Fishery LF (sex dis-aggregrated) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `sc_fish3`                 | Trawl Fishery LF (sex disaggregrated) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `sc_fish2`                 | LF for japaneses Longline fishery (sex aggregrated) (basically a survey now) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `sc_fish4`                 | LF for japaneses Longline fishery (sex aggregrated) (basically a survey now) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `fish_size`                | LF From japaneses trawl survey? (sex aggregrated) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `ac_srv1`                  | Domestic Longline Survey AF (sex aggregated) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `sc_srv1`                  | Domestic Longline Survey LF (sex disaggregrated) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `ac_srv2`                  | Japanese Longline Survey AF (sex aggregated) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `sc_srv2`                  | Japanese Longline Survey LF (sex disaggregrated) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `ac_srv7`                  | NMFS bottom trawl survey AF (sex aggregated) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | `sc_srv7`                  | NMFS bottom trawl survey LF (sex disaggregrated) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
 </div>
 </div>
 <div id="symbols" class="section level2 hasAnchor" number="3.3">
