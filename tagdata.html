@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-12-01" />
+<meta name="date" content="2022-12-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -198,7 +198,6 @@ div.csl-indent {
 <li class="chapter" data-level="5.1" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#surveyData"><i class="fa fa-check"></i><b>5.1</b> Survey Abundance data</a></li>
 <li class="chapter" data-level="5.2" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#AFs"><i class="fa fa-check"></i><b>5.2</b> Age-frequency</a>
 <ul>
-<li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#direct-ageing-estimator"><i class="fa fa-check"></i>Direct Ageing estimator</a></li>
 <li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#length-frequency"><i class="fa fa-check"></i>Length-frequency</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#ObserverData"><i class="fa fa-check"></i><b>5.3</b> Observer data</a></li>
@@ -344,11 +343,11 @@ where, <span class="math inline">\(N^k_a\)</span> is used as an known input into
 </div>
 <div id="growth-estimation-using-the-laslettevesonpolacheck-lep-method" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Growth estimation using the Laslett–Eveson–Polacheck (LEP) method<a href="tagdata.html#growth-estimation-using-the-laslettevesonpolacheck-lep-method" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Going to investigate the use of “Laslett–Eveson–Polacheck (LEP)” based on <span class="citation">Laslett, Eveson, and Polacheck (<a href="#ref-laslett2002flexible" role="doc-biblioref">2002</a>)</span> &amp; <span class="citation">Eveson, Laslett, and Polacheck (<a href="#ref-eveson2004integrated" role="doc-biblioref">2004</a>)</span> as described in <span class="citation">Aires-da-Silva et al. (<a href="#ref-aires2015improved" role="doc-biblioref">2015</a>)</span>.</p>
-<p>The idea is to use a single growth model that fits to two observational data sets (ideally within the assessment, however we will start outside for now. When including it in the assessment you will also have LF data to help inform growth). The first will describe age-at-length data from direct ageing. The second will be length increment data from tagging experiments.</p>
+<p>Another use of tag-recovery data is for estimating growth models which are important inputs for stock assessment models. The section explores the “Laslett–Eveson–Polacheck (LEP)” approach, based on <span class="citation">Laslett, Eveson, and Polacheck (<a href="#ref-laslett2002flexible" role="doc-biblioref">2002</a>)</span> &amp; <span class="citation">Eveson, Laslett, and Polacheck (<a href="#ref-eveson2004integrated" role="doc-biblioref">2004</a>)</span> and described in <span class="citation">Aires-da-Silva et al. (<a href="#ref-aires2015improved" role="doc-biblioref">2015</a>)</span>.</p>
+<p>The idea is to use a single growth model that fits to two observational data sets (ideally within the assessment, but for now this analysis is independent of the assessment). The two data sets are are age and length observations and tag-increment observations from tagging experiments. A benefit of this method, other than estimating growth is that estimates of ages of fish at release are a derivative that can then be used as inputs for tag releases in an age-structured stock assessment model (what to do with observations with no sex information?).</p>
 <div id="age-at-length-growth-model" class="section level3 unnumbered hasAnchor">
 <h3>Age-at-length growth model<a href="tagdata.html#age-at-length-growth-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We start by using the Richards growth curve following <span class="citation">Aires-da-Silva et al. (<a href="#ref-aires2015improved" role="doc-biblioref">2015</a>)</span> (but this could be extended). The Richards growth formulation follows</p>
+<p>The Richards growth curve was assumed as was done in <span class="citation">Aires-da-Silva et al. (<a href="#ref-aires2015improved" role="doc-biblioref">2015</a>)</span> (but this could be extended). The Richards growth formulation follows</p>
 <p><span class="math display" id="eq:richardsgrowth">\[\begin{equation}
   \bar{l}_{a} = L_{\infty} \left( 1 + \frac{1}{p} \exp \{-K(a - a_0)\}\right)^{-p}
   \tag{6.3}

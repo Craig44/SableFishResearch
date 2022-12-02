@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-12-01" />
+<meta name="date" content="2022-12-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -198,7 +198,6 @@ div.csl-indent {
 <li class="chapter" data-level="5.1" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#surveyData"><i class="fa fa-check"></i><b>5.1</b> Survey Abundance data</a></li>
 <li class="chapter" data-level="5.2" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#AFs"><i class="fa fa-check"></i><b>5.2</b> Age-frequency</a>
 <ul>
-<li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#direct-ageing-estimator"><i class="fa fa-check"></i>Direct Ageing estimator</a></li>
 <li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#length-frequency"><i class="fa fa-check"></i>Length-frequency</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#ObserverData"><i class="fa fa-check"></i><b>5.3</b> Observer data</a></li>
@@ -260,7 +259,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="spatialmodelInputs" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Spatial model inputs<a href="spatialmodelInputs.html#spatialmodelInputs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This chapter describes how raw age/length and catch data were utilised to derive assessment inputs for a myriad of spatially structured assessments. The chapter aims to standardize the methods so that we can easily re-work the data to be fit in an 1,2 or <span class="math inline">\(n_r\)</span> area assessment model.</p>
+<p>This chapter describes how age,length, survey and catch data were used to derive assessment inputs for a myriad of spatially structured assessments. The chapter aims to standardize methods so that we can easily re-work the data to be fit in a 1,2 or <span class="math inline">\(n_r\)</span> area assessment model.</p>
 <div class="figure"><span style="display:block;" id="fig:LLRegions"></span>
 <img src="Figures/Longline_areas.png" alt="The finest spatial resolution that we are considering for Sablefish assessment" width="100%" />
 <p class="caption">
@@ -269,7 +268,8 @@ Figure 5.1: The finest spatial resolution that we are considering for Sablefish 
 </div>
 <div id="surveyData" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Survey Abundance data<a href="spatialmodelInputs.html#surveyData" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>I am thinking, when it comes to the real data application that we apply a geostatistical model-based estimator. The survey is a systematic/fixed design (Do the visit the same locations each year? obviously ignoring the AI BS switching), but use a stratified survey estimator for the population mean and variance. I am wondering if this will over state the precision? A useful reference for changes in survey operators for the Alaskan sablefish is <span class="citation">Kimura and Zenger Jr (<a href="#ref-kimura1997standardizing" role="doc-biblioref">1997</a>)</span>. “The Japanese long-line gear used in the joint surveys and the NMFS long-line gear are similar in many respects…Differences between Japanese sampling gear and NMFS sampling gear were mostly due to hook and gangion construction”</p>
+<p>I am thinking, when it comes to the real data application that we apply a geostatistical model-based estimator. The survey is a systematic/fixed design (do they visit the same locations each year? obviously ignoring the AI BS switching), but use a stratified survey estimator for the population total and variance. This is often done because there are no known design based estimators for systematic surveys that have a single primary sampling unit i.e., the only random event would be for the first station then the rest are systematically placed based on the first sampling unit. I am wondering if a stratified random variance estimator will over state or under state the precision?</p>
+<p>A useful reference for changes in survey operators for the Alaskan sablefish is <span class="citation">Kimura and Zenger Jr (<a href="#ref-kimura1997standardizing" role="doc-biblioref">1997</a>)</span>. “The Japanese long-line gear used in the joint surveys and the NMFS long-line gear are similar in many respects…Differences between Japanese sampling gear and NMFS sampling gear were mostly due to hook and gangion construction”. When analysing the survey CPUE data it would be ideal to have a single time-series. So a desirable population total estimator would account for different catchabilities by country or vessel.</p>
 <div class="figure"><span style="display:block;" id="fig:surveycatchgif"></span>
 <img src="Figures/catch.gif" alt="A time-series of sablefish catch from the long line survey pooled over 50km by 50km grided cells"  />
 <p class="caption">
@@ -279,17 +279,13 @@ Figure 5.2: A time-series of sablefish catch from the long line survey pooled ov
 </div>
 <div id="AFs" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Age-frequency<a href="spatialmodelInputs.html#AFs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A big challenge of any spatial stock assessment is deriving spatially disaggregated age-frequency observations from low age sample sizes. For both the long-line survey and fishery we have both age and length data sets. This means there are multiple estimators available. These include direct ageing, length frequency analysis <span class="citation">(<a href="#ref-andrade2004estimation" role="doc-biblioref">Andrade and Kinas 2004</a>)</span> (Length frequency analysis decomposes length frequency histograms into age classes) and age-length key <span class="citation">(<a href="#ref-ailloud2019general" role="doc-biblioref">Ailloud and Hoenig 2019</a>; <a href="#ref-hoenig2002generalizing" role="doc-biblioref">Hoenig, Choudary Hanumara, and Heisey 2002</a>)</span>. The forward age-length key method at face value is the most attractive as it reduces sparsity and variation when compared to direct ageing estimators.</p>
-<p>A note on sablefish otolith samping from the survey.
-“Otolith collections were length-stratified from 1979-94 and random thereafter” pg 9 of <span class="citation">Sigler, Fujioka, and Lowe (<a href="#ref-sigler2001alaska" role="doc-biblioref">2001</a>)</span></p>
+<p>A big challenge of any spatial stock assessment is deriving spatially disaggregated age-frequency observations from low age sample sizes. For both the long-line survey and fishery we have both age and length data sets. This means there are multiple estimators available, including direct ageing, length frequency analysis <span class="citation">(<a href="#ref-andrade2004estimation" role="doc-biblioref">Andrade and Kinas 2004</a>)</span> (Length frequency analysis decomposes length frequency histograms into age classes) and age-length key <span class="citation">(<a href="#ref-ailloud2019general" role="doc-biblioref">Ailloud and Hoenig 2019</a>; <a href="#ref-hoenig2002generalizing" role="doc-biblioref">Hoenig, Choudary Hanumara, and Heisey 2002</a>)</span>. The forward age-length key method at face value looks to be the most attractive, as it reduces data sparsity when compared to direct ageing estimators.</p>
+<p>A note on sablefish otolith sampling from the survey. “Otolith collections were length-stratified from 1979-94 and random thereafter” pg 9 of <span class="citation">Sigler, Fujioka, and Lowe (<a href="#ref-sigler2001alaska" role="doc-biblioref">2001</a>)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:agesamples"></span>
 <img src="Figures/age_samples_by_year_region_sex.png" alt="Number of aged fish by sex, region and year" width="100%" />
 <p class="caption">
 Figure 5.3: Number of aged fish by sex, region and year
 </p>
-</div>
-<div id="direct-ageing-estimator" class="section level3 unnumbered hasAnchor">
-<h3>Direct Ageing estimator<a href="spatialmodelInputs.html#direct-ageing-estimator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 <div id="length-frequency" class="section level3 unnumbered hasAnchor">
 <h3>Length-frequency<a href="spatialmodelInputs.html#length-frequency" class="anchor-section" aria-label="Anchor link to header"></a></h3>

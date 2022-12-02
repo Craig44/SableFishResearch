@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-12-01" />
+<meta name="date" content="2022-12-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -198,7 +198,6 @@ div.csl-indent {
 <li class="chapter" data-level="5.1" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#surveyData"><i class="fa fa-check"></i><b>5.1</b> Survey Abundance data</a></li>
 <li class="chapter" data-level="5.2" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#AFs"><i class="fa fa-check"></i><b>5.2</b> Age-frequency</a>
 <ul>
-<li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#direct-ageing-estimator"><i class="fa fa-check"></i>Direct Ageing estimator</a></li>
 <li class="chapter" data-level="" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#length-frequency"><i class="fa fa-check"></i>Length-frequency</a></li>
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="spatialmodelInputs.html"><a href="spatialmodelInputs.html#ObserverData"><i class="fa fa-check"></i><b>5.3</b> Observer data</a></li>
@@ -382,7 +381,7 @@ S^{female}_a = \alpha/(1+19^{(a_{50}-a)/a_{to95})})
 <p>A third EM (EM3) was also explored, this structured compositional data using Approach 1 but fixed the female <span class="math inline">\(\alpha\)</span> = 1 in Equation <a href="sexratios.html#eq:femaleselectivity">(8.2)</a>. This is often the default approach. For scenario 1 this should be the best performing EM as it has the <span class="math inline">\(\alpha\)</span> set at the values of the OM.</p>
 <div id="em-1-using-approach-1" class="section level4 unnumbered hasAnchor">
 <h4>EM 1 (using approach 1)<a href="sexratios.html#em-1-using-approach-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  1.053253e-06</code></pre>
+<pre><code>## max gradient from 100 simualtions =  1.858256e-06</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_1_EM_1-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario1EM1ssb"></span>
 <img src="_main_files/figure-html/runscenario1EM1ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
@@ -399,7 +398,7 @@ Figure 8.3: Annual fishing mortality, red line OM (truth), black lines are the e
 </div>
 <div id="em-2-using-approach-2" class="section level4 unnumbered hasAnchor">
 <h4>EM 2 (using approach 2)<a href="sexratios.html#em-2-using-approach-2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  3.494913e-06</code></pre>
+<pre><code>## max gradient from 100 simualtions =  5.591513e-11</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_1_EM_2-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario1EM2ssb"></span>
 <img src="_main_files/figure-html/runscenario1EM2ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
@@ -416,7 +415,7 @@ Figure 8.5: Annual fishing mortality, red line OM (truth), black lines are the e
 </div>
 <div id="em-3-using-approach-1-with-female-fixed-at-alpha-1" class="section level4 unnumbered hasAnchor">
 <h4>EM 3 (using approach 1 with female fixed at <span class="math inline">\(\alpha = 1\)</span>)<a href="sexratios.html#em-3-using-approach-1-with-female-fixed-at-alpha-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  3.282872e-07</code></pre>
+<pre><code>## max gradient from 100 simualtions =  6.455864e-07</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_1_EM_3-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario1EM3ssb"></span>
 <img src="_main_files/figure-html/runscenario1EM3ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
@@ -438,7 +437,7 @@ Figure 8.7: Annual fishing mortality, red line OM (truth), black lines are the e
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="sexratios.html#cb12-1" aria-hidden="true" tabindex="-1"></a>true_pars<span class="sc">$</span>logit_f_alpha_f <span class="ot">=</span> <span class="fu">logit_general</span>(<span class="fl">1.2</span>, TMB_data<span class="sc">$</span>sel_alpha_bounds[<span class="dv">1</span>], TMB_data<span class="sc">$</span>sel_alpha_bounds[<span class="dv">2</span>])</span></code></pre></div>
 <div id="em-1-using-approach-1-1" class="section level4 unnumbered hasAnchor">
 <h4>EM 1 (using approach 1)<a href="sexratios.html#em-1-using-approach-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  2.041873e-07</code></pre>
+<pre><code>## max gradient from 100 simualtions =  6.54662e-07</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_2_EM_1-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario2EM1ssb"></span>
 <img src="_main_files/figure-html/runscenario2EM1ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
@@ -455,7 +454,7 @@ Figure 8.9: Annual fishing mortality, red line OM (truth), black lines are the e
 </div>
 <div id="em-2-using-approach-2-1" class="section level4 unnumbered hasAnchor">
 <h4>EM 2 (using approach 2)<a href="sexratios.html#em-2-using-approach-2-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  3.427881e-07</code></pre>
+<pre><code>## max gradient from 100 simualtions =  3.796794e-07</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_2_EM_2-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario2EM2ssb"></span>
 <img src="_main_files/figure-html/runscenario2EM2ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
@@ -472,7 +471,7 @@ Figure 8.11: Annual fishing mortality, red line OM (truth), black lines are the 
 </div>
 <div id="em-3-using-approach-1-with-female-fixed-at-alpha-1-1" class="section level4 unnumbered hasAnchor">
 <h4>EM 3 (using approach 1 with female fixed at <span class="math inline">\(\alpha = 1\)</span>)<a href="sexratios.html#em-3-using-approach-1-with-female-fixed-at-alpha-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<pre><code>## max gradient from 100 simualtions =  1.720786e-06</code></pre>
+<pre><code>## max gradient from 100 simualtions =  2.748698e-07</code></pre>
 <p><img src="_main_files/figure-html/run_scenario_2_EM_3-1.png" width="672" /></p>
 <div class="figure"><span style="display:block;" id="fig:runscenario2EM3ssb"></span>
 <img src="_main_files/figure-html/runscenario2EM3ssb-1.png" alt="Absolute SSBs, red line OM (truth), black lines are the estimated values form EMs" width="672" />
