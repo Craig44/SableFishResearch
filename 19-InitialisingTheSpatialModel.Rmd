@@ -19,7 +19,7 @@ N_a = \left\{ \begin{array}{lcl}
 
 Initialization for ages \(1 \leq a < a_+\) is easy, all you need to do is iterate the model \(a_+ - 1\) times and the age classes will be populated with there respected initial numbers at age. However, for the plus group (\(N_{a_+}\)) the solution is needed.
 
-Although the plus group may start at let say 30 years old, it actually represents 30 and 31 and 32 up to some biological plausible value lets say 130, but mathematically can be thought of as \(\infty\). The plus group is modeled for practical reasons and care should be given when choosing the cut-off maximum age. The plus group is an infinite geometric series that is defined by the common ratio \(r_{a_+}\).
+Although the plus group may start at let say 30 years old, it actually represents 30 and 31 and 32 up to some biological plausible value lets say 130, but mathematically can be thought of as \(\infty\). The plus group is modeled for practical reasons and care should be given when choosing the cut-off maximum age. The plus group is an infinite geometric series that is defined by the common ratio \(r_{a_+} = M\).
 
 \begin{align}
 N_{a_+} &= R_0e^{\sum_{a = a_+}^\infty-aM}\\
@@ -40,10 +40,10 @@ N_plus_group
 R0 * exp(-M - plus_group_age*M) / (1 - exp(-M))
 ```
 
-The question becomes, how do we calculate this plus group when there is markovian movement as well as? This code shows how the same infinite geometric series solution works for the plus group with movement. Instead of using just natural mortality (\(M\)) you also need how much the plus group accumulates from the movement process. Let \(c\) denote the initial accumulation the plus group in a given region receives from ageing, natural mortality and movement. Then the plus group for that region can be 
+The question becomes, how do we calculate this plus group when there is markovian movement? This code shows how the same infinite geometric series solution works for the plus group with movement. Instead of the common ratio being just it also need to account for the movement process. Let \(c^r_{a+}\) denote the accumulation of individuals into the plus group in region \(r\). This will be the result of ageing, natural mortality and movement. Then the plus group for that region can be 
 
 \[
-N_{a+, r} = N_{a+ - 1, r} \frac{1}{1 - c}
+N_{a+, r} = N_{a+ - 1, r} \frac{1}{1 - c^r_{a+}}
 \]
 where, \(N_{a+ - 1, r}\) is the numbers at age for the second to last age cohort in the plus group. The following R code shows how this is equivalent to running the annual cycle for 1000 years.
 

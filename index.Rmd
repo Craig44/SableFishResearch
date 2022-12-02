@@ -17,10 +17,10 @@ link-citations: yes
 
 # Overview
 
-This Gitbook documents my/our research for the Alaska sablefish (*Anoplopoma fimbria*). The objective is to develop and explore a spatially explicit stock assessment for Alaskan sablefish. However, there will be many other topics that I will likely only scratch the surface on. The following outlines the chapters in this document
+This Gitbook documents my/our research for the Alaska sablefish (*Anoplopoma fimbria*). The objective is to develop and explore a spatially explicit stock assessment for Alaskan sablefish. However, there will be many topics that I will likely only scratch the surface on. The following section outlines chapters in this document.
 
 
-## chapter overview  {-}
+## Gitbook outline  {-}
 - Chapter \@ref(objectives) outlines a list of objectives that we have set or accomplished during this research project. Some of our research cannot be presented in this document due to the confidentiality reasons. However, this checklist should include all tasks during the project
 
 - Chapter \@ref(modeldescription) documents the current stock assessment model and assumptions (work in progress). This is the first step of the project, with the purpose of helping me understand the assessment, data and important dynamics
