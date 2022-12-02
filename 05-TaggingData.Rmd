@@ -209,15 +209,15 @@ There are tow types of tag-recovery observations that we will consider in this w
 
 
 ## Growth estimation using the Laslett–Eveson–Polacheck (LEP) method 
-Going to investigate the use of “Laslett–Eveson–Polacheck (LEP)” based on @laslett2002flexible \& @eveson2004integrated as described in @aires2015improved.
+Another use of tag-recovery data is for estimating growth models which are important inputs for stock assessment models. The section explores the “Laslett–Eveson–Polacheck (LEP)” approach, based on @laslett2002flexible \& @eveson2004integrated and described in @aires2015improved.
 
 
-The idea is to use a single growth model that fits to two observational data sets (ideally within the assessment, however we will start outside for now. When including it in the assessment you will also have LF data to help inform growth). The first will describe age-at-length data from direct ageing. The second will be length increment data from tagging experiments. 
+The idea is to use a single growth model that fits to two observational data sets (ideally within the assessment, but for now this analysis is independent of the assessment). The two data sets are are age and length observations and tag-increment observations from tagging experiments. A benefit of this method, other than estimating growth is that estimates of ages of fish at release are a derivative that can then be used as inputs for tag releases in an age-structured stock assessment model (what to do with observations with no sex information?).
 
 
 ### Age-at-length growth model {-}
 
-We start by using the Richards growth curve following @aires2015improved (but this could be extended). The Richards growth formulation follows
+The Richards growth curve was assumed as was done in @aires2015improved (but this could be extended). The Richards growth formulation follows
 
 \begin{equation} 
   \bar{l}_{a} = L_{\infty} \left( 1 + \frac{1}{p} \exp \{-K(a - a_0)\}\right)^{-p}
