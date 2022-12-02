@@ -160,7 +160,7 @@ div.csl-indent {
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a>
 <ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#chapter-overview"><i class="fa fa-check"></i>chapter overview</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#gitbook-outline"><i class="fa fa-check"></i>Gitbook outline</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#future-things-to-consider"><i class="fa fa-check"></i>Future things to consider</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="objectives.html"><a href="objectives.html"><i class="fa fa-check"></i><b>2</b> A list of objectives/milestones that we have set along the project life</a></li>
@@ -274,7 +274,7 @@ N_a = \left\{ \begin{array}{lcl}
 \end{array}\right.
 \]</span></p>
 <p>Initialization for ages <span class="math inline">\(1 \leq a &lt; a_+\)</span> is easy, all you need to do is iterate the model <span class="math inline">\(a_+ - 1\)</span> times and the age classes will be populated with there respected initial numbers at age. However, for the plus group (<span class="math inline">\(N_{a_+}\)</span>) the solution is needed.</p>
-<p>Although the plus group may start at let say 30 years old, it actually represents 30 and 31 and 32 up to some biological plausible value lets say 130, but mathematically can be thought of as <span class="math inline">\(\infty\)</span>. The plus group is modeled for practical reasons and care should be given when choosing the cut-off maximum age. The plus group is an infinite geometric series that is defined by the common ratio <span class="math inline">\(r_{a_+}\)</span>.</p>
+<p>Although the plus group may start at let say 30 years old, it actually represents 30 and 31 and 32 up to some biological plausible value lets say 130, but mathematically can be thought of as <span class="math inline">\(\infty\)</span>. The plus group is modeled for practical reasons and care should be given when choosing the cut-off maximum age. The plus group is an infinite geometric series that is defined by the common ratio <span class="math inline">\(r_{a_+} = M\)</span>.</p>
 <p><span class="math display">\[\begin{align}
 N_{a_+} &amp;= R_0e^{\sum_{a = a_+}^\infty-aM}\\
         &amp;= R_0 \frac{e^{M - a_+M}}{1 - e^{-M}}
@@ -293,9 +293,9 @@ N_{a_+} &amp;= R_0e^{\sum_{a = a_+}^\infty-aM}\\
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="spatialInit.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="do">## using the geometric series calculation</span></span>
 <span id="cb33-2"><a href="spatialInit.html#cb33-2" aria-hidden="true" tabindex="-1"></a>R0 <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M <span class="sc">-</span> plus_group_age<span class="sc">*</span>M) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span>M))</span></code></pre></div>
 <pre><code>## [1] 1893568</code></pre>
-<p>The question becomes, how do we calculate this plus group when there is markovian movement as well as? This code shows how the same infinite geometric series solution works for the plus group with movement. Instead of using just natural mortality (<span class="math inline">\(M\)</span>) you also need how much the plus group accumulates from the movement process. Let <span class="math inline">\(c\)</span> denote the initial accumulation the plus group in a given region receives from ageing, natural mortality and movement. Then the plus group for that region can be</p>
+<p>The question becomes, how do we calculate this plus group when there is markovian movement? This code shows how the same infinite geometric series solution works for the plus group with movement. Instead of the common ratio being just it also need to account for the movement process. Let <span class="math inline">\(c^r_{a+}\)</span> denote the accumulation of individuals into the plus group in region <span class="math inline">\(r\)</span>. This will be the result of ageing, natural mortality and movement. Then the plus group for that region can be</p>
 <p><span class="math display">\[
-N_{a+, r} = N_{a+ - 1, r} \frac{1}{1 - c}
+N_{a+, r} = N_{a+ - 1, r} \frac{1}{1 - c^r_{a+}}
 \]</span>
 where, <span class="math inline">\(N_{a+ - 1, r}\)</span> is the numbers at age for the second to last age cohort in the plus group. The following R code shows how this is equivalent to running the annual cycle for 1000 years.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="spatialInit.html#cb35-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">=</span> <span class="fl">0.1</span></span>
