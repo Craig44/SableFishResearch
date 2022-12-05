@@ -1,0 +1,57 @@
+# Observer data {#observerdata}
+
+This chapter describes an exploratory analysis using the observer and other fishery reported data. The aim is to highlight trends and signals in the data that would lead to an assessment decision or consideration i.e., spatial and temporal structures. All data analysed in this section has been extracted from the AKFIN database (North Pacific Observer Program). It included extracts from the length, age and catch reports. Some of the data cannot be displayed here due to confidentiality reasons.
+
+This data will result in two important assessment inputs: observed catch (which will be known with a high level of precision) and composition by fishery, either age or length. 
+
+
+Define what a fishery is? Currently a "fishery" is defined by a gear type i.e., trawl vs fixed-gear (line and pot).
+
+is there evidence for changing selectivity? i.e., time-blocks
+
+## Catch data {-}
+
+Deriving annual estimates of catch by year and region should be fairly straight forward. Fishers generally have a legal requirement to record catches and we will probably just assume that reported catches are accurate (is there any evidence of under-over reporting?). Is there discarding?
+
+
+- spatial patterns changes over time
+- intrayear catch patterns (pulse vs all year round)
+
+
+## Length data {-}
+
+- spatial patterns. definition of a fleet consider using the approach by @lennert2010exploratory.
+
+
+Discussing the method of @lennert2010exploratory. My understanding of this method is that it uses regression trees to identify splits/nodes in the covariates latitude, longitude and season that generate groups/clusters of length frequency distributions that are similar or somewhat homogenous. "Assuming sampling coverage is adequate, comparison of pooled and individual-year tree results can identify spatial structure that is strongly indicated in every year, and that which is only present in select years, perhaps as a result of strong recruitment or changes in catchability, or if sampling coverage is not adequate, sampling variability." 
+
+
+Run this exploration and see where the breaks are. This may lead us to reconsider spatial boundaries. **If we assume catchabilities for the fishery are constant over time and space** this exploration may indicate spatial structure in the population. However, that is a strong assumption... We could repeat this for the survey length frequency and see if the pattern is consistent. Just keep in mind that the survey data is from a smaller intra year window.
+
+
+How can we disentangle whether change are due to changes in fishing practice or change in population dynamics? i.e., recruitment or movement 
+
+```{r observerLFSplitAnalysis, echo = F, eval = 'asis'}
+split_table = readRDS(file.path("Data", "LL_LF_split_algorithm.RDS"))
+split_table$Var_explained = round(split_table$Var_explained, 2) * 100
+colnames(split_table) = c("Variable", "Split value", "Cell", "Variance explained (%)")
+kable(split_table, caption = "Longitude splits based on regression tree analysis")
+
+```
+
+
+```{r observerLFSplit, out.width = '100%',fig.height= 5, fig.cap = "Longitude splits based on regression tree analysis from Table \@(ref:observerLFSplitAnalysis)", echo = F, eval = T}
+include_graphics(file.path("Figures", "observer_split_analysis.png"))
+```
+
+
+
+## Age data {-}
+There is not enough samples in the age data to repeat the analysis conducted in the length frequency.
+
+- sample sizes
+- Can we build reasonable age-length keys by region and year? If not, how should we pool information to build age-length keys
+
+
+
+

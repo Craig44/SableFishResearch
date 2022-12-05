@@ -1,4 +1,4 @@
-# Spatial model inputs {#spatialmodelInputs}
+# Survey data {#surveydata}
 
 This chapter describes how age,length, survey and catch data were used to derive assessment inputs for a myriad of spatially structured assessments. The chapter aims to standardize methods so that we can easily re-work the data to be fit in a 1,2 or \(n_r\) area assessment model.
 
