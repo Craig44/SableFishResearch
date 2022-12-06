@@ -31,16 +31,17 @@ Run this exploration and see where the breaks are. This may lead us to reconside
 
 How can we disentangle whether change are due to changes in fishing practice or change in population dynamics? i.e., recruitment or movement 
 
+
+
 ```{r observerLFSplitAnalysis, echo = F, eval = 'asis'}
 split_table = readRDS(file.path("Data", "LL_LF_split_algorithm.RDS"))
 split_table$Var_explained = round(split_table$Var_explained, 2) * 100
 colnames(split_table) = c("Variable", "Split value", "Cell", "Variance explained (%)")
 kable(split_table, caption = "Longitude splits based on regression tree analysis")
-
 ```
 
 
-```{r observerLFSplit, out.width = '100%',fig.height= 5, fig.cap = "Longitude splits based on regression tree analysis from Table \@(ref:observerLFSplitAnalysis)", echo = F, eval = T}
+```{r observerLFSplit, out.width = '100%',fig.height= 5, fig.cap = "Longitude splits based on regression tree analysis from Table (ref:observerLFSplitAnalysis)", echo = F, eval = T}
 include_graphics(file.path("Figures", "observer_split_analysis.png"))
 ```
 
