@@ -15,6 +15,8 @@ fig:femaleCDFagesamples
 fig:maleCDFagesamples
 fig:femaleCDFlengthsamples
 fig:maleCDFlengthsamples
+tab:observerLFSplitAnalysis
+fig:observerLFSplit
 fig:addagelength
 fig:showagelengthtransitionproblem
 eq:lengthexploit
@@ -47,14 +49,16 @@ observationsection
 symbols
 spatialmodeldescription
 spatialmodelequations
-spatialmodelInputs
+surveydata
 surveyData
 AFs
 ObserverData
 Growth
 CatchData
+observerdata
 tagdata
 integrating-tagging-observations-in-spatial-age-structured-models
+growth
 growth-estimation-using-the-laslettevesonpolacheck-lep-method
 refpoints
 sexratios

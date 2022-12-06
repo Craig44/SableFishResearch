@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Alaskan sablefish research</title>
+  <title>Chapter 6 Observer data | Alaskan sablefish research</title>
   <meta name="description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Alaskan sablefish research" />
+  <meta property="og:title" content="Chapter 6 Observer data | Alaskan sablefish research" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Alaskan sablefish research" />
+  <meta name="twitter:title" content="Chapter 6 Observer data | Alaskan sablefish research" />
   
   <meta name="twitter:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="surveydata.html"/>
+<link rel="next" href="tagdata.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -266,19 +266,107 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="observerdata" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Observer data<a href="observerdata.html#observerdata" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This chapter describes an exploratory analysis using the observer and other fishery reported data. The aim is to highlight trends and signals in the data that would lead to an assessment decision or consideration i.e., spatial and temporal structures. All data analysed in this section has been extracted from the AKFIN database (North Pacific Observer Program). It included extracts from the length, age and catch reports. Some of the data cannot be displayed here due to confidentiality reasons.</p>
+<p>This data will result in two important assessment inputs: observed catch (which will be known with a high level of precision) and composition by fishery, either age or length.</p>
+<p>Define what a fishery is? Currently a “fishery” is defined by a gear type i.e., trawl vs fixed-gear (line and pot).</p>
+<p>is there evidence for changing selectivity? i.e., time-blocks</p>
+<div id="catch-data" class="section level2 unnumbered hasAnchor">
+<h2>Catch data<a href="observerdata.html#catch-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Deriving annual estimates of catch by year and region should be fairly straight forward. Fishers generally have a legal requirement to record catches and we will probably just assume that reported catches are accurate (is there any evidence of under-over reporting?). Is there discarding?</p>
+<ul>
+<li>spatial patterns changes over time</li>
+<li>intrayear catch patterns (pulse vs all year round)</li>
+</ul>
+</div>
+<div id="length-data" class="section level2 unnumbered hasAnchor">
+<h2>Length data<a href="observerdata.html#length-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>spatial patterns. definition of a fleet consider using the approach by <span class="citation">Lennert-Cody et al. (<a href="#ref-lennert2010exploratory" role="doc-biblioref">2010</a>)</span>.</li>
+</ul>
+<p>Discussing the method of <span class="citation">Lennert-Cody et al. (<a href="#ref-lennert2010exploratory" role="doc-biblioref">2010</a>)</span>. My understanding of this method is that it uses regression trees to identify splits/nodes in the covariates latitude, longitude and season that generate groups/clusters of length frequency distributions that are similar or somewhat homogenous. “Assuming sampling coverage is adequate, comparison of pooled and individual-year tree results can identify spatial structure that is strongly indicated in every year, and that which is only present in select years, perhaps as a result of strong recruitment or changes in catchability, or if sampling coverage is not adequate, sampling variability.”</p>
+<p>Run this exploration and see where the breaks are. This may lead us to reconsider spatial boundaries. <strong>If we assume catchabilities for the fishery are constant over time and space</strong> this exploration may indicate spatial structure in the population. However, that is a strong assumption… We could repeat this for the survey length frequency and see if the pattern is consistent. Just keep in mind that the survey data is from a smaller intra year window.</p>
+<p>How can we disentangle whether change are due to changes in fishing practice or change in population dynamics? i.e., recruitment or movement</p>
+<table>
+<caption><span id="tab:observerLFSplitAnalysis">Table 6.1: </span>Longitude splits based on regression tree analysis</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Variable</th>
+<th align="left">Split value</th>
+<th align="right">Cell</th>
+<th align="right">Variance explained (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Split1</td>
+<td align="left">Lon</td>
+<td align="left">180</td>
+<td align="right">NA</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="left">Split2</td>
+<td align="left">Year</td>
+<td align="left">2015</td>
+<td align="right">2</td>
+<td align="right">10</td>
+</tr>
+<tr class="odd">
+<td align="left">Split3</td>
+<td align="left">Lon</td>
+<td align="left">212</td>
+<td align="right">2</td>
+<td align="right">13</td>
+</tr>
+<tr class="even">
+<td align="left">Split4</td>
+<td align="left">Lon</td>
+<td align="left">206</td>
+<td align="right">4</td>
+<td align="right">14</td>
+</tr>
+<tr class="odd">
+<td align="left">Split5</td>
+<td align="left">Qrt</td>
+<td align="left">12;34</td>
+<td align="right">2</td>
+<td align="right">15</td>
+</tr>
+</tbody>
+</table>
+<div class="figure"><span style="display:block;" id="fig:observerLFSplit"></span>
+<img src="Figures/observer_split_analysis.png" alt="Longitude splits based on regression tree analysis from Table (ref:observerLFSplitAnalysis)" width="100%" />
+<p class="caption">
+Figure 6.1: Longitude splits based on regression tree analysis from Table (ref:observerLFSplitAnalysis)
+</p>
+</div>
+</div>
+<div id="age-data" class="section level2 unnumbered hasAnchor">
+<h2>Age data<a href="observerdata.html#age-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There is not enough samples in the age data to repeat the analysis conducted in the length frequency.</p>
+<ul>
+<li>sample sizes</li>
+<li>Can we build reasonable age-length keys by region and year? If not, how should we pool information to build age-length keys</li>
+</ul>
+
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-lennert2010exploratory" class="csl-entry">
+Lennert-Cody, Cleridy E, Mihoko Minami, Patrick K Tomlinson, and Mark N Maunder. 2010. <span>“Exploratory Analysis of Spatial–Temporal Patterns in Length–Frequency Data: An Example of Distributional Regression Trees.”</span> <em>Fisheries Research</em> 102 (3): 323–26.
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="surveydata.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tagdata.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -309,7 +397,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment/%s",
+"link": "https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment/05-ObserverDataAndAnalysis.Rmd",
 "text": "Edit"
 },
 "history": {
