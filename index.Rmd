@@ -23,23 +23,27 @@ This Gitbook documents my/our research for the Alaska sablefish (*Anoplopoma fim
 ## Gitbook outline  {-}
 - Chapter \@ref(objectives) outlines a list of objectives that we have set or accomplished during this research project. Some of our research cannot be presented in this document due to the confidentiality reasons. However, this checklist should include all tasks during the project
 
-- Chapter \@ref(modeldescription) documents the current stock assessment model and assumptions (work in progress). This is the first step of the project, with the purpose of helping me understand the assessment, data and important dynamics
+- Chapter \@ref(modeldescription) documents the current stock assessment model and assumptions (work in progress). This is the first step of the project, with the purpose of helping me understand the assessment, data and important dynamics.
 
-- Chapter \@ref(spatialmodeldescription) documents a generalised spatial stock assessment model used as both an OM and EM during simulations
+- Chapter \@ref(spatialmodeldescription) documents a generalised spatial stock assessment model used as both an OM and EM during simulations.
 
 
-- Chapter \@ref(spatialmodelInputs) describes data (other than tagging data see Chapter \@ref(tagdata)) that was explored for use in the spatial stock assessment model.
+- Chapter \@ref(surveydata) describes, characterises and explores the survey longline data.
+
+
+- Chapter \@ref(observerdata) describes, characterises and explores fishery dependent data, which includes reported catch and observer records.
+
 
 - Chapter \@ref(tagdata) describes the tagging data and how it can be used within a spatial stock assessment model but also used in a panmictic model for informing population dynamics such as growth.
 
 
-- Chapter \@ref(sexratios) explores how to include sex disaggregated composition observations that can include sex ratio information. It conducts a simple simulation to investigate two different approaches
+- Chapter \@ref(sexratios) explores how to include sex disaggregated composition observations that can include sex ratio information. It conducts a simple simulation to investigate two different approaches.
 
 
-- Chapter \@ref(Fexplore) explores how to parameterise fishing mortality. The current approach is to estimate an annual fishing mortality parameter for each gear as a free parameter. I feel slightly uncomfortable about this approach moving towards a spatial model as the number of estimated parameters will explode with spatial areas. This chapter looks at two alternative approaches that either derive fishing mortality estimates using a Newton Raphson solver which is heavily borrowed from the Stock Synthesis "hybrid" approach [@methot2013stock] and Pope's discrete approach [@pope1972investigation] which uses exploitation rates. Both these methods have been applied in the literature for decades. The aim of this chapter is to do a simulation and make sure the considered approaches are efficient and numerically stability for the purposes of our study
+- Chapter \@ref(Fexplore) explores how to parameterise fishing mortality. The current approach is to estimate an annual fishing mortality parameter for each gear as a free parameter. I feel slightly uncomfortable about this approach moving towards a spatial model as the number of estimated parameters will explode with spatial areas. This chapter looks at two alternative approaches that either derive fishing mortality estimates using a Newton Raphson solver which is heavily borrowed from the Stock Synthesis "hybrid" approach [@methot2013stock] and Pope's discrete approach [@pope1972investigation] which uses exploitation rates. Both these methods have been applied in the literature for decades. The aim of this chapter is to do a simulation and make sure the considered approaches are efficient and numerically stability for the purposes of our study.
 
 
-- Chapter \@ref(spatialInit) explores how to calculate the plus group in spatially explicit age-structured models that assume markovian movement during initialization
+- Chapter \@ref(spatialInit) explores how to calculate the plus group in spatially explicit age-structured models that assume markovian movement during initialization.
 
 
 

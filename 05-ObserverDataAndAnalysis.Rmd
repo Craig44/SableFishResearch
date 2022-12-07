@@ -2,12 +2,14 @@
 
 This chapter describes an exploratory analysis using the observer and other fishery reported data. The aim is to highlight trends and signals in the data that would lead to an assessment decision or consideration i.e., spatial and temporal structures. All data analysed in this section has been extracted from the AKFIN database (North Pacific Observer Program). It included extracts from the length, age and catch reports. Some of the data cannot be displayed here due to confidentiality reasons.
 
-This data will result in two important assessment inputs: observed catch (which will be known with a high level of precision) and composition by fishery, either age or length. 
+This data will result in two important assessment inputs: observed catch (which will be assumed known with a high level of precision) and composition by fishery, either age or length. 
 
 
 Define what a fishery is? Currently a "fishery" is defined by a gear type i.e., trawl vs fixed-gear (line and pot).
 
 is there evidence for changing selectivity? i.e., time-blocks
+
+Auxiliary information see Table 3.3 @goethel2021assessment for management actions which describe spatial closures by gear.
 
 ## Catch data {-}
 
@@ -18,12 +20,14 @@ Deriving annual estimates of catch by year and region should be fairly straight 
 - intrayear catch patterns (pulse vs all year round)
 
 
+
+
 ## Length data {-}
 
-- spatial patterns. definition of a fleet consider using the approach by @lennert2010exploratory.
+- spatio-temporal patterns. definition of a fleet consider using the approach by @lennert2010exploratory.
 
-
-Discussing the method of @lennert2010exploratory. My understanding of this method is that it uses regression trees to identify splits/nodes in the covariates latitude, longitude and season that generate groups/clusters of length frequency distributions that are similar or somewhat homogenous. "Assuming sampling coverage is adequate, comparison of pooled and individual-year tree results can identify spatial structure that is strongly indicated in every year, and that which is only present in select years, perhaps as a result of strong recruitment or changes in catchability, or if sampling coverage is not adequate, sampling variability." 
+### regression tree analysis {-}
+My understanding of the method described in @lennert2010exploratory is that it uses regression trees to identify splits/nodes in the covariates latitude, longitude and season that generate groups/clusters of length frequency distributions that are similar or somewhat homogenous. "Assuming sampling coverage is adequate, comparison of pooled and individual-year tree results can identify spatial structure that is strongly indicated in every year, and that which is only present in select years, perhaps as a result of strong recruitment or changes in catchability, or if sampling coverage is not adequate, sampling variability." 
 
 
 Run this exploration and see where the breaks are. This may lead us to reconsider spatial boundaries. **If we assume catchabilities for the fishery are constant over time and space** this exploration may indicate spatial structure in the population. However, that is a strong assumption... We could repeat this for the survey length frequency and see if the pattern is consistent. Just keep in mind that the survey data is from a smaller intra year window.
@@ -31,6 +35,8 @@ Run this exploration and see where the breaks are. This may lead us to reconside
 
 How can we disentangle whether change are due to changes in fishing practice or change in population dynamics? i.e., recruitment or movement 
 
+
+A limitation for this method for our application is latitude and longitude grids contain unequal areas due to the shrinking of longitudes towards the poles. Also with the unusual shape of the coastline 
 
 
 ```{r observerLFSplitAnalysis, echo = F, eval = 'asis'}
@@ -41,10 +47,72 @@ kable(split_table, caption = "Longitude splits based on regression tree analysis
 ```
 
 
-```{r observerLFSplit, out.width = '100%',fig.height= 5, fig.cap = "Longitude splits based on regression tree analysis from Table (ref:observerLFSplitAnalysis)", echo = F, eval = T}
+```{r observerLFSplit, out.width = '100%',fig.height= 5, fig.cap = "Longitude splits based on regression tree analysis from Table \\@ref(tab:observerLFSplitAnalysis)", echo = F, eval = T}
 include_graphics(file.path("Figures", "observer_split_analysis.png"))
 ```
 
+
+### Catch at length estimator {-}
+
+Scaling observed length frequencies to obtain catch at length inputs. A subset of hauls contain observers that subsample catches for ages and lengths. 
+
+Observers are responsible for subsampling observed catch to provide length and age samples. These samples need to be scaled to either the stock wide level for inputs into a single area stock assessment or to some area level for use in a spatially disaggregated stock assessments. We will illustrate a hierachical sampling scheme with three levels in Figure \@ref(fig:fishdependentsampling).
+
+
+```{r fishdependentsampling, out.width = '100%',fig.height= 7, fig.cap = "Sampling hierachy for fishery dependent catch at age and catch at length estimates", echo = F, eval = T}
+include_graphics(file.path("Figures", "fishery_dependent_sampling.png"))
+```
+
+Each node in the sampling hierarchy is denoted by the index \(m\). When a node is nested within another node, we use \(m \in m'\) to define that \(m'\) is nested within \(m\).
+
++----------------------------+-----------------------------------------------------------------------------+
+| Symbol                     | Description                            
++============================+=============================================================================+
+| \(m,l,a,s\)                | index for node, length bin, age bin, sex
++----------------------------+-----------------------------------------------------------------------------+
+| \(n_{m,l,s},N_{m,l,s}\)    | Number of fish in unscaled and scaled LF for sex $s$, at node $m$
++----------------------------+-----------------------------------------------------------------------------+
+| \(n_{m,a,s},N_{m,a,s}\)    | Number of fish in unscaled and scaled AF for sex $s$, at node $m$
++----------------------------+-----------------------------------------------------------------------------+
+| \(q_m\)                    | Number of child nodes for node $m$
++----------------------------+-----------------------------------------------------------------------------+
+|\(n_{m,l,a,s},N_{m,l,a,s}\) | Number of fish in unscaled and scaled LF \& AF for sex $s$, at node $m$
++----------------------------+-----------------------------------------------------------------------------+
+|\(s_m\)                     | Scaling factor at node $m$
++----------------------------+-----------------------------------------------------------------------------+
+|\(W_m,M_m,P_m,A_m\)         | scaling variables for each node (weight, numbers, proportion, area)
++----------------------------+-----------------------------------------------------------------------------+
+|\(w_{l,s}\)                 | mean weight for length bin $l$ and sex $s$
++----------------------------+-----------------------------------------------------------------------------+
+|\(w_{a,s}\)                 | mean weight for age bin $a$ and sex $s$
++----------------------------+-----------------------------------------------------------------------------+
+|\(K_{m,l,a,s}\)             | Age-length key for node \(m\) by sex
++----------------------------+-----------------------------------------------------------------------------+
+
+We require information the numbers at length for each node ( $n_{m,l,s}$) which make up the unscaled length frequency. Length weight parameters that describe the allometric relationship of weight from length ($w_{l,s} = a_s L_{l,s}^{b_s}$). The last piece is how we want to scale the frequencies ($W_m,M_m,P_m,A_m$). Length frequencies are iteratively calculated up the sampling hierarchy
+
+\[
+n_{m,l,s} = \sum_{m' \in m} N_{m',l,s}
+\]
+where
+\[
+N_{m',l,s} = s_{m'} n_{m',l,s}
+\]
+
+There are multiple approaches for scaling unscaled numbers to scaled, below outlines a few possibilities.
+
+\[
+s_m = \left\{\begin{array}{lr}
+W_m / \sum_{l,s} w_{l,s}n_{m,l,s}, & \text{if scaling is by weight}\\
+M_m / \sum_{l,s}n_{m,l,s} , & \text{if scaling is by weight}\\
+1 / P_m, & \text{if scaling is by proportion}\\
+\frac{A_m\sum_m W_m}{q_m \sum_m W_m}, & \text{if scaling is by area}\\
+1, & \text{if scaling is none}\\
+\end{array}\right\}
+\]
+
+
+If a haul is subsampled i.e., only 100 fish are measured for length out of 1000 caught in a haul, then we use the sampling fraction to scale the subsample to generate an estimated haul level catch LF. Area wide LFs estimates are calculated by scaling each sampled haul by the total weight or numbers across all hauls (whether sampled or not?) in that area to obtain scaled area wide LF's.
 
 
 ## Age data {-}
@@ -52,7 +120,6 @@ There is not enough samples in the age data to repeat the analysis conducted in 
 
 - sample sizes
 - Can we build reasonable age-length keys by region and year? If not, how should we pool information to build age-length keys
-
 
 
 

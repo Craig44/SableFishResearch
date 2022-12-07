@@ -38,10 +38,10 @@ and,
 where, \(N^{eff, k}_{y,s}\) is the effective sample size.
 
 
-## A simple simulation {#sexSimulation}
+## A simple simulation {-}
 To explore the utility of these two approaches we conducted a simple simulation using a sexually disaggregated age-structured model (see Section \@ref(sexSimulation)). The Operating Model (OM) used in the simulation assumed a 50:50 sex ratio during the recruitment process however the OM did assume different growth and selectivity among the sexes.
 
-### Results
+### Results {-}
 In summary both approaches resulted in similar estimates in selectivities and SSBs. I prefer Approach 1 as it is a single observation compared with Approach 2 which has two observation types (need to consider how to avoid double counting of samples), but this simulation showed at least within the very small assumptions explored here they resulted in similar performance. This was all I was after in order to move forward to the spatial model.
 
 
@@ -53,7 +53,7 @@ Another consideration about "Approach 2" is if the selectivity shape differs bet
 - Actual sex ratio skewed in the recruitment process, rather than just a selectivity effect which was of focus in the following simulation
 - Look at the effect on \(F\)'s I only summarised SSB and selectivities
 - Look at some residuals to see if that is a way to discredit some of these models
-### Operating Model (OM) Parameters 
+### Operating Model (OM) Parameters  {-}
 
 ```{r setup}
 set.seed(123)
@@ -268,7 +268,7 @@ legend('topright', legend = c("Male","Female"), col = c("black", "red"), lty = c
 ```
 
 
-### Scenario 1 
+### Scenario 1  {-}
 The first simulation assumed the OM had 50:50 males and female sex ratio at recruitment, and selectivities were as described in the above OM section. We simulated 100 data sets for each of the two approach's for sexually disaggregated compositional data outlined in the introduction. These were then fitted to in two EM's, where the EM's differed in the approach they used. Both EM's estimated a scalar on the female selectivity that allowed females to be more or less selected compared to males for both the fishery and survey. This was done be introducing an estimable \(\alpha\) parameter into the selectivity. Males selectivities were constrained to have a max value = 1 using,
 \begin{equation}
 S^{male}_a = 1/(1+19^{(a_{50}-a)/a_{to95})})
@@ -575,7 +575,7 @@ ggplot() +
 
 
 
-### Scenario 2 
+### Scenario 2  {-}
 The second scenario assumed sex ratio was 50:50 at recruitment and females were more selective than males to the fishery. This was done by setting \(\alpha\) = 1.2 in Equation \@ref(eq:femaleselectivity). 
 
 ```{r ChangeOMSceneario2, warning=F, echo = T, eval = T}

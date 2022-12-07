@@ -4,7 +4,7 @@ Growth is an important input in stock assessments. Although we are not consideri
 
 
 
-## Growth estimation using the Laslett–Eveson–Polacheck (LEP) method 
+## Growth estimation using the Laslett–Eveson–Polacheck (LEP) method  {-}
 Another use of tag-recovery data is for estimating growth models which are important inputs for stock assessment models. The section explores the “Laslett–Eveson–Polacheck (LEP)” approach, based on @laslett2002flexible \& @eveson2004integrated and described in @aires2015improved.
 
 

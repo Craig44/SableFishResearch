@@ -4,9 +4,86 @@ Since 1972 there have been approximately 400 000 sablefish tagged in Alaska wate
 
 Historical publications investigating movement of Alaskan sablefish include @heifetz1991movement, @hanselman2015move
 
-## Integrating tagging observations in spatial age-structured models
+## Exploratory analysis of tag data {-}
 
-This project intends to explore a range of methods for utilising tag-recovery observations in spatially disaggregated age-structured stock assessments.
+Figure \@ref(fig:TagReleases) shows the spatial distribution of both releases and recaptures, which both have fairly broad spatial distributions which is a good attribute. Figure \@ref(fig:recoveriebygear) shows the number of recoveries by gear method and year, this highlights a major drop off in recoveries from the Longline gear with no other gear has picked up in. This will have to be discussed with the wider team. In particular, what years to consider this data to be informative. 
+
+
+```{r TagReleases, out.width = '100%',fig.height= 5, fig.cap = "Tag releases and recoveries pooled over all years", echo = F, eval = T}
+include_graphics(file.path("Figures", "Overall_tag_spatial.png"))
+```
+
+
+
+```{r recoveriebygear, out.width = '60%',fig.height= 3.4, fig.cap = "Recovered fish by gear type and year", echo = F, eval = T}
+include_graphics(file.path("Figures", "recovery_by_gear_and_method.png"))
+```
+
+
+
+We applied a simple Lincoln-Peterson estimators to view changes in abundance over the area of interest using a subset of the tag recoveries. The Lincoln-Peterson estimator follows
+
+\[
+\widehat{N} = \frac{n e^{-(\kappa + M)}K\tau}{k} \ .
+\]
+
++----------------------------+-----------------------------------------------------------------------------+
+| Symbol                     | Description                            
++============================+=============================================================================+
+| \(N\)                      | Number of fish in the population 
++----------------------------+-----------------------------------------------------------------------------+
+| \(n\)                      | Number of fish released with a tag
++----------------------------+-----------------------------------------------------------------------------+
+| \(K\)                      | Number of fish scanned for tags (annual fishery catch)
++----------------------------+-----------------------------------------------------------------------------+
+| \(k\)                      | Number of tagged fish recovered 
++----------------------------+-----------------------------------------------------------------------------+
+| \(\tau\)                   | Reporting/detection rate
++----------------------------+-----------------------------------------------------------------------------+
+| \(\kappa\)                 | Annual tag loss or mortality
++----------------------------+-----------------------------------------------------------------------------+
+| \(M\)                      | Natural mortality
++----------------------------+-----------------------------------------------------------------------------+
+
+
+Most of the tags are released during the summer survey (Figure \@ref(fig:TagDataByMonth)) but recoveries are more spread out within a year.
+
+```{r TagDataByMonth, echo=FALSE,out.width="49%", fig.height=5,fig.cap="Tag recovery and release distributions by month",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c(file.path("Figures","Releases_by_month.png"),file.path("Figures","Recoveries_by_month.png")))
+``` 
+
+
+An initial Lincoln-Peterson estimator used on line tag recoveries that were at liberty for a year (300 - 420 days). This time-at-liberty period was chosen so we could explore trends in biomass in exploitation rates to compare with the assessment. Due to the large distance traveled by sablefish over this time-period (Figure \@ref(fig:KMtravelled)), the spatial extent was the entire stock region.
+
+
+```{r KMtravelled, out.width= '60%',fig.height= 3.4, fig.cap = "Distance (km) between release location and recovery location for fish at liberty for a year.", echo = F, eval = T}
+include_graphics(file.path("Figures", "distance_travelled_after_a_year.png"))
+```
+
+
+A few calculations/approximations are needed to be made to estimate \(K\) which will be the catch scanned for tags over the time period of interest and adjusting the catch for tag detection and reporting rates. We also will want to account for tag-loss and or tag induced mortality which assumed to be 10\% each year. Reporting rates are based on the work by @heifetz2001estimation. The period for calculating total catch was the 15 of May to 15 of September. This was chosen as it brackets the monthly peak of releases (Figure \@ref(fig:TagDataByMonth)). The other adjustment was converting reported weight into numbers. For this I calculated the mean numbers of fish per tonne based on the observer data. I then used this multiplier for the catch reported in tonnes during the period to exrtract the numbers caught by the fishery and thus assumed checked for tags.
+
+
+```{r popestimateslincolnpeterson, out.width = '60%',fig.height= 3.4, fig.cap = "Recovered fish by gear type and year", echo = F, eval = T}
+include_graphics(file.path("Figures", "LincolPetersonEstimates.png"))
+```
+
+Once we have annual population estimates we can make derive a rough annual exploitation rate (\(U_y \)) denoted by 
+
+\[
+U_y  = \frac{C_y}{\widehat{N}}
+\]
+where, \(C_y\) is the annual catch in numbers for the Longline fishery shown in Figure \@ref(fig:roughExploitationRate).
+
+```{r roughExploitationRate, out.width = '60%',fig.height= 3.4, fig.cap = "Exploitation rate for the Longline fishery based on Lincoln-Peterson estimates", echo = F, eval = T}
+include_graphics(file.path("Figures", "rough_exploitation_rate.png"))
+```
+
+
+
+## Integrating tagging observations in spatial age-structured models {-}
+
+This project intends to explore a range of methods for utilizing tag-recovery observations in spatially disaggregated age-structured stock assessments.
 
 ## Tagging things to consider with relevant references {-}
 
@@ -195,7 +272,7 @@ Once a tag-release event has occurred for tag group \(k\), the only known knowle
 where, \(N^k_a\) is used as an known input into the model with no error. **Revist** can we account for uncertainty here?
 
 
-#### Things to consider for tag release {-}
+### Things to consider for tag release {-}
 
 - we don't have much information regarding sex of tagged fish (36.5\% of recovered tags have sex information). Does this lean towards the internal method? can allocate sex ratio based on vulnerable population which may be important, if there is quite a difference in sex disaggregated selectivities.
 

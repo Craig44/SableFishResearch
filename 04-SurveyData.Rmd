@@ -8,7 +8,7 @@ include_graphics(file.path("Figures", "Longline_areas.png"))
 ```
 
 
-## Survey Abundance data {#surveyData}
+## Abundance data {-}
 
 I am thinking, when it comes to the real data application that we apply a geostatistical model-based estimator. The survey is a systematic/fixed design (do they visit the same locations each year? obviously ignoring the AI BS switching), but use a stratified survey estimator for the population total and variance. This is often done because there are no known design based estimators for systematic surveys that have a single primary sampling unit i.e., the only random event would be for the first station then the rest are systematically placed based on the first sampling unit. I am wondering if a stratified random variance estimator will over state or under state the precision? 
 
@@ -20,7 +20,7 @@ A useful reference for changes in survey operators for the Alaskan sablefish is 
 knitr::include_graphics("Figures/catch.gif")
 ```
 
-## Age-frequency {#AFs}
+## Age data {-}
 A big challenge of any spatial stock assessment is deriving spatially disaggregated age-frequency observations from low age sample sizes. For both the long-line survey and fishery we have both age and length data sets. This means there are multiple estimators available, including direct ageing, length frequency analysis [@andrade2004estimation] (Length frequency analysis decomposes length frequency histograms into age classes) and age-length key [@ailloud2019general;@hoenig2002generalizing]. The forward age-length key method at face value looks to be the most attractive, as it reduces data sparsity when compared to direct ageing estimators.
 
 
@@ -32,18 +32,14 @@ include_graphics(file.path("Figures", "age_samples_by_year_region_sex.png"))
 
 
 
-### Length-frequency {-}
+## Length data {-}
 
 
 ```{r lengthsamples, out.width = '100%', fig.height= 5, fig.cap="Number of fish measured for length by sex, region and year", echo = F, eval = T}
 include_graphics(file.path("Figures", "length_samples_by_year_region_sex.png"))
 ```
 
-## Observer data {#ObserverData}
-
-
-
-## Growth data {#Growth}
+## Age-length data {-}
 
 
 
@@ -61,8 +57,6 @@ knitr::include_graphics(c(file.path("Figures","raw_male_growth_by_region.png"),f
 ```{r femalegrowth, echo=FALSE,out.width="49%", fig.height=5,fig.cap="Female age-length by region (left panel) and decade (right panel)",fig.show='hold',fig.align='center'}
 knitr::include_graphics(c(file.path("Figures","raw_female_growth_by_region.png"),file.path("Figures","raw_female_growth_by_decade.png")))
 ``` 
-
-## Catch data {#CatchData}
 
 
 ## Appendix {-}
