@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 Tagging data and studies | Alaskan sablefish research</title>
+  <title>Chapter 7 Tagging data exploration | Alaskan sablefish research</title>
   <meta name="description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 Tagging data and studies | Alaskan sablefish research" />
+  <meta property="og:title" content="Chapter 7 Tagging data exploration | Alaskan sablefish research" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 Tagging data and studies | Alaskan sablefish research" />
+  <meta name="twitter:title" content="Chapter 7 Tagging data exploration | Alaskan sablefish research" />
   
   <meta name="twitter:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   
@@ -211,9 +211,9 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-data-1"><i class="fa fa-check"></i>Age data</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>7</b> Tagging data and studies</a>
+<li class="chapter" data-level="7" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>7</b> Tagging data exploration</a>
 <ul>
-<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#exploratory-analysis-of-tag-data"><i class="fa fa-check"></i>Exploratory analysis of tag data</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#exploratory-analysis-of-the-tag-data"><i class="fa fa-check"></i>Exploratory analysis of the tag data</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#integrating-tagging-observations-in-spatial-age-structured-models"><i class="fa fa-check"></i>Integrating tagging observations in spatial age-structured models</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tagging-things-to-consider-with-relevant-references"><i class="fa fa-check"></i>Tagging things to consider with relevant references</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#releasing-tags"><i class="fa fa-check"></i>Releasing tags</a>
@@ -271,11 +271,11 @@ div.csl-indent {
 
             <section class="normal" id="section-">
 <div id="tagdata" class="section level1 hasAnchor" number="7">
-<h1><span class="header-section-number">Chapter 7</span> Tagging data and studies<a href="tagdata.html#tagdata" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1><span class="header-section-number">Chapter 7</span> Tagging data exploration<a href="tagdata.html#tagdata" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Since 1972 there have been approximately 400 000 sablefish tagged in Alaska waters, of which over 38 500 have been recovered. Although there is extensive and long term tagging data, this information is not currently directly included in the stock assessment <span class="citation">(<a href="#ref-goethel2021assessment" role="doc-biblioref">Goethel et al. 2021</a>)</span>.</p>
 <p>Historical publications investigating movement of Alaskan sablefish include <span class="citation">Heifetz and Fujioka (<a href="#ref-heifetz1991movement" role="doc-biblioref">1991</a>)</span>, <span class="citation">Hanselman et al. (<a href="#ref-hanselman2015move" role="doc-biblioref">2015</a>)</span></p>
-<div id="exploratory-analysis-of-tag-data" class="section level2 unnumbered hasAnchor">
-<h2>Exploratory analysis of tag data<a href="tagdata.html#exploratory-analysis-of-tag-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exploratory-analysis-of-the-tag-data" class="section level2 unnumbered hasAnchor">
+<h2>Exploratory analysis of the tag data<a href="tagdata.html#exploratory-analysis-of-the-tag-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Figure <a href="tagdata.html#fig:TagReleases">7.1</a> shows the spatial distribution of both releases and recaptures, which both have fairly broad spatial distributions which is a good attribute. Figure <a href="tagdata.html#fig:recoveriebygear">7.2</a> shows the number of recoveries by gear method and year, this highlights a major drop off in recoveries from the Longline gear with no other gear has picked up in. This will have to be discussed with the wider team. In particular, what years to consider this data to be informative.</p>
 <div class="figure"><span style="display:block;" id="fig:TagReleases"></span>
 <img src="Figures/Overall_tag_spatial.png" alt="Tag releases and recoveries pooled over all years" width="100%" />
@@ -315,7 +315,7 @@ Figure 7.2: Recovered fish by gear type and year
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(K\)</span></td>
-<td>Number of fish scanned for tags (annual fishery catch)</td>
+<td>Number of fish scanned for tags (fishery catch over the period of recoveries</td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(k\)</span></td>
@@ -331,7 +331,7 @@ Figure 7.2: Recovered fish by gear type and year
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(M\)</span></td>
-<td>Natural mortality = 0.1 loosely based on <span class="citation">Goethel et al. (<a href="#ref-goethel2021assessment" role="doc-biblioref">2021</a>)</span></td>
+<td>Natural mortality = 0.1 based on <span class="citation">Goethel et al. (<a href="#ref-goethel2021assessment" role="doc-biblioref">2021</a>)</span></td>
 </tr>
 </tbody>
 </table>
@@ -342,21 +342,21 @@ Figure 7.2: Recovered fish by gear type and year
 Figure 7.3: Tag recovery and release distributions by month
 </p>
 </div>
-<p>An initial Lincoln-Peterson estimator used on line tag recoveries that were at liberty for a year (300 - 420 days). This time-at-liberty period was chosen so we could explore trends in biomass in exploitation rates to compare with the assessment. Due to the large distance traveled by sablefish over this time-period (Figure <a href="tagdata.html#fig:KMtravelled">7.4</a>), the spatial extent was the entire stock region.</p>
+<p>A Lincoln-Peterson estimator based on long line tag recoveries that were at liberty for a year (300 - 420 days) was explored. This time-at-liberty period was chosen so we could calculate annual estimates of abundance and thus derive annual estimates of exploitation rates to compare with the assessment. Due to the large distance traveled by sablefish over this time-period (Figure <a href="tagdata.html#fig:KMtravelled">7.4</a>), the spatial extent considered was the entire stock region.</p>
 <div class="figure"><span style="display:block;" id="fig:KMtravelled"></span>
 <img src="Figures/distance_travelled_after_a_year.png" alt="Distance (km) between release location and recovery location for fish at liberty for a year." width="60%" />
 <p class="caption">
 Figure 7.4: Distance (km) between release location and recovery location for fish at liberty for a year.
 </p>
 </div>
-<p>A few calculations/approximations are needed to be made to estimate <span class="math inline">\(K\)</span> which will be the catch scanned for tags over the time period of interest and adjusting the catch for tag detection and reporting rates. We also will want to account for tag-loss and or tag induced mortality which assumed to be 10% each year. Reporting rates are based on the work by <span class="citation">Heifetz and Maloney (<a href="#ref-heifetz2001estimation" role="doc-biblioref">2001</a>)</span>. The period for calculating total catch was the 15 of May to 15 of September. This was chosen as it brackets the monthly peak of releases (Figure <a href="tagdata.html#fig:TagDataByMonth">7.3</a>). The other adjustment was converting reported weight into numbers. For this I calculated the mean numbers of fish per tonne based on the observer data. I then used this multiplier for the catch reported in tonnes during the period to exrtract the numbers caught by the fishery and thus assumed checked for tags.</p>
+<p>A few calculations/approximations are included in the Lincoln-Peterson estimator, these include tag loss and natural mortality for tagged fish after a year at liberaty, reporting rates from the commercial fishery, and changing reported weights to numbers. The period for calculating catch that was scanned during tag recoveries was the 15 of May to 15 of September. This was chosen as it brackets the monthly peak of releases (Figure <a href="tagdata.html#fig:TagDataByMonth">7.3</a>). The other adjustment was converting reported weight into numbers. For this I calculated the mean numbers of fish per tonne based on the observer data. I then used this multiplier for the catch reported in tonnes during the period of recoveries to extract the numbers scanned by the fishery each year.</p>
 <div class="figure"><span style="display:block;" id="fig:popestimateslincolnpeterson"></span>
 <img src="Figures/LincolPetersonEstimates.png" alt="Recovered fish by gear type and year" width="60%" />
 <p class="caption">
 Figure 7.5: Recovered fish by gear type and year
 </p>
 </div>
-<p>Once we have annual population estimates we can make derive a rough annual exploitation rate (<span class="math inline">\(U_y\)</span>) denoted by</p>
+<p>Once we have annual population abundance estimates we can derive a rough annual exploitation rate (<span class="math inline">\(U_y\)</span>) denoted by</p>
 <p><span class="math display">\[
 U_y  = \frac{C_y}{\widehat{N}}
 \]</span>
