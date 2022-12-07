@@ -38,11 +38,11 @@ We applied a simple Lincoln-Peterson estimators to view changes in abundance ove
 +----------------------------+-----------------------------------------------------------------------------+
 | \(k\)                      | Number of tagged fish recovered 
 +----------------------------+-----------------------------------------------------------------------------+
-| \(\tau\)                   | Reporting/detection rate
+| \(\tau\)                   | Reporting/detection rate = 0.276 from @heifetz2001estimation
 +----------------------------+-----------------------------------------------------------------------------+
-| \(\kappa\)                 | Annual tag loss or mortality
+| \(\kappa\)                 | Annual tag loss or mortality = 0.1 @beamish_88
 +----------------------------+-----------------------------------------------------------------------------+
-| \(M\)                      | Natural mortality
+| \(M\)                      | Natural mortality = 0.1 loosely based on @goethel2021assessment
 +----------------------------+-----------------------------------------------------------------------------+
 
 
