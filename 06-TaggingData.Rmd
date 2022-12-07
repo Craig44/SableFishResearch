@@ -1,10 +1,10 @@
-# Tagging data and studies {#tagdata}
+# Tagging data exploration {#tagdata}
 Since 1972 there have been approximately 400 000 sablefish tagged in Alaska waters, of which over 38 500 have been recovered. Although there is extensive and long term tagging data, this information is not currently directly included in the stock assessment [@goethel2021assessment].
 
 
 Historical publications investigating movement of Alaskan sablefish include @heifetz1991movement, @hanselman2015move
 
-## Exploratory analysis of tag data {-}
+## Exploratory analysis of the tag data {-}
 
 Figure \@ref(fig:TagReleases) shows the spatial distribution of both releases and recaptures, which both have fairly broad spatial distributions which is a good attribute. Figure \@ref(fig:recoveriebygear) shows the number of recoveries by gear method and year, this highlights a major drop off in recoveries from the Longline gear with no other gear has picked up in. This will have to be discussed with the wider team. In particular, what years to consider this data to be informative. 
 
@@ -34,7 +34,7 @@ We applied a simple Lincoln-Peterson estimators to view changes in abundance ove
 +----------------------------+-----------------------------------------------------------------------------+
 | \(n\)                      | Number of fish released with a tag
 +----------------------------+-----------------------------------------------------------------------------+
-| \(K\)                      | Number of fish scanned for tags (annual fishery catch)
+| \(K\)                      | Number of fish scanned for tags (fishery catch over the period of recoveries)
 +----------------------------+-----------------------------------------------------------------------------+
 | \(k\)                      | Number of tagged fish recovered 
 +----------------------------+-----------------------------------------------------------------------------+
@@ -42,7 +42,7 @@ We applied a simple Lincoln-Peterson estimators to view changes in abundance ove
 +----------------------------+-----------------------------------------------------------------------------+
 | \(\kappa\)                 | Annual tag loss or mortality = 0.1 @beamish_88
 +----------------------------+-----------------------------------------------------------------------------+
-| \(M\)                      | Natural mortality = 0.1 loosely based on @goethel2021assessment
+| \(M\)                      | Natural mortality = 0.1 based on @goethel2021assessment
 +----------------------------+-----------------------------------------------------------------------------+
 
 
@@ -53,7 +53,7 @@ knitr::include_graphics(c(file.path("Figures","Releases_by_month.png"),file.path
 ``` 
 
 
-An initial Lincoln-Peterson estimator used on line tag recoveries that were at liberty for a year (300 - 420 days). This time-at-liberty period was chosen so we could explore trends in biomass in exploitation rates to compare with the assessment. Due to the large distance traveled by sablefish over this time-period (Figure \@ref(fig:KMtravelled)), the spatial extent was the entire stock region.
+A Lincoln-Peterson estimator based on long line tag recoveries that were at liberty for a year (300 - 420 days) was explored. This time-at-liberty period was chosen so we could calculate annual estimates of abundance and thus derive annual estimates of exploitation rates to compare with the assessment. Due to the large distance traveled by sablefish over this time-period (Figure \@ref(fig:KMtravelled)), the spatial extent considered was the entire stock region.
 
 
 ```{r KMtravelled, out.width= '60%',fig.height= 3.4, fig.cap = "Distance (km) between release location and recovery location for fish at liberty for a year.", echo = F, eval = T}
@@ -61,14 +61,14 @@ include_graphics(file.path("Figures", "distance_travelled_after_a_year.png"))
 ```
 
 
-A few calculations/approximations are needed to be made to estimate \(K\) which will be the catch scanned for tags over the time period of interest and adjusting the catch for tag detection and reporting rates. We also will want to account for tag-loss and or tag induced mortality which assumed to be 10\% each year. Reporting rates are based on the work by @heifetz2001estimation. The period for calculating total catch was the 15 of May to 15 of September. This was chosen as it brackets the monthly peak of releases (Figure \@ref(fig:TagDataByMonth)). The other adjustment was converting reported weight into numbers. For this I calculated the mean numbers of fish per tonne based on the observer data. I then used this multiplier for the catch reported in tonnes during the period to exrtract the numbers caught by the fishery and thus assumed checked for tags.
+A few calculations/approximations are included in the Lincoln-Peterson estimator, these include tag loss and natural mortality for tagged fish after a year at liberaty, reporting rates from the commercial fishery, and changing reported weights to numbers. The period for calculating catch that was scanned during tag recoveries was the 15 of May to 15 of September. This was chosen as it brackets the monthly peak of releases (Figure \@ref(fig:TagDataByMonth)). The other adjustment was converting reported weight into numbers. For this I calculated the mean numbers of fish per tonne based on the observer data. I then used this multiplier for the catch reported in tonnes during the period of recoveries to extract the numbers scanned by the fishery each year.
 
 
 ```{r popestimateslincolnpeterson, out.width = '60%',fig.height= 3.4, fig.cap = "Recovered fish by gear type and year", echo = F, eval = T}
 include_graphics(file.path("Figures", "LincolPetersonEstimates.png"))
 ```
 
-Once we have annual population estimates we can make derive a rough annual exploitation rate (\(U_y \)) denoted by 
+Once we have annual population abundance estimates we can derive a rough annual exploitation rate (\(U_y \)) denoted by 
 
 \[
 U_y  = \frac{C_y}{\widehat{N}}

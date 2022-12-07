@@ -39,7 +39,7 @@ where, \(N^{eff, k}_{y,s}\) is the effective sample size.
 
 
 ## A simple simulation {-}
-To explore the utility of these two approaches we conducted a simple simulation using a sexually disaggregated age-structured model (see Section \@ref(sexSimulation)). The Operating Model (OM) used in the simulation assumed a 50:50 sex ratio during the recruitment process however the OM did assume different growth and selectivity among the sexes.
+To explore the utility of these two approaches we conducted a simple simulation using a sexually disaggregated age-structured model (see simulation section below). The Operating Model (OM) used in the simulation assumed a 50:50 sex ratio during the recruitment process however the OM did assume different growth and selectivity among the sexes.
 
 ### Results {-}
 In summary both approaches resulted in similar estimates in selectivities and SSBs. I prefer Approach 1 as it is a single observation compared with Approach 2 which has two observation types (need to consider how to avoid double counting of samples), but this simulation showed at least within the very small assumptions explored here they resulted in similar performance. This was all I was after in order to move forward to the spatial model.
