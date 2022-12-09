@@ -1,6 +1,6 @@
 # Observer data {#observerdata}
 
-This chapter describes an exploratory analysis using the observer and other fishery reported data. The aim is to highlight trends and signals in the data that would lead to an assessment decision or consideration i.e., spatial and temporal structures. All data analysed in this section has been extracted from the AKFIN database (North Pacific Observer Program). It included extracts from the length, age and catch reports. Some of the data cannot be displayed here due to confidentiality reasons.
+This chapter describes an exploratory analysis using the observer and other fishery reported data. The aim is to highlight trends and signals in the data that would lead to an assessment decision or consideration i.e., spatial and temporal structures. All data analysed in this section has been extracted from the AKFIN database (North Pacific Observer Program). It included extracts from the length, age and catch reports. Some of the data cannot be displayed here due to confidentiality reasons. Locations shown in this work have been generalized to generic center locations of a 20 x 20 sq. km grid if there were 3 or more unique vessels, as per NOAA/NMFS regulations.
 
 This data will result in two important assessment inputs: observed catch (which will be assumed known with a high level of precision) and composition by fishery, either age or length. 
 
@@ -11,6 +11,11 @@ is there evidence for changing selectivity? i.e., time-blocks
 
 Auxiliary information see Table 3.3 @goethel2021assessment for management actions which describe spatial closures by gear.
 
+
+```{r CatchHistoryByRegion, out.width = '80%',fig.height= 4, fig.cap = "Catch history by region", echo = F, eval = T}
+include_graphics(file.path("Figures", "observed_catch_by_area.png"))
+```
+
 ## Catch data {-}
 
 Deriving annual estimates of catch by year and region should be fairly straight forward. Fishers generally have a legal requirement to record catches and we will probably just assume that reported catches are accurate (is there any evidence of under-over reporting?). Is there discarding?
@@ -20,6 +25,18 @@ Deriving annual estimates of catch by year and region should be fairly straight 
 - intrayear catch patterns (pulse vs all year round)
 
 
+
+
+```{r observerRepresentativeSamplesByGear, out.width = '100%', fig.cap = "Observer representative figures by method. When the cross and circle are the same size this indicates observers sample proportional to the catch for a year.", echo = F, eval = T}
+include_graphics(file.path("Figures", "proportion_observed_catch_by_method_2.png"))
+include_graphics(file.path("Figures", "proportion_observed_catch_by_method_1.png"))
+```
+
+
+```{r observerRepresentativeSamplesByArea, out.width = '100%', fig.cap = "Observer representative figures by method. When the cross and circle are the same size this indicates observers sample proportional to the catch for a year.", echo = F, eval = T}
+include_graphics(file.path("Figures", "proportion_observed_catch_by_area_2.png"))
+include_graphics(file.path("Figures", "proportion_observed_catch_by_area_1.png"))
+```
 
 
 ## Length data {-}
@@ -53,10 +70,7 @@ include_graphics(file.path("Figures", "observer_split_analysis.png"))
 
 
 ### Catch at length estimator {-}
-
-Scaling observed length frequencies to obtain catch at length inputs. A subset of hauls contain observers that subsample catches for ages and lengths. 
-
-Observers are responsible for subsampling observed catch to provide length and age samples. These samples need to be scaled to either the stock wide level for inputs into a single area stock assessment or to some area level for use in a spatially disaggregated stock assessments. We will illustrate a hierachical sampling scheme with three levels in Figure \@ref(fig:fishdependentsampling).
+The aim of catch at length is to obtain representative length frequencies (LF) of fish removed by a specific fishery within a specific area and year. These estimates are derived from observer collected data of which only a subsample of fishing trips are observed. Observers are tasked with subsampling observed catch to provide length and age samples. Thus these samples need to be scaled to either the stock wide level for inputs into a single area stock assessment or to some region level for use in a spatially disaggregated stock assessment. This is sampling structure has a natural hierarchy which is illustrated in Figure \@ref(fig:fishdependentsampling).
 
 
 ```{r fishdependentsampling, out.width = '100%',fig.height= 7, fig.cap = "Sampling hierachy for fishery dependent catch at age and catch at length estimates", echo = F, eval = T}
@@ -78,7 +92,7 @@ Each node in the sampling hierarchy is denoted by the index \(m\). When a node i
 +----------------------------+-----------------------------------------------------------------------------+
 |\(n_{m,l,a,s},N_{m,l,a,s}\) | Number of fish in unscaled and scaled LF \& AF for sex $s$, at node $m$
 +----------------------------+-----------------------------------------------------------------------------+
-|\(s_m\)                     | Scaling factor at node $m$
+|\(\pi_m\)                   | Scaling factor at node $m$
 +----------------------------+-----------------------------------------------------------------------------+
 |\(W_m,M_m,P_m,A_m\)         | scaling variables for each node (weight, numbers, proportion, area)
 +----------------------------+-----------------------------------------------------------------------------+
@@ -96,27 +110,62 @@ n_{m,l,s} = \sum_{m' \in m} N_{m',l,s}
 \]
 where
 \[
-N_{m',l,s} = s_{m'} n_{m',l,s}
+N_{m',l,s} = \pi_{m'} n_{m',l,s}
 \]
 
-There are multiple approaches for scaling unscaled numbers to scaled, below outlines a few possibilities.
+There are multiple approaches for scaling unscaled numbers to scaled numbers such as scaling by area etc, scaling by weight. 
+
+<!-- \[ -->
+<!-- \pi_m = \left\{\begin{array}{lr} -->
+<!-- W_m / \sum_{l,s} w_{l,s}n_{m,l,s}, & \text{if scaling is by weight}\\ -->
+<!-- M_m / \sum_{l,s}n_{m,l,s} , & \text{if scaling is by weight}\\ -->
+<!-- 1 / P_m, & \text{if scaling is by proportion}\\ -->
+<!-- \frac{A_m\sum_m W_m}{q_m \sum_m W_m}, & \text{if scaling is by area}\\ -->
+<!-- 1, & \text{if scaling is none}\\ -->
+<!-- \end{array}\right\} -->
+<!-- \] -->
+
+
+If an individual haul is subsampled i.e., only 50 fish are measured for length of 1000 caught in a single haul, then we use the sampling fraction denoted by \(\pi^{h}\) to scale the subsample to a haul level LF. Region wide LFs are calculated by summing the LFs over all sampled hauls within that region. Due to each haul having a scaled LF hauls, hauls with larger catches will naturally contribute more samples to a region wide LF, thus making this a catch weighted estimator.
+
+If \(n^h_l\) fish are measured for lengths from a haul that had \(N^h_l\) fish, then the scaler for the subsample follows,
+\[
+\pi^{h} = \frac{N^h_l}{n^h_l}
+\]
+each length sample in haul \(h\) is divided by this sampling fraction. 
+
+The estimator for region wide LFs denoted by \(\widehat{N}^r_{l,s}\) follow,
 
 \[
-s_m = \left\{\begin{array}{lr}
-W_m / \sum_{l,s} w_{l,s}n_{m,l,s}, & \text{if scaling is by weight}\\
-M_m / \sum_{l,s}n_{m,l,s} , & \text{if scaling is by weight}\\
-1 / P_m, & \text{if scaling is by proportion}\\
-\frac{A_m\sum_m W_m}{q_m \sum_m W_m}, & \text{if scaling is by area}\\
-1, & \text{if scaling is none}\\
-\end{array}\right\}
+\widehat{N}^r_{l,s} = \sum_{h\in a} n^h_{l,s} \pi^{h} \pi^{r}
 \]
+where \(\pi^{r}\), is the region scalar which weights each observed haul by the catch from hauls that had LFs collected and total catch in the region.
+\[
+\pi^{r} = \frac{C_r}{\sum_{h \in h'} C_h}
+\]
+where, \( C_h\) is the catch from haul \(h\), \(h'\) denotes the set of hauls that were observed and had LFs taken, and \(C_r\) is the region wide catch, which is a legal requirement from fishers to report.
 
 
-If a haul is subsampled i.e., only 100 fish are measured for length out of 1000 caught in a haul, then we use the sampling fraction to scale the subsample to generate an estimated haul level catch LF. Area wide LFs estimates are calculated by scaling each sampled haul by the total weight or numbers across all hauls (whether sampled or not?) in that area to obtain scaled area wide LF's.
+Region wide LFs are aggregated across multiple regions denoted by the set \(r'\) using an another catch weighted approach
+
+\[
+\widehat{N}^{r'}_{l,s} = \sum_{r\in r'} \widehat{N}^r_{l,s} \pi^{r}
+\]
+where,
+
+\[
+\pi^{r} = \frac{C_r}{\sum_r C_r}
+\]
+where, \(A_r\) is the catch in region \(C_r\) and \(\sum_r C_r\) denotes catch over all regions under investigation.
+
+
+```{r ScaledLFs, out.width = '100%', fig.cap = "This figure shows how each of the scaling factors change the raw sampled LFs (\\(n^h_{l,s}\\)) to obtain regional scaled length frequencies (\\(\\widehat{N}^{r'}_{l,s}\\)) for the fixed gear fishery.", echo = F, eval = T}
+include_graphics(file.path("Figures", "LF_scaling.png"))
+```
 
 
 ## Age data {-}
-There is not enough samples in the age data to repeat the analysis conducted in the length frequency.
+There is not enough samples in the age data to repeat the analysis conducted in the length frequency. 
 
 - sample sizes
 - Can we build reasonable age-length keys by region and year? If not, how should we pool information to build age-length keys
