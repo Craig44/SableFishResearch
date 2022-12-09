@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-12-07" />
+<meta name="date" content="2022-12-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -272,11 +272,17 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="observerdata" class="section level1 hasAnchor" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Observer data<a href="observerdata.html#observerdata" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This chapter describes an exploratory analysis using the observer and other fishery reported data. The aim is to highlight trends and signals in the data that would lead to an assessment decision or consideration i.e., spatial and temporal structures. All data analysed in this section has been extracted from the AKFIN database (North Pacific Observer Program). It included extracts from the length, age and catch reports. Some of the data cannot be displayed here due to confidentiality reasons.</p>
+<p>This chapter describes an exploratory analysis using the observer and other fishery reported data. The aim is to highlight trends and signals in the data that would lead to an assessment decision or consideration i.e., spatial and temporal structures. All data analysed in this section has been extracted from the AKFIN database (North Pacific Observer Program). It included extracts from the length, age and catch reports. Some of the data cannot be displayed here due to confidentiality reasons. Locations shown in this work have been generalized to generic center locations of a 20 x 20 sq. km grid if there were 3 or more unique vessels, as per NOAA/NMFS regulations.</p>
 <p>This data will result in two important assessment inputs: observed catch (which will be assumed known with a high level of precision) and composition by fishery, either age or length.</p>
 <p>Define what a fishery is? Currently a “fishery” is defined by a gear type i.e., trawl vs fixed-gear (line and pot).</p>
 <p>is there evidence for changing selectivity? i.e., time-blocks</p>
 <p>Auxiliary information see Table 3.3 <span class="citation">Goethel et al. (<a href="#ref-goethel2021assessment" role="doc-biblioref">2021</a>)</span> for management actions which describe spatial closures by gear.</p>
+<div class="figure"><span style="display:block;" id="fig:CatchHistoryByRegion"></span>
+<img src="Figures/observed_catch_by_area.png" alt="Catch history by region" width="80%" />
+<p class="caption">
+Figure 6.1: Catch history by region
+</p>
+</div>
 <div id="catch-data" class="section level2 unnumbered hasAnchor">
 <h2>Catch data<a href="observerdata.html#catch-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Deriving annual estimates of catch by year and region should be fairly straight forward. Fishers generally have a legal requirement to record catches and we will probably just assume that reported catches are accurate (is there any evidence of under-over reporting?). Is there discarding?</p>
@@ -284,6 +290,30 @@ div.csl-indent {
 <li>spatial patterns changes over time</li>
 <li>intrayear catch patterns (pulse vs all year round)</li>
 </ul>
+<div class="figure"><span style="display:block;" id="fig:observerRepresentativeSamplesByGear-1"></span>
+<img src="Figures/proportion_observed_catch_by_method_2.png" alt="Observer representative figures by method. When the cross and circle are the same size this indicates observers sample proportional to the catch for a year." width="100%" />
+<p class="caption">
+Figure 6.2: Observer representative figures by method. When the cross and circle are the same size this indicates observers sample proportional to the catch for a year.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:observerRepresentativeSamplesByGear-2"></span>
+<img src="Figures/proportion_observed_catch_by_method_1.png" alt="Observer representative figures by method. When the cross and circle are the same size this indicates observers sample proportional to the catch for a year." width="100%" />
+<p class="caption">
+Figure 6.3: Observer representative figures by method. When the cross and circle are the same size this indicates observers sample proportional to the catch for a year.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:observerRepresentativeSamplesByArea-1"></span>
+<img src="Figures/proportion_observed_catch_by_area_2.png" alt="Observer representative figures by method. When the cross and circle are the same size this indicates observers sample proportional to the catch for a year." width="100%" />
+<p class="caption">
+Figure 6.4: Observer representative figures by method. When the cross and circle are the same size this indicates observers sample proportional to the catch for a year.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:observerRepresentativeSamplesByArea-2"></span>
+<img src="Figures/proportion_observed_catch_by_area_1.png" alt="Observer representative figures by method. When the cross and circle are the same size this indicates observers sample proportional to the catch for a year." width="100%" />
+<p class="caption">
+Figure 6.5: Observer representative figures by method. When the cross and circle are the same size this indicates observers sample proportional to the catch for a year.
+</p>
+</div>
 </div>
 <div id="length-data-1" class="section level2 unnumbered hasAnchor">
 <h2>Length data<a href="observerdata.html#length-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -348,18 +378,17 @@ div.csl-indent {
 <div class="figure"><span style="display:block;" id="fig:observerLFSplit"></span>
 <img src="Figures/observer_split_analysis.png" alt="Longitude splits based on regression tree analysis from Table \@ref(tab:observerLFSplitAnalysis)" width="100%" />
 <p class="caption">
-Figure 6.1: Longitude splits based on regression tree analysis from Table <a href="observerdata.html#tab:observerLFSplitAnalysis">6.1</a>
+Figure 6.6: Longitude splits based on regression tree analysis from Table <a href="observerdata.html#tab:observerLFSplitAnalysis">6.1</a>
 </p>
 </div>
 </div>
 <div id="catch-at-length-estimator" class="section level3 unnumbered hasAnchor">
 <h3>Catch at length estimator<a href="observerdata.html#catch-at-length-estimator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Scaling observed length frequencies to obtain catch at length inputs. A subset of hauls contain observers that subsample catches for ages and lengths.</p>
-<p>Observers are responsible for subsampling observed catch to provide length and age samples. These samples need to be scaled to either the stock wide level for inputs into a single area stock assessment or to some area level for use in a spatially disaggregated stock assessments. We will illustrate a hierachical sampling scheme with three levels in Figure <a href="observerdata.html#fig:fishdependentsampling">6.2</a>.</p>
+<p>The aim of catch at length is to obtain representative length frequencies (LF) of fish removed by a specific fishery within a specific area and year. These estimates are derived from observer collected data of which only a subsample of fishing trips are observed. Observers are tasked with subsampling observed catch to provide length and age samples. Thus these samples need to be scaled to either the stock wide level for inputs into a single area stock assessment or to some region level for use in a spatially disaggregated stock assessment. This is sampling structure has a natural hierarchy which is illustrated in Figure <a href="observerdata.html#fig:fishdependentsampling">6.7</a>.</p>
 <div class="figure"><span style="display:block;" id="fig:fishdependentsampling"></span>
 <img src="Figures/fishery_dependent_sampling.png" alt="Sampling hierachy for fishery dependent catch at age and catch at length estimates" width="100%" />
 <p class="caption">
-Figure 6.2: Sampling hierachy for fishery dependent catch at age and catch at length estimates
+Figure 6.7: Sampling hierachy for fishery dependent catch at age and catch at length estimates
 </p>
 </div>
 <p>Each node in the sampling hierarchy is denoted by the index <span class="math inline">\(m\)</span>. When a node is nested within another node, we use <span class="math inline">\(m \in m&#39;\)</span> to define that <span class="math inline">\(m&#39;\)</span> is nested within <span class="math inline">\(m\)</span>.</p>
@@ -396,7 +425,7 @@ Figure 6.2: Sampling hierachy for fishery dependent catch at age and catch at le
 <td>Number of fish in unscaled and scaled LF &amp; AF for sex <span class="math inline">\(s\)</span>, at node <span class="math inline">\(m\)</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(s_m\)</span></td>
+<td><span class="math inline">\(\pi_m\)</span></td>
 <td>Scaling factor at node <span class="math inline">\(m\)</span></td>
 </tr>
 <tr class="odd">
@@ -423,19 +452,48 @@ n_{m,l,s} = \sum_{m&#39; \in m} N_{m&#39;,l,s}
 \]</span>
 where
 <span class="math display">\[
-N_{m&#39;,l,s} = s_{m&#39;} n_{m&#39;,l,s}
+N_{m&#39;,l,s} = \pi_{m&#39;} n_{m&#39;,l,s}
 \]</span></p>
-<p>There are multiple approaches for scaling unscaled numbers to scaled, below outlines a few possibilities.</p>
+<p>There are multiple approaches for scaling unscaled numbers to scaled numbers such as scaling by area etc, scaling by weight.</p>
+<!-- \[ -->
+<!-- \pi_m = \left\{\begin{array}{lr} -->
+<!-- W_m / \sum_{l,s} w_{l,s}n_{m,l,s}, & \text{if scaling is by weight}\\ -->
+<!-- M_m / \sum_{l,s}n_{m,l,s} , & \text{if scaling is by weight}\\ -->
+<!-- 1 / P_m, & \text{if scaling is by proportion}\\ -->
+<!-- \frac{A_m\sum_m W_m}{q_m \sum_m W_m}, & \text{if scaling is by area}\\ -->
+<!-- 1, & \text{if scaling is none}\\ -->
+<!-- \end{array}\right\} -->
+<!-- \] -->
+<p>If an individual haul is subsampled i.e., only 50 fish are measured for length of 1000 caught in a single haul, then we use the sampling fraction denoted by <span class="math inline">\(\pi^{h}\)</span> to scale the subsample to a haul level LF. Region wide LFs are calculated by summing the LFs over all sampled hauls within that region. Due to each haul having a scaled LF hauls, hauls with larger catches will naturally contribute more samples to a region wide LF, thus making this a catch weighted estimator.</p>
+<p>If <span class="math inline">\(n^h_l\)</span> fish are measured for lengths from a haul that had <span class="math inline">\(N^h_l\)</span> fish, then the scaler for the subsample follows,
+<span class="math display">\[
+\pi^{h} = \frac{N^h_l}{n^h_l}
+\]</span>
+each length sample in haul <span class="math inline">\(h\)</span> is divided by this sampling fraction.</p>
+<p>The estimator for region wide LFs denoted by <span class="math inline">\(\widehat{N}^r_{l,s}\)</span> follow,</p>
 <p><span class="math display">\[
-s_m = \left\{\begin{array}{lr}
-W_m / \sum_{l,s} w_{l,s}n_{m,l,s}, &amp; \text{if scaling is by weight}\\
-M_m / \sum_{l,s}n_{m,l,s} , &amp; \text{if scaling is by weight}\\
-1 / P_m, &amp; \text{if scaling is by proportion}\\
-\frac{A_m\sum_m W_m}{q_m \sum_m W_m}, &amp; \text{if scaling is by area}\\
-1, &amp; \text{if scaling is none}\\
-\end{array}\right\}
-\]</span></p>
-<p>If a haul is subsampled i.e., only 100 fish are measured for length out of 1000 caught in a haul, then we use the sampling fraction to scale the subsample to generate an estimated haul level catch LF. Area wide LFs estimates are calculated by scaling each sampled haul by the total weight or numbers across all hauls (whether sampled or not?) in that area to obtain scaled area wide LF’s.</p>
+\widehat{N}^r_{l,s} = \sum_{h\in a} n^h_{l,s} \pi^{h} \pi^{r}
+\]</span>
+where <span class="math inline">\(\pi^{r}\)</span>, is the region scalar which weights each observed haul by the catch from hauls that had LFs collected and total catch in the region.
+<span class="math display">\[
+\pi^{r} = \frac{C_r}{\sum_{h \in h&#39;} C_h}
+\]</span>
+where, <span class="math inline">\(C_h\)</span> is the catch from haul <span class="math inline">\(h\)</span>, <span class="math inline">\(h&#39;\)</span> denotes the set of hauls that were observed and had LFs taken, and <span class="math inline">\(C_r\)</span> is the region wide catch, which is a legal requirement from fishers to report.</p>
+<p>Region wide LFs are aggregated across multiple regions denoted by the set <span class="math inline">\(r&#39;\)</span> using an another catch weighted approach</p>
+<p><span class="math display">\[
+\widehat{N}^{r&#39;}_{l,s} = \sum_{r\in r&#39;} \widehat{N}^r_{l,s} \pi^{r}
+\]</span>
+where,</p>
+<p><span class="math display">\[
+\pi^{r} = \frac{C_r}{\sum_r C_r}
+\]</span>
+where, <span class="math inline">\(A_r\)</span> is the catch in region <span class="math inline">\(C_r\)</span> and <span class="math inline">\(\sum_r C_r\)</span> denotes catch over all regions under investigation.</p>
+<div class="figure"><span style="display:block;" id="fig:ScaledLFs"></span>
+<img src="Figures/LF_scaling.png" alt="This figure shows how each of the scaling factors change the raw sampled LFs (\(n^h_{l,s}\)) to obtain regional scaled length frequencies (\(\widehat{N}^{r'}_{l,s}\)) for the fixed gear fishery." width="100%" />
+<p class="caption">
+Figure 6.8: This figure shows how each of the scaling factors change the raw sampled LFs (<span class="math inline">\(n^h_{l,s}\)</span>) to obtain regional scaled length frequencies (<span class="math inline">\(\widehat{N}^{r&#39;}_{l,s}\)</span>) for the fixed gear fishery.
+</p>
+</div>
 </div>
 </div>
 <div id="age-data-1" class="section level2 unnumbered hasAnchor">

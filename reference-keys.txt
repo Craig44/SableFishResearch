@@ -15,9 +15,15 @@ fig:femaleCDFagesamples
 fig:maleCDFagesamples
 fig:femaleCDFlengthsamples
 fig:maleCDFlengthsamples
+fig:CatchHistoryByRegion
+fig:observerRepresentativeSamplesByGear-1
+fig:observerRepresentativeSamplesByGear-2
+fig:observerRepresentativeSamplesByArea-1
+fig:observerRepresentativeSamplesByArea-2
 tab:observerLFSplitAnalysis
 fig:observerLFSplit
 fig:fishdependentsampling
+fig:ScaledLFs
 fig:TagReleases
 fig:recoveriebygear
 fig:TagDataByMonth
