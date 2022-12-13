@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Survey data | Alaskan sablefish research</title>
   <meta name="description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Survey data | Alaskan sablefish research" />
   <meta property="og:type" content="book" />
@@ -189,7 +189,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#initialisation-gleft.right-1"><i class="fa fa-check"></i>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)</a></li>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#population-dynamics-fleft.right-1"><i class="fa fa-check"></i>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)</a></li>
-<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#to-do"><i class="fa fa-check"></i>To DO</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#decision-analysis-for-determining-the-spatial-resolution-of-the-model"><i class="fa fa-check"></i>Decision analysis for determining the spatial resolution of the model</a></li>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#appendix"><i class="fa fa-check"></i>Appendix</a></li>
 </ul></li>
 </ul></li>
@@ -285,7 +285,7 @@ Figure 5.1: The finest spatial resolution that we are considering for Sablefish 
 </div>
 <div id="abundance-data" class="section level2 unnumbered hasAnchor">
 <h2>Abundance data<a href="surveydata.html#abundance-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>One of the aims is to a geostatistical model-based estimator with the current estimator. The survey is a systematic/fixed design, but the current estimator for the population total and variance is based on a stratified random survey design. This is often done because there is no design based estimator for systematic surveys that have a single primary sampling unit i.e., the only random event would be for the first station then the rest are systematically placed based on the first sampling unit. I wonder if a stratified random variance estimator will under state the variance (see <span class="citation">Fewster (<a href="#ref-fewster2011variance" role="doc-biblioref">2011</a>)</span> for more detail on this issue).</p>
+<p>One of the aims is to a geostatistical model-based estimator <span class="citation">(<a href="#ref-sdmTMB" role="doc-biblioref">Anderson et al. 2022</a>)</span> with the current estimator. The survey is a systematic/fixed design, but the current estimator for the population total and variance is based on a stratified random survey design. This is often done because there is no design based estimator for systematic surveys that have a single primary sampling unit i.e., the only random event would be for the first station then the rest are systematically placed based on the first sampling unit. I wonder if a stratified random variance estimator will under state the variance (see <span class="citation">Fewster (<a href="#ref-fewster2011variance" role="doc-biblioref">2011</a>)</span> for more detail on this issue).</p>
 <p>A consideration when using the survey data within a geostatistical model-based estimator is what to define an observation as. The current estimator treats each skate/hachi as an “observation” (need to ask about this). Due to the fishing of gear being perpendicular to land a single fishing event can cover many depth strata. Each skate/hachi is attached to a depth strata where it is used in the current estimator (does this inflate the sample size? should skate within a fishing event be treated as a cluster?). Although it would be interesting to use the skate/hachi level data, only the start and end latitude and longitudes are recorded. This means we would have to interpolate a coordinate for each skate or pool data over each fishing event for use in the geostatistical model?</p>
 <p>A useful reference for changes in survey operators for the Alaskan sablefish is <span class="citation">Kimura and Zenger Jr (<a href="#ref-kimura1997standardizing" role="doc-biblioref">1997</a>)</span>. “The Japanese long-line gear used in the joint surveys and the NMFS long-line gear are similar in many respects…Differences between Japanese sampling gear and NMFS sampling gear were mostly due to hook and gangion construction”. When analysing the survey CPUE data it would be ideal to have a single time-series. So a desirable population total estimator would account for different catchabilities by country or vessel.</p>
 <div class="figure"><span style="display:block;" id="fig:surveycatchgif"></span>
@@ -401,6 +401,9 @@ Figure 5.11: CDF of length frequencies for males
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-ailloud2019general" class="csl-entry">
 Ailloud, Lisa E, and John M Hoenig. 2019. <span>“A General Theory of Age-Length Keys: Combining the Forward and Inverse Keys to Estimate Age Composition from Incomplete Data.”</span> <em>ICES Journal of Marine Science</em> 76 (6): 1515–23.
+</div>
+<div id="ref-sdmTMB" class="csl-entry">
+Anderson, Sean C., Ward, Eric J., English, Philina A., Barnett, and Lewis A. K. 2022. <span>“sdmTMB: An r Package for Fast, Flexible, and User-Friendly Generalized Linear Mixed Effects Models with Spatial and Spatiotemporal Random Fields.”</span> <em>bioRxiv</em> 2022.03.24.485545. <a href="https://doi.org/10.1101/2022.03.24.485545">https://doi.org/10.1101/2022.03.24.485545</a>.
 </div>
 <div id="ref-fewster2011variance" class="csl-entry">
 Fewster, R M. 2011. <span>“Variance Estimation for Systematic Designs in Spatial Surveys.”</span> <em>Biometrics</em> 67 (4): 1518–31.

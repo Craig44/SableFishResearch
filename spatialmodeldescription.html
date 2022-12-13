@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Spatial stock assessment model for Alaskan sablefish | Alaskan sablefish research</title>
   <meta name="description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Spatial stock assessment model for Alaskan sablefish | Alaskan sablefish research" />
   <meta property="og:type" content="book" />
@@ -189,7 +189,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#initialisation-gleft.right-1"><i class="fa fa-check"></i>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)</a></li>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#population-dynamics-fleft.right-1"><i class="fa fa-check"></i>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)</a></li>
-<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#to-do"><i class="fa fa-check"></i>To DO</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#decision-analysis-for-determining-the-spatial-resolution-of-the-model"><i class="fa fa-check"></i>Decision analysis for determining the spatial resolution of the model</a></li>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#appendix"><i class="fa fa-check"></i>Appendix</a></li>
 </ul></li>
 </ul></li>
@@ -294,11 +294,65 @@ The plus group</p>
 <div id="population-dynamics-fleft.right-1" class="section level3 unnumbered hasAnchor">
 <h3>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)<a href="spatialmodeldescription.html#population-dynamics-fleft.right-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="to-do" class="section level3 unnumbered hasAnchor">
-<h3>To DO<a href="spatialmodeldescription.html#to-do" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>simulation test a spatial model with three areas no tagging data and equilibrium initial conditions</li>
-</ul>
+<div id="decision-analysis-for-determining-the-spatial-resolution-of-the-model" class="section level3 unnumbered hasAnchor">
+<h3>Decision analysis for determining the spatial resolution of the model<a href="spatialmodeldescription.html#decision-analysis-for-determining-the-spatial-resolution-of-the-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This section will describe the decision making process we took in configuring a spatially explicit model for the Alaskan sablefish stock. The first consideration was whether to include areas outside of the Gulf of Alaska (GOA) and the Bering sea Aleutian islands region, which is the spatial extent for the current stock assessment <span class="citation">(<a href="#ref-goethel2021assessment" role="doc-biblioref">Goethel et al. 2021</a>)</span>. Sablefish inhabit a broad spatial distribution from the northeastern Pacific Ocean from northern Mexico to the Gulf of Alaska. It is currently assessed by three assessment bodies, the first is the area of focus, being the Bering sea and gulf of Alaska <span class="citation">(<a href="#ref-goethel2021assessment" role="doc-biblioref">Goethel et al. 2021</a>)</span>, one off the west coast of Canada <strong>(Cox et al. 2011)</strong> and the west coast from California to Oregan <strong>(Stewart et al. 2011)</strong>. Given the complex juvenile life history coupled with long range movement capabilities of adults, the stock structure of sablefish has been a topic of extensive research.</p>
+<p>A recent genetic study by <span class="citation">Jasonowicz et al. (<a href="#ref-jasonowicz2017love" role="doc-biblioref">2017</a>)</span>, found no significant difference between samples off the west coast of US, GOA and bering sea (there were no samples off the west coast of Canada in this study), providing evidence for a single panmictic population. A recent morphometric study <span class="citation">(<a href="#ref-kapur2020oceanographic" role="doc-biblioref">Kapur et al. 2020</a>)</span>, found significant differences in fish traits such as length at age between samples from the west coast of US and GOA. These results were consitent with the findings from <span class="citation">Tripp-Valdez et al. (<a href="#ref-tripp2012population" role="doc-biblioref">2012</a>)</span>. Tagging is another important information source with extensive tagging along the entire North pacific. Tag recovery data provide evidence for a two stock hypothesis <span class="citation">(<a href="#ref-kimura1998tagged" role="doc-biblioref">Kimura and Shavy 1998</a>)</span>. With a stock north of Vancouver Island and a stock to the south.</p>
+<p>For the purposes of this research, we will assume GOA and BS, hereinafter refered to as the GOABS complex, is isolated (i.e., no movement in or out of this region) from Canada and the west coast of the US. Although there is evidence to include part of Canada. Due to practical considerations regarding data sharing and the time-frame of this research Canada was excluded. The focus of this research is to build and explore a spatially explicit model for the GOABS complex.</p>
+<p>The general approach taken, was to build an initial spatial model that had the finest spatial resolution possible and aggregate regions as due to data limitations, model convergence issues etc. This finest model spatial resolution was based on the input data with the coarsest reported spatial resolution. Data sets have been reported at different spatial resolutions over time. In general, data are reproted at three levels of spatial resolution: latitude and longitude (high spatial resolution), statistical area (Figure <a href="spatialmodeldescription.html#fig:spatialstatArea">4.1</a>) and larger fishery management boundaries (Figure <a href="spatialmodeldescription.html#fig:spatialmanagementArea">4.2</a>). Input data sets and the spatial resolution available are described in the following table.</p>
+<div class="figure"><span style="display:block;" id="fig:spatialstatArea"></span>
+<img src="Figures/alaska-fisheries-boundaries-map.jpg" alt="Statistical and reporting areas for GOABS complex" width="100%" />
+<p class="caption">
+Figure 4.1: Statistical and reporting areas for GOABS complex
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:spatialmanagementArea"></span>
+<img src="Figures/NFMP_with_EGOA.png" alt="Fishery management plan boundaries. The Eastern Gulf is often reported at subareas split up be East/West Yakutat and sometimes Southeast." width="100%" />
+<p class="caption">
+Figure 4.2: Fishery management plan boundaries. The Eastern Gulf is often reported at subareas split up be East/West Yakutat and sometimes Southeast.
+</p>
+</div>
+<table>
+<colgroup>
+<col width="17%" />
+<col width="82%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Data source</th>
+<th>Description and spatial resolution</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Catch pre 1900</td>
+<td>Available at FMP spatial resolution</td>
+</tr>
+<tr class="even">
+<td>Catch post 1900</td>
+<td>Available at FMP spatial resolution</td>
+</tr>
+<tr class="odd">
+<td>Observer data
+(Age,Length
+and catch)</td>
+<td>Latitude and Longitude positions</td>
+</tr>
+<tr class="even">
+<td>Survey data
+(Age, Length
+and catch)</td>
+<td>Latitude and Longitude positions</td>
+</tr>
+<tr class="odd">
+<td>Tagging data</td>
+<td>Latitude and Longitude for releases,
+Latitude and longitude for approximately half the recoveries</td>
+</tr>
+</tbody>
+</table>
+<p>Reported catch from commercial fishers seems to be the data set which has the coarsest reported spatial resolution (check this statement with Dan. Are later data known to statistical areas?). For this reason, the finest spatial resolution we will consider is a Five area model based on the fishery management plan boundaries (FMP) being, Bering Sea, Aleutian Islands, Western Gulf, Central Gulf and Eastern Gulf. Although this was determined by a reporting constraint, this is also the spatial resolution that the stock is managed at.</p>
+<p>In addition to the reported spatial resolution of the data, we need to consider if there is any spatial sampling stratification within a data set. Sampling designs that have spatially varying stratification and thus spatially varying sampling intensity, could be inappropriate to use for alternative spatial stratifications. Often retrospective design based estimators are not as efficient as design based estimators that are consistent with the sampling design. Fortunately in this case, the independent survey design is systematic. This results in consistent spatial sampling with respect to space, and removes this concern when considering alternative regional boundaries.</p>
 </div>
 <div id="appendix" class="section level3 unnumbered hasAnchor">
 <h3>Appendix<a href="spatialmodeldescription.html#appendix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -310,6 +364,18 @@ The plus group</p>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-goethel2021assessment" class="csl-entry">
 Goethel, DR, DH Hanselman, CJ Rodgveller, KH Fenski, SK Shotwell, KB Echave, PW Malecha, A Siwicke, and CR Lunsford. 2021. <span>“Assessment of the Sablefish Stock in Alaska.”</span> <em>Stock Assessment and Fishery Evaluation Report for the Groundfish Resources of the Gulf of Alaska and the Bering Sea/Aleutian Islands as Projected for</em>.
+</div>
+<div id="ref-jasonowicz2017love" class="csl-entry">
+Jasonowicz, Andrew J, Frederick W Goetz, Giles W Goetz, and Krista M Nichols. 2017. <span>“Love the One You’re with: Genomic Evidence of Panmixia in the Sablefish (Anoplopoma Fimbria).”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 74 (3): 377–87.
+</div>
+<div id="ref-kapur2020oceanographic" class="csl-entry">
+Kapur, M, M Haltuch, B Connors, L Rogers, A Berger, E Koontz, J Cope, et al. 2020. <span>“Oceanographic Features Delineate Growth Zonation in Northeast Pacific Sablefish.”</span> <em>Fisheries Research</em> 222: 105414.
+</div>
+<div id="ref-kimura1998tagged" class="csl-entry">
+Kimura, Daniel K, and Franklin R Shavy. 1998. <span>“Tagged Sablefish, Anoplopoma Fimbria.”</span> <em>Fishery Bulletin</em> 96: 462–81.
+</div>
+<div id="ref-tripp2012population" class="csl-entry">
+Tripp-Valdez, MA, FJ Garcı́a-de-León, H Espinosa-Pérez, and G Ruiz-Campos. 2012. <span>“Population Structure of Sablefish Anoplopoma Fimbria Using Genetic Variability and Geometric Morphometric Analysis.”</span> <em>Journal of Applied Ichthyology</em> 28 (4): 516–23.
 </div>
 </div>
             </section>

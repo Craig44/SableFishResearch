@@ -4,6 +4,8 @@ eq:catchatage
 eq:surveyage
 eq:relativeindex
 eq:agelengthtransition
+fig:spatialstatArea
+fig:spatialmanagementArea
 fig:LLRegions
 fig:surveycatchgif
 fig:agesamples
