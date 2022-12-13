@@ -21,9 +21,56 @@ The plus group
 
 
 
-### To DO {-}
+### Decision analysis for determining the spatial resolution of the model {-}
+This section will describe the decision making process we took in configuring a spatially explicit model for the Alaskan sablefish stock. The first consideration was whether to include areas outside of the Gulf of Alaska (GOA) and the Bering sea Aleutian islands region, which is the spatial extent for the current stock assessment [@goethel2021assessment]. Sablefish inhabit a broad spatial distribution from the northeastern Pacific Ocean from northern Mexico to the Gulf of Alaska. It is currently assessed by three assessment bodies, the first is the area of focus, being the Bering sea and gulf of Alaska [@goethel2021assessment], one off the west coast of Canada **(Cox et al. 2011)** and the west coast from California to Oregan **(Stewart et al. 2011)**. Given the complex juvenile life history coupled with long range movement capabilities of adults, the stock structure of sablefish has been a topic of extensive research.
 
-- simulation test a spatial model with three areas no tagging data and equilibrium initial conditions
+
+A recent genetic study by @jasonowicz2017love, found no significant difference between samples off the west coast of US, GOA and bering sea (there were no samples off the west coast of Canada in this study), providing evidence for a single panmictic population. A recent morphometric study [@kapur2020oceanographic], found significant differences in fish traits such as length at age between samples from the west coast of US and GOA. These results were consitent with the findings from @tripp2012population. Tagging is another important information source with extensive tagging along the entire North pacific. Tag recovery data provide evidence for a two stock hypothesis [@kimura1998tagged]. With a stock north of Vancouver Island and a stock to the south. 
+
+
+For the purposes of this research, we will assume GOA and BS, hereinafter refered to as the GOABS complex, is isolated (i.e., no movement in or out of this region) from Canada and the west coast of the US. Although there is evidence to include part of Canada. Due to practical considerations regarding data sharing and the time-frame of this research Canada was excluded. The focus of this research is to build and explore a spatially explicit model for the GOABS complex.
+
+
+The general approach taken, was to build an initial spatial model that had the finest spatial resolution possible and aggregate regions as due to data limitations, model convergence issues etc. This finest model spatial resolution was based on the input data with the coarsest reported spatial resolution. Data sets have been reported at different spatial resolutions over time. In general, data are reproted at three levels of spatial resolution: latitude and longitude (high spatial resolution), statistical area (Figure \@ref(fig:spatialstatArea)) and larger fishery management boundaries (Figure \@ref(fig:spatialmanagementArea)). Input data sets and the spatial resolution available are described in the following table.
+
+
+```{r spatialstatArea, out.width = '100%', fig.height= 6, fig.cap="Statistical and reporting areas for GOABS complex", echo = F, eval = T}
+include_graphics(file.path("Figures", "alaska-fisheries-boundaries-map.jpg"))
+```
+
+
+```{r spatialmanagementArea, out.width = '100%', fig.height= 5, fig.cap="Fishery management plan boundaries. The Eastern Gulf is often reported at subareas split up be East/West Yakutat and sometimes Southeast.", echo = F, eval = T}
+include_graphics(file.path("Figures", "NFMP_with_EGOA.png"))
+```
+
++------------------+---------------------------------------------------------------------------------------+
+| Data source      | Description and spatial resolution                            
++==================+=======================================================================================+
+| Catch pre 1900   | Available at FMP spatial resolution
+|                  | 
++------------------+---------------------------------------------------------------------------------------+
+| Catch post 1900  | Available at FMP spatial resolution 
+|                  | 
++------------------+---------------------------------------------------------------------------------------+
+| Observer data    | Latitude and Longitude positions
+|  (Age,Length     | 
+|   and  catch)    |
++------------------+---------------------------------------------------------------------------------------+
+| Survey data      | Latitude and Longitude positions
+|  (Age, Length    | 
+|and  catch)       |
++------------------+---------------------------------------------------------------------------------------+
+| Tagging data     | Latitude and Longitude for releases, 
+|                  | Latitude and longitude for approximately half the recoveries
++------------------+---------------------------------------------------------------------------------------+
+
+Reported catch from commercial fishers seems to be the data set which has the coarsest reported spatial resolution (check this statement with Dan. Are later data known to statistical areas?). For this reason, the finest spatial resolution we will consider is a Five area model based on the fishery management plan boundaries (FMP) being, Bering Sea, Aleutian Islands, Western Gulf, Central Gulf and Eastern Gulf. Although this was determined by a reporting constraint, this is also the spatial resolution that the stock is managed at.
+
+
+
+In addition to the reported spatial resolution of the data, we need to consider if there is any spatial sampling stratification within a data set. Sampling designs that have spatially varying stratification and thus spatially varying sampling intensity, could be inappropriate to use for alternative spatial stratifications. Often retrospective design based estimators are not as efficient as design based estimators that are consistent with the sampling design. Fortunately in this case, the independent survey design is systematic. This results in consistent spatial sampling with respect to space, and removes this concern when considering alternative regional boundaries.
+
+
 
 ### Appendix {-}
 
