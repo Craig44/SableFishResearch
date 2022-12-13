@@ -10,7 +10,13 @@ include_graphics(file.path("Figures", "Longline_areas.png"))
 
 ## Abundance data {-}
 
-I am thinking, when it comes to the real data application that we apply a geostatistical model-based estimator. The survey is a systematic/fixed design (do they visit the same locations each year? obviously ignoring the AI BS switching), but use a stratified survey estimator for the population total and variance. This is often done because there are no known design based estimators for systematic surveys that have a single primary sampling unit i.e., the only random event would be for the first station then the rest are systematically placed based on the first sampling unit. I am wondering if a stratified random variance estimator will over state or under state the precision? 
+One of the aims is to a geostatistical model-based estimator with the current estimator. The survey is a systematic/fixed design, but the current estimator for the population total and variance is based on a stratified random survey design. This is often done because there is no design based estimator for systematic surveys that have a single primary sampling unit i.e., the only random event would be for the first station then the rest are systematically placed based on the first sampling unit. I wonder if a stratified random variance estimator will under state the variance (see @fewster2011variance for more detail on this issue). 
+
+
+A consideration when using the survey data within a geostatistical model-based estimator is what to define an observation as. The current estimator treats each skate/hachi as an "observation" (need to ask about this). Due to the fishing of gear being perpendicular to land a single fishing event can cover many depth strata. Each skate/hachi is attached to a depth strata where it is used in the current estimator (does this inflate the sample size? should skate within a fishing event be treated as a cluster?). Although it would be interesting to use the skate/hachi level data, only the start and end latitude and longitudes are recorded. This means we would have to interpolate a coordinate for each skate or pool data over each fishing event for use in the geostatistical model?
+
+
+
 
 
 A useful reference for changes in survey operators for the Alaskan sablefish is @kimura1997standardizing. "The Japanese long-line gear used in the joint surveys and the NMFS long-line gear are similar in many respects...Differences between Japanese sampling gear and NMFS sampling gear were mostly due to hook and gangion construction". When analysing the survey CPUE data it would be ideal to have a single time-series. So a desirable population total estimator would account for different catchabilities by country or vessel.
@@ -21,7 +27,7 @@ knitr::include_graphics("Figures/catch.gif")
 ```
 
 ## Age data {-}
-A big challenge of any spatial stock assessment is deriving spatially disaggregated age-frequency observations from low age sample sizes. For both the long-line survey and fishery we have both age and length data sets. This means there are multiple estimators available, including direct ageing, length frequency analysis [@andrade2004estimation] (Length frequency analysis decomposes length frequency histograms into age classes) and age-length key [@ailloud2019general;@hoenig2002generalizing]. The forward age-length key method at face value looks to be the most attractive, as it reduces data sparsity when compared to direct ageing estimators.
+A big challenge of any spatial stock assessment is deriving spatially disaggregated age-frequency observations from low age sample sizes. For both the long-line survey and fixed gear fishery we have both age and length observations. This means there are multiple estimators available, including; direct ageing and age-length key [@ailloud2019general;@hoenig2002generalizing]. The forward age-length key method at face value looks to be the most attractive, as it reduces data sparsity when compared to direct ageing estimators. However, we will generate AF's for both methods and see if they effect any model outputs.
 
 
 A note on sablefish otolith sampling from the survey. "Otolith collections were length-stratified from 1979-94 and random thereafter" pg 9 of @sigler2001alaska.
@@ -33,6 +39,23 @@ include_graphics(file.path("Figures", "age_samples_by_year_region_sex.png"))
 
 
 ## Length data {-}
+Often, each haul is subsampled for LF measurements. For each fishing event, we calculate the sampling fraction
+\[
+\pi_h = \frac{n_h}{N_h}
+\]
+where, \(n_h\) is the number of fish measured for LF and \(N_h\) are the total number of fish caught in fishing event \(h\). Each measure length is then scaled by this sampling fraction to derive the length frequency for the entire fishing event,
+
+\[
+N^h_l = \frac{\pi_h}{n^h_l}
+\]
+where, \(n^h_l\) is the number of fish in length bin \(l\) for fishing event \(h\), and \(N^h_l\) is the scaled number of fish.
+
+To generate region wide LF's from the survey data, we used the mean
+\[
+N^r_l = \frac{1}{\sum\limits_{h \in r}1} \sum\limits_{h \in r} N^h_l
+\]
+where, \(h \in r\) denotes only hauls within region \(r\) and \(\sum\limits_{h \in r}1\) indicates the number of fishing events in that region.
+
 
 
 ```{r lengthsamples, out.width = '100%', fig.height= 5, fig.cap="Number of fish measured for length by sex, region and year", echo = F, eval = T}
@@ -64,23 +87,23 @@ knitr::include_graphics(c(file.path("Figures","raw_female_growth_by_region.png")
 Sampling notation
 
 
-+----------------------------+-----------------------------------------------------------------------------+
-| Symbol                     | Description                            
-+============================+=============================================================================+
-| \(h\)                      | haul index
-+----------------------------+-----------------------------------------------------------------------------+
-| \(i\)                      | an individual fish index
-+----------------------------+-----------------------------------------------------------------------------+
-| \(a_i\)                    | age of individual \(i\)
-+----------------------------+-----------------------------------------------------------------------------+
-| \(l_i\)                    | length of individual \(i\) 
-+----------------------------+-----------------------------------------------------------------------------+
-| \(C^h\)                    | Catch for haul \(h\) can be numbers or biomass
-+----------------------------+-----------------------------------------------------------------------------+
-| \(n^h_l\)                  | number of fish measured for length from haul \(h\) 
-+----------------------------+-----------------------------------------------------------------------------+
-| \(n^h_a\)                  | number age samples in haul \(h\). Assumed to be a subsample of \(n^h_l\)
-+----------------------------+-----------------------------------------------------------------------------+
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | Symbol                     | Description                             -->
+<!-- +============================+=============================================================================+ -->
+<!-- | \(h\)                      | haul index -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | \(i\)                      | an individual fish index -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | \(a_i\)                    | age of individual \(i\) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | \(l_i\)                    | length of individual \(i\)  -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | \(C^h\)                    | Catch for haul \(h\) can be numbers or biomass -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | \(n^h_l\)                  | number of fish measured for length from haul \(h\)  -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | \(n^h_a\)                  | number age samples in haul \(h\). Assumed to be a subsample of \(n^h_l\) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
 
 
 

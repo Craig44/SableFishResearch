@@ -1,4 +1,4 @@
-# Observer data {#observerdata}
+# Fishery dependent data {#observerdata}
 
 This chapter describes an exploratory analysis using the observer and other fishery reported data. The aim is to highlight trends and signals in the data that would lead to an assessment decision or consideration i.e., spatial and temporal structures. All data analysed in this section has been extracted from the AKFIN database (North Pacific Observer Program). It included extracts from the length, age and catch reports. Some of the data cannot be displayed here due to confidentiality reasons. Locations shown in this work have been generalized to generic center locations of a 20 x 20 sq. km grid if there were 3 or more unique vessels, as per NOAA/NMFS regulations.
 
@@ -167,8 +167,39 @@ include_graphics(file.path("Figures", "LF_scaling.png"))
 ## Age data {-}
 There is not enough samples in the age data to repeat the analysis conducted in the length frequency. 
 
-- sample sizes
 - Can we build reasonable age-length keys by region and year? If not, how should we pool information to build age-length keys
+- How best to pool data with low sample sizes in a year? how to set these sample size thresholds?
+- How to deal with ages that have no otoliths? set zero or impute?
+
+
+### Age length keys {-}
+Calculate the probability of age given a length bin by using the empirical distribution of age and lengths.
+
+\[
+\hat{p}(a|l) = \frac{n_{a,l}}{n_{+,l}}
+\]
+where, \(n_{+,l}\) is the total of all ages in length bin \(l\).
+The probabilities of age given length from the forward ALK are then simply multiplied by the marginal probabilities \(\hat{p}(l) = N_{l} / \sum_lN_{l}\).
+
+
+### Continuation ratio logits (CRL) {-}
+
+An alternative to the ALK is to use a continuation ratio model (CRL) to model the distribution of ages \(\boldsymbol{p}_a(\boldsymbol{x}) = (p_J, \dots, p_A)\), which has been proposed and explored in recent studies [@berg2012spatial;@correa2020improved]. Using a \(J\) minus \(A\) conditional model for describing the probability of being age \(a\) given it as at least \(a\), that is
+
+\begin{equation}
+\pi_a = P(Y = a| Y \geq a) = \frac{p_a}{p_a + p_{a+1} + \dots + p_A} , \ \ a = J, \dots, A-1
+\end{equation}
+
+
+Given the set of A − J models, the estimated unconditional probabilities \(p_a\) from the conditional probabilities \(\pi_a\) follows
+
+\begin{align}
+\hat{p}_a =&  \hat{\pi}_a , \ a = R\\
+\hat{p}_a =& \hat{\pi}_a \bigg( 1 - \sum\limits_{k = J}^{a - 1} \hat{p}_a \bigg) = \hat{\pi}_a \prod\limits_{k = J}^{a - 1} (1 - \hat{\pi}_k) , \ a > J
+\end{align}
+
+This method was not explored in detail due to the sex dimension for sablefish adding a complexity we didn't have time to get in to. There is R code that applies the CRL model ignoring sex in the data.
+
 
 
 
