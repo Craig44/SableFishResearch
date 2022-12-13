@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-12-09" />
+<meta name="date" content="2022-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -201,7 +201,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-length-data"><i class="fa fa-check"></i>Age-length data</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#appendix-1"><i class="fa fa-check"></i>Appendix</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="observerdata.html"><a href="observerdata.html"><i class="fa fa-check"></i><b>6</b> Observer data</a>
+<li class="chapter" data-level="6" data-path="observerdata.html"><a href="observerdata.html"><i class="fa fa-check"></i><b>6</b> Fishery dependent data</a>
 <ul>
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#catch-data"><i class="fa fa-check"></i>Catch data</a></li>
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#length-data-1"><i class="fa fa-check"></i>Length data</a>
@@ -209,7 +209,11 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#regression-tree-analysis"><i class="fa fa-check"></i>regression tree analysis</a></li>
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#catch-at-length-estimator"><i class="fa fa-check"></i>Catch at length estimator</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-data-1"><i class="fa fa-check"></i>Age data</a></li>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-data-1"><i class="fa fa-check"></i>Age data</a>
+<ul>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-length-keys"><i class="fa fa-check"></i>Age length keys</a></li>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#continuation-ratio-logits-crl"><i class="fa fa-check"></i>Continuation ratio logits (CRL)</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>7</b> Tagging data exploration</a>
 <ul>
@@ -281,7 +285,8 @@ Figure 5.1: The finest spatial resolution that we are considering for Sablefish 
 </div>
 <div id="abundance-data" class="section level2 unnumbered hasAnchor">
 <h2>Abundance data<a href="surveydata.html#abundance-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>I am thinking, when it comes to the real data application that we apply a geostatistical model-based estimator. The survey is a systematic/fixed design (do they visit the same locations each year? obviously ignoring the AI BS switching), but use a stratified survey estimator for the population total and variance. This is often done because there are no known design based estimators for systematic surveys that have a single primary sampling unit i.e., the only random event would be for the first station then the rest are systematically placed based on the first sampling unit. I am wondering if a stratified random variance estimator will over state or under state the precision?</p>
+<p>One of the aims is to a geostatistical model-based estimator with the current estimator. The survey is a systematic/fixed design, but the current estimator for the population total and variance is based on a stratified random survey design. This is often done because there is no design based estimator for systematic surveys that have a single primary sampling unit i.e., the only random event would be for the first station then the rest are systematically placed based on the first sampling unit. I wonder if a stratified random variance estimator will under state the variance (see <span class="citation">Fewster (<a href="#ref-fewster2011variance" role="doc-biblioref">2011</a>)</span> for more detail on this issue).</p>
+<p>A consideration when using the survey data within a geostatistical model-based estimator is what to define an observation as. The current estimator treats each skate/hachi as an “observation” (need to ask about this). Due to the fishing of gear being perpendicular to land a single fishing event can cover many depth strata. Each skate/hachi is attached to a depth strata where it is used in the current estimator (does this inflate the sample size? should skate within a fishing event be treated as a cluster?). Although it would be interesting to use the skate/hachi level data, only the start and end latitude and longitudes are recorded. This means we would have to interpolate a coordinate for each skate or pool data over each fishing event for use in the geostatistical model?</p>
 <p>A useful reference for changes in survey operators for the Alaskan sablefish is <span class="citation">Kimura and Zenger Jr (<a href="#ref-kimura1997standardizing" role="doc-biblioref">1997</a>)</span>. “The Japanese long-line gear used in the joint surveys and the NMFS long-line gear are similar in many respects…Differences between Japanese sampling gear and NMFS sampling gear were mostly due to hook and gangion construction”. When analysing the survey CPUE data it would be ideal to have a single time-series. So a desirable population total estimator would account for different catchabilities by country or vessel.</p>
 <div class="figure"><span style="display:block;" id="fig:surveycatchgif"></span>
 <img src="Figures/catch.gif" alt="A time-series of sablefish catch from the long line survey pooled over 50km by 50km grided cells"  />
@@ -292,7 +297,7 @@ Figure 5.2: A time-series of sablefish catch from the long line survey pooled ov
 </div>
 <div id="age-data" class="section level2 unnumbered hasAnchor">
 <h2>Age data<a href="surveydata.html#age-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A big challenge of any spatial stock assessment is deriving spatially disaggregated age-frequency observations from low age sample sizes. For both the long-line survey and fishery we have both age and length data sets. This means there are multiple estimators available, including direct ageing, length frequency analysis <span class="citation">(<a href="#ref-andrade2004estimation" role="doc-biblioref">Andrade and Kinas 2004</a>)</span> (Length frequency analysis decomposes length frequency histograms into age classes) and age-length key <span class="citation">(<a href="#ref-ailloud2019general" role="doc-biblioref">Ailloud and Hoenig 2019</a>; <a href="#ref-hoenig2002generalizing" role="doc-biblioref">Hoenig, Choudary Hanumara, and Heisey 2002</a>)</span>. The forward age-length key method at face value looks to be the most attractive, as it reduces data sparsity when compared to direct ageing estimators.</p>
+<p>A big challenge of any spatial stock assessment is deriving spatially disaggregated age-frequency observations from low age sample sizes. For both the long-line survey and fixed gear fishery we have both age and length observations. This means there are multiple estimators available, including; direct ageing and age-length key <span class="citation">(<a href="#ref-ailloud2019general" role="doc-biblioref">Ailloud and Hoenig 2019</a>; <a href="#ref-hoenig2002generalizing" role="doc-biblioref">Hoenig, Choudary Hanumara, and Heisey 2002</a>)</span>. The forward age-length key method at face value looks to be the most attractive, as it reduces data sparsity when compared to direct ageing estimators. However, we will generate AF’s for both methods and see if they effect any model outputs.</p>
 <p>A note on sablefish otolith sampling from the survey. “Otolith collections were length-stratified from 1979-94 and random thereafter” pg 9 of <span class="citation">Sigler, Fujioka, and Lowe (<a href="#ref-sigler2001alaska" role="doc-biblioref">2001</a>)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:agesamples"></span>
 <img src="Figures/age_samples_by_year_region_sex.png" alt="Number of aged fish by sex, region and year" width="100%" />
@@ -303,6 +308,20 @@ Figure 5.3: Number of aged fish by sex, region and year
 </div>
 <div id="length-data" class="section level2 unnumbered hasAnchor">
 <h2>Length data<a href="surveydata.html#length-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Often, each haul is subsampled for LF measurements. For each fishing event, we calculate the sampling fraction
+<span class="math display">\[
+\pi_h = \frac{n_h}{N_h}
+\]</span>
+where, <span class="math inline">\(n_h\)</span> is the number of fish measured for LF and <span class="math inline">\(N_h\)</span> are the total number of fish caught in fishing event <span class="math inline">\(h\)</span>. Each measure length is then scaled by this sampling fraction to derive the length frequency for the entire fishing event,</p>
+<p><span class="math display">\[
+N^h_l = \frac{\pi_h}{n^h_l}
+\]</span>
+where, <span class="math inline">\(n^h_l\)</span> is the number of fish in length bin <span class="math inline">\(l\)</span> for fishing event <span class="math inline">\(h\)</span>, and <span class="math inline">\(N^h_l\)</span> is the scaled number of fish.</p>
+<p>To generate region wide LF’s from the survey data, we used the mean
+<span class="math display">\[
+N^r_l = \frac{1}{\sum\limits_{h \in r}1} \sum\limits_{h \in r} N^h_l
+\]</span>
+where, <span class="math inline">\(h \in r\)</span> denotes only hauls within region <span class="math inline">\(r\)</span> and <span class="math inline">\(\sum\limits_{h \in r}1\)</span> indicates the number of fishing events in that region.</p>
 <div class="figure"><span style="display:block;" id="fig:lengthsamples"></span>
 <img src="Figures/length_samples_by_year_region_sex.png" alt="Number of fish measured for length by sex, region and year" width="100%" />
 <p class="caption">
@@ -334,48 +353,23 @@ Figure 5.7: Female age-length by region (left panel) and decade (right panel)
 <div id="appendix-1" class="section level2 unnumbered hasAnchor">
 <h2>Appendix<a href="surveydata.html#appendix-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Sampling notation</p>
-<table>
-<colgroup>
-<col width="27%" />
-<col width="72%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Symbol</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span class="math inline">\(h\)</span></td>
-<td>haul index</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(i\)</span></td>
-<td>an individual fish index</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(a_i\)</span></td>
-<td>age of individual <span class="math inline">\(i\)</span></td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(l_i\)</span></td>
-<td>length of individual <span class="math inline">\(i\)</span></td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(C^h\)</span></td>
-<td>Catch for haul <span class="math inline">\(h\)</span> can be numbers or biomass</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(n^h_l\)</span></td>
-<td>number of fish measured for length from haul <span class="math inline">\(h\)</span></td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(n^h_a\)</span></td>
-<td>number age samples in haul <span class="math inline">\(h\)</span>. Assumed to be a subsample of <span class="math inline">\(n^h_l\)</span></td>
-</tr>
-</tbody>
-</table>
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | Symbol                     | Description                             -->
+<!-- +============================+=============================================================================+ -->
+<!-- | \(h\)                      | haul index -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | \(i\)                      | an individual fish index -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | \(a_i\)                    | age of individual \(i\) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | \(l_i\)                    | length of individual \(i\)  -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | \(C^h\)                    | Catch for haul \(h\) can be numbers or biomass -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | \(n^h_l\)                  | number of fish measured for length from haul \(h\)  -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
+<!-- | \(n^h_a\)                  | number age samples in haul \(h\). Assumed to be a subsample of \(n^h_l\) -->
+<!-- +----------------------------+-----------------------------------------------------------------------------+ -->
 <div class="figure"><span style="display:block;" id="fig:femaleCDFagesamples"></span>
 <img src="Figures/raw_ecdf_AFs_by_year_region_female.png" alt="CDF of age frequencies for females" width="100%" />
 <p class="caption">
@@ -408,8 +402,8 @@ Figure 5.11: CDF of length frequencies for males
 <div id="ref-ailloud2019general" class="csl-entry">
 Ailloud, Lisa E, and John M Hoenig. 2019. <span>“A General Theory of Age-Length Keys: Combining the Forward and Inverse Keys to Estimate Age Composition from Incomplete Data.”</span> <em>ICES Journal of Marine Science</em> 76 (6): 1515–23.
 </div>
-<div id="ref-andrade2004estimation" class="csl-entry">
-Andrade, Humber A, and Paul G Kinas. 2004. <span>“Estimation of Birthdates and Catch-at-Age Using Length Frequency Analysis (LFA), with Application for Skipjack Tuna (Katsuwonus Pelamis) Caught in the Southwest Atlantic.”</span> <em>ICES Journal of Marine Science</em> 61 (5): 798–811.
+<div id="ref-fewster2011variance" class="csl-entry">
+Fewster, R M. 2011. <span>“Variance Estimation for Systematic Designs in Spatial Surveys.”</span> <em>Biometrics</em> 67 (4): 1518–31.
 </div>
 <div id="ref-hoenig2002generalizing" class="csl-entry">
 Hoenig, John M, R Choudary Hanumara, and Dennis M Heisey. 2002. <span>“Generalizing Double and Triple Sampling for Repeated Surveys and Partial Verification.”</span> <em>Biometrical Journal: Journal of Mathematical Methods in Biosciences</em> 44 (5): 603–18.

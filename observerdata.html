@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Observer data | Alaskan sablefish research</title>
+  <title>Chapter 6 Fishery dependent data | Alaskan sablefish research</title>
   <meta name="description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Observer data | Alaskan sablefish research" />
+  <meta property="og:title" content="Chapter 6 Fishery dependent data | Alaskan sablefish research" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Observer data | Alaskan sablefish research" />
+  <meta name="twitter:title" content="Chapter 6 Fishery dependent data | Alaskan sablefish research" />
   
   <meta name="twitter:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-12-09" />
+<meta name="date" content="2022-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -201,7 +201,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-length-data"><i class="fa fa-check"></i>Age-length data</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#appendix-1"><i class="fa fa-check"></i>Appendix</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="observerdata.html"><a href="observerdata.html"><i class="fa fa-check"></i><b>6</b> Observer data</a>
+<li class="chapter" data-level="6" data-path="observerdata.html"><a href="observerdata.html"><i class="fa fa-check"></i><b>6</b> Fishery dependent data</a>
 <ul>
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#catch-data"><i class="fa fa-check"></i>Catch data</a></li>
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#length-data-1"><i class="fa fa-check"></i>Length data</a>
@@ -209,7 +209,11 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#regression-tree-analysis"><i class="fa fa-check"></i>regression tree analysis</a></li>
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#catch-at-length-estimator"><i class="fa fa-check"></i>Catch at length estimator</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-data-1"><i class="fa fa-check"></i>Age data</a></li>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-data-1"><i class="fa fa-check"></i>Age data</a>
+<ul>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-length-keys"><i class="fa fa-check"></i>Age length keys</a></li>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#continuation-ratio-logits-crl"><i class="fa fa-check"></i>Continuation ratio logits (CRL)</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>7</b> Tagging data exploration</a>
 <ul>
@@ -271,7 +275,7 @@ div.csl-indent {
 
             <section class="normal" id="section-">
 <div id="observerdata" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">Chapter 6</span> Observer data<a href="observerdata.html#observerdata" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1><span class="header-section-number">Chapter 6</span> Fishery dependent data<a href="observerdata.html#observerdata" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This chapter describes an exploratory analysis using the observer and other fishery reported data. The aim is to highlight trends and signals in the data that would lead to an assessment decision or consideration i.e., spatial and temporal structures. All data analysed in this section has been extracted from the AKFIN database (North Pacific Observer Program). It included extracts from the length, age and catch reports. Some of the data cannot be displayed here due to confidentiality reasons. Locations shown in this work have been generalized to generic center locations of a 20 x 20 sq. km grid if there were 3 or more unique vessels, as per NOAA/NMFS regulations.</p>
 <p>This data will result in two important assessment inputs: observed catch (which will be assumed known with a high level of precision) and composition by fishery, either age or length.</p>
 <p>Define what a fishery is? Currently a “fishery” is defined by a gear type i.e., trawl vs fixed-gear (line and pot).</p>
@@ -500,14 +504,43 @@ Figure 6.8: This figure shows how each of the scaling factors change the raw sam
 <h2>Age data<a href="observerdata.html#age-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>There is not enough samples in the age data to repeat the analysis conducted in the length frequency.</p>
 <ul>
-<li>sample sizes</li>
 <li>Can we build reasonable age-length keys by region and year? If not, how should we pool information to build age-length keys</li>
+<li>How best to pool data with low sample sizes in a year? how to set these sample size thresholds?</li>
+<li>How to deal with ages that have no otoliths? set zero or impute?</li>
 </ul>
+<div id="age-length-keys" class="section level3 unnumbered hasAnchor">
+<h3>Age length keys<a href="observerdata.html#age-length-keys" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Calculate the probability of age given a length bin by using the empirical distribution of age and lengths.</p>
+<p><span class="math display">\[
+\hat{p}(a|l) = \frac{n_{a,l}}{n_{+,l}}
+\]</span>
+where, <span class="math inline">\(n_{+,l}\)</span> is the total of all ages in length bin <span class="math inline">\(l\)</span>.
+The probabilities of age given length from the forward ALK are then simply multiplied by the marginal probabilities <span class="math inline">\(\hat{p}(l) = N_{l} / \sum_lN_{l}\)</span>.</p>
+</div>
+<div id="continuation-ratio-logits-crl" class="section level3 unnumbered hasAnchor">
+<h3>Continuation ratio logits (CRL)<a href="observerdata.html#continuation-ratio-logits-crl" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An alternative to the ALK is to use a continuation ratio model (CRL) to model the distribution of ages <span class="math inline">\(\boldsymbol{p}_a(\boldsymbol{x}) = (p_J, \dots, p_A)\)</span>, which has been proposed and explored in recent studies <span class="citation">(<a href="#ref-berg2012spatial" role="doc-biblioref">Berg and Kristensen 2012</a>; <a href="#ref-correa2020improved" role="doc-biblioref">Correa et al. 2020</a>)</span>. Using a <span class="math inline">\(J\)</span> minus <span class="math inline">\(A\)</span> conditional model for describing the probability of being age <span class="math inline">\(a\)</span> given it as at least <span class="math inline">\(a\)</span>, that is</p>
+<p><span class="math display">\[\begin{equation}
+\pi_a = P(Y = a| Y \geq a) = \frac{p_a}{p_a + p_{a+1} + \dots + p_A} , \ \ a = J, \dots, A-1
+\end{equation}\]</span></p>
+<p>Given the set of A − J models, the estimated unconditional probabilities <span class="math inline">\(p_a\)</span> from the conditional probabilities <span class="math inline">\(\pi_a\)</span> follows</p>
+<p><span class="math display">\[\begin{align}
+\hat{p}_a =&amp;  \hat{\pi}_a , \ a = R\\
+\hat{p}_a =&amp; \hat{\pi}_a \bigg( 1 - \sum\limits_{k = J}^{a - 1} \hat{p}_a \bigg) = \hat{\pi}_a \prod\limits_{k = J}^{a - 1} (1 - \hat{\pi}_k) , \ a &gt; J
+\end{align}\]</span></p>
+<p>This method was not explored in detail due to the sex dimension for sablefish adding a complexity we didn’t have time to get in to. There is R code that applies the CRL model ignoring sex in the data.</p>
 
+</div>
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-berg2012spatial" class="csl-entry">
+Berg, Casper W, and Kasper Kristensen. 2012. <span>“Spatial Age-Length Key Modelling Using Continuation Ratio Logits.”</span> <em>Fisheries Research</em> 129: 119–26.
+</div>
+<div id="ref-correa2020improved" class="csl-entry">
+Correa, Giancarlo M, Lorenzo Ciannelli, Lewis AK Barnett, Stan Kotwicki, and Claudio Fuentes. 2020. <span>“Improved Estimation of Age Composition by Accounting for Spatiotemporal Variability in Somatic Growth.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 77 (11): 1810–21.
+</div>
 <div id="ref-goethel2021assessment" class="csl-entry">
 Goethel, DR, DH Hanselman, CJ Rodgveller, KH Fenski, SK Shotwell, KB Echave, PW Malecha, A Siwicke, and CR Lunsford. 2021. <span>“Assessment of the Sablefish Stock in Alaska.”</span> <em>Stock Assessment and Fishery Evaluation Report for the Groundfish Resources of the Gulf of Alaska and the Bering Sea/Aleutian Islands as Projected for</em>.
 </div>
@@ -552,7 +585,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment/05-ObserverDataAndAnalysis.Rmd",
+"link": "https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment/05-FisheryDependentData.Rmd",
 "text": "Edit"
 },
 "history": {
