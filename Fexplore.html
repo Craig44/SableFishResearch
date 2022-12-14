@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-12-13" />
+<meta name="date" content="2022-12-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -185,11 +185,23 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html"><i class="fa fa-check"></i><b>4</b> Spatial stock assessment model for Alaskan sablefish</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#spatialmodelequations"><i class="fa fa-check"></i><b>4.1</b> Process equations</a>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#process-equations"><i class="fa fa-check"></i>Process equations</a>
 <ul>
-<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#initialisation-gleft.right-1"><i class="fa fa-check"></i>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)</a></li>
-<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#population-dynamics-fleft.right-1"><i class="fa fa-check"></i>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)</a></li>
-<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#decision-analysis-for-determining-the-spatial-resolution-of-the-model"><i class="fa fa-check"></i>Decision analysis for determining the spatial resolution of the model</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#population-dynamics"><i class="fa fa-check"></i>Population dynamics</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#initialisation"><i class="fa fa-check"></i>Initialisation</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#tag-release-events"><i class="fa fa-check"></i>Tag release events</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#observation-equations"><i class="fa fa-check"></i>Observation equations</a>
+<ul>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#catch-at-age-1"><i class="fa fa-check"></i>Catch at age</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#catch-at-length-1"><i class="fa fa-check"></i>Catch at length</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#proportions-at-age"><i class="fa fa-check"></i>Proportions at age</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#relative-abundance-indices-1"><i class="fa fa-check"></i>Relative abundance indices</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#tag-recovery-observations"><i class="fa fa-check"></i>Tag recovery observations</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#likelihoods"><i class="fa fa-check"></i>Likelihoods</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#considerations-for-determining-the-spatial-resolution-of-the-model"><i class="fa fa-check"></i>Considerations for determining the spatial resolution of the model</a>
+<ul>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#appendix"><i class="fa fa-check"></i>Appendix</a></li>
 </ul></li>
 </ul></li>
@@ -224,7 +236,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#things-to-consider-for-tag-release"><i class="fa fa-check"></i>Things to consider for tag release</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tag-recovery-observations"><i class="fa fa-check"></i>Tag recovery observations</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tag-recovery-observations-1"><i class="fa fa-check"></i>Tag recovery observations</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="growth.html"><a href="growth.html"><i class="fa fa-check"></i><b>8</b> Growth</a>
 <ul>
@@ -392,20 +404,20 @@ Figure 11.1: Illustration of how mortality is applied to an age cohort continuou
 <span id="cb23-2"><a href="Fexplore.html#cb23-2" aria-hidden="true" tabindex="-1"></a>hybrid_F_bench <span class="ot">=</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_hybrid_F, <span class="at">n =</span> <span class="dv">1000</span>)</span>
 <span id="cb23-3"><a href="Fexplore.html#cb23-3" aria-hidden="true" tabindex="-1"></a>est_F_bench</span></code></pre></div>
 <pre><code>##                     elapsed
-## template.likelihood   0.793
-## template.gradient     1.565</code></pre>
+## template.likelihood   0.923
+## template.gradient     1.784</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="Fexplore.html#cb25-1" aria-hidden="true" tabindex="-1"></a>hybrid_F_bench</span></code></pre></div>
 <pre><code>##                     elapsed
-## template.likelihood   2.060
-## template.gradient     4.269</code></pre>
+## template.likelihood   2.436
+## template.gradient     5.038</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="Fexplore.html#cb27-1" aria-hidden="true" tabindex="-1"></a>ben_est_F <span class="ot">&lt;-</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_est_F, <span class="at">n=</span><span class="dv">20</span>,<span class="at">expr=</span><span class="fu">expression</span>(<span class="fu">do.call</span>(<span class="st">&quot;optim&quot;</span>,obj)))</span>
 <span id="cb27-2"><a href="Fexplore.html#cb27-2" aria-hidden="true" tabindex="-1"></a>ben_hybrid_F <span class="ot">&lt;-</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_hybrid_F, <span class="at">n=</span><span class="dv">20</span>,<span class="at">expr=</span><span class="fu">expression</span>(<span class="fu">do.call</span>(<span class="st">&quot;optim&quot;</span>,obj)))</span>
 <span id="cb27-3"><a href="Fexplore.html#cb27-3" aria-hidden="true" tabindex="-1"></a>ben_est_F</span></code></pre></div>
 <pre><code>##                       elapsed
-## do.call(&quot;optim&quot;, obj)  14.044</code></pre>
+## do.call(&quot;optim&quot;, obj)  16.097</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="Fexplore.html#cb29-1" aria-hidden="true" tabindex="-1"></a>ben_hybrid_F</span></code></pre></div>
 <pre><code>##                       elapsed
-## do.call(&quot;optim&quot;, obj)  11.731</code></pre>
+## do.call(&quot;optim&quot;, obj)  13.886</code></pre>
 <p>These results have highlighted the following</p>
 <ul>
 <li>Both the Free <span class="math inline">\(F\)</span> and hybrid estimate very similar model quantities i.e., SSB’s and F’s</li>
