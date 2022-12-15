@@ -4,6 +4,7 @@ eq:catchatage
 eq:surveyage
 eq:relativeindex
 eq:agelengthtransition
+fig:TagRecoveriesOutsideRegion
 fig:spatialstatArea
 fig:spatialmanagementArea
 fig:LLRegions
@@ -59,9 +60,6 @@ eq:survival
 overview
 objectives
 modeldescription
-modelequations
-observationsection
-symbols
 spatialmodeldescription
 surveydata
 observerdata
