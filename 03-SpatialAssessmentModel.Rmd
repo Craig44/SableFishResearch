@@ -38,6 +38,22 @@ N_{a, r} = N_{a, r} e^{\epsilon_a} \ \ \forall \ a \ r \ .
 \]
 To help with estimation there is a penalty on \(epsilon_a\) that assumes they are centered on zero with an estimable variance parameters. In general these parameters can be highly uncertain. The variance on these deviation parameters is often fixed at a low value which implies unless there is strong signal in the data the initial age-structure should be at an equilibrium.
 
+
+### Growth {-}
+
+Empirical length at age matrices were supplied for all years where sufficient age-length data was available and growth was assumed the same for all regions. Mean weight at age was calculated using an allometric length weight relationship with time and space invariant parameters \(\alpha\) and \(\beta\)
+
+\[
+\bar{w}_{a,y} = \alpha \bar{l}_{a,y}^{\beta} 
+\]
+
+**TODO** add the adjustment for lognormal distribution as in Casal2.
+
+### Recruitment {-}
+How to spatially apportion recruits in a way that is consistent with the data and isn't confounded with movement of young fish. There are two considerations, firstly looking at the AF and LFs there are regions that seem to have more young fish than others (link to figure and describe). However, there is very little information on spawning grounds and behavior. This coupled with a complex early life history make it difficult to a priori set regional apportionment of recruits, which would be ideal, an alternative is to estimate these as free parameters. This may introduce confounding when we start estimating movement which is believed to be ontogenetic.
+
+
+
 ### Tag release events {-}
 
 Tags release events denoted by the index \(k\) have an implied region \(r\) and year \(y\) dimension. Each tag release is done by assuming a known age frequency of release. This is derived using the age-length key from the survey. They are denoted in the partition as \(N^k_{a,r,y,s}\), and are tracked for nine years before migrating into a pooled tag group. At present, they are assumed to take on the exact same population processes as the untagged elements of the partition.
@@ -45,11 +61,13 @@ Tags release events denoted by the index \(k\) have an implied region \(r\) and 
 
 ## Observation equations {-}
 
-As in the current stock assessment, there are three observational types in the current Sablefish stock assessment
+As in the current stock assessment, there are the three conventional observational types in the spatial model
+
 - Relative indices of abundance
 - Age composition disaggregated by sex for the fixed gear fishery and longline survey
 - Length composition disaggregated by sex for the trawl fishery 
 
+The additional observational type relates to tag recoveries. 
 
 ### Catch at age {-}
 Fishery dependent catch at age observations are available for the fixed gear fishery, but are also needed to calculate catch at length observations for the trawl fishery. Catch at age for fishery \(g\) is denoted by \({C}^g_{a,r,y,s}\) and model fitted values are calculated following
@@ -57,6 +75,18 @@ Fishery dependent catch at age observations are available for the fixed gear fis
 \begin{equation} 
   \widehat{C}^g_{a,r,y,s} = \frac{F^g_{a,r,y,s}}{Z_{a,r,y,s}}   N_{a,r,y,s} \left(1 - S_{a,r,y,s} \right)
 \end{equation} 
+
+Observed values were proportions with respect to age and sex, final model fitted proportions were
+\[
+\widehat{P}^g_{a,r,y,s} = \frac{\widehat{C}^g_{a,r,y,s}}{\sum_a \sum_s \widehat{C}^g_{a,r,y,s}},
+\]
+and initially the multinomial likelihood was assumed
+
+\[
+\boldsymbol{P}^g_{r,y} \sim \text{Multinomial}\left(\boldsymbol{\widehat{P}}^g_{r,y}, N^{eff}_{r,y}\right)
+\]
+where, \(N^{eff}_{r,y}\) is the effective sample size and \(\boldsymbol{P}^g_{r,y} = (P^g_{1,r,y,1}, \dots, P^g_{a_+,r,y,1}, P^g_{1,r,y,2}, \dots, P^g_{a_+,r,y,2})\) is the vector of observed proportions across all ages and sexs in year \(y\) and region \(r\), and \(\boldsymbol{\widehat{P}}^g_{r,y}\) has the same dimension (\(\sum_a \sum_s \widehat{P}^g_{a,r,y,s} = 1\)).
+
 
 ### Catch at length {-}
 Catch at length observations are available for the trawl fishery. Model fitted values are derived by multiplying the catch at age (see above) by an age-length transition matrix denoted by \(\boldsymbol{A}^l_{y,s}\) (dimensions of \(\boldsymbol{A}^l_{y,s}\) are \(n_a \ \times \ n_l\) and its rows must sum to 1),
@@ -89,11 +119,7 @@ When tagged fish are released, the observed length frequency is converted to an 
 Release condition vs recapture condition
 
 
-## Likelihoods {-}
-
-All compositional observations were treated as proportions across age or length and sex.
-
-
+Can we assign tag-recoveries off Canada to EGOA? (sensitivity) i.e., Figure \@ref(fig:TagRecoveriesOutsideRegion)
 
 
 ## Considerations for determining the spatial resolution of the model {-}
@@ -103,7 +129,12 @@ This section will describe the decision making process we took in configuring a 
 A recent genetic study by @jasonowicz2017love, found no significant difference between samples off the west coast of US, GOA and bering sea (there were no samples off the west coast of Canada in this study), providing evidence for a single panmictic population. A recent morphometric study [@kapur2020oceanographic], found significant differences in fish traits such as length at age between samples from the west coast of US and GOA. These results were consitent with the findings from @tripp2012population. Tagging is another important information source with extensive tagging along the entire North pacific. Tag recovery data provide evidence for a two stock hypothesis [@kimura1998tagged]. With a stock north of Vancouver Island and a stock to the south. 
 
 
-For the purposes of this research, we will assume GOA and BS, hereinafter refered to as the GOABS complex, is isolated (i.e., no movement in or out of this region) from Canada and the west coast of the US. Although there is evidence to include part of Canada. Due to practical considerations regarding data sharing and the time-frame of this research Canada was excluded. The focus of this research is to build and explore a spatially explicit model for the GOABS complex.
+For the purposes of this research, we will assume GOA and BS, hereinafter refered to as the GOABS complex, is isolated (i.e., no movement in or out of this region) from Canada and the west coast of the US. Although there is evidence to include part of Canada (Figure \@ref(fig:TagRecoveriesOutsideRegion)). Due to practical considerations regarding data sharing and the time-frame of this research Canada was excluded. The focus of this research is to build and explore a spatially explicit model for the GOABS complex.
+
+```{r TagRecoveriesOutsideRegion, out.width = '100%', fig.height= 6, fig.cap="Tag recoveries outside of stock boundaries, with release locations (bottom panel).", echo = F, eval = T}
+include_graphics(file.path("Figures", "out_of_region_recoveries.png"))
+```
+
 
 
 The general approach taken, was to build an initial spatial model that had the finest spatial resolution possible and aggregate regions as due to data limitations, model convergence issues etc. This finest model spatial resolution was based on the input data with the coarsest reported spatial resolution. Data sets have been reported at different spatial resolutions over time. In general, data are reproted at three levels of spatial resolution: latitude and longitude (high spatial resolution), statistical area (Figure \@ref(fig:spatialstatArea)) and larger fishery management boundaries (Figure \@ref(fig:spatialmanagementArea)). Input data sets and the spatial resolution available are described in the following table.

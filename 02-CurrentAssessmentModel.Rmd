@@ -11,7 +11,7 @@ disaggregated integrated age-structured model. Let \(\boldsymbol{N_{y,s}}\) deno
   \end{cases}
   (\#eq:processmodel)
 \end{equation} 
-where, \(g(.)\) is the function describing initial conditions for the partition and \(f(.)\) is the function that applies populations dyanmics each year i.e., birth, death, growth and migration. See Section \@ref(symbols) \& \@ref(modelequations) for a detailed description of \(g(.)\) and \(f(.)\) and \(\boldsymbol{\theta}\) is the set of estimable (not all are estimated) parameters.
+where, \(g(.)\) is the function describing initial conditions for the partition and \(f(.)\) is the function that applies populations dyanmics each year i.e., birth, death, growth and migration. See later sections for a detailed description of \(g(.)\) and \(f(.)\) and \(\boldsymbol{\theta}\) is the set of estimable (not all are estimated) parameters.
 
 
 Maximum Likelihood Estimates (MLE) for estimated parameters \(\widehat{\boldsymbol{\theta}}_{MLE}\) are evaluated,
@@ -19,10 +19,10 @@ Maximum Likelihood Estimates (MLE) for estimated parameters \(\widehat{\boldsymb
 	\widehat{\boldsymbol{\theta}}_{MLE} = \underset{\boldsymbol{\theta}}{\arg\max} \left( L\left(\boldsymbol{\theta} | \boldsymbol{y^{obs}}\right) \right)
 	  (\#eq:observationmodel)
 \end{equation}
-where, \(\boldsymbol{y^{obs}}\) is a set of observations and \(L\left( . \right)\) is an objective function that is made up of priors/penalties and log-likelihood. See Section \@ref(observationsection)
+where, \(\boldsymbol{y^{obs}}\) is a set of observations and \(L\left( . \right)\) is an objective function that is made up of priors/penalties and log-likelihood. See observation section.
 
 
-## Process equations {#modelequations}
+## Process equations {-}
 
 ### Initialisation \left(\(g\left(.\right)\)\right) {-}
 \begin{align*}
@@ -59,7 +59,7 @@ R_y = \exp\{\mu_r + \tau_y + 0.5\sigma_R^2\}
 
 
 
-## Observation equations {#observationsection}
+## Observation equations {-}
 Three are three observational types in the current Sablefish stock assessment
 - Relative abundance indices
 - Age composition (aggregated over sex)
@@ -198,7 +198,7 @@ where, \(\boldsymbol{C_{y,s}}\) is a column vector of numbers at age (dimension 
 <!-- | `sc_srv7`                  | NMFS bottom trawl survey LF (sex disaggregrated) -->
 <!-- +----------------------------+-----------------------------------------------------------------------------+ -->
 
-## Symbol Notation {#symbols}
+## Symbol Notation {-}
 +----------------------------+-----------------------------------------------------------------------------+
 | Symbol                     | Description                            
 +============================+=============================================================================+

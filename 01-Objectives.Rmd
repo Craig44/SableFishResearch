@@ -2,9 +2,10 @@
 
 
 - [x]  Translate current stock assessment (Chapter \@ref(modeldescription)) from ADMB to TMB. Planned date of completion is December 1 2022
-- [ ]  ~~Conduct self test using TMB stock assessment model. Planned date of completion is December 1 2022~~ I decided not to do this because the assessment had too many bespoke likelihoods
+- [x]  ~~Conduct self test using TMB stock assessment model. Planned date of completion is December 1 2022~~ I decided not to do this because the assessment had too many bespoke likelihoods
 - [x]  Consider improvements i.e., sex disaggregated composition data or sex ratio observations (look at the rock lobster assessment) including age-length observations or tag-increment observations to estimate growth internally. (Chapter \@ref(sexratios))
-- [ ]  Characterize both fishery and survey data to get an idea of data limitations when considering spatially explicit stock assessment model.
-- [ ]  Develop a spatially explicit estimation model in TMB that generalizes the current assessment model. This requires a lot of thought, especially how we want to integrate the tagging data (Chapter \@ref(tagdata))
-
+- [x]  Characterize both fishery and survey data to get an idea of data limitations when considering spatially explicit stock assessment model.
+- [x]  Develop a spatially explicit estimation model in TMB that generalizes the current assessment model. This requires a lot of thought, especially how we want to integrate the tagging data (Chapter \@ref(tagdata)). Self test has been complete without tagging data.
+- [ ]  Generate observation error values for composition data. either boostrap or use SE methods
+- [ ]  Calculate mean length at age for each year - perhaps use the growth model, but this may be double using some of the datasets? This is an interesting idea cause if we take the tag data for example it would be used to estimate mean length at age just using increment and length at release, where as when it is internally used in the model it would be using age-frequency to estimate ontogenetic movement.
 
