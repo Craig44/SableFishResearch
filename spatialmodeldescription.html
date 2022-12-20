@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-12-15" />
+<meta name="date" content="2022-12-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -191,6 +191,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#initialisation"><i class="fa fa-check"></i>Initialisation</a></li>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#growth"><i class="fa fa-check"></i>Growth</a></li>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#recruitment"><i class="fa fa-check"></i>Recruitment</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#fishing-mortality"><i class="fa fa-check"></i>Fishing mortality</a></li>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#tag-release-events"><i class="fa fa-check"></i>Tag release events</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#observation-equations-1"><i class="fa fa-check"></i>Observation equations</a>
@@ -333,9 +334,16 @@ To help with estimation there is a penalty on <span class="math inline">\(epsilo
 <h3>Recruitment<a href="spatialmodeldescription.html#recruitment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>How to spatially apportion recruits in a way that is consistent with the data and isn’t confounded with movement of young fish. There are two considerations, firstly looking at the AF and LFs there are regions that seem to have more young fish than others (link to figure and describe). However, there is very little information on spawning grounds and behavior. This coupled with a complex early life history make it difficult to a priori set regional apportionment of recruits, which would be ideal, an alternative is to estimate these as free parameters. This may introduce confounding when we start estimating movement which is believed to be ontogenetic.</p>
 </div>
+<div id="fishing-mortality" class="section level3 unnumbered hasAnchor">
+<h3>Fishing mortality<a href="spatialmodeldescription.html#fishing-mortality" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When the hybrid F method was employed by the model, tagged fish were not included when internally solving the fishing mortality nuisance parameters. The ratio of tagged to untagged numbers of fish in the partition at any point was thought to be small enough not to effect F estimates. We wanted to reduce the computational overhead this would require.</p>
+</div>
 <div id="tag-release-events" class="section level3 unnumbered hasAnchor">
 <h3>Tag release events<a href="spatialmodeldescription.html#tag-release-events" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Tags release events denoted by the index <span class="math inline">\(k\)</span> have an implied region <span class="math inline">\(r\)</span> and year <span class="math inline">\(y\)</span> dimension. Each tag release is done by assuming a known age frequency of release. This is derived using the age-length key from the survey. They are denoted in the partition as <span class="math inline">\(N^k_{a,r,y,s}\)</span>, and are tracked for nine years before migrating into a pooled tag group. At present, they are assumed to take on the exact same population processes as the untagged elements of the partition.</p>
+<p>Most of the tag releases have unknown sex. Sex disaggregated age-frequencies were derived using an ALK that was disaggregrated by sex in the age dimension but sex aggregated in the length dimension. This meant when we multiplied an unsexed length frequency through this ALK we get sex disaggregated age frequency.</p>
+<p>Age length keys were not available in all years when tagged fish were released, particularly in the early period. Tag release age frequencies before 1981 were based on age-length keys from 1981, 1985 and 1987. After that period if an age-length key was not available we used the age length key from the closest year with an age-length key.</p>
+<p>Do we want to include the inshore (Chatham Strait and Clarence Strait) tag-releases? there are alot of fish tagged in these regions.</p>
 </div>
 </div>
 <div id="observation-equations-1" class="section level2 unnumbered hasAnchor">
@@ -389,7 +397,13 @@ where, <span class="math inline">\(\bar{w}_{a,y,s}\)</span> is mean weight at ag
 <div id="tag-recovery-observations" class="section level3 unnumbered hasAnchor">
 <h3>Tag recovery observations<a href="spatialmodeldescription.html#tag-recovery-observations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>When tagged fish are released, the observed length frequency is converted to an age frequency at release using the age-length key from the survey. Each recovery period for the tag release event <span class="math inline">\(k\)</span> has the length frequency of recoveries, because we can link the release length to each recovery length we can calculate the age that each fish was at release by multiplying the length at release for fish recovered during the period by the age-length key at release and incrementing the age by the time-at liberty to derive age frequencies over a recovery period for a tag release group. This means the age-length conversion between releases and recoveries is consistent, but has the down side of smearing an a single length at release and recovery across multiple age bins. However, it does mitigate the problem highlighted in chapter <a href="tagdata.html#tagdata">7</a> (tag release section) of going backwards and forwards through the age-length transition matrix, which appears to be more problematic.</p>
-<p>Release condition vs recapture condition</p>
+<p>All tag recoveries are from the fixed gear fishery, due to the recent trend in recoveries by gear method (Figure <a href="tagdata.html#fig:recoveriebygear">7.2</a>), we only considered tags recovered before 2018. With the decline in the longline catch, recoveries have declined substantially. The switch to pot gear has not seen a recovery rate that is close to the longline method. To avoid this complication we will only recoveries from a period when the longline method was the predominant method of fixed gear methods.</p>
+<p>Model fitted values for tags recovered in region <span class="math inline">\(r\)</span> and year <span class="math inline">\(y\)</span> that were released by tag-release event <span class="math inline">\(k\)</span> denoted as <span class="math inline">\(\widehat{N}^k_{a,r,y,s}\)</span> are derived as</p>
+<p><span class="math display">\[
+\widehat{N}^k_{a,r,y,s} =  N^k_{a,r,y,s} 1 - e^{-F^g_{a,r,y,s} + 0.5M_{y}} \delta_y
+\]</span>
+where, <span class="math inline">\(N^k_{a,r,y,s}\)</span> are the number of tagged fish from tag-release event <span class="math inline">\(k\)</span>, and <span class="math inline">\(\delta_y\)</span> is the reporting rate in year <span class="math inline">\(y\)</span>.</p>
+<p>Release condition vs recapture condition?</p>
 <p>Can we assign tag-recoveries off Canada to EGOA? (sensitivity) i.e., Figure <a href="spatialmodeldescription.html#fig:TagRecoveriesOutsideRegion">4.1</a></p>
 </div>
 </div>
