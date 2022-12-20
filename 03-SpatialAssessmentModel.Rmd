@@ -52,12 +52,21 @@ Empirical length at age matrices were supplied for all years where sufficient ag
 ### Recruitment {-}
 How to spatially apportion recruits in a way that is consistent with the data and isn't confounded with movement of young fish. There are two considerations, firstly looking at the AF and LFs there are regions that seem to have more young fish than others (link to figure and describe). However, there is very little information on spawning grounds and behavior. This coupled with a complex early life history make it difficult to a priori set regional apportionment of recruits, which would be ideal, an alternative is to estimate these as free parameters. This may introduce confounding when we start estimating movement which is believed to be ontogenetic.
 
+### Fishing mortality {-}
+When the hybrid F method was employed by the model, tagged fish were not included when internally solving the fishing mortality nuisance parameters. The ratio of tagged to untagged numbers of fish in the partition at any point was thought to be small enough not to effect F estimates. We wanted to reduce the computational overhead this would require.
 
 
 ### Tag release events {-}
 
 Tags release events denoted by the index \(k\) have an implied region \(r\) and year \(y\) dimension. Each tag release is done by assuming a known age frequency of release. This is derived using the age-length key from the survey. They are denoted in the partition as \(N^k_{a,r,y,s}\), and are tracked for nine years before migrating into a pooled tag group. At present, they are assumed to take on the exact same population processes as the untagged elements of the partition.
 
+
+Most of the tag releases have unknown sex. Sex disaggregated age-frequencies were derived using an ALK that was disaggregrated by sex in the age dimension but sex aggregated in the length dimension. This meant when we multiplied an unsexed length frequency through this ALK we get sex disaggregated age frequency. 
+
+Age length keys were not available in all years when tagged fish were released, particularly in the early period. Tag release age frequencies before 1981 were based on age-length keys from 1981, 1985 and 1987. After that period if an age-length key was not available we used the age length key from the closest year with an age-length key.
+
+
+Do we want to include the inshore (Chatham Strait and Clarence Strait) tag-releases? there are alot of fish tagged in these regions.
 
 ## Observation equations {-}
 
@@ -116,7 +125,18 @@ where, \(\bar{w}_{a,y,s}\) is mean weight at age, this can be omitted if the obs
 
 When tagged fish are released, the observed length frequency is converted to an age frequency at release using the age-length key from the survey. Each recovery period for the tag release event \(k\) has the length frequency of recoveries, because we can link the release length to each recovery length we can calculate the age that each fish was at release by multiplying the length at release for fish recovered during the period by the age-length key at release and incrementing the age by the time-at liberty to derive age frequencies over a recovery period for a tag release group. This means the age-length conversion between releases and recoveries is consistent, but has the down side of smearing an a single length at release and recovery across multiple age bins. However, it does mitigate the problem highlighted in chapter \@ref(tagdata) (tag release section) of going backwards and forwards through the age-length transition matrix, which appears to be more problematic.
 
-Release condition vs recapture condition
+All tag recoveries are from the fixed gear fishery, due to the recent trend in recoveries by gear method (Figure \@ref(fig:recoveriebygear)), we only considered tags recovered before 2018. With the decline in the longline catch, recoveries have declined substantially. The switch to pot gear has not seen a recovery rate that is close to the longline method. To avoid this complication we will only recoveries from a period when the longline method was the predominant method of fixed gear methods. 
+
+Model fitted values for tags recovered in region \(r\) and year \(y\) that were released by tag-release event \(k\) denoted as \(\widehat{N}^k_{a,r,y,s}\) are derived as
+
+
+\[
+\widehat{N}^k_{a,r,y,s} =  N^k_{a,r,y,s} 1 - e^{-F^g_{a,r,y,s} + 0.5M_{y}} \delta_y
+\]
+where, \(N^k_{a,r,y,s}\) are the number of tagged fish from tag-release event \(k\), and \(\delta_y\) is the reporting rate in year \(y\).
+
+
+Release condition vs recapture condition?
 
 
 Can we assign tag-recoveries off Canada to EGOA? (sensitivity) i.e., Figure \@ref(fig:TagRecoveriesOutsideRegion)
