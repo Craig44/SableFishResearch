@@ -17,21 +17,21 @@ link-citations: yes
 
 # Overview
 
-This Gitbook documents my/our research for the Alaska sablefish (*Anoplopoma fimbria*). The objective is to develop and explore a spatially explicit stock assessment for Alaskan sablefish. However, there will be many topics that I will likely only scratch the surface on. The following section outlines chapters in this document.
+This Gitbook documents my/our research on Alaskan sablefish (*Anoplopoma fimbria*). The objective is to develop and explore a spatially explicit stock assessment model for the Alaskan sablefish stock. However, there will be many topics that I will touch on. This book outlines my research and thinking along with some rabbit holes I entered (and hopefully returned) during my post-doctoral research. The following section outlines chapters contained in this document.
 
 
 ## Gitbook outline  {-}
 - Chapter \@ref(objectives) outlines a list of objectives that we have set or accomplished during this research project. Some of our research cannot be presented in this document due to the confidentiality reasons. However, this checklist should include all tasks during the project
 
-- Chapter \@ref(modeldescription) documents the current stock assessment model and assumptions (work in progress). This is the first step of the project, with the purpose of helping me understand the assessment, data and important dynamics.
+- Chapter \@ref(modeldescription) documents the current stock assessment model and assumptions (work in progress). This is the first step of the project, with the purpose of helping me understand the data and important process dynamics assumed in the current assessment. Most models used in this research is written in TMB [@kristensen2015tmb], many of these are available in the R package [found here](https://github.com/Craig44/SpatialSablefishAssessment).
 
-- Chapter \@ref(spatialmodeldescription) documents a generalised spatial stock assessment model used as both an OM and EM during simulations.
-
-
-- Chapter \@ref(surveydata) describes, characterises and explores the survey longline data.
+- Chapter \@ref(spatialmodeldescription) documents a generalized spatial assessment model used as both an OM and EM during simulations.
 
 
-- Chapter \@ref(observerdata) describes, characterises and explores fishery dependent data, which includes reported catch and observer records.
+- Chapter \@ref(surveydata) describes, characterizes and explores the survey longline data available for the the assessment.
+
+
+- Chapter \@ref(observerdata) describes, characterizes and explores fishery dependent data, which includes reported catch (log-book data) and observer records.
 
 
 - Chapter \@ref(tagdata) describes the tagging data and how it can be used within a spatial stock assessment model but also used in a panmictic model for informing population dynamics such as growth.
@@ -40,7 +40,7 @@ This Gitbook documents my/our research for the Alaska sablefish (*Anoplopoma fim
 - Chapter \@ref(sexratios) explores how to include sex disaggregated composition observations that can include sex ratio information. It conducts a simple simulation to investigate two different approaches.
 
 
-- Chapter \@ref(Fexplore) explores how to parameterise fishing mortality. The current approach is to estimate an annual fishing mortality parameter for each gear as a free parameter. I feel slightly uncomfortable about this approach moving towards a spatial model as the number of estimated parameters will explode with spatial areas. This chapter looks at two alternative approaches that either derive fishing mortality estimates using a Newton Raphson solver which is heavily borrowed from the Stock Synthesis "hybrid" approach [@methot2013stock] and Pope's discrete approach [@pope1972investigation] which uses exploitation rates. Both these methods have been applied in the literature for decades. The aim of this chapter is to do a simulation and make sure the considered approaches are efficient and numerically stability for the purposes of our study.
+- Chapter \@ref(Fexplore) explores how to parameterise fishing mortality. The current approach is to estimate an annual fishing mortality parameter for each gear as a free parameter. I feel slightly uncomfortable about this approach moving towards a spatial model as the number of estimated parameters will explode when a spatial dimension is explored. This chapter looks at two alternative approaches that either derive fishing mortality estimates using a Newton Raphson solver which is heavily borrowed from the Stock Synthesis "hybrid" approach [@methot2013stock] and Pope's discrete approach [@pope1972investigation] which uses exploitation rates. Both these methods have been applied in the literature for decades. The aim of this chapter is to do a simulation and make sure the considered approaches are efficient and numerically stability for the purposes of our research.
 
 
 - Chapter \@ref(spatialInit) explores how to calculate the plus group in spatially explicit age-structured models that assume markovian movement during initialization.
@@ -53,8 +53,8 @@ This Gitbook documents my/our research for the Alaska sablefish (*Anoplopoma fim
 
 ## Future things to consider {-}
  
-- How to reduce partition dimension when adding tag-release events
-- When is the latest you can start the model? Currently the assessment model starts in 1960 because there is early survey and catch info along with some of the largest catches observed over the fishery. I want to explore starting the model at later period i.e., the 1980's when there is consistent surveys and age data. This is thought to reduce the number of estimable parameters that have low information (early recruitment). However, the downfall is we may loose information on stock productivity because the 60's and 70's have some of the largest recorded catches.
+
+- When is the latest year that we can start the model at? Currently the assessment model starts in 1960 because there is early survey and catch info along with some of the largest catches recorded. I want to explore starting the model at a later period i.e., the 1980's when there is consistent surveys and age data. This is thought to reduce the number of estimable parameters that have low information (early recruitment deviations). However, the downfall is we may loose information on stock production because the 60's and 70's have some of the largest recorded catches.
 
 
 
