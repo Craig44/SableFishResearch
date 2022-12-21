@@ -392,7 +392,7 @@ Figure 11.1: Illustration of how mortality is applied to an age cohort continuou
 <span id="cb18-16"><a href="Fexplore.html#cb18-16" aria-hidden="true" tabindex="-1"></a>opt_model_hybrid_F<span class="sc">$</span>iterations</span></code></pre></div>
 <pre><code>## [1] 187</code></pre>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="Fexplore.html#cb20-1" aria-hidden="true" tabindex="-1"></a>opt_model_est_F<span class="sc">$</span>iterations</span></code></pre></div>
-<pre><code>## [1] 673</code></pre>
+<pre><code>## [1] 697</code></pre>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="Fexplore.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="do">## get reports = </span></span>
 <span id="cb22-2"><a href="Fexplore.html#cb22-2" aria-hidden="true" tabindex="-1"></a>rep_est_hybrid <span class="ot">=</span> est_model_hybrid_F<span class="sc">$</span><span class="fu">report</span>(est_model_hybrid_F<span class="sc">$</span>env<span class="sc">$</span>last.par.best)</span>
 <span id="cb22-3"><a href="Fexplore.html#cb22-3" aria-hidden="true" tabindex="-1"></a>rep_est_F <span class="ot">=</span> est_model_est_F<span class="sc">$</span><span class="fu">report</span>(est_model_est_F<span class="sc">$</span>env<span class="sc">$</span>last.par.best)</span>
@@ -406,20 +406,20 @@ Figure 11.1: Illustration of how mortality is applied to an age cohort continuou
 <span id="cb23-2"><a href="Fexplore.html#cb23-2" aria-hidden="true" tabindex="-1"></a>hybrid_F_bench <span class="ot">=</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_hybrid_F, <span class="at">n =</span> <span class="dv">1000</span>)</span>
 <span id="cb23-3"><a href="Fexplore.html#cb23-3" aria-hidden="true" tabindex="-1"></a>est_F_bench</span></code></pre></div>
 <pre><code>##                     elapsed
-## template.likelihood   0.926
-## template.gradient     1.774</code></pre>
+## template.likelihood   0.794
+## template.gradient     1.549</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="Fexplore.html#cb25-1" aria-hidden="true" tabindex="-1"></a>hybrid_F_bench</span></code></pre></div>
 <pre><code>##                     elapsed
-## template.likelihood   2.429
-## template.gradient     5.047</code></pre>
+## template.likelihood   2.058
+## template.gradient     4.249</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="Fexplore.html#cb27-1" aria-hidden="true" tabindex="-1"></a>ben_est_F <span class="ot">&lt;-</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_est_F, <span class="at">n=</span><span class="dv">20</span>,<span class="at">expr=</span><span class="fu">expression</span>(<span class="fu">do.call</span>(<span class="st">&quot;optim&quot;</span>,obj)))</span>
 <span id="cb27-2"><a href="Fexplore.html#cb27-2" aria-hidden="true" tabindex="-1"></a>ben_hybrid_F <span class="ot">&lt;-</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_hybrid_F, <span class="at">n=</span><span class="dv">20</span>,<span class="at">expr=</span><span class="fu">expression</span>(<span class="fu">do.call</span>(<span class="st">&quot;optim&quot;</span>,obj)))</span>
 <span id="cb27-3"><a href="Fexplore.html#cb27-3" aria-hidden="true" tabindex="-1"></a>ben_est_F</span></code></pre></div>
 <pre><code>##                       elapsed
-## do.call(&quot;optim&quot;, obj)  16.543</code></pre>
+## do.call(&quot;optim&quot;, obj)  14.024</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="Fexplore.html#cb29-1" aria-hidden="true" tabindex="-1"></a>ben_hybrid_F</span></code></pre></div>
 <pre><code>##                       elapsed
-## do.call(&quot;optim&quot;, obj)  13.307</code></pre>
+## do.call(&quot;optim&quot;, obj)  11.648</code></pre>
 <p>These results have highlighted the following</p>
 <ul>
 <li>Both the Free <span class="math inline">\(F\)</span> and hybrid estimate very similar model quantities i.e., SSB’s and F’s</li>

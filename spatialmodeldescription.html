@@ -290,12 +290,19 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="spatialmodeldescription" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Spatial stock assessment model for Alaskan sablefish<a href="spatialmodeldescription.html#spatialmodeldescription" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>The latest published stock assessment <span class="citation">(<a href="#ref-goethel2021assessment" role="doc-biblioref">Goethel et al. 2021</a>)</span> is a sexually disaggregated integrated age-structured model. Let <span class="math inline">\(\boldsymbol{N_{r,y,s}}\)</span> denote a vector of ages in year <span class="math inline">\(y\)</span> sex <span class="math inline">\(s\)</span> in region <span class="math inline">\(r\)</span> (the partition) i.e., <span class="math inline">\(\boldsymbol{N_{r,y,s}} = (N_{1,r,y,s}, N_{2,r,y,s}, \dots, N_{a_+,r,y,s})^T\)</span>.</p>
+<p>The latest published stock assessment <span class="citation">(<a href="#ref-goethel2021assessment" role="doc-biblioref">Goethel et al. 2021</a>)</span> assumes a panmictic stock. However, there are many studies highlighting spatial heterogeneity in sablefish in the Alaskan region <span class="citation">(<a href="#ref-heifetz1991movement" role="doc-biblioref">Heifetz and Fujioka 1991</a>; <a href="#ref-hanselman2015move" role="doc-biblioref">Hanselman et al. 2015</a>)</span>. This chapter descripes an extension of the current assessment model by including a spatial dimension and tagged fish in the partition. Let <span class="math inline">\(\boldsymbol{N_{r,y,s}}\)</span> denote a vector of ages in year <span class="math inline">\(y\)</span> sex <span class="math inline">\(s\)</span> in region <span class="math inline">\(r\)</span> (the partition) i.e., <span class="math inline">\(\boldsymbol{N_{r,y,s}} = (N_{1,r,y,s}, N_{2,r,y,s}, \dots, N_{a_+,r,y,s})^T\)</span>.</p>
 <div id="process-equations-1" class="section level2 unnumbered hasAnchor">
 <h2>Process equations<a href="spatialmodeldescription.html#process-equations-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="population-dynamics" class="section level3 unnumbered hasAnchor">
 <h3>Population dynamics<a href="spatialmodeldescription.html#population-dynamics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The order of processes in the annual cycle are recruitment, total mortality, ageing then markovian movement. Before movement, the partition is updated as
+<p>The order of processes in an annual cycle follow</p>
+<ol style="list-style-type: decimal">
+<li>recruitment and release of tagged fish (we apply initial tag induced mortality here),</li>
+<li>total mortality and ageing,</li>
+<li>markovian movement</li>
+<li>annual tag shedding (applied as a mortality process),</li>
+</ol>
+<p>Before movement, the partition is updated following
 <span class="math display">\[\begin{align*}
 N_{a,r,y,s} =
 \begin{cases}
@@ -312,7 +319,7 @@ N_{a - 1,r,y - 1,s} \exp\bigg( -Z_{a - 1,r, y - 1,s} \bigg) + N_{a,r,y - 1,s} \e
 </div>
 <div id="initialisation" class="section level3 unnumbered hasAnchor">
 <h3>Initialisation<a href="spatialmodeldescription.html#initialisation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>An equilibrium age structure is derived following the method described in Chapter <a href="spatialInit.html#spatialInit">12</a>, but for completeness we will briefly describe it here. The annual cycle is run <span class="math inline">\(a_+ - a_1\)</span> times (i.e., to populate all age cohorts prior to the plus group). Then, iterate the annual cycle one more time and calculate the number of individuals that moved into each regions plus age cohort, denoted by <span class="math inline">\(c^r_{a+}\)</span>. This will be the result of ageing, mortality and movement. The equilibrium plus group for region <span class="math inline">\(r\)</span> is then calculated as</p>
+<p>An equilibrium age structure is derived following the method described in Chapter <a href="spatialInit.html#spatialInit">12</a>, but for completeness we will briefly describe it here. The annual cycle is run <span class="math inline">\(n_a - 1\)</span> times (i.e., to populate all age cohorts prior to the plus group). Then, iterate the annual cycle one more time and calculate the number of individuals that moved into each regions plus age cohort, denoted by <span class="math inline">\(c^r_{a+}\)</span>. This will be the result of ageing, mortality and movement. The equilibrium plus group for region <span class="math inline">\(r\)</span> is then calculated as</p>
 <p><span class="math display">\[
 N_{a+, r} = N_{a+ - 1, r} \frac{1}{1 - c^r_{a+}}  \  .
 \]</span></p>
@@ -320,11 +327,15 @@ N_{a+, r} = N_{a+ - 1, r} \frac{1}{1 - c^r_{a+}}  \  .
 <p><span class="math display">\[
 N_{a, r} = N_{a, r} e^{\epsilon_a} \ \ \forall \ a \ r \ .
 \]</span>
-To help with estimation there is a penalty on <span class="math inline">\(epsilon_a\)</span> that assumes they are centered on zero with an estimable variance parameters. In general these parameters can be highly uncertain. The variance on these deviation parameters is often fixed at a low value which implies unless there is strong signal in the data the initial age-structure should be at an equilibrium.</p>
+To help with estimation there is a penalty on <span class="math inline">\(\epsilon_a\)</span> that assumes a central tendancy of zero with an estimable variance parameter (<span class="math inline">\(\sigma_{\epsilon}^2\)</span>).
+<span class="math display">\[
+\epsilon_a \sim \mathcal{N}(0, \sigma_{\epsilon})
+\]</span></p>
+<p>In general these parameters can be highly uncertain. The variance on these deviation parameters is often fixed at a low value which requires a strong signal in the data to deviate away from the initial equilibrium age-structure.</p>
 </div>
 <div id="growth" class="section level3 unnumbered hasAnchor">
 <h3>Growth<a href="spatialmodeldescription.html#growth" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Empirical length at age matrices were supplied for all years where sufficient age-length data was available and growth was assumed the same for all regions. Mean weight at age was calculated using an allometric length weight relationship with time and space invariant parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span></p>
+<p>Empirical length at age matrices are supplied for all years where sufficient age-length data was available and growth was assumed the same across all regions. Mean weight at age was calculated using an allometric length weight relationship with time and space invariant parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span></p>
 <p><span class="math display">\[
 \bar{w}_{a,y} = \alpha \bar{l}_{a,y}^{\beta}
 \]</span></p>
@@ -332,44 +343,44 @@ To help with estimation there is a penalty on <span class="math inline">\(epsilo
 </div>
 <div id="recruitment" class="section level3 unnumbered hasAnchor">
 <h3>Recruitment<a href="spatialmodeldescription.html#recruitment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>How to spatially apportion recruits in a way that is consistent with the data and isn’t confounded with movement of young fish. There are two considerations, firstly looking at the AF and LFs there are regions that seem to have more young fish than others (link to figure and describe). However, there is very little information on spawning grounds and behavior. This coupled with a complex early life history make it difficult to a priori set regional apportionment of recruits, which would be ideal, an alternative is to estimate these as free parameters. This may introduce confounding when we start estimating movement which is believed to be ontogenetic.</p>
+<p>How to spatially apportion recruits in a way that is consistent with the data and isn’t confounded with movement of young fish? There are two considerations, firstly looking at the AF and LFs there are regions that seem to have more young fish than others (link to figure and describe). However, there is very little information on spawning grounds and behavior. This coupled with a complex early life history make it difficult to a priori set regional apportionment of recruits, which would be ideal, an alternative is to estimate these as free parameters. This may introduce confounding when we start estimating movement which is believed to be ontogenetic.</p>
 </div>
 <div id="fishing-mortality" class="section level3 unnumbered hasAnchor">
 <h3>Fishing mortality<a href="spatialmodeldescription.html#fishing-mortality" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>When the hybrid F method was employed by the model, tagged fish were not included when internally solving the fishing mortality nuisance parameters. The ratio of tagged to untagged numbers of fish in the partition at any point was thought to be small enough not to effect F estimates. We wanted to reduce the computational overhead this would require.</p>
+<p>When the hybrid <span class="math inline">\(F\)</span> method is assumed, tagged fish were not included when internally solving the fishing mortality nuisance parameters (Chapter <a href="Fexplore.html#Fexplore">11</a>). The ratio of tagged to untagged numbers of fish in the partition in any year was assumed to be small enough not to effect <span class="math inline">\(F\)</span> estimates. However, tagged fish were included when the model calculates predicted catch-at-age/length and catch for a fleet. This decision was made to reduce the computational overhead this would require to implement. When <span class="math inline">\(F\)</span> parameters are estimated as free parameters, then this is not a problem and <span class="math inline">\(F\)</span> will be applied to both tagged and untagged fish.</p>
 </div>
 <div id="tag-release-events" class="section level3 unnumbered hasAnchor">
 <h3>Tag release events<a href="spatialmodeldescription.html#tag-release-events" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Tags release events denoted by the index <span class="math inline">\(k\)</span> have an implied region <span class="math inline">\(r\)</span> and year <span class="math inline">\(y\)</span> dimension. Each tag release is done by assuming a known age frequency of release. This is derived using the age-length key from the survey. They are denoted in the partition as <span class="math inline">\(N^k_{a,r,y,s}\)</span>, and are tracked for nine years before migrating into a pooled tag group. At present, they are assumed to take on the exact same population processes as the untagged elements of the partition.</p>
-<p>Most of the tag releases have unknown sex. Sex disaggregated age-frequencies were derived using an ALK that was disaggregrated by sex in the age dimension but sex aggregated in the length dimension. This meant when we multiplied an unsexed length frequency through this ALK we get sex disaggregated age frequency.</p>
-<p>Age length keys were not available in all years when tagged fish were released, particularly in the early period. Tag release age frequencies before 1981 were based on age-length keys from 1981, 1985 and 1987. After that period if an age-length key was not available we used the age length key from the closest year with an age-length key.</p>
-<p>Do we want to include the inshore (Chatham Strait and Clarence Strait) tag-releases? there are alot of fish tagged in these regions.</p>
+<p>Tags release event denoted by the index <span class="math inline">\(k\)</span> have an implied region <span class="math inline">\(r\)</span> and year <span class="math inline">\(y\)</span> dimension. Each tag release event has known sex and age frequency at release. This is derived using the age-length key from the survey. Tagged fish from release event <span class="math inline">\(k\)</span> are denoted in the partition by <span class="math inline">\(N^k_{a,r,y,s}\)</span>, and are tracked for <span class="math inline">\(n_{T}\)</span> years before migrating into a pooled tag group, at which point we loose release-event information because we loose the year information but we do maintain its region of release. At present, tagged fish are assumed to take on the exact same population processes as the untagged elements of the partition.</p>
+<p>Most of the tagged fish in the available have unknown sex. Sex disaggregated age-frequencies were derived using an ALK that was disaggregrated by sex in the age dimension but sex aggregated in the length dimension. This meant when we multiplied an unsexed length frequency through this ALK we obtained sex disaggregated age frequency. The negative of this approach is a tagged fish that would have an exact age, sex and length will be represented in the model as a fraction of a fish across multiple ages and sexes.</p>
+<p>Age length keys were not available in all years when tagged fish were released, particularly in the early period. Tag release age frequencies before 1981 were based on age-length keys pooled over years 1981, 1985 and 1987. After that period, if an age-length key was not available we used the age length key from the closest year that has an age-length key. (<strong>How can we explore uncertainty in this input?</strong> re-run the model with numbers at age and length from bootstrapping age-length keys?)</p>
+<p>Do we want to include the inshore (Chatham Strait and Clarence Strait) tag-releases? there are alot of fish tagged in these regions. Also do we care about the amount of tags that captured off Canada and US? See Figure <a href="spatialmodeldescription.html#fig:TagRecoveriesOutsideRegion">4.1</a></p>
 </div>
 </div>
 <div id="observation-equations" class="section level2 unnumbered hasAnchor">
 <h2>Observation equations<a href="spatialmodeldescription.html#observation-equations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>As in the current stock assessment, there are the three conventional observational types in the spatial model</p>
+<p>As in the current stock assessment model, there are the three conventional observation types in the spatial model</p>
 <ul>
 <li>Relative indices of abundance</li>
 <li>Age composition disaggregated by sex for the fixed gear fishery and longline survey</li>
-<li>Length composition disaggregated by sex for the trawl fishery</li>
+<li>Length composition disaggregated by sex for the trawl and early period of the fixed gear fishery</li>
 </ul>
-<p>The additional observational type relates to tag recoveries.</p>
+<p>In addition to these, tag-recoveries are also included in the model.</p>
 <div id="catch-at-age-1" class="section level3 unnumbered hasAnchor">
 <h3>Catch at age<a href="spatialmodeldescription.html#catch-at-age-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Fishery dependent catch at age observations are available for the fixed gear fishery, but are also needed to calculate catch at length observations for the trawl fishery. Catch at age for fishery <span class="math inline">\(g\)</span> is denoted by <span class="math inline">\({C}^g_{a,r,y,s}\)</span> and model fitted values are calculated following</p>
 <p><span class="math display">\[\begin{equation}
-  \widehat{C}^g_{a,r,y,s} = \frac{F^g_{a,r,y,s}}{Z_{a,r,y,s}}   N_{a,r,y,s} \left(1 - S_{a,r,y,s} \right)
+  {C}^g_{a,r,y,s} = \frac{F^g_{a,r,y,s}}{Z_{a,r,y,s}}   N_{a,r,y,s} \left(1 - S_{a,r,y,s} \right)
 \end{equation}\]</span></p>
 <p>Observed values were proportions with respect to age and sex, final model fitted proportions were
 <span class="math display">\[
-\widehat{P}^g_{a,r,y,s} = \frac{\widehat{C}^g_{a,r,y,s}}{\sum_a \sum_s \widehat{C}^g_{a,r,y,s}},
+{P}^g_{a,r,y,s} = \frac{{C}^g_{a,r,y,s}}{\sum_a \sum_s {C}^g_{a,r,y,s}},
 \]</span>
 and initially the multinomial likelihood was assumed</p>
 <p><span class="math display">\[
-\boldsymbol{P}^g_{r,y} \sim \text{Multinomial}\left(\boldsymbol{\widehat{P}}^g_{r,y}, N^{eff}_{r,y}\right)
+\boldsymbol{X}^g_{r,y} \sim \text{Multinomial}\left(\boldsymbol{\widehat{P}}^g_{r,y}\right)
 \]</span>
-where, <span class="math inline">\(N^{eff}_{r,y}\)</span> is the effective sample size and <span class="math inline">\(\boldsymbol{P}^g_{r,y} = (P^g_{1,r,y,1}, \dots, P^g_{a_+,r,y,1}, P^g_{1,r,y,2}, \dots, P^g_{a_+,r,y,2})\)</span> is the vector of observed proportions across all ages and sexs in year <span class="math inline">\(y\)</span> and region <span class="math inline">\(r\)</span>, and <span class="math inline">\(\boldsymbol{\widehat{P}}^g_{r,y}\)</span> has the same dimension (<span class="math inline">\(\sum_a \sum_s \widehat{P}^g_{a,r,y,s} = 1\)</span>).</p>
+where, <span class="math inline">\(\boldsymbol{X}^g_{r,y} = \boldsymbol{P}^g_{r,y}N^{eff}_{r,y}\)</span> and <span class="math inline">\(\boldsymbol{P}^g_{r,y}\)</span> is the observed proportions, <span class="math inline">\(N^{eff}_{r,y}\)</span> is the effective sample size and <span class="math inline">\(\boldsymbol{P}^g_{r,y} = (P^g_{1,r,y,1}, \dots, P^g_{a_+,r,y,1}, P^g_{1,r,y,2}, \dots, P^g_{a_+,r,y,2})\)</span> is the vector of observed proportions across all ages and sexs in year <span class="math inline">\(y\)</span> and region <span class="math inline">\(r\)</span>, and <span class="math inline">\(\boldsymbol{\widehat{P}}^g_{r,y}\)</span> is the model fitted values which have the same dimension (<span class="math inline">\(\sum_a \sum_s \widehat{P}^g_{a,r,y,s} = 1\)</span>).</p>
 </div>
 <div id="catch-at-length-1" class="section level3 unnumbered hasAnchor">
 <h3>Catch at length<a href="spatialmodeldescription.html#catch-at-length-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -396,15 +407,23 @@ where, <span class="math inline">\(\bar{w}_{a,y,s}\)</span> is mean weight at ag
 </div>
 <div id="tag-recovery-observations" class="section level3 unnumbered hasAnchor">
 <h3>Tag recovery observations<a href="spatialmodeldescription.html#tag-recovery-observations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>When tagged fish are released, the observed length frequency is converted to an age frequency at release using the age-length key from the survey. Each recovery period for the tag release event <span class="math inline">\(k\)</span> has the length frequency of recoveries, because we can link the release length to each recovery length we can calculate the age that each fish was at release by multiplying the length at release for fish recovered during the period by the age-length key at release and incrementing the age by the time-at liberty to derive age frequencies over a recovery period for a tag release group. This means the age-length conversion between releases and recoveries is consistent, but has the down side of smearing an a single length at release and recovery across multiple age bins. However, it does mitigate the problem highlighted in chapter <a href="tagdata.html#tagdata">7</a> (tag release section) of going backwards and forwards through the age-length transition matrix, which appears to be more problematic.</p>
-<p>All tag recoveries are from the fixed gear fishery, due to the recent trend in recoveries by gear method (Figure <a href="tagdata.html#fig:recoveriebygear">7.2</a>), we only considered tags recovered before 2018. With the decline in the longline catch, recoveries have declined substantially. The switch to pot gear has not seen a recovery rate that is close to the longline method. To avoid this complication we will only recoveries from a period when the longline method was the predominant method of fixed gear methods.</p>
-<p>Model fitted values for tags recovered in region <span class="math inline">\(r\)</span> and year <span class="math inline">\(y\)</span> that were released by tag-release event <span class="math inline">\(k\)</span> denoted as <span class="math inline">\(\widehat{N}^k_{a,r,y,s}\)</span> are derived as</p>
+<p>When tagged fish are released in to the model partition they are tracked by the tag release event <span class="math inline">\(k\)</span> for <span class="math inline">\(n_{T}\)</span> years. Due to tags being predominately recovered by the fixed gear fishery there are many recoveries for which there is no length or sex information (<strong>get a number</strong>). The model expects tag-recovery observations to be known by age and sex. These are derived for each recovery event (also year and region specific) and tag-release event by using the age-length key that was used to release each recovered fish to obtain an sex specific age-frequency. This age-frequency is then aged by the number of years this tag-recovery event was at liberty to derive observed tag-recoveries by age and sex.</p>
+<p>This assumes the age-length conversion between releases and recoveries is consistent and allows us to use recovered fish with no length or sex recorded, but has the down side as mentioned earlier in the tag release section of smearing a single recovered fish across multiple age bins and sexes. However, it does mitigate the problem highlighted in chapter <a href="tagdata.html#tagdata">7</a> (tag release section) of going backwards and forwards through the age-length transition matrix, which appears to be more problematic.</p>
+<p>All tag recoveries are from the fixed gear (longline and pot gear) fishery, due to the recent trend in recoveries by gear method (Figure <a href="tagdata.html#fig:recoveriebygear">7.2</a>), we only considered tags recovered before 2018. The switch from longline to pot fishing in the fixed gear fisheyr has not seen anywhere the same recoveries to be reported from the pot gear compared to the longling gear. To avoid this complication we will only recoveries from a period when the longline method was the dominant method of fixed gear catch</p>
+<p>Model fitted values for tag event <span class="math inline">\(k\)</span> recovered in region <span class="math inline">\(r\)</span> and year <span class="math inline">\(y\)</span> are denoted by <span class="math inline">\(\widehat{N}^k_{a,r,y,s}\)</span>, and are derived as</p>
 <p><span class="math display">\[
-\widehat{N}^k_{a,r,y,s} =  N^k_{a,r,y,s} 1 - e^{-F^g_{a,r,y,s} + 0.5M_{y}} \delta_y
+\widehat{N}^k_{a,r,y,s} =  N^k_{a,r,y,s}e^{-0.5M_{y}} (1 - e^{-F^{LL}_{a,r,y,s}})\delta_y
 \]</span>
-where, <span class="math inline">\(N^k_{a,r,y,s}\)</span> are the number of tagged fish from tag-release event <span class="math inline">\(k\)</span>, and <span class="math inline">\(\delta_y\)</span> is the reporting rate in year <span class="math inline">\(y\)</span>.</p>
-<p>Release condition vs recapture condition?</p>
-<p>Can we assign tag-recoveries off Canada to EGOA? (sensitivity) i.e., Figure <a href="spatialmodeldescription.html#fig:TagRecoveriesOutsideRegion">4.1</a></p>
+where, <span class="math inline">\(N^k_{a,r,y,s}\)</span> are the number of tagged fish from tag-release event <span class="math inline">\(k\)</span>, and <span class="math inline">\(\delta_y\)</span> is the reporting rate in year <span class="math inline">\(y\)</span>. We assume there has been half the years natural mortality when deriving expected tag-recoveries. The current assessment pools observed and fitted values across age and sex and assumes the are from the Poisson distribution.</p>
+<p><span class="math display">\[
+{N}^k_{r,y} \sim \mathcal{Poisson}(\widehat{N}^k_{r,y})
+\]</span>
+where, <span class="math inline">\(\widehat{N}^k_{r,y} = \sum_a \sum_s \widehat{N}^k_{a,r,y,s}\)</span></p>
+<p>Things to consider</p>
+<ul>
+<li>Release condition vs recapture condition?</li>
+<li>different densities i.e. negative binomial</li>
+</ul>
 </div>
 </div>
 <div id="considerations-for-determining-the-spatial-resolution-of-the-model" class="section level2 unnumbered hasAnchor">
@@ -482,6 +501,12 @@ Latitude and longitude for approximately half the recoveries</td>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-goethel2021assessment" class="csl-entry">
 Goethel, DR, DH Hanselman, CJ Rodgveller, KH Fenski, SK Shotwell, KB Echave, PW Malecha, A Siwicke, and CR Lunsford. 2021. <span>“Assessment of the Sablefish Stock in Alaska.”</span> <em>Stock Assessment and Fishery Evaluation Report for the Groundfish Resources of the Gulf of Alaska and the Bering Sea/Aleutian Islands as Projected for</em>.
+</div>
+<div id="ref-hanselman2015move" class="csl-entry">
+Hanselman, Dana H, Jonathan Heifetz, Katy B Echave, and Sherri C Dressel. 2015. <span>“Move It or Lose It: Movement and Mortality of Sablefish Tagged in Alaska.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 72 (2): 238–51.
+</div>
+<div id="ref-heifetz1991movement" class="csl-entry">
+Heifetz, Jonathan, and Jeffrey T Fujioka. 1991. <span>“Movement Dynamics of Tagged Sablefish in the Northeastern Pacific.”</span> <em>Fisheries Research</em> 11 (3-4): 355–74.
 </div>
 <div id="ref-jasonowicz2017love" class="csl-entry">
 Jasonowicz, Andrew J, Frederick W Goetz, Giles W Goetz, and Krista M Nichols. 2017. <span>“Love the One You’re with: Genomic Evidence of Panmixia in the Sablefish (Anoplopoma Fimbria).”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 74 (3): 377–87.

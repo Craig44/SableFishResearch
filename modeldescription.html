@@ -631,6 +631,7 @@ where, <span class="math inline">\(\boldsymbol{C_{y,s}}\)</span> is a column vec
 <span class="math display">\[\begin{equation}
     Pr\left[ \boldsymbol{y^{obs}}, \boldsymbol{u}| \boldsymbol{\theta} \right]  = Pr\left[\boldsymbol{y^{obs}} |\boldsymbol{\theta^f}, \boldsymbol{u} \right] Pr\left[\boldsymbol{u} |\boldsymbol{\theta^h} \right]
     \end{equation}\]</span></p>
+<p>where, <span class="math inline">\(\boldsymbol{\theta}\)</span> denotes “fixed-effect” parameters which are furthur seperated by <span class="math inline">\(\boldsymbol{\theta} = (\boldsymbol{\theta^f},\boldsymbol{\theta^h})\)</span>, with <span class="math inline">\(\boldsymbol{\theta^h}\)</span> denoting fixed effects that are hyperprior parameters for the “random-effect” variables denoted by <span class="math inline">\(\boldsymbol{u}\)</span> and <span class="math inline">\(\(\boldsymbol{\theta^h}\)</span> ) are all other fixed-effect parameters.</p>
 <p>Inference is conducted by maximising the marginal likelihood noting <span class="math inline">\(L\left(\boldsymbol{\theta} | \boldsymbol{y^{obs}} \right) \propto Pr\left[ \boldsymbol{y^{obs}} | \boldsymbol{\theta} \right]\)</span>
 <span class="math display">\[\begin{equation}\label{eq:marginal_ll}
     L\left(\boldsymbol{\theta} | \boldsymbol{y^{obs}}\right) = \int \left(Pr\left[\boldsymbol{y^{obs}} |\boldsymbol{\theta^f}, \boldsymbol{\theta^g}, \boldsymbol{u} \right] Pr\left[\boldsymbol{u} |\boldsymbol{\theta^h} \right] \right) \boldsymbol{du}
@@ -650,7 +651,6 @@ In general this integral is not tractable, and so approximations are necessary. 
 <ul>
 <li>Build a validate function to help catch users setting up parameters or data structures that will cause a crash once supplied to TMB.</li>
 <li>Self test</li>
-<li>change some parameter containers. In the ADMB model the often share parameters between male and females. Particularly for selectivity parameters. However TMB will not allow us to fix/map parameters across different arrays or vectors. This means we will want to join the male and female selectivity parameter objects into a single object so that we can share parameters between the sexes.</li>
 <li>Change array column casting from <code>vector&lt;Type&gt;(array.col(i))</code> to <code>array.col(i).vec()</code></li>
 </ul>
 
