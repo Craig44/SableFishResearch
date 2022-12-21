@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-12-20" />
+<meta name="date" content="2022-12-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -171,7 +171,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#initialisation-gleft.right"><i class="fa fa-check"></i>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#population-dynamics-fleft.right"><i class="fa fa-check"></i>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#observation-equations"><i class="fa fa-check"></i>Observation equations</a>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#observation-equations-llleft-.-right"><i class="fa fa-check"></i>Observation equations (<span class="math inline">\(ll\left( . \right)\)</span>)</a>
 <ul>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-age"><i class="fa fa-check"></i>Catch at age</a></li>
 <li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#relative-abundance-indices"><i class="fa fa-check"></i>Relative abundance indices</a></li>
@@ -194,7 +194,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#fishing-mortality"><i class="fa fa-check"></i>Fishing mortality</a></li>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#tag-release-events"><i class="fa fa-check"></i>Tag release events</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#observation-equations-1"><i class="fa fa-check"></i>Observation equations</a>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#observation-equations"><i class="fa fa-check"></i>Observation equations</a>
 <ul>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#catch-at-age-1"><i class="fa fa-check"></i>Catch at age</a></li>
 <li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#catch-at-length-1"><i class="fa fa-check"></i>Catch at length</a></li>
@@ -291,30 +291,29 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">Alaskan sablefish research</h1>
 <p class="author"><em>C.Marsh</em></p>
-<p class="date"><em>2022-12-20</em></p>
+<p class="date"><em>2022-12-21</em></p>
 </div>
 <div id="overview" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Overview<a href="index.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This Gitbook documents my/our research for the Alaska sablefish (<em>Anoplopoma fimbria</em>). The objective is to develop and explore a spatially explicit stock assessment for Alaskan sablefish. However, there will be many topics that I will likely only scratch the surface on. The following section outlines chapters in this document.</p>
+<p>This Gitbook documents my/our research on Alaskan sablefish (<em>Anoplopoma fimbria</em>). The objective is to develop and explore a spatially explicit stock assessment model for the Alaskan sablefish stock. However, there will be many topics that I will touch on. This book outlines my research and thinking along with some rabbit holes I entered (and hopefully returned) during my post-doctoral research. The following section outlines chapters contained in this document.</p>
 <div id="gitbook-outline" class="section level2 unnumbered hasAnchor">
 <h2>Gitbook outline<a href="index.html#gitbook-outline" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><p>Chapter <a href="objectives.html#objectives">2</a> outlines a list of objectives that we have set or accomplished during this research project. Some of our research cannot be presented in this document due to the confidentiality reasons. However, this checklist should include all tasks during the project</p></li>
-<li><p>Chapter <a href="modeldescription.html#modeldescription">3</a> documents the current stock assessment model and assumptions (work in progress). This is the first step of the project, with the purpose of helping me understand the assessment, data and important dynamics.</p></li>
-<li><p>Chapter <a href="spatialmodeldescription.html#spatialmodeldescription">4</a> documents a generalised spatial stock assessment model used as both an OM and EM during simulations.</p></li>
-<li><p>Chapter <a href="surveydata.html#surveydata">5</a> describes, characterises and explores the survey longline data.</p></li>
-<li><p>Chapter <a href="observerdata.html#observerdata">6</a> describes, characterises and explores fishery dependent data, which includes reported catch and observer records.</p></li>
+<li><p>Chapter <a href="modeldescription.html#modeldescription">3</a> documents the current stock assessment model and assumptions (work in progress). This is the first step of the project, with the purpose of helping me understand the data and important process dynamics assumed in the current assessment. Most models used in this research is written in TMB <span class="citation">(<a href="#ref-kristensen2015tmb" role="doc-biblioref">Kristensen et al. 2015</a>)</span>, many of these are available in the R package <a href="https://github.com/Craig44/SpatialSablefishAssessment">found here</a>.</p></li>
+<li><p>Chapter <a href="spatialmodeldescription.html#spatialmodeldescription">4</a> documents a generalized spatial assessment model used as both an OM and EM during simulations.</p></li>
+<li><p>Chapter <a href="surveydata.html#surveydata">5</a> describes, characterizes and explores the survey longline data available for the the assessment.</p></li>
+<li><p>Chapter <a href="observerdata.html#observerdata">6</a> describes, characterizes and explores fishery dependent data, which includes reported catch (log-book data) and observer records.</p></li>
 <li><p>Chapter <a href="tagdata.html#tagdata">7</a> describes the tagging data and how it can be used within a spatial stock assessment model but also used in a panmictic model for informing population dynamics such as growth.</p></li>
 <li><p>Chapter <a href="sexratios.html#sexratios">10</a> explores how to include sex disaggregated composition observations that can include sex ratio information. It conducts a simple simulation to investigate two different approaches.</p></li>
-<li><p>Chapter <a href="Fexplore.html#Fexplore">11</a> explores how to parameterise fishing mortality. The current approach is to estimate an annual fishing mortality parameter for each gear as a free parameter. I feel slightly uncomfortable about this approach moving towards a spatial model as the number of estimated parameters will explode with spatial areas. This chapter looks at two alternative approaches that either derive fishing mortality estimates using a Newton Raphson solver which is heavily borrowed from the Stock Synthesis “hybrid” approach <span class="citation">(<a href="#ref-methot2013stock" role="doc-biblioref">Methot Jr and Wetzel 2013</a>)</span> and Pope’s discrete approach <span class="citation">(<a href="#ref-pope1972investigation" role="doc-biblioref">Pope 1972</a>)</span> which uses exploitation rates. Both these methods have been applied in the literature for decades. The aim of this chapter is to do a simulation and make sure the considered approaches are efficient and numerically stability for the purposes of our study.</p></li>
+<li><p>Chapter <a href="Fexplore.html#Fexplore">11</a> explores how to parameterise fishing mortality. The current approach is to estimate an annual fishing mortality parameter for each gear as a free parameter. I feel slightly uncomfortable about this approach moving towards a spatial model as the number of estimated parameters will explode when a spatial dimension is explored. This chapter looks at two alternative approaches that either derive fishing mortality estimates using a Newton Raphson solver which is heavily borrowed from the Stock Synthesis “hybrid” approach <span class="citation">(<a href="#ref-methot2013stock" role="doc-biblioref">Methot Jr and Wetzel 2013</a>)</span> and Pope’s discrete approach <span class="citation">(<a href="#ref-pope1972investigation" role="doc-biblioref">Pope 1972</a>)</span> which uses exploitation rates. Both these methods have been applied in the literature for decades. The aim of this chapter is to do a simulation and make sure the considered approaches are efficient and numerically stability for the purposes of our research.</p></li>
 <li><p>Chapter <a href="spatialInit.html#spatialInit">12</a> explores how to calculate the plus group in spatially explicit age-structured models that assume markovian movement during initialization.</p></li>
 </ul>
 </div>
 <div id="future-things-to-consider" class="section level2 unnumbered hasAnchor">
 <h2>Future things to consider<a href="index.html#future-things-to-consider" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>How to reduce partition dimension when adding tag-release events</li>
-<li>When is the latest you can start the model? Currently the assessment model starts in 1960 because there is early survey and catch info along with some of the largest catches observed over the fishery. I want to explore starting the model at later period i.e., the 1980’s when there is consistent surveys and age data. This is thought to reduce the number of estimable parameters that have low information (early recruitment). However, the downfall is we may loose information on stock productivity because the 60’s and 70’s have some of the largest recorded catches.</li>
+<li>When is the latest year that we can start the model at? Currently the assessment model starts in 1960 because there is early survey and catch info along with some of the largest catches recorded. I want to explore starting the model at a later period i.e., the 1980’s when there is consistent surveys and age data. This is thought to reduce the number of estimable parameters that have low information (early recruitment deviations). However, the downfall is we may loose information on stock production because the 60’s and 70’s have some of the largest recorded catches.</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TMB)</span>
 <span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#library(stockassessmenthelper)</span></span>
@@ -329,6 +328,9 @@ div.csl-indent {
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-kristensen2015tmb" class="csl-entry">
+Kristensen, Kasper, Anders Nielsen, Casper W Berg, Hans Skaug, and Brad Bell. 2015. <span>“TMB: Automatic Differentiation and Laplace Approximation.”</span> <em>arXiv Preprint arXiv:1509.00660</em>.
+</div>
 <div id="ref-methot2013stock" class="csl-entry">
 Methot Jr, Richard D, and Chantell R Wetzel. 2013. <span>“Stock Synthesis: A Biological and Statistical Framework for Fish Stock Assessment and Fishery Management.”</span> <em>Fisheries Research</em> 142: 86–99.
 </div>
