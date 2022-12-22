@@ -38,29 +38,87 @@ include_graphics(file.path("Figures", "age_samples_by_year_region_sex.png"))
 
 
 
-## Length data {-}
-Often, each haul is subsampled for LF measurements. For each fishing event, we calculate the sampling fraction
+## Length frequencies {-}
+Often, each haul is subsampled for LF measurements. For each haul we calculate the sampling fraction of samples for LF vs the entire haul catch
 \[
 \pi_h = \frac{n_h}{N_h}
 \]
-where, \(n_h\) is the number of fish measured for LF and \(N_h\) are the total number of fish caught in fishing event \(h\). Each measure length is then scaled by this sampling fraction to derive the length frequency for the entire fishing event,
+where, \(n_h\) is the number of fish measured for LF and \(N_h\) are the total number of fish caught in haul \(h\). Each length measurement is then scaled by this sampling fraction to derive the length frequency for the entire haul,
 
 \[
 N^h_l = \frac{\pi_h}{n^h_l}
 \]
-where, \(n^h_l\) is the number of fish in length bin \(l\) for fishing event \(h\), and \(N^h_l\) is the scaled number of fish.
+where, \(n^h_l\) is the number of fish in length bin \(l\) for haul \(h\), and \(N^h_l\) is the scaled number of fish.
 
-To generate region wide LF's from the survey data, we used the mean
+To generate region wide LF's from the survey data, we used the mean estimator
 \[
 N^r_l = \frac{1}{\sum\limits_{h \in r}1} \sum\limits_{h \in r} N^h_l
 \]
-where, \(h \in r\) denotes only hauls within region \(r\) and \(\sum\limits_{h \in r}1\) indicates the number of fishing events in that region.
+where, \(h \in r\) denotes only hauls within region \(r\) and \(\sum\limits_{h \in r}1\) indicates the number of hauls in that region.
 
 
 
 ```{r lengthsamples, out.width = '100%', fig.height= 5, fig.cap="Number of fish measured for length by sex, region and year", echo = F, eval = T}
 include_graphics(file.path("Figures", "length_samples_by_year_region_sex.png"))
 ```
+
+## Age frequencies {-}
+
+Two estimators were explored for deriving spatially disaggregated age-frequencies from survey data. These were direct ageing estimators and age-length key estimators.
+
+### Direct ageing estimators
+
+The direct ageing estimator we applied assumed age-samples within a region and year are the result of simple random sampling, with the estimator.
+
+\[
+P_{a,r,y} = \frac{n_{a,r, y}}{\sum\limits_a n_{a,r, y}}
+\]
+where, \(P_{a,r,y}\) is the proportion in age \(a\) and \(n_{a,r, y}\) are the number of fish aged in age \(a\) region  \(r\) and year \(y\).
+
+To aggregate age frequencies across areas we use an abundance weighted approach, where the abundance estimated from the survey in region \(r\) and year \(y\) denoted by \(I_{r,y}\) is used,
+
+\[
+\tilde{P}_{a,r,y} = P_{a,r,y} \frac{I_{r,y}}{\sum\limits_r I_{r,y}}  \  .
+\]
+If we are going to aggregate proportions at age over multiple regions we would use \(\tilde{P}_{a,r,y}\) such as,
+
+\[
+{P}_{a,R,y} = \sum\limits_{r \in R} \tilde{P}_{a,r,y}
+\]
+where, \(R\) indicates the set of areas that we are aggregating and this is normalized so that it sums to one, which leads to area aggregated estimates
+
+\[
+{P}_{a,R,y} = \frac{{P}_{a,R,y}}{\sum\limits_a{P}_{a,R,y}}  \ .
+\]
+
+### Age length key estimators
+The Age length key (ALK) estimator uses paired age-lengths to calculate an age-length key which is used to derive age-frequencies by multiplying the ALK by scaled length frequencies.
+
+Constructing an age-length key requires paired age and length measurements which calculate the probability of age given a length bin
+
+\[
+\hat{p}(a|l) = \frac{n_{a,l}}{n_{+,l}}
+\]
+where, \(n_{+,l}\) is the number of ages with corresponding lenghts that fall within length bin \(l\).
+
+The probabilities of age given length using the forward ALK method are then simply multiplied by the marginal probabilities by the scaled length frequencies
+
+\[
+P_{a,r} = \hat{p}(a|l) N^r_l
+\]
+
+where, \(N^r_l\) are regional specific scaled length frequencies (described in the prior section). The ALK can also be regional specific where only paired age-lengths are used from that region. This is not considered in this work because of the lack of samples when building ALKs at this resolution.
+
+
+### Observation error estimates
+
+Bootstrapping is used to estimate standard errors for \(P_{a,R,y}\). Data used to calculate age-length keys are resampled with replacement to calcualte a SE and CV. This produces a CV for each age, region and year denoted by \(CV_{a,r, y}\). Proportions at age are assumed to be distributed according to the multinomial distribution. To translate the observation error expressed as a CV to an initial effective sample denoted by \(N^{eff}_y\) we apply a non-linear least squares solver to estimate \(N^{eff}_y\) by minimsing the following function
+
+\[
+\log CV_{a,r, y} = \log \sqrt{\frac{P_{a,R,y}\widehat{N}^{eff}_y \left(1 -  P_{a,R,y}\right)}{P_{a,R,y}\widehat{N}^{eff}_y}}
+\]
+
+
 
 ## Age-length data {-}
 
