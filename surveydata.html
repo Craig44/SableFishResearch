@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-12-21" />
+<meta name="date" content="2022-12-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -211,14 +211,20 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#abundance-data"><i class="fa fa-check"></i>Abundance data</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-data"><i class="fa fa-check"></i>Age data</a></li>
-<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#length-data"><i class="fa fa-check"></i>Length data</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#length-frequencies"><i class="fa fa-check"></i>Length frequencies</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-frequencies"><i class="fa fa-check"></i>Age frequencies</a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="surveydata.html"><a href="surveydata.html#direct-ageing-estimators"><i class="fa fa-check"></i><b>5.0.1</b> Direct ageing estimators</a></li>
+<li class="chapter" data-level="5.0.2" data-path="surveydata.html"><a href="surveydata.html#age-length-key-estimators"><i class="fa fa-check"></i><b>5.0.2</b> Age length key estimators</a></li>
+<li class="chapter" data-level="5.0.3" data-path="surveydata.html"><a href="surveydata.html#observation-error-estimates"><i class="fa fa-check"></i><b>5.0.3</b> Observation error estimates</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-length-data"><i class="fa fa-check"></i>Age-length data</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#appendix-1"><i class="fa fa-check"></i>Appendix</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="observerdata.html"><a href="observerdata.html"><i class="fa fa-check"></i><b>6</b> Fishery dependent data</a>
 <ul>
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#catch-data"><i class="fa fa-check"></i>Catch data</a></li>
-<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#length-data-1"><i class="fa fa-check"></i>Length data</a>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#length-data"><i class="fa fa-check"></i>Length data</a>
 <ul>
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#regression-tree-analysis"><i class="fa fa-check"></i>regression tree analysis</a></li>
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#catch-at-length-estimator"><i class="fa fa-check"></i>Catch at length estimator</a></li>
@@ -267,6 +273,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#appendix---hybrid-approach"><i class="fa fa-check"></i>Appendix - Hybrid approach</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="spatialInit.html"><a href="spatialInit.html"><i class="fa fa-check"></i><b>12</b> Initialising the plus group in spatial models</a></li>
+<li class="chapter" data-level="13" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i><b>13</b> Glossary of terms</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment" target="blank">NOAA Website</a></li>
@@ -320,27 +327,72 @@ Figure 5.3: Number of aged fish by sex, region and year
 </p>
 </div>
 </div>
-<div id="length-data" class="section level2 unnumbered hasAnchor">
-<h2>Length data<a href="surveydata.html#length-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Often, each haul is subsampled for LF measurements. For each fishing event, we calculate the sampling fraction
+<div id="length-frequencies" class="section level2 unnumbered hasAnchor">
+<h2>Length frequencies<a href="surveydata.html#length-frequencies" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Often, each haul is subsampled for LF measurements. For each haul we calculate the sampling fraction of samples for LF vs the entire haul catch
 <span class="math display">\[
 \pi_h = \frac{n_h}{N_h}
 \]</span>
-where, <span class="math inline">\(n_h\)</span> is the number of fish measured for LF and <span class="math inline">\(N_h\)</span> are the total number of fish caught in fishing event <span class="math inline">\(h\)</span>. Each measure length is then scaled by this sampling fraction to derive the length frequency for the entire fishing event,</p>
+where, <span class="math inline">\(n_h\)</span> is the number of fish measured for LF and <span class="math inline">\(N_h\)</span> are the total number of fish caught in haul <span class="math inline">\(h\)</span>. Each length measurement is then scaled by this sampling fraction to derive the length frequency for the entire haul,</p>
 <p><span class="math display">\[
 N^h_l = \frac{\pi_h}{n^h_l}
 \]</span>
-where, <span class="math inline">\(n^h_l\)</span> is the number of fish in length bin <span class="math inline">\(l\)</span> for fishing event <span class="math inline">\(h\)</span>, and <span class="math inline">\(N^h_l\)</span> is the scaled number of fish.</p>
-<p>To generate region wide LF’s from the survey data, we used the mean
+where, <span class="math inline">\(n^h_l\)</span> is the number of fish in length bin <span class="math inline">\(l\)</span> for haul <span class="math inline">\(h\)</span>, and <span class="math inline">\(N^h_l\)</span> is the scaled number of fish.</p>
+<p>To generate region wide LF’s from the survey data, we used the mean estimator
 <span class="math display">\[
 N^r_l = \frac{1}{\sum\limits_{h \in r}1} \sum\limits_{h \in r} N^h_l
 \]</span>
-where, <span class="math inline">\(h \in r\)</span> denotes only hauls within region <span class="math inline">\(r\)</span> and <span class="math inline">\(\sum\limits_{h \in r}1\)</span> indicates the number of fishing events in that region.</p>
+where, <span class="math inline">\(h \in r\)</span> denotes only hauls within region <span class="math inline">\(r\)</span> and <span class="math inline">\(\sum\limits_{h \in r}1\)</span> indicates the number of hauls in that region.</p>
 <div class="figure"><span style="display:block;" id="fig:lengthsamples"></span>
 <img src="Figures/length_samples_by_year_region_sex.png" alt="Number of fish measured for length by sex, region and year" width="100%" />
 <p class="caption">
 Figure 5.4: Number of fish measured for length by sex, region and year
 </p>
+</div>
+</div>
+<div id="age-frequencies" class="section level2 unnumbered hasAnchor">
+<h2>Age frequencies<a href="surveydata.html#age-frequencies" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Two estimators were explored for deriving spatially disaggregated age-frequencies from survey data. These were direct ageing estimators and age-length key estimators.</p>
+<div id="direct-ageing-estimators" class="section level3 hasAnchor" number="5.0.1">
+<h3><span class="header-section-number">5.0.1</span> Direct ageing estimators<a href="surveydata.html#direct-ageing-estimators" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The direct ageing estimator we applied assumed age-samples within a region and year are the result of simple random sampling, with the estimator.</p>
+<p><span class="math display">\[
+P_{a,r,y} = \frac{n_{a,r, y}}{\sum\limits_a n_{a,r, y}}
+\]</span>
+where, <span class="math inline">\(P_{a,r,y}\)</span> is the proportion in age <span class="math inline">\(a\)</span> and <span class="math inline">\(n_{a,r, y}\)</span> are the number of fish aged in age <span class="math inline">\(a\)</span> region <span class="math inline">\(r\)</span> and year <span class="math inline">\(y\)</span>.</p>
+<p>To aggregate age frequencies across areas we use an abundance weighted approach, where the abundance estimated from the survey in region <span class="math inline">\(r\)</span> and year <span class="math inline">\(y\)</span> denoted by <span class="math inline">\(I_{r,y}\)</span> is used,</p>
+<p><span class="math display">\[
+\tilde{P}_{a,r,y} = P_{a,r,y} \frac{I_{r,y}}{\sum\limits_r I_{r,y}}  \  .
+\]</span>
+If we are going to aggregate proportions at age over multiple regions we would use <span class="math inline">\(\tilde{P}_{a,r,y}\)</span> such as,</p>
+<p><span class="math display">\[
+{P}_{a,R,y} = \sum\limits_{r \in R} \tilde{P}_{a,r,y}
+\]</span>
+where, <span class="math inline">\(R\)</span> indicates the set of areas that we are aggregating and this is normalized so that it sums to one, which leads to area aggregated estimates</p>
+<p><span class="math display">\[
+{P}_{a,R,y} = \frac{{P}_{a,R,y}}{\sum\limits_a{P}_{a,R,y}}  \ .
+\]</span></p>
+</div>
+<div id="age-length-key-estimators" class="section level3 hasAnchor" number="5.0.2">
+<h3><span class="header-section-number">5.0.2</span> Age length key estimators<a href="surveydata.html#age-length-key-estimators" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Age length key (ALK) estimator uses paired age-lengths to calculate an age-length key which is used to derive age-frequencies by multiplying the ALK by scaled length frequencies.</p>
+<p>Constructing an age-length key requires paired age and length measurements which calculate the probability of age given a length bin</p>
+<p><span class="math display">\[
+\hat{p}(a|l) = \frac{n_{a,l}}{n_{+,l}}
+\]</span>
+where, <span class="math inline">\(n_{+,l}\)</span> is the number of ages with corresponding lenghts that fall within length bin <span class="math inline">\(l\)</span>.</p>
+<p>The probabilities of age given length using the forward ALK method are then simply multiplied by the marginal probabilities by the scaled length frequencies</p>
+<p><span class="math display">\[
+P_{a,r} = \hat{p}(a|l) N^r_l
+\]</span></p>
+<p>where, <span class="math inline">\(N^r_l\)</span> are regional specific scaled length frequencies (described in the prior section). The ALK can also be regional specific where only paired age-lengths are used from that region. This is not considered in this work because of the lack of samples when building ALKs at this resolution.</p>
+</div>
+<div id="observation-error-estimates" class="section level3 hasAnchor" number="5.0.3">
+<h3><span class="header-section-number">5.0.3</span> Observation error estimates<a href="surveydata.html#observation-error-estimates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Bootstrapping is used to estimate standard errors for <span class="math inline">\(P_{a,R,y}\)</span>. Data used to calculate age-length keys are resampled with replacement to calcualte a SE and CV. This produces a CV for each age, region and year denoted by <span class="math inline">\(CV_{a,r, y}\)</span>. Proportions at age are assumed to be distributed according to the multinomial distribution. To translate the observation error expressed as a CV to an initial effective sample denoted by <span class="math inline">\(N^{eff}_y\)</span> we apply a non-linear least squares solver to estimate <span class="math inline">\(N^{eff}_y\)</span> by minimsing the following function</p>
+<p><span class="math display">\[
+\log CV_{a,r, y} = \log \sqrt{\frac{P_{a,R,y}\widehat{N}^{eff}_y \left(1 -  P_{a,R,y}\right)}{P_{a,R,y}\widehat{N}^{eff}_y}}
+\]</span></p>
 </div>
 </div>
 <div id="age-length-data" class="section level2 unnumbered hasAnchor">

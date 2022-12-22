@@ -62,6 +62,9 @@ objectives
 modeldescription
 spatialmodeldescription
 surveydata
+direct-ageing-estimators
+age-length-key-estimators
+observation-error-estimates
 observerdata
 tagdata
 growth
@@ -69,3 +72,4 @@ refpoints
 sexratios
 Fexplore
 spatialInit
+glossary

@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2022-12-21" />
+<meta name="date" content="2022-12-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -211,14 +211,20 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#abundance-data"><i class="fa fa-check"></i>Abundance data</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-data"><i class="fa fa-check"></i>Age data</a></li>
-<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#length-data"><i class="fa fa-check"></i>Length data</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#length-frequencies"><i class="fa fa-check"></i>Length frequencies</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-frequencies"><i class="fa fa-check"></i>Age frequencies</a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="surveydata.html"><a href="surveydata.html#direct-ageing-estimators"><i class="fa fa-check"></i><b>5.0.1</b> Direct ageing estimators</a></li>
+<li class="chapter" data-level="5.0.2" data-path="surveydata.html"><a href="surveydata.html#age-length-key-estimators"><i class="fa fa-check"></i><b>5.0.2</b> Age length key estimators</a></li>
+<li class="chapter" data-level="5.0.3" data-path="surveydata.html"><a href="surveydata.html#observation-error-estimates"><i class="fa fa-check"></i><b>5.0.3</b> Observation error estimates</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-length-data"><i class="fa fa-check"></i>Age-length data</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#appendix-1"><i class="fa fa-check"></i>Appendix</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="observerdata.html"><a href="observerdata.html"><i class="fa fa-check"></i><b>6</b> Fishery dependent data</a>
 <ul>
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#catch-data"><i class="fa fa-check"></i>Catch data</a></li>
-<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#length-data-1"><i class="fa fa-check"></i>Length data</a>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#length-data"><i class="fa fa-check"></i>Length data</a>
 <ul>
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#regression-tree-analysis"><i class="fa fa-check"></i>regression tree analysis</a></li>
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#catch-at-length-estimator"><i class="fa fa-check"></i>Catch at length estimator</a></li>
@@ -267,6 +273,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#appendix---hybrid-approach"><i class="fa fa-check"></i>Appendix - Hybrid approach</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="spatialInit.html"><a href="spatialInit.html"><i class="fa fa-check"></i><b>12</b> Initialising the plus group in spatial models</a></li>
+<li class="chapter" data-level="13" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i><b>13</b> Glossary of terms</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment" target="blank">NOAA Website</a></li>
@@ -404,15 +411,15 @@ where, <span class="math inline">\(\boldsymbol{C_{y,s}}\)</span> is a column vec
 <!-- +----------------------------+-----------------------------------------------------------------------------+ -->
 <!-- | label                      | Selectivity description                             -->
 <!-- +============================+=============================================================================+ -->
-<!-- | `fish1`                    | Longline selectivity from 1960-1994 -->
+<!-- | `fish1`                    | fixed gear selectivity from 1960-1994 -->
 <!-- +----------------------------+-----------------------------------------------------------------------------+ -->
 <!-- | `fish2`                    | Not sure if this is used, maybe this is used for `srv6`? -->
 <!-- +----------------------------+-----------------------------------------------------------------------------+ -->
 <!-- | `fish3`                    | Trawl selectivity from 1960 - \(T\) -->
 <!-- +----------------------------+-----------------------------------------------------------------------------+ -->
-<!-- | `fish4`                    | Longline selectivity from 1995 -\( \ IFQ_y\) (\(IFQ_y\) can = \(T\) -->
+<!-- | `fish4`                    | fixed gear selectivity from 1995 -\( \ IFQ_y\) (\(IFQ_y\) can = \(T\) -->
 <!-- +----------------------------+-----------------------------------------------------------------------------+ -->
-<!-- | `fish5`                    | Longline selectivity from \(IFQ_y \ - \ T\) if there is post IFQ block -->
+<!-- | `fish5`                    | fixed gear selectivity from \(IFQ_y \ - \ T\) if there is post IFQ block -->
 <!-- +----------------------------+-----------------------------------------------------------------------------+ -->
 <!-- | `srv1`                     | Domestic Longline survey selectivity -->
 <!-- +----------------------------+-----------------------------------------------------------------------------+ -->
@@ -430,7 +437,7 @@ where, <span class="math inline">\(\boldsymbol{C_{y,s}}\)</span> is a column vec
 <!-- +----------------------------+-----------------------------------------------------------------------------+ -->
 <!-- | `srv4`                     | Abundance survey uses both `srv2_sel` and `srv9_sel` -->
 <!-- +----------------------------+-----------------------------------------------------------------------------+ -->
-<!-- | `srv5`                     | Longline fishery CPUE `fish1_sel`, `fish4_sel`, `fish5_sel` -->
+<!-- | `srv5`                     | fixed gear fishery CPUE `fish1_sel`, `fish4_sel`, `fish5_sel` -->
 <!-- +----------------------------+-----------------------------------------------------------------------------+ -->
 <!-- | `srv6`                     | Japanese LL fishery CPUE -->
 <!-- +----------------------------+-----------------------------------------------------------------------------+ -->
@@ -439,9 +446,9 @@ where, <span class="math inline">\(\boldsymbol{C_{y,s}}\)</span> is a column vec
 <!-- +----------------------------+-----------------------------------------------------------------------------+ -->
 <!-- | label                      | Composition description                             -->
 <!-- +============================+=============================================================================+ -->
-<!-- | `ac_fish1`                 | Longline Fishery Age Comp (sex aggregated) -->
+<!-- | `ac_fish1`                 | fixed gear Fishery Age Comp (sex aggregated) -->
 <!-- +----------------------------+-----------------------------------------------------------------------------+ -->
-<!-- | `sc_fish1`                 | Longline Fishery LF (sex dis-aggregrated) -->
+<!-- | `sc_fish1`                 | fixed gear Fishery LF (sex dis-aggregrated) -->
 <!-- +----------------------------+-----------------------------------------------------------------------------+ -->
 <!-- | `sc_fish3`                 | Trawl Fishery LF (sex disaggregrated) -->
 <!-- +----------------------------+-----------------------------------------------------------------------------+ -->
@@ -517,7 +524,7 @@ where, <span class="math inline">\(\boldsymbol{C_{y,s}}\)</span> is a column vec
 </tr>
 <tr class="even">
 <td><span class="math inline">\(g\)</span></td>
-<td>gear type index, i.e. longline survey, longline fishery, trawl fishery</td>
+<td>gear type index, i.e. longline survey, fixed gear fishery, trawl fishery</td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(x\)</span></td>
