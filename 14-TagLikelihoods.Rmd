@@ -47,7 +47,7 @@ where, \(\boldsymbol{N}^k\) is the vector of tag-recoveries for all possible rec
 \[
 \boldsymbol{N}^k = (N^k_1, N^k_2, \dots, N^k_{n_m}, N^k_{NR})
 \]
-where, \(N^k_{NR}\) represents the not recovered category and is \(N^k_{NR} = T^k - \sum\limits_m^{n_m}\), where \(T^k\) is the initial number of tags released for event \(k\). \(\widehat{\boldsymbol{\theta}}^k\) is a vector of proportions that sum to one, with the same dimensions as \(\boldsymbol{N}^k\) and is calculated as,
+where, \(N^k_{NR}\) represents the not recovered category and is \(N^k_{NR} = T^k - \sum\limits_m^{n_m} N^k_m\), where \(T^k\) is the initial number of tags released for event \(k\). \(\widehat{\boldsymbol{\theta}}^k\) is a vector of proportions that sum to one, with the same dimensions as \(\boldsymbol{N}^k\) and is calculated as,
 
 \[
 \widehat{\theta}^k_m = \frac{\widehat{N}^k_{m}}{T^k}, \quad \forall \ m \in (1, \dots,n_m)
@@ -93,7 +93,7 @@ ll = \sum_k\sum_y\sum_r log(\widehat{\theta}^k_{r,t}) \times N^k_{r,t}
 To explore these likelihoods are very simple simulation was setup to see how well each likelihood could estimate elements of \(\boldsymbol{M}\) under different levels of over dispersion. The simulation assumes all tags encountered where reported (100\% reporting rate) and both natural mortality and fishing mortality are known without error. The only estimated parameters were \(\boldsymbol{M}\) and \(\phi\) when the negative binomial likelihood was explored.
 
 
-The following is some R-code that was used to generate operatint model values for 
+The following is some R-code that was used to generate operating model values for 
 ```{r simulate_tag_data}
 set.seed(123)
 n_y = 5
@@ -175,7 +175,7 @@ OM_mat$type = "OM"
 
 
 
-```{r runsimulationTagLike}
+```{r runsimulationTagLike, warning=FALSE, message=FALSE, error = FALSE}}
 ############################################
 ## over_diserpsion_investication
 ## what happens when we simualte from
@@ -253,11 +253,6 @@ for(over_ndx in 1:length(over_dispersion_params)) {
     recap_mat$SE = (OM_mat$proportion - recap_mat$value)^2
     recap_mat$type = "Recapture"
     recap_mat$sim = sim
-    multi_recap_mat = melt(multi_recap_rep$movement_matrix)
-    multi_recap_mat$RE = (multi_recap_mat$value - OM_mat$proportion) / OM_mat$proportion * 100
-    multi_recap_mat$SE = (OM_mat$proportion - multi_recap_mat$value)^2
-    multi_recap_mat$type = "Multinomial Recapture"
-    multi_recap_mat$sim = sim
     multi_release_mat = melt(multi_release_rep$movement_matrix)
     multi_release_mat$RE = (multi_release_mat$value - OM_mat$proportion) / OM_mat$proportion * 100
     multi_release_mat$SE = (OM_mat$proportion - multi_release_mat$value)^2
@@ -268,7 +263,7 @@ for(over_ndx in 1:length(over_dispersion_params)) {
     nb_mat$SE = (OM_mat$proportion - nb_mat$value)^2
     nb_mat$type = "Negative Binomial"
     nb_mat$sim = sim
-    full_move_df = rbind(full_move_df, rbind(pois_mat, recap_mat, multi_recap_mat, multi_release_mat, nb_mat))
+    full_move_df = rbind(full_move_df, rbind(pois_mat, recap_mat, multi_release_mat, nb_mat))
   }
   prop_obs_zero = temp_proportion_zeros_sim_data / (dim(data$tag_recovery_obs)[1] * dim(data$tag_recovery_obs)[2] * dim(data$tag_recovery_obs)[3])
   tmp_df = data.frame(avg_proportion_zero = mean(prop_obs_zero), avg_var = mean(temp_variance_sim_data), over_dispersion_param = this_dispersion)
@@ -285,7 +280,7 @@ kable(sim_data_info, caption = "Average proportion of zeros and variance of simu
 ```
 
 
-```{r taglikesummaryplotsRE, echo = F, eval = T, warning=FALSE, message=FALSE, error = FALSE, fig.cap="Relative error in movement parameters. Columns are overdispersion values for simulated data. GGplot facets are movement matrix elemen combinatons"}
+```{r taglikesummaryplotsRE, echo = F, eval = T, warning=FALSE, message=FALSE, error = FALSE, fig.cap="Relative error in movement parameters. Columns are overdispersion values for simulated data. GGplot facets are movement matrix elemen combinatons", fig.height=10}
 ggplot(complete_df, aes(y = RE, col = type, x = type)) +
   geom_boxplot() +
   ylim(-100, 150) +
@@ -297,7 +292,7 @@ ggplot(complete_df, aes(y = RE, col = type, x = type)) +
 ```
 
 
-```{r taglikesummaryplotsEst, echo = F, eval = T, warning=FALSE, message=FALSE, error = FALSE, fig.cap="Estimated movement parameters, red line is true value. Columns are overdispersion values for simulated data. GGplot facets are movement matrix elemen combinatons"}
+```{r taglikesummaryplotsEst, echo = F, eval = T, warning=FALSE, message=FALSE, error = FALSE, fig.cap="Estimated movement parameters, red line is true value. Columns are overdispersion values for simulated data. GGplot facets are movement matrix elemen combinatons", fig.height=10}
 
 ggplot(complete_df) +
   geom_boxplot(aes(y = proportion, col = type, x = type)) +
@@ -305,7 +300,9 @@ ggplot(complete_df) +
   ylim(0, 1) +
   labs(x = "", y= "Estimated Movement parameters", col = "Likelihood") +
   theme_bw() +
-  facet_grid(From~To~over_dispersion_param)
+  facet_grid(From~To~over_dispersion_param) +
+  theme(axis.text.x = element_blank())
+
 
 ```
 
