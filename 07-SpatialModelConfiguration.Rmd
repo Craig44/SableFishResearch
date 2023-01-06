@@ -74,7 +74,7 @@ include_graphics(file.path("Figures", "Observation_Frequency.png"))
 ```
 
 
-```{r initialspatialObservations, out.width = '100%', fig.height= 7, fig.cap="Catch (kilo tonnes) by gear and area.", echo = F, eval = T}
+```{r initialcatch, out.width = '100%', fig.height= 7, fig.cap="Catch (kilo tonnes) by gear and area.", echo = F, eval = T}
 include_graphics(file.path("Figures", "InputCatches.png"))
 ```
 
