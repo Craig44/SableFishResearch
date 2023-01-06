@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 Tag likelihoods | Alaskan sablefish research</title>
+  <meta name="description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 Tag likelihoods | Alaskan sablefish research" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Tag likelihoods | Alaskan sablefish research" />
+  
+  <meta name="twitter:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
+  
+
+<meta name="author" content="C.Marsh" />
+
+
+<meta name="date" content="2023-01-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="tagdata.html"/>
+<link rel="next" href="growth.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Sablefish Research</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#gitbook-outline"><i class="fa fa-check"></i>Gitbook outline</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#future-things-to-consider"><i class="fa fa-check"></i>Future things to consider</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="objectives.html"><a href="objectives.html"><i class="fa fa-check"></i><b>2</b> A list of objectives/milestones that we have set along the project life</a></li>
+<li class="chapter" data-level="3" data-path="modeldescription.html"><a href="modeldescription.html"><i class="fa fa-check"></i><b>3</b> Current Alaskan sablefish stock assessment model</a>
+<ul>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#process-equations"><i class="fa fa-check"></i>Process equations</a>
+<ul>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#initialisation-gleft.right"><i class="fa fa-check"></i>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#population-dynamics-fleft.right"><i class="fa fa-check"></i>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#observation-equations-llleft-.-right"><i class="fa fa-check"></i>Observation equations (<span class="math inline">\(ll\left( . \right)\)</span>)</a>
+<ul>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-age"><i class="fa fa-check"></i>Catch at age</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#relative-abundance-indices"><i class="fa fa-check"></i>Relative abundance indices</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-length"><i class="fa fa-check"></i>Catch at length</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#symbol-notation"><i class="fa fa-check"></i>Symbol Notation</a>
+<ul>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#inference"><i class="fa fa-check"></i>Inference</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#todo"><i class="fa fa-check"></i>TODO</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html"><i class="fa fa-check"></i><b>4</b> Spatial stock assessment model for Alaskan sablefish</a>
+<ul>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#process-equations-1"><i class="fa fa-check"></i>Process equations</a>
+<ul>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#population-dynamics"><i class="fa fa-check"></i>Population dynamics</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#initialisation"><i class="fa fa-check"></i>Initialisation</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#growth"><i class="fa fa-check"></i>Growth</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#recruitment"><i class="fa fa-check"></i>Recruitment</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#fishing-mortality"><i class="fa fa-check"></i>Fishing mortality</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#tag-release-events"><i class="fa fa-check"></i>Tag release events</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#observation-equations"><i class="fa fa-check"></i>Observation equations</a>
+<ul>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#catch-at-age-1"><i class="fa fa-check"></i>Catch at age</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#catch-at-length-1"><i class="fa fa-check"></i>Catch at length</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#proportions-at-age"><i class="fa fa-check"></i>Proportions at age</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#relative-abundance-indices-1"><i class="fa fa-check"></i>Relative abundance indices</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#tag-recovery-observations"><i class="fa fa-check"></i>Tag recovery observations</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#considerations-for-determining-the-spatial-resolution-of-the-model"><i class="fa fa-check"></i>Considerations for determining the spatial resolution of the model</a>
+<ul>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#appendix"><i class="fa fa-check"></i>Appendix</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="surveydata.html"><a href="surveydata.html"><i class="fa fa-check"></i><b>5</b> Survey data</a>
+<ul>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#abundance-data"><i class="fa fa-check"></i>Abundance data</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-data"><i class="fa fa-check"></i>Age data</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#length-frequencies"><i class="fa fa-check"></i>Length frequencies</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-frequencies"><i class="fa fa-check"></i>Age frequencies</a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="surveydata.html"><a href="surveydata.html#direct-ageing-estimators"><i class="fa fa-check"></i><b>5.0.1</b> Direct ageing estimators</a></li>
+<li class="chapter" data-level="5.0.2" data-path="surveydata.html"><a href="surveydata.html#age-length-key-estimators"><i class="fa fa-check"></i><b>5.0.2</b> Age length key estimators</a></li>
+<li class="chapter" data-level="5.0.3" data-path="surveydata.html"><a href="surveydata.html#observation-error-estimates"><i class="fa fa-check"></i><b>5.0.3</b> Observation error estimates</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-length-data"><i class="fa fa-check"></i>Age-length data</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#appendix-1"><i class="fa fa-check"></i>Appendix</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="observerdata.html"><a href="observerdata.html"><i class="fa fa-check"></i><b>6</b> Fishery dependent data</a>
+<ul>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#catch-data"><i class="fa fa-check"></i>Catch data</a></li>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#length-data"><i class="fa fa-check"></i>Length data</a>
+<ul>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#regression-tree-analysis"><i class="fa fa-check"></i>regression tree analysis</a></li>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#catch-at-length-estimator"><i class="fa fa-check"></i>Catch at length estimator</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-data-1"><i class="fa fa-check"></i>Age data</a>
+<ul>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-length-keys"><i class="fa fa-check"></i>Age length keys</a></li>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#continuation-ratio-logits-crl"><i class="fa fa-check"></i>Continuation ratio logits (CRL)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>7</b> Tagging data exploration</a>
+<ul>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#exploratory-analysis-of-the-tag-data"><i class="fa fa-check"></i>Exploratory analysis of the tag data</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#integrating-tagging-observations-in-spatial-age-structured-models"><i class="fa fa-check"></i>Integrating tagging observations in spatial age-structured models</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tagging-things-to-consider-with-relevant-references"><i class="fa fa-check"></i>Tagging things to consider with relevant references</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#releasing-tags"><i class="fa fa-check"></i>Releasing tags</a>
+<ul>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#things-to-consider-for-tag-release"><i class="fa fa-check"></i>Things to consider for tag release</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tag-recovery-observations-1"><i class="fa fa-check"></i>Tag recovery observations</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="taglike.html"><a href="taglike.html"><i class="fa fa-check"></i><b>8</b> Tag likelihoods</a>
+<ul>
+<li class="chapter" data-level="" data-path="taglike.html"><a href="taglike.html#likelihoods"><i class="fa fa-check"></i>Likelihoods</a>
+<ul>
+<li class="chapter" data-level="" data-path="taglike.html"><a href="taglike.html#poisson"><i class="fa fa-check"></i>Poisson</a></li>
+<li class="chapter" data-level="" data-path="taglike.html"><a href="taglike.html#negative-binomial"><i class="fa fa-check"></i>Negative Binomial</a></li>
+<li class="chapter" data-level="" data-path="taglike.html"><a href="taglike.html#multinomialrelease-conditioned"><i class="fa fa-check"></i>Multinomial:release conditioned</a></li>
+<li class="chapter" data-level="" data-path="taglike.html"><a href="taglike.html#recapture-conditioned"><i class="fa fa-check"></i>Recapture conditioned</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="taglike.html"><a href="taglike.html#simple-simulation"><i class="fa fa-check"></i>Simple simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#growth"><i class="fa fa-check"></i><b>9</b> Growth</a>
+<ul>
+<li class="chapter" data-level="" data-path="growth.html"><a href="growth.html"><i class="fa fa-check"></i>Growth estimation using the Laslett–Eveson–Polacheck (LEP) method</a>
+<ul>
+<li class="chapter" data-level="" data-path="growth.html"><a href="growth.html#age-at-length-growth-model"><i class="fa fa-check"></i>Age-at-length growth model</a></li>
+<li class="chapter" data-level="" data-path="growth.html"><a href="growth.html#tag-recapture-growth-data"><i class="fa fa-check"></i>Tag recapture growth data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="growth.html"><a href="growth.html#simulation-test-the-lep-method"><i class="fa fa-check"></i>Simulation test the “LEP” method</a></li>
+<li class="chapter" data-level="" data-path="growth.html"><a href="growth.html#next-steps"><i class="fa fa-check"></i>Next steps</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="refpoints.html"><a href="refpoints.html"><i class="fa fa-check"></i><b>10</b> Review/summarise reference points</a></li>
+<li class="chapter" data-level="11" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>11</b> Sex ratios in age and length composition data</a>
+<ul>
+<li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#a-simple-simulation"><i class="fa fa-check"></i>A simple simulation</a>
+<ul>
+<li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#results"><i class="fa fa-check"></i>Results</a></li>
+<li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#future-research-that-was-not-considered-in-this-simple-simulation"><i class="fa fa-check"></i>Future research that was not considered in this simple simulation</a></li>
+<li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#scenario-1"><i class="fa fa-check"></i>Scenario 1</a></li>
+<li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#scenario-2"><i class="fa fa-check"></i>Scenario 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="Fexplore.html"><a href="Fexplore.html"><i class="fa fa-check"></i><b>12</b> Fishing mortality approaches</a>
+<ul>
+<li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#set-up-a-simulation"><i class="fa fa-check"></i>Set up a simulation</a></li>
+<li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#appendix---hybrid-approach"><i class="fa fa-check"></i>Appendix - Hybrid approach</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="spatialInit.html"><a href="spatialInit.html"><i class="fa fa-check"></i><b>13</b> Initialising the plus group in spatial models</a></li>
+<li class="chapter" data-level="14" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i><b>14</b> Glossary of terms</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment" target="blank">NOAA Website</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Alaskan sablefish research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="taglike" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Tag likelihoods<a href="taglike.html#taglike" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This section explores a range of tag-recovery likelihoods that have been used in the literature. I simple tag recapture model is used in a simulation to explore how well different likelihoods estimate movement parameters under a range of dispersion conditions. The tag-recapture model ignores age and models number of tagged fish from a release event denoted by <span class="math inline">\(k\)</span> over three regions indexed by <span class="math inline">\(r\)</span> for <span class="math inline">\(n_t\)</span> discrete time-steps. <span class="math inline">\(T^k_{r,t}\)</span> denotes the number of tagged fish from release event <span class="math inline">\(k\)</span> in region <span class="math inline">\(r\)</span> and time step <span class="math inline">\(t\)</span>. The model applies the following processes between time-steps.</p>
+<p><span class="math display">\[\begin{align*}
+T^k_{r,t + 1} &amp; = T^k_{r,t} e^{-Z_t} \\
+Z_t &amp; = M + F_t \\
+\boldsymbol{T}^k_{t + 1} &amp; = \boldsymbol{T}^k_{t + 1} \boldsymbol{M}
+\end{align*}\]</span>
+where, <span class="math inline">\(\boldsymbol{T}^k_{t + 1} = (T^k_{1,t + 1},\dots, T^k_{n_r,t + 1})\)</span> is a vector of numbers of tagged fish across all regions and <span class="math inline">\(\boldsymbol{M}\)</span> is a <span class="math inline">\(n_r \times n_r\)</span> movement matrix. This assumes each region has the same fishing mortality in each time-step.</p>
+<div id="likelihoods" class="section level2 unnumbered hasAnchor">
+<h2>Likelihoods<a href="taglike.html#likelihoods" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For all possible tag-recovery events indexed by <span class="math inline">\(m\)</span> (where <span class="math inline">\(m = \{r,t\}\)</span> i.e., has an implied region and time-step dimension) the tag-recapture model derives expected tag-recoveries. In this case, any time or region that has any fishing mortality rate is considered a possible tag-recovery event. All the likelihoods in the following sections use the same derivation for expected tag-recoveries, which follows</p>
+<p><span class="math display">\[
+N^k_{m} = T^k_{r,t} \left(1 - e^{-Z_t}\right) \frac{F_t}{Z_t}, \quad m = \{r,t\} \ .
+\]</span></p>
+<div id="poisson" class="section level3 unnumbered hasAnchor">
+<h3>Poisson<a href="taglike.html#poisson" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Poisson is the simplest likelihood, which was explored by <span class="citation">Hilborn (<a href="#ref-hilborn1990determination" role="doc-biblioref">1990</a>)</span>. It assumes</p>
+<p><span class="math display">\[
+N^k_{m} \sim \mathcal{Poisson}(\widehat{N}^k_{m}) \,
+\]</span></p>
+<p>with the total log-likelihood contribution evaluating the Poisson log-likelihood over all possible release and recovery events (<span class="math inline">\(\sum\limits_k\sum\limits_m\)</span>)</p>
+</div>
+<div id="negative-binomial" class="section level3 unnumbered hasAnchor">
+<h3>Negative Binomial<a href="taglike.html#negative-binomial" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A similar likelihood to the Poisson is the Negative Binomial which was explored by <span class="citation">Hanselman et al. (<a href="#ref-hanselman2015move" role="doc-biblioref">2015</a>)</span>. This is a more flexible likelihood as it allows for over dispersion, through an additional estimable parameter denoted by <span class="math inline">\(\phi\)</span></p>
+<p><span class="math display">\[
+N^k_{m} \sim \mathcal{NB}(\widehat{N}^k_{m}, \widehat{\phi}) \,
+\]</span></p>
+<p>with the total log-likelihood contribution evaluating the Negative binomial log-likelihood over all possible release and recovery events (<span class="math inline">\(\sum\limits_k\sum\limits_m\)</span>)</p>
+</div>
+<div id="multinomialrelease-conditioned" class="section level3 unnumbered hasAnchor">
+<h3>Multinomial:release conditioned<a href="taglike.html#multinomialrelease-conditioned" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The release conditioned multinomial likelihood was explored by <span class="citation">Polacheck et al. (<a href="#ref-polacheck2006integrating" role="doc-biblioref">2006</a>)</span> and subsequently by <span class="citation">Vincent, Brenden, and Bence (<a href="#ref-vincent2020parameter" role="doc-biblioref">2020</a>)</span> &amp; <span class="citation">D. R. Goethel, Legault, and Cadrin (<a href="#ref-goethel2014demonstration" role="doc-biblioref">2014</a>)</span>. This treats all recovery events plus an additional not-recovered event as a multinomial distributed event.</p>
+<p><span class="math display">\[
+\boldsymbol{N}^k \sim \mathcal{Multinomial}\left(\widehat{\boldsymbol{\theta}}^k\right)
+\]</span>
+where, <span class="math inline">\(\boldsymbol{N}^k\)</span> is the vector of tag-recoveries for all possible recovery events (<span class="math inline">\(n_m\)</span>) plus an additional not-recovered event.
+<span class="math display">\[
+\boldsymbol{N}^k = (N^k_1, N^k_2, \dots, N^k_{n_m}, N^k_{NR})
+\]</span>
+where, <span class="math inline">\(N^k_{NR}\)</span> represents the not recovered category and is <span class="math inline">\(N^k_{NR} = T^k - \sum\limits_m^{n_m}\)</span>, where <span class="math inline">\(T^k\)</span> is the initial number of tags released for event <span class="math inline">\(k\)</span>. <span class="math inline">\(\widehat{\boldsymbol{\theta}}^k\)</span> is a vector of proportions that sum to one, with the same dimensions as <span class="math inline">\(\boldsymbol{N}^k\)</span> and is calculated as,</p>
+<p><span class="math display">\[
+\widehat{\theta}^k_m = \frac{\widehat{N}^k_{m}}{T^k}, \quad \forall \ m \in (1, \dots,n_m)
+\]</span>
+where, again <span class="math inline">\(T^k\)</span> is the initial number of tags released for event <span class="math inline">\(k\)</span>. The proportions for the not recaptured group is calculated as,
+<span class="math display">\[
+\widehat{\theta}^k_{NR} = 1 - \sum_m^{n_m} \widehat{\theta}^k_m
+\]</span></p>
+</div>
+<div id="recapture-conditioned" class="section level3 unnumbered hasAnchor">
+<h3>Recapture conditioned<a href="taglike.html#recapture-conditioned" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The multinomial which is recapture conditioned was described by <span class="citation">Vincent, Brenden, and Bence (<a href="#ref-vincent2020parameter" role="doc-biblioref">2020</a>)</span> but based on the original work of <span class="citation">McGarvey and Feenstra (<a href="#ref-mcgarvey2002estimating" role="doc-biblioref">2002</a>)</span> (described in the next section). This likelihood evaluates the probability of recapturing a tagged fish in a certain region among all possible regions for a given release event and time-period.</p>
+<p><span class="math display">\[
+\boldsymbol{N}^k_t \sim \mathcal{Multinomial}\left(\widehat{\boldsymbol{\theta}}_t^k\right)
+\]</span>
+where, <span class="math inline">\(\boldsymbol{N}^k_t\)</span> is the vector of tag-recoveries in all regions (<span class="math inline">\(n_m\)</span>) for release event <span class="math inline">\(k\)</span> and time period <span class="math inline">\(t\)</span>
+<span class="math display">\[
+\boldsymbol{N}^k_t = (N^k_{1,t}, N^k_{2,t}, \dots, N^k_{n_r,t})
+\]</span>
+and model predicted proportions
+<span class="math display">\[
+\widehat{\boldsymbol{\theta}}_t^k = (\widehat{\theta}^k_{1,t}, \widehat{\theta}^k_{2,t}, \dots, \widehat{\theta}^k_{n_r,t})
+\]</span>
+and,</p>
+<p><span class="math display">\[
+\widehat{\theta}^k_{r,t} = \frac{\widehat{\theta}^k_{r,t}}{\sum\limits_r \widehat{\theta}^k_{r,t}}
+\]</span></p>
+<p>The literature <span class="citation">(<a href="#ref-mcgarvey2002estimating" role="doc-biblioref">McGarvey and Feenstra 2002</a>; <a href="#ref-vincent2020parameter" role="doc-biblioref">Vincent, Brenden, and Bence 2020</a>)</span> often describes the log likelihood as</p>
+<p><span class="math display">\[
+ll = \sum_k\sum_y\sum_r log(\widehat{\theta}^k_{r,t}) \times N^k_{r,t}
+\]</span></p>
+</div>
+</div>
+<div id="simple-simulation" class="section level2 unnumbered hasAnchor">
+<h2>Simple simulation<a href="taglike.html#simple-simulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To explore these likelihoods are very simple simulation was setup to see how well each likelihood could estimate elements of <span class="math inline">\(\boldsymbol{M}\)</span> under different levels of over dispersion. The simulation assumes all tags encountered where reported (100% reporting rate) and both natural mortality and fishing mortality are known without error. The only estimated parameters were <span class="math inline">\(\boldsymbol{M}\)</span> and <span class="math inline">\(\phi\)</span> when the negative binomial likelihood was explored.</p>
+<p>The following is some R-code that was used to generate operatint model values for</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="taglike.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb3-2"><a href="taglike.html#cb3-2" aria-hidden="true" tabindex="-1"></a>n_y <span class="ot">=</span> <span class="dv">5</span></span>
+<span id="cb3-3"><a href="taglike.html#cb3-3" aria-hidden="true" tabindex="-1"></a>n_regions <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb3-4"><a href="taglike.html#cb3-4" aria-hidden="true" tabindex="-1"></a>M <span class="ot">=</span> <span class="fl">0.13</span></span>
+<span id="cb3-5"><a href="taglike.html#cb3-5" aria-hidden="true" tabindex="-1"></a>F_y <span class="ot">=</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> n_y, <span class="fu">log</span>(<span class="fl">0.2</span>), <span class="fl">0.6</span>)</span>
+<span id="cb3-6"><a href="taglike.html#cb3-6" aria-hidden="true" tabindex="-1"></a>Z_y <span class="ot">=</span> F_y <span class="sc">+</span> M</span>
+<span id="cb3-7"><a href="taglike.html#cb3-7" aria-hidden="true" tabindex="-1"></a>S_y <span class="ot">=</span> <span class="fu">exp</span>(<span class="sc">-</span>Z_y)</span>
+<span id="cb3-8"><a href="taglike.html#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># make up some random movement matrix</span></span>
+<span id="cb3-9"><a href="taglike.html#cb3-9" aria-hidden="true" tabindex="-1"></a>move_matrix <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">ncol =</span> n_regions, <span class="at">nrow =</span> n_regions)</span>
+<span id="cb3-10"><a href="taglike.html#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(move_matrix) <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="fl">0.5</span>, <span class="fl">0.6</span>)</span>
+<span id="cb3-11"><a href="taglike.html#cb3-11" aria-hidden="true" tabindex="-1"></a>move_matrix <span class="ot">=</span> move_matrix <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n_regions <span class="sc">*</span> n_regions, <span class="fl">0.1</span>,<span class="fl">0.05</span>)</span>
+<span id="cb3-12"><a href="taglike.html#cb3-12" aria-hidden="true" tabindex="-1"></a>move_matrix <span class="ot">=</span> <span class="fu">sweep</span>(move_matrix, <span class="at">MARGIN =</span> <span class="dv">1</span>, <span class="at">STATS =</span> <span class="fu">rowSums</span>(move_matrix), <span class="at">FUN =</span> <span class="st">&quot;/&quot;</span>)</span>
+<span id="cb3-13"><a href="taglike.html#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="do">## seed tag releases</span></span>
+<span id="cb3-14"><a href="taglike.html#cb3-14" aria-hidden="true" tabindex="-1"></a>tag_release_by_region <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">1000</span>, n_regions)</span>
+<span id="cb3-15"><a href="taglike.html#cb3-15" aria-hidden="true" tabindex="-1"></a>n_release_events <span class="ot">=</span> n_regions</span>
+<span id="cb3-16"><a href="taglike.html#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate tag-partition</span></span>
+<span id="cb3-17"><a href="taglike.html#cb3-17" aria-hidden="true" tabindex="-1"></a>tags_partition_by_release_event <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(n_regions, n_y <span class="sc">+</span> <span class="dv">1</span>, n_release_events))</span>
+<span id="cb3-18"><a href="taglike.html#cb3-18" aria-hidden="true" tabindex="-1"></a>expected_tag_recoveries  <span class="ot">=</span> tag_recovery_obs <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(n_regions, n_y, n_release_events))</span>
+<span id="cb3-19"><a href="taglike.html#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(r <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_release_events)</span>
+<span id="cb3-20"><a href="taglike.html#cb3-20" aria-hidden="true" tabindex="-1"></a>  tags_partition_by_release_event[r,<span class="dv">1</span>,r] <span class="ot">=</span> tag_release_by_region[r]</span>
+<span id="cb3-21"><a href="taglike.html#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(y <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_y) {</span>
+<span id="cb3-22"><a href="taglike.html#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(rel_event <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_release_events) {</span>
+<span id="cb3-23"><a href="taglike.html#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="do">## ageing and F</span></span>
+<span id="cb3-24"><a href="taglike.html#cb3-24" aria-hidden="true" tabindex="-1"></a>    tags_partition_by_release_event[,y <span class="sc">+</span> <span class="dv">1</span>, rel_event] <span class="ot">=</span> </span>
+<span id="cb3-25"><a href="taglike.html#cb3-25" aria-hidden="true" tabindex="-1"></a>      tags_partition_by_release_event[,y,rel_event] <span class="sc">*</span> S_y[y]</span>
+<span id="cb3-26"><a href="taglike.html#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Movement</span></span>
+<span id="cb3-27"><a href="taglike.html#cb3-27" aria-hidden="true" tabindex="-1"></a>    tags_partition_by_release_event[,y <span class="sc">+</span> <span class="dv">1</span>, rel_event] <span class="ot">=</span> </span>
+<span id="cb3-28"><a href="taglike.html#cb3-28" aria-hidden="true" tabindex="-1"></a>      tags_partition_by_release_event[,y <span class="sc">+</span> <span class="dv">1</span>, rel_event] <span class="sc">%*%</span> move_matrix</span>
+<span id="cb3-29"><a href="taglike.html#cb3-29" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-30"><a href="taglike.html#cb3-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-31"><a href="taglike.html#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="taglike.html#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="do">## Create tag-recovery expected values</span></span>
+<span id="cb3-33"><a href="taglike.html#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(rel_event <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_regions) {</span>
+<span id="cb3-34"><a href="taglike.html#cb3-34" aria-hidden="true" tabindex="-1"></a>  expected_tag_recoveries[,,rel_event] <span class="ot">=</span> </span>
+<span id="cb3-35"><a href="taglike.html#cb3-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sweep</span>(tags_partition_by_release_event[ ,<span class="dv">2</span><span class="sc">:</span>(n_y <span class="sc">+</span> <span class="dv">1</span>),rel_event], <span class="at">MARGIN =</span> <span class="dv">2</span>, <span class="at">STATS =</span>  F_y <span class="sc">/</span> Z_y <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> S_y), <span class="at">FUN =</span> <span class="st">&quot;*&quot;</span>)</span>
+<span id="cb3-36"><a href="taglike.html#cb3-36" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The following code chunk assumes <code>tags_partition_by_release_event</code> is the same among simulations, but uses the negative binomial with a range of over-dispersion parameters to simulate tag-recoveries for <code>n_sim</code> times. We explore Relative error (RE) and mean square error (MSE) for the different likelihood choices.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="taglike.html#cb4-1" aria-hidden="true" tabindex="-1"></a>n_sim <span class="ot">=</span> <span class="dv">500</span></span>
+<span id="cb4-2"><a href="taglike.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Populate TMB objects</span></span>
+<span id="cb4-3"><a href="taglike.html#cb4-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb4-4"><a href="taglike.html#cb4-4" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>n_y <span class="ot">=</span> n_y</span>
+<span id="cb4-5"><a href="taglike.html#cb4-5" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>n_regions <span class="ot">=</span> n_regions</span>
+<span id="cb4-6"><a href="taglike.html#cb4-6" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>M <span class="ot">=</span> M</span>
+<span id="cb4-7"><a href="taglike.html#cb4-7" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>F_y <span class="ot">=</span> F_y</span>
+<span id="cb4-8"><a href="taglike.html#cb4-8" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>tag_likelihood <span class="ot">=</span> <span class="dv">0</span> <span class="do">## Poisson</span></span>
+<span id="cb4-9"><a href="taglike.html#cb4-9" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>tag_recovery_obs <span class="ot">=</span> tag_recovery_obs</span>
+<span id="cb4-10"><a href="taglike.html#cb4-10" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>number_of_tags_released <span class="ot">=</span> tag_release_by_region</span>
+<span id="cb4-11"><a href="taglike.html#cb4-11" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>movement_transformation <span class="ot">=</span> <span class="dv">0</span> <span class="do">## simplex, can use the logistic transformation as well</span></span>
+<span id="cb4-12"><a href="taglike.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="do">## starting values</span></span>
+<span id="cb4-13"><a href="taglike.html#cb4-13" aria-hidden="true" tabindex="-1"></a>est_parameters <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb4-14"><a href="taglike.html#cb4-14" aria-hidden="true" tabindex="-1"></a>start_matrix <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">ncol =</span> n_regions, <span class="at">nrow =</span> n_regions)</span>
+<span id="cb4-15"><a href="taglike.html#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(start_matrix) <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">0.95</span>, <span class="fl">0.95</span>, <span class="fl">0.95</span>)</span>
+<span id="cb4-16"><a href="taglike.html#cb4-16" aria-hidden="true" tabindex="-1"></a>start_matrix <span class="ot">=</span> start_matrix <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n_regions <span class="sc">*</span> n_regions, <span class="fl">0.02</span>,<span class="fl">0.0001</span>)</span>
+<span id="cb4-17"><a href="taglike.html#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="do">## force to sum = 1</span></span>
+<span id="cb4-18"><a href="taglike.html#cb4-18" aria-hidden="true" tabindex="-1"></a>start_matrix <span class="ot">=</span> <span class="fu">sweep</span>(start_matrix, <span class="at">MARGIN =</span> <span class="dv">1</span>, <span class="at">STATS =</span> <span class="fu">rowSums</span>(start_matrix), <span class="at">FUN =</span> <span class="st">&quot;/&quot;</span>)</span>
+<span id="cb4-19"><a href="taglike.html#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="taglike.html#cb4-20" aria-hidden="true" tabindex="-1"></a>est_parameters<span class="sc">$</span>transformed_movement_pars <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> n_regions <span class="sc">-</span> <span class="dv">1</span>, <span class="at">ncol =</span> n_regions)</span>
+<span id="cb4-21"><a href="taglike.html#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_regions)</span>
+<span id="cb4-22"><a href="taglike.html#cb4-22" aria-hidden="true" tabindex="-1"></a>  est_parameters<span class="sc">$</span>transformed_movement_pars[,i] <span class="ot">=</span> <span class="fu">simplex</span>(start_matrix[i,])</span>
+<span id="cb4-23"><a href="taglike.html#cb4-23" aria-hidden="true" tabindex="-1"></a>est_parameters<span class="sc">$</span>ln_phi <span class="ot">=</span> <span class="fu">log</span>(<span class="dv">1</span>)</span>
+<span id="cb4-24"><a href="taglike.html#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="do">## don&#39;t estimate phi parameter unless Negative binomial</span></span>
+<span id="cb4-25"><a href="taglike.html#cb4-25" aria-hidden="true" tabindex="-1"></a>na_map <span class="ot">=</span> <span class="fu">fix_pars</span>(<span class="at">par_list =</span> est_parameters, <span class="at">pars_to_exclude =</span> <span class="st">&quot;ln_phi&quot;</span>)</span>
+<span id="cb4-26"><a href="taglike.html#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="taglike.html#cb4-27" aria-hidden="true" tabindex="-1"></a>OM_mat <span class="ot">=</span> <span class="fu">melt</span>(move_matrix)</span>
+<span id="cb4-28"><a href="taglike.html#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(OM_mat) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;From&quot;</span>, <span class="st">&quot;To&quot;</span>,<span class="st">&quot;proportion&quot;</span>)</span>
+<span id="cb4-29"><a href="taglike.html#cb4-29" aria-hidden="true" tabindex="-1"></a>OM_mat<span class="sc">$</span>type <span class="ot">=</span> <span class="st">&quot;OM&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="taglike.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">############################################</span></span>
+<span id="cb5-2"><a href="taglike.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">## over_diserpsion_investication</span></span>
+<span id="cb5-3"><a href="taglike.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="do">## what happens when we simualte from</span></span>
+<span id="cb5-4"><a href="taglike.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">## negative binomial with different </span></span>
+<span id="cb5-5"><a href="taglike.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="do">## over-dispersion parameters</span></span>
+<span id="cb5-6"><a href="taglike.html#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="do">############################################</span></span>
+<span id="cb5-7"><a href="taglike.html#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="taglike.html#cb5-8" aria-hidden="true" tabindex="-1"></a>over_dispersion_params <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">10</span>)</span>
+<span id="cb5-9"><a href="taglike.html#cb5-9" aria-hidden="true" tabindex="-1"></a>n_sim <span class="ot">=</span> <span class="dv">500</span></span>
+<span id="cb5-10"><a href="taglike.html#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># use the simplex</span></span>
+<span id="cb5-11"><a href="taglike.html#cb5-11" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>movement_transformation <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb5-12"><a href="taglike.html#cb5-12" aria-hidden="true" tabindex="-1"></a>sim_data_info <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb5-13"><a href="taglike.html#cb5-13" aria-hidden="true" tabindex="-1"></a>complete_df <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb5-14"><a href="taglike.html#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(over_ndx <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(over_dispersion_params)) {</span>
+<span id="cb5-15"><a href="taglike.html#cb5-15" aria-hidden="true" tabindex="-1"></a>  this_dispersion <span class="ot">=</span> over_dispersion_params[over_ndx]</span>
+<span id="cb5-16"><a href="taglike.html#cb5-16" aria-hidden="true" tabindex="-1"></a>  full_move_df <span class="ot">=</span> <span class="cn">NULL</span>;</span>
+<span id="cb5-17"><a href="taglike.html#cb5-17" aria-hidden="true" tabindex="-1"></a>  temp_proportion_zeros_sim_data <span class="ot">=</span> temp_variance_sim_data <span class="ot">=</span> <span class="fu">c</span>()</span>
+<span id="cb5-18"><a href="taglike.html#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(sim <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sim) {</span>
+<span id="cb5-19"><a href="taglike.html#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="do">## keep expected values the same among simulations</span></span>
+<span id="cb5-20"><a href="taglike.html#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(rel_event <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_release_events) {</span>
+<span id="cb5-21"><a href="taglike.html#cb5-21" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span>(y <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_y) {</span>
+<span id="cb5-22"><a href="taglike.html#cb5-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span>(r <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_regions) {</span>
+<span id="cb5-23"><a href="taglike.html#cb5-23" aria-hidden="true" tabindex="-1"></a>          tag_recovery_obs[r,y,rel_event] <span class="ot">=</span> <span class="fu">rnbinom</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">mu =</span> expected_tag_recoveries[ r,y,rel_event], <span class="at">size =</span> this_dispersion)</span>
+<span id="cb5-24"><a href="taglike.html#cb5-24" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb5-25"><a href="taglike.html#cb5-25" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb5-26"><a href="taglike.html#cb5-26" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-27"><a href="taglike.html#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="do">## summarise number of zeros and variance of observed data</span></span>
+<span id="cb5-28"><a href="taglike.html#cb5-28" aria-hidden="true" tabindex="-1"></a>    temp_proportion_zeros_sim_data <span class="ot">=</span> <span class="fu">c</span>(temp_proportion_zeros_sim_data, <span class="fu">sum</span>(tag_recovery_obs <span class="sc">==</span> <span class="dv">0</span>));</span>
+<span id="cb5-29"><a href="taglike.html#cb5-29" aria-hidden="true" tabindex="-1"></a>    temp_variance_sim_data <span class="ot">=</span> <span class="fu">c</span>(temp_variance_sim_data, <span class="fu">var</span>(tag_recovery_obs));</span>
+<span id="cb5-30"><a href="taglike.html#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="do">## save data</span></span>
+<span id="cb5-31"><a href="taglike.html#cb5-31" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>tag_recovery_obs <span class="ot">=</span> tag_recovery_obs</span>
+<span id="cb5-32"><a href="taglike.html#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="taglike.html#cb5-33" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Poisson</span></span>
+<span id="cb5-34"><a href="taglike.html#cb5-34" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>tag_likelihood <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb5-35"><a href="taglike.html#cb5-35" aria-hidden="true" tabindex="-1"></a>    est_obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(data, est_parameters, <span class="at">map =</span> na_map, <span class="at">DLL=</span><span class="st">&quot;SimpleTagEstimator&quot;</span>, <span class="at">silent =</span> T)</span>
+<span id="cb5-36"><a href="taglike.html#cb5-36" aria-hidden="true" tabindex="-1"></a>    est_obj<span class="sc">$</span>env<span class="sc">$</span>tracepar <span class="ot">=</span> F</span>
+<span id="cb5-37"><a href="taglike.html#cb5-37" aria-hidden="true" tabindex="-1"></a>    opt_poisson <span class="ot">=</span> <span class="fu">nlminb</span>(est_obj<span class="sc">$</span>par, est_obj<span class="sc">$</span>fn, est_obj<span class="sc">$</span>gr, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">iter.max =</span> <span class="dv">10000</span>, <span class="at">eval.max =</span> <span class="dv">10000</span>))</span>
+<span id="cb5-38"><a href="taglike.html#cb5-38" aria-hidden="true" tabindex="-1"></a>    poisson_rep <span class="ot">=</span> est_obj<span class="sc">$</span><span class="fu">report</span>(opt_poisson<span class="sc">$</span>par)</span>
+<span id="cb5-39"><a href="taglike.html#cb5-39" aria-hidden="true" tabindex="-1"></a>    sd_poisson <span class="ot">=</span> <span class="fu">sdreport</span>(est_obj)</span>
+<span id="cb5-40"><a href="taglike.html#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-41"><a href="taglike.html#cb5-41" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Multinomial release conditioned</span></span>
+<span id="cb5-42"><a href="taglike.html#cb5-42" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>tag_likelihood <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb5-43"><a href="taglike.html#cb5-43" aria-hidden="true" tabindex="-1"></a>    est_obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(data, est_parameters, <span class="at">map =</span> na_map, <span class="at">DLL=</span><span class="st">&quot;SimpleTagEstimator&quot;</span>, <span class="at">silent =</span>T)</span>
+<span id="cb5-44"><a href="taglike.html#cb5-44" aria-hidden="true" tabindex="-1"></a>    opt_multi_release <span class="ot">=</span> <span class="fu">nlminb</span>(est_obj<span class="sc">$</span>par, est_obj<span class="sc">$</span>fn, est_obj<span class="sc">$</span>gr, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">iter.max =</span> <span class="dv">10000</span>, <span class="at">eval.max =</span> <span class="dv">10000</span>))</span>
+<span id="cb5-45"><a href="taglike.html#cb5-45" aria-hidden="true" tabindex="-1"></a>    multi_release_rep <span class="ot">=</span> est_obj<span class="sc">$</span><span class="fu">report</span>(opt_multi_release<span class="sc">$</span>par)</span>
+<span id="cb5-46"><a href="taglike.html#cb5-46" aria-hidden="true" tabindex="-1"></a>    sd_multi_release <span class="ot">=</span> <span class="fu">sdreport</span>(est_obj)</span>
+<span id="cb5-47"><a href="taglike.html#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-48"><a href="taglike.html#cb5-48" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Multinomial recapture conditioned</span></span>
+<span id="cb5-49"><a href="taglike.html#cb5-49" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>tag_likelihood <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb5-50"><a href="taglike.html#cb5-50" aria-hidden="true" tabindex="-1"></a>    est_obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(data, est_parameters,<span class="at">map =</span> na_map,  <span class="at">DLL=</span><span class="st">&quot;SimpleTagEstimator&quot;</span>, <span class="at">silent =</span> T)</span>
+<span id="cb5-51"><a href="taglike.html#cb5-51" aria-hidden="true" tabindex="-1"></a>    opt_multi_recap <span class="ot">=</span> <span class="fu">nlminb</span>(est_obj<span class="sc">$</span>par, est_obj<span class="sc">$</span>fn, est_obj<span class="sc">$</span>gr, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">iter.max =</span> <span class="dv">10000</span>, <span class="at">eval.max =</span> <span class="dv">10000</span>))</span>
+<span id="cb5-52"><a href="taglike.html#cb5-52" aria-hidden="true" tabindex="-1"></a>    multi_recap_rep <span class="ot">=</span> est_obj<span class="sc">$</span><span class="fu">report</span>(opt_multi_recap<span class="sc">$</span>par)</span>
+<span id="cb5-53"><a href="taglike.html#cb5-53" aria-hidden="true" tabindex="-1"></a>    sd_multi_recap <span class="ot">=</span> <span class="fu">sdreport</span>(est_obj)</span>
+<span id="cb5-54"><a href="taglike.html#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-55"><a href="taglike.html#cb5-55" aria-hidden="true" tabindex="-1"></a>    <span class="do">## recapture conditioned</span></span>
+<span id="cb5-56"><a href="taglike.html#cb5-56" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>tag_likelihood <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb5-57"><a href="taglike.html#cb5-57" aria-hidden="true" tabindex="-1"></a>    est_obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(data, est_parameters,<span class="at">map =</span> na_map,  <span class="at">DLL=</span><span class="st">&quot;SimpleTagEstimator&quot;</span>, <span class="at">silent =</span> T)</span>
+<span id="cb5-58"><a href="taglike.html#cb5-58" aria-hidden="true" tabindex="-1"></a>    opt_recap <span class="ot">=</span> <span class="fu">nlminb</span>(est_obj<span class="sc">$</span>par, est_obj<span class="sc">$</span>fn, est_obj<span class="sc">$</span>gr, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">iter.max =</span> <span class="dv">10000</span>, <span class="at">eval.max =</span> <span class="dv">10000</span>))</span>
+<span id="cb5-59"><a href="taglike.html#cb5-59" aria-hidden="true" tabindex="-1"></a>    recap_rep <span class="ot">=</span> est_obj<span class="sc">$</span><span class="fu">report</span>(opt_recap<span class="sc">$</span>par)</span>
+<span id="cb5-60"><a href="taglike.html#cb5-60" aria-hidden="true" tabindex="-1"></a>    sd_recap <span class="ot">=</span> <span class="fu">sdreport</span>(est_obj)</span>
+<span id="cb5-61"><a href="taglike.html#cb5-61" aria-hidden="true" tabindex="-1"></a>    <span class="do">## Negative binomial</span></span>
+<span id="cb5-62"><a href="taglike.html#cb5-62" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>tag_likelihood <span class="ot">=</span> <span class="dv">4</span></span>
+<span id="cb5-63"><a href="taglike.html#cb5-63" aria-hidden="true" tabindex="-1"></a>    est_obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(data, est_parameters,  <span class="at">DLL=</span><span class="st">&quot;SimpleTagEstimator&quot;</span>, <span class="at">silent =</span> T)</span>
+<span id="cb5-64"><a href="taglike.html#cb5-64" aria-hidden="true" tabindex="-1"></a>    opt_nb <span class="ot">=</span> <span class="fu">nlminb</span>(est_obj<span class="sc">$</span>par, est_obj<span class="sc">$</span>fn, est_obj<span class="sc">$</span>gr, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">iter.max =</span> <span class="dv">10000</span>, <span class="at">eval.max =</span> <span class="dv">10000</span>))</span>
+<span id="cb5-65"><a href="taglike.html#cb5-65" aria-hidden="true" tabindex="-1"></a>    nb_rep <span class="ot">=</span> est_obj<span class="sc">$</span><span class="fu">report</span>(opt_nb<span class="sc">$</span>par)</span>
+<span id="cb5-66"><a href="taglike.html#cb5-66" aria-hidden="true" tabindex="-1"></a>    sd_nb <span class="ot">=</span> <span class="fu">sdreport</span>(est_obj)</span>
+<span id="cb5-67"><a href="taglike.html#cb5-67" aria-hidden="true" tabindex="-1"></a>    <span class="do">## reformat movement estimates</span></span>
+<span id="cb5-68"><a href="taglike.html#cb5-68" aria-hidden="true" tabindex="-1"></a>    pois_mat <span class="ot">=</span> <span class="fu">melt</span>(poisson_rep<span class="sc">$</span>movement_matrix)</span>
+<span id="cb5-69"><a href="taglike.html#cb5-69" aria-hidden="true" tabindex="-1"></a>    pois_mat<span class="sc">$</span>RE <span class="ot">=</span> (pois_mat<span class="sc">$</span>value <span class="sc">-</span> OM_mat<span class="sc">$</span>proportion) <span class="sc">/</span> OM_mat<span class="sc">$</span>proportion <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb5-70"><a href="taglike.html#cb5-70" aria-hidden="true" tabindex="-1"></a>    pois_mat<span class="sc">$</span>SE <span class="ot">=</span> (OM_mat<span class="sc">$</span>proportion <span class="sc">-</span> pois_mat<span class="sc">$</span>value)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb5-71"><a href="taglike.html#cb5-71" aria-hidden="true" tabindex="-1"></a>    pois_mat<span class="sc">$</span>type <span class="ot">=</span> <span class="st">&quot;Poisson&quot;</span></span>
+<span id="cb5-72"><a href="taglike.html#cb5-72" aria-hidden="true" tabindex="-1"></a>    pois_mat<span class="sc">$</span>sim <span class="ot">=</span> sim</span>
+<span id="cb5-73"><a href="taglike.html#cb5-73" aria-hidden="true" tabindex="-1"></a>    recap_mat <span class="ot">=</span> <span class="fu">melt</span>(recap_rep<span class="sc">$</span>movement_matrix)</span>
+<span id="cb5-74"><a href="taglike.html#cb5-74" aria-hidden="true" tabindex="-1"></a>    recap_mat<span class="sc">$</span>RE <span class="ot">=</span> (recap_mat<span class="sc">$</span>value <span class="sc">-</span> OM_mat<span class="sc">$</span>proportion) <span class="sc">/</span> OM_mat<span class="sc">$</span>proportion <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb5-75"><a href="taglike.html#cb5-75" aria-hidden="true" tabindex="-1"></a>    recap_mat<span class="sc">$</span>SE <span class="ot">=</span> (OM_mat<span class="sc">$</span>proportion <span class="sc">-</span> recap_mat<span class="sc">$</span>value)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb5-76"><a href="taglike.html#cb5-76" aria-hidden="true" tabindex="-1"></a>    recap_mat<span class="sc">$</span>type <span class="ot">=</span> <span class="st">&quot;Recapture&quot;</span></span>
+<span id="cb5-77"><a href="taglike.html#cb5-77" aria-hidden="true" tabindex="-1"></a>    recap_mat<span class="sc">$</span>sim <span class="ot">=</span> sim</span>
+<span id="cb5-78"><a href="taglike.html#cb5-78" aria-hidden="true" tabindex="-1"></a>    multi_recap_mat <span class="ot">=</span> <span class="fu">melt</span>(multi_recap_rep<span class="sc">$</span>movement_matrix)</span>
+<span id="cb5-79"><a href="taglike.html#cb5-79" aria-hidden="true" tabindex="-1"></a>    multi_recap_mat<span class="sc">$</span>RE <span class="ot">=</span> (multi_recap_mat<span class="sc">$</span>value <span class="sc">-</span> OM_mat<span class="sc">$</span>proportion) <span class="sc">/</span> OM_mat<span class="sc">$</span>proportion <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb5-80"><a href="taglike.html#cb5-80" aria-hidden="true" tabindex="-1"></a>    multi_recap_mat<span class="sc">$</span>SE <span class="ot">=</span> (OM_mat<span class="sc">$</span>proportion <span class="sc">-</span> multi_recap_mat<span class="sc">$</span>value)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb5-81"><a href="taglike.html#cb5-81" aria-hidden="true" tabindex="-1"></a>    multi_recap_mat<span class="sc">$</span>type <span class="ot">=</span> <span class="st">&quot;Multinomial Recapture&quot;</span></span>
+<span id="cb5-82"><a href="taglike.html#cb5-82" aria-hidden="true" tabindex="-1"></a>    multi_recap_mat<span class="sc">$</span>sim <span class="ot">=</span> sim</span>
+<span id="cb5-83"><a href="taglike.html#cb5-83" aria-hidden="true" tabindex="-1"></a>    multi_release_mat <span class="ot">=</span> <span class="fu">melt</span>(multi_release_rep<span class="sc">$</span>movement_matrix)</span>
+<span id="cb5-84"><a href="taglike.html#cb5-84" aria-hidden="true" tabindex="-1"></a>    multi_release_mat<span class="sc">$</span>RE <span class="ot">=</span> (multi_release_mat<span class="sc">$</span>value <span class="sc">-</span> OM_mat<span class="sc">$</span>proportion) <span class="sc">/</span> OM_mat<span class="sc">$</span>proportion <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb5-85"><a href="taglike.html#cb5-85" aria-hidden="true" tabindex="-1"></a>    multi_release_mat<span class="sc">$</span>SE <span class="ot">=</span> (OM_mat<span class="sc">$</span>proportion <span class="sc">-</span> multi_release_mat<span class="sc">$</span>value)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb5-86"><a href="taglike.html#cb5-86" aria-hidden="true" tabindex="-1"></a>    multi_release_mat<span class="sc">$</span>type <span class="ot">=</span> <span class="st">&quot;Multinomial Release&quot;</span></span>
+<span id="cb5-87"><a href="taglike.html#cb5-87" aria-hidden="true" tabindex="-1"></a>    multi_release_mat<span class="sc">$</span>sim <span class="ot">=</span> sim</span>
+<span id="cb5-88"><a href="taglike.html#cb5-88" aria-hidden="true" tabindex="-1"></a>    nb_mat <span class="ot">=</span> <span class="fu">melt</span>(nb_rep<span class="sc">$</span>movement_matrix)</span>
+<span id="cb5-89"><a href="taglike.html#cb5-89" aria-hidden="true" tabindex="-1"></a>    nb_mat<span class="sc">$</span>RE <span class="ot">=</span> (nb_mat<span class="sc">$</span>value <span class="sc">-</span> OM_mat<span class="sc">$</span>proportion) <span class="sc">/</span> OM_mat<span class="sc">$</span>proportion <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb5-90"><a href="taglike.html#cb5-90" aria-hidden="true" tabindex="-1"></a>    nb_mat<span class="sc">$</span>SE <span class="ot">=</span> (OM_mat<span class="sc">$</span>proportion <span class="sc">-</span> nb_mat<span class="sc">$</span>value)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb5-91"><a href="taglike.html#cb5-91" aria-hidden="true" tabindex="-1"></a>    nb_mat<span class="sc">$</span>type <span class="ot">=</span> <span class="st">&quot;Negative Binomial&quot;</span></span>
+<span id="cb5-92"><a href="taglike.html#cb5-92" aria-hidden="true" tabindex="-1"></a>    nb_mat<span class="sc">$</span>sim <span class="ot">=</span> sim</span>
+<span id="cb5-93"><a href="taglike.html#cb5-93" aria-hidden="true" tabindex="-1"></a>    full_move_df <span class="ot">=</span> <span class="fu">rbind</span>(full_move_df, <span class="fu">rbind</span>(pois_mat, recap_mat, multi_recap_mat, multi_release_mat, nb_mat))</span>
+<span id="cb5-94"><a href="taglike.html#cb5-94" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-95"><a href="taglike.html#cb5-95" aria-hidden="true" tabindex="-1"></a>  prop_obs_zero <span class="ot">=</span> temp_proportion_zeros_sim_data <span class="sc">/</span> (<span class="fu">dim</span>(data<span class="sc">$</span>tag_recovery_obs)[<span class="dv">1</span>] <span class="sc">*</span> <span class="fu">dim</span>(data<span class="sc">$</span>tag_recovery_obs)[<span class="dv">2</span>] <span class="sc">*</span> <span class="fu">dim</span>(data<span class="sc">$</span>tag_recovery_obs)[<span class="dv">3</span>])</span>
+<span id="cb5-96"><a href="taglike.html#cb5-96" aria-hidden="true" tabindex="-1"></a>  tmp_df <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">avg_proportion_zero =</span> <span class="fu">mean</span>(prop_obs_zero), <span class="at">avg_var =</span> <span class="fu">mean</span>(temp_variance_sim_data), <span class="at">over_dispersion_param =</span> this_dispersion)</span>
+<span id="cb5-97"><a href="taglike.html#cb5-97" aria-hidden="true" tabindex="-1"></a>  sim_data_info <span class="ot">=</span> <span class="fu">rbind</span>(sim_data_info, tmp_df)</span>
+<span id="cb5-98"><a href="taglike.html#cb5-98" aria-hidden="true" tabindex="-1"></a>  full_move_df<span class="sc">$</span>over_dispersion_param <span class="ot">=</span> this_dispersion</span>
+<span id="cb5-99"><a href="taglike.html#cb5-99" aria-hidden="true" tabindex="-1"></a>  complete_df <span class="ot">=</span> <span class="fu">rbind</span>(complete_df, full_move_df)</span>
+<span id="cb5-100"><a href="taglike.html#cb5-100" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<pre><code>## Warning in nlminb(est_obj$par, est_obj$fn, est_obj$gr, control = list(iter.max =
+## 10000, : NA/NaN function evaluation</code></pre>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<pre><code>## Warning in nlminb(est_obj$par, est_obj$fn, est_obj$gr, control = list(iter.max =
+## 10000, : NA/NaN function evaluation</code></pre>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<pre><code>## Warning in nlminb(est_obj$par, est_obj$fn, est_obj$gr, control = list(iter.max =
+## 10000, : NA/NaN function evaluation</code></pre>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<pre><code>## Warning in nlminb(est_obj$par, est_obj$fn, est_obj$gr, control = list(iter.max =
+## 10000, : NA/NaN function evaluation</code></pre>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<pre><code>## Warning in nlminb(est_obj$par, est_obj$fn, est_obj$gr, control = list(iter.max =
+## 10000, : NA/NaN function evaluation</code></pre>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<pre><code>## Warning in nlminb(est_obj$par, est_obj$fn, est_obj$gr, control = list(iter.max =
+## 10000, : NA/NaN function evaluation</code></pre>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<pre><code>## Warning in nlminb(est_obj$par, est_obj$fn, est_obj$gr, control = list(iter.max =
+## 10000, : NA/NaN function evaluation</code></pre>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<pre><code>## Warning in nlminb(est_obj$par, est_obj$fn, est_obj$gr, control = list(iter.max =
+## 10000, : NA/NaN function evaluation</code></pre>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<pre><code>## Warning in nlminb(est_obj$par, est_obj$fn, est_obj$gr, control = list(iter.max =
+## 10000, : NA/NaN function evaluation</code></pre>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<pre><code>## Warning in nlminb(est_obj$par, est_obj$fn, est_obj$gr, control = list(iter.max =
+## 10000, : NA/NaN function evaluation</code></pre>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<pre><code>## Warning in nlminb(est_obj$par, est_obj$fn, est_obj$gr, control = list(iter.max =
+## 10000, : NA/NaN function evaluation</code></pre>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<pre><code>## Warning in nlminb(est_obj$par, est_obj$fn, est_obj$gr, control = list(iter.max =
+## 10000, : NA/NaN function evaluation</code></pre>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<pre><code>## Warning in nlminb(est_obj$par, est_obj$fn, est_obj$gr, control = list(iter.max =
+## 10000, : NA/NaN function evaluation</code></pre>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<pre><code>## Warning in nlminb(est_obj$par, est_obj$fn, est_obj$gr, control = list(iter.max =
+## 10000, : NA/NaN function evaluation</code></pre>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<pre><code>## Warning in nlminb(est_obj$par, est_obj$fn, est_obj$gr, control = list(iter.max =
+## 10000, : NA/NaN function evaluation</code></pre>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<pre><code>## Warning in nlminb(est_obj$par, est_obj$fn, est_obj$gr, control = list(iter.max =
+## 10000, : NA/NaN function evaluation</code></pre>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<pre><code>## Warning in nlminb(est_obj$par, est_obj$fn, est_obj$gr, control = list(iter.max =
+## 10000, : NA/NaN function evaluation</code></pre>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<pre><code>## Warning in nlminb(est_obj$par, est_obj$fn, est_obj$gr, control = list(iter.max =
+## 10000, : NA/NaN function evaluation</code></pre>
+<pre><code>## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced
+
+## Warning in sqrt(diag(cov)): NaNs produced</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="taglike.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(complete_df) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;From&quot;</span>, <span class="st">&quot;To&quot;</span>,<span class="st">&quot;proportion&quot;</span>, <span class="st">&quot;RE&quot;</span>, <span class="st">&quot;SE&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;sim&quot;</span>, <span class="st">&quot;over_dispersion_param&quot;</span>)</span></code></pre></div>
+<table>
+<caption><span id="tab:overdispersiontable">Table 8.1: </span>Average proportion of zeros and variance of simulated data for different overdispersion settings.</caption>
+<thead>
+<tr class="header">
+<th align="right">avg_proportion_zero</th>
+<th align="right">avg_var</th>
+<th align="right">over_dispersion_param</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.6030667</td>
+<td align="right">10135.3877</td>
+<td align="right">0.1</td>
+</tr>
+<tr class="even">
+<td align="right">0.4170222</td>
+<td align="right">5552.9753</td>
+<td align="right">0.2</td>
+</tr>
+<tr class="odd">
+<td align="right">0.2956444</td>
+<td align="right">4003.5063</td>
+<td align="right">0.3</td>
+</tr>
+<tr class="even">
+<td align="right">0.1764444</td>
+<td align="right">2321.7189</td>
+<td align="right">0.5</td>
+</tr>
+<tr class="odd">
+<td align="right">0.0684444</td>
+<td align="right">1505.6692</td>
+<td align="right">1.0</td>
+</tr>
+<tr class="even">
+<td align="right">0.0018222</td>
+<td align="right">561.6672</td>
+<td align="right">10.0</td>
+</tr>
+</tbody>
+</table>
+<div class="figure"><span style="display:block;" id="fig:taglikesummaryplotsRE"></span>
+<img src="_main_files/figure-html/taglikesummaryplotsRE-1.png" alt="Relative error in movement parameters. Columns are overdispersion values for simulated data. GGplot facets are movement matrix elemen combinatons" width="672" />
+<p class="caption">
+Figure 8.1: Relative error in movement parameters. Columns are overdispersion values for simulated data. GGplot facets are movement matrix elemen combinatons
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:taglikesummaryplotsEst"></span>
+<img src="_main_files/figure-html/taglikesummaryplotsEst-1.png" alt="Estimated movement parameters, red line is true value. Columns are overdispersion values for simulated data. GGplot facets are movement matrix elemen combinatons" width="672" />
+<p class="caption">
+Figure 8.2: Estimated movement parameters, red line is true value. Columns are overdispersion values for simulated data. GGplot facets are movement matrix elemen combinatons
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:taglikesummaryplotsMSE"></span>
+<img src="_main_files/figure-html/taglikesummaryplotsMSE-1.png" alt="Mean squared error (MSE) over all simulations and estimated parameters." width="672" />
+<p class="caption">
+Figure 8.3: Mean squared error (MSE) over all simulations and estimated parameters.
+</p>
+</div>
+
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-goethel2014demonstration" class="csl-entry">
+Goethel, Daniel R, Christopher M Legault, and Steven X Cadrin. 2014. <span>“Demonstration of a Spatially Explicit, Tag-Integrated Stock Assessment Model with Application to Three Interconnected Stocks of Yellowtail Flounder Off of New England.”</span> <em>ICES Journal of Marine Science</em> 72 (1): 164–77.
+</div>
+<div id="ref-hanselman2015move" class="csl-entry">
+Hanselman, Dana H, Jonathan Heifetz, Katy B Echave, and Sherri C Dressel. 2015. <span>“Move It or Lose It: Movement and Mortality of Sablefish Tagged in Alaska.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 72 (2): 238–51.
+</div>
+<div id="ref-hilborn1990determination" class="csl-entry">
+Hilborn, Ray. 1990. <span>“Determination of Fish Movement Patterns from Tag Recoveries Using Maximum Likelihood Estimators.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 47 (3): 635–43.
+</div>
+<div id="ref-mcgarvey2002estimating" class="csl-entry">
+McGarvey, Richard, and John E Feenstra. 2002. <span>“Estimating Rates of Fish Movement from Tag Recoveries: Conditioning by Recapture.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 59 (6): 1054–64.
+</div>
+<div id="ref-polacheck2006integrating" class="csl-entry">
+Polacheck, Tom, J Paige Eveson, Geoff M Laslett, Kenneth H Pollock, and William S Hearn. 2006. <span>“Integrating Catch-at-Age and Multiyear Tagging Data: A Combined Brownie and Petersen Estimation Approach in a Fishery Context.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 63 (3): 534–48.
+</div>
+<div id="ref-vincent2020parameter" class="csl-entry">
+Vincent, Matthew T, Travis O Brenden, and James R Bence. 2020. <span>“Parameter Estimation Performance of a Recapture-Conditioned Integrated Tagging Catch-at-Age Analysis Model.”</span> <em>Fisheries Research</em> 224: 105451.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="tagdata.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="growth.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment/07-TagLikelihoods.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"depth": 1
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

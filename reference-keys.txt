@@ -37,6 +37,10 @@ fig:addagelength
 fig:showagelengthtransitionproblem
 eq:lengthexploit
 eq:tagatagerelease
+tab:overdispersiontable
+fig:taglikesummaryplotsRE
+fig:taglikesummaryplotsEst
+fig:taglikesummaryplotsMSE
 eq:richardsgrowth
 eq:lengthatrelease
 eq:lengthatrecapture
@@ -67,6 +71,7 @@ age-length-key-estimators
 observation-error-estimates
 observerdata
 tagdata
+taglike
 growth
 refpoints
 sexratios
