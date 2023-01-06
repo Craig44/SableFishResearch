@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Alaskan sablefish research</title>
+  <title>Chapter 8 Initial model setup | Alaskan sablefish research</title>
   <meta name="description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Alaskan sablefish research" />
+  <meta property="og:title" content="Chapter 8 Initial model setup | Alaskan sablefish research" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Alaskan sablefish research" />
+  <meta name="twitter:title" content="Chapter 8 Initial model setup | Alaskan sablefish research" />
   
   <meta name="twitter:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="objectives.html"/>
+<link rel="prev" href="tagdata.html"/>
+<link rel="next" href="taglike.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -309,54 +309,120 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Alaskan sablefish research</h1>
-<p class="author"><em>C.Marsh</em></p>
-<p class="date"><em>2023-01-06</em></p>
-</div>
-<div id="overview" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Overview<a href="index.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This Gitbook documents my/our research on Alaskan sablefish (<em>Anoplopoma fimbria</em>). The objective is to develop and explore a spatially explicit stock assessment model for the Alaskan sablefish stock. However, there will be many topics that I will touch on. This book outlines my research and thinking along with some rabbit holes I entered (and hopefully returned) during my post-doctoral research. The following section outlines chapters contained in this document.</p>
-<div id="gitbook-outline" class="section level2 unnumbered hasAnchor">
-<h2>Gitbook outline<a href="index.html#gitbook-outline" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="InitialModelSetup" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Initial model setup<a href="InitialModelSetup.html#InitialModelSetup" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <ul>
-<li><p>Chapter <a href="objectives.html#objectives">2</a> outlines a list of objectives that we have set or accomplished during this research project. Some of our research cannot be presented in this document due to the confidentiality reasons. However, this checklist should include all tasks during the project</p></li>
-<li><p>Chapter <a href="modeldescription.html#modeldescription">3</a> documents the current stock assessment model and assumptions (work in progress). This is the first step of the project, with the purpose of helping me understand the data and important process dynamics assumed in the current assessment. Most models used in this research is written in TMB <span class="citation">(<a href="#ref-kristensen2015tmb" role="doc-biblioref">Kristensen et al. 2015</a>)</span>, many of these are available in the <a href="https://github.com/Craig44/SpatialSablefishAssessment"><code>SpatialSablefishAssessment</code> R package</a>.</p></li>
-<li><p>Chapter <a href="spatialmodeldescription.html#spatialmodeldescription">4</a> documents a generalized spatial assessment model used as both an OM and EM during simulations.</p></li>
-<li><p>Chapter <a href="surveydata.html#surveydata">5</a> describes, characterizes and explores the survey longline data available for the the assessment.</p></li>
-<li><p>Chapter <a href="observerdata.html#observerdata">6</a> describes, characterizes and explores fishery dependent data, which includes reported catch (log-book data) and observer records.</p></li>
-<li><p>Chapter <a href="tagdata.html#tagdata">7</a> describes the tagging data and how it can be used within a spatial stock assessment model but also used in a panmictic model for informing population dynamics such as growth.</p></li>
-<li><p>Chapter <a href="sexratios.html#sexratios">12</a> explores how to include sex disaggregated composition observations that can include sex ratio information. It conducts a simple simulation to investigate two different approaches.</p></li>
-<li><p>Chapter <a href="Fexplore.html#Fexplore">13</a> explores how to parameterise fishing mortality. The current approach is to estimate an annual fishing mortality parameter for each gear as a free parameter. I feel slightly uncomfortable about this approach moving towards a spatial model as the number of estimated parameters will explode when a spatial dimension is explored. This chapter looks at two alternative approaches that either derive fishing mortality estimates using a Newton Raphson solver which is heavily borrowed from the Stock Synthesis “hybrid” approach <span class="citation">(<a href="#ref-methot2013stock" role="doc-biblioref">Methot Jr and Wetzel 2013</a>)</span> and Pope’s discrete approach <span class="citation">(<a href="#ref-pope1972investigation" role="doc-biblioref">Pope 1972</a>)</span> which uses exploitation rates. Both these methods have been applied in the literature for decades. The aim of this chapter is to do a simulation and make sure the considered approaches are efficient and numerically stability for the purposes of our research.</p></li>
-<li><p>Chapter <a href="spatialInit.html#spatialInit">14</a> explores how to calculate the plus group in spatially explicit age-structured models that assume markovian movement during initialization.</p></li>
+<li>When did we choose to start the model and why</li>
+<li>What spatial regions did we start with and why</li>
+<li>How many fisheries</li>
+<li>What observations were included?</li>
 </ul>
+<div id="model-start-time" class="section level2 unnumbered hasAnchor">
+<h2>Model start time<a href="InitialModelSetup.html#model-start-time" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The start year for the current stock assessment is 1960. This is the earlest year in which catch is available. There is early sex-aggregated length composition from the Japanese longline fleet along with a CPUE index for that same fleet in the 60’s/70’s. The survey data doesn’t kick in until mid to late 70’s. Unfortunately catch is the most limiting data input, where we can only go back to 1977 before we loose information on regional catch be gear method (pers comms kari Fenske). For this reason 1977 was the start year for the spatial assessment model.</p>
 </div>
-<div id="future-things-to-consider" class="section level2 unnumbered hasAnchor">
-<h2>Future things to consider<a href="index.html#future-things-to-consider" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>When is the latest year that we can start the model at? Currently the assessment model starts in 1960 because there is early survey and catch info along with some of the largest catches recorded. I want to explore starting the model at a later period i.e., the 1980’s when there is consistent surveys and age data. This is thought to reduce the number of estimable parameters that have low information (early recruitment deviations). However, the downfall is we may loose information on stock production because the 60’s and 70’s have some of the largest recorded catches.</li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TMB)</span>
-<span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#library(stockassessmenthelper)</span></span>
-<span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-4"><a href="index.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-5"><a href="index.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
-<span id="cb1-6"><a href="index.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
-<span id="cb1-7"><a href="index.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb1-8"><a href="index.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span></code></pre></div>
+<div id="model-spatial-resolution-of-the-model" class="section level2 unnumbered hasAnchor">
+<h2>Model spatial resolution of the model<a href="InitialModelSetup.html#model-spatial-resolution-of-the-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This section describes the decision making process we took in configuring an initial spatial model. The first consideration was whether to include areas outside of the Gulf of Alaska (GOA) and the Bering sea Aleutian islands region, which is the spatial extent for the current stock assessment <span class="citation">(<a href="#ref-goethel2021assessment" role="doc-biblioref">D. Goethel et al. 2021</a>)</span>. Sablefish inhabit a broad spatial distribution from the northeastern Pacific Ocean from northern Mexico to the Gulf of Alaska. It is currently assessed by three assessment bodies, the first is the area of focus, being the Bering sea and gulf of Alaska <span class="citation">(<a href="#ref-goethel2021assessment" role="doc-biblioref">D. Goethel et al. 2021</a>)</span>, one off the west coast of Canada <strong>(Cox et al. 2011)</strong> and the west coast from California to Oregan <strong>(Stewart et al. 2011)</strong>. Given the complex juvenile life history coupled with long range movement capabilities of adults, the stock structure of sablefish has been a topic of extensive research.</p>
+<p>A recent genetic study by <span class="citation">Jasonowicz et al. (<a href="#ref-jasonowicz2017love" role="doc-biblioref">2017</a>)</span>, found no significant difference between samples off the west coast of US, GOA and bering sea (there were no samples off the west coast of Canada in this study), providing evidence for a single panmictic population. A recent morphometric study <span class="citation">(<a href="#ref-kapur2020oceanographic" role="doc-biblioref">Kapur et al. 2020</a>)</span>, found significant differences in fish traits such as length at age between samples from the west coast of US and GOA. These results were consistent with the findings from <span class="citation">Tripp-Valdez et al. (<a href="#ref-tripp2012population" role="doc-biblioref">2012</a>)</span>. Tagging is another important information source, with extensive tag releases along the entire North Pacific. Tag recovery data provide evidence for a two stock hypothesis <span class="citation">(<a href="#ref-kimura1998tagged" role="doc-biblioref">Kimura and Shavy 1998</a>)</span>. With a stock north of Vancouver Island and a stock to the south.</p>
+<p>For the purposes of this research, we will assume GOA and BS, hereinafter refereed to as the GOABS complex, is isolated (i.e., no movement in or out of this region) from Canada and the west coast of the US. Although there is evidence to include part of Canada (Figure <a href="InitialModelSetup.html#fig:TagRecoveriesOutsideRegion">8.1</a>). Due to practical considerations regarding data sharing and the time-frame of this research Canada was excluded. The focus of this research is to build and explore a spatially explicit model for the GOABS complex.</p>
+<div class="figure"><span style="display:block;" id="fig:TagRecoveriesOutsideRegion"></span>
+<img src="Figures/out_of_region_recoveries.png" alt="Tag recoveries outside of stock boundaries, with release locations (bottom panel)." width="100%" />
+<p class="caption">
+Figure 8.1: Tag recoveries outside of stock boundaries, with release locations (bottom panel).
+</p>
+</div>
+<p>The general approach taken, was to build an initial spatial model that had the finest spatial resolution possible and aggregate regions as data limitations and model convergence issues arose. This finest model spatial resolution was initially based on the input data set with the coarsest reported spatial resolution. Data sets have been reported at different spatial resolutions over time. In general, data are reproted at three levels of spatial resolution: latitude and longitude (high spatial resolution), statistical area (Figure <a href="InitialModelSetup.html#fig:spatialstatArea">8.2</a>) and larger fishery management boundaries (Figure <a href="InitialModelSetup.html#fig:spatialmanagementArea">8.3</a>). Input data sets and the spatial resolution available are described in the following table.</p>
+<div class="figure"><span style="display:block;" id="fig:spatialstatArea"></span>
+<img src="Figures/alaska-fisheries-boundaries-map.jpg" alt="Statistical and reporting areas for GOABS complex" width="100%" />
+<p class="caption">
+Figure 8.2: Statistical and reporting areas for GOABS complex
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:spatialmanagementArea"></span>
+<img src="Figures/NFMP_with_EGOA.png" alt="Fishery management plan boundaries. The Eastern Gulf is often reported at subareas split up be East/West Yakutat and sometimes Southeast." width="100%" />
+<p class="caption">
+Figure 8.3: Fishery management plan boundaries. The Eastern Gulf is often reported at subareas split up be East/West Yakutat and sometimes Southeast.
+</p>
+</div>
+<table>
+<colgroup>
+<col width="17%" />
+<col width="82%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Data source</th>
+<th>Description and spatial resolution</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Catch pre 1990</td>
+<td>Available at FMP spatial resolution</td>
+</tr>
+<tr class="even">
+<td>Catch post 1990</td>
+<td>Available at FMP spatial resolution</td>
+</tr>
+<tr class="odd">
+<td>Observer data
+(Age,Length
+and catch)</td>
+<td>Latitude and Longitude positions</td>
+</tr>
+<tr class="even">
+<td>Survey data
+(Age, Length
+and catch)</td>
+<td>Latitude and Longitude positions</td>
+</tr>
+<tr class="odd">
+<td>Tagging data</td>
+<td>Latitude and Longitude for releases,
+Latitude and longitude for approximately half the recoveries</td>
+</tr>
+</tbody>
+</table>
+<p>Reported catch from commercial fishers seems to be the most limiting data set which has the coarsest reported spatial resolution (<strong>check this statement</strong>). For this reason, the finest spatial resolution we will consider is the fishery management plan boundaries (FMP) being, Bering Sea, Aleutian Islands, Western Gulf, Central Gulf and Eastern Gulf i.e., five area model. Although this was determined by a reporting constraint, this is also the spatial resolution that ABC’s are allocated for</p>
+<p>In addition to the reported spatial resolution of the data, we need to consider if there is any spatial sampling stratification within a data set. Sampling designs that have spatially varying stratification and thus spatially varying sampling intensity, could be inappropriate to use for alternative spatial stratifications. Often post-stratified estimators are not as efficient or accurate as design based estimators that are consistent with the sampling design. Fortunately in this case, the independent survey design is systematic. This results in consistent spatial sampling with respect to space, and removes this concern when considering alternative regional boundaries.</p>
+</div>
+<div id="observations" class="section level2 unnumbered hasAnchor">
+<h2>Observations<a href="InitialModelSetup.html#observations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="figure"><span style="display:block;" id="fig:initialspatialObservations"></span>
+<img src="Figures/Observation_Frequency.png" alt="Observation type and frequency for the initial model." width="100%" />
+<p class="caption">
+Figure 8.4: Observation type and frequency for the initial model.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:initialcatch"></span>
+<img src="Figures/InputCatches.png" alt="Catch (kilo tonnes) by gear and area." width="100%" />
+<p class="caption">
+Figure 8.5: Catch (kilo tonnes) by gear and area.
+</p>
+</div>
+</div>
+<div id="first-model-run" class="section level2 unnumbered hasAnchor">
+<h2>First model run<a href="InitialModelSetup.html#first-model-run" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-kristensen2015tmb" class="csl-entry">
-Kristensen, Kasper, Anders Nielsen, Casper W Berg, Hans Skaug, and Brad Bell. 2015. <span>“TMB: Automatic Differentiation and Laplace Approximation.”</span> <em>arXiv Preprint arXiv:1509.00660</em>.
+<div id="ref-goethel2021assessment" class="csl-entry">
+Goethel, DR, DH Hanselman, CJ Rodgveller, KH Fenski, SK Shotwell, KB Echave, PW Malecha, A Siwicke, and CR Lunsford. 2021. <span>“Assessment of the Sablefish Stock in Alaska.”</span> <em>Stock Assessment and Fishery Evaluation Report for the Groundfish Resources of the Gulf of Alaska and the Bering Sea/Aleutian Islands as Projected for</em>.
 </div>
-<div id="ref-methot2013stock" class="csl-entry">
-Methot Jr, Richard D, and Chantell R Wetzel. 2013. <span>“Stock Synthesis: A Biological and Statistical Framework for Fish Stock Assessment and Fishery Management.”</span> <em>Fisheries Research</em> 142: 86–99.
+<div id="ref-jasonowicz2017love" class="csl-entry">
+Jasonowicz, Andrew J, Frederick W Goetz, Giles W Goetz, and Krista M Nichols. 2017. <span>“Love the One You’re with: Genomic Evidence of Panmixia in the Sablefish (Anoplopoma Fimbria).”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 74 (3): 377–87.
 </div>
-<div id="ref-pope1972investigation" class="csl-entry">
-Pope, JG. 1972. <span>“An Investigation of the Accuracy of Virtual Population Analysis Using Cohort Analysis.”</span> <em>ICNAF Research Bulletin</em> 9 (10): 65–74.
+<div id="ref-kapur2020oceanographic" class="csl-entry">
+Kapur, M, M Haltuch, B Connors, L Rogers, A Berger, E Koontz, J Cope, et al. 2020. <span>“Oceanographic Features Delineate Growth Zonation in Northeast Pacific Sablefish.”</span> <em>Fisheries Research</em> 222: 105414.
+</div>
+<div id="ref-kimura1998tagged" class="csl-entry">
+Kimura, Daniel K, and Franklin R Shavy. 1998. <span>“Tagged Sablefish, Anoplopoma Fimbria.”</span> <em>Fishery Bulletin</em> 96: 462–81.
+</div>
+<div id="ref-tripp2012population" class="csl-entry">
+Tripp-Valdez, MA, FJ Garcı́a-de-León, H Espinosa-Pérez, and G Ruiz-Campos. 2012. <span>“Population Structure of Sablefish Anoplopoma Fimbria Using Genetic Variability and Geometric Morphometric Analysis.”</span> <em>Journal of Applied Ichthyology</em> 28 (4): 516–23.
 </div>
 </div>
             </section>
@@ -364,8 +430,8 @@ Pope, JG. 1972. <span>“An Investigation of the Accuracy of Virtual Population 
           </div>
         </div>
       </div>
-
-<a href="objectives.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tagdata.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="taglike.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -396,7 +462,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment/index.Rmd",
+"link": "https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment/07-SpatialModelConfiguration.Rmd",
 "text": "Edit"
 },
 "history": {

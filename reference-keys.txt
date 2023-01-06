@@ -4,9 +4,6 @@ eq:catchatage
 eq:surveyage
 eq:relativeindex
 eq:agelengthtransition
-fig:TagRecoveriesOutsideRegion
-fig:spatialstatArea
-fig:spatialmanagementArea
 fig:LLRegions
 fig:surveycatchgif
 fig:agesamples
@@ -37,6 +34,11 @@ fig:addagelength
 fig:showagelengthtransitionproblem
 eq:lengthexploit
 eq:tagatagerelease
+fig:TagRecoveriesOutsideRegion
+fig:spatialstatArea
+fig:spatialmanagementArea
+fig:initialspatialObservations
+fig:initialcatch
 tab:overdispersiontable
 fig:taglikesummaryplotsRE
 fig:taglikesummaryplotsEst
@@ -71,6 +73,7 @@ age-length-key-estimators
 observation-error-estimates
 observerdata
 tagdata
+InitialModelSetup
 taglike
 growth
 refpoints
