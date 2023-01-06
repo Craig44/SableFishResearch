@@ -91,6 +91,9 @@ where, \(R\) indicates the set of areas that we are aggregating and this is norm
 {P}_{a,R,y} = \frac{{P}_{a,R,y}}{\sum\limits_a{P}_{a,R,y}}  \ .
 \]
 
+
+For length bins that don't have age-length data a linear interpolation is done between neighboring length columns of the age-length key for all ages.
+
 ### Age length key estimators
 The Age length key (ALK) estimator uses paired age-lengths to calculate an age-length key which is used to derive age-frequencies by multiplying the ALK by scaled length frequencies.
 
@@ -112,7 +115,7 @@ where, \(N^r_l\) are regional specific scaled length frequencies (described in t
 
 ### Observation error estimates
 
-Bootstrapping is used to estimate standard errors for \(P_{a,R,y}\). Data used to calculate age-length keys are resampled with replacement to calcualte a SE and CV. This produces a CV for each age, region and year denoted by \(CV_{a,r, y}\). Proportions at age are assumed to be distributed according to the multinomial distribution. To translate the observation error expressed as a CV to an initial effective sample denoted by \(N^{eff}_y\) we apply a non-linear least squares solver to estimate \(N^{eff}_y\) by minimsing the following function
+Bootstrapping is used to estimate standard errors for \(P_{a,R,y}\). Data used to calculate age-length keys are re sampled with replacement to calculate a SE and CV. This produces a CV for each age, region and year denoted by \(CV_{a,r, y}\). Proportions at age are assumed to be distributed according to the multinomial distribution. To translate the observation error expressed as a CV to an initial effective sample denoted by \(N^{eff}_y\) we apply a non-linear least squares solver to estimate \(N^{eff}_y\) by minimsing the following expression
 
 \[
 \log CV_{a,r, y} = \log \sqrt{\frac{P_{a,R,y}\widehat{N}^{eff}_y \left(1 -  P_{a,R,y}\right)}{P_{a,R,y}\widehat{N}^{eff}_y}}
