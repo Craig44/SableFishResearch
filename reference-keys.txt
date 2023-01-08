@@ -4,8 +4,12 @@ eq:catchatage
 eq:surveyage
 eq:relativeindex
 eq:agelengthtransition
-fig:LLRegions
 fig:surveycatchgif
+fig:meshCPUE
+fig:spatialResid
+fig:spatialprediction
+fig:indexComparison
+fig:surveyProjection
 fig:agesamples
 fig:lengthsamples
 fig:agelengthbysex
@@ -37,6 +41,7 @@ eq:tagatagerelease
 fig:TagRecoveriesOutsideRegion
 fig:spatialstatArea
 fig:spatialmanagementArea
+fig:LLRegions
 fig:initialspatialObservations
 fig:initialcatch
 tab:overdispersiontable

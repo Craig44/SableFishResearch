@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2023-01-06" />
+<meta name="date" content="2023-01-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -205,7 +205,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5" data-path="surveydata.html"><a href="surveydata.html"><i class="fa fa-check"></i><b>5</b> Survey data</a>
 <ul>
-<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#abundance-data"><i class="fa fa-check"></i>Abundance data</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#survey-design"><i class="fa fa-check"></i>Survey design</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#abundance-catch-rate-data"><i class="fa fa-check"></i>Abundance (catch rate) data</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-data"><i class="fa fa-check"></i>Age data</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#length-frequencies"><i class="fa fa-check"></i>Length frequencies</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-frequencies"><i class="fa fa-check"></i>Age frequencies</a>
@@ -311,11 +312,12 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="InitialModelSetup" class="section level1 hasAnchor" number="8">
 <h1><span class="header-section-number">Chapter 8</span> Initial model setup<a href="InitialModelSetup.html#InitialModelSetup" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Use <span class="citation">Punt (<a href="#ref-punt2019spatial" role="doc-biblioref">2019</a>)</span> to outline the key considerations</p>
 <ul>
-<li>When did we choose to start the model and why</li>
+<li>When did we choose to start the model and why. was it assumed to be in an equilbruim state</li>
 <li>What spatial regions did we start with and why</li>
 <li>How many fisheries</li>
-<li>What observations were included?</li>
+<li>What observations were included? how were they initially weighted</li>
 </ul>
 <div id="model-start-time" class="section level2 unnumbered hasAnchor">
 <h2>Model start time<a href="InitialModelSetup.html#model-start-time" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -384,21 +386,27 @@ Latitude and longitude for approximately half the recoveries</td>
 </tr>
 </tbody>
 </table>
-<p>Reported catch from commercial fishers seems to be the most limiting data set which has the coarsest reported spatial resolution (<strong>check this statement</strong>). For this reason, the finest spatial resolution we will consider is the fishery management plan boundaries (FMP) being, Bering Sea, Aleutian Islands, Western Gulf, Central Gulf and Eastern Gulf i.e., five area model. Although this was determined by a reporting constraint, this is also the spatial resolution that ABC’s are allocated for</p>
+<p>Reported catch from commercial fishers seems to be the most limiting data set which has the coarsest reported spatial resolution (<strong>check this statement</strong>). For this reason, the finest spatial resolution we will consider is the fishery management plan boundaries (FMP) being, Bering Sea, Aleutian Islands, Western Gulf, Central Gulf and Eastern Gulf i.e., five area model (Figure <a href="InitialModelSetup.html#fig:LLRegions">8.4</a>). Although this was determined by a reporting constraint, this is also the spatial resolution that ABC’s are allocated for</p>
 <p>In addition to the reported spatial resolution of the data, we need to consider if there is any spatial sampling stratification within a data set. Sampling designs that have spatially varying stratification and thus spatially varying sampling intensity, could be inappropriate to use for alternative spatial stratifications. Often post-stratified estimators are not as efficient or accurate as design based estimators that are consistent with the sampling design. Fortunately in this case, the independent survey design is systematic. This results in consistent spatial sampling with respect to space, and removes this concern when considering alternative regional boundaries.</p>
+<div class="figure"><span style="display:block;" id="fig:LLRegions"></span>
+<img src="Figures/Longline_areas.png" alt="The finest spatial resolution that we are considering for Sablefish assessment" width="100%" />
+<p class="caption">
+Figure 8.4: The finest spatial resolution that we are considering for Sablefish assessment
+</p>
+</div>
 </div>
 <div id="observations" class="section level2 unnumbered hasAnchor">
 <h2>Observations<a href="InitialModelSetup.html#observations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="figure"><span style="display:block;" id="fig:initialspatialObservations"></span>
 <img src="Figures/Observation_Frequency.png" alt="Observation type and frequency for the initial model." width="100%" />
 <p class="caption">
-Figure 8.4: Observation type and frequency for the initial model.
+Figure 8.5: Observation type and frequency for the initial model.
 </p>
 </div>
 <div class="figure"><span style="display:block;" id="fig:initialcatch"></span>
 <img src="Figures/InputCatches.png" alt="Catch (kilo tonnes) by gear and area." width="100%" />
 <p class="caption">
-Figure 8.5: Catch (kilo tonnes) by gear and area.
+Figure 8.6: Catch (kilo tonnes) by gear and area.
 </p>
 </div>
 </div>
@@ -420,6 +428,9 @@ Kapur, M, M Haltuch, B Connors, L Rogers, A Berger, E Koontz, J Cope, et al. 202
 </div>
 <div id="ref-kimura1998tagged" class="csl-entry">
 Kimura, Daniel K, and Franklin R Shavy. 1998. <span>“Tagged Sablefish, Anoplopoma Fimbria.”</span> <em>Fishery Bulletin</em> 96: 462–81.
+</div>
+<div id="ref-punt2019spatial" class="csl-entry">
+Punt, André E. 2019. <span>“Spatial Stock Assessment Methods: A Viewpoint on Current Issues and Assumptions.”</span> <em>Fisheries Research</em> 213: 132–43.
 </div>
 <div id="ref-tripp2012population" class="csl-entry">
 Tripp-Valdez, MA, FJ Garcı́a-de-León, H Espinosa-Pérez, and G Ruiz-Campos. 2012. <span>“Population Structure of Sablefish Anoplopoma Fimbria Using Genetic Variability and Geometric Morphometric Analysis.”</span> <em>Journal of Applied Ichthyology</em> 28 (4): 516–23.

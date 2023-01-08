@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2023-01-06" />
+<meta name="date" content="2023-01-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -205,7 +205,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5" data-path="surveydata.html"><a href="surveydata.html"><i class="fa fa-check"></i><b>5</b> Survey data</a>
 <ul>
-<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#abundance-data"><i class="fa fa-check"></i>Abundance data</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#survey-design"><i class="fa fa-check"></i>Survey design</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#abundance-catch-rate-data"><i class="fa fa-check"></i>Abundance (catch rate) data</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-data"><i class="fa fa-check"></i>Age data</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#length-frequencies"><i class="fa fa-check"></i>Length frequencies</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-frequencies"><i class="fa fa-check"></i>Age frequencies</a>
@@ -362,11 +363,13 @@ To help with estimation there is a penalty on <span class="math inline">\(\epsil
 <p><span class="math display">\[
 \bar{w}_{a,y} = \alpha \bar{l}_{a,y}^{\beta}
 \]</span></p>
-<p>These were also the same as the in the stock assessment.</p>
 </div>
 <div id="recruitment" class="section level3 unnumbered hasAnchor">
 <h3>Recruitment<a href="spatialmodeldescription.html#recruitment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>There are two options in the model for recruitment, regional mean recruitment with global recruitment deviations and regional mean recruitment with region recruitment deviations.</p>
+<p>TODO
+- Add regional stock recruitment relationships as a model option
+- Add a global stock recruitment relationship</p>
 </div>
 <div id="fishing-mortality" class="section level3 unnumbered hasAnchor">
 <h3>Fishing mortality<a href="spatialmodeldescription.html#fishing-mortality" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -374,7 +377,7 @@ To help with estimation there is a penalty on <span class="math inline">\(\epsil
 </div>
 <div id="tag-release-events" class="section level3 unnumbered hasAnchor">
 <h3>Tag release events<a href="spatialmodeldescription.html#tag-release-events" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Tags release event denoted by the index <span class="math inline">\(k\)</span> have an implied region <span class="math inline">\(r\)</span> and year <span class="math inline">\(y\)</span> dimension. Each tag release event has known sex and age frequency at release. This is derived using the survey age-length, which is responsble fore tag-releases. A downside of using the age-length key approach to conver unsexed lengths at release into release by age and sex is a tagged fish that would have an exact age, sex and length will be represented in the model as a fraction of a fish across multiple ages and sexes. For release years where thee were no age length keys, we used age-length keys pooled over years 1981, 1985 and 1987 for earlier perios (prior to 1981) and the closest age-length key for later periods. (<strong>How can we explore uncertainty in this input?</strong> re-run the model with numbers at age and length from bootstrapping age-length keys?)</p>
+<p>Tags release event denoted by the index <span class="math inline">\(k\)</span> have an implied region <span class="math inline">\(r\)</span> and year <span class="math inline">\(y\)</span> dimension. Each tag release event has known sex and age frequency at release. This is derived using the survey age-length key. This is reasonable given the survey is responsible for releasing most tags. A downside of using the age-length key approach to convert unsexed lengths at release into tag releases by age and sex is a tagged fish that would have an exact age, sex and length will be represented in the model as a fraction of a fish across multiple ages and sexes. For release years where there were no age length keys, we used age-length keys pooled over years 1981, 1985 and 1987 for earlier perios (prior to 1981) and the closest age-length key for later periods. (<strong>How can we explore uncertainty in this input?</strong> re-run the model with numbers at age and length from bootstrapping age-length keys?)</p>
 <p>Tagged fish from release event <span class="math inline">\(k\)</span> are denoted in the partition as <span class="math inline">\(T^k_{a,r,y,s}\)</span>, and are tracked for <span class="math inline">\(n_{T}\)</span> years before migrating into a pooled tag group, at which point we loose release-year information but do maintain its region of release. At present, tagged fish are assumed to take on the exact same population processes as the untagged elements of the partition (instantaneous mixing).</p>
 <p>Other considerations for tag-releases</p>
 <ul>

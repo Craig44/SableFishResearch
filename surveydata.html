@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2023-01-06" />
+<meta name="date" content="2023-01-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -205,7 +205,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5" data-path="surveydata.html"><a href="surveydata.html"><i class="fa fa-check"></i><b>5</b> Survey data</a>
 <ul>
-<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#abundance-data"><i class="fa fa-check"></i>Abundance data</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#survey-design"><i class="fa fa-check"></i>Survey design</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#abundance-catch-rate-data"><i class="fa fa-check"></i>Abundance (catch rate) data</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-data"><i class="fa fa-check"></i>Age data</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#length-frequencies"><i class="fa fa-check"></i>Length frequencies</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-frequencies"><i class="fa fa-check"></i>Age frequencies</a>
@@ -311,22 +312,94 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="surveydata" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Survey data<a href="surveydata.html#surveydata" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This chapter describes how age,length, survey and catch data were used to derive assessment inputs for a myriad of spatially structured assessments. The chapter aims to standardize methods so that we can easily re-work the data to be fit in a 1,2 or <span class="math inline">\(n_r\)</span> area assessment model.</p>
-<div class="figure"><span style="display:block;" id="fig:LLRegions"></span>
-<img src="Figures/Longline_areas.png" alt="The finest spatial resolution that we are considering for Sablefish assessment" width="100%" />
-<p class="caption">
-Figure 5.1: The finest spatial resolution that we are considering for Sablefish assessment
-</p>
+<p>This chapter explores and describes survey age, length and catch rate data to inform the following spatial model decisions</p>
+<ul>
+<li>Is there spatial differences in age or length composition?</li>
+<li>Is there spatial differences in relative abundance?</li>
+<li>Is there spatial differences growth?</li>
+</ul>
+<div id="survey-design" class="section level2 unnumbered hasAnchor">
+<h2>Survey design<a href="surveydata.html#survey-design" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The longline survey in the Gulf of Alaska and Bering Sea began in 1978-79 and is fixed station systematic design <span class="citation">(<a href="#ref-sasaki1985studies" role="doc-biblioref">Sasaki 1985</a>)</span>. “Survey stations are distributed as uniformely as possible in each geographic area. One station per day is fished, and normally 160 hachis/skates are fished at each station. The longline is set at right angles to the isobars in a manner to cover the depth range of 101- 1,000 m. However, the distance between 101 and 1,000 m varied at each survey station. Thus, this complete depth range could not be covered at stations where this distance exceeded the 16 km length of the longline gear. The longline was usually set from shallow to deep waters and was retrieved in the same direction. Hauling the longline started 2 hours after the set was completed.” pg 68 <span class="citation">Sasaki (<a href="#ref-sasaki1985studies" role="doc-biblioref">1985</a>)</span></p>
+<p>Each hachi is assigned to a depth stratum which is treated as an independent observation by stratified estimators to generate population estimates and associated variance (<strong>Is this right?</strong> seems inappropriate given all these hachi are essentially a cluster from a single fishing event)</p>
 </div>
-<div id="abundance-data" class="section level2 unnumbered hasAnchor">
-<h2>Abundance data<a href="surveydata.html#abundance-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>One of the aims is to a geostatistical model-based estimator <span class="citation">(<a href="#ref-sdmTMB" role="doc-biblioref">Anderson et al. 2022</a>)</span> with the current estimator. The survey is a systematic/fixed design, but the current estimator for the population total and variance is based on a stratified random survey design. This is often done because there is no design based estimator for systematic surveys that have a single primary sampling unit i.e., the only random event would be for the first station then the rest are systematically placed based on the first sampling unit. I wonder if a stratified random variance estimator will under state the variance (see <span class="citation">Fewster (<a href="#ref-fewster2011variance" role="doc-biblioref">2011</a>)</span> for more detail on this issue).</p>
-<p>A consideration when using the survey data within a geostatistical model-based estimator is what to define an observation as. The current estimator treats each skate/hachi as an “observation” (need to ask about this). Due to the fishing of gear being perpendicular to land a single fishing event can cover many depth strata. Each skate/hachi is attached to a depth strata where it is used in the current estimator (does this inflate the sample size? should skate within a fishing event be treated as a cluster?). Although it would be interesting to use the skate/hachi level data, only the start and end latitude and longitudes are recorded. This means we would have to interpolate a coordinate for each skate or pool data over each fishing event for use in the geostatistical model?</p>
-<p>A useful reference for changes in survey operators for the Alaskan sablefish is <span class="citation">Kimura and Zenger Jr (<a href="#ref-kimura1997standardizing" role="doc-biblioref">1997</a>)</span>. “The Japanese long-line gear used in the joint surveys and the NMFS long-line gear are similar in many respects…Differences between Japanese sampling gear and NMFS sampling gear were mostly due to hook and gangion construction”. When analysing the survey CPUE data it would be ideal to have a single time-series. So a desirable population total estimator would account for different catchabilities by country or vessel.</p>
+<div id="abundance-catch-rate-data" class="section level2 unnumbered hasAnchor">
+<h2>Abundance (catch rate) data<a href="surveydata.html#abundance-catch-rate-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A geostatistical model-based estimator was used to estimate spatial estimates of abundance. <code>sdmTMB</code> <span class="citation">(<a href="#ref-sdmTMB" role="doc-biblioref">Anderson et al. 2022</a>)</span> was the package used for this exercise. Geostatistical models require spatial locations to be known for all observations. A limitation of using hachi level data is latitude and longitude is only known for the whole longline event (e.g., all hachi on the same line have the same spatial coordinates). For each longline event we summed over all hachi. Survey abundnace pooled over 50km x 50km grid cells is shown in Figure <a href="surveydata.html#fig:surveycatchgif">5.1</a>.</p>
 <div class="figure"><span style="display:block;" id="fig:surveycatchgif"></span>
 <img src="Figures/catch.gif" alt="A time-series of sablefish catch from the long line survey pooled over 50km by 50km grided cells"  />
 <p class="caption">
-Figure 5.2: A time-series of sablefish catch from the long line survey pooled over 50km by 50km grided cells
+Figure 5.1: A time-series of sablefish catch from the long line survey pooled over 50km by 50km grided cells
+</p>
+</div>
+<!-- One of the aims is to a geostatistical model-based estimator [@sdmTMB] with the current estimator. The survey is a systematic/fixed design, but the current estimator for the population total and variance is based on a stratified random survey design. This is often done because there is no design based estimator for systematic surveys that have a single primary sampling unit i.e., the only random event would be for the first station then the rest are systematically placed based on the first sampling unit. I wonder if a stratified random variance estimator will under state the variance (see @fewster2011variance for more detail on this issue).  -->
+<!-- A consideration when using the survey data within a geostatistical model-based estimator is what to define an observation as. The current estimator treats each skate/hachi as an "observation" (need to ask about this). Due to the fishing of gear being perpendicular to land a single fishing event can cover many depth strata. Each skate/hachi is attached to a depth strata where it is used in the current estimator (does this inflate the sample size? should skate within a fishing event be treated as a cluster?). Although it would be interesting to use the skate/hachi level data, only the start and end latitude and longitudes are recorded. This means we would have to interpolate a coordinate for each skate or pool data over each fishing event for use in the geostatistical model? -->
+<p>A range of covariates, spatio-temporal and likelihood assumptions were considered in the geostatistical analysis. Two covariates that were forced in the model whether they were statistically significant or not was Year and country. There has been documented difference between Japanese and NMFS sampling relating to hook and ganion construction <span class="citation">(<a href="#ref-kimura1997standardizing" role="doc-biblioref">Kimura and Zenger Jr 1997</a>)</span>.</p>
+<p>Given the unusual shape of the coast for the region, an boundary was created to avoid spatial regions in the Bearing sea sharing information with CGOA and EGOA. The mesh assumed in models that has spatial random effects but <strong>not</strong> spatio-temporal random effects is shown in Figure <a href="surveydata.html#fig:meshCPUE">5.2</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:meshCPUE"></span>
+<img src="Figures/mesh.png" alt="Mesh for spatial random effects, red dots indicate station location"  />
+<p class="caption">
+Figure 5.2: Mesh for spatial random effects, red dots indicate station location
+</p>
+</div>
+<p>The first model was configured using code chunk <a href="#fig:firstModel"><strong>??</strong></a>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="surveydata.html#cb2-1" aria-hidden="true" tabindex="-1"></a>fit_spatial_tweedie <span class="ot">&lt;-</span> <span class="fu">sdmTMB</span>(</span>
+<span id="cb2-2"><a href="surveydata.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  catch <span class="sc">~</span> <span class="dv">0</span>  <span class="sc">+</span> <span class="fu">as.factor</span>(Year) <span class="sc">+</span> Country,</span>
+<span id="cb2-3"><a href="surveydata.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">tweedie</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
+<span id="cb2-4"><a href="surveydata.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">spatial =</span> <span class="st">&quot;on&quot;</span>,</span>
+<span id="cb2-5"><a href="surveydata.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb2-6"><a href="surveydata.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">spatiotemporal =</span> <span class="st">&quot;off&quot;</span>,</span>
+<span id="cb2-7"><a href="surveydata.html#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>This model structure was repeated assuming the Gamma and Lognormal distribtion because there were only 5 records of 4000 that did not catch sablefish strictly positive distributions were only considered. Residuals shown in Figure <a href="surveydata.html#fig:meshCPUE">5.2</a></p>
+<div class="figure"><span style="display:block;" id="fig:spatialResid"></span>
+<img src="Figures/spatial_residuals.png" alt="Boxplot comparing overall residuals between distributions"  />
+<p class="caption">
+Figure 5.3: Boxplot comparing overall residuals between distributions
+</p>
+</div>
+<table>
+<colgroup>
+<col width="27%" />
+<col width="72%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\mathcal{M}_1\)</span></td>
+<td><code>y ~ year + country + omega</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mathcal{M}_2\)</span></td>
+<td><code>y ~ year + country + FMP_region + omega</code></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mathcal{M}_3\)</span></td>
+<td><code>y ~ year + country + epsilon</code></td>
+</tr>
+</tbody>
+</table>
+<p>where <code>omega</code> is time-invariant Gaussian Field (GF) and <code>epsilon</code> is time-varying Gaussian Field</p>
+<div class="figure"><span style="display:block;" id="fig:spatialprediction"></span>
+<img src="Figures/spatial_tweedie_predict.png" alt="Spatial predition M1 with the tweedie distribution."  />
+<p class="caption">
+Figure 5.4: Spatial predition M1 with the tweedie distribution.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:indexComparison"></span>
+<img src="Figures/indicies.png" alt="Comparison of indicies for the Tweedie distribution and the three model structures."  />
+<p class="caption">
+Figure 5.5: Comparison of indicies for the Tweedie distribution and the three model structures.
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:surveyProjection"></span>
+<img src="Figures/projection_regions.png" alt="Projection regions"  />
+<p class="caption">
+Figure 5.6: Projection regions
 </p>
 </div>
 </div>
@@ -337,7 +410,7 @@ Figure 5.2: A time-series of sablefish catch from the long line survey pooled ov
 <div class="figure"><span style="display:block;" id="fig:agesamples"></span>
 <img src="Figures/age_samples_by_year_region_sex.png" alt="Number of aged fish by sex, region and year" width="100%" />
 <p class="caption">
-Figure 5.3: Number of aged fish by sex, region and year
+Figure 5.7: Number of aged fish by sex, region and year
 </p>
 </div>
 </div>
@@ -360,7 +433,7 @@ where, <span class="math inline">\(h \in r\)</span> denotes only hauls within re
 <div class="figure"><span style="display:block;" id="fig:lengthsamples"></span>
 <img src="Figures/length_samples_by_year_region_sex.png" alt="Number of fish measured for length by sex, region and year" width="100%" />
 <p class="caption">
-Figure 5.4: Number of fish measured for length by sex, region and year
+Figure 5.8: Number of fish measured for length by sex, region and year
 </p>
 </div>
 </div>
@@ -415,19 +488,19 @@ P_{a,r} = \hat{p}(a|l) N^r_l
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:agelengthbysex"></span>
 <img src="Figures/raw_growth_by_sex.png" alt="Age-length by sex" width="61%" />
 <p class="caption">
-Figure 5.5: Age-length by sex
+Figure 5.9: Age-length by sex
 </p>
 </div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:malegrowth"></span>
 <img src="Figures/raw_male_growth_by_region.png" alt="Male age-length by region (left panel) and decade (right panel)" width="49%" /><img src="Figures/raw_male_growth_by_decade.png" alt="Male age-length by region (left panel) and decade (right panel)" width="49%" />
 <p class="caption">
-Figure 5.6: Male age-length by region (left panel) and decade (right panel)
+Figure 5.10: Male age-length by region (left panel) and decade (right panel)
 </p>
 </div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:femalegrowth"></span>
 <img src="Figures/raw_female_growth_by_region.png" alt="Female age-length by region (left panel) and decade (right panel)" width="49%" /><img src="Figures/raw_female_growth_by_decade.png" alt="Female age-length by region (left panel) and decade (right panel)" width="49%" />
 <p class="caption">
-Figure 5.7: Female age-length by region (left panel) and decade (right panel)
+Figure 5.11: Female age-length by region (left panel) and decade (right panel)
 </p>
 </div>
 </div>
@@ -454,25 +527,25 @@ Figure 5.7: Female age-length by region (left panel) and decade (right panel)
 <div class="figure"><span style="display:block;" id="fig:femaleCDFagesamples"></span>
 <img src="Figures/raw_ecdf_AFs_by_year_region_female.png" alt="CDF of age frequencies for females" width="100%" />
 <p class="caption">
-Figure 5.8: CDF of age frequencies for females
+Figure 5.12: CDF of age frequencies for females
 </p>
 </div>
 <div class="figure"><span style="display:block;" id="fig:maleCDFagesamples"></span>
 <img src="Figures/raw_ecdf_AFs_by_year_region_male.png" alt="CDF of age frequencies for males" width="100%" />
 <p class="caption">
-Figure 5.9: CDF of age frequencies for males
+Figure 5.13: CDF of age frequencies for males
 </p>
 </div>
 <div class="figure"><span style="display:block;" id="fig:femaleCDFlengthsamples"></span>
 <img src="Figures/raw_ecdf_LFs_by_year_region_female.png" alt="CDF of length frequencies for females" width="100%" />
 <p class="caption">
-Figure 5.10: CDF of length frequencies for females
+Figure 5.14: CDF of length frequencies for females
 </p>
 </div>
 <div class="figure"><span style="display:block;" id="fig:maleCDFlengthsamples"></span>
 <img src="Figures/raw_ecdf_LFs_by_year_region_male.png" alt="CDF of length frequencies for males" width="100%" />
 <p class="caption">
-Figure 5.11: CDF of length frequencies for males
+Figure 5.15: CDF of length frequencies for males
 </p>
 </div>
 
@@ -486,14 +559,14 @@ Ailloud, Lisa E, and John M Hoenig. 2019. <span>“A General Theory of Age-Lengt
 <div id="ref-sdmTMB" class="csl-entry">
 Anderson, Sean C., Ward, Eric J., English, Philina A., Barnett, and Lewis A. K. 2022. <span>“sdmTMB: An r Package for Fast, Flexible, and User-Friendly Generalized Linear Mixed Effects Models with Spatial and Spatiotemporal Random Fields.”</span> <em>bioRxiv</em> 2022.03.24.485545. <a href="https://doi.org/10.1101/2022.03.24.485545">https://doi.org/10.1101/2022.03.24.485545</a>.
 </div>
-<div id="ref-fewster2011variance" class="csl-entry">
-Fewster, R M. 2011. <span>“Variance Estimation for Systematic Designs in Spatial Surveys.”</span> <em>Biometrics</em> 67 (4): 1518–31.
-</div>
 <div id="ref-hoenig2002generalizing" class="csl-entry">
 Hoenig, John M, R Choudary Hanumara, and Dennis M Heisey. 2002. <span>“Generalizing Double and Triple Sampling for Repeated Surveys and Partial Verification.”</span> <em>Biometrical Journal: Journal of Mathematical Methods in Biosciences</em> 44 (5): 603–18.
 </div>
 <div id="ref-kimura1997standardizing" class="csl-entry">
 Kimura, Daniel K, and Harold H Zenger Jr. 1997. <span>“Standardizing Sablefish (Anoplopoma Fimbria) Long-Line Survey Abundance Indices by Modeling the Log-Ratio of Paired Comparative Fishing Cpues.”</span> <em>ICES Journal of Marine Science</em> 54 (1): 48–59.
+</div>
+<div id="ref-sasaki1985studies" class="csl-entry">
+Sasaki, Takashi. 1985. <span>“Studies on the Sablefish Resources of the North Pacific Ocean.”</span> <em>Bulletin of the Far Seas Fisheries Research Laboratory</em> 22: 1–108.
 </div>
 <div id="ref-sigler2001alaska" class="csl-entry">
 Sigler, Michael F, Jeffrey T Fujioka, and Sandra A Lowe. 2001. <span>“Alaska Sablefish Assessment for 2001.”</span> <em>Stock Assessment and Fishery Evaluation Report for the Groundfish Fisheries of the Bering Sea and Aleutian Islands</em>.
