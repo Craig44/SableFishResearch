@@ -1,9 +1,10 @@
 # Initial model setup {#InitialModelSetup}
+Use @punt2019spatial to outline the key considerations
 
-- When did we choose to start the model and why
+- When did we choose to start the model and why. was it assumed to be in an equilbruim state
 - What spatial regions did we start with and why
 - How many fisheries
-- What observations were included?
+- What observations were included? how were they initially weighted
 
 
 ## Model start time {-}
@@ -59,22 +60,23 @@ include_graphics(file.path("Figures", "NFMP_with_EGOA.png"))
 |                  | Latitude and longitude for approximately half the recoveries
 +------------------+---------------------------------------------------------------------------------------+
 
-Reported catch from commercial fishers seems to be the most limiting data set which has the coarsest reported spatial resolution (**check this statement**). For this reason, the finest spatial resolution we will consider is the fishery management plan boundaries (FMP) being, Bering Sea, Aleutian Islands, Western Gulf, Central Gulf and Eastern Gulf i.e., five area model. Although this was determined by a reporting constraint, this is also the spatial resolution that ABC's are allocated for
+Reported catch from commercial fishers seems to be the most limiting data set which has the coarsest reported spatial resolution (**check this statement**). For this reason, the finest spatial resolution we will consider is the fishery management plan boundaries (FMP) being, Bering Sea, Aleutian Islands, Western Gulf, Central Gulf and Eastern Gulf i.e., five area model (Figure \@ref(fig:LLRegions)). Although this was determined by a reporting constraint, this is also the spatial resolution that ABC's are allocated for
 
 
 In addition to the reported spatial resolution of the data, we need to consider if there is any spatial sampling stratification within a data set. Sampling designs that have spatially varying stratification and thus spatially varying sampling intensity, could be inappropriate to use for alternative spatial stratifications. Often post-stratified estimators are not as efficient or accurate as design based estimators that are consistent with the sampling design. Fortunately in this case, the independent survey design is systematic. This results in consistent spatial sampling with respect to space, and removes this concern when considering alternative regional boundaries.
 
-
+```{r LLRegions, out.width = '100%', fig.height= 5, fig.cap="The finest spatial resolution that we are considering for Sablefish assessment", echo = F, eval = T}
+include_graphics(file.path("Figures", "Longline_areas.png"))
+```
 
 ## Observations {-}
 
-
-```{r initialspatialObservations, out.width = '100%', fig.height= 8, fig.cap="Observation type and frequency for the initial model.", echo = F, eval = T}
+```{r initialspatialObservations, out.width = '100%', fig.height= 6, fig.cap="Observation type and frequency for the initial model.", echo = F, eval = T}
 include_graphics(file.path("Figures", "Observation_Frequency.png"))
 ```
 
 
-```{r initialcatch, out.width = '100%', fig.height= 7, fig.cap="Catch (kilo tonnes) by gear and area.", echo = F, eval = T}
+```{r initialcatch, out.width = '100%', fig.height= 5, fig.cap="Catch (kilo tonnes) by gear and area.", echo = F, eval = T}
 include_graphics(file.path("Figures", "InputCatches.png"))
 ```
 

@@ -62,10 +62,13 @@ Mean weight at age was calculated using an allometric length weight relationship
 \bar{w}_{a,y} = \alpha \bar{l}_{a,y}^{\beta} 
 \]
 
-These were also the same as the in the stock assessment.
-
 ### Recruitment {-}
 There are two options in the model for recruitment, regional mean recruitment with global recruitment deviations and regional mean recruitment with region recruitment deviations.
+
+
+TODO
+- Add regional stock recruitment relationships as a model option
+- Add a global stock recruitment relationship
 
 ### Fishing mortality {-}
 When the hybrid \(F\) method is assumed (this is my default), tagged fish were not included when internally solving the fishing mortality nuisance parameters (Chapter \@ref(Fexplore)). The ratio of tagged to untagged numbers of fish in the partition in any year was assumed to be small enough not to effect \(F\) estimates. However, tagged fish were included when the model calculates predicted catch-at-age/length and catch for a fleet. This decision was made to reduce the computational overhead this would require to implement. When \(F\) parameters are estimated as free parameters, then this is not a problem and \(F\) will be applied to both tagged and untagged fish.
@@ -73,7 +76,7 @@ When the hybrid \(F\) method is assumed (this is my default), tagged fish were n
 
 ### Tag release events {-}
 
-Tags release event denoted by the index \(k\) have an implied region \(r\) and year \(y\) dimension. Each tag release event has known sex and age frequency at release. This is derived using the survey age-length, which is responsble fore tag-releases. A downside of using the age-length key approach to conver unsexed lengths at release into release by age and sex is a tagged fish that would have an exact age, sex and length will be represented in the model as a fraction of a fish across multiple ages and sexes. For release years where thee were no age length keys, we used age-length keys pooled over years 1981, 1985 and 1987 for earlier perios (prior to 1981) and the closest age-length key for later periods. (**How can we explore uncertainty in this input?** re-run the model with numbers at age and length from bootstrapping age-length keys?)
+Tags release event denoted by the index \(k\) have an implied region \(r\) and year \(y\) dimension. Each tag release event has known sex and age frequency at release. This is derived using the survey age-length key. This is reasonable given the survey is responsible for releasing most tags. A downside of using the age-length key approach to convert unsexed lengths at release into tag releases by age and sex is a tagged fish that would have an exact age, sex and length will be represented in the model as a fraction of a fish across multiple ages and sexes. For release years where there were no age length keys, we used age-length keys pooled over years 1981, 1985 and 1987 for earlier perios (prior to 1981) and the closest age-length key for later periods. (**How can we explore uncertainty in this input?** re-run the model with numbers at age and length from bootstrapping age-length keys?)
 
 
 Tagged fish from release event \(k\) are denoted in the partition as \(T^k_{a,r,y,s}\), and are tracked for \(n_{T}\) years before migrating into a pooled tag group, at which point we loose release-year information but do maintain its region of release. At present, tagged fish are assumed to take on the exact same population processes as the untagged elements of the partition (instantaneous mixing).

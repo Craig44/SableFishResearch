@@ -282,7 +282,7 @@ If random effects are considered the joint probability model follows,
 	Pr\left[ \boldsymbol{y^{obs}}, \boldsymbol{u}| \boldsymbol{\theta} \right]  = Pr\left[\boldsymbol{y^{obs}} |\boldsymbol{\theta^f}, \boldsymbol{u} \right] Pr\left[\boldsymbol{u} |\boldsymbol{\theta^h} \right] 
 	\end{equation}
 
-where, \(\boldsymbol{\theta}\) denotes "fixed-effect" parameters which are furthur seperated by \(\boldsymbol{\theta} = (\boldsymbol{\theta^f},\boldsymbol{\theta^h}) \), with \(\boldsymbol{\theta^h}\) denoting fixed effects that are hyperprior parameters for the "random-effect" variables denoted by \(\boldsymbol{u}\) and \(\(\boldsymbol{\theta^h}\) \) are all other fixed-effect parameters.
+where, \(\boldsymbol{\theta}\) denotes "fixed-effect" parameters which are furthur seperated by \(\boldsymbol{\theta} = (\boldsymbol{\theta^f},\boldsymbol{\theta^h}) \), with \(\boldsymbol{\theta^h}\) denoting fixed effects that are hyperprior parameters for the "random-effect" variables denoted by \(\boldsymbol{u}\) and \(\boldsymbol{\theta^f}\) are all other fixed-effect parameters.
 
 Inference is conducted by maximising the marginal likelihood noting \( L\left(\boldsymbol{\theta} | \boldsymbol{y^{obs}} \right) \propto Pr\left[ \boldsymbol{y^{obs}} | \boldsymbol{\theta} \right]\)
 	\begin{equation}\label{eq:marginal_ll}

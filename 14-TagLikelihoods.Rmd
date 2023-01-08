@@ -2,11 +2,12 @@
 This section explores a range of tag-recovery likelihoods that have been used in the literature. I simple tag recapture model is used in a simulation to explore how well different likelihoods estimate movement parameters under a range of dispersion conditions. The tag-recapture model ignores age and models number of tagged fish from a release event denoted by \(k\) over three regions indexed by \(r\) for \(n_t\) discrete time-steps. \(T^k_{r,t}\) denotes the number of tagged fish from release event \(k\) in region \(r\) and time step \(t\). The model applies the following processes between time-steps.
 
 \begin{align*}
-T^k_{r,t + 1} & = T^k_{r,t} e^{-Z_t} \\
+T^k_{r,t} & = T^k, \quad t = 0\\
+T^k_{r,t + 1} & = T^k_{r,t} e^{-Z_t}, \quad t > 0\\
 Z_t & = M + F_t \\
 \boldsymbol{T}^k_{t + 1} & = \boldsymbol{T}^k_{t + 1} \boldsymbol{M}
 \end{align*}
-where, \(\boldsymbol{T}^k_{t + 1} =  (T^k_{1,t + 1},\dots, T^k_{n_r,t + 1})\) is a vector of numbers of tagged fish across all regions and \(\boldsymbol{M}\) is a \(n_r \times n_r\) movement matrix. This assumes each region has the same fishing mortality in each time-step.
+where, \(T^k\) is the initial nunmber of tag releases for release event \(k\), \(\boldsymbol{T}^k_{t + 1} =  (T^k_{1,t + 1},\dots, T^k_{n_r,t + 1})\) is a vector of numbers of tagged fish across all regions and \(\boldsymbol{M}\) is a \(n_r \times n_r\) movement matrix. This assumes each region has the same fishing mortality in each time-step.
 
 ## Likelihoods {-}
 
@@ -276,7 +277,7 @@ colnames(complete_df) = c("From", "To","proportion", "RE", "SE", "type", "sim", 
 
 
 ```{r overdispersiontable, echo = F, eval = T, warning=FALSE, message=FALSE, error = FALSE}
-kable(sim_data_info, caption = "Average proportion of zeros and variance of simulated data for different overdispersion settings.")
+kable(sim_data_info, caption = "Average proportion of zeros and variance of simulated data for different overdispersion settings.", digits  = 3)
 ```
 
 
