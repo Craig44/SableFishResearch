@@ -214,7 +214,7 @@ div.csl-indent {
 <li class="chapter" data-level="5.0.1" data-path="surveydata.html"><a href="surveydata.html#direct-ageing-estimators"><i class="fa fa-check"></i><b>5.0.1</b> Direct ageing estimators</a></li>
 <li class="chapter" data-level="5.0.2" data-path="surveydata.html"><a href="surveydata.html#age-length-key-estimators"><i class="fa fa-check"></i><b>5.0.2</b> Age length key estimators</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#continuation-ratio-logits-crl"><i class="fa fa-check"></i>Continuation ratio logits (CRL)</a></li>
-<li class="chapter" data-level="5.0.3" data-path="surveydata.html"><a href="surveydata.html#observation-error-estimates"><i class="fa fa-check"></i><b>5.0.3</b> Observation error estimates</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#estimating-initial-effective-sample-sizes"><i class="fa fa-check"></i>Estimating initial effective sample sizes</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-length-data"><i class="fa fa-check"></i>Age-length data</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#appendix"><i class="fa fa-check"></i>Appendix</a></li>
@@ -246,7 +246,8 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#model-spatial-resolution-of-the-model"><i class="fa fa-check"></i>Model spatial resolution of the model</a></li>
 <li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#fishery-structure"><i class="fa fa-check"></i>Fishery structure</a></li>
 <li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#observations"><i class="fa fa-check"></i>Observations</a></li>
-<li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#first-model-run"><i class="fa fa-check"></i>First model run</a></li>
+<li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#first-model-run-without-tag-recapture-data"><i class="fa fa-check"></i>First model run <strong>without</strong> tag-recapture data</a></li>
+<li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#first-model-run-with-tag-recapture-data"><i class="fa fa-check"></i>First model run <strong>with</strong> tag-recapture data</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="taglike.html"><a href="taglike.html"><i class="fa fa-check"></i><b>9</b> Tag likelihoods</a>
 <ul>
@@ -313,8 +314,8 @@ div.csl-indent {
 <p>This chapter explores and describes survey age, length and catch rate data to inform the following spatial model decisions</p>
 <ul>
 <li>Is there spatial differences in age or length composition?</li>
-<li>Is there spatial differences in relative abundance?</li>
-<li>Is there spatial differences growth?</li>
+<li>Is there spatial differences in growth?</li>
+<li>What estimators will we use for regional abundance and age-frequencies</li>
 </ul>
 <div id="survey-design" class="section level2 unnumbered hasAnchor">
 <h2>Survey design<a href="surveydata.html#survey-design" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -532,9 +533,9 @@ P_{a,r} = \hat{p}(a|l) N^r_l
 \hat{p}_a =&amp; \hat{\pi}_a \bigg( 1 - \sum\limits_{k = J}^{a - 1} \hat{p}_a \bigg) = \hat{\pi}_a \prod\limits_{k = J}^{a - 1} (1 - \hat{\pi}_k) , \ a &gt; J
 \end{align}\]</span></p>
 </div>
-<div id="observation-error-estimates" class="section level3 hasAnchor" number="5.0.3">
-<h3><span class="header-section-number">5.0.3</span> Observation error estimates<a href="surveydata.html#observation-error-estimates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Bootstrapping is used to estimate standard errors for <span class="math inline">\(P_{a,R,y}\)</span>. Data used to calculate age-length keys are re sampled with replacement to calculate a SE and CV. This produces a CV for each age, region and year denoted by <span class="math inline">\(CV_{a,r, y}\)</span>. Proportions at age are assumed to be distributed according to the multinomial distribution. To translate the observation error expressed as a CV to an initial effective sample denoted by <span class="math inline">\(N^{eff}_y\)</span> we apply a non-linear least squares solver to estimate <span class="math inline">\(N^{eff}_y\)</span> by minimsing the following expression</p>
+<div id="estimating-initial-effective-sample-sizes" class="section level3 unnumbered hasAnchor">
+<h3>Estimating initial effective sample sizes<a href="surveydata.html#estimating-initial-effective-sample-sizes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Bootstrapping is used to estimate standard errors for <span class="math inline">\(P_{a,R,y}\)</span>. Data used to calculate age-length keys are re sampled with replacement to calculate a SE and CV. This produces a CV for each age, region and year denoted by <span class="math inline">\(CV_{a,r, y}\)</span>. Proportions at age are assumed to be distributed according to the multinomial distribution. To translate the observation error expressed as a CV to an initial effective sample denoted by <span class="math inline">\(N^{eff}_y\)</span> we apply a non-linear least squares solver to estimate <span class="math inline">\(N^{eff}_y\)</span> by minimizing the following expression</p>
 <p><span class="math display">\[
 \log CV_{a,r, y} = \log \sqrt{\frac{P_{a,R,y}\widehat{N}^{eff}_y \left(1 -  P_{a,R,y}\right)}{P_{a,R,y}\widehat{N}^{eff}_y}}
 \]</span></p>

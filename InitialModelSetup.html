@@ -214,7 +214,7 @@ div.csl-indent {
 <li class="chapter" data-level="5.0.1" data-path="surveydata.html"><a href="surveydata.html#direct-ageing-estimators"><i class="fa fa-check"></i><b>5.0.1</b> Direct ageing estimators</a></li>
 <li class="chapter" data-level="5.0.2" data-path="surveydata.html"><a href="surveydata.html#age-length-key-estimators"><i class="fa fa-check"></i><b>5.0.2</b> Age length key estimators</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#continuation-ratio-logits-crl"><i class="fa fa-check"></i>Continuation ratio logits (CRL)</a></li>
-<li class="chapter" data-level="5.0.3" data-path="surveydata.html"><a href="surveydata.html#observation-error-estimates"><i class="fa fa-check"></i><b>5.0.3</b> Observation error estimates</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#estimating-initial-effective-sample-sizes"><i class="fa fa-check"></i>Estimating initial effective sample sizes</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-length-data"><i class="fa fa-check"></i>Age-length data</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#appendix"><i class="fa fa-check"></i>Appendix</a></li>
@@ -246,7 +246,8 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#model-spatial-resolution-of-the-model"><i class="fa fa-check"></i>Model spatial resolution of the model</a></li>
 <li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#fishery-structure"><i class="fa fa-check"></i>Fishery structure</a></li>
 <li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#observations"><i class="fa fa-check"></i>Observations</a></li>
-<li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#first-model-run"><i class="fa fa-check"></i>First model run</a></li>
+<li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#first-model-run-without-tag-recapture-data"><i class="fa fa-check"></i>First model run <strong>without</strong> tag-recapture data</a></li>
+<li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#first-model-run-with-tag-recapture-data"><i class="fa fa-check"></i>First model run <strong>with</strong> tag-recapture data</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="taglike.html"><a href="taglike.html"><i class="fa fa-check"></i><b>9</b> Tag likelihoods</a>
 <ul>
@@ -483,8 +484,79 @@ Figure 8.9: Catch (kilo tonnes) by gear and area.
 </p>
 </div>
 </div>
-<div id="first-model-run" class="section level2 unnumbered hasAnchor">
-<h2>First model run<a href="InitialModelSetup.html#first-model-run" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="first-model-run-without-tag-recapture-data" class="section level2 unnumbered hasAnchor">
+<h2>First model run <strong>without</strong> tag-recapture data<a href="InitialModelSetup.html#first-model-run-without-tag-recapture-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Annual recruit deviation parameters shared among regions (they still have independent regional mean recruitment parameters)</li>
+<li>No initial F, initial numbers at age 3:18 have estimate deviation parameters away from an equilibrium exponential decay. <span class="math inline">\(\sim \mathcal{N}(0,0.2^2)\)</span></li>
+<li>Fishery selectivities the same for each region (fixed gear fishery shares logistic delta parameter between males and females). Estimated time-blocks the same as the assessment (3 for the dixed, 1 for the trawl)</li>
+<li>Survey selectivity the same for each region (two time-blocks)</li>
+<li>Survey catchability the same for each region</li>
+</ul>
+<p>Issues
+- Cannot estimate movement, get non-positive definite hessian matrix. Only when I turn movement off do I get positive definite hessian matrix.</p>
+<div class="figure"><span style="display:block;" id="fig:modelNoTagcatch"></span>
+<img src="Figures/Model_NoTagData/Catch_fit.png" alt="Fits to annual catch" width="100%" />
+<p class="caption">
+Figure 8.10: Fits to annual catch
+</p>
+</div>
+</div>
+<div id="first-model-run-with-tag-recapture-data" class="section level2 unnumbered hasAnchor">
+<h2>First model run <strong>with</strong> tag-recapture data<a href="InitialModelSetup.html#first-model-run-with-tag-recapture-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Initial model constraints</p>
+<ul>
+<li>same as model without tag-recapture data</li>
+<li>did not estimate reporting rate, assumed it was 0.6 (loosely based on <span class="citation">Hanselman et al. (<a href="#ref-hanselman2015move" role="doc-biblioref">2015</a>)</span>)</li>
+<li>initial mortality loss = 0.1</li>
+<li>annual tag-shedding = 0.02</li>
+</ul>
+<p>Issues
+- If I use spatio-temporal index models <span class="math inline">\(\mathcal{M}_3\)</span> and <span class="math inline">\(\mathcal{M}_4\)</span> I cannot get a positive definite hessian matrix. I believe this is due to the standard errors.
+- Recruit devs in recent years are very large and make me question model convergence (TODO: profile these recruit devs)
+- Tag predictions consistently under observed values (show)</p>
+<div class="figure"><span style="display:block;" id="fig:model01catch"></span>
+<img src="Figures/Model_01/Catch_fit.png" alt="Fits to annual catch" width="100%" />
+<p class="caption">
+Figure 8.11: Fits to annual catch
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:model01survey"></span>
+<img src="Figures/Model_01/survey_index_fit.png" alt="Fits to survey abundance data" width="100%" />
+<p class="caption">
+Figure 8.12: Fits to survey abundance data
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:model01movement"></span>
+<img src="Figures/Model_01/Est_movement.png" alt="Estimated movement matrix" width="100%" />
+<p class="caption">
+Figure 8.13: Estimated movement matrix
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:model01tagresids"></span>
+<img src="Figures/Model_01/tag_aggregated_fit.png" alt="Aggregated tag recovery residuals" width="100%" />
+<p class="caption">
+Figure 8.14: Aggregated tag recovery residuals
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:model01sel"></span>
+<img src="Figures/Model_01/Est_selectivity.png" alt="Estimated selectivities" width="60%" />
+<p class="caption">
+Figure 8.15: Estimated selectivities
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:model01ssbs"></span>
+<img src="Figures/Model_01/regional_ssb.png" alt="Estimated regional SSBs" width="60%" />
+<p class="caption">
+Figure 8.16: Estimated regional SSBs
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:model01init"></span>
+<img src="Figures/Model_01/Init_numbers_at_age.png" alt="Estimated initial age-structure" width="60%" />
+<p class="caption">
+Figure 8.17: Estimated initial age-structure
+</p>
+</div>
 
 </div>
 </div>
@@ -492,6 +564,9 @@ Figure 8.9: Catch (kilo tonnes) by gear and area.
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-goethel2021assessment" class="csl-entry">
 Goethel, DR, DH Hanselman, CJ Rodgveller, KH Fenski, SK Shotwell, KB Echave, PW Malecha, A Siwicke, and CR Lunsford. 2021. <span>“Assessment of the Sablefish Stock in Alaska.”</span> <em>Stock Assessment and Fishery Evaluation Report for the Groundfish Resources of the Gulf of Alaska and the Bering Sea/Aleutian Islands as Projected for</em>.
+</div>
+<div id="ref-hanselman2015move" class="csl-entry">
+Hanselman, Dana H, Jonathan Heifetz, Katy B Echave, and Sherri C Dressel. 2015. <span>“Move It or Lose It: Movement and Mortality of Sablefish Tagged in Alaska.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 72 (2): 238–51.
 </div>
 <div id="ref-jasonowicz2017love" class="csl-entry">
 Jasonowicz, Andrew J, Frederick W Goetz, Giles W Goetz, and Krista M Nichols. 2017. <span>“Love the One You’re with: Genomic Evidence of Panmixia in the Sablefish (Anoplopoma Fimbria).”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 74 (3): 377–87.

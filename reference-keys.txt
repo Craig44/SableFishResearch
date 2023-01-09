@@ -52,6 +52,14 @@ fig:FishingLatitude
 fig:FishingLongitude
 fig:initialspatialObservations
 fig:initialcatch
+fig:modelNoTagcatch
+fig:model01catch
+fig:model01survey
+fig:model01movement
+fig:model01tagresids
+fig:model01sel
+fig:model01ssbs
+fig:model01init
 tab:overdispersiontable
 fig:taglikesummaryplotsRE
 fig:taglikesummaryplotsEst
@@ -83,7 +91,6 @@ spatialmodeldescription
 surveydata
 direct-ageing-estimators
 age-length-key-estimators
-observation-error-estimates
 observerdata
 tagdata
 InitialModelSetup
