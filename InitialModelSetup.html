@@ -232,13 +232,13 @@ div.csl-indent {
 <li class="chapter" data-level="7" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>7</b> Tagging data exploration</a>
 <ul>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#exploratory-analysis-of-the-tag-data"><i class="fa fa-check"></i>Exploratory analysis of the tag data</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#lincoln-peterson-estimator"><i class="fa fa-check"></i>Lincoln-Peterson estimator</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#integrating-tagging-observations-in-spatial-age-structured-models"><i class="fa fa-check"></i>Integrating tagging observations in spatial age-structured models</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tagging-things-to-consider-with-relevant-references"><i class="fa fa-check"></i>Tagging things to consider with relevant references</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#releasing-tags"><i class="fa fa-check"></i>Releasing tags</a>
 <ul>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#things-to-consider-for-tag-release"><i class="fa fa-check"></i>Things to consider for tag release</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tag-recovery-observations-1"><i class="fa fa-check"></i>Tag recovery observations</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html"><i class="fa fa-check"></i><b>8</b> Initial model setup</a>
 <ul>
@@ -325,24 +325,18 @@ div.csl-indent {
 <h2>Model spatial resolution of the model<a href="InitialModelSetup.html#model-spatial-resolution-of-the-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This section describes the decision making process we took in configuring an initial spatial model. The first consideration was whether to include areas outside of the Gulf of Alaska (GOA) and the Bering sea Aleutian islands region, which is the spatial extent for the current stock assessment <span class="citation">(<a href="#ref-goethel2021assessment" role="doc-biblioref">D. Goethel et al. 2021</a>)</span>. Sablefish inhabit a broad spatial distribution from the northeastern Pacific Ocean from northern Mexico to the Gulf of Alaska. It is currently assessed by three assessment bodies, the first is the area of focus, being the Bering sea and gulf of Alaska <span class="citation">(<a href="#ref-goethel2021assessment" role="doc-biblioref">D. Goethel et al. 2021</a>)</span>, one off the west coast of Canada <strong>(Cox et al. 2011)</strong> and the west coast from California to Oregan <strong>(Stewart et al. 2011)</strong>. Given the complex juvenile life history coupled with long range movement capabilities of adults, the stock structure of sablefish has been a topic of extensive research.</p>
 <p>A recent genetic study by <span class="citation">Jasonowicz et al. (<a href="#ref-jasonowicz2017love" role="doc-biblioref">2017</a>)</span>, found no significant difference between samples off the west coast of US, GOA and bering sea (there were no samples off the west coast of Canada in this study), providing evidence for a single panmictic population. A recent morphometric study <span class="citation">(<a href="#ref-kapur2020oceanographic" role="doc-biblioref">Kapur et al. 2020</a>)</span>, found significant differences in fish traits such as length at age between samples from the west coast of US and GOA. These results were consistent with the findings from <span class="citation">Tripp-Valdez et al. (<a href="#ref-tripp2012population" role="doc-biblioref">2012</a>)</span>. Tagging is another important information source, with extensive tag releases along the entire North Pacific. Tag recovery data provide evidence for a two stock hypothesis <span class="citation">(<a href="#ref-kimura1998tagged" role="doc-biblioref">Kimura and Shavy 1998</a>)</span>. With a stock north of Vancouver Island and a stock to the south.</p>
-<p>For the purposes of this research, we will assume GOA and BS, hereinafter refereed to as the GOABS complex, is isolated (i.e., no movement in or out of this region) from Canada and the west coast of the US. Although there is evidence to include part of Canada (Figure <a href="InitialModelSetup.html#fig:TagRecoveriesOutsideRegion">8.1</a>). Due to practical considerations regarding data sharing and the time-frame of this research Canada was excluded. The focus of this research is to build and explore a spatially explicit model for the GOABS complex.</p>
-<div class="figure"><span style="display:block;" id="fig:TagRecoveriesOutsideRegion"></span>
-<img src="Figures/out_of_region_recoveries.png" alt="Tag recoveries outside of stock boundaries, with release locations (bottom panel)." width="100%" />
-<p class="caption">
-Figure 8.1: Tag recoveries outside of stock boundaries, with release locations (bottom panel).
-</p>
-</div>
-<p>The general approach taken, was to build an initial spatial model that had the finest spatial resolution possible and aggregate regions as data limitations and model convergence issues arose. This finest model spatial resolution was initially based on the input data set with the coarsest reported spatial resolution. Data sets have been reported at different spatial resolutions over time. In general, data are reproted at three levels of spatial resolution: latitude and longitude (high spatial resolution), statistical area (Figure <a href="InitialModelSetup.html#fig:spatialstatArea">8.2</a>) and larger fishery management boundaries (Figure <a href="InitialModelSetup.html#fig:spatialmanagementArea">8.3</a>). Input data sets and the spatial resolution available are described in the following table.</p>
+<p>For the purposes of this research, we will assume GOA and BS, hereinafter refereed to as the GOABS complex, is isolated (i.e., no movement in or out of this region) from Canada and the west coast of the US. Although there is evidence to include part of Canada (Figure <a href="tagdata.html#fig:TagRecoveriesOutsideRegion">7.3</a>). Due to practical considerations regarding data sharing and the time-frame of this research Canada was excluded. The focus of this research is to build and explore a spatially explicit model for the GOABS complex.</p>
+<p>The general approach taken, was to build an initial spatial model that had the finest spatial resolution possible and aggregate regions as data limitations and model convergence issues arose. This finest model spatial resolution was initially based on the input data set with the coarsest reported spatial resolution. Data sets have been reported at different spatial resolutions over time. In general, data are reproted at three levels of spatial resolution: latitude and longitude (high spatial resolution), statistical area (Figure <a href="InitialModelSetup.html#fig:spatialstatArea">8.1</a>) and larger fishery management boundaries (Figure <a href="InitialModelSetup.html#fig:spatialmanagementArea">8.2</a>). Input data sets and the spatial resolution available are described in the following table.</p>
 <div class="figure"><span style="display:block;" id="fig:spatialstatArea"></span>
 <img src="Figures/alaska-fisheries-boundaries-map.jpg" alt="Statistical and reporting areas for GOABS complex" width="100%" />
 <p class="caption">
-Figure 8.2: Statistical and reporting areas for GOABS complex
+Figure 8.1: Statistical and reporting areas for GOABS complex
 </p>
 </div>
 <div class="figure"><span style="display:block;" id="fig:spatialmanagementArea"></span>
 <img src="Figures/NFMP_with_EGOA.png" alt="Fishery management plan boundaries. The Eastern Gulf is often reported at subareas split up be East/West Yakutat and sometimes Southeast." width="100%" />
 <p class="caption">
-Figure 8.3: Fishery management plan boundaries. The Eastern Gulf is often reported at subareas split up be East/West Yakutat and sometimes Southeast.
+Figure 8.2: Fishery management plan boundaries. The Eastern Gulf is often reported at subareas split up be East/West Yakutat and sometimes Southeast.
 </p>
 </div>
 <table>
@@ -384,12 +378,12 @@ Latitude and longitude for approximately half the recoveries</td>
 </tr>
 </tbody>
 </table>
-<p>Reported catch from commercial fishers seems to be the most limiting data set which has the coarsest reported spatial resolution (<strong>check this statement</strong>). For this reason, the finest spatial resolution we will consider is the fishery management plan boundaries (FMP) being, Bering Sea, Aleutian Islands, Western Gulf, Central Gulf and Eastern Gulf i.e., five area model (Figure <a href="InitialModelSetup.html#fig:LLRegions">8.4</a>). Although this was determined by a reporting constraint, this is also the spatial resolution that ABC’s are allocated for</p>
+<p>Reported catch from commercial fishers seems to be the most limiting data set which has the coarsest reported spatial resolution (<strong>check this statement</strong>). For this reason, the finest spatial resolution we will consider is the fishery management plan boundaries (FMP) being, Bering Sea, Aleutian Islands, Western Gulf, Central Gulf and Eastern Gulf i.e., five area model (Figure <a href="InitialModelSetup.html#fig:LLRegions">8.3</a>). Although this was determined by a reporting constraint, this is also the spatial resolution that ABC’s are allocated for</p>
 <p>In addition to the reported spatial resolution of the data, we need to consider if there is any spatial sampling stratification within a data set. Sampling designs that have spatially varying stratification and thus spatially varying sampling intensity, could be inappropriate to use for alternative spatial stratifications. Often post-stratified estimators are not as efficient or accurate as design based estimators that are consistent with the sampling design. Fortunately in this case, the independent survey design is systematic. This results in consistent spatial sampling with respect to space, and removes this concern when considering alternative regional boundaries.</p>
 <div class="figure"><span style="display:block;" id="fig:LLRegions"></span>
 <img src="Figures/Longline_areas.png" alt="The finest spatial resolution that we are considering for Sablefish assessment" width="100%" />
 <p class="caption">
-Figure 8.4: The finest spatial resolution that we are considering for Sablefish assessment
+Figure 8.3: The finest spatial resolution that we are considering for Sablefish assessment
 </p>
 </div>
 </div>
@@ -451,7 +445,26 @@ Figure 8.4: The finest spatial resolution that we are considering for Sablefish 
 <div class="figure"><span style="display:block;" id="fig:observerLFSplit"></span>
 <img src="Figures/observer_split_analysis.png" alt="Longitude splits based on regression tree analysis from Table \@ref(tab:observerLFSplitAnalysis)" width="100%" />
 <p class="caption">
-Figure 8.5: Longitude splits based on regression tree analysis from Table <a href="InitialModelSetup.html#tab:observerLFSplitAnalysis">8.1</a>
+Figure 8.4: Longitude splits based on regression tree analysis from Table <a href="InitialModelSetup.html#tab:observerLFSplitAnalysis">8.1</a>
+</p>
+</div>
+<p>A summary of fishing effort distributions by region and year. This plots the depth latitude and longitude within one of the five regions for observed fishing events.</p>
+<div class="figure"><span style="display:block;" id="fig:FishingDepth"></span>
+<img src="Figures/duration_depth.png" alt="Boxplot of depth by observed fishing event" width="100%" />
+<p class="caption">
+Figure 8.5: Boxplot of depth by observed fishing event
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:FishingLatitude"></span>
+<img src="Figures/latitude_dist.png" alt="Boxplot of latitude by observed fishing event" width="100%" />
+<p class="caption">
+Figure 8.6: Boxplot of latitude by observed fishing event
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:FishingLongitude"></span>
+<img src="Figures/longitude_dist.png" alt="Boxplot of longitude by observed fishing event" width="100%" />
+<p class="caption">
+Figure 8.7: Boxplot of longitude by observed fishing event
 </p>
 </div>
 </div>
@@ -460,13 +473,13 @@ Figure 8.5: Longitude splits based on regression tree analysis from Table <a hre
 <div class="figure"><span style="display:block;" id="fig:initialspatialObservations"></span>
 <img src="Figures/Observation_Frequency.png" alt="Observation type and frequency for the initial model." width="100%" />
 <p class="caption">
-Figure 8.6: Observation type and frequency for the initial model.
+Figure 8.8: Observation type and frequency for the initial model.
 </p>
 </div>
 <div class="figure"><span style="display:block;" id="fig:initialcatch"></span>
 <img src="Figures/InputCatches.png" alt="Catch (kilo tonnes) by gear and area." width="100%" />
 <p class="caption">
-Figure 8.7: Catch (kilo tonnes) by gear and area.
+Figure 8.9: Catch (kilo tonnes) by gear and area.
 </p>
 </div>
 </div>

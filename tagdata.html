@@ -232,13 +232,13 @@ div.csl-indent {
 <li class="chapter" data-level="7" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>7</b> Tagging data exploration</a>
 <ul>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#exploratory-analysis-of-the-tag-data"><i class="fa fa-check"></i>Exploratory analysis of the tag data</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#lincoln-peterson-estimator"><i class="fa fa-check"></i>Lincoln-Peterson estimator</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#integrating-tagging-observations-in-spatial-age-structured-models"><i class="fa fa-check"></i>Integrating tagging observations in spatial age-structured models</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tagging-things-to-consider-with-relevant-references"><i class="fa fa-check"></i>Tagging things to consider with relevant references</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#releasing-tags"><i class="fa fa-check"></i>Releasing tags</a>
 <ul>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#things-to-consider-for-tag-release"><i class="fa fa-check"></i>Things to consider for tag release</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tag-recovery-observations-1"><i class="fa fa-check"></i>Tag recovery observations</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html"><i class="fa fa-check"></i><b>8</b> Initial model setup</a>
 <ul>
@@ -327,6 +327,23 @@ Figure 7.1: Tag releases and recoveries pooled over all years
 Figure 7.2: Recovered fish by gear type and year
 </p>
 </div>
+<p>One thing of note is the number of tag-recaptures outside of the stock boundaries, shown in Figure <a href="tagdata.html#fig:TagRecoveriesOutsideRegion">7.3</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:TagRecoveriesOutsideRegion"></span>
+<img src="Figures/out_of_region_recoveries.png" alt="Tag recoveries outside of stock boundaries, with release locations (bottom panel)." width="100%" />
+<p class="caption">
+Figure 7.3: Tag recoveries outside of stock boundaries, with release locations (bottom panel).
+</p>
+</div>
+<p>We can crudely look at the proportion of recoveries across recovery regions that were released in a given region shown in Figure <a href="tagdata.html#fig:EmpiricalRecoveries">7.4</a>. Care must be taken when interpreting these numbers because recovery rates among regions will differ which this plot is ignoring.</p>
+<div class="figure"><span style="display:block;" id="fig:EmpiricalRecoveries"></span>
+<img src="Figures/empirical_tag_recoveries.png" alt="Tag recoveries by release and recovery region pooled over all years. Colors are number of tags recovered and text indicates the proportion." width="100%" />
+<p class="caption">
+Figure 7.4: Tag recoveries by release and recovery region pooled over all years. Colors are number of tags recovered and text indicates the proportion.
+</p>
+</div>
+</div>
+<div id="lincoln-peterson-estimator" class="section level2 unnumbered hasAnchor">
+<h2>Lincoln-Peterson estimator<a href="tagdata.html#lincoln-peterson-estimator" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We applied a simple Lincoln-Peterson estimators to view changes in abundance over the area of interest using a subset of the tag recoveries. The Lincoln-Peterson estimator follows</p>
 <p><span class="math display">\[
 \widehat{N} = \frac{n e^{-(\kappa + M)}K\tau}{k} \ .
@@ -373,36 +390,36 @@ Figure 7.2: Recovered fish by gear type and year
 </tr>
 </tbody>
 </table>
-<p>Most of the tags are released during the summer survey (Figure <a href="tagdata.html#fig:TagDataByMonth">7.3</a>) but recoveries are more spread out within a year.</p>
+<p>Most of the tags are released during the summer survey (Figure <a href="tagdata.html#fig:TagDataByMonth">7.5</a>) but recoveries are more spread out within a year.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:TagDataByMonth"></span>
 <img src="Figures/Releases_by_month.png" alt="Tag recovery and release distributions by month" width="49%" /><img src="Figures/Recoveries_by_month.png" alt="Tag recovery and release distributions by month" width="49%" />
 <p class="caption">
-Figure 7.3: Tag recovery and release distributions by month
+Figure 7.5: Tag recovery and release distributions by month
 </p>
 </div>
-<p>A Lincoln-Peterson estimator based on long line tag recoveries that were at liberty for a year (300 - 420 days) was explored. This time-at-liberty period was chosen so we could calculate annual estimates of abundance and thus derive annual estimates of exploitation rates to compare with the assessment. Due to the large distance traveled by sablefish over this time-period (Figure <a href="tagdata.html#fig:KMtravelled">7.4</a>), the spatial extent considered was the entire stock region.</p>
+<p>A Lincoln-Peterson estimator based on long line tag recoveries that were at liberty for a year (300 - 420 days) was explored. This time-at-liberty period was chosen so we could calculate annual estimates of abundance and thus derive annual estimates of exploitation rates to compare with the assessment. Due to the large distance traveled by sablefish over this time-period (Figure <a href="tagdata.html#fig:KMtravelled">7.6</a>), the spatial extent considered was the entire stock region.</p>
 <div class="figure"><span style="display:block;" id="fig:KMtravelled"></span>
 <img src="Figures/distance_travelled_after_a_year.png" alt="Distance (km) between release location and recovery location for fish at liberty for a year." width="60%" />
 <p class="caption">
-Figure 7.4: Distance (km) between release location and recovery location for fish at liberty for a year.
+Figure 7.6: Distance (km) between release location and recovery location for fish at liberty for a year.
 </p>
 </div>
-<p>A few calculations/approximations are included in the Lincoln-Peterson estimator, these include tag loss and natural mortality for tagged fish after a year at liberaty, reporting rates from the commercial fishery, and changing reported weights to numbers. The period for calculating catch that was scanned during tag recoveries was the 15 of May to 15 of September. This was chosen as it brackets the monthly peak of releases (Figure <a href="tagdata.html#fig:TagDataByMonth">7.3</a>). The other adjustment was converting reported weight into numbers. For this I calculated the mean numbers of fish per tonne based on the observer data. I then used this multiplier for the catch reported in tonnes during the period of recoveries to extract the numbers scanned by the fishery each year.</p>
+<p>A few calculations/approximations are included in the Lincoln-Peterson estimator, these include tag loss and natural mortality for tagged fish after a year at liberaty, reporting rates from the commercial fishery, and changing reported weights to numbers. The period for calculating catch that was scanned during tag recoveries was the 15 of May to 15 of September. This was chosen as it brackets the monthly peak of releases (Figure <a href="tagdata.html#fig:TagDataByMonth">7.5</a>). The other adjustment was converting reported weight into numbers. For this I calculated the mean numbers of fish per tonne based on the observer data. I then used this multiplier for the catch reported in tonnes during the period of recoveries to extract the numbers scanned by the fishery each year.</p>
 <div class="figure"><span style="display:block;" id="fig:popestimateslincolnpeterson"></span>
 <img src="Figures/LincolPetersonEstimates.png" alt="Recovered fish by gear type and year" width="60%" />
 <p class="caption">
-Figure 7.5: Recovered fish by gear type and year
+Figure 7.7: Recovered fish by gear type and year
 </p>
 </div>
 <p>Once we have annual population abundance estimates we can derive a rough annual exploitation rate (<span class="math inline">\(U_y\)</span>) denoted by</p>
 <p><span class="math display">\[
 U_y  = \frac{C_y}{\widehat{N}}
 \]</span>
-where, <span class="math inline">\(C_y\)</span> is the annual catch in numbers for the Longline fishery shown in Figure <a href="tagdata.html#fig:roughExploitationRate">7.6</a>.</p>
+where, <span class="math inline">\(C_y\)</span> is the annual catch in numbers for the Longline fishery shown in Figure <a href="tagdata.html#fig:roughExploitationRate">7.8</a>.</p>
 <div class="figure"><span style="display:block;" id="fig:roughExploitationRate"></span>
 <img src="Figures/rough_exploitation_rate.png" alt="Exploitation rate for the Longline fishery based on Lincoln-Peterson estimates" width="60%" />
 <p class="caption">
-Figure 7.6: Exploitation rate for the Longline fishery based on Lincoln-Peterson estimates
+Figure 7.8: Exploitation rate for the Longline fishery based on Lincoln-Peterson estimates
 </p>
 </div>
 </div>
@@ -424,13 +441,13 @@ Figure 7.6: Exploitation rate for the Longline fishery based on Lincoln-Peterson
 </div>
 <div id="releasing-tags" class="section level2 unnumbered hasAnchor">
 <h2>Releasing tags<a href="tagdata.html#releasing-tags" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Tag release events involve releasing a tag-cohort at the beginning of a year within a specific area. A tag cohort is indexed by <span class="math inline">\(k\)</span> and has an implied year <span class="math inline">\(y\)</span> and region <span class="math inline">\(r\)</span> index. <span class="math inline">\(\boldsymbol{N}^k\)</span> is used to denote a vector of lengths or ages for tag-cohort <span class="math inline">\(k\)</span>. In general, only the length frequency is known at time of release for each tag-cohort becasue ageing is a fatal process. We consider two different approaches for seeding a tag cohort within spatial age-structured models. The two methods are essentially the same but differ in whether the length are converted to age outside of the model (“External”) or done within the model (“Internal”). The internal method requires users to supply length frequency for each tag-cohort and the model will use the assumed growth assumptions and sex ratios to convert the lengths to ages. The external approach will use an age-length key outside of the model to derive an age frequency that can then be supplied to the model.</p>
+<p>Tag release events involve releasing a tag-cohort at the beginning of a year within a specific area. A tag cohort is indexed by <span class="math inline">\(k\)</span> and has an implied year <span class="math inline">\(y\)</span> and region <span class="math inline">\(r\)</span> index. <span class="math inline">\(\boldsymbol{N}^k\)</span> is used to denote a vector of lengths or ages for tag-cohort <span class="math inline">\(k\)</span>. In general, only the length frequency is known at time of release for each tag-cohort because ageing is a fatal process. We consider two different approaches for seeding a tag cohort within spatial age-structured models. The two methods are essentially the same but differ in whether the length are converted to age outside of the model (“External”) or done within the model (“Internal”). The internal method requires users to supply length frequency for each tag-cohort and the model will use the assumed growth assumptions and sex ratios to convert the lengths to ages. The external approach will use an age-length key outside of the model to derive an age frequency that can then be supplied to the model.</p>
 <p>A frequent assumption of age-structured tagging models in the literature <span class="citation">(<a href="#ref-maunder1998integration" role="doc-biblioref">Maunder 1998</a>; <a href="#ref-vincent2020parameter" role="doc-biblioref">Vincent, Brenden, and Bence 2020</a>)</span> is that the age-frequency of each tag-cohort is known. Due to the fact that ageing is a fatal process, we assume they have used the external approach. If the age-length key is representative, then this method is expected to be very similar and have better computational performance. Factors to consider at time of release are; gear method used to select releases, where releases occur, and time of releases. If growth is estimated within the assessment model, then the internal method may be prefered to keep the growth assumptions consistent between LF observations and other model quantities.</p>
 <p>One down fall of the internal approach is tag releases and recoveries are both length-based inputs. Due to age-structured modelling growth as length conditional on age. Moving individuals back and forwards through the age-length transition matrix (length <span class="math inline">\(\rightarrow\)</span> age <span class="math inline">\(\rightarrow\)</span> length) will cause “smearing” of length frequencies. This is demonstrated in Figures @(ref:addagelength) and @(ref:showagelengthtransition_problem), and needs to be considered when considering model fitted values for observations and corresponding likelihood assumptions. Given this phenomenon, we make the argument that the external age-length key approach should be used. The external method means we assume (there actually is error in this) the ages of released fish and time at liberty, thus we know the age at recovery.</p>
 <div class="figure"><span style="display:block;" id="fig:addagelength"></span>
 <img src="_main_files/figure-html/addagelength-1.png" alt="An example of theoretical length at age, with overlapping length bins used to describe the effect of going back and fourth through the age-length transition matrix." width="70%" />
 <p class="caption">
-Figure 7.7: An example of theoretical length at age, with overlapping length bins used to describe the effect of going back and fourth through the age-length transition matrix.
+Figure 7.9: An example of theoretical length at age, with overlapping length bins used to describe the effect of going back and fourth through the age-length transition matrix.
 </p>
 </div>
 <pre><code>## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
@@ -438,7 +455,7 @@ Figure 7.7: An example of theoretical length at age, with overlapping length bin
 <div class="figure"><span style="display:block;" id="fig:showagelengthtransitionproblem"></span>
 <img src="_main_files/figure-html/showagelengthtransitionproblem-1.png" alt="A visualisation of the effect of going back and forth through an age-length transition matrix. This can happen when tag releases and recaptures are input as length in an age-structured model. The model converts lengths to ages, then reconverts the age to length for observations. This is assuming the same age-length relationship in Figure \@ref(fig:addagelength)" width="100%" />
 <p class="caption">
-Figure 7.8: A visualisation of the effect of going back and forth through an age-length transition matrix. This can happen when tag releases and recaptures are input as length in an age-structured model. The model converts lengths to ages, then reconverts the age to length for observations. This is assuming the same age-length relationship in Figure <a href="tagdata.html#fig:addagelength">7.7</a>
+Figure 7.10: A visualisation of the effect of going back and forth through an age-length transition matrix. This can happen when tag releases and recaptures are input as length in an age-structured model. The model converts lengths to ages, then reconverts the age to length for observations. This is assuming the same age-length relationship in Figure <a href="tagdata.html#fig:addagelength">7.9</a>
 </p>
 </div>
 <div id="internal-method" class="section level4 unnumbered hasAnchor">
@@ -477,14 +494,10 @@ where, <span class="math inline">\(N^k_a\)</span> is used as an known input into
 <div id="things-to-consider-for-tag-release" class="section level3 unnumbered hasAnchor">
 <h3>Things to consider for tag release<a href="tagdata.html#things-to-consider-for-tag-release" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>we don’t have much information regarding sex of tagged fish (36.5% of recovered tags have sex information). Does this lean towards the internal method? can allocate sex ratio based on vulnerable population which may be important, if there is quite a difference in sex disaggregated selectivities.</li>
+<li>we don’t have much information regarding sex of tagged fish (36.5% of recovered tags have sex information)</li>
 </ul>
-</div>
-</div>
-<div id="tag-recovery-observations-1" class="section level2 unnumbered hasAnchor">
-<h2>Tag recovery observations<a href="tagdata.html#tag-recovery-observations-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There are two types of tag-recovery observations that we will consider in this work, tag-release conditioned and tag-recapture conditioned. This conditioning relates to whether we relate recoveries to the release event or whether we only look at the recoveries relative to other recoveries within a time period <span class="citation">(<a href="#ref-vincent2020parameter" role="doc-biblioref">Vincent, Brenden, and Bence 2020</a>; <a href="#ref-mcgarvey2002estimating" role="doc-biblioref">McGarvey and Feenstra 2002</a>)</span>. This conditioning relates more to the log-likelihood formulation rather than the model expected values. We should also explore two different approaches regarding the scanned fish of which tag-recoveries are a subset. The first is recoveries were entirely from a fishery which requires some understanding or assumptions on reporting rates. The other method assumes scanned fish are known, which is the approach used in the Casal2 <span class="citation">(<a href="#ref-doonan2016casal2" role="doc-biblioref">Doonan et al. 2016</a>)</span> stock assessment program. This information can be recorded if the scanning is done either by observers who are recording LF’s for the catch or scientific/trained staff when shed sampling landed catch. Both these scanning approaches will require an assuming or information on detection rates.</p>
 
+</div>
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -494,9 +507,6 @@ Ailloud, Lisa E, and John M Hoenig. 2019. <span>“A General Theory of Age-Lengt
 </div>
 <div id="ref-beamish_88" class="csl-entry">
 Beamish, R. J., and C. A. McFarlane. 1988. <span>“Resident and Dispersal Behavior of Adult Sablefish (Anaplopoma Fimbria) in the Slope Waters Off Canada’s West Coast.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 45 (1): 152–64.
-</div>
-<div id="ref-doonan2016casal2" class="csl-entry">
-Doonan, Ian, Kath Large, Alistair Dunn, Scott Rasmussen, Craig Marsh, and Sophie Mormede. 2016. <span>“Casal2: New Zealand’s Integrated Population Modelling Tool.”</span> <em>Fisheries Research</em> 183: 498–505.
 </div>
 <div id="ref-goethel2021assessment" class="csl-entry">
 Goethel, DR, DH Hanselman, CJ Rodgveller, KH Fenski, SK Shotwell, KB Echave, PW Malecha, A Siwicke, and CR Lunsford. 2021. <span>“Assessment of the Sablefish Stock in Alaska.”</span> <em>Stock Assessment and Fishery Evaluation Report for the Groundfish Resources of the Gulf of Alaska and the Bering Sea/Aleutian Islands as Projected for</em>.

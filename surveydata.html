@@ -232,13 +232,13 @@ div.csl-indent {
 <li class="chapter" data-level="7" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>7</b> Tagging data exploration</a>
 <ul>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#exploratory-analysis-of-the-tag-data"><i class="fa fa-check"></i>Exploratory analysis of the tag data</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#lincoln-peterson-estimator"><i class="fa fa-check"></i>Lincoln-Peterson estimator</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#integrating-tagging-observations-in-spatial-age-structured-models"><i class="fa fa-check"></i>Integrating tagging observations in spatial age-structured models</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tagging-things-to-consider-with-relevant-references"><i class="fa fa-check"></i>Tagging things to consider with relevant references</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#releasing-tags"><i class="fa fa-check"></i>Releasing tags</a>
 <ul>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#things-to-consider-for-tag-release"><i class="fa fa-check"></i>Things to consider for tag release</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tag-recovery-observations-1"><i class="fa fa-check"></i>Tag recovery observations</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html"><i class="fa fa-check"></i><b>8</b> Initial model setup</a>
 <ul>
@@ -340,7 +340,7 @@ Figure 5.1: A time-series of sablefish catch from the long line survey pooled ov
 Figure 5.2: Mesh for spatial random effects, red dots indicate station location
 </p>
 </div>
-<p>The first model was configured using code chunk <a href="#fig:firstModel"><strong>??</strong></a>.</p>
+<p>The first model was configured using code the follow code chunk.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="surveydata.html#cb2-1" aria-hidden="true" tabindex="-1"></a>fit_spatial_tweedie <span class="ot">&lt;-</span> <span class="fu">sdmTMB</span>(</span>
 <span id="cb2-2"><a href="surveydata.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  catch <span class="sc">~</span> <span class="dv">0</span>  <span class="sc">+</span> <span class="fu">as.factor</span>(Year) <span class="sc">+</span> Country,</span>
 <span id="cb2-3"><a href="surveydata.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">tweedie</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),</span>
@@ -377,11 +377,57 @@ Figure 5.3: Boxplot comparing overall residuals between distributions
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(\mathcal{M}_3\)</span></td>
-<td><code>y ~ year + country + epsilon</code></td>
+<td><code>y ~ year + country + epsilon(iid)</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mathcal{M}_4\)</span></td>
+<td><code>y ~ year + country + epsilon(ar1)</code></td>
 </tr>
 </tbody>
 </table>
-<p>where <code>omega</code> is time-invariant Gaussian Field (GF) and <code>epsilon</code> is time-varying Gaussian Field</p>
+<p>where <code>omega</code> is time-invariant Gaussian Field (GF) and <code>epsilon</code> is time-varying GF</p>
+<table>
+<caption><span id="tab:likelihoodComparison">Table 5.1: </span>Negative log-likelihoods for index models</caption>
+<thead>
+<tr class="header">
+<th align="left">model</th>
+<th align="right">Gamma</th>
+<th align="right">Lognormal</th>
+<th align="right">Tweedie</th>
+<th align="right">n_params</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">M1</td>
+<td align="right">2865.55</td>
+<td align="right">3404.42</td>
+<td align="right">2199.97</td>
+<td align="right">48</td>
+</tr>
+<tr class="even">
+<td align="left">M2</td>
+<td align="right">2848.87</td>
+<td align="right">3378.63</td>
+<td align="right">2183.28</td>
+<td align="right">52</td>
+</tr>
+<tr class="odd">
+<td align="left">M3</td>
+<td align="right">2737.73</td>
+<td align="right">3229.85</td>
+<td align="right">1970.40</td>
+<td align="right">49</td>
+</tr>
+<tr class="even">
+<td align="left">M4</td>
+<td align="right">2581.64</td>
+<td align="right">3021.01</td>
+<td align="right">1778.05</td>
+<td align="right">50</td>
+</tr>
+</tbody>
+</table>
 <div class="figure"><span style="display:block;" id="fig:spatialprediction"></span>
 <img src="Figures/spatial_tweedie_predict.png" alt="Spatial predition M1 with the tweedie distribution."  />
 <p class="caption">

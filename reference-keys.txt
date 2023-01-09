@@ -7,6 +7,7 @@ eq:agelengthtransition
 fig:surveycatchgif
 fig:meshCPUE
 fig:spatialResid
+tab:likelihoodComparison
 fig:spatialprediction
 fig:indexComparison
 fig:surveyProjection
@@ -31,6 +32,8 @@ fig:obsmalegrowth
 fig:obsfemalegrowth
 fig:TagReleases
 fig:recoveriebygear
+fig:TagRecoveriesOutsideRegion
+fig:EmpiricalRecoveries
 fig:TagDataByMonth
 fig:KMtravelled
 fig:popestimateslincolnpeterson
@@ -39,12 +42,14 @@ fig:addagelength
 fig:showagelengthtransitionproblem
 eq:lengthexploit
 eq:tagatagerelease
-fig:TagRecoveriesOutsideRegion
 fig:spatialstatArea
 fig:spatialmanagementArea
 fig:LLRegions
 tab:observerLFSplitAnalysis
 fig:observerLFSplit
+fig:FishingDepth
+fig:FishingLatitude
+fig:FishingLongitude
 fig:initialspatialObservations
 fig:initialcatch
 tab:overdispersiontable
