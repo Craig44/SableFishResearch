@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2023-01-08" />
+<meta name="date" content="2023-01-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -213,6 +213,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="5.0.1" data-path="surveydata.html"><a href="surveydata.html#direct-ageing-estimators"><i class="fa fa-check"></i><b>5.0.1</b> Direct ageing estimators</a></li>
 <li class="chapter" data-level="5.0.2" data-path="surveydata.html"><a href="surveydata.html#age-length-key-estimators"><i class="fa fa-check"></i><b>5.0.2</b> Age length key estimators</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#continuation-ratio-logits-crl"><i class="fa fa-check"></i>Continuation ratio logits (CRL)</a></li>
 <li class="chapter" data-level="5.0.3" data-path="surveydata.html"><a href="surveydata.html#observation-error-estimates"><i class="fa fa-check"></i><b>5.0.3</b> Observation error estimates</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-length-data"><i class="fa fa-check"></i>Age-length data</a></li>
@@ -223,14 +224,10 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#catch-data"><i class="fa fa-check"></i>Catch data</a></li>
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#length-data"><i class="fa fa-check"></i>Length data</a>
 <ul>
-<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#regression-tree-analysis"><i class="fa fa-check"></i>regression tree analysis</a></li>
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#catch-at-length-estimator"><i class="fa fa-check"></i>Catch at length estimator</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-data-1"><i class="fa fa-check"></i>Age data</a>
-<ul>
-<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-length-keys"><i class="fa fa-check"></i>Age length keys</a></li>
-<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#continuation-ratio-logits-crl"><i class="fa fa-check"></i>Continuation ratio logits (CRL)</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-data-1"><i class="fa fa-check"></i>Age data</a></li>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-length-data-1"><i class="fa fa-check"></i>Age-length data</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>7</b> Tagging data exploration</a>
 <ul>
@@ -247,6 +244,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#model-start-time"><i class="fa fa-check"></i>Model start time</a></li>
 <li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#model-spatial-resolution-of-the-model"><i class="fa fa-check"></i>Model spatial resolution of the model</a></li>
+<li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#fishery-structure"><i class="fa fa-check"></i>Fishery structure</a></li>
 <li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#observations"><i class="fa fa-check"></i>Observations</a></li>
 <li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#first-model-run"><i class="fa fa-check"></i>First model run</a></li>
 </ul></li>
@@ -312,7 +310,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="observerdata" class="section level1 hasAnchor" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Fishery dependent data<a href="observerdata.html#observerdata" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This chapter describes an exploratory analysis using the observer and other fishery reported data. The aim is to highlight trends and signals in the data that would lead to an assessment decision or consideration i.e., spatial and temporal structures. All data analysed in this section has been extracted from the AKFIN database (North Pacific Observer Program). It included extracts from the length, age and catch reports. Some of the data cannot be displayed here due to confidentiality reasons. Locations shown in this work have been generalized to generic center locations of a 20 x 20 sq. km grid if there were 3 or more unique vessels, as per NOAA/NMFS regulations.</p>
+<p>This chapter describes an exploratory analysis using the observer and other fishery reported data. The aim is to highlight trends and signals in the data that would lead to an assessment decision or consideration e.g. spatial and temporal structures. All data analysed in this section has been extracted from the AKFIN database (North Pacific Observer Program). It included extracts from the length, age and catch reports. Some of the data cannot be displayed here due to confidentiality reasons. Locations shown in this work have been generalized to generic center locations of a 20 x 20 sq. km grid if there were 3 or more unique vessels, as per NOAA/NMFS regulations.</p>
 <p>This data will result in two important assessment inputs: observed catch (which will be assumed known with a high level of precision) and composition by fishery, either age or length.</p>
 <p>Define what a fishery is? Currently a “fishery” is defined by a gear type i.e., trawl vs fixed-gear (line and pot).</p>
 <p>is there evidence for changing selectivity? i.e., time-blocks</p>
@@ -325,11 +323,8 @@ Figure 6.1: Catch history by region
 </div>
 <div id="catch-data" class="section level2 unnumbered hasAnchor">
 <h2>Catch data<a href="observerdata.html#catch-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Deriving annual estimates of catch by year and region should be fairly straight forward. Fishers generally have a legal requirement to record catches and we will probably just assume that reported catches are accurate (is there any evidence of under-over reporting?). Is there discarding?</p>
-<ul>
-<li>spatial patterns changes over time</li>
-<li>intrayear catch patterns (pulse vs all year round)</li>
-</ul>
+<p>Deriving annual estimates of catch by year and region should be fairly straight forward. Fishers generally have a legal requirement to record catches and we will probably just assume that reported catches are accurate. Unfortunately catch by gear type and region is not known prior to 1977 (pers comms Kari Fenske).</p>
+<p>The following bubble plots display the proportion of catch sampled for lengths and ages by observers relative to the catch by gear and area from 1990 when observer data available. When bubbles and crosses have the same size then the observer samples are proportional to catch for a given year. When crosses are larger then observers sampled more relative to the catch and vice versa. These are meant to give some impression of “representative” sampling i.e., are there regions or gears that are under or over sampled.</p>
 <div class="figure"><span style="display:block;" id="fig:observerRepresentativeSamplesByGear-1"></span>
 <img src="Figures/proportion_observed_catch_by_method_2.png" alt="Observer representative figures by method. When the cross and circle are the same size this indicates observers sample proportional to the catch for a year." width="100%" />
 <p class="caption">
@@ -357,78 +352,13 @@ Figure 6.5: Observer representative figures by method. When the cross and circle
 </div>
 <div id="length-data" class="section level2 unnumbered hasAnchor">
 <h2>Length data<a href="observerdata.html#length-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>spatio-temporal patterns. definition of a fleet consider using the approach by <span class="citation">Lennert-Cody et al. (<a href="#ref-lennert2010exploratory" role="doc-biblioref">2010</a>)</span>.</li>
-</ul>
-<div id="regression-tree-analysis" class="section level3 unnumbered hasAnchor">
-<h3>regression tree analysis<a href="observerdata.html#regression-tree-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>My understanding of the method described in <span class="citation">Lennert-Cody et al. (<a href="#ref-lennert2010exploratory" role="doc-biblioref">2010</a>)</span> is that it uses regression trees to identify splits/nodes in the covariates latitude, longitude and season that generate groups/clusters of length frequency distributions that are similar or somewhat homogenous. “Assuming sampling coverage is adequate, comparison of pooled and individual-year tree results can identify spatial structure that is strongly indicated in every year, and that which is only present in select years, perhaps as a result of strong recruitment or changes in catchability, or if sampling coverage is not adequate, sampling variability.”</p>
-<p>Run this exploration and see where the breaks are. This may lead us to reconsider spatial boundaries. <strong>If we assume catchabilities for the fishery are constant over time and space</strong> this exploration may indicate spatial structure in the population. However, that is a strong assumption… We could repeat this for the survey length frequency and see if the pattern is consistent. Just keep in mind that the survey data is from a smaller intra year window.</p>
-<p>How can we disentangle whether change are due to changes in fishing practice or change in population dynamics? i.e., recruitment or movement</p>
-<p>A limitation for this method for our application is latitude and longitude grids contain unequal areas due to the shrinking of longitudes towards the poles. Also with the unusual shape of the coastline</p>
-<table>
-<caption><span id="tab:observerLFSplitAnalysis">Table 6.1: </span>Longitude splits based on regression tree analysis</caption>
-<thead>
-<tr class="header">
-<th align="left"></th>
-<th align="left">Variable</th>
-<th align="left">Split value</th>
-<th align="right">Cell</th>
-<th align="right">Variance explained (%)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Split1</td>
-<td align="left">Lon</td>
-<td align="left">180</td>
-<td align="right">NA</td>
-<td align="right">6</td>
-</tr>
-<tr class="even">
-<td align="left">Split2</td>
-<td align="left">Year</td>
-<td align="left">2015</td>
-<td align="right">2</td>
-<td align="right">10</td>
-</tr>
-<tr class="odd">
-<td align="left">Split3</td>
-<td align="left">Lon</td>
-<td align="left">212</td>
-<td align="right">2</td>
-<td align="right">13</td>
-</tr>
-<tr class="even">
-<td align="left">Split4</td>
-<td align="left">Lon</td>
-<td align="left">206</td>
-<td align="right">4</td>
-<td align="right">14</td>
-</tr>
-<tr class="odd">
-<td align="left">Split5</td>
-<td align="left">Qrt</td>
-<td align="left">12;34</td>
-<td align="right">2</td>
-<td align="right">15</td>
-</tr>
-</tbody>
-</table>
-<div class="figure"><span style="display:block;" id="fig:observerLFSplit"></span>
-<img src="Figures/observer_split_analysis.png" alt="Longitude splits based on regression tree analysis from Table \@ref(tab:observerLFSplitAnalysis)" width="100%" />
-<p class="caption">
-Figure 6.6: Longitude splits based on regression tree analysis from Table <a href="observerdata.html#tab:observerLFSplitAnalysis">6.1</a>
-</p>
-</div>
-</div>
 <div id="catch-at-length-estimator" class="section level3 unnumbered hasAnchor">
 <h3>Catch at length estimator<a href="observerdata.html#catch-at-length-estimator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The aim of catch at length is to obtain representative length frequencies (LF) of fish removed by a specific fishery within a specific area and year. These estimates are derived from observer collected data of which only a subsample of fishing trips are observed. Observers are tasked with subsampling observed catch to provide length and age samples. Thus these samples need to be scaled to either the stock wide level for inputs into a single area stock assessment or to some region level for use in a spatially disaggregated stock assessment. This is sampling structure has a natural hierarchy which is illustrated in Figure <a href="observerdata.html#fig:fishdependentsampling">6.7</a>.</p>
+<p>The aim of catch at length is to obtain representative length frequencies (LF) of fish removed by a specific fishery within a specific area and year. These estimates are derived from observer collected data of which only a subsample of fishing trips are observed. Observers are tasked with subsampling observed catch to provide length and age samples. Thus these samples need to be scaled to either the stock wide level for inputs into a single area stock assessment or to some region level for use in a spatially disaggregated stock assessment. This is sampling structure has a natural hierarchy which is illustrated in Figure <a href="observerdata.html#fig:fishdependentsampling">6.6</a>.</p>
 <div class="figure"><span style="display:block;" id="fig:fishdependentsampling"></span>
 <img src="Figures/fishery_dependent_sampling.png" alt="Sampling hierachy for fishery dependent catch at age and catch at length estimates" width="100%" />
 <p class="caption">
-Figure 6.7: Sampling hierachy for fishery dependent catch at age and catch at length estimates
+Figure 6.6: Sampling hierachy for fishery dependent catch at age and catch at length estimates
 </p>
 </div>
 <p>Each node in the sampling hierarchy is denoted by the index <span class="math inline">\(m\)</span>. When a node is nested within another node, we use <span class="math inline">\(m \in m&#39;\)</span> to define that <span class="math inline">\(m&#39;\)</span> is nested within <span class="math inline">\(m\)</span>.</p>
@@ -531,57 +461,43 @@ where, <span class="math inline">\(A_r\)</span> is the catch in region <span cla
 <div class="figure"><span style="display:block;" id="fig:ScaledLFs"></span>
 <img src="Figures/LF_scaling.png" alt="This figure shows how each of the scaling factors change the raw sampled LFs (\(n^h_{l,s}\)) to obtain regional scaled length frequencies (\(\widehat{N}^{r'}_{l,s}\)) for the fixed gear fishery." width="100%" />
 <p class="caption">
-Figure 6.8: This figure shows how each of the scaling factors change the raw sampled LFs (<span class="math inline">\(n^h_{l,s}\)</span>) to obtain regional scaled length frequencies (<span class="math inline">\(\widehat{N}^{r&#39;}_{l,s}\)</span>) for the fixed gear fishery.
+Figure 6.7: This figure shows how each of the scaling factors change the raw sampled LFs (<span class="math inline">\(n^h_{l,s}\)</span>) to obtain regional scaled length frequencies (<span class="math inline">\(\widehat{N}^{r&#39;}_{l,s}\)</span>) for the fixed gear fishery.
 </p>
 </div>
+<p>A gear and region had to have at least 100 fish measured for length in order to generate catch at length estimates.</p>
 </div>
 </div>
 <div id="age-data-1" class="section level2 unnumbered hasAnchor">
 <h2>Age data<a href="observerdata.html#age-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There is not enough samples in the age data to repeat the analysis conducted in the length frequency.</p>
-<ul>
-<li>Can we build reasonable age-length keys by region and year? If not, how should we pool information to build age-length keys</li>
-<li>How best to pool data with low sample sizes in a year? how to set these sample size thresholds?</li>
-<li>How to deal with ages that have no otoliths? set zero or impute?</li>
-</ul>
-<div id="age-length-keys" class="section level3 unnumbered hasAnchor">
-<h3>Age length keys<a href="observerdata.html#age-length-keys" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Calculate the probability of age given a length bin by using the empirical distribution of age and lengths.</p>
-<p><span class="math display">\[
-\hat{p}(a|l) = \frac{n_{a,l}}{n_{+,l}}
-\]</span>
-where, <span class="math inline">\(n_{+,l}\)</span> is the total of all ages in length bin <span class="math inline">\(l\)</span>.
-The probabilities of age given length from the forward ALK are then simply multiplied by the marginal probabilities <span class="math inline">\(\hat{p}(l) = N_{l} / \sum_lN_{l}\)</span>.</p>
+<p>Only the fixed gear fishery has age-samples to estimate age-frequencies. The same direct and age-length key estimators as the survey was used for the fixed gear survey.</p>
 </div>
-<div id="continuation-ratio-logits-crl" class="section level3 unnumbered hasAnchor">
-<h3>Continuation ratio logits (CRL)<a href="observerdata.html#continuation-ratio-logits-crl" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>An alternative to the ALK is to use a continuation ratio model (CRL) to model the distribution of ages <span class="math inline">\(\boldsymbol{p}_a(\boldsymbol{x}) = (p_J, \dots, p_A)\)</span>, which has been proposed and explored in recent studies <span class="citation">(<a href="#ref-berg2012spatial" role="doc-biblioref">Berg and Kristensen 2012</a>; <a href="#ref-correa2020improved" role="doc-biblioref">Correa et al. 2020</a>)</span>. Using a <span class="math inline">\(J\)</span> minus <span class="math inline">\(A\)</span> conditional model for describing the probability of being age <span class="math inline">\(a\)</span> given it as at least <span class="math inline">\(a\)</span>, that is</p>
-<p><span class="math display">\[\begin{equation}
-\pi_a = P(Y = a| Y \geq a) = \frac{p_a}{p_a + p_{a+1} + \dots + p_A} , \ \ a = J, \dots, A-1
-\end{equation}\]</span></p>
-<p>Given the set of A − J models, the estimated unconditional probabilities <span class="math inline">\(p_a\)</span> from the conditional probabilities <span class="math inline">\(\pi_a\)</span> follows</p>
-<p><span class="math display">\[\begin{align}
-\hat{p}_a =&amp;  \hat{\pi}_a , \ a = R\\
-\hat{p}_a =&amp; \hat{\pi}_a \bigg( 1 - \sum\limits_{k = J}^{a - 1} \hat{p}_a \bigg) = \hat{\pi}_a \prod\limits_{k = J}^{a - 1} (1 - \hat{\pi}_k) , \ a &gt; J
-\end{align}\]</span></p>
-<p>This method was not explored in detail due to the sex dimension for sablefish adding a complexity we didn’t have time to get in to. There is R code that applies the CRL model ignoring sex in the data.</p>
+<div id="age-length-data-1" class="section level2 unnumbered hasAnchor">
+<h2>Age-length data<a href="observerdata.html#age-length-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:obsagelengthbysex"></span>
+<img src="Figures/obs_raw_growth_by_sex.png" alt="Age-length by sex" width="61%" />
+<p class="caption">
+Figure 6.8: Age-length by sex
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:obsmalegrowth"></span>
+<img src="Figures/obs_raw_male_growth_by_region.png" alt="Male age-length by region (left panel) and decade (right panel)" width="49%" /><img src="Figures/raw_male_growth_by_decade.png" alt="Male age-length by region (left panel) and decade (right panel)" width="49%" />
+<p class="caption">
+Figure 6.9: Male age-length by region (left panel) and decade (right panel)
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:obsfemalegrowth"></span>
+<img src="Figures/obs_raw_female_growth_by_region.png" alt="Female age-length by region (left panel) and decade (right panel)" width="49%" /><img src="Figures/raw_female_growth_by_decade.png" alt="Female age-length by region (left panel) and decade (right panel)" width="49%" />
+<p class="caption">
+Figure 6.10: Female age-length by region (left panel) and decade (right panel)
+</p>
+</div>
 
-</div>
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-berg2012spatial" class="csl-entry">
-Berg, Casper W, and Kasper Kristensen. 2012. <span>“Spatial Age-Length Key Modelling Using Continuation Ratio Logits.”</span> <em>Fisheries Research</em> 129: 119–26.
-</div>
-<div id="ref-correa2020improved" class="csl-entry">
-Correa, Giancarlo M, Lorenzo Ciannelli, Lewis AK Barnett, Stan Kotwicki, and Claudio Fuentes. 2020. <span>“Improved Estimation of Age Composition by Accounting for Spatiotemporal Variability in Somatic Growth.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 77 (11): 1810–21.
-</div>
 <div id="ref-goethel2021assessment" class="csl-entry">
 Goethel, DR, DH Hanselman, CJ Rodgveller, KH Fenski, SK Shotwell, KB Echave, PW Malecha, A Siwicke, and CR Lunsford. 2021. <span>“Assessment of the Sablefish Stock in Alaska.”</span> <em>Stock Assessment and Fishery Evaluation Report for the Groundfish Resources of the Gulf of Alaska and the Bering Sea/Aleutian Islands as Projected for</em>.
-</div>
-<div id="ref-lennert2010exploratory" class="csl-entry">
-Lennert-Cody, Cleridy E, Mihoko Minami, Patrick K Tomlinson, and Mark N Maunder. 2010. <span>“Exploratory Analysis of Spatial–Temporal Patterns in Length–Frequency Data: An Example of Distributional Regression Trees.”</span> <em>Fisheries Research</em> 102 (3): 323–26.
 </div>
 </div>
             </section>

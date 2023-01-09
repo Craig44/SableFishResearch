@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2023-01-08" />
+<meta name="date" content="2023-01-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -213,6 +213,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="5.0.1" data-path="surveydata.html"><a href="surveydata.html#direct-ageing-estimators"><i class="fa fa-check"></i><b>5.0.1</b> Direct ageing estimators</a></li>
 <li class="chapter" data-level="5.0.2" data-path="surveydata.html"><a href="surveydata.html#age-length-key-estimators"><i class="fa fa-check"></i><b>5.0.2</b> Age length key estimators</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#continuation-ratio-logits-crl"><i class="fa fa-check"></i>Continuation ratio logits (CRL)</a></li>
 <li class="chapter" data-level="5.0.3" data-path="surveydata.html"><a href="surveydata.html#observation-error-estimates"><i class="fa fa-check"></i><b>5.0.3</b> Observation error estimates</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-length-data"><i class="fa fa-check"></i>Age-length data</a></li>
@@ -223,14 +224,10 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#catch-data"><i class="fa fa-check"></i>Catch data</a></li>
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#length-data"><i class="fa fa-check"></i>Length data</a>
 <ul>
-<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#regression-tree-analysis"><i class="fa fa-check"></i>regression tree analysis</a></li>
 <li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#catch-at-length-estimator"><i class="fa fa-check"></i>Catch at length estimator</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-data-1"><i class="fa fa-check"></i>Age data</a>
-<ul>
-<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-length-keys"><i class="fa fa-check"></i>Age length keys</a></li>
-<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#continuation-ratio-logits-crl"><i class="fa fa-check"></i>Continuation ratio logits (CRL)</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-data-1"><i class="fa fa-check"></i>Age data</a></li>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-length-data-1"><i class="fa fa-check"></i>Age-length data</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>7</b> Tagging data exploration</a>
 <ul>
@@ -247,6 +244,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#model-start-time"><i class="fa fa-check"></i>Model start time</a></li>
 <li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#model-spatial-resolution-of-the-model"><i class="fa fa-check"></i>Model spatial resolution of the model</a></li>
+<li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#fishery-structure"><i class="fa fa-check"></i>Fishery structure</a></li>
 <li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#observations"><i class="fa fa-check"></i>Observations</a></li>
 <li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#first-model-run"><i class="fa fa-check"></i>First model run</a></li>
 </ul></li>
@@ -395,18 +393,80 @@ Figure 8.4: The finest spatial resolution that we are considering for Sablefish 
 </p>
 </div>
 </div>
+<div id="fishery-structure" class="section level2 unnumbered hasAnchor">
+<h2>Fishery structure<a href="InitialModelSetup.html#fishery-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I used the approach from <span class="citation">Lennert-Cody et al. (<a href="#ref-lennert2010exploratory" role="doc-biblioref">2010</a>)</span> to analysis length frequency samples to identify changes in length frequency that may suggest alternative fleet or stock structures. My understanding of the method described in <span class="citation">Lennert-Cody et al. (<a href="#ref-lennert2010exploratory" role="doc-biblioref">2010</a>)</span> is that it uses regression trees to identify splits/nodes in the covariates latitude, longitude and season that generate groups/clusters of length frequency distributions that are similar or somewhat homogenous. “Assuming sampling coverage is adequate, comparison of pooled and individual-year tree results can identify spatial structure that is strongly indicated in every year, and that which is only present in select years, perhaps as a result of strong recruitment or changes in catchability, or if sampling coverage is not adequate, sampling variability.”</p>
+<!-- Run this exploration and see where the breaks are. This may lead us to reconsider spatial boundaries. **If we assume catchabilities for the fishery are constant over time and space** this exploration may indicate spatial structure in the population. However, that is a strong assumption... We could repeat this for the survey length frequency and see if the pattern is consistent. Just keep in mind that the survey data is from a smaller intra year window. -->
+<!-- How can we disentangle whether change are due to changes in fishing practice or change in population dynamics? i.e., recruitment or movement  -->
+<p>A limitation for this method for our application is latitude and longitude grids contain unequal areas due to the shrinking of longitudes towards the poles. Also with the unusual shape of the coastline binary splits by latitude and longitude may also be a problem.</p>
+<table>
+<caption><span id="tab:observerLFSplitAnalysis">Table 8.1: </span>Longitude splits based on regression tree analysis</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Variable</th>
+<th align="left">Split value</th>
+<th align="right">Cell</th>
+<th align="right">Variance explained (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Split1</td>
+<td align="left">Lon</td>
+<td align="left">180</td>
+<td align="right">NA</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="left">Split2</td>
+<td align="left">Year</td>
+<td align="left">2015</td>
+<td align="right">2</td>
+<td align="right">10</td>
+</tr>
+<tr class="odd">
+<td align="left">Split3</td>
+<td align="left">Lon</td>
+<td align="left">212</td>
+<td align="right">2</td>
+<td align="right">13</td>
+</tr>
+<tr class="even">
+<td align="left">Split4</td>
+<td align="left">Lon</td>
+<td align="left">206</td>
+<td align="right">4</td>
+<td align="right">14</td>
+</tr>
+<tr class="odd">
+<td align="left">Split5</td>
+<td align="left">Qrt</td>
+<td align="left">12;34</td>
+<td align="right">2</td>
+<td align="right">15</td>
+</tr>
+</tbody>
+</table>
+<div class="figure"><span style="display:block;" id="fig:observerLFSplit"></span>
+<img src="Figures/observer_split_analysis.png" alt="Longitude splits based on regression tree analysis from Table \@ref(tab:observerLFSplitAnalysis)" width="100%" />
+<p class="caption">
+Figure 8.5: Longitude splits based on regression tree analysis from Table <a href="InitialModelSetup.html#tab:observerLFSplitAnalysis">8.1</a>
+</p>
+</div>
+</div>
 <div id="observations" class="section level2 unnumbered hasAnchor">
 <h2>Observations<a href="InitialModelSetup.html#observations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="figure"><span style="display:block;" id="fig:initialspatialObservations"></span>
 <img src="Figures/Observation_Frequency.png" alt="Observation type and frequency for the initial model." width="100%" />
 <p class="caption">
-Figure 8.5: Observation type and frequency for the initial model.
+Figure 8.6: Observation type and frequency for the initial model.
 </p>
 </div>
 <div class="figure"><span style="display:block;" id="fig:initialcatch"></span>
 <img src="Figures/InputCatches.png" alt="Catch (kilo tonnes) by gear and area." width="100%" />
 <p class="caption">
-Figure 8.6: Catch (kilo tonnes) by gear and area.
+Figure 8.7: Catch (kilo tonnes) by gear and area.
 </p>
 </div>
 </div>
@@ -428,6 +488,9 @@ Kapur, M, M Haltuch, B Connors, L Rogers, A Berger, E Koontz, J Cope, et al. 202
 </div>
 <div id="ref-kimura1998tagged" class="csl-entry">
 Kimura, Daniel K, and Franklin R Shavy. 1998. <span>“Tagged Sablefish, Anoplopoma Fimbria.”</span> <em>Fishery Bulletin</em> 96: 462–81.
+</div>
+<div id="ref-lennert2010exploratory" class="csl-entry">
+Lennert-Cody, Cleridy E, Mihoko Minami, Patrick K Tomlinson, and Mark N Maunder. 2010. <span>“Exploratory Analysis of Spatial–Temporal Patterns in Length–Frequency Data: An Example of Distributional Regression Trees.”</span> <em>Fisheries Research</em> 102 (3): 323–26.
 </div>
 <div id="ref-punt2019spatial" class="csl-entry">
 Punt, André E. 2019. <span>“Spatial Stock Assessment Methods: A Viewpoint on Current Issues and Assumptions.”</span> <em>Fisheries Research</em> 213: 132–43.

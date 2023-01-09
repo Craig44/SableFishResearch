@@ -24,10 +24,11 @@ fig:observerRepresentativeSamplesByGear-1
 fig:observerRepresentativeSamplesByGear-2
 fig:observerRepresentativeSamplesByArea-1
 fig:observerRepresentativeSamplesByArea-2
-tab:observerLFSplitAnalysis
-fig:observerLFSplit
 fig:fishdependentsampling
 fig:ScaledLFs
+fig:obsagelengthbysex
+fig:obsmalegrowth
+fig:obsfemalegrowth
 fig:TagReleases
 fig:recoveriebygear
 fig:TagDataByMonth
@@ -42,6 +43,8 @@ fig:TagRecoveriesOutsideRegion
 fig:spatialstatArea
 fig:spatialmanagementArea
 fig:LLRegions
+tab:observerLFSplitAnalysis
+fig:observerLFSplit
 fig:initialspatialObservations
 fig:initialcatch
 tab:overdispersiontable
