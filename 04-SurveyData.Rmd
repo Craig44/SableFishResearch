@@ -87,15 +87,15 @@ knitr::include_graphics("Figures/indicies.png")
 
 
 
-```{r surveyProjection, fig.cap="Projection regions", eval = T, echo = F, fig.width=5, fig.height= 5}
-knitr::include_graphics("Figures/projection_regions.png")
+```{r surveyProjection, fig.cap="Spatial predictions of log abundance from model M3 (spatio-temporal GF)", eval = T, echo = F,  out.width = '100%', fig.height= 13}
+knitr::include_graphics("Figures/spatial_ar1_tweedie_predict_all.png")
 ```
 
 
 
 
 ## Age data {-}
-A big challenge of any spatial stock assessment is deriving spatially disaggregated age-frequency observations from low age sample sizes. For both the long-line survey and fixed gear fishery we have both age and length observations. This means there are multiple estimators available, including; direct ageing and age-length key [@ailloud2019general;@hoenig2002generalizing]. The forward age-length key method at face value looks to be the most attractive, as it reduces data sparsity when compared to direct ageing estimators. However, we will generate AF's for both methods and see if they effect any model outputs.
+A big challenge of any spatial stock assessment is deriving spatially disaggregated age-frequency observations from small age sample sizes. For both the long-line survey and fixed gear fishery we have both age and length data. This means there are multiple estimators available, including; direct ageing and age-length key [@ailloud2019general;@hoenig2002generalizing] estimators. The forward age-length key method at face value looks to be the most attractive, as it reduces data sparsity when compared to direct ageing estimators. However, we will generate AF's for both methods and see if they effect any model outputs.
 
 
 A note on sablefish otolith sampling from the survey. "Otolith collections were length-stratified from 1979-94 and random thereafter" pg 9 of @sigler2001alaska.
@@ -103,7 +103,6 @@ A note on sablefish otolith sampling from the survey. "Otolith collections were 
 ```{r agesamples, out.width = '100%', fig.height= 5, fig.cap="Number of aged fish by sex, region and year", echo = F, eval = T}
 include_graphics(file.path("Figures", "age_samples_by_year_region_sex.png"))
 ```
-
 
 
 ## Length frequencies {-}
@@ -160,7 +159,7 @@ where, \(R\) indicates the set of areas that we are aggregating and this is norm
 \]
 
 
-For length bins that don't have age-length data a linear interpolation is done between neighboring length columns of the age-length key for all ages.
+Length bins that did not have age samples were imputed with the global age-length key values. This was to include length samples in the length frequency to avoid odd age-frequencies.
 
 ### Age length key estimators
 The Age length key (ALK) estimator uses paired age-lengths to calculate an age-length key which is used to derive age-frequencies by multiplying the ALK by scaled length frequencies.
@@ -179,6 +178,28 @@ P_{a,r} = \hat{p}(a|l) N^r_l
 \]
 
 where, \(N^r_l\) are regional specific scaled length frequencies (described in the prior section). The ALK can also be regional specific where only paired age-lengths are used from that region. This is not considered in this work because of the lack of samples when building ALKs at this resolution.
+
+### Continuation ratio logits (CRL) {-}
+
+**This method was not explored in detail**  due to the sex dimension for sablefish adding a complexity we didn't have time to get in to. There is R code that applies the CRL model ignoring sex in the data and wanted to partially document it as it seems quite promising.
+
+
+An alternative to the ALK is to use a continuation ratio model (CRL) to model the distribution of ages \(\boldsymbol{p}_a(\boldsymbol{x}) = (p_J, \dots, p_A)\), which has been proposed and explored in recent studies [@berg2012spatial;@correa2020improved]. Using a \(J\) minus \(A\) conditional model for describing the probability of being age \(a\) given it as at least \(a\), that is
+
+\begin{equation}
+\pi_a = P(Y = a| Y \geq a) = \frac{p_a}{p_a + p_{a+1} + \dots + p_A} , \ \ a = J, \dots, A-1
+\end{equation}
+
+
+Given the set of A − J models, the estimated unconditional probabilities \(p_a\) from the conditional probabilities \(\pi_a\) follows
+
+\begin{align}
+\hat{p}_a =&  \hat{\pi}_a , \ a = R\\
+\hat{p}_a =& \hat{\pi}_a \bigg( 1 - \sum\limits_{k = J}^{a - 1} \hat{p}_a \bigg) = \hat{\pi}_a \prod\limits_{k = J}^{a - 1} (1 - \hat{\pi}_k) , \ a > J
+\end{align}
+
+
+
 
 
 ### Observation error estimates
@@ -213,9 +234,8 @@ knitr::include_graphics(c(file.path("Figures","raw_female_growth_by_region.png")
 
 ## Appendix {-}
 
-Sampling notation
 
-
+<!-- Sampling notation -->
 <!-- +----------------------------+-----------------------------------------------------------------------------+ -->
 <!-- | Symbol                     | Description                             -->
 <!-- +============================+=============================================================================+ -->

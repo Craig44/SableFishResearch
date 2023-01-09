@@ -1,6 +1,6 @@
 # Fishery dependent data {#observerdata}
 
-This chapter describes an exploratory analysis using the observer and other fishery reported data. The aim is to highlight trends and signals in the data that would lead to an assessment decision or consideration i.e., spatial and temporal structures. All data analysed in this section has been extracted from the AKFIN database (North Pacific Observer Program). It included extracts from the length, age and catch reports. Some of the data cannot be displayed here due to confidentiality reasons. Locations shown in this work have been generalized to generic center locations of a 20 x 20 sq. km grid if there were 3 or more unique vessels, as per NOAA/NMFS regulations.
+This chapter describes an exploratory analysis using the observer and other fishery reported data. The aim is to highlight trends and signals in the data that would lead to an assessment decision or consideration e.g. spatial and temporal structures. All data analysed in this section has been extracted from the AKFIN database (North Pacific Observer Program). It included extracts from the length, age and catch reports. Some of the data cannot be displayed here due to confidentiality reasons. Locations shown in this work have been generalized to generic center locations of a 20 x 20 sq. km grid if there were 3 or more unique vessels, as per NOAA/NMFS regulations.
 
 This data will result in two important assessment inputs: observed catch (which will be assumed known with a high level of precision) and composition by fishery, either age or length. 
 
@@ -18,13 +18,9 @@ include_graphics(file.path("Figures", "observed_catch_by_area.png"))
 
 ## Catch data {-}
 
-Deriving annual estimates of catch by year and region should be fairly straight forward. Fishers generally have a legal requirement to record catches and we will probably just assume that reported catches are accurate (is there any evidence of under-over reporting?). Is there discarding?
+Deriving annual estimates of catch by year and region should be fairly straight forward. Fishers generally have a legal requirement to record catches and we will probably just assume that reported catches are accurate. Unfortunately catch by gear type and region is not known prior to 1977 (pers comms Kari Fenske).
 
-
-- spatial patterns changes over time
-- intrayear catch patterns (pulse vs all year round)
-
-
+The following bubble plots display the proportion of catch sampled for lengths and ages by observers relative to the catch by gear and area from 1990 when observer data available. When bubbles and crosses have the same size then the observer samples are proportional to catch for a given year. When crosses are larger then observers sampled more relative to the catch and vice versa. These are meant to give some impression of "representative" sampling i.e., are there regions or gears that are under or over sampled.
 
 
 ```{r observerRepresentativeSamplesByGear, out.width = '100%', fig.cap = "Observer representative figures by method. When the cross and circle are the same size this indicates observers sample proportional to the catch for a year.", echo = F, eval = T}
@@ -40,34 +36,6 @@ include_graphics(file.path("Figures", "proportion_observed_catch_by_area_1.png")
 
 
 ## Length data {-}
-
-- spatio-temporal patterns. definition of a fleet consider using the approach by @lennert2010exploratory.
-
-### regression tree analysis {-}
-My understanding of the method described in @lennert2010exploratory is that it uses regression trees to identify splits/nodes in the covariates latitude, longitude and season that generate groups/clusters of length frequency distributions that are similar or somewhat homogenous. "Assuming sampling coverage is adequate, comparison of pooled and individual-year tree results can identify spatial structure that is strongly indicated in every year, and that which is only present in select years, perhaps as a result of strong recruitment or changes in catchability, or if sampling coverage is not adequate, sampling variability." 
-
-
-Run this exploration and see where the breaks are. This may lead us to reconsider spatial boundaries. **If we assume catchabilities for the fishery are constant over time and space** this exploration may indicate spatial structure in the population. However, that is a strong assumption... We could repeat this for the survey length frequency and see if the pattern is consistent. Just keep in mind that the survey data is from a smaller intra year window.
-
-
-How can we disentangle whether change are due to changes in fishing practice or change in population dynamics? i.e., recruitment or movement 
-
-
-A limitation for this method for our application is latitude and longitude grids contain unequal areas due to the shrinking of longitudes towards the poles. Also with the unusual shape of the coastline 
-
-
-```{r observerLFSplitAnalysis, echo = F, eval = 'asis'}
-split_table = readRDS(file.path("Data", "LL_LF_split_algorithm.RDS"))
-split_table$Var_explained = round(split_table$Var_explained, 2) * 100
-colnames(split_table) = c("Variable", "Split value", "Cell", "Variance explained (%)")
-kable(split_table, caption = "Longitude splits based on regression tree analysis")
-```
-
-
-```{r observerLFSplit, out.width = '100%',fig.height= 5, fig.cap = "Longitude splits based on regression tree analysis from Table \\@ref(tab:observerLFSplitAnalysis)", echo = F, eval = T}
-include_graphics(file.path("Figures", "observer_split_analysis.png"))
-```
-
 
 ### Catch at length estimator {-}
 The aim of catch at length is to obtain representative length frequencies (LF) of fish removed by a specific fishery within a specific area and year. These estimates are derived from observer collected data of which only a subsample of fishing trips are observed. Observers are tasked with subsampling observed catch to provide length and age samples. Thus these samples need to be scaled to either the stock wide level for inputs into a single area stock assessment or to some region level for use in a spatially disaggregated stock assessment. This is sampling structure has a natural hierarchy which is illustrated in Figure \@ref(fig:fishdependentsampling).
@@ -163,43 +131,30 @@ where, \(A_r\) is the catch in region \(C_r\) and \(\sum_r C_r\) denotes catch o
 include_graphics(file.path("Figures", "LF_scaling.png"))
 ```
 
+A gear and region had to have at least 100 fish measured for length in order to generate catch at length estimates.
 
 ## Age data {-}
-There is not enough samples in the age data to repeat the analysis conducted in the length frequency. 
 
-- Can we build reasonable age-length keys by region and year? If not, how should we pool information to build age-length keys
-- How best to pool data with low sample sizes in a year? how to set these sample size thresholds?
-- How to deal with ages that have no otoliths? set zero or impute?
+Only the fixed gear fishery has age-samples to estimate age-frequencies. The same direct and age-length key estimators as the survey was used for the fixed gear survey.
 
 
-### Age length keys {-}
-Calculate the probability of age given a length bin by using the empirical distribution of age and lengths.
-
-\[
-\hat{p}(a|l) = \frac{n_{a,l}}{n_{+,l}}
-\]
-where, \(n_{+,l}\) is the total of all ages in length bin \(l\).
-The probabilities of age given length from the forward ALK are then simply multiplied by the marginal probabilities \(\hat{p}(l) = N_{l} / \sum_lN_{l}\).
+## Age-length data {-}
 
 
-### Continuation ratio logits (CRL) {-}
 
-An alternative to the ALK is to use a continuation ratio model (CRL) to model the distribution of ages \(\boldsymbol{p}_a(\boldsymbol{x}) = (p_J, \dots, p_A)\), which has been proposed and explored in recent studies [@berg2012spatial;@correa2020improved]. Using a \(J\) minus \(A\) conditional model for describing the probability of being age \(a\) given it as at least \(a\), that is
-
-\begin{equation}
-\pi_a = P(Y = a| Y \geq a) = \frac{p_a}{p_a + p_{a+1} + \dots + p_A} , \ \ a = J, \dots, A-1
-\end{equation}
+```{r obsagelengthbysex, echo=FALSE,out.width="61%", fig.height=6,fig.cap="Age-length by sex",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c(file.path("Figures","obs_raw_growth_by_sex.png")))
+``` 
 
 
-Given the set of A − J models, the estimated unconditional probabilities \(p_a\) from the conditional probabilities \(\pi_a\) follows
 
-\begin{align}
-\hat{p}_a =&  \hat{\pi}_a , \ a = R\\
-\hat{p}_a =& \hat{\pi}_a \bigg( 1 - \sum\limits_{k = J}^{a - 1} \hat{p}_a \bigg) = \hat{\pi}_a \prod\limits_{k = J}^{a - 1} (1 - \hat{\pi}_k) , \ a > J
-\end{align}
-
-This method was not explored in detail due to the sex dimension for sablefish adding a complexity we didn't have time to get in to. There is R code that applies the CRL model ignoring sex in the data.
+```{r obsmalegrowth, echo=FALSE,out.width="49%", fig.height=5,fig.cap="Male age-length by region (left panel) and decade (right panel)",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c(file.path("Figures","obs_raw_male_growth_by_region.png"),file.path("Figures","raw_male_growth_by_decade.png")))
+``` 
 
 
+```{r obsfemalegrowth, echo=FALSE,out.width="49%", fig.height=5,fig.cap="Female age-length by region (left panel) and decade (right panel)",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c(file.path("Figures","obs_raw_female_growth_by_region.png"),file.path("Figures","raw_female_growth_by_decade.png")))
+``` 
 
 

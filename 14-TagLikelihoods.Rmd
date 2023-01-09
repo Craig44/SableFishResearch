@@ -176,7 +176,7 @@ OM_mat$type = "OM"
 
 
 
-```{r runsimulationTagLike, warning=FALSE, message=FALSE, error = FALSE}
+```{r runsimulationTagLike, warning=FALSE, message=FALSE, error = FALSE, cache=TRUE}
 ############################################
 ## over_diserpsion_investication
 ## what happens when we simualte from
