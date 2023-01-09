@@ -20,6 +20,14 @@ include_graphics(file.path("Figures", "recovery_by_gear_and_method.png"))
 ```
 
 
+One thing of note is the number of tag-recaptures outside of the stock boundaries, shown in  Figure \@ref(fig:TagRecoveriesOutsideRegion).
+
+```{r TagRecoveriesOutsideRegion, out.width = '100%', fig.height= 6, fig.cap="Tag recoveries outside of stock boundaries, with release locations (bottom panel).", echo = F, eval = T}
+include_graphics(file.path("Figures", "out_of_region_recoveries.png"))
+```
+
+
+## Lincoln-Peterson estimator {-}
 
 We applied a simple Lincoln-Peterson estimators to view changes in abundance over the area of interest using a subset of the tag recoveries. The Lincoln-Peterson estimator follows
 
@@ -97,7 +105,7 @@ This project intends to explore a range of methods for utilizing tag-recovery ob
 
 
 ## Releasing tags {-}
-Tag release events involve releasing a tag-cohort at the beginning of a year within a specific area. A tag cohort is indexed by \(k\) and has an implied year \(y\) and region \(r\) index. \(\boldsymbol{N}^k\) is used to denote a vector of lengths or ages for tag-cohort \(k\). In general, only the length frequency is known at time of release for each tag-cohort becasue ageing is a fatal process. We consider two different approaches for seeding a tag cohort within spatial age-structured models. The two methods are essentially the same but differ in whether the length are converted to age outside of the model ("External") or done within the model ("Internal"). The internal method requires users to supply length frequency for each tag-cohort and the model will use the assumed growth assumptions and sex ratios to convert the lengths to ages. The external approach will use an age-length key outside of the model to derive an age frequency that can then be supplied to the model. 
+Tag release events involve releasing a tag-cohort at the beginning of a year within a specific area. A tag cohort is indexed by \(k\) and has an implied year \(y\) and region \(r\) index. \(\boldsymbol{N}^k\) is used to denote a vector of lengths or ages for tag-cohort \(k\). In general, only the length frequency is known at time of release for each tag-cohort because ageing is a fatal process. We consider two different approaches for seeding a tag cohort within spatial age-structured models. The two methods are essentially the same but differ in whether the length are converted to age outside of the model ("External") or done within the model ("Internal"). The internal method requires users to supply length frequency for each tag-cohort and the model will use the assumed growth assumptions and sex ratios to convert the lengths to ages. The external approach will use an age-length key outside of the model to derive an age frequency that can then be supplied to the model. 
 
 A frequent assumption of age-structured tagging models in the literature [@maunder1998integration;@vincent2020parameter] is that the age-frequency of each tag-cohort is known. Due to the fact that ageing is a fatal process, we assume they have used the external approach. If the age-length key is representative, then this method is expected to be very similar and have better computational performance. Factors to consider at time of release are; gear method used to select releases, where releases occur, and time of releases. If growth is estimated within the assessment model, then the internal method may be prefered to keep the growth assumptions consistent between LF observations and other model quantities.
 
@@ -274,11 +282,7 @@ where, \(N^k_a\) is used as an known input into the model with no error. **Revis
 
 ### Things to consider for tag release {-}
 
-- we don't have much information regarding sex of tagged fish (36.5\% of recovered tags have sex information). Does this lean towards the internal method? can allocate sex ratio based on vulnerable population which may be important, if there is quite a difference in sex disaggregated selectivities.
-
-
-## Tag recovery observations {-}
-There are two types of tag-recovery observations that we will consider in this work, tag-release conditioned and tag-recapture conditioned. This conditioning relates to whether we relate recoveries to the release event or whether we only look at the recoveries relative to other recoveries within a time period [@vincent2020parameter;@mcgarvey2002estimating]. This conditioning relates more to the log-likelihood formulation rather than the model expected values. We should also explore two different approaches regarding the scanned fish of which tag-recoveries are a subset. The first is recoveries were entirely from a fishery which requires some understanding or assumptions on reporting rates. The other method assumes scanned fish are known, which is the approach used in the Casal2 [@doonan2016casal2] stock assessment program. This information can be recorded if the scanning is done either by observers who are recording LF's for the catch or scientific/trained staff when shed sampling landed catch. Both these scanning approaches will require an assuming or information on detection rates.
+- we don't have much information regarding sex of tagged fish (36.5\% of recovered tags have sex information)
 
 
 

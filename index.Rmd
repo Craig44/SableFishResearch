@@ -37,6 +37,8 @@ This Gitbook documents my/our research on Alaskan sablefish (*Anoplopoma fimbria
 - Chapter \@ref(tagdata) describes the tagging data and how it can be used within a spatial stock assessment model but also used in a panmictic model for informing population dynamics such as growth.
 
 
+- Chapter \@ref(taglike) describes different tag likelihoods that I considered in the spatial model and does a simple simulation estimating annual movement rates with the different likelihoods 
+
 - Chapter \@ref(sexratios) explores how to include sex disaggregated composition observations that can include sex ratio information. It conducts a simple simulation to investigate two different approaches.
 
 

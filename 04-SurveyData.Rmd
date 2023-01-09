@@ -42,7 +42,7 @@ Given the unusual shape of the coast for the region, an boundary was created to 
 knitr::include_graphics("Figures/mesh.png")
 ```
 
-The first model was configured using code chunk \@ref(fig:firstModel).
+The first model was configured using code the follow code chunk.
 ```{r firstModel, echo = T, eval = F}
 fit_spatial_tweedie <- sdmTMB(
   catch ~ 0  + as.factor(Year) + Country,
@@ -68,10 +68,20 @@ knitr::include_graphics("Figures/spatial_residuals.png")
 +----------------------------+-----------------------------------------------------------------------------+
 | \(\mathcal{M}_2\)          | `y ~ year + country + FMP_region + omega`
 +----------------------------+-----------------------------------------------------------------------------+
-| \(\mathcal{M}_3\)          | `y ~ year + country + epsilon`
+| \(\mathcal{M}_3\)          | `y ~ year + country + epsilon(iid)`
++----------------------------+-----------------------------------------------------------------------------+
+| \(\mathcal{M}_4\)          | `y ~ year + country + epsilon(ar1)`
 +----------------------------+-----------------------------------------------------------------------------+
 
-where `omega` is time-invariant Gaussian Field (GF) and `epsilon` is time-varying Gaussian Field
+where `omega` is time-invariant Gaussian Field (GF) and `epsilon` is time-varying GF
+
+
+
+```{r likelihoodComparison,  eval = T, echo = F}
+ll_df = read.table("Figures/Index_ll.txt", header = T)
+kable(ll_df, caption = "Negative log-likelihoods for index models")
+```
+
 
 
 ```{r spatialprediction, fig.cap="Spatial predition M1 with the tweedie distribution.", eval = T, echo = F, fig.width=5, fig.height= 5}
@@ -90,8 +100,6 @@ knitr::include_graphics("Figures/indicies.png")
 ```{r surveyProjection, fig.cap="Spatial predictions of log abundance from model M3 (spatio-temporal GF)", eval = T, echo = F,  out.width = '100%', fig.height= 13}
 knitr::include_graphics("Figures/spatial_ar1_tweedie_predict_all.png")
 ```
-
-
 
 
 ## Age data {-}
