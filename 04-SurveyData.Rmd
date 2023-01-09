@@ -2,10 +2,10 @@
 
 This chapter explores and describes survey age, length and catch rate data to inform the following spatial model decisions
 
-- Is there spatial differences in age or length composition?
-- Is there spatial differences in relative abundance?
-- Is there spatial differences growth?
 
+- Is there spatial differences in age or length composition?
+- Is there spatial differences in growth?
+- What estimators will we use for regional abundance and age-frequencies
 
 
 
@@ -210,9 +210,9 @@ Given the set of A − J models, the estimated unconditional probabilities \(p_a
 
 
 
-### Observation error estimates
+### Estimating initial effective sample sizes {-}
 
-Bootstrapping is used to estimate standard errors for \(P_{a,R,y}\). Data used to calculate age-length keys are re sampled with replacement to calculate a SE and CV. This produces a CV for each age, region and year denoted by \(CV_{a,r, y}\). Proportions at age are assumed to be distributed according to the multinomial distribution. To translate the observation error expressed as a CV to an initial effective sample denoted by \(N^{eff}_y\) we apply a non-linear least squares solver to estimate \(N^{eff}_y\) by minimsing the following expression
+Bootstrapping is used to estimate standard errors for \(P_{a,R,y}\). Data used to calculate age-length keys are re sampled with replacement to calculate a SE and CV. This produces a CV for each age, region and year denoted by \(CV_{a,r, y}\). Proportions at age are assumed to be distributed according to the multinomial distribution. To translate the observation error expressed as a CV to an initial effective sample denoted by \(N^{eff}_y\) we apply a non-linear least squares solver to estimate \(N^{eff}_y\) by minimizing the following expression
 
 \[
 \log CV_{a,r, y} = \log \sqrt{\frac{P_{a,R,y}\widehat{N}^{eff}_y \left(1 -  P_{a,R,y}\right)}{P_{a,R,y}\widehat{N}^{eff}_y}}
