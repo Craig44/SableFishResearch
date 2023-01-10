@@ -50,6 +50,8 @@ fig:observerLFSplit
 fig:FishingDepth
 fig:FishingLatitude
 fig:FishingLongitude
+tab:surveyLFSplitAnalysis
+fig:surveyLFSplit
 fig:initialspatialObservations
 fig:initialcatch
 fig:modelNoTagcatch
@@ -94,6 +96,7 @@ age-length-key-estimators
 observerdata
 tagdata
 InitialModelSetup
+nextsteps
 taglike
 growth
 refpoints
