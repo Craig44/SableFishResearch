@@ -1,5 +1,5 @@
 # Tag likelihoods {#taglike}
-This section explores a range of tag-recovery likelihoods that have been used in the literature. I simple tag recapture model is used in a simulation to explore how well different likelihoods estimate movement parameters under a range of dispersion conditions. The tag-recapture model ignores age and models number of tagged fish from a release event denoted by \(k\) over three regions indexed by \(r\) for \(n_t\) discrete time-steps. \(T^k_{r,t}\) denotes the number of tagged fish from release event \(k\) in region \(r\) and time step \(t\). The model applies the following processes between time-steps.
+This section explores a range of tag-recovery likelihoods that have been used in the literature. A simple tag recapture model is used in a simulation to explore how well different likelihoods estimate movement parameters under a range of over-dispersion assumptions. The tag-recapture model ignores age and models number of tagged fish from a release event denoted by \(k\) over three regions indexed by \(r\) for \(n_t\) discrete time-steps. \(T^k_{r,t}\) denotes the number of tagged fish from release event \(k\) in region \(r\) and time step \(t\). The model applies the following processes between time-steps.
 
 \begin{align*}
 T^k_{r,t} & = T^k, \quad t = 0\\
@@ -61,7 +61,7 @@ where, again \(T^k\) is the initial number of tags released for event \(k\). The
 
 ### Recapture conditioned {-}
 
-The multinomial which is recapture conditioned was described by @vincent2020parameter but based on the original work of @mcgarvey2002estimating (described in the next section). This likelihood evaluates the probability of recapturing a tagged fish in a certain region among all possible regions for a given release event and time-period.
+The multinomial which is recapture conditioned follows that described by @vincent2020parameter but based on the original work of @mcgarvey2002estimating. This likelihood evaluates the probability of recapturing a tagged fish in a certain region among all possible regions for a given release event and time-period.
 
 
 \[
@@ -78,7 +78,7 @@ and model predicted proportions
 and,
 
 \[
-\widehat{\theta}^k_{r,t} = \frac{\widehat{\theta}^k_{r,t}}{\sum\limits_r \widehat{\theta}^k_{r,t}}
+\widehat{\theta}^k_{r,t} = \frac{\widehat{N}^k_{r,t}}{\sum\limits_r \widehat{N}^k_{r,t}}
 \]
 
 
@@ -91,7 +91,9 @@ ll = \sum_k\sum_y\sum_r log(\widehat{\theta}^k_{r,t}) \times N^k_{r,t}
 
 
 ## Simple simulation {-}
-To explore these likelihoods are very simple simulation was setup to see how well each likelihood could estimate elements of \(\boldsymbol{M}\) under different levels of over dispersion. The simulation assumes all tags encountered where reported (100\% reporting rate) and both natural mortality and fishing mortality are known without error. The only estimated parameters were \(\boldsymbol{M}\) and \(\phi\) when the negative binomial likelihood was explored.
+To explore these likelihoods are very simple simulation was setup to see how well each likelihood could estimate elements of \(\boldsymbol{M}\) under different levels of over-dispersion. The simulation assumes all tags encountered where reported (100\% reporting rate) and both natural mortality and fishing mortality are known without error. The only estimated parameters were \(\boldsymbol{M}\) and \(\phi\) when the negative binomial likelihood was explored.
+
+Tag recovery observations were all simulated using the negative binomial likelihood with varying over-dispersion parameters.
 
 
 The following is some R-code that was used to generate operating model values for 
