@@ -315,9 +315,9 @@ div.csl-indent {
 <h1><span class="header-section-number">Chapter 8</span> Initial model setup<a href="InitialModelSetup.html#InitialModelSetup" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Use <span class="citation">Punt (<a href="#ref-punt2019spatial" role="doc-biblioref">2019</a>)</span> to outline the key considerations</p>
 <ul>
-<li>When did we choose to start the model and why. was it assumed to be in an equilbruim state</li>
+<li>When did we choose to start the model and why. was it assumed to be in an equilibrium state</li>
 <li>What spatial regions did we start with and why</li>
-<li>How many fisheries</li>
+<li>How many fisheries?</li>
 <li>What observations were included? how were they initially weighted</li>
 </ul>
 <div id="model-start-time" class="section level2 unnumbered hasAnchor">
@@ -473,6 +473,7 @@ Figure 8.7: Boxplot of longitude by observed fishing event
 </div>
 <div id="repeast-regression-method-on-survey-lf-data" class="section level2 unnumbered hasAnchor">
 <h2>Repeast regression method on survey LF data<a href="InitialModelSetup.html#repeast-regression-method-on-survey-lf-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I repeated the regression tree analysis for LF data on the survey data to see what spatial and temporal structures are in the Survey LF data. Interestingly it chose to have a longitude split at 206 degrees which was present in the fixed gear LF analsyis and the same break out at the Aleutian islands.</p>
 <table>
 <caption><span id="tab:surveyLFSplitAnalysis">Table 8.2: </span>Longitude splits based on regression tree analysis for survey data</caption>
 <thead>
@@ -572,9 +573,9 @@ Figure 8.11: Fits to annual catch
 <li>annual tag-shedding = 0.02</li>
 </ul>
 <p>Issues
-- If I use spatio-temporal index models <span class="math inline">\(\mathcal{M}_3\)</span> and <span class="math inline">\(\mathcal{M}_4\)</span> I cannot get a positive definite hessian matrix. I believe this is due to the standard errors.
+- If I use spatio-temporal index models <span class="math inline">\(\mathcal{M}_3\)</span> and <span class="math inline">\(\mathcal{M}_4\)</span> I cannot get a positive definite hessian matrix. I believe this is due to the large standard errors (Figure <a href="surveydata.html#fig:indexComparison">5.5</a>).
 - Recruit devs in recent years are very large and make me question model convergence (TODO: profile these recruit devs)
-- Tag predictions consistently under observed values (show)</p>
+- Tag predictions want a larger F and thus larger Biomass. Predictions often higher than observed values. Consider turning of initial tag-mortality, tag-shedding and increase tag-reporting.</p>
 <div class="figure"><span style="display:block;" id="fig:model01catch"></span>
 <img src="Figures/Model_01/Catch_fit.png" alt="Fits to annual catch" width="100%" />
 <p class="caption">
