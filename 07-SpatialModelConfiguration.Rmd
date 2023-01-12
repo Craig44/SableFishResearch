@@ -8,15 +8,15 @@ Use @punt2019spatial to outline the key considerations
 
 
 ## Model start time {-}
-The start year for the current stock assessment is 1960. This is the earlest year in which catch is available. There is early sex-aggregated length composition from the Japanese longline fleet along with a CPUE index for that same fleet in the 60's/70's. The survey data doesn't kick in until mid to late 70's. Unfortunately catch is the most limiting data input, where we can only go back to 1977 before we loose information on regional catch be gear method (pers comms kari Fenske). For this reason 1977 was the start year for the spatial assessment model.
+The start year for the current stock assessment is 1960. This is the earliest year in which catch is available. There is early sex-aggregated length composition from the Japanese longline fleet along with a CPUE index for that same fleet in the 60's/70's. The survey data doesn't kick in until mid to late 70's. Unfortunately catch is the most limiting data input, where we can only go back to 1977 before we loose information on regional catch be gear method (pers comms kari Fenske). For this reason 1977 was the start year for the spatial assessment model.
 
 
 
 ## Model spatial resolution of the model {-}
-This section describes the decision making process we took in configuring an initial spatial model. The first consideration was whether to include areas outside of the Gulf of Alaska (GOA) and the Bering sea Aleutian islands region, which is the spatial extent for the current stock assessment [@goethel2021assessment]. Sablefish inhabit a broad spatial distribution from the northeastern Pacific Ocean from northern Mexico to the Gulf of Alaska. It is currently assessed by three assessment bodies, the first is the area of focus, being the Bering sea and gulf of Alaska [@goethel2021assessment], one off the west coast of Canada **(Cox et al. 2011)** and the west coast from California to Oregan **(Stewart et al. 2011)**. Given the complex juvenile life history coupled with long range movement capabilities of adults, the stock structure of sablefish has been a topic of extensive research.
+This section describes the decision making process we took in configuring an initial spatial model. The first consideration was whether to include areas outside of the Gulf of Alaska (GOA) and the Bering sea Aleutian islands region, which is the spatial extent for the current stock assessment [@goethel2021assessment]. Sablefish inhabit a broad spatial distribution from the northeastern Pacific Ocean from northern Mexico to the Gulf of Alaska. It is currently assessed by three assessment bodies, the first is the area of focus, being the Bering sea and gulf of Alaska [@goethel2021assessment], one off the west coast of Canada **(Cox et al. 2011)** and the west coast from California to Oregon **(Stewart et al. 2011)**. Given the complex juvenile life history coupled with long range movement capabilities of adults, the stock structure of sablefish has been a topic of extensive research.
 
 
-A recent genetic study by @jasonowicz2017love, found no significant difference between samples off the west coast of US, GOA and bering sea (there were no samples off the west coast of Canada in this study), providing evidence for a single panmictic population. A recent morphometric study [@kapur2020oceanographic], found significant differences in fish traits such as length at age between samples from the west coast of US and GOA. These results were consistent with the findings from @tripp2012population. Tagging is another important information source, with extensive tag releases along the entire North Pacific. Tag recovery data provide evidence for a two stock hypothesis [@kimura1998tagged]. With a stock north of Vancouver Island and a stock to the south. 
+A recent genetic study by @jasonowicz2017love, found no significant difference between samples off the west coast of US, GOA and Bering sea (there were no samples off the west coast of Canada in this study), providing evidence for a single panmictic population. A recent morphometric study [@kapur2020oceanographic], found significant differences in fish traits such as length at age between samples from the west coast of US and GOA. These results were consistent with the findings from @tripp2012population. Tagging is another important information source, with extensive tag releases along the entire North Pacific. Tag recovery data provide evidence for a two stock hypothesis [@kimura1998tagged]. With a stock north of Vancouver Island and a stock to the south. 
 
 
 For the purposes of this research, we will assume GOA and BS, hereinafter refereed to as the GOABS complex, is isolated (i.e., no movement in or out of this region) from Canada and the west coast of the US. Although there is evidence to include part of Canada (Figure \@ref(fig:TagRecoveriesOutsideRegion)). Due to practical considerations regarding data sharing and the time-frame of this research Canada was excluded. The focus of this research is to build and explore a spatially explicit model for the GOABS complex.
@@ -135,9 +135,10 @@ include_graphics(file.path("Figures", "InputCatches.png"))
 
 
 ## First model run **without** tag-recapture data {-}
+
 - Annual recruit deviation parameters shared among regions (they still have independent regional mean recruitment parameters)
 - No initial F, initial numbers at age 3:18 have estimate deviation parameters away from an equilibrium exponential decay. \(\sim \mathcal{N}(0,0.2^2)\)
-- Fishery selectivities the same for each region (fixed gear fishery shares logistic delta parameter between males and females). Estimated time-blocks the same as the assessment (3 for the dixed, 1 for the trawl)
+- Fishery selectivities the same for each region (fixed gear fishery shares logistic delta parameter between males and females). Estimated time-blocks the same as the assessment (3 for the fixed, 1 for the trawl)
 - Survey selectivity the same for each region (two time-blocks)
 - Survey catchability the same for each region
 
