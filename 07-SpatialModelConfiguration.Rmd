@@ -1,9 +1,9 @@
 # Initial model setup {#InitialModelSetup}
 Use @punt2019spatial to outline the key considerations
 
-- When did we choose to start the model and why. was it assumed to be in an equilbruim state
+- When did we choose to start the model and why. was it assumed to be in an equilibrium state
 - What spatial regions did we start with and why
-- How many fisheries
+- How many fisheries?
 - What observations were included? how were they initially weighted
 
 
@@ -107,7 +107,7 @@ include_graphics(file.path("Figures", "longitude_dist.png"))
 
 ## Repeast regression method on survey LF data {-}
 
-
+I repeated the regression tree analysis for LF data on the survey data to see what spatial and temporal structures are in the Survey LF data. Interestingly it chose to have a longitude split at 206 degrees which was present in the fixed gear LF analsyis and the same break out at the Aleutian islands.
 
 ```{r surveyLFSplitAnalysis, echo = F, eval = 'asis'}
 split_table = readRDS(file.path("Data", "survey_LF_split_algorithm.RDS"))
@@ -164,9 +164,9 @@ Initial model constraints
 
 
 Issues
-- If I use spatio-temporal index models \(\mathcal{M}_3\) and \(\mathcal{M}_4\) I cannot get a positive definite hessian matrix. I believe this is due to the standard errors.
+- If I use spatio-temporal index models \(\mathcal{M}_3\) and \(\mathcal{M}_4\) I cannot get a positive definite hessian matrix. I believe this is due to the large standard errors (Figure \@ref(fig:indexComparison)).
 - Recruit devs in recent years are very large and make me question model convergence (TODO: profile these recruit devs)
-- Tag predictions consistently under observed values (show)
+- Tag predictions want a larger F and thus larger Biomass. Predictions often higher than observed values. Consider turning of initial tag-mortality, tag-shedding and increase tag-reporting.
 
 
 
