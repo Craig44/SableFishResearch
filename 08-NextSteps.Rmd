@@ -2,9 +2,10 @@
 
 
 - Down weight the tag data? try multinomial likelihood should remove the absolute F signal
-- Reweight composition
+- Reweight composition data, increase precision for survey index (not fitting well) or estimate spatial selectivities (relectunt to do this because I want regional differences to be due to movement)
 - Split survey AF by country e.g., Japanese and Domestic series
 - Tag mixing? any ideas 
+- Profile recruitment parameters
 - Reduce regions - split at 206 longitude based on regression analysis of LF's
 
 
