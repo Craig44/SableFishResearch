@@ -313,7 +313,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="taglike" class="section level1 hasAnchor" number="10">
 <h1><span class="header-section-number">Chapter 10</span> Tag likelihoods<a href="taglike.html#taglike" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This section explores a range of tag-recovery likelihoods that have been used in the literature. I simple tag recapture model is used in a simulation to explore how well different likelihoods estimate movement parameters under a range of dispersion conditions. The tag-recapture model ignores age and models number of tagged fish from a release event denoted by <span class="math inline">\(k\)</span> over three regions indexed by <span class="math inline">\(r\)</span> for <span class="math inline">\(n_t\)</span> discrete time-steps. <span class="math inline">\(T^k_{r,t}\)</span> denotes the number of tagged fish from release event <span class="math inline">\(k\)</span> in region <span class="math inline">\(r\)</span> and time step <span class="math inline">\(t\)</span>. The model applies the following processes between time-steps.</p>
+<p>This section explores a range of tag-recovery likelihoods that have been used in the literature. A simple tag recapture model is used in a simulation to explore how well different likelihoods estimate movement parameters under a range of over-dispersion assumptions. The tag-recapture model ignores age and models number of tagged fish from a release event denoted by <span class="math inline">\(k\)</span> over three regions indexed by <span class="math inline">\(r\)</span> for <span class="math inline">\(n_t\)</span> discrete time-steps. <span class="math inline">\(T^k_{r,t}\)</span> denotes the number of tagged fish from release event <span class="math inline">\(k\)</span> in region <span class="math inline">\(r\)</span> and time step <span class="math inline">\(t\)</span>. The model applies the following processes between time-steps.</p>
 <p><span class="math display">\[\begin{align*}
 T^k_{r,t} &amp; = T^k, \quad t = 0\\
 T^k_{r,t + 1} &amp; = T^k_{r,t} e^{-Z_t}, \quad t &gt; 0\\
@@ -364,7 +364,7 @@ where, again <span class="math inline">\(T^k\)</span> is the initial number of t
 </div>
 <div id="recapture-conditioned" class="section level3 unnumbered hasAnchor">
 <h3>Recapture conditioned<a href="taglike.html#recapture-conditioned" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The multinomial which is recapture conditioned was described by <span class="citation">Vincent, Brenden, and Bence (<a href="#ref-vincent2020parameter" role="doc-biblioref">2020</a>)</span> but based on the original work of <span class="citation">McGarvey and Feenstra (<a href="#ref-mcgarvey2002estimating" role="doc-biblioref">2002</a>)</span> (described in the next section). This likelihood evaluates the probability of recapturing a tagged fish in a certain region among all possible regions for a given release event and time-period.</p>
+<p>The multinomial which is recapture conditioned follows that described by <span class="citation">Vincent, Brenden, and Bence (<a href="#ref-vincent2020parameter" role="doc-biblioref">2020</a>)</span> but based on the original work of <span class="citation">McGarvey and Feenstra (<a href="#ref-mcgarvey2002estimating" role="doc-biblioref">2002</a>)</span>. This likelihood evaluates the probability of recapturing a tagged fish in a certain region among all possible regions for a given release event and time-period.</p>
 <p><span class="math display">\[
 \boldsymbol{N}^k_t \sim \mathcal{Multinomial}\left(\widehat{\boldsymbol{\theta}}_t^k\right)
 \]</span>
@@ -378,7 +378,7 @@ and model predicted proportions
 \]</span>
 and,</p>
 <p><span class="math display">\[
-\widehat{\theta}^k_{r,t} = \frac{\widehat{\theta}^k_{r,t}}{\sum\limits_r \widehat{\theta}^k_{r,t}}
+\widehat{\theta}^k_{r,t} = \frac{\widehat{N}^k_{r,t}}{\sum\limits_r \widehat{N}^k_{r,t}}
 \]</span></p>
 <p>The literature <span class="citation">(<a href="#ref-mcgarvey2002estimating" role="doc-biblioref">McGarvey and Feenstra 2002</a>; <a href="#ref-vincent2020parameter" role="doc-biblioref">Vincent, Brenden, and Bence 2020</a>)</span> often describes the log likelihood as</p>
 <p><span class="math display">\[
@@ -388,7 +388,8 @@ ll = \sum_k\sum_y\sum_r log(\widehat{\theta}^k_{r,t}) \times N^k_{r,t}
 </div>
 <div id="simple-simulation" class="section level2 unnumbered hasAnchor">
 <h2>Simple simulation<a href="taglike.html#simple-simulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>To explore these likelihoods are very simple simulation was setup to see how well each likelihood could estimate elements of <span class="math inline">\(\boldsymbol{M}\)</span> under different levels of over dispersion. The simulation assumes all tags encountered where reported (100% reporting rate) and both natural mortality and fishing mortality are known without error. The only estimated parameters were <span class="math inline">\(\boldsymbol{M}\)</span> and <span class="math inline">\(\phi\)</span> when the negative binomial likelihood was explored.</p>
+<p>To explore these likelihoods are very simple simulation was setup to see how well each likelihood could estimate elements of <span class="math inline">\(\boldsymbol{M}\)</span> under different levels of over-dispersion. The simulation assumes all tags encountered where reported (100% reporting rate) and both natural mortality and fishing mortality are known without error. The only estimated parameters were <span class="math inline">\(\boldsymbol{M}\)</span> and <span class="math inline">\(\phi\)</span> when the negative binomial likelihood was explored.</p>
+<p>Tag recovery observations were all simulated using the negative binomial likelihood with varying over-dispersion parameters.</p>
 <p>The following is some R-code that was used to generate operating model values for</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="taglike.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb4-2"><a href="taglike.html#cb4-2" aria-hidden="true" tabindex="-1"></a>n_y <span class="ot">=</span> <span class="dv">5</span></span>
