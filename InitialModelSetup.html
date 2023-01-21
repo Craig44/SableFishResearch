@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Initial model setup | Alaskan sablefish research</title>
   <meta name="description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Initial model setup | Alaskan sablefish research" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2023-01-12" />
+<meta name="date" content="2023-01-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="tagdata.html"/>
-<link rel="next" href="nextsteps.html"/>
+<link rel="next" href="modelIterations.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -214,7 +214,7 @@ div.csl-indent {
 <li class="chapter" data-level="5.0.1" data-path="surveydata.html"><a href="surveydata.html#direct-ageing-estimators"><i class="fa fa-check"></i><b>5.0.1</b> Direct ageing estimators</a></li>
 <li class="chapter" data-level="5.0.2" data-path="surveydata.html"><a href="surveydata.html#age-length-key-estimators"><i class="fa fa-check"></i><b>5.0.2</b> Age length key estimators</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#continuation-ratio-logits-crl"><i class="fa fa-check"></i>Continuation ratio logits (CRL)</a></li>
-<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#estimating-initial-effective-sample-sizes"><i class="fa fa-check"></i>Estimating initial effective sample sizes</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#estimating-initial-input-sample-sizes-for-multinomial-composition-data"><i class="fa fa-check"></i>Estimating initial input sample sizes for multinomial composition data</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-length-data"><i class="fa fa-check"></i>Age-length data</a></li>
 <li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#appendix"><i class="fa fa-check"></i>Appendix</a></li>
@@ -245,12 +245,15 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#model-start-time"><i class="fa fa-check"></i>Model start time</a></li>
 <li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#model-spatial-resolution-of-the-model"><i class="fa fa-check"></i>Model spatial resolution of the model</a></li>
 <li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#fishery-structure"><i class="fa fa-check"></i>Fishery structure</a></li>
-<li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#repeast-regression-method-on-survey-lf-data"><i class="fa fa-check"></i>Repeast regression method on survey LF data</a></li>
-<li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#observations"><i class="fa fa-check"></i>Observations</a></li>
-<li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#first-model-run-without-tag-recapture-data"><i class="fa fa-check"></i>First model run <strong>without</strong> tag-recapture data</a></li>
-<li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#first-model-run-with-tag-recapture-data"><i class="fa fa-check"></i>First model run <strong>with</strong> tag-recapture data</a></li>
+<li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#repeat-regression-analysis-on-survey-lf-data"><i class="fa fa-check"></i>Repeat regression analysis on survey LF data</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="nextsteps.html"><a href="nextsteps.html"><i class="fa fa-check"></i><b>9</b> Next steps</a></li>
+<li class="chapter" data-level="9" data-path="modelIterations.html"><a href="modelIterations.html"><i class="fa fa-check"></i><b>9</b> Model iterations</a>
+<ul>
+<li class="chapter" data-level="" data-path="modelIterations.html"><a href="modelIterations.html#single-area-model"><i class="fa fa-check"></i>Single Area model</a>
+<ul>
+<li class="chapter" data-level="" data-path="modelIterations.html"><a href="modelIterations.html#include-tagging-data"><i class="fa fa-check"></i>Include tagging data</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="10" data-path="taglike.html"><a href="taglike.html"><i class="fa fa-check"></i><b>10</b> Tag likelihoods</a>
 <ul>
 <li class="chapter" data-level="" data-path="taglike.html"><a href="taglike.html#likelihoods"><i class="fa fa-check"></i>Likelihoods</a>
@@ -471,8 +474,8 @@ Figure 8.7: Boxplot of longitude by observed fishing event
 </p>
 </div>
 </div>
-<div id="repeast-regression-method-on-survey-lf-data" class="section level2 unnumbered hasAnchor">
-<h2>Repeast regression method on survey LF data<a href="InitialModelSetup.html#repeast-regression-method-on-survey-lf-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="repeat-regression-analysis-on-survey-lf-data" class="section level2 unnumbered hasAnchor">
+<h2>Repeat regression analysis on survey LF data<a href="InitialModelSetup.html#repeat-regression-analysis-on-survey-lf-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>I repeated the regression tree analysis for LF data on the survey data to see what spatial and temporal structures are in the Survey LF data. Interestingly it chose to have a longitude split at 206 degrees which was present in the fixed gear LF analsyis and the same break out at the Aleutian islands.</p>
 <table>
 <caption><span id="tab:surveyLFSplitAnalysis">Table 8.2: </span>Longitude splits based on regression tree analysis for survey data</caption>
@@ -529,95 +532,6 @@ Figure 8.7: Boxplot of longitude by observed fishing event
 Figure 8.8: Longitude splits based on regression tree analysis from Table <a href="InitialModelSetup.html#tab:surveyLFSplitAnalysis">8.2</a>
 </p>
 </div>
-</div>
-<div id="observations" class="section level2 unnumbered hasAnchor">
-<h2>Observations<a href="InitialModelSetup.html#observations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="figure"><span style="display:block;" id="fig:initialspatialObservations"></span>
-<img src="Figures/Observation_Frequency.png" alt="Observation type and frequency for the initial model." width="100%" />
-<p class="caption">
-Figure 8.9: Observation type and frequency for the initial model.
-</p>
-</div>
-<div class="figure"><span style="display:block;" id="fig:initialcatch"></span>
-<img src="Figures/InputCatches.png" alt="Catch (kilo tonnes) by gear and area." width="100%" />
-<p class="caption">
-Figure 8.10: Catch (kilo tonnes) by gear and area.
-</p>
-</div>
-</div>
-<div id="first-model-run-without-tag-recapture-data" class="section level2 unnumbered hasAnchor">
-<h2>First model run <strong>without</strong> tag-recapture data<a href="InitialModelSetup.html#first-model-run-without-tag-recapture-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>Annual recruit deviation parameters shared among regions (they still have independent regional mean recruitment parameters)</li>
-<li>No initial F, initial numbers at age 3:18 have estimate deviation parameters away from an equilibrium exponential decay. <span class="math inline">\(\sim \mathcal{N}(0,0.2^2)\)</span></li>
-<li>Fishery selectivities the same for each region (fixed gear fishery shares logistic delta parameter between males and females). Estimated time-blocks the same as the assessment (3 for the fixed, 1 for the trawl)</li>
-<li>Survey selectivity the same for each region (two time-blocks)</li>
-<li>Survey catchability the same for each region</li>
-</ul>
-<p>Issues
-- Cannot estimate movement, get non-positive definite hessian matrix. Only when I turn movement off do I get positive definite hessian matrix.</p>
-<div class="figure"><span style="display:block;" id="fig:modelNoTagcatch"></span>
-<img src="Figures/Model_NoTagData/Catch_fit.png" alt="Fits to annual catch" width="100%" />
-<p class="caption">
-Figure 8.11: Fits to annual catch
-</p>
-</div>
-</div>
-<div id="first-model-run-with-tag-recapture-data" class="section level2 unnumbered hasAnchor">
-<h2>First model run <strong>with</strong> tag-recapture data<a href="InitialModelSetup.html#first-model-run-with-tag-recapture-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Initial model constraints</p>
-<ul>
-<li>same as model without tag-recapture data</li>
-<li>did not estimate reporting rate, assumed it was 0.6 (loosely based on <span class="citation">Hanselman et al. (<a href="#ref-hanselman2015move" role="doc-biblioref">2015</a>)</span>)</li>
-<li>initial mortality loss = 0.1</li>
-<li>annual tag-shedding = 0.02</li>
-</ul>
-<p>Issues
-- If I use spatio-temporal index models <span class="math inline">\(\mathcal{M}_3\)</span> and <span class="math inline">\(\mathcal{M}_4\)</span> I cannot get a positive definite hessian matrix. I believe this is due to the large standard errors (Figure <a href="surveydata.html#fig:indexComparison">5.5</a>).
-- Recruit devs in recent years are very large and make me question model convergence (TODO: profile these recruit devs)
-- Tag predictions want a larger F and thus larger Biomass. Predictions often higher than observed values. Consider turning of initial tag-mortality, tag-shedding and increase tag-reporting.</p>
-<div class="figure"><span style="display:block;" id="fig:model01catch"></span>
-<img src="Figures/Model_01/Catch_fit.png" alt="Fits to annual catch" width="100%" />
-<p class="caption">
-Figure 8.12: Fits to annual catch
-</p>
-</div>
-<div class="figure"><span style="display:block;" id="fig:model01survey"></span>
-<img src="Figures/Model_01/survey_index_fit.png" alt="Fits to survey abundance data" width="100%" />
-<p class="caption">
-Figure 8.13: Fits to survey abundance data
-</p>
-</div>
-<div class="figure"><span style="display:block;" id="fig:model01movement"></span>
-<img src="Figures/Model_01/Est_movement.png" alt="Estimated movement matrix" width="100%" />
-<p class="caption">
-Figure 8.14: Estimated movement matrix
-</p>
-</div>
-<div class="figure"><span style="display:block;" id="fig:model01tagresids"></span>
-<img src="Figures/Model_01/tag_aggregated_fit.png" alt="Aggregated tag recovery residuals" width="100%" />
-<p class="caption">
-Figure 8.15: Aggregated tag recovery residuals
-</p>
-</div>
-<div class="figure"><span style="display:block;" id="fig:model01sel"></span>
-<img src="Figures/Model_01/Est_selectivity.png" alt="Estimated selectivities" width="60%" />
-<p class="caption">
-Figure 8.16: Estimated selectivities
-</p>
-</div>
-<div class="figure"><span style="display:block;" id="fig:model01ssbs"></span>
-<img src="Figures/Model_01/regional_ssb.png" alt="Estimated regional SSBs" width="60%" />
-<p class="caption">
-Figure 8.17: Estimated regional SSBs
-</p>
-</div>
-<div class="figure"><span style="display:block;" id="fig:model01init"></span>
-<img src="Figures/Model_01/Init_numbers_at_age.png" alt="Estimated initial age-structure" width="60%" />
-<p class="caption">
-Figure 8.18: Estimated initial age-structure
-</p>
-</div>
 
 </div>
 </div>
@@ -625,9 +539,6 @@ Figure 8.18: Estimated initial age-structure
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-goethel2021assessment" class="csl-entry">
 Goethel, DR, DH Hanselman, CJ Rodgveller, KH Fenski, SK Shotwell, KB Echave, PW Malecha, A Siwicke, and CR Lunsford. 2021. <span>“Assessment of the Sablefish Stock in Alaska.”</span> <em>Stock Assessment and Fishery Evaluation Report for the Groundfish Resources of the Gulf of Alaska and the Bering Sea/Aleutian Islands as Projected for</em>.
-</div>
-<div id="ref-hanselman2015move" class="csl-entry">
-Hanselman, Dana H, Jonathan Heifetz, Katy B Echave, and Sherri C Dressel. 2015. <span>“Move It or Lose It: Movement and Mortality of Sablefish Tagged in Alaska.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 72 (2): 238–51.
 </div>
 <div id="ref-jasonowicz2017love" class="csl-entry">
 Jasonowicz, Andrew J, Frederick W Goetz, Giles W Goetz, and Krista M Nichols. 2017. <span>“Love the One You’re with: Genomic Evidence of Panmixia in the Sablefish (Anoplopoma Fimbria).”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 74 (3): 377–87.
@@ -654,7 +565,7 @@ Tripp-Valdez, MA, FJ Garcı́a-de-León, H Espinosa-Pérez, and G Ruiz-Campos. 2
         </div>
       </div>
 <a href="tagdata.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="nextsteps.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="modelIterations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
