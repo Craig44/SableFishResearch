@@ -9,9 +9,9 @@ Based on our exploratory analysis we have developed the three following spatial 
 
 ## Single Area model {-}
 
-Due to the spatial focus of this research, data sets were dropped during initial model development that are used in the current stock assessment. These included, early Japanese fishery CPUE, early Japanese Length frequency observations and the NFMS trawl survey. The early Japanese data was dropped because it could not be disaggregated by sex or space.
+Due to the focus on spatial assessment models for this research, data sets that are in the current assessment were dropped during initial model development. These included, early Japanese fishery CPUE, early Japanese Length frequency observations and the NFMS trawl survey. The early Japanese data was dropped because it could not be disaggregated by sex or space. The trawl survey was initially not included because we believe that we have sufficient information from the longline survey and the trawl survey does not monitor the core sablefish depth range, which was thought to possibly introduce data conflict due to sampling variation which we wanted to minimize.
 
-```{r obsSingleAreaModel, out.width = '100%', fig.height= 6, fig.cap="Observation frequency assumed in the `SpatialSablefishAssessment` (SSA) model", echo = F, eval = T}
+```{r obsSingleAreaModel, out.width = '60%', fig.height= 4, fig.cap="Observation frequency assumed in the `SpatialSablefishAssessment` (SSA) model", echo = F, eval = T}
 include_graphics(file.path("Figures", "Application" ,"1-Area","1977_start","Observation_Frequency.png"))
 ```
 
@@ -36,26 +36,26 @@ Even with the differences stated above, the models produced similar fits and est
 
 
 
-```{r compareASSSSB, out.width = '100%', fig.height= 6, fig.cap="Estimated SSB (kt) between the current assessment (CA) and `SpatialSablefishAssessment` (SSA)", echo = F, eval = T}
+```{r compareASSSSB, out.width = '60%', fig.height= 4, fig.cap="Estimated SSB (kt) between the current assessment (CA) and `SpatialSablefishAssessment` (SSA)", echo = F, eval = T}
 include_graphics(file.path("Figures", "Application" ,"1-Area","1977_start","compare_SSB.png"))
 ```
 
-```{r compareASSFs, out.width = '100%', fig.height= 6, fig.cap="Estimated fishing mortality between the current assessment (CA) and `SpatialSablefishAssessment` (SSA)", echo = F, eval = T}
+```{r compareASSFs, out.width = '60%', fig.height= 4, fig.cap="Estimated fishing mortality between the current assessment (CA) and `SpatialSablefishAssessment` (SSA)", echo = F, eval = T}
 include_graphics(file.path("Figures", "Application" ,"1-Area","1977_start","compare_Fs.png"))
 ```
 
-```{r compareASSRec, out.width = '100%', fig.height= 6, fig.cap="Estimated recruitment between the current assessment (CA) and `SpatialSablefishAssessment` (SSA)", echo = F, eval = T}
+```{r compareASSRec, out.width = '60%', fig.height= 4, fig.cap="Estimated recruitment between the current assessment (CA) and `SpatialSablefishAssessment` (SSA)", echo = F, eval = T}
 include_graphics(file.path("Figures", "Application" ,"1-Area","1977_start","compare_Recruitment.png"))
 ```
 
-```{r compareASSBio, out.width = '100%', fig.height= 6, fig.cap="Compare fits to the survey biomass observation between current assessment (CA) and `SpatialSablefishAssessment` (SSA)", echo = F, eval = T}
+```{r compareASSBio, out.width = '60%', fig.height= 4, fig.cap="Compare fits to the survey biomass observation between current assessment (CA) and `SpatialSablefishAssessment` (SSA)", echo = F, eval = T}
 include_graphics(file.path("Figures", "Application" ,"1-Area","1977_start","compare_srv1_dom_ll.png"))
 ```
 
 
 ### Include tagging data {-}
 
-An additional iteration we did was to include the tag-recovery observations to see what would happen. 
+An additional iteration was run for the single area model that included tag-recovery observations to see what would happen. 
 
 
 
