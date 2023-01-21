@@ -152,12 +152,12 @@ Model fitted values for tag event \(k\) recovered in region \(r\) and year \(y\)
 
 
 \[
-\widehat{N}^k_{m} =  \sum_a \sum_s T^k_{a,r,y,s} \frac{F^{LL}_{a,r,y,s}}{Z_{a,r,y,s}} (1 - e^{-Z_{a,r,y,s}})\delta_{r,y} \quad m = \{r,y\}
+\widehat{N}^k_{m} =  \sum_a \sum_s T^k_{a,r,y,s} \frac{F^{LL}_{a,r,y,s}}{Z_{a,r,y,s}} (1 - e^{-Z_{a,r,y,s}})\delta_{r,y}, \quad m = \{r,y\}
 \]
 where, \(T^k_{a,r,y,s}\) are the number of tagged fish from tag-release event \(k\), and \(\delta_{r,y}\) is the reporting rate in year \(y\). Initial model runs used the Poisson 
 
 \[
-\widehat{N}^k_{m}  \sim \mathcal{Poisson}(\widehat{N}^k_{m})
+N^k_{m}  \sim \mathcal{Poisson}(\widehat{N}^k_{m})
 \]
 
-However, the negative binmoial and multinomial are in development. See Chapter \@ref(taglike) for simple exploration of different tag-likelihoods for estimating movement parameters.
+However, the negative binomial and multinomial are in development. See Chapter \@ref(taglike) for simple exploration of different tag-likelihoods for estimating movement parameters.

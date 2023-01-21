@@ -14,7 +14,7 @@ This chapter explores and describes survey age, length and catch rate data to in
 The longline survey in the Gulf of Alaska and Bering Sea began in 1978-79 and is fixed station systematic design [@sasaki1985studies]. "Survey stations are distributed as uniformely as possible in each geographic area. One station per day is fished, and normally 160 hachis/skates are fished at each station. The longline is set at right angles to the isobars in a manner to cover the depth range of 101- 1,000 m. However, the distance between 101 and 1,000 m varied at each survey station. Thus, this complete depth range could not be covered at stations where this distance exceeded the 16 km length of the longline gear. The longline was usually set from shallow to deep waters and was retrieved in the same direction. Hauling the longline started 2 hours after the set was completed." pg 68 @sasaki1985studies
 
 
-Each hachi is assigned to a depth stratum which is treated as an independent observation by stratified estimators to generate population estimates and associated variance (**Is this right?** seems inappropriate given all these hachi are essentially a cluster from a single fishing event)
+Each hachi is assigned to a depth stratum. Hachi belonging to a fishing event and specific depth stratum are used to derive mean catch rates for each  stratum and fishing event observation and used in subsequent estimators. Covariation is accounted for in variance estimators between depth strata to account for longline transects crossing multiple depth strata.
 
 
 ## Abundance (catch rate) data {-}
@@ -210,12 +210,12 @@ Given the set of A − J models, the estimated unconditional probabilities \(p_a
 
 
 
-### Estimating initial effective sample sizes {-}
+### Estimating initial input sample sizes for multinomial composition data {-}
 
 Bootstrapping is used to estimate standard errors for \(P_{a,R,y}\). Data used to calculate age-length keys are re sampled with replacement to calculate a SE and CV. This produces a CV for each age, region and year denoted by \(CV_{a,r, y}\). Proportions at age are assumed to be distributed according to the multinomial distribution. To translate the observation error expressed as a CV to an initial effective sample denoted by \(N^{eff}_y\) we apply a non-linear least squares solver to estimate \(N^{eff}_y\) by minimizing the following expression
 
 \[
-\log CV_{a,r, y} = \log \sqrt{\frac{P_{a,R,y}\widehat{N}^{eff}_y \left(1 -  P_{a,R,y}\right)}{P_{a,R,y}\widehat{N}^{eff}_y}}
+\log CV_{a,r, y} = \log \sqrt{\frac{P_{a,R,y}\widehat{N}^{eff}_y \left(1 -  P_{a,R,y}\right)}}{P_{a,R,y}\widehat{N}^{eff}_y}
 \]
 
 

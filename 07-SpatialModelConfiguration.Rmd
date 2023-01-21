@@ -105,7 +105,7 @@ include_graphics(file.path("Figures", "latitude_dist.png"))
 include_graphics(file.path("Figures", "longitude_dist.png"))
 ```
 
-## Repeast regression method on survey LF data {-}
+## Repeat regression analysis on survey LF data {-}
 
 I repeated the regression tree analysis for LF data on the survey data to see what spatial and temporal structures are in the Survey LF data. Interestingly it chose to have a longitude split at 206 degrees which was present in the fixed gear LF analsyis and the same break out at the Aleutian islands.
 
@@ -120,87 +120,4 @@ kable(split_table, caption = "Longitude splits based on regression tree analysis
 ```{r surveyLFSplit, out.width = '100%',fig.height= 5, fig.cap = "Longitude splits based on regression tree analysis from Table \\@ref(tab:surveyLFSplitAnalysis)", echo = F, eval = T}
 include_graphics(file.path("Figures", "survey_split_analysis.png"))
 ```
-
-
-## Observations {-}
-
-```{r initialspatialObservations, out.width = '100%', fig.height= 6, fig.cap="Observation type and frequency for the initial model.", echo = F, eval = T}
-include_graphics(file.path("Figures", "Observation_Frequency.png"))
-```
-
-
-```{r initialcatch, out.width = '100%', fig.height= 5, fig.cap="Catch (kilo tonnes) by gear and area.", echo = F, eval = T}
-include_graphics(file.path("Figures", "InputCatches.png"))
-```
-
-
-## First model run **without** tag-recapture data {-}
-
-- Annual recruit deviation parameters shared among regions (they still have independent regional mean recruitment parameters)
-- No initial F, initial numbers at age 3:18 have estimate deviation parameters away from an equilibrium exponential decay. \(\sim \mathcal{N}(0,0.2^2)\)
-- Fishery selectivities the same for each region (fixed gear fishery shares logistic delta parameter between males and females). Estimated time-blocks the same as the assessment (3 for the fixed, 1 for the trawl)
-- Survey selectivity the same for each region (two time-blocks)
-- Survey catchability the same for each region
-
-
-Issues
-- Cannot estimate movement, get non-positive definite hessian matrix. Only when I turn movement off do I get positive definite hessian matrix.
-
-
-
-```{r modelNoTagcatch, out.width = '100%', fig.height= 6, fig.cap="Fits to annual catch", echo = F, eval = T}
-include_graphics(file.path("Figures", "Model_NoTagData", "Catch_fit.png"))
-```
-
-
-## First model run **with** tag-recapture data {-}
-
-Initial model constraints
-
-- same as model without tag-recapture data
-- did not estimate reporting rate, assumed it was 0.6 (loosely based on @hanselman2015move) 
-- initial mortality loss = 0.1
-- annual tag-shedding = 0.02
-
-
-Issues
-- If I use spatio-temporal index models \(\mathcal{M}_3\) and \(\mathcal{M}_4\) I cannot get a positive definite hessian matrix. I believe this is due to the large standard errors (Figure \@ref(fig:indexComparison)).
-- Recruit devs in recent years are very large and make me question model convergence (TODO: profile these recruit devs)
-- Tag predictions want a larger F and thus larger Biomass. Predictions often higher than observed values. Consider turning of initial tag-mortality, tag-shedding and increase tag-reporting.
-
-
-
-```{r model01catch, out.width = '100%', fig.height= 6, fig.cap="Fits to annual catch", echo = F, eval = T}
-include_graphics(file.path("Figures", "Model_01", "Catch_fit.png"))
-```
-
-
-```{r model01survey, out.width = '100%', fig.height= 6, fig.cap="Fits to survey abundance data", echo = F, eval = T}
-include_graphics(file.path("Figures", "Model_01" ,"survey_index_fit.png"))
-```
-
-
-```{r model01movement, out.width = '100%', fig.height= 6, fig.cap="Estimated movement matrix", echo = F, eval = T}
-include_graphics(file.path("Figures", "Model_01" ,"Est_movement.png"))
-```
-
-
-```{r model01tagresids, out.width = '100%', fig.height= 6, fig.cap="Aggregated tag recovery residuals", echo = F, eval = T}
-include_graphics(file.path("Figures", "Model_01" ,"tag_aggregated_fit.png"))
-```
-
-
-```{r model01sel, out.width = '60%', fig.height= 6, fig.cap="Estimated selectivities", echo = F, eval = T}
-include_graphics(file.path("Figures", "Model_01" ,"Est_selectivity.png"))
-```
-
-
-```{r model01ssbs, out.width = '60%', fig.height= 6, fig.cap="Estimated regional SSBs", echo = F, eval = T}
-include_graphics(file.path("Figures", "Model_01" ,"regional_ssb.png"))
-```
-
-```{r model01init, out.width = '60%', fig.height= 6, fig.cap="Estimated initial age-structure", echo = F, eval = T}
-include_graphics(file.path("Figures", "Model_01" ,"Init_numbers_at_age.png"))
-```
-
 

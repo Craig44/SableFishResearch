@@ -1,0 +1,61 @@
+# Model iterations {#modelIterations}
+
+Based on our exploratory analysis we have developed the three following spatial models
+
+- 5 Area Merge EY/WY/SouthEast into EGOA 
+- 3 Area Merge Bering Sea, Aleutian Islands, and Western Gulf regions
+- 1 Area merge all regions
+
+
+## Single Area model {-}
+
+Due to the spatial focus of this research, data sets were dropped during initial model development that are used in the current stock assessment. These included, early Japanese fishery CPUE, early Japanese Length frequency observations and the NFMS trawl survey. The early Japanese data was dropped because it could not be disaggregated by sex or space.
+
+```{r obsSingleAreaModel, out.width = '100%', fig.height= 6, fig.cap="Observation frequency assumed in the `SpatialSablefishAssessment` (SSA) model", echo = F, eval = T}
+include_graphics(file.path("Figures", "Application" ,"1-Area","1977_start","Observation_Frequency.png"))
+```
+
+
+As a validation step, we compare `SpatialSablefishAssessment` which was developed for this research with the 2021 stock assessment [@goethel2021assessment] (Not the exact assessment model as I made some changes/fixes).
+
+There are a few fundamental differences between these assessment models, which are listed below
+
+
+- Start year 1977. Because `SpatialSablefishAssessment` does not have that early data. The model would not converge if started in 1960
+- No temporal overlap in age and length composition. The current assessment model provides age composition (aggregated by sex) and length composition (disaggregated by sex) simultaneously in years for the longline survey and fixed gear fishery. Because we use the age-length key method to derive age-frequencies, that treatment thought to be inappropriate due to the double use of the length data.
+- Age and Length composition are sexually disaggregated. As described in Chapter \@ref(sexratios) we assume for an observation in a year that composition sum to one over sex and age.
+
+- Slightly different treatment of initial age deviations for non-equilibrium age-structure
+
+- Fishing mortality are catch conditioned and not estimated as free parameters
+
+- An initial fishing mortality parameter was estimated as a free parameter. The current assessment assuems 10\% of the estimated average fixed gear fishing mortality
+
+
+Even with the differences stated above, the models produced similar fits and estimated model quantities for overlapping years.
+
+
+
+```{r compareASSSSB, out.width = '100%', fig.height= 6, fig.cap="Estimated SSB (kt) between the current assessment (CA) and `SpatialSablefishAssessment` (SSA)", echo = F, eval = T}
+include_graphics(file.path("Figures", "Application" ,"1-Area","1977_start","compare_SSB.png"))
+```
+
+```{r compareASSFs, out.width = '100%', fig.height= 6, fig.cap="Estimated fishing mortality between the current assessment (CA) and `SpatialSablefishAssessment` (SSA)", echo = F, eval = T}
+include_graphics(file.path("Figures", "Application" ,"1-Area","1977_start","compare_Fs.png"))
+```
+
+```{r compareASSRec, out.width = '100%', fig.height= 6, fig.cap="Estimated recruitment between the current assessment (CA) and `SpatialSablefishAssessment` (SSA)", echo = F, eval = T}
+include_graphics(file.path("Figures", "Application" ,"1-Area","1977_start","compare_Recruitment.png"))
+```
+
+```{r compareASSBio, out.width = '100%', fig.height= 6, fig.cap="Compare fits to the survey biomass observation between current assessment (CA) and `SpatialSablefishAssessment` (SSA)", echo = F, eval = T}
+include_graphics(file.path("Figures", "Application" ,"1-Area","1977_start","compare_srv1_dom_ll.png"))
+```
+
+
+### Include tagging data {-}
+
+An additional iteration we did was to include the tag-recovery observations to see what would happen. 
+
+
+
