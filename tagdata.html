@@ -491,6 +491,18 @@ Figure 7.3: Tag recoveries outside of stock boundaries, with release locations (
 Figure 7.4: Tag recoveries by release and recovery region pooled over all years. Colors are number of tags recovered and text indicates the proportion.
 </p>
 </div>
+<div class="figure"><span style="display:block;" id="fig:TagByReleaseYear"></span>
+<img src="Figures/TagData/absolute_releases_and_recoveries.png" alt="Number of tag recoveries and releases by release year and years at liberty" width="100%" />
+<p class="caption">
+Figure 7.5: Number of tag recoveries and releases by release year and years at liberty
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:RelativeTagByReleaseYear"></span>
+<img src="Figures/TagData/relative_releases_and_recoveries.png" alt="Relative (val/max(val)) tag recoveries and releases by release year and years at liberty" width="100%" />
+<p class="caption">
+Figure 7.6: Relative (val/max(val)) tag recoveries and releases by release year and years at liberty
+</p>
+</div>
 </div>
 <div id="lincoln-peterson-estimator" class="section level2 unnumbered hasAnchor">
 <h2>Lincoln-Peterson estimator<a href="tagdata.html#lincoln-peterson-estimator" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -540,36 +552,36 @@ Figure 7.4: Tag recoveries by release and recovery region pooled over all years.
 </tr>
 </tbody>
 </table>
-<p>Most of the tags are released during the summer survey (Figure <a href="tagdata.html#fig:TagDataByMonth">7.5</a>) but recoveries are more spread out within a year.</p>
+<p>Most of the tags are released during the summer survey (Figure <a href="tagdata.html#fig:TagDataByMonth">7.7</a>) but recoveries are more spread out within a year.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:TagDataByMonth"></span>
 <img src="Figures/Releases_by_month.png" alt="Tag recovery and release distributions by month" width="49%" /><img src="Figures/Recoveries_by_month.png" alt="Tag recovery and release distributions by month" width="49%" />
 <p class="caption">
-Figure 7.5: Tag recovery and release distributions by month
+Figure 7.7: Tag recovery and release distributions by month
 </p>
 </div>
-<p>A Lincoln-Peterson estimator based on long line tag recoveries that were at liberty for a year (300 - 420 days) was explored. This time-at-liberty period was chosen so we could calculate annual estimates of abundance and thus derive annual estimates of exploitation rates to compare with the assessment. Due to the large distance traveled by sablefish over this time-period (Figure <a href="tagdata.html#fig:KMtravelled">7.6</a>), the spatial extent considered was the entire stock region.</p>
+<p>A Lincoln-Peterson estimator based on long line tag recoveries that were at liberty for a year (300 - 420 days) was explored. This time-at-liberty period was chosen so we could calculate annual estimates of abundance and thus derive annual estimates of exploitation rates to compare with the assessment. Due to the large distance traveled by sablefish over this time-period (Figure <a href="tagdata.html#fig:KMtravelled">7.8</a>), the spatial extent considered was the entire stock region.</p>
 <div class="figure"><span style="display:block;" id="fig:KMtravelled"></span>
 <img src="Figures/distance_travelled_after_a_year.png" alt="Distance (km) between release location and recovery location for fish at liberty for a year." width="60%" />
 <p class="caption">
-Figure 7.6: Distance (km) between release location and recovery location for fish at liberty for a year.
+Figure 7.8: Distance (km) between release location and recovery location for fish at liberty for a year.
 </p>
 </div>
-<p>A few calculations/approximations are included in the Lincoln-Peterson estimator, these include tag loss and natural mortality for tagged fish after a year at liberaty, reporting rates from the commercial fishery, and changing reported weights to numbers. The period for calculating catch that was scanned during tag recoveries was the 15 of May to 15 of September. This was chosen as it brackets the monthly peak of releases (Figure <a href="tagdata.html#fig:TagDataByMonth">7.5</a>). The other adjustment was converting reported weight into numbers. For this I calculated the mean numbers of fish per tonne based on the observer data. I then used this multiplier for the catch reported in tonnes during the period of recoveries to extract the numbers scanned by the fishery each year.</p>
+<p>A few calculations/approximations are included in the Lincoln-Peterson estimator, these include tag loss and natural mortality for tagged fish after a year at liberaty, reporting rates from the commercial fishery, and changing reported weights to numbers. The period for calculating catch that was scanned during tag recoveries was the 15 of May to 15 of September. This was chosen as it brackets the monthly peak of releases (Figure <a href="tagdata.html#fig:TagDataByMonth">7.7</a>). The other adjustment was converting reported weight into numbers. For this I calculated the mean numbers of fish per tonne based on the observer data. I then used this multiplier for the catch reported in tonnes during the period of recoveries to extract the numbers scanned by the fishery each year.</p>
 <div class="figure"><span style="display:block;" id="fig:popestimateslincolnpeterson"></span>
 <img src="Figures/LincolPetersonEstimates.png" alt="Recovered fish by gear type and year" width="60%" />
 <p class="caption">
-Figure 7.7: Recovered fish by gear type and year
+Figure 7.9: Recovered fish by gear type and year
 </p>
 </div>
 <p>Once we have annual population abundance estimates we can derive a rough annual exploitation rate (<span class="math inline">\(U_y\)</span>) denoted by</p>
 <p><span class="math display">\[
 U_y  = \frac{C_y}{\widehat{N}}
 \]</span>
-where, <span class="math inline">\(C_y\)</span> is the annual catch in numbers for the Longline fishery shown in Figure <a href="tagdata.html#fig:roughExploitationRate">7.8</a>.</p>
+where, <span class="math inline">\(C_y\)</span> is the annual catch in numbers for the Longline fishery shown in Figure <a href="tagdata.html#fig:roughExploitationRate">7.10</a>.</p>
 <div class="figure"><span style="display:block;" id="fig:roughExploitationRate"></span>
 <img src="Figures/rough_exploitation_rate.png" alt="Exploitation rate for the Longline fishery based on Lincoln-Peterson estimates" width="60%" />
 <p class="caption">
-Figure 7.8: Exploitation rate for the Longline fishery based on Lincoln-Peterson estimates
+Figure 7.10: Exploitation rate for the Longline fishery based on Lincoln-Peterson estimates
 </p>
 </div>
 </div>
@@ -597,7 +609,7 @@ Figure 7.8: Exploitation rate for the Longline fishery based on Lincoln-Peterson
 <div class="figure"><span style="display:block;" id="fig:addagelength"></span>
 <img src="_main_files/figure-html/addagelength-1.png" alt="An example of theoretical length at age, with overlapping length bins used to describe the effect of going back and fourth through the age-length transition matrix." width="70%" />
 <p class="caption">
-Figure 7.9: An example of theoretical length at age, with overlapping length bins used to describe the effect of going back and fourth through the age-length transition matrix.
+Figure 7.11: An example of theoretical length at age, with overlapping length bins used to describe the effect of going back and fourth through the age-length transition matrix.
 </p>
 </div>
 <pre><code>## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
@@ -605,7 +617,7 @@ Figure 7.9: An example of theoretical length at age, with overlapping length bin
 <div class="figure"><span style="display:block;" id="fig:showagelengthtransitionproblem"></span>
 <img src="_main_files/figure-html/showagelengthtransitionproblem-1.png" alt="A visualisation of the effect of going back and forth through an age-length transition matrix. This can happen when tag releases and recaptures are input as length in an age-structured model. The model converts lengths to ages, then reconverts the age to length for observations. This is assuming the same age-length relationship in Figure \@ref(fig:addagelength)" width="100%" />
 <p class="caption">
-Figure 7.10: A visualisation of the effect of going back and forth through an age-length transition matrix. This can happen when tag releases and recaptures are input as length in an age-structured model. The model converts lengths to ages, then reconverts the age to length for observations. This is assuming the same age-length relationship in Figure <a href="tagdata.html#fig:addagelength">7.9</a>
+Figure 7.12: A visualisation of the effect of going back and forth through an age-length transition matrix. This can happen when tag releases and recaptures are input as length in an age-structured model. The model converts lengths to ages, then reconverts the age to length for observations. This is assuming the same age-length relationship in Figure <a href="tagdata.html#fig:addagelength">7.11</a>
 </p>
 </div>
 <div id="internal-method" class="section level4 unnumbered hasAnchor">
