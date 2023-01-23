@@ -30,6 +30,8 @@ fig:ScaledLFs
 fig:obsagelengthbysex
 fig:obsmalegrowth
 fig:obsfemalegrowth
+tab:recoverytables
+tab:releasetables
 fig:TagReleases
 fig:recoveriebygear
 fig:TagRecoveriesOutsideRegion

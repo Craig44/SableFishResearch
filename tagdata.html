@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2023-01-22" />
+<meta name="date" content="2023-01-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -231,6 +231,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="7" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>7</b> Tagging data exploration</a>
 <ul>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#data-grooming"><i class="fa fa-check"></i>Data grooming</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#exploratory-analysis-of-the-tag-data"><i class="fa fa-check"></i>Exploratory analysis of the tag data</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#lincoln-peterson-estimator"><i class="fa fa-check"></i>Lincoln-Peterson estimator</a></li>
 <li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#integrating-tagging-observations-in-spatial-age-structured-models"><i class="fa fa-check"></i>Integrating tagging observations in spatial age-structured models</a></li>
@@ -318,6 +319,149 @@ div.csl-indent {
 <h1><span class="header-section-number">Chapter 7</span> Tagging data exploration<a href="tagdata.html#tagdata" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Since 1972 there have been approximately 400 000 sablefish tagged in Alaska waters, of which over 38 500 have been recovered. Although there is extensive and long term tagging data, this information is not currently directly included in the stock assessment <span class="citation">(<a href="#ref-goethel2021assessment" role="doc-biblioref">D. Goethel et al. 2021</a>)</span>.</p>
 <p>Historical publications investigating movement of Alaskan sablefish include <span class="citation">Heifetz and Fujioka (<a href="#ref-heifetz1991movement" role="doc-biblioref">1991</a>)</span>, <span class="citation">Hanselman et al. (<a href="#ref-hanselman2015move" role="doc-biblioref">2015</a>)</span></p>
+<div id="data-grooming" class="section level2 unnumbered hasAnchor">
+<h2>Data grooming<a href="tagdata.html#data-grooming" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<caption><span id="tab:recoverytables">Table 7.1: </span>Tag recoveries dropped during grooming.</caption>
+<colgroup>
+<col width="49%" />
+<col width="9%" />
+<col width="20%" />
+<col width="21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">rule</th>
+<th align="right">events</th>
+<th align="right">events_removed</th>
+<th align="right">relative_events</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Init</td>
+<td align="right">36159</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">Duplicated recovery id</td>
+<td align="right">36104</td>
+<td align="right">1085</td>
+<td align="right">-2.92</td>
+</tr>
+<tr class="odd">
+<td align="left">negative time-at-liberty recovery id</td>
+<td align="right">35884</td>
+<td align="right">220</td>
+<td align="right">-0.61</td>
+</tr>
+<tr class="even">
+<td align="left">NA lat and long</td>
+<td align="right">35884</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">Tag type: AB, BK, JU, SA, SB</td>
+<td align="right">30986</td>
+<td align="right">4898</td>
+<td align="right">-13.65</td>
+</tr>
+<tr class="even">
+<td align="left">Area: BS, AI, EGOA, WGOA, CGOA</td>
+<td align="right">22535</td>
+<td align="right">8451</td>
+<td align="right">-27.27</td>
+</tr>
+<tr class="odd">
+<td align="left">Gear recovery: 901, 902</td>
+<td align="right">19214</td>
+<td align="right">3321</td>
+<td align="right">-14.74</td>
+</tr>
+<tr class="even">
+<td align="left">Exclude survey recoveries</td>
+<td align="right">16805</td>
+<td align="right">2409</td>
+<td align="right">-12.54</td>
+</tr>
+<tr class="odd">
+<td align="left">Release code: 623, 901, 902, 915</td>
+<td align="right">13267</td>
+<td align="right">3538</td>
+<td align="right">-21.05</td>
+</tr>
+<tr class="even">
+<td align="left">Release depth &gt; 150</td>
+<td align="right">10850</td>
+<td align="right">2417</td>
+<td align="right">-18.22</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:releasetables">Table 7.2: </span>Tag releases dropped during grooming.</caption>
+<colgroup>
+<col width="46%" />
+<col width="9%" />
+<col width="21%" />
+<col width="22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">rule</th>
+<th align="right">events</th>
+<th align="right">events_removed</th>
+<th align="right">relative_events</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Init</td>
+<td align="right">395146</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">Duplicated recovery id</td>
+<td align="right">390768</td>
+<td align="right">4378</td>
+<td align="right">-1.11</td>
+</tr>
+<tr class="odd">
+<td align="left">NA lat and long</td>
+<td align="right">390767</td>
+<td align="right">1</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">Tag type: AB, BK, JU, SA, SB</td>
+<td align="right">337603</td>
+<td align="right">53164</td>
+<td align="right">-13.61</td>
+</tr>
+<tr class="odd">
+<td align="left">Area: BS, AI, EGOA, WGOA, CGOA</td>
+<td align="right">276427</td>
+<td align="right">61176</td>
+<td align="right">-18.12</td>
+</tr>
+<tr class="even">
+<td align="left">Release code: 623, 901, 902, 915</td>
+<td align="right">241525</td>
+<td align="right">34902</td>
+<td align="right">-12.63</td>
+</tr>
+<tr class="odd">
+<td align="left">Release depth &gt; 150</td>
+<td align="right">202563</td>
+<td align="right">38962</td>
+<td align="right">-16.13</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="exploratory-analysis-of-the-tag-data" class="section level2 unnumbered hasAnchor">
 <h2>Exploratory analysis of the tag data<a href="tagdata.html#exploratory-analysis-of-the-tag-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Figure <a href="tagdata.html#fig:TagReleases">7.1</a> shows the spatial distribution of both releases and recaptures, which both have fairly broad spatial distributions which is a good attribute. Figure <a href="tagdata.html#fig:recoveriebygear">7.2</a> shows the number of recoveries by gear method and year, this highlights a major drop off in recoveries from the Longline gear with no other gear has picked up in. This will have to be discussed with the wider team. In particular, what years to consider this data to be informative.</p>
