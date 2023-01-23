@@ -4,6 +4,21 @@ Since 1972 there have been approximately 400 000 sablefish tagged in Alaska wate
 
 Historical publications investigating movement of Alaskan sablefish include @heifetz1991movement, @hanselman2015move
 
+
+## Data grooming {-}
+
+
+```{r recoverytables, echo = F, eval = 'asis'}
+recovery_table = readRDS(file = file.path("Data", "RecoveryGrooming.RDS"))
+kable(recovery_table[,c("rule","events","events_removed","relative_events")], caption = "Tag recoveries dropped during grooming.")
+```
+
+```{r releasetables, echo = F, eval = 'asis'}
+release_table = readRDS(file = file.path("Data", "ReleaseGrooming.RDS"))
+kable(release_table[,c("rule","events","events_removed","relative_events")], caption = "Tag releases dropped during grooming.")
+```
+
+
 ## Exploratory analysis of the tag data {-}
 
 Figure \@ref(fig:TagReleases) shows the spatial distribution of both releases and recaptures, which both have fairly broad spatial distributions which is a good attribute. Figure \@ref(fig:recoveriebygear) shows the number of recoveries by gear method and year, this highlights a major drop off in recoveries from the Longline gear with no other gear has picked up in. This will have to be discussed with the wider team. In particular, what years to consider this data to be informative. 
