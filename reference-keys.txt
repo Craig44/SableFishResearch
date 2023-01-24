@@ -38,6 +38,7 @@ fig:TagRecoveriesOutsideRegion
 fig:EmpiricalRecoveries
 fig:TagByReleaseYear
 fig:RelativeTagByReleaseYear
+fig:TagReleasessimplePrediction
 fig:TagDataByMonth
 fig:KMtravelled
 fig:popestimateslincolnpeterson
