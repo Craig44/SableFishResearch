@@ -59,6 +59,30 @@ include_graphics(file.path("Figures", "TagData","absolute_releases_and_recoverie
 include_graphics(file.path("Figures", "TagData","relative_releases_and_recoveries.png"))
 ```
 
+## Single area recovery model {-}
+To get an idea regarding tag-mixing and expected recoveries we developed a simple recovery model that was loosely based on Fs and Ms assumed in the sablefish assessment. When we initially run the spatial model with the tagging data there was a scaling problem where the model wanted large annual fishing mortality rates. To explore this we focused on the single area model and looked at expected recoveries based on a range of tag-loss, annual tag-shedding and mortality assumptions
+
+Three tag recovery models were explored
+
+- \(\mathcal{M}_1\)
+
+\[ \widehat{N}^{k}_y = \sum_a  T^k_a \left(\exp{-Z_{a}}\right)^y \frac{F_{a}}{Z_{a}} (1 - e^{-Z_{a}})\]
+
+- \(\mathcal{M}_2\)
+
+\[ \widehat{N}^{k}_y = \sum_a  T^k_a exp(-M_{tag}) \left(\exp{-Z_{a}}\right)^y \frac{F_{a}}{Z_{a}} (1 - e^{-Z_{a}})\]
+
+
+- \(\mathcal{M}_2\)
+
+\[ \widehat{N}^{k}_y = \sum_a T^k_a exp(-M_{tag}) \left( \exp{-(\tau + Z_{a})}\right)^y \frac{F_{a}}{Z_{a}} (1 - e^{-Z_{a}})\]
+
+where, \(T^k_a\) numbers of tag releases, released in year \(k\) of age \(a\), \(y\) denotes years at liberty, \(F_{a} = 0.078 * S_a \), where \(S_a\) is logisitc selectivity with \(a_{50} = 5\) and \(ato_{95} = 2\) (the value 0.078 was the mean fishing mortality from the 2021 assessment), \(Z_a = F_a + 0.1\), \(M_{tag}\) is the initial tag induced mortality (=0.1), and \(\tau\) is the annual tag-shedding rate (=0.02). This ignores sex and assumes constant F over years, which is obviously incorrect. However, the purpose was to help identify release years that may be problematic due to mixing or perhaps higher tag induced mortality than initially assumed.
+
+
+```{r TagReleasessimplePrediction, out.width = '100%', fig.height= 8, fig.cap="Observed and predicted recoveries from a simple model exploration. The a subscript in the model labels assumes tag-reporting of 60%, the absence of the subscript assume 100% tag reporting.", echo = F, eval = T}
+include_graphics(file.path("Figures", "1-Area","releases_after_year_at_liberty_F_0.1.png"))
+```
 
 ## Lincoln-Peterson estimator {-}
 
