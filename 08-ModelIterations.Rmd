@@ -58,4 +58,42 @@ include_graphics(file.path("Figures", "Application" ,"1-Area","1977_start","comp
 An additional iteration was run for the single area model that included tag-recovery observations to see what would happen. 
 
 
+```{r compareASSBiowithTag, out.width = '60%', fig.height= 5, fig.cap="Estimated SSBs when tag data is included and excluded.", echo = F, eval = T}
+include_graphics(file.path("Figures", "Application" ,"1-Area","include_tag_data","SSB_w_wo_tag.png"))
+```
 
+
+
+## Three area model {-}
+
+
+```{r movement3AreaModel, out.width = '60%', fig.height= 4, fig.cap="Estimated movement in the three area model", echo = F, eval = T}
+include_graphics(file.path("Figures", "Application" ,"3-Area","TagData_01","Est_movement.png"))
+```
+
+
+
+```{r ssb3AreaModel, out.width = '60%', fig.height= 4, fig.cap="Estimated SSB in the three area model", echo = F, eval = T}
+include_graphics(file.path("Figures", "Application" ,"3-Area","TagData_01","regional_ssb.png"))
+```
+
+## Five area model {-}
+
+
+```{r movement5AreaModel, out.width = '60%', fig.height= 4, fig.cap="Estimated movement in the three area model", echo = F, eval = T}
+include_graphics(file.path("Figures", "Application" ,"5-Area","Model_01","Est_movement.png"))
+```
+
+
+
+```{r ssb5AreaModel, out.width = '60%', fig.height= 4, fig.cap="Estimated SSB in the three area model", echo = F, eval = T}
+include_graphics(file.path("Figures", "Application" ,"5-Area","Model_01","regional_ssb.png"))
+```
+
+
+## Comparison {-}
+
+
+```{r AllSSBs, out.width = '60%', fig.height= 4, fig.cap="Estimated SSB across initial models", echo = F, eval = T}
+include_graphics(file.path("Figures", "Application" ,"Comparison","FirstAttempt","SSB_summarise_over_models.png"))
+```
