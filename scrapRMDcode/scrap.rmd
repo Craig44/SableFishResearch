@@ -1,0 +1,16 @@
+spare Rmarkdown comments
+
+Recent movement studies on Sablefish i.e., @hanselman2015move have highlighted the dynamic nature of Sablefish movement.
+
+
+@francis1988maximum
+
+or 
+
+@francis1988growth
+
+
+
+
+
+"The average length of an age-1 juvenile sablefish tagged in southeast Alaska is 31- 35 cm. Because of the known-age (age-1) of juvenile sablefish, these tagging studies are especially unique and provide valuable information that differs from the tagging of adults on the longline survey" Katy Echave tag documentation
