@@ -62,6 +62,12 @@ fig:compareASSSSB
 fig:compareASSFs
 fig:compareASSRec
 fig:compareASSBio
+fig:compareASSBiowithTag
+fig:movement3AreaModel
+fig:ssb3AreaModel
+fig:movement5AreaModel
+fig:ssb5AreaModel
+fig:AllSSBs
 tab:overdispersiontable
 fig:taglikesummaryplotsRE
 fig:taglikesummaryplotsEst
@@ -97,6 +103,7 @@ observerdata
 tagdata
 InitialModelSetup
 modelIterations
+nextsteps
 taglike
 growth
 refpoints
