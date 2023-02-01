@@ -1,4 +1,14 @@
 # Next steps {#nextsteps}
 
-- Dirichlet Multinomial likelihood for compositional data
+- Apply the Dirichlet-Multinomial likelihood for compositional data
+- Start model 1990
+- Generate reference points and ABCs
+
+
+
+
+## Simulation Scenarios {-}
+
+
+- What effect loosing early time-periods has on the assessment advice. The spatial models started much later in the time-series than when significant exploitation occured, which is a common issue with spatial models due to historical data not haveing spatial resolution to be used. This early period coincides with the largest removals in the time-series which is thought to be valuable to observe for observering contrast and helping estimate stock production [@hilborn1979comparison] this claim is actually countered by @magnusson2007makes.
 

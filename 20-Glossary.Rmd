@@ -10,8 +10,26 @@
 +----------------------------+-----------------------------------------------------------------------------+
 | EM                         | Estimation model
 +----------------------------+-----------------------------------------------------------------------------+
-| AF                         | Age frequency
+| AF                         | Age frequency, numbers or proportions in each age cohort
 +----------------------------+-----------------------------------------------------------------------------+
-| LF                         | Length frequency
+| LF                         | Length frequency, numbers or proportions in each model length bin
 +----------------------------+-----------------------------------------------------------------------------+
+| ABC                        | Acceptable Biological Catch
++----------------------------+-----------------------------------------------------------------------------+
+| IFQ                        | Individual Fishing Quotas
++----------------------------+-----------------------------------------------------------------------------+
+| NPFMC                      | North Pacific Fishery Management Council
++----------------------------+-----------------------------------------------------------------------------+
+| metapopulation             | A metapopulation as a system of discrete local populations, each of which 
+|                            | determines its own internal dynamics to a large extent, but with a degree of
+|                            | identifiable and nontrivial demographic influence from other local 
+|                            | populations through dispersal of individuals [@kritzer2004metapopulation]
++----------------------------+-----------------------------------------------------------------------------+
+| Connectivity               |Movement of individuals among geographic areas at any life stage (e.g., larval
+|                            | or adult).
++----------------------------+-----------------------------------------------------------------------------+
+| Panmictic                  | A single, unit population with no spatial heterogeneity
++----------------------------+-----------------------------------------------------------------------------+
+
+
 

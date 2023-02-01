@@ -17,24 +17,33 @@ link-citations: yes
 
 # Overview
 
-This Gitbook documents my/our research on Alaskan sablefish (*Anoplopoma fimbria*). The objective is to develop and explore a spatially explicit stock assessment model for the Alaskan sablefish stock. However, there will be many topics that I will touch on. This book outlines my research and thinking along with some rabbit holes I entered (and hopefully returned) during my post-doctoral research. The following section outlines chapters contained in this document.
+This Gitbook documents my/our research on Alaskan sablefish (*Anoplopoma fimbria*). The objective is to develop and explore a spatially explicit stock assessment model for the Alaskan sablefish stock. However, there will be many topics that I will touch on that are common stock assessment considerations. This book outlines my research and thinking whilst diving down some rabbit holes (and hopefully returning), during my post-doctoral research. The following section outlines chapters contained in this document.
 
 
 ## Gitbook outline  {-}
-- Chapter \@ref(objectives) outlines a list of objectives that we have set or accomplished during this research project. Some of our research cannot be presented in this document due to the confidentiality reasons. However, this checklist should include all tasks during the project
+- Chapter \@ref(objectives) outlines a list of objectives that we have set or accomplished during this research project. Some of our research cannot be presented in this document due to data-confidentiality concerns However, this checklist should include all tasks during the project
 
-- Chapter \@ref(modeldescription) documents the current stock assessment model and assumptions (work in progress). This is the first step of the project, with the purpose of helping me understand the data and important process dynamics assumed in the current assessment. Most models used in this research is written in TMB [@kristensen2015tmb], many of these are available in the [`SpatialSablefishAssessment` R package](https://github.com/Craig44/SpatialSablefishAssessment).
+- Chapter \@ref(modeldescription) documents the current stock assessment model and assumptions (work in progress). This is the first step of the project, with the purpose of helping me understand the data and important process dynamics assumed in the current assessment. Most models applied in this research were written in TMB [@kristensen2015tmb], many of the assessemtn models are available in the [`SpatialSablefishAssessment` R package](https://github.com/Craig44/SpatialSablefishAssessment), which was developed during this research.
 
 - Chapter \@ref(spatialmodeldescription) documents a generalized spatial assessment model used as both an OM and EM during simulations.
 
 
-- Chapter \@ref(surveydata) describes, characterizes and explores the survey longline data available for the the assessment.
+- Chapter \@ref(surveydata) describes, characterizes and explores the survey longline data available for the assessment.
 
 
 - Chapter \@ref(observerdata) describes, characterizes and explores fishery dependent data, which includes reported catch (log-book data) and observer records.
 
 
 - Chapter \@ref(tagdata) describes the tagging data and how it can be used within a spatial stock assessment model but also used in a panmictic model for informing population dynamics such as growth.
+
+
+
+- Chapter \@ref(InitialModelSetup) outlines diagnostics and decisions that were made when considering the spatial resolution of possible models.
+
+- Chapter \@ref(modelIterations) displays outputs from preliminary spatial models under development.
+
+
+- Chapter \@ref(modelIterations) displays outputs from preliminary spatial models under development.
 
 
 - Chapter \@ref(taglike) describes different tag likelihoods that I considered in the spatial model and does a simple simulation estimating annual movement rates with the different likelihoods 

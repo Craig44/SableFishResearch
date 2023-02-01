@@ -8,8 +8,12 @@
 - [x]  Develop a spatially explicit estimation model in TMB that generalizes the current assessment model. This requires a lot of thought, especially how we want to integrate the tagging data (Chapter \@ref(tagdata)). Self test has been complete without tagging data.
 - [x]  Generate observation error values for composition data. either boostrap or use SE methods
 - [ ]  ~~Calculate mean length at age for each year - perhaps use the growth model, but this may be double using some of the datasets? This is an interesting idea cause if we take the tag data for example it would be used to estimate mean length at age just using increment and time at liberty, where as when it is internally used in the model it would be using age-frequency to estimate ontogenetic movement.~~ I decided to default to the current assessment length at age and mean length assumptions
-- [ ]  Outline key model decisions based on data exploration (Chapter \@ref(InitialModelSetup))
-- [ ]  Display initial model runs
-- [ ]  Consider descibe data-weighting methods
+
+- [x]  Outline key model decisions based on data exploration (Chapter \@ref(InitialModelSetup))
+- [x]  Display initial model runs (Chapter \@ref(modelIterations))
+- [x]  Develop projections and reference point calculations for spatial models 
+- [ ]  Develop summary diagnostics to better identify model misfits summarise over dimensions
+- [ ]  Start running model permutations and conducting model comparisons
+
 
 

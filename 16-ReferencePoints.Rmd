@@ -17,4 +17,43 @@ Most of my experience with reference points are spawning biomass related i.e., \
 
 
 
+## Spatial reference points {-}
+
+One of the challenges that we stumbled across (we are not the first) is how specify reference points in spatially explicit models. This initial section is an attempt to summaries some of the approaches described and implemented in the literature.
+
+
+### summarise @kritzer2004metapopulation {-}
+
+More of a review paper on spatial populations descriptions i.e., closed spatial populations vs meta-populations vs patchy population
+
+
+
+### summarise @goethel2017accounting {-}
+
+So they used an OM with given life-histories and spatial population assumptions to find reference points, which were regional and fleet specific? Ask Dan about this 
+
+"Model inputs were used to simulate population dynamics forward through time until equilibrium was reached. An iterative search algorithm was implemented that ran the model across combinations of fishing mortalities (according to a defined step size for each fleet and area) to find the desired BRP."
+
+
+Was this deterministic recruitment?
+
+
+### summarise @kapur2021equilibrium {-}
+
+In this paper they show that a spatial model with Beverton-holt stock recruitment curve and both global and regional stock recruit assumptions can have a closed form MSY calculation. The benefit to this over other methods which require running a model to equilibrium is computation and you get estimates of uncertainty.
+
+
+However, the approach proposed here was "solved for as part of an optimization routine" which doesn't seem that much more easy to implement in a software, unless you do what Dana does in the current sablefish assessment and add reference points as estimated parameters with penalties.
+
+### summarise @fenske2022implications {-}
+
+"A spatial spawner per recruit (SPR) model was used to estimate the biological reference points \(F_{40,r}\) and \(B_{40,r}\) for each region."
+
+
+### summarise @reuchlin2016spatial {-}
+
+They propose using spatial indicator based on High-Density Areas (HDA). This is calculated from a wide area survey whereby "HDA \(x\) captures the proportion of total research vessel survey tows in a given year that fall within the highest \(x\%\) quantile of the entire time series’ \(> 0\) kg/tow distribution. Thus, HDA \(x\) is an index for areas containing the highest concentrations of stock biomass."
+
+
+Although a very interesting idea, not really that helpful for me, because this is a survey based reference point rather than a stock assessment based reference point.
 
