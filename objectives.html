@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2023-01-25" />
+<meta name="date" content="2023-02-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -259,7 +259,10 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="modelIterations.html"><a href="modelIterations.html#five-area-model"><i class="fa fa-check"></i>Five area model</a></li>
 <li class="chapter" data-level="" data-path="modelIterations.html"><a href="modelIterations.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="nextsteps.html"><a href="nextsteps.html"><i class="fa fa-check"></i><b>10</b> Next steps</a></li>
+<li class="chapter" data-level="10" data-path="nextsteps.html"><a href="nextsteps.html"><i class="fa fa-check"></i><b>10</b> Next steps</a>
+<ul>
+<li class="chapter" data-level="" data-path="nextsteps.html"><a href="nextsteps.html#simulation-scenarios"><i class="fa fa-check"></i>Simulation Scenarios</a></li>
+</ul></li>
 <li class="chapter" data-level="11" data-path="taglike.html"><a href="taglike.html"><i class="fa fa-check"></i><b>11</b> Tag likelihoods</a>
 <ul>
 <li class="chapter" data-level="" data-path="taglike.html"><a href="taglike.html#likelihoods"><i class="fa fa-check"></i>Likelihoods</a>
@@ -281,7 +284,17 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="growth.html"><a href="growth.html#simulation-test-the-lep-method"><i class="fa fa-check"></i>Simulation test the “LEP” method</a></li>
 <li class="chapter" data-level="" data-path="growth.html"><a href="growth.html#next-steps"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="refpoints.html"><a href="refpoints.html"><i class="fa fa-check"></i><b>13</b> Review/summarise reference points</a></li>
+<li class="chapter" data-level="13" data-path="refpoints.html"><a href="refpoints.html"><i class="fa fa-check"></i><b>13</b> Review/summarise reference points</a>
+<ul>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#spatial-reference-points"><i class="fa fa-check"></i>Spatial reference points</a>
+<ul>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-kritzer2004metapopulation"><i class="fa fa-check"></i>summarise <span class="citation">Kritzer and Sale (2004)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-goethel2017accounting"><i class="fa fa-check"></i>summarise <span class="citation">D. R. Goethel and Berger (2017)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-kapur2021equilibrium"><i class="fa fa-check"></i>summarise <span class="citation">MS Kapur et al. (2021)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-fenske2022implications"><i class="fa fa-check"></i>summarise <span class="citation">Fenske (2022)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-reuchlin2016spatial"><i class="fa fa-check"></i>summarise <span class="citation">Reuchlin-Hugenholtz et al. (2016)</span></a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="14" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>14</b> Sex ratios in age and length composition data</a>
 <ul>
 <li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#a-simple-simulation"><i class="fa fa-check"></i>A simple simulation</a>
@@ -323,16 +336,18 @@ div.csl-indent {
 <div id="objectives" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">Chapter 2</span> A list of objectives/milestones that we have set along the project life<a href="objectives.html#objectives" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <ul class="task-list">
-<li><input type="checkbox" disabled="" checked="" />Translate current stock assessment (Chapter <a href="modeldescription.html#modeldescription">3</a>) from ADMB to TMB. Planned date of completion is December 1 2022</li>
-<li><input type="checkbox" disabled="" /><del>Conduct self test using TMB stock assessment model. Planned date of completion is December 1 2022</del> I decided not to do this because the assessment had too many bespoke likelihoods</li>
-<li><input type="checkbox" disabled="" checked="" />Consider improvements i.e., sex disaggregated composition data or sex ratio observations (look at the rock lobster assessment) including age-length observations or tag-increment observations to estimate growth internally. (Chapter <a href="sexratios.html#sexratios">14</a>)</li>
-<li><input type="checkbox" disabled="" checked="" />Characterize both fishery and survey data to get an idea of data limitations when considering spatially explicit stock assessment model.</li>
-<li><input type="checkbox" disabled="" checked="" />Develop a spatially explicit estimation model in TMB that generalizes the current assessment model. This requires a lot of thought, especially how we want to integrate the tagging data (Chapter <a href="tagdata.html#tagdata">7</a>). Self test has been complete without tagging data.</li>
-<li><input type="checkbox" disabled="" checked="" />Generate observation error values for composition data. either boostrap or use SE methods</li>
-<li><input type="checkbox" disabled="" /><del>Calculate mean length at age for each year - perhaps use the growth model, but this may be double using some of the datasets? This is an interesting idea cause if we take the tag data for example it would be used to estimate mean length at age just using increment and time at liberty, where as when it is internally used in the model it would be using age-frequency to estimate ontogenetic movement.</del> I decided to default to the current assessment length at age and mean length assumptions</li>
-<li><input type="checkbox" disabled="" />Outline key model decisions based on data exploration (Chapter <a href="InitialModelSetup.html#InitialModelSetup">8</a>)</li>
-<li><input type="checkbox" disabled="" />Display initial model runs</li>
-<li><input type="checkbox" disabled="" />Consider descibe data-weighting methods</li>
+<li><p><input type="checkbox" disabled="" checked="" />Translate current stock assessment (Chapter <a href="modeldescription.html#modeldescription">3</a>) from ADMB to TMB. Planned date of completion is December 1 2022</p></li>
+<li><p><input type="checkbox" disabled="" /><del>Conduct self test using TMB stock assessment model. Planned date of completion is December 1 2022</del> I decided not to do this because the assessment had too many bespoke likelihoods</p></li>
+<li><p><input type="checkbox" disabled="" checked="" />Consider improvements i.e., sex disaggregated composition data or sex ratio observations (look at the rock lobster assessment) including age-length observations or tag-increment observations to estimate growth internally. (Chapter <a href="sexratios.html#sexratios">14</a>)</p></li>
+<li><p><input type="checkbox" disabled="" checked="" />Characterize both fishery and survey data to get an idea of data limitations when considering spatially explicit stock assessment model.</p></li>
+<li><p><input type="checkbox" disabled="" checked="" />Develop a spatially explicit estimation model in TMB that generalizes the current assessment model. This requires a lot of thought, especially how we want to integrate the tagging data (Chapter <a href="tagdata.html#tagdata">7</a>). Self test has been complete without tagging data.</p></li>
+<li><p><input type="checkbox" disabled="" checked="" />Generate observation error values for composition data. either boostrap or use SE methods</p></li>
+<li><p><input type="checkbox" disabled="" /><del>Calculate mean length at age for each year - perhaps use the growth model, but this may be double using some of the datasets? This is an interesting idea cause if we take the tag data for example it would be used to estimate mean length at age just using increment and time at liberty, where as when it is internally used in the model it would be using age-frequency to estimate ontogenetic movement.</del> I decided to default to the current assessment length at age and mean length assumptions</p></li>
+<li><p><input type="checkbox" disabled="" checked="" />Outline key model decisions based on data exploration (Chapter <a href="InitialModelSetup.html#InitialModelSetup">8</a>)</p></li>
+<li><p><input type="checkbox" disabled="" checked="" />Display initial model runs (Chapter <a href="modelIterations.html#modelIterations">9</a>)</p></li>
+<li><p><input type="checkbox" disabled="" checked="" />Develop projections and reference point calculations for spatial models</p></li>
+<li><p><input type="checkbox" disabled="" />Develop summary diagnostics to better identify model misfits summarise over dimensions</p></li>
+<li><p><input type="checkbox" disabled="" />Start running model permutations and conducting model comparisons</p></li>
 </ul>
 
 </div>

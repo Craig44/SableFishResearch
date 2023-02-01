@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2023-01-25" />
+<meta name="date" content="2023-02-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -259,7 +259,10 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="modelIterations.html"><a href="modelIterations.html#five-area-model"><i class="fa fa-check"></i>Five area model</a></li>
 <li class="chapter" data-level="" data-path="modelIterations.html"><a href="modelIterations.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="nextsteps.html"><a href="nextsteps.html"><i class="fa fa-check"></i><b>10</b> Next steps</a></li>
+<li class="chapter" data-level="10" data-path="nextsteps.html"><a href="nextsteps.html"><i class="fa fa-check"></i><b>10</b> Next steps</a>
+<ul>
+<li class="chapter" data-level="" data-path="nextsteps.html"><a href="nextsteps.html#simulation-scenarios"><i class="fa fa-check"></i>Simulation Scenarios</a></li>
+</ul></li>
 <li class="chapter" data-level="11" data-path="taglike.html"><a href="taglike.html"><i class="fa fa-check"></i><b>11</b> Tag likelihoods</a>
 <ul>
 <li class="chapter" data-level="" data-path="taglike.html"><a href="taglike.html#likelihoods"><i class="fa fa-check"></i>Likelihoods</a>
@@ -281,7 +284,17 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="growth.html"><a href="growth.html#simulation-test-the-lep-method"><i class="fa fa-check"></i>Simulation test the “LEP” method</a></li>
 <li class="chapter" data-level="" data-path="growth.html"><a href="growth.html#next-steps"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="refpoints.html"><a href="refpoints.html"><i class="fa fa-check"></i><b>13</b> Review/summarise reference points</a></li>
+<li class="chapter" data-level="13" data-path="refpoints.html"><a href="refpoints.html"><i class="fa fa-check"></i><b>13</b> Review/summarise reference points</a>
+<ul>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#spatial-reference-points"><i class="fa fa-check"></i>Spatial reference points</a>
+<ul>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-kritzer2004metapopulation"><i class="fa fa-check"></i>summarise <span class="citation">Kritzer and Sale (2004)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-goethel2017accounting"><i class="fa fa-check"></i>summarise <span class="citation">D. R. Goethel and Berger (2017)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-kapur2021equilibrium"><i class="fa fa-check"></i>summarise <span class="citation">MS Kapur et al. (2021)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-fenske2022implications"><i class="fa fa-check"></i>summarise <span class="citation">Fenske (2022)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-reuchlin2016spatial"><i class="fa fa-check"></i>summarise <span class="citation">Reuchlin-Hugenholtz et al. (2016)</span></a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="14" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>14</b> Sex ratios in age and length composition data</a>
 <ul>
 <li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#a-simple-simulation"><i class="fa fa-check"></i>A simple simulation</a>
@@ -353,7 +366,53 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
+<div id="spatial-reference-points" class="section level2 unnumbered hasAnchor">
+<h2>Spatial reference points<a href="refpoints.html#spatial-reference-points" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>One of the challenges that we stumbled across (we are not the first) is how specify reference points in spatially explicit models. This initial section is an attempt to summaries some of the approaches described and implemented in the literature.</p>
+<div id="summarise-kritzer2004metapopulation" class="section level3 unnumbered hasAnchor">
+<h3>summarise <span class="citation">Kritzer and Sale (<a href="#ref-kritzer2004metapopulation" role="doc-biblioref">2004</a>)</span><a href="refpoints.html#summarise-kritzer2004metapopulation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>More of a review paper on spatial populations descriptions i.e., closed spatial populations vs meta-populations vs patchy population</p>
+</div>
+<div id="summarise-goethel2017accounting" class="section level3 unnumbered hasAnchor">
+<h3>summarise <span class="citation">D. R. Goethel and Berger (<a href="#ref-goethel2017accounting" role="doc-biblioref">2017</a>)</span><a href="refpoints.html#summarise-goethel2017accounting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>So they used an OM with given life-histories and spatial population assumptions to find reference points, which were regional and fleet specific? Ask Dan about this</p>
+<p>“Model inputs were used to simulate population dynamics forward through time until equilibrium was reached. An iterative search algorithm was implemented that ran the model across combinations of fishing mortalities (according to a defined step size for each fleet and area) to find the desired BRP.”</p>
+<p>Was this deterministic recruitment?</p>
+</div>
+<div id="summarise-kapur2021equilibrium" class="section level3 unnumbered hasAnchor">
+<h3>summarise <span class="citation">MS Kapur et al. (<a href="#ref-kapur2021equilibrium" role="doc-biblioref">2021</a>)</span><a href="refpoints.html#summarise-kapur2021equilibrium" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In this paper they show that a spatial model with Beverton-holt stock recruitment curve and both global and regional stock recruit assumptions can have a closed form MSY calculation. The benefit to this over other methods which require running a model to equilibrium is computation and you get estimates of uncertainty.</p>
+<p>However, the approach proposed here was “solved for as part of an optimization routine” which doesn’t seem that much more easy to implement in a software, unless you do what Dana does in the current sablefish assessment and add reference points as estimated parameters with penalties.</p>
+</div>
+<div id="summarise-fenske2022implications" class="section level3 unnumbered hasAnchor">
+<h3>summarise <span class="citation">Fenske (<a href="#ref-fenske2022implications" role="doc-biblioref">2022</a>)</span><a href="refpoints.html#summarise-fenske2022implications" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>“A spatial spawner per recruit (SPR) model was used to estimate the biological reference points <span class="math inline">\(F_{40,r}\)</span> and <span class="math inline">\(B_{40,r}\)</span> for each region.”</p>
+</div>
+<div id="summarise-reuchlin2016spatial" class="section level3 unnumbered hasAnchor">
+<h3>summarise <span class="citation">Reuchlin-Hugenholtz et al. (<a href="#ref-reuchlin2016spatial" role="doc-biblioref">2016</a>)</span><a href="refpoints.html#summarise-reuchlin2016spatial" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>They propose using spatial indicator based on High-Density Areas (HDA). This is calculated from a wide area survey whereby “HDA <span class="math inline">\(x\)</span> captures the proportion of total research vessel survey tows in a given year that fall within the highest <span class="math inline">\(x\%\)</span> quantile of the entire time series’ <span class="math inline">\(&gt; 0\)</span> kg/tow distribution. Thus, HDA <span class="math inline">\(x\)</span> is an index for areas containing the highest concentrations of stock biomass.”</p>
+<p>Although a very interesting idea, not really that helpful for me, because this is a survey based reference point rather than a stock assessment based reference point.</p>
 
+</div>
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-fenske2022implications" class="csl-entry">
+Fenske, Kari Hammarsten. 2022. <span>“Implications of Spatial Population Dynamics for Abundance Estimation and Catch Apportionment of Alaska Sablefish (Anoplopoma Fimbria).”</span> PhD thesis, University of Alaska Fairbanks.
+</div>
+<div id="ref-goethel2017accounting" class="csl-entry">
+Goethel, Daniel R, and Aaron M Berger. 2017. <span>“Accounting for Spatial Complexities in the Calculation of Biological Reference Points: Effects of Misdiagnosing Population Structure for Stock Status Indicators.”</span> <em>Canadian Journal of Fisheries and Aquatic Sciences</em> 74 (11): 1878–94.
+</div>
+<div id="ref-kapur2021equilibrium" class="csl-entry">
+Kapur, MS, MC Siple, M Olmos, KM Privitera-Johnson, G Adams, J Best, C Castillo-Jordan, et al. 2021. <span>“Equilibrium Reference Point Calculations for the Next Generation of Spatial Assessments.”</span> <em>Fisheries Research</em> 244: 106132.
+</div>
+<div id="ref-kritzer2004metapopulation" class="csl-entry">
+Kritzer, Jacob P, and Peter F Sale. 2004. <span>“Metapopulation Ecology in the Sea: From Levins’ Model to Marine Ecology and Fisheries Science.”</span> <em>Fish and Fisheries</em> 5 (2): 131–40.
+</div>
+<div id="ref-reuchlin2016spatial" class="csl-entry">
+Reuchlin-Hugenholtz, Emilie, Nancy L Shackell, Jeffrey A Hutchings, and Handling editor: Valerio Bartolino. 2016. <span>“Spatial Reference Points for Groundfish.”</span> <em>ICES Journal of Marine Science</em> 73 (10): 2468–78.
+</div>
 </div>
             </section>
 

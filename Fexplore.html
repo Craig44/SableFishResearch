@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2023-01-25" />
+<meta name="date" content="2023-02-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -259,7 +259,10 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="modelIterations.html"><a href="modelIterations.html#five-area-model"><i class="fa fa-check"></i>Five area model</a></li>
 <li class="chapter" data-level="" data-path="modelIterations.html"><a href="modelIterations.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="nextsteps.html"><a href="nextsteps.html"><i class="fa fa-check"></i><b>10</b> Next steps</a></li>
+<li class="chapter" data-level="10" data-path="nextsteps.html"><a href="nextsteps.html"><i class="fa fa-check"></i><b>10</b> Next steps</a>
+<ul>
+<li class="chapter" data-level="" data-path="nextsteps.html"><a href="nextsteps.html#simulation-scenarios"><i class="fa fa-check"></i>Simulation Scenarios</a></li>
+</ul></li>
 <li class="chapter" data-level="11" data-path="taglike.html"><a href="taglike.html"><i class="fa fa-check"></i><b>11</b> Tag likelihoods</a>
 <ul>
 <li class="chapter" data-level="" data-path="taglike.html"><a href="taglike.html#likelihoods"><i class="fa fa-check"></i>Likelihoods</a>
@@ -281,7 +284,17 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="growth.html"><a href="growth.html#simulation-test-the-lep-method"><i class="fa fa-check"></i>Simulation test the “LEP” method</a></li>
 <li class="chapter" data-level="" data-path="growth.html"><a href="growth.html#next-steps"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="refpoints.html"><a href="refpoints.html"><i class="fa fa-check"></i><b>13</b> Review/summarise reference points</a></li>
+<li class="chapter" data-level="13" data-path="refpoints.html"><a href="refpoints.html"><i class="fa fa-check"></i><b>13</b> Review/summarise reference points</a>
+<ul>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#spatial-reference-points"><i class="fa fa-check"></i>Spatial reference points</a>
+<ul>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-kritzer2004metapopulation"><i class="fa fa-check"></i>summarise <span class="citation">Kritzer and Sale (2004)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-goethel2017accounting"><i class="fa fa-check"></i>summarise <span class="citation">D. R. Goethel and Berger (2017)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-kapur2021equilibrium"><i class="fa fa-check"></i>summarise <span class="citation">MS Kapur et al. (2021)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-fenske2022implications"><i class="fa fa-check"></i>summarise <span class="citation">Fenske (2022)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-reuchlin2016spatial"><i class="fa fa-check"></i>summarise <span class="citation">Reuchlin-Hugenholtz et al. (2016)</span></a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="14" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>14</b> Sex ratios in age and length composition data</a>
 <ul>
 <li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#a-simple-simulation"><i class="fa fa-check"></i>A simple simulation</a>
@@ -438,20 +451,20 @@ Figure 15.1: Illustration of how mortality is applied to an age cohort continuou
 <span id="cb27-2"><a href="Fexplore.html#cb27-2" aria-hidden="true" tabindex="-1"></a>hybrid_F_bench <span class="ot">=</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_hybrid_F, <span class="at">n =</span> <span class="dv">1000</span>)</span>
 <span id="cb27-3"><a href="Fexplore.html#cb27-3" aria-hidden="true" tabindex="-1"></a>est_F_bench</span></code></pre></div>
 <pre><code>##                     elapsed
-## template.likelihood   0.792
-## template.gradient     1.555</code></pre>
+## template.likelihood   0.796
+## template.gradient     1.560</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="Fexplore.html#cb29-1" aria-hidden="true" tabindex="-1"></a>hybrid_F_bench</span></code></pre></div>
 <pre><code>##                     elapsed
 ## template.likelihood   2.063
-## template.gradient     4.240</code></pre>
+## template.gradient     4.232</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="Fexplore.html#cb31-1" aria-hidden="true" tabindex="-1"></a>ben_est_F <span class="ot">&lt;-</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_est_F, <span class="at">n=</span><span class="dv">20</span>,<span class="at">expr=</span><span class="fu">expression</span>(<span class="fu">do.call</span>(<span class="st">&quot;optim&quot;</span>,obj)))</span>
 <span id="cb31-2"><a href="Fexplore.html#cb31-2" aria-hidden="true" tabindex="-1"></a>ben_hybrid_F <span class="ot">&lt;-</span> <span class="fu">benchmark</span>(<span class="at">obj =</span> est_model_hybrid_F, <span class="at">n=</span><span class="dv">20</span>,<span class="at">expr=</span><span class="fu">expression</span>(<span class="fu">do.call</span>(<span class="st">&quot;optim&quot;</span>,obj)))</span>
 <span id="cb31-3"><a href="Fexplore.html#cb31-3" aria-hidden="true" tabindex="-1"></a>ben_est_F</span></code></pre></div>
 <pre><code>##                       elapsed
-## do.call(&quot;optim&quot;, obj)  13.994</code></pre>
+## do.call(&quot;optim&quot;, obj)  14.026</code></pre>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="Fexplore.html#cb33-1" aria-hidden="true" tabindex="-1"></a>ben_hybrid_F</span></code></pre></div>
 <pre><code>##                       elapsed
-## do.call(&quot;optim&quot;, obj)  11.682</code></pre>
+## do.call(&quot;optim&quot;, obj)   13.38</code></pre>
 <p>These results have highlighted the following</p>
 <ul>
 <li>Both the Free <span class="math inline">\(F\)</span> and hybrid estimate very similar model quantities i.e., SSB’s and F’s</li>

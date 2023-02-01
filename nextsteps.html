@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2023-01-25" />
+<meta name="date" content="2023-02-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -259,7 +259,10 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="modelIterations.html"><a href="modelIterations.html#five-area-model"><i class="fa fa-check"></i>Five area model</a></li>
 <li class="chapter" data-level="" data-path="modelIterations.html"><a href="modelIterations.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="nextsteps.html"><a href="nextsteps.html"><i class="fa fa-check"></i><b>10</b> Next steps</a></li>
+<li class="chapter" data-level="10" data-path="nextsteps.html"><a href="nextsteps.html"><i class="fa fa-check"></i><b>10</b> Next steps</a>
+<ul>
+<li class="chapter" data-level="" data-path="nextsteps.html"><a href="nextsteps.html#simulation-scenarios"><i class="fa fa-check"></i>Simulation Scenarios</a></li>
+</ul></li>
 <li class="chapter" data-level="11" data-path="taglike.html"><a href="taglike.html"><i class="fa fa-check"></i><b>11</b> Tag likelihoods</a>
 <ul>
 <li class="chapter" data-level="" data-path="taglike.html"><a href="taglike.html#likelihoods"><i class="fa fa-check"></i>Likelihoods</a>
@@ -281,7 +284,17 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="growth.html"><a href="growth.html#simulation-test-the-lep-method"><i class="fa fa-check"></i>Simulation test the “LEP” method</a></li>
 <li class="chapter" data-level="" data-path="growth.html"><a href="growth.html#next-steps"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="refpoints.html"><a href="refpoints.html"><i class="fa fa-check"></i><b>13</b> Review/summarise reference points</a></li>
+<li class="chapter" data-level="13" data-path="refpoints.html"><a href="refpoints.html"><i class="fa fa-check"></i><b>13</b> Review/summarise reference points</a>
+<ul>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#spatial-reference-points"><i class="fa fa-check"></i>Spatial reference points</a>
+<ul>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-kritzer2004metapopulation"><i class="fa fa-check"></i>summarise <span class="citation">Kritzer and Sale (2004)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-goethel2017accounting"><i class="fa fa-check"></i>summarise <span class="citation">D. R. Goethel and Berger (2017)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-kapur2021equilibrium"><i class="fa fa-check"></i>summarise <span class="citation">MS Kapur et al. (2021)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-fenske2022implications"><i class="fa fa-check"></i>summarise <span class="citation">Fenske (2022)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-reuchlin2016spatial"><i class="fa fa-check"></i>summarise <span class="citation">Reuchlin-Hugenholtz et al. (2016)</span></a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="14" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>14</b> Sex ratios in age and length composition data</a>
 <ul>
 <li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#a-simple-simulation"><i class="fa fa-check"></i>A simple simulation</a>
@@ -323,9 +336,26 @@ div.csl-indent {
 <div id="nextsteps" class="section level1 hasAnchor" number="10">
 <h1><span class="header-section-number">Chapter 10</span> Next steps<a href="nextsteps.html#nextsteps" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <ul>
-<li>Dirichlet Multinomial likelihood for compositional data</li>
+<li>Apply the Dirichlet-Multinomial likelihood for compositional data</li>
+<li>Start model 1990</li>
+<li>Generate reference points and ABCs</li>
+</ul>
+<div id="simulation-scenarios" class="section level2 unnumbered hasAnchor">
+<h2>Simulation Scenarios<a href="nextsteps.html#simulation-scenarios" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>What effect loosing early time-periods has on the assessment advice. The spatial models started much later in the time-series than when significant exploitation occured, which is a common issue with spatial models due to historical data not haveing spatial resolution to be used. This early period coincides with the largest removals in the time-series which is thought to be valuable to observe for observering contrast and helping estimate stock production <span class="citation">(<a href="#ref-hilborn1979comparison" role="doc-biblioref">Hilborn 1979</a>)</span> this claim is actually countered by <span class="citation">Magnusson and Hilborn (<a href="#ref-magnusson2007makes" role="doc-biblioref">2007</a>)</span>.</li>
 </ul>
 
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-hilborn1979comparison" class="csl-entry">
+Hilborn, Ray. 1979. <span>“Comparison of Fisheries Control Systems That Utilize Catch and Effort Data.”</span> <em>Journal of the Fisheries Board of Canada</em> 36 (12): 1477–89.
+</div>
+<div id="ref-magnusson2007makes" class="csl-entry">
+Magnusson, Arni, and Ray Hilborn. 2007. <span>“What Makes Fisheries Data Informative?”</span> <em>Fish and Fisheries</em> 8 (4): 337–58.
+</div>
 </div>
             </section>
 
