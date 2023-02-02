@@ -69,6 +69,12 @@ fig:movement5AreaModel
 fig:ssb5AreaModel
 fig:ssb5AreaReweighting
 fig:AllSSBs
+fig:fiveAreaSSBS
+fig:fiveAreaDepletion
+fig:fiveAreaRecruitment
+fig:fiveAreaFixedGearF
+fig:fiveAreaTrawlGearF
+fig:fiveAreaSelectivity
 tab:overdispersiontable
 fig:taglikesummaryplotsRE
 fig:taglikesummaryplotsEst
@@ -104,6 +110,7 @@ observerdata
 tagdata
 InitialModelSetup
 modelIterations
+FiveAreaModel
 nextsteps
 taglike
 growth

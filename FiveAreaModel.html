@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 17 Initialising the plus group in spatial models | Alaskan sablefish research</title>
+  <title>Chapter 10 Five area model permutations | Alaskan sablefish research</title>
   <meta name="description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 17 Initialising the plus group in spatial models | Alaskan sablefish research" />
+  <meta property="og:title" content="Chapter 10 Five area model permutations | Alaskan sablefish research" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 17 Initialising the plus group in spatial models | Alaskan sablefish research" />
+  <meta name="twitter:title" content="Chapter 10 Five area model permutations | Alaskan sablefish research" />
   
   <meta name="twitter:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="Fexplore.html"/>
-<link rel="next" href="glossary.html"/>
+<link rel="prev" href="modelIterations.html"/>
+<link rel="next" href="nextsteps.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -337,119 +337,51 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="spatialInit" class="section level1 hasAnchor" number="17">
-<h1><span class="header-section-number">Chapter 17</span> Initialising the plus group in spatial models<a href="spatialInit.html#spatialInit" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>In single area age-structured models, the plus age group is calculated using a solution to an infinite geometric series. This solution for an age-structured model is used to derive initial (equilibrium) state of the partition. The partition consists of a vector of numbers at age for each category denoted by <span class="math inline">\(\textbf{N}\)</span>;
-<span class="math display">\[
-\textbf{N} = (N_1, N_2, ... , N_{a_+})^T
-\]</span></p>
-<p>where <span class="math inline">\(N_{a_+}\)</span> denotes the numbers in the plus group. The numbers at age for a single area population with no density-dependent processes is derived as,</p>
-<p><span class="math display">\[
-N_a = \left\{ \begin{array}{lcl}
-    R_0 &amp; \mbox{for} &amp; a = 1
-    \\
-    R_0e^{-aM}  &amp; \mbox{for} &amp; 1 &lt; a &lt; a_+
-    \\
-    R_0e^{\sum_{i = a_+}^\infty-iM} &amp; \mbox{for} &amp; a = a_+
-\end{array}\right.
-\]</span></p>
-<p>Initialization for ages <span class="math inline">\(1 \leq a &lt; a_+\)</span> is easy, all you need to do is iterate the model <span class="math inline">\(a_+ - 1\)</span> times and the age classes will be populated with there respected initial numbers at age. However, for the plus group (<span class="math inline">\(N_{a_+}\)</span>) the solution is needed.</p>
-<p>Although the plus group may start at let say 30 years old, it actually represents 30 and 31 and 32 up to some biological plausible value lets say 130, but mathematically can be thought of as <span class="math inline">\(\infty\)</span>. The plus group is modeled for practical reasons and care should be given when choosing the cut-off maximum age. The plus group is an infinite geometric series that is defined by the common ratio <span class="math inline">\(r_{a_+} = M\)</span>.</p>
-<p><span class="math display">\[\begin{align}
-N_{a_+} &amp;= R_0e^{\sum_{a = a_+}^\infty-aM}\\
-        &amp;= R_0 \frac{e^{M - a_+M}}{1 - e^{-M}}
-\end{align}\]</span></p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="spatialInit.html#cb35-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">=</span> <span class="fl">0.1</span></span>
-<span id="cb35-2"><a href="spatialInit.html#cb35-2" aria-hidden="true" tabindex="-1"></a>R0 <span class="ot">=</span> <span class="fl">4e6</span></span>
-<span id="cb35-3"><a href="spatialInit.html#cb35-3" aria-hidden="true" tabindex="-1"></a>plus_group_age <span class="ot">=</span> <span class="dv">30</span></span>
-<span id="cb35-4"><a href="spatialInit.html#cb35-4" aria-hidden="true" tabindex="-1"></a>N_age <span class="ot">=</span> R0 <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M <span class="sc">*</span> <span class="dv">1</span><span class="sc">:</span>plus_group_age)</span>
-<span id="cb35-5"><a href="spatialInit.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="do">## numerically calculate it</span></span>
-<span id="cb35-6"><a href="spatialInit.html#cb35-6" aria-hidden="true" tabindex="-1"></a>N_plus_group <span class="ot">=</span>  <span class="fu">tail</span>(N_age, <span class="at">n =</span> <span class="dv">1</span>)</span>
-<span id="cb35-7"><a href="spatialInit.html#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span>) {</span>
-<span id="cb35-8"><a href="spatialInit.html#cb35-8" aria-hidden="true" tabindex="-1"></a>  N_plus_group <span class="ot">=</span> N_plus_group <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M) <span class="sc">+</span> <span class="fu">tail</span>(N_age, <span class="at">n =</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M)</span>
-<span id="cb35-9"><a href="spatialInit.html#cb35-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb35-10"><a href="spatialInit.html#cb35-10" aria-hidden="true" tabindex="-1"></a>N_plus_group</span></code></pre></div>
-<pre><code>## [1] 1893568</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="spatialInit.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="do">## using the geometric series calculation</span></span>
-<span id="cb37-2"><a href="spatialInit.html#cb37-2" aria-hidden="true" tabindex="-1"></a>R0 <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M <span class="sc">-</span> plus_group_age<span class="sc">*</span>M) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span>M))</span></code></pre></div>
-<pre><code>## [1] 1893568</code></pre>
-<p>The question becomes, how do we calculate this plus group when there is markovian movement? This code shows how the same infinite geometric series solution works for the plus group with movement. Instead of the common ratio being just it also need to account for the movement process. Let <span class="math inline">\(c^r_{a+}\)</span> denote the accumulation of individuals into the plus group in region <span class="math inline">\(r\)</span>. This will be the result of ageing, natural mortality and movement. Then the plus group for that region can be</p>
-<p><span class="math display">\[
-N_{a+, r} = N_{a+ - 1, r} \frac{1}{1 - c^r_{a+}}
-\]</span>
-where, <span class="math inline">\(N_{a+ - 1, r}\)</span> is the numbers at age for the second to last age cohort in the plus group. The following R code shows how this is equivalent to running the annual cycle for 1000 years.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="spatialInit.html#cb39-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">=</span> <span class="fl">0.1</span></span>
-<span id="cb39-2"><a href="spatialInit.html#cb39-2" aria-hidden="true" tabindex="-1"></a>R0 <span class="ot">=</span> <span class="fl">4e6</span></span>
-<span id="cb39-3"><a href="spatialInit.html#cb39-3" aria-hidden="true" tabindex="-1"></a>n_regions <span class="ot">=</span> <span class="dv">3</span></span>
-<span id="cb39-4"><a href="spatialInit.html#cb39-4" aria-hidden="true" tabindex="-1"></a>movement_matrix <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> n_regions, <span class="at">ncol =</span> n_regions);</span>
-<span id="cb39-5"><a href="spatialInit.html#cb39-5" aria-hidden="true" tabindex="-1"></a>movement_matrix[<span class="dv">1</span>,] <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="fl">0.2</span>, <span class="fl">0.1</span>)</span>
-<span id="cb39-6"><a href="spatialInit.html#cb39-6" aria-hidden="true" tabindex="-1"></a>movement_matrix[<span class="dv">2</span>,] <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.6</span>, <span class="fl">0.3</span>)</span>
-<span id="cb39-7"><a href="spatialInit.html#cb39-7" aria-hidden="true" tabindex="-1"></a>movement_matrix[<span class="dv">3</span>,] <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">0.15</span>, <span class="fl">0.05</span>, <span class="fl">0.8</span>)</span>
-<span id="cb39-8"><a href="spatialInit.html#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="do">## rows are &quot;from&quot; cols are &quot;to&quot;</span></span>
-<span id="cb39-9"><a href="spatialInit.html#cb39-9" aria-hidden="true" tabindex="-1"></a>plus_group_age <span class="ot">=</span> <span class="dv">30</span></span>
-<span id="cb39-10"><a href="spatialInit.html#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="do">## partition</span></span>
-<span id="cb39-11"><a href="spatialInit.html#cb39-11" aria-hidden="true" tabindex="-1"></a>N_age <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> n_regions, <span class="at">ncol =</span> plus_group_age)</span>
-<span id="cb39-12"><a href="spatialInit.html#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="do">## initialise with no movement initially</span></span>
-<span id="cb39-13"><a href="spatialInit.html#cb39-13" aria-hidden="true" tabindex="-1"></a>N_age[<span class="dv">1</span>,] <span class="ot">=</span> R0 <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M <span class="sc">*</span> <span class="dv">1</span><span class="sc">:</span>plus_group_age) <span class="do">##</span></span>
-<span id="cb39-14"><a href="spatialInit.html#cb39-14" aria-hidden="true" tabindex="-1"></a>N_age[<span class="dv">2</span>,] <span class="ot">=</span> R0 <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M <span class="sc">*</span> <span class="dv">1</span><span class="sc">:</span>plus_group_age) <span class="do">## </span></span>
-<span id="cb39-15"><a href="spatialInit.html#cb39-15" aria-hidden="true" tabindex="-1"></a>N_age[<span class="dv">3</span>,] <span class="ot">=</span> R0 <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M <span class="sc">*</span> <span class="dv">1</span><span class="sc">:</span>plus_group_age) <span class="do">##</span></span>
-<span id="cb39-16"><a href="spatialInit.html#cb39-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-17"><a href="spatialInit.html#cb39-17" aria-hidden="true" tabindex="-1"></a><span class="do">## apply an annual cycle 10000 times to see what the &quot;initial conditions should be&quot;</span></span>
-<span id="cb39-18"><a href="spatialInit.html#cb39-18" aria-hidden="true" tabindex="-1"></a>N_next_year_age <span class="ot">=</span> N_age</span>
-<span id="cb39-19"><a href="spatialInit.html#cb39-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) {</span>
-<span id="cb39-20"><a href="spatialInit.html#cb39-20" aria-hidden="true" tabindex="-1"></a>  <span class="do">## recruitment</span></span>
-<span id="cb39-21"><a href="spatialInit.html#cb39-21" aria-hidden="true" tabindex="-1"></a>  N_next_year_age[,<span class="dv">1</span>] <span class="ot">=</span> R0 <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M)</span>
-<span id="cb39-22"><a href="spatialInit.html#cb39-22" aria-hidden="true" tabindex="-1"></a>  <span class="do">## ageing and mortality</span></span>
-<span id="cb39-23"><a href="spatialInit.html#cb39-23" aria-hidden="true" tabindex="-1"></a>  N_next_year_age[,<span class="dv">2</span><span class="sc">:</span>plus_group_age] <span class="ot">=</span> N_age[,<span class="dv">1</span><span class="sc">:</span>(plus_group_age <span class="sc">-</span> <span class="dv">1</span>)] <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M)</span>
-<span id="cb39-24"><a href="spatialInit.html#cb39-24" aria-hidden="true" tabindex="-1"></a>  <span class="do">## plus group</span></span>
-<span id="cb39-25"><a href="spatialInit.html#cb39-25" aria-hidden="true" tabindex="-1"></a>  N_next_year_age[,plus_group_age] <span class="ot">=</span> N_next_year_age[,plus_group_age] <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M) <span class="sc">+</span> N_age[,plus_group_age] <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M)</span>
-<span id="cb39-26"><a href="spatialInit.html#cb39-26" aria-hidden="true" tabindex="-1"></a>  <span class="do">## movement</span></span>
-<span id="cb39-27"><a href="spatialInit.html#cb39-27" aria-hidden="true" tabindex="-1"></a>  N_age <span class="ot">=</span> <span class="fu">t</span>(movement_matrix) <span class="sc">%*%</span> N_next_year_age</span>
-<span id="cb39-28"><a href="spatialInit.html#cb39-28" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb39-29"><a href="spatialInit.html#cb39-29" aria-hidden="true" tabindex="-1"></a>iterative_N_age <span class="ot">=</span> N_age</span>
-<span id="cb39-30"><a href="spatialInit.html#cb39-30" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>plus_group_age, N_age[<span class="dv">3</span>,], <span class="at">xlab =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">ylab=</span> <span class="st">&quot;Initial numbers&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,R0<span class="sc">*</span> <span class="fl">1.4</span>), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
-<span id="cb39-31"><a href="spatialInit.html#cb39-31" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="dv">1</span><span class="sc">:</span>plus_group_age, N_age[<span class="dv">2</span>,], <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb39-32"><a href="spatialInit.html#cb39-32" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="dv">1</span><span class="sc">:</span>plus_group_age, N_age[<span class="dv">1</span>,], <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb39-33"><a href="spatialInit.html#cb39-33" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&#39;topright&#39;</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>,<span class="st">&quot;blue&quot;</span>), <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Region 3&quot;</span>, <span class="st">&quot;Region 2&quot;</span>, <span class="st">&quot;Region 1&quot;</span>), <span class="at">lwd =</span> <span class="dv">3</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/spatialcase-1.png" width="672" /></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="spatialInit.html#cb40-1" aria-hidden="true" tabindex="-1"></a>N_age <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> n_regions, <span class="at">ncol =</span> plus_group_age)</span>
-<span id="cb40-2"><a href="spatialInit.html#cb40-2" aria-hidden="true" tabindex="-1"></a>update_N_age <span class="ot">=</span> N_age</span>
-<span id="cb40-3"><a href="spatialInit.html#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(plus_group_age)) {</span>
-<span id="cb40-4"><a href="spatialInit.html#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># recruitment</span></span>
-<span id="cb40-5"><a href="spatialInit.html#cb40-5" aria-hidden="true" tabindex="-1"></a>  update_N_age[,<span class="dv">1</span>] <span class="ot">=</span> R0 <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M)</span>
-<span id="cb40-6"><a href="spatialInit.html#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ageing and mortality</span></span>
-<span id="cb40-7"><a href="spatialInit.html#cb40-7" aria-hidden="true" tabindex="-1"></a>  update_N_age[,<span class="dv">2</span><span class="sc">:</span>plus_group_age] <span class="ot">=</span> N_age[,<span class="dv">1</span><span class="sc">:</span>(plus_group_age <span class="sc">-</span> <span class="dv">1</span>)] <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M)</span>
-<span id="cb40-8"><a href="spatialInit.html#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plus group</span></span>
-<span id="cb40-9"><a href="spatialInit.html#cb40-9" aria-hidden="true" tabindex="-1"></a>  update_N_age[,plus_group_age] <span class="ot">=</span> update_N_age[,plus_group_age] <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M) <span class="sc">+</span> N_age[,plus_group_age] <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M)</span>
-<span id="cb40-10"><a href="spatialInit.html#cb40-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># movement</span></span>
-<span id="cb40-11"><a href="spatialInit.html#cb40-11" aria-hidden="true" tabindex="-1"></a>  N_age <span class="ot">=</span> <span class="fu">t</span>(movement_matrix) <span class="sc">%*%</span> update_N_age</span>
-<span id="cb40-12"><a href="spatialInit.html#cb40-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb40-13"><a href="spatialInit.html#cb40-13" aria-hidden="true" tabindex="-1"></a><span class="do">## calculate one more annual cycle</span></span>
-<span id="cb40-14"><a href="spatialInit.html#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="co"># recruitment</span></span>
-<span id="cb40-15"><a href="spatialInit.html#cb40-15" aria-hidden="true" tabindex="-1"></a>update_N_age[,<span class="dv">1</span>] <span class="ot">=</span> R0 <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M)</span>
-<span id="cb40-16"><a href="spatialInit.html#cb40-16" aria-hidden="true" tabindex="-1"></a><span class="co"># ageing and mortality</span></span>
-<span id="cb40-17"><a href="spatialInit.html#cb40-17" aria-hidden="true" tabindex="-1"></a>update_N_age[,<span class="dv">2</span><span class="sc">:</span>plus_group_age] <span class="ot">=</span> N_age[,<span class="dv">1</span><span class="sc">:</span>(plus_group_age <span class="sc">-</span> <span class="dv">1</span>)] <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M)</span>
-<span id="cb40-18"><a href="spatialInit.html#cb40-18" aria-hidden="true" tabindex="-1"></a><span class="co"># plus group</span></span>
-<span id="cb40-19"><a href="spatialInit.html#cb40-19" aria-hidden="true" tabindex="-1"></a>update_N_age[,plus_group_age] <span class="ot">=</span> update_N_age[,plus_group_age] <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M) <span class="sc">+</span> N_age[,plus_group_age] <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>M)</span>
-<span id="cb40-20"><a href="spatialInit.html#cb40-20" aria-hidden="true" tabindex="-1"></a><span class="co"># movement</span></span>
-<span id="cb40-21"><a href="spatialInit.html#cb40-21" aria-hidden="true" tabindex="-1"></a>update_N_age <span class="ot">=</span> <span class="fu">t</span>(movement_matrix) <span class="sc">%*%</span> update_N_age</span>
-<span id="cb40-22"><a href="spatialInit.html#cb40-22" aria-hidden="true" tabindex="-1"></a><span class="do">## approximate!</span></span>
-<span id="cb40-23"><a href="spatialInit.html#cb40-23" aria-hidden="true" tabindex="-1"></a>c <span class="ot">=</span> update_N_age[,plus_group_age] <span class="sc">/</span> N_age[,plus_group_age] <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb40-24"><a href="spatialInit.html#cb40-24" aria-hidden="true" tabindex="-1"></a>update_N_age[,plus_group_age] <span class="ot">=</span> N_age[,plus_group_age] <span class="sc">*</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> c)</span>
-<span id="cb40-25"><a href="spatialInit.html#cb40-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-26"><a href="spatialInit.html#cb40-26" aria-hidden="true" tabindex="-1"></a>iterative_N_age[,plus_group_age]</span></code></pre></div>
-<pre><code>## [1] 1758313 1217294 2705097</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="spatialInit.html#cb42-1" aria-hidden="true" tabindex="-1"></a>update_N_age[,plus_group_age]</span></code></pre></div>
-<pre><code>## [1] 1758313 1217294 2705097</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="spatialInit.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>plus_group_age, iterative_N_age[<span class="dv">3</span>,], <span class="at">xlab =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">ylab=</span> <span class="st">&quot;Initial numbers&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,R0<span class="sc">*</span> <span class="fl">1.4</span>), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
-<span id="cb44-2"><a href="spatialInit.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="dv">1</span><span class="sc">:</span>plus_group_age, update_N_age[<span class="dv">3</span>,], <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb44-3"><a href="spatialInit.html#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-4"><a href="spatialInit.html#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="dv">1</span><span class="sc">:</span>plus_group_age, iterative_N_age[<span class="dv">2</span>,], <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>, <span class="at">lty =</span> <span class="dv">1</span>)</span>
-<span id="cb44-5"><a href="spatialInit.html#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="dv">1</span><span class="sc">:</span>plus_group_age, update_N_age[<span class="dv">2</span>,], <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb44-6"><a href="spatialInit.html#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="dv">1</span><span class="sc">:</span>plus_group_age, iterative_N_age[<span class="dv">1</span>,], <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">&quot;black&quot;</span>, <span class="at">lty =</span> <span class="dv">1</span>)</span>
-<span id="cb44-7"><a href="spatialInit.html#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="dv">1</span><span class="sc">:</span>plus_group_age, update_N_age[<span class="dv">1</span>,], <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb44-8"><a href="spatialInit.html#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&#39;topright&#39;</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>), <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Numerical&quot;</span>, <span class="st">&quot;Analytical&quot;</span>), <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/spatialcase_alt-1.png" width="672" /></p>
+<div id="FiveAreaModel" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">Chapter 10</span> Five area model permutations<a href="FiveAreaModel.html#FiveAreaModel" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<ul>
+<li>“Init (ALK)” The initial model, assumes multinomial likelihoods for composition. AFs were estimated using the Age length key. Tag recovery data was assumed to be Negative Binomial. Annual recruitment deviations are shared across the regions</li>
+<li>“Direct Ageing” The same as “Init (ALK)” except using direct ageing estimators AF</li>
+<li>“D-M” The same “Init (ALK)” but assumes compositional data is Dirichlet Multinomial</li>
+<li>“Regional Recruitment” same as “D-M” but with regional specific annual recruitment deviations</li>
+<li>“Recruit constrained” same as “Regional Recruitment” but constrains the annual recruitment deviations to sum = 0</li>
+</ul>
+<div class="figure"><span style="display:block;" id="fig:fiveAreaSSBS"></span>
+<img src="Figures/Application/5-Area/Comparison/SSB_summarise_over_models.png" alt="Estimated SSBs across the different five region model" width="100%" />
+<p class="caption">
+Figure 10.1: Estimated SSBs across the different five region model
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:fiveAreaDepletion"></span>
+<img src="Figures/Application/5-Area/Comparison/Depletion_summarise_over_models.png" alt="Estimated Depletion across the different five region model" width="100%" />
+<p class="caption">
+Figure 10.2: Estimated Depletion across the different five region model
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:fiveAreaRecruitment"></span>
+<img src="Figures/Application/5-Area/Comparison/Recruitment.png" alt="Estimated Recruitment across the different five region model" width="100%" />
+<p class="caption">
+Figure 10.3: Estimated Recruitment across the different five region model
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:fiveAreaFixedGearF"></span>
+<img src="Figures/Application/5-Area/Comparison/Fixed_gear_Fs.png" alt="Estimated Fishing mortalities for the fixed gear fishery" width="100%" />
+<p class="caption">
+Figure 10.4: Estimated Fishing mortalities for the fixed gear fishery
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:fiveAreaTrawlGearF"></span>
+<img src="Figures/Application/5-Area/Comparison/Trawl_gear_Fs.png" alt="Estimated Fishing mortalities for the Trawl fishery" width="100%" />
+<p class="caption">
+Figure 10.5: Estimated Fishing mortalities for the Trawl fishery
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:fiveAreaSelectivity"></span>
+<img src="Figures/Application/5-Area/Comparison/Selectivities.png" alt="Estimated selectivities" width="100%" />
+<p class="caption">
+Figure 10.6: Estimated selectivities
+</p>
+</div>
 
 </div>
             </section>
@@ -457,8 +389,8 @@ where, <span class="math inline">\(N_{a+ - 1, r}\)</span> is the numbers at age 
           </div>
         </div>
       </div>
-<a href="Fexplore.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="glossary.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="modelIterations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="nextsteps.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -489,7 +421,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment/19-InitialisingTheSpatialModel.Rmd",
+"link": "https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment/09-5AreaModel.Rmd",
 "text": "Edit"
 },
 "history": {
