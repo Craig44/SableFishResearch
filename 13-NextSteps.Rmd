@@ -1,5 +1,6 @@
 # Next steps {#nextsteps}
 
+- Run log likelihood profiles on Female Trawl selectivity parameters
 - Apply the Dirichlet-Multinomial likelihood for compositional data
 - Start model 1990
 - Generate reference points and ABCs

@@ -1,0 +1,42 @@
+# Five area model permutations {#FiveAreaModel}
+
+- "Init (ALK)"  The initial model, assumes multinomial likelihoods for composition. AFs were estimated using the Age length key. Tag recovery data was assumed to be Negative Binomial. Annual recruitment deviations are shared across the regions
+- "Direct Ageing" The same as "Init (ALK)" except using direct ageing estimators AF
+- "D-M" The same "Init (ALK)" but assumes compositional data is Dirichlet Multinomial
+- "Regional Recruitment" same as "D-M" but with regional specific annual recruitment deviations
+- "Recruit constrained" same as "Regional Recruitment" but constrains the annual recruitment deviations to sum = 0
+
+
+
+```{r fiveAreaSSBS, out.width = '100%', fig.height= 5, fig.cap="Estimated SSBs across the different five region model", echo = F, eval = T}
+include_graphics(file.path("Figures", "Application" ,"5-Area","Comparison","SSB_summarise_over_models.png"))
+```
+
+
+```{r fiveAreaDepletion, out.width = '100%', fig.height= 5, fig.cap="Estimated Depletion across the different five region model", echo = F, eval = T}
+include_graphics(file.path("Figures", "Application" ,"5-Area","Comparison","Depletion_summarise_over_models.png"))
+```
+
+
+
+```{r fiveAreaRecruitment, out.width = '100%', fig.height= 5, fig.cap="Estimated Recruitment across the different five region model", echo = F, eval = T}
+include_graphics(file.path("Figures", "Application" ,"5-Area","Comparison","Recruitment.png"))
+```
+
+
+```{r fiveAreaFixedGearF, out.width = '100%', fig.height= 5, fig.cap="Estimated Fishing mortalities for the fixed gear fishery", echo = F, eval = T}
+include_graphics(file.path("Figures", "Application" ,"5-Area","Comparison","Fixed_gear_Fs.png"))
+```
+
+```{r fiveAreaTrawlGearF, out.width = '100%', fig.height= 5, fig.cap="Estimated Fishing mortalities for the Trawl fishery", echo = F, eval = T}
+include_graphics(file.path("Figures", "Application" ,"5-Area","Comparison","Trawl_gear_Fs.png"))
+```
+
+
+```{r fiveAreaSelectivity, out.width = '100%', fig.height= 5, fig.cap="Estimated selectivities", echo = F, eval = T}
+include_graphics(file.path("Figures", "Application" ,"5-Area","Comparison","Selectivities.png"))
+```
+
+
+
+

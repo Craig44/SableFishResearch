@@ -97,6 +97,13 @@ include_graphics(file.path("Figures", "Application" ,"5-Area","Model_01","ReWeig
 ```
 
 
+### Issues {-}
+
+
+- estimating female trawl selectivity which is double normal. There are some odd LF obs i.e., EGOA 1999, BS 2013. Compare empirical LF's between fixed gear and trawl, to see if there is much difference. Perhaps we can try a logistic. Or an alternative double normal form, I wonder if the two parameterisation is causing issues
+
+- Terminal recruitment is estimated as being unrealistically large. Add a constraint so that all recruitment deviations have to sum = 0.
+
 ## Comparison {-}
 
 
