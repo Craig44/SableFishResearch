@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2023-02-01" />
+<meta name="date" content="2023-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -337,13 +337,13 @@ div.csl-indent {
 <h1><span class="header-section-number">Chapter 9</span> Model iterations<a href="modelIterations.html#modelIterations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Based on our exploratory analysis we have developed the three following spatial models</p>
 <ul>
-<li>5 Area Merge EY/WY/SouthEast into EGOA</li>
-<li>3 Area Merge Bering Sea, Aleutian Islands, and Western Gulf regions</li>
+<li>5 Area Merge EY/WY/SouthEast into a single EGOA region</li>
+<li>3 Area Merge Bering Sea, Aleutian Islands, and Western Gulf into a single region. This model is the same as <span class="citation">Fenske (<a href="#ref-fenske2022implications" role="doc-biblioref">2022</a>)</span></li>
 <li>1 Area merge all regions</li>
 </ul>
 <div id="single-area-model" class="section level2 unnumbered hasAnchor">
 <h2>Single Area model<a href="modelIterations.html#single-area-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Due to the focus on spatial assessment models for this research, data sets that are in the current assessment were dropped during initial model development. These included, early Japanese fishery CPUE, early Japanese Length frequency observations and the NFMS trawl survey. The early Japanese data was dropped because it could not be disaggregated by sex or space. The trawl survey was initially not included because we believe that we have sufficient information from the longline survey and the trawl survey does not monitor the core sablefish depth range, which was thought to possibly introduce data conflict due to sampling variation which we wanted to minimize.</p>
+<p>Due to the focus on spatial assessment models for this research, some data sets that are in the current assessment were dropped during initial model development. These included, early Japanese fishery CPUE, early Japanese Length frequency observations and the NFMS trawl survey. The early Japanese data was dropped because it could not be disaggregated by sex or space. The trawl survey was initially not included because we believe that we have sufficient information from the longline survey and the trawl survey does not monitor the core sablefish depth range, which was thought to possibly introduce data conflict due to sampling variation which we wanted to minimize.</p>
 <div class="figure"><span style="display:block;" id="fig:obsSingleAreaModel"></span>
 <img src="Figures/Application/1-Area/1977_start/Observation_Frequency.png" alt="Observation frequency assumed in the `SpatialSablefishAssessment` (SSA) model" width="60%" />
 <p class="caption">
@@ -354,13 +354,13 @@ Figure 9.1: Observation frequency assumed in the <code>SpatialSablefishAssessmen
 <p>There are a few fundamental differences between these assessment models, which are listed below</p>
 <ul>
 <li><p>Start year 1977. Because <code>SpatialSablefishAssessment</code> does not have that early data. The model would not converge if started in 1960</p></li>
-<li><p>No temporal overlap in age and length composition. The current assessment model provides age composition (aggregated by sex) and length composition (disaggregated by sex) simultaneously in years for the longline survey and fixed gear fishery. Because we use the age-length key method to derive age-frequencies, that treatment thought to be inappropriate due to the double use of the length data.</p></li>
+<li><p>No temporal overlap in age and length composition. The current stock assessment model provides age composition (aggregated by sex) and length composition (disaggregated by sex) simultaneously in years for the longline survey and fixed gear fishery. Because we use the age-length key method to derive age-frequencies, that treatment was thought to be inappropriate due to the double use of the length data.</p></li>
 <li><p>Age and Length composition are sexually disaggregated. As described in Chapter <a href="sexratios.html#sexratios">14</a> we assume for an observation in a year that composition sum to one over sex and age.</p></li>
 <li><p>Slightly different treatment of initial age deviations for non-equilibrium age-structure</p></li>
 <li><p>Fishing mortality are catch conditioned and not estimated as free parameters</p></li>
-<li><p>An initial fishing mortality parameter was estimated as a free parameter. The current assessment assuems 10% of the estimated average fixed gear fishing mortality</p></li>
+<li><p>An initial fishing mortality parameter was estimated as a free parameter. The current assessment assumes 10% of the estimated average fixed gear fishing mortality</p></li>
 </ul>
-<p>Even with the differences stated above, the models produced similar fits and estimated model quantities for overlapping years.</p>
+<p>Even with the differences stated above, the models produced similar estimated model quantities in comparable years.</p>
 <div class="figure"><span style="display:block;" id="fig:compareASSSSB"></span>
 <img src="Figures/Application/1-Area/1977_start/compare_SSB.png" alt="Estimated SSB (kt) between the current assessment (CA) and `SpatialSablefishAssessment` (SSA)" width="60%" />
 <p class="caption">
@@ -399,30 +399,38 @@ Figure 9.6: Estimated SSBs when tag data is included and excluded.
 <div id="three-area-model" class="section level2 unnumbered hasAnchor">
 <h2>Three area model<a href="modelIterations.html#three-area-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="figure"><span style="display:block;" id="fig:movement3AreaModel"></span>
-<img src="Figures/Application/3-Area/TagData_01/Est_movement.png" alt="Estimated movement in the three area model" width="60%" />
+<img src="Figures/Application/3-Area/TagData_01/Est_movement.png" alt="Estimated movement in the three region model" width="60%" />
 <p class="caption">
-Figure 9.7: Estimated movement in the three area model
+Figure 9.7: Estimated movement in the three region model
 </p>
 </div>
 <div class="figure"><span style="display:block;" id="fig:ssb3AreaModel"></span>
-<img src="Figures/Application/3-Area/TagData_01/regional_ssb.png" alt="Estimated SSB in the three area model" width="60%" />
+<img src="Figures/Application/3-Area/TagData_01/regional_ssb.png" alt="Estimated SSB in the three region model" width="60%" />
 <p class="caption">
-Figure 9.8: Estimated SSB in the three area model
+Figure 9.8: Estimated SSB in the three region model
 </p>
 </div>
 </div>
 <div id="five-area-model" class="section level2 unnumbered hasAnchor">
 <h2>Five area model<a href="modelIterations.html#five-area-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The initial five area model had estimated regional mean recruitment parameters, but shared a common annual recruitment deviation. All composition data has assumed multinomial likelihoods and tag-recovery data was assumed Negative Binomial.</p>
 <div class="figure"><span style="display:block;" id="fig:movement5AreaModel"></span>
-<img src="Figures/Application/5-Area/Model_01/Est_movement.png" alt="Estimated movement in the three area model" width="60%" />
+<img src="Figures/Application/5-Area/Model_01/Est_movement.png" alt="Estimated movement in the five region model" width="60%" />
 <p class="caption">
-Figure 9.9: Estimated movement in the three area model
+Figure 9.9: Estimated movement in the five region model
 </p>
 </div>
 <div class="figure"><span style="display:block;" id="fig:ssb5AreaModel"></span>
-<img src="Figures/Application/5-Area/Model_01/regional_ssb.png" alt="Estimated SSB in the three area model" width="60%" />
+<img src="Figures/Application/5-Area/Model_01/regional_ssb.png" alt="Estimated SSB in the five region model" width="60%" />
 <p class="caption">
-Figure 9.10: Estimated SSB in the three area model
+Figure 9.10: Estimated SSB in the five region model
+</p>
+</div>
+<p>The Francis TA 1.8 data weighting method was applied. This ended up down weighting the composition data which resulted in model convergence issues. The effect on the data weighting procedure is shown in the following figure.</p>
+<div class="figure"><span style="display:block;" id="fig:ssb5AreaReweighting"></span>
+<img src="Figures/Application/5-Area/Model_01/ReWeighted_SSBs.png" alt="Estimated SSB in the five region model" width="60%" />
+<p class="caption">
+Figure 9.11: Estimated SSB in the five region model
 </p>
 </div>
 </div>
@@ -431,7 +439,7 @@ Figure 9.10: Estimated SSB in the three area model
 <div class="figure"><span style="display:block;" id="fig:AllSSBs"></span>
 <img src="Figures/Application/Comparison/FirstAttempt/SSB_summarise_over_models.png" alt="Estimated SSB across initial models" width="60%" />
 <p class="caption">
-Figure 9.11: Estimated SSB across initial models
+Figure 9.12: Estimated SSB across initial models
 </p>
 </div>
 
@@ -439,6 +447,9 @@ Figure 9.11: Estimated SSB across initial models
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-fenske2022implications" class="csl-entry">
+Fenske, Kari Hammarsten. 2022. <span>“Implications of Spatial Population Dynamics for Abundance Estimation and Catch Apportionment of Alaska Sablefish (Anoplopoma Fimbria).”</span> PhD thesis, University of Alaska Fairbanks.
+</div>
 <div id="ref-goethel2021assessment" class="csl-entry">
 Goethel, DR, DH Hanselman, CJ Rodgveller, KH Fenski, SK Shotwell, KB Echave, PW Malecha, A Siwicke, and CR Lunsford. 2021. <span>“Assessment of the Sablefish Stock in Alaska.”</span> <em>Stock Assessment and Fishery Evaluation Report for the Groundfish Resources of the Gulf of Alaska and the Bering Sea/Aleutian Islands as Projected for</em>.
 </div>

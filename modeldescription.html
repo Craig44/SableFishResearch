@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2023-02-01" />
+<meta name="date" content="2023-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -335,7 +335,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="modeldescription" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Current Alaskan sablefish stock assessment model<a href="modeldescription.html#modeldescription" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>The latest published stock assessment <span class="citation">(<a href="#ref-goethel2021assessment" role="doc-biblioref">D. Goethel et al. 2021</a>)</span> is a single area model sexually disaggregated integrated age-structured model. Let <span class="math inline">\(\boldsymbol{N_{y,s}}\)</span> denote a vector of ages in year <span class="math inline">\(y\)</span> for sex <span class="math inline">\(s\)</span> (the partition) i.e., <span class="math inline">\(\boldsymbol{N_{y,s}} = (N_{1,y,s}, N_{2,y,s}, \dots, N_{a_+,y,s})^T\)</span>. The general process model is sequential and follows the general Equation <a href="modeldescription.html#eq:processmodel">(3.1)</a>,</p>
+<p>The latest published stock assessment <span class="citation">(<a href="#ref-goethel2021assessment" role="doc-biblioref">D. Goethel et al. 2021</a>)</span> is a single area and sexually disaggregated age-structured model. Let <span class="math inline">\(\boldsymbol{N_{y,s}}\)</span> denote a vector of ages in year <span class="math inline">\(y\)</span> for sex <span class="math inline">\(s\)</span> (the partition) i.e., <span class="math inline">\(\boldsymbol{N_{y,s}} = (N_{1,y,s}, N_{2,y,s}, \dots, N_{a_+,y,s})^T\)</span>. The general process model is sequential and follows the general Equation <a href="modeldescription.html#eq:processmodel">(3.1)</a>,</p>
 <p><span class="math display" id="eq:processmodel">\[\begin{equation}
   \boldsymbol{N_{y,s}} =
   \begin{cases}
@@ -345,12 +345,12 @@ div.csl-indent {
   \tag{3.1}
 \end{equation}\]</span>
 where, <span class="math inline">\(g(.)\)</span> is the function describing initial conditions for the partition and <span class="math inline">\(f(.)\)</span> is the function that applies populations dynamics each year i.e., birth, death, growth and migration. See later sections for a detailed description of <span class="math inline">\(g(.)\)</span> and <span class="math inline">\(f(.)\)</span> and <span class="math inline">\(\boldsymbol{\theta}\)</span> is the set of estimable (not all are estimated) parameters.</p>
-<p>Maximum Likelihood Estimates (MLE) for estimated parameters <span class="math inline">\(\widehat{\boldsymbol{\theta}}_{MLE}\)</span> are evaluated,
+<p>Maximum Likelihood Estimates (MLE) for estimated parameters <span class="math inline">\(\widehat{\boldsymbol{\theta}}_{MLE}\)</span> are evaluated by,
 <span class="math display" id="eq:observationmodel">\[\begin{equation}
     \widehat{\boldsymbol{\theta}}_{MLE} = \underset{\boldsymbol{\theta}}{\arg\max} \left( L\left(\boldsymbol{\theta} | \boldsymbol{y^{obs}}\right) \right)
       \tag{3.2}
 \end{equation}\]</span>
-where, <span class="math inline">\(\boldsymbol{y^{obs}}\)</span> is a set of observations and <span class="math inline">\(L\left( . \right)\)</span> is an objective function that is made up of priors/penalties and densities. All the models in this research estimate <span class="math inline">\(\widehat{\boldsymbol{\theta}}_{MLE}\)</span> by minimising the negative log of <span class="math inline">\(ll\left( . \right) = -\log(L\left( . \right))\)</span>. See the observation section for descriptions of <span class="math inline">\(ll\left( . \right)\)</span>.</p>
+where, <span class="math inline">\(\boldsymbol{y^{obs}}\)</span> is a set of observations and <span class="math inline">\(L\left( . \right)\)</span> is an objective function that is made up of priors/penalties and probability densities. All the models in this research estimate <span class="math inline">\(\widehat{\boldsymbol{\theta}}_{MLE}\)</span> by minimising the negative log of <span class="math inline">\(ll\left( . \right) = -\log(L\left( . \right))\)</span>. See the observation section for components of <span class="math inline">\(ll\left( . \right)\)</span>.</p>
 <p>All symbols used in the following equations are defined in the table at the end of this chapter.</p>
 <div id="process-equations" class="section level2 unnumbered hasAnchor">
 <h2>Process equations<a href="modeldescription.html#process-equations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -371,7 +371,7 @@ R_1, &amp; a = a_1\\
 <p><span class="math display">\[
 Z_{a,y,s} = M + \sum_g F^g_{y} S^g_{a,y,s}
 \]</span>
-where, <span class="math inline">\(S^g_{a,y,s}\)</span> is the fishery selectivity and <span class="math inline">\(F^g_{y}\)</span> is the annual estimated fishing mortality. The annual cycle follows,</p>
+where, <span class="math inline">\(S^g_{a,y,s}\)</span> is the fishery selectivity and <span class="math inline">\(F^g_{y}\)</span> is the annual estimated fishing mortality for fishing fleet <span class="math inline">\(g\)</span>. The annual cycle follows,</p>
 <p><span class="math display">\[\begin{align*}
 N_{a,y,s} =
 \begin{cases}
@@ -390,7 +390,7 @@ and <span class="math inline">\(p^s_{y}\)</span> is the proportion of recruits i
 </div>
 <div id="observation-equations-llleft-.-right" class="section level2 unnumbered hasAnchor">
 <h2>Observation equations (<span class="math inline">\(ll\left( . \right)\)</span>)<a href="modeldescription.html#observation-equations-llleft-.-right" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Three are three observation types used in the current Sablefish stock assessment
+<p>Three are three observation types used in the current sablefish stock assessment
 - Relative abundance indices
 - Age composition (aggregated over sex)
 - Length composition (disaggregated by sex)</p>

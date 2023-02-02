@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2023-02-01" />
+<meta name="date" content="2023-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -335,14 +335,14 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="spatialmodeldescription" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Spatial stock assessment model for Alaskan sablefish<a href="spatialmodeldescription.html#spatialmodeldescription" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>The spatial model used for this research is available as an R package and is best described by the R package documentation <a href="https://craig44.github.io/SpatialSablefishAssessment/TagIntegratedEq.html">found here</a>. I have described the general model, but the package documentation is the best resource for specific equations.</p>
+<p>The spatial model used for this research is available as an R package and is best described by the R package documentation <a href="https://craig44.github.io/SpatialSablefishAssessment/TagIntegratedEq.html">found here</a>. I have described the general model here for completness, but the package documentation is the best resource for specific equations.</p>
 <div id="process-equations-1" class="section level2 unnumbered hasAnchor">
 <h2>Process equations<a href="spatialmodeldescription.html#process-equations-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="population-dynamics" class="section level3 unnumbered hasAnchor">
 <h3>Population dynamics<a href="spatialmodeldescription.html#population-dynamics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The order of processes in an annual cycle follow</p>
 <ol style="list-style-type: decimal">
-<li>Recruitment and release of tagged fish (we apply initial tag induced mortality here)</li>
+<li>Recruitment and release of tagged fish (we apply initial tag induced mortality at this point)</li>
 <li>Total mortality and ageing</li>
 <li>Markovian movement</li>
 <li>Annual tag shedding (applied as a mortality process)</li>
@@ -404,8 +404,8 @@ To help with estimation there is a penalty on <span class="math inline">\(\epsil
 <p>Tagged fish from release event <span class="math inline">\(k\)</span> are denoted in the partition as <span class="math inline">\(T^k_{a,r,y,s}\)</span>, and are tracked for <span class="math inline">\(n_{T}\)</span> years before migrating into a pooled tag group, at which point we loose release-year information but do maintain its region of release. At present, tagged fish are assumed to take on the exact same population processes as the untagged elements of the partition (instantaneous mixing).</p>
 <p>Other considerations for tag-releases</p>
 <ul>
-<li>Do we want to include the inshore (Chatham Strait and Clarence Strait) tag-releases? there are alot of fish tagged in these regions.</li>
-<li>Do we care about the amount of tags that leave stock area? See Figure <a href="tagdata.html#fig:TagRecoveriesOutsideRegion">7.3</a></li>
+<li>Do we want to include the inshore/State (Chatham Strait and Clarence Strait) tag-releases? there are alot of fish tagged in these regions.</li>
+<li>Do we care about the amount of tags that leave the stock boundaries? See Figure <a href="tagdata.html#fig:TagRecoveriesOutsideRegion">7.3</a></li>
 </ul>
 </div>
 </div>

@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2023-02-01" />
+<meta name="date" content="2023-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -336,27 +336,27 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">Alaskan sablefish research</h1>
 <p class="author"><em>C.Marsh</em></p>
-<p class="date"><em>2023-02-01</em></p>
+<p class="date"><em>2023-02-02</em></p>
 </div>
 <div id="overview" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Overview<a href="index.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This Gitbook documents my/our research on Alaskan sablefish (<em>Anoplopoma fimbria</em>). The objective is to develop and explore a spatially explicit stock assessment model for the Alaskan sablefish stock. However, there will be many topics that I will touch on that are common stock assessment considerations. This book outlines my research and thinking whilst diving down some rabbit holes (and hopefully returning), during my post-doctoral research. The following section outlines chapters contained in this document.</p>
+<p>This Gitbook documents my/our research on Alaskan sablefish (<em>Anoplopoma fimbria</em>). The objective is to develop and explore a spatially explicit stock assessment model for the Alaskan sablefish stock. Although this is focused on sablefish, there will be many topics encountered that are common to other stock assessments. The following section outlines chapters contained in this document.</p>
 <div id="gitbook-outline" class="section level2 unnumbered hasAnchor">
 <h2>Gitbook outline<a href="index.html#gitbook-outline" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li><p>Chapter <a href="objectives.html#objectives">2</a> outlines a list of objectives that we have set or accomplished during this research project. Some of our research cannot be presented in this document due to data-confidentiality concerns However, this checklist should include all tasks during the project</p></li>
-<li><p>Chapter <a href="modeldescription.html#modeldescription">3</a> documents the current stock assessment model and assumptions (work in progress). This is the first step of the project, with the purpose of helping me understand the data and important process dynamics assumed in the current assessment. Most models applied in this research were written in TMB <span class="citation">(<a href="#ref-kristensen2015tmb" role="doc-biblioref">Kristensen et al. 2015</a>)</span>, many of the assessemtn models are available in the <a href="https://github.com/Craig44/SpatialSablefishAssessment"><code>SpatialSablefishAssessment</code> R package</a>, which was developed during this research.</p></li>
-<li><p>Chapter <a href="spatialmodeldescription.html#spatialmodeldescription">4</a> documents a generalized spatial assessment model used as both an OM and EM during simulations.</p></li>
+<li><p>Chapter <a href="objectives.html#objectives">2</a> outlines a list of objectives that we have set or accomplished during this research project</p></li>
+<li><p>Chapter <a href="modeldescription.html#modeldescription">3</a> documents the current stock assessment model and assumptions (work in progress). This is the first step of the project. Its purpose is to helo me understand the data and important process dynamics assumed in the current assessment. Most models applied in this research were written in TMB <span class="citation">(<a href="#ref-kristensen2015tmb" role="doc-biblioref">Kristensen et al. 2015</a>)</span>, many of the assessemnt models are available in the <a href="https://github.com/Craig44/SpatialSablefishAssessment"><code>SpatialSablefishAssessment</code> R package</a>, which was developed during this research.</p></li>
+<li><p>Chapter <a href="spatialmodeldescription.html#spatialmodeldescription">4</a> documents a generalized spatial assessment model used as both an OM and EM.</p></li>
 <li><p>Chapter <a href="surveydata.html#surveydata">5</a> describes, characterizes and explores the survey longline data available for the assessment.</p></li>
 <li><p>Chapter <a href="observerdata.html#observerdata">6</a> describes, characterizes and explores fishery dependent data, which includes reported catch (log-book data) and observer records.</p></li>
 <li><p>Chapter <a href="tagdata.html#tagdata">7</a> describes the tagging data and how it can be used within a spatial stock assessment model but also used in a panmictic model for informing population dynamics such as growth.</p></li>
-<li><p>Chapter <a href="InitialModelSetup.html#InitialModelSetup">8</a> outlines diagnostics and decisions that were made when considering the spatial resolution of possible models.</p></li>
+<li><p>Chapter <a href="InitialModelSetup.html#InitialModelSetup">8</a> outlines diagnostics and decisions that were made when considering the spatial resolution of our model.</p></li>
 <li><p>Chapter <a href="modelIterations.html#modelIterations">9</a> displays outputs from preliminary spatial models under development.</p></li>
-<li><p>Chapter <a href="modelIterations.html#modelIterations">9</a> displays outputs from preliminary spatial models under development.</p></li>
-<li><p>Chapter <a href="taglike.html#taglike">11</a> describes different tag likelihoods that I considered in the spatial model and does a simple simulation estimating annual movement rates with the different likelihoods</p></li>
+<li><p>Chapter <a href="nextsteps.html#nextsteps">10</a> outlines future model assumptions/considerations.</p></li>
+<li><p>Chapter <a href="taglike.html#taglike">11</a> describes different tag likelihoods that I considered in the spatial model and does a simple simulation estimating annual movement rates with the different likelihoods.</p></li>
 <li><p>Chapter <a href="sexratios.html#sexratios">14</a> explores how to include sex disaggregated composition observations that can include sex ratio information. It conducts a simple simulation to investigate two different approaches.</p></li>
-<li><p>Chapter <a href="Fexplore.html#Fexplore">15</a> explores how to parameterise fishing mortality. The current approach is to estimate an annual fishing mortality parameter for each gear as a free parameter. I feel slightly uncomfortable about this approach moving towards a spatial model as the number of estimated parameters will explode when a spatial dimension is explored. This chapter looks at two alternative approaches that either derive fishing mortality estimates using a Newton Raphson solver which is heavily borrowed from the Stock Synthesis “hybrid” approach <span class="citation">(<a href="#ref-methot2013stock" role="doc-biblioref">Methot Jr and Wetzel 2013</a>)</span> and Pope’s discrete approach <span class="citation">(<a href="#ref-pope1972investigation" role="doc-biblioref">Pope 1972</a>)</span> which uses exploitation rates. Both these methods have been applied in the literature for decades. The aim of this chapter is to do a simulation and make sure the considered approaches are efficient and numerically stability for the purposes of our research.</p></li>
-<li><p>Chapter <a href="spatialInit.html#spatialInit">16</a> explores how to calculate the plus group in spatially explicit age-structured models that assume markovian movement during initialization.</p></li>
+<li><p>Chapter <a href="Fexplore.html#Fexplore">15</a> explores how to parameterize fishing mortality. The current approach is to estimate an annual fishing mortality parameter for each gear as a free parameter. I feel slightly uncomfortable about this approach moving towards a spatial model as the number of estimated parameters will explode when a spatial dimension is added. This chapter looks at two alternative approaches that either derive fishing mortality estimates using a Newton Raphson solver which is heavily borrowed from the Stock Synthesis “hybrid” approach <span class="citation">(<a href="#ref-methot2013stock" role="doc-biblioref">Methot Jr and Wetzel 2013</a>)</span> and Pope’s discrete approach <span class="citation">(<a href="#ref-pope1972investigation" role="doc-biblioref">Pope 1972</a>)</span> which uses exploitation rates. Both these methods have been applied in the literature for decades. The aim of this chapter is to do a simulation and make sure the considered approaches are efficient and numerically stabile for the purposes of our research.</p></li>
+<li><p>Chapter <a href="spatialInit.html#spatialInit">16</a> explores how to calculate initial numbers at age for the accumulating age cohort (plus group), in a spatially explicit age-structured models that assumes markovian movement during initialization.</p></li>
 </ul>
 </div>
 <div id="future-things-to-consider" class="section level2 unnumbered hasAnchor">

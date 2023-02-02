@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2023-02-01" />
+<meta name="date" content="2023-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -453,22 +453,16 @@ Figure 5.3: Boxplot comparing overall residuals between distributions
 </tr>
 </tbody>
 </table>
-<div class="figure"><span style="display:block;" id="fig:spatialprediction"></span>
-<img src="Figures/spatial_tweedie_predict.png" alt="Spatial predition M1 with the tweedie distribution."  />
-<p class="caption">
-Figure 5.4: Spatial predition M1 with the tweedie distribution.
-</p>
-</div>
 <div class="figure"><span style="display:block;" id="fig:indexComparison"></span>
 <img src="Figures/indicies.png" alt="Comparison of indicies for the Tweedie distribution and the three model structures."  />
 <p class="caption">
-Figure 5.5: Comparison of indicies for the Tweedie distribution and the three model structures.
+Figure 5.4: Comparison of indicies for the Tweedie distribution and the three model structures.
 </p>
 </div>
 <div class="figure"><span style="display:block;" id="fig:surveyProjection"></span>
 <img src="Figures/spatial_ar1_tweedie_predict_all.png" alt="Spatial predictions of log abundance from model M3 (spatio-temporal GF)" width="100%" />
 <p class="caption">
-Figure 5.6: Spatial predictions of log abundance from model M3 (spatio-temporal GF)
+Figure 5.5: Spatial predictions of log abundance from model M3 (spatio-temporal GF)
 </p>
 </div>
 </div>
@@ -479,7 +473,7 @@ Figure 5.6: Spatial predictions of log abundance from model M3 (spatio-temporal 
 <div class="figure"><span style="display:block;" id="fig:agesamples"></span>
 <img src="Figures/age_samples_by_year_region_sex.png" alt="Number of aged fish by sex, region and year" width="100%" />
 <p class="caption">
-Figure 5.7: Number of aged fish by sex, region and year
+Figure 5.6: Number of aged fish by sex, region and year
 </p>
 </div>
 </div>
@@ -502,7 +496,7 @@ where, <span class="math inline">\(h \in r\)</span> denotes only hauls within re
 <div class="figure"><span style="display:block;" id="fig:lengthsamples"></span>
 <img src="Figures/length_samples_by_year_region_sex.png" alt="Number of fish measured for length by sex, region and year" width="100%" />
 <p class="caption">
-Figure 5.8: Number of fish measured for length by sex, region and year
+Figure 5.7: Number of fish measured for length by sex, region and year
 </p>
 </div>
 </div>
@@ -546,7 +540,7 @@ P_{a,r} = \hat{p}(a|l) N^r_l
 </div>
 <div id="continuation-ratio-logits-crl" class="section level3 unnumbered hasAnchor">
 <h3>Continuation ratio logits (CRL)<a href="surveydata.html#continuation-ratio-logits-crl" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>This method was not explored in detail</strong> due to the sex dimension for sablefish adding a complexity we didn’t have time to get in to. There is R code that applies the CRL model ignoring sex in the data and wanted to partially document it as it seems quite promising.</p>
+<p><strong>This method was not explored in detail</strong> due to the sex dimension for sablefish adding a complexity we didn’t have time to get in to. There is R code that applies the CRL model ignoring sex in the data and wanted to partially document it, as it seems quite promising.</p>
 <p>An alternative to the ALK is to use a continuation ratio model (CRL) to model the distribution of ages <span class="math inline">\(\boldsymbol{p}_a(\boldsymbol{x}) = (p_J, \dots, p_A)\)</span>, which has been proposed and explored in recent studies <span class="citation">(<a href="#ref-berg2012spatial" role="doc-biblioref">Berg and Kristensen 2012</a>; <a href="#ref-correa2020improved" role="doc-biblioref">Correa et al. 2020</a>)</span>. Using a <span class="math inline">\(J\)</span> minus <span class="math inline">\(A\)</span> conditional model for describing the probability of being age <span class="math inline">\(a\)</span> given it as at least <span class="math inline">\(a\)</span>, that is</p>
 <p><span class="math display">\[\begin{equation}
 \pi_a = P(Y = a| Y \geq a) = \frac{p_a}{p_a + p_{a+1} + \dots + p_A} , \ \ a = J, \dots, A-1
@@ -561,7 +555,7 @@ P_{a,r} = \hat{p}(a|l) N^r_l
 <h3>Estimating initial input sample sizes for multinomial composition data<a href="surveydata.html#estimating-initial-input-sample-sizes-for-multinomial-composition-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Bootstrapping is used to estimate standard errors for <span class="math inline">\(P_{a,R,y}\)</span>. Data used to calculate age-length keys are re sampled with replacement to calculate a SE and CV. This produces a CV for each age, region and year denoted by <span class="math inline">\(CV_{a,r, y}\)</span>. Proportions at age are assumed to be distributed according to the multinomial distribution. To translate the observation error expressed as a CV to an initial effective sample denoted by <span class="math inline">\(N^{eff}_y\)</span> we apply a non-linear least squares solver to estimate <span class="math inline">\(N^{eff}_y\)</span> by minimizing the following expression</p>
 <p><span class="math display">\[
-\log CV_{a,r, y} = \log \sqrt{\frac{P_{a,R,y}\widehat{N}^{eff}_y \left(1 -  P_{a,R,y}\right)}}{P_{a,R,y}\widehat{N}^{eff}_y}
+\log CV_{a,r, y} = \log \frac{\sqrt{P_{a,R,y}\widehat{N}^{eff}_y \left(1 -  P_{a,R,y}\right)}}{P_{a,R,y}\widehat{N}^{eff}_y}
 \]</span></p>
 </div>
 </div>
@@ -570,19 +564,19 @@ P_{a,r} = \hat{p}(a|l) N^r_l
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:agelengthbysex"></span>
 <img src="Figures/raw_growth_by_sex.png" alt="Age-length by sex" width="61%" />
 <p class="caption">
-Figure 5.9: Age-length by sex
+Figure 5.8: Age-length by sex
 </p>
 </div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:malegrowth"></span>
 <img src="Figures/raw_male_growth_by_region.png" alt="Male age-length by region (left panel) and decade (right panel)" width="49%" /><img src="Figures/raw_male_growth_by_decade.png" alt="Male age-length by region (left panel) and decade (right panel)" width="49%" />
 <p class="caption">
-Figure 5.10: Male age-length by region (left panel) and decade (right panel)
+Figure 5.9: Male age-length by region (left panel) and decade (right panel)
 </p>
 </div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:femalegrowth"></span>
 <img src="Figures/raw_female_growth_by_region.png" alt="Female age-length by region (left panel) and decade (right panel)" width="49%" /><img src="Figures/raw_female_growth_by_decade.png" alt="Female age-length by region (left panel) and decade (right panel)" width="49%" />
 <p class="caption">
-Figure 5.11: Female age-length by region (left panel) and decade (right panel)
+Figure 5.10: Female age-length by region (left panel) and decade (right panel)
 </p>
 </div>
 </div>
@@ -609,25 +603,31 @@ Figure 5.11: Female age-length by region (left panel) and decade (right panel)
 <div class="figure"><span style="display:block;" id="fig:femaleCDFagesamples"></span>
 <img src="Figures/raw_ecdf_AFs_by_year_region_female.png" alt="CDF of age frequencies for females" width="100%" />
 <p class="caption">
-Figure 5.12: CDF of age frequencies for females
+Figure 5.11: CDF of age frequencies for females
 </p>
 </div>
 <div class="figure"><span style="display:block;" id="fig:maleCDFagesamples"></span>
 <img src="Figures/raw_ecdf_AFs_by_year_region_male.png" alt="CDF of age frequencies for males" width="100%" />
 <p class="caption">
-Figure 5.13: CDF of age frequencies for males
+Figure 5.12: CDF of age frequencies for males
 </p>
 </div>
 <div class="figure"><span style="display:block;" id="fig:femaleCDFlengthsamples"></span>
 <img src="Figures/raw_ecdf_LFs_by_year_region_female.png" alt="CDF of length frequencies for females" width="100%" />
 <p class="caption">
-Figure 5.14: CDF of length frequencies for females
+Figure 5.13: CDF of length frequencies for females
 </p>
 </div>
 <div class="figure"><span style="display:block;" id="fig:maleCDFlengthsamples"></span>
 <img src="Figures/raw_ecdf_LFs_by_year_region_male.png" alt="CDF of length frequencies for males" width="100%" />
 <p class="caption">
-Figure 5.15: CDF of length frequencies for males
+Figure 5.14: CDF of length frequencies for males
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:spatialprediction"></span>
+<img src="Figures/spatial_tweedie_predict.png" alt="Spatial predition M1 with the tweedie distribution."  />
+<p class="caption">
+Figure 5.15: Spatial predition M1 with the tweedie distribution.
 </p>
 </div>
 
