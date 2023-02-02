@@ -92,7 +92,7 @@ include_graphics(file.path("Figures", "Application" ,"5-Area","Model_01","region
 
 The Francis TA 1.8 data weighting method was applied. This ended up down weighting the composition data which resulted in model convergence issues. The effect on the data weighting procedure is shown in the following figure.
 
-```{r ssb5AreaModel, out.width = '60%', fig.height= 4, fig.cap="Estimated SSB in the five region model", echo = F, eval = T}
+```{r ssb5AreaReweighting, out.width = '60%', fig.height= 4, fig.cap="Estimated SSB in the five region model", echo = F, eval = T}
 include_graphics(file.path("Figures", "Application" ,"5-Area","Model_01","ReWeighted_SSBs.png"))
 ```
 
