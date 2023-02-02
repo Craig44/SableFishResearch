@@ -1,5 +1,5 @@
 # Current Alaskan sablefish stock assessment model {#modeldescription}
-The latest published stock assessment [@goethel2021assessment] is a single area model sexually disaggregated integrated age-structured model. Let \(\boldsymbol{N_{y,s}}\) denote a vector of ages in year \(y\) for sex \(s\) (the partition) i.e., \(\boldsymbol{N_{y,s}} = (N_{1,y,s}, N_{2,y,s}, \dots, N_{a_+,y,s})^T\). The general process model is sequential and follows the general Equation \@ref(eq:processmodel),
+The latest published stock assessment [@goethel2021assessment] is a single area and sexually disaggregated age-structured model. Let \(\boldsymbol{N_{y,s}}\) denote a vector of ages in year \(y\) for sex \(s\) (the partition) i.e., \(\boldsymbol{N_{y,s}} = (N_{1,y,s}, N_{2,y,s}, \dots, N_{a_+,y,s})^T\). The general process model is sequential and follows the general Equation \@ref(eq:processmodel),
 
 \begin{equation} 
   \boldsymbol{N_{y,s}} = 
@@ -12,12 +12,12 @@ The latest published stock assessment [@goethel2021assessment] is a single area 
 where, \(g(.)\) is the function describing initial conditions for the partition and \(f(.)\) is the function that applies populations dynamics each year i.e., birth, death, growth and migration. See later sections for a detailed description of \(g(.)\) and \(f(.)\) and \(\boldsymbol{\theta}\) is the set of estimable (not all are estimated) parameters.
 
 
-Maximum Likelihood Estimates (MLE) for estimated parameters \(\widehat{\boldsymbol{\theta}}_{MLE}\) are evaluated,
+Maximum Likelihood Estimates (MLE) for estimated parameters \(\widehat{\boldsymbol{\theta}}_{MLE}\) are evaluated by,
 \begin{equation}
 	\widehat{\boldsymbol{\theta}}_{MLE} = \underset{\boldsymbol{\theta}}{\arg\max} \left( L\left(\boldsymbol{\theta} | \boldsymbol{y^{obs}}\right) \right)
 	  (\#eq:observationmodel)
 \end{equation}
-where, \(\boldsymbol{y^{obs}}\) is a set of observations and \(L\left( . \right)\) is an objective function that is made up of priors/penalties and densities. All the models in this research estimate \(\widehat{\boldsymbol{\theta}}_{MLE}\) by minimising the negative log of \(ll\left( . \right) = -\log(L\left( . \right))\). See the observation section for descriptions of \(ll\left( . \right)\).
+where, \(\boldsymbol{y^{obs}}\) is a set of observations and \(L\left( . \right)\) is an objective function that is made up of priors/penalties and probability densities. All the models in this research estimate \(\widehat{\boldsymbol{\theta}}_{MLE}\) by minimising the negative log of \(ll\left( . \right) = -\log(L\left( . \right))\). See the observation section for components of \(ll\left( . \right)\).
 
 
 All symbols used in the following equations are defined in the table at the end of this chapter.
@@ -40,7 +40,7 @@ The assessment assumes a closed population that is only effected by mortality (n
 \[
 Z_{a,y,s} = M + \sum_g F^g_{y} S^g_{a,y,s}
 \]
-where, \(S^g_{a,y,s}\) is the fishery selectivity and \(F^g_{y}\) is the annual estimated fishing mortality. The annual cycle follows,
+where, \(S^g_{a,y,s}\) is the fishery selectivity and \(F^g_{y}\) is the annual estimated fishing mortality for fishing fleet \(g\). The annual cycle follows,
 
 
 \begin{align*}
@@ -60,7 +60,7 @@ and \(p^s_{y}\) is the proportion of recruits in year \(y\) for sex \(s\).
 
 
 ## Observation equations (\(ll\left( . \right)\)) {-}
-Three are three observation types used in the current Sablefish stock assessment
+Three are three observation types used in the current sablefish stock assessment
 - Relative abundance indices
 - Age composition (aggregated over sex)
 - Length composition (disaggregated by sex)

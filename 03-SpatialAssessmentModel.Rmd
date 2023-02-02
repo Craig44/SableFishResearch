@@ -1,12 +1,12 @@
 # Spatial stock assessment model for Alaskan sablefish {#spatialmodeldescription}
-The spatial model used for this research is available as an R package and is best described by the R package documentation [found here](https://craig44.github.io/SpatialSablefishAssessment/TagIntegratedEq.html). I have described the general model, but the package documentation is the best resource for specific equations.
+The spatial model used for this research is available as an R package and is best described by the R package documentation [found here](https://craig44.github.io/SpatialSablefishAssessment/TagIntegratedEq.html). I have described the general model here for completness, but the package documentation is the best resource for specific equations.
 
 
 ## Process equations {-}
 ### Population dynamics {-}
 The order of processes in an annual cycle follow
 
-1. Recruitment and release of tagged fish (we apply initial tag induced mortality here)
+1. Recruitment and release of tagged fish (we apply initial tag induced mortality at this point)
 2. Total mortality and ageing
 3. Markovian movement
 4. Annual tag shedding (applied as a mortality process)
@@ -84,8 +84,8 @@ Tagged fish from release event \(k\) are denoted in the partition as \(T^k_{a,r,
 
 Other considerations for tag-releases
 
-- Do we want to include the inshore (Chatham Strait and Clarence Strait) tag-releases? there are alot of fish tagged in these regions. 
-- Do we care about the amount of tags that leave stock area? See Figure \@ref(fig:TagRecoveriesOutsideRegion)
+- Do we want to include the inshore/State (Chatham Strait and Clarence Strait) tag-releases? there are alot of fish tagged in these regions. 
+- Do we care about the amount of tags that leave the stock boundaries? See Figure \@ref(fig:TagRecoveriesOutsideRegion)
 
 
 ## Observation equations {-}

@@ -84,11 +84,6 @@ kable(ll_df, caption = "Negative log-likelihoods for index models")
 
 
 
-```{r spatialprediction, fig.cap="Spatial predition M1 with the tweedie distribution.", eval = T, echo = F, fig.width=5, fig.height= 5}
-knitr::include_graphics("Figures/spatial_tweedie_predict.png")
-```
-
-
 
 ```{r indexComparison, fig.cap="Comparison of indicies for the Tweedie distribution and the three model structures.", eval = T, echo = F, fig.width=5, fig.height= 5}
 knitr::include_graphics("Figures/indicies.png")
@@ -189,7 +184,7 @@ where, \(N^r_l\) are regional specific scaled length frequencies (described in t
 
 ### Continuation ratio logits (CRL) {-}
 
-**This method was not explored in detail**  due to the sex dimension for sablefish adding a complexity we didn't have time to get in to. There is R code that applies the CRL model ignoring sex in the data and wanted to partially document it as it seems quite promising.
+**This method was not explored in detail**  due to the sex dimension for sablefish adding a complexity we didn't have time to get in to. There is R code that applies the CRL model ignoring sex in the data and wanted to partially document it, as it seems quite promising.
 
 
 An alternative to the ALK is to use a continuation ratio model (CRL) to model the distribution of ages \(\boldsymbol{p}_a(\boldsymbol{x}) = (p_J, \dots, p_A)\), which has been proposed and explored in recent studies [@berg2012spatial;@correa2020improved]. Using a \(J\) minus \(A\) conditional model for describing the probability of being age \(a\) given it as at least \(a\), that is
@@ -215,7 +210,7 @@ Given the set of A − J models, the estimated unconditional probabilities \(p_a
 Bootstrapping is used to estimate standard errors for \(P_{a,R,y}\). Data used to calculate age-length keys are re sampled with replacement to calculate a SE and CV. This produces a CV for each age, region and year denoted by \(CV_{a,r, y}\). Proportions at age are assumed to be distributed according to the multinomial distribution. To translate the observation error expressed as a CV to an initial effective sample denoted by \(N^{eff}_y\) we apply a non-linear least squares solver to estimate \(N^{eff}_y\) by minimizing the following expression
 
 \[
-\log CV_{a,r, y} = \log \sqrt{\frac{P_{a,R,y}\widehat{N}^{eff}_y \left(1 -  P_{a,R,y}\right)}}{P_{a,R,y}\widehat{N}^{eff}_y}
+\log CV_{a,r, y} = \log \frac{\sqrt{P_{a,R,y}\widehat{N}^{eff}_y \left(1 -  P_{a,R,y}\right)}}{P_{a,R,y}\widehat{N}^{eff}_y}
 \]
 
 
@@ -280,4 +275,11 @@ include_graphics(file.path("Figures", "raw_ecdf_LFs_by_year_region_female.png"))
 
 ```{r maleCDFlengthsamples, out.width = '100%', fig.height= 10, fig.cap="CDF of length frequencies for males", echo = F, eval = T}
 include_graphics(file.path("Figures", "raw_ecdf_LFs_by_year_region_male.png"))
+```
+
+
+
+
+```{r spatialprediction, fig.cap="Spatial predition M1 with the tweedie distribution.", eval = T, echo = F, fig.width=5, fig.height= 5}
+knitr::include_graphics("Figures/spatial_tweedie_predict.png")
 ```

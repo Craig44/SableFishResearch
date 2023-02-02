@@ -2,14 +2,14 @@
 
 Based on our exploratory analysis we have developed the three following spatial models
 
-- 5 Area Merge EY/WY/SouthEast into EGOA 
-- 3 Area Merge Bering Sea, Aleutian Islands, and Western Gulf regions
+- 5 Area Merge EY/WY/SouthEast into a single EGOA region
+- 3 Area Merge Bering Sea, Aleutian Islands, and Western Gulf into a single region. This model is the same as @fenske2022implications
 - 1 Area merge all regions
 
 
 ## Single Area model {-}
 
-Due to the focus on spatial assessment models for this research, data sets that are in the current assessment were dropped during initial model development. These included, early Japanese fishery CPUE, early Japanese Length frequency observations and the NFMS trawl survey. The early Japanese data was dropped because it could not be disaggregated by sex or space. The trawl survey was initially not included because we believe that we have sufficient information from the longline survey and the trawl survey does not monitor the core sablefish depth range, which was thought to possibly introduce data conflict due to sampling variation which we wanted to minimize.
+Due to the focus on spatial assessment models for this research, some data sets that are in the current assessment were dropped during initial model development. These included, early Japanese fishery CPUE, early Japanese Length frequency observations and the NFMS trawl survey. The early Japanese data was dropped because it could not be disaggregated by sex or space. The trawl survey was initially not included because we believe that we have sufficient information from the longline survey and the trawl survey does not monitor the core sablefish depth range, which was thought to possibly introduce data conflict due to sampling variation which we wanted to minimize.
 
 ```{r obsSingleAreaModel, out.width = '60%', fig.height= 4, fig.cap="Observation frequency assumed in the `SpatialSablefishAssessment` (SSA) model", echo = F, eval = T}
 include_graphics(file.path("Figures", "Application" ,"1-Area","1977_start","Observation_Frequency.png"))
@@ -22,17 +22,17 @@ There are a few fundamental differences between these assessment models, which a
 
 
 - Start year 1977. Because `SpatialSablefishAssessment` does not have that early data. The model would not converge if started in 1960
-- No temporal overlap in age and length composition. The current assessment model provides age composition (aggregated by sex) and length composition (disaggregated by sex) simultaneously in years for the longline survey and fixed gear fishery. Because we use the age-length key method to derive age-frequencies, that treatment thought to be inappropriate due to the double use of the length data.
+- No temporal overlap in age and length composition. The current stock assessment model provides age composition (aggregated by sex) and length composition (disaggregated by sex) simultaneously in years for the longline survey and fixed gear fishery. Because we use the age-length key method to derive age-frequencies, that treatment was thought to be inappropriate due to the double use of the length data.
 - Age and Length composition are sexually disaggregated. As described in Chapter \@ref(sexratios) we assume for an observation in a year that composition sum to one over sex and age.
 
 - Slightly different treatment of initial age deviations for non-equilibrium age-structure
 
 - Fishing mortality are catch conditioned and not estimated as free parameters
 
-- An initial fishing mortality parameter was estimated as a free parameter. The current assessment assuems 10\% of the estimated average fixed gear fishing mortality
+- An initial fishing mortality parameter was estimated as a free parameter. The current assessment assumes 10\% of the estimated average fixed gear fishing mortality
 
 
-Even with the differences stated above, the models produced similar fits and estimated model quantities for overlapping years.
+Even with the differences stated above, the models produced similar estimated model quantities in comparable years.
 
 
 
@@ -63,31 +63,37 @@ include_graphics(file.path("Figures", "Application" ,"1-Area","include_tag_data"
 ```
 
 
-
 ## Three area model {-}
 
 
-```{r movement3AreaModel, out.width = '60%', fig.height= 4, fig.cap="Estimated movement in the three area model", echo = F, eval = T}
+```{r movement3AreaModel, out.width = '60%', fig.height= 4, fig.cap="Estimated movement in the three region model", echo = F, eval = T}
 include_graphics(file.path("Figures", "Application" ,"3-Area","TagData_01","Est_movement.png"))
 ```
 
 
 
-```{r ssb3AreaModel, out.width = '60%', fig.height= 4, fig.cap="Estimated SSB in the three area model", echo = F, eval = T}
+```{r ssb3AreaModel, out.width = '60%', fig.height= 4, fig.cap="Estimated SSB in the three region model", echo = F, eval = T}
 include_graphics(file.path("Figures", "Application" ,"3-Area","TagData_01","regional_ssb.png"))
 ```
 
 ## Five area model {-}
 
+The initial five area model had estimated regional mean recruitment parameters, but shared a common annual recruitment deviation. All composition data has assumed multinomial likelihoods and tag-recovery data was assumed Negative Binomial.
 
-```{r movement5AreaModel, out.width = '60%', fig.height= 4, fig.cap="Estimated movement in the three area model", echo = F, eval = T}
+```{r movement5AreaModel, out.width = '60%', fig.height= 4, fig.cap="Estimated movement in the five region model", echo = F, eval = T}
 include_graphics(file.path("Figures", "Application" ,"5-Area","Model_01","Est_movement.png"))
 ```
 
 
-
-```{r ssb5AreaModel, out.width = '60%', fig.height= 4, fig.cap="Estimated SSB in the three area model", echo = F, eval = T}
+```{r ssb5AreaModel, out.width = '60%', fig.height= 4, fig.cap="Estimated SSB in the five region model", echo = F, eval = T}
 include_graphics(file.path("Figures", "Application" ,"5-Area","Model_01","regional_ssb.png"))
+```
+
+
+The Francis TA 1.8 data weighting method was applied. This ended up down weighting the composition data which resulted in model convergence issues. The effect on the data weighting procedure is shown in the following figure.
+
+```{r ssb5AreaModel, out.width = '60%', fig.height= 4, fig.cap="Estimated SSB in the five region model", echo = F, eval = T}
+include_graphics(file.path("Figures", "Application" ,"5-Area","Model_01","ReWeighted_SSBs.png"))
 ```
 
 
