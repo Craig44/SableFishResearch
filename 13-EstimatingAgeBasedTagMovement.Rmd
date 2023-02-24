@@ -1,0 +1,298 @@
+# Estimating age-based movement {#agebasedmovement}
+
+Simple tagging process model
+
+\begin{align*}
+T^k_{a, r,t} & = T_a^k, \quad t = 0\\
+T^k_{a, r,t + 1} & = T^k_{a, r,t} e^{-M}, \quad t > 0\\
+\boldsymbol{T}^k_{a, t + 1} & = \boldsymbol{T}^k_{a, t + 1} (1 - S^o_a)  \boldsymbol{M}^y + \boldsymbol{T}^k_{a, t + 1}  S^o_a \boldsymbol{M}^o
+\end{align*}
+where, \(T_a^k\) is the initial number of tag releases for release event \(k\) and age \(a\), \(\boldsymbol{T}^k_{a, t + 1}\) is a matrix of numbers of tagged fish across all regions and ages from release event \(k\) and \(\boldsymbol{M}^y\) is a \(n_r \times n_r\) movement matrix for young fish and \(\boldsymbol{M}^o\) is the movement matrix for older fish. \(S^o_a\) is a movement based logistic ogive that determines what proportion of age-cohorts move based on \(\boldsymbol{M}^o\) and \((1 - S^o_a)\) indicates what proportion of age-cohorts move based on \(\boldsymbol{M}^y\)
+
+
+
+Generating age-based observation model 
+
+\begin{align*}
+\widehat{Y}^k_{r,t} & = \sum_a T^k_{a, r,t}(1 - S^o_a) \\
+\widehat{O}^k_{r,t} & = \sum_a T^k_{a, r,t} S^o_a \\
+{Y}^k_{r,t} & = \sum_a N^k_{a, r,t}(1 - S^o_a) \\
+{O}^k_{r,t} & = \sum_a N^k_{a, r,t} S^o_a \\
+\end{align*}
+
+\(\widehat{Y}^k_{r,t}\) expected tag recoveries for young fish, and \(\widehat{O}^k_{r,t}\) is the expected tag recoveries for old fish, and \( N^k_{a, r,t}\) is the observed tag-recovery by age.
+
+
+```{r loadagebasedTMBmodel, echo = F, eval = T, results = 'hide', warning=FALSE, message=FALSE, error = FALSE}
+compile(file.path("TMB","SimpleAgeBasedMovement.cpp"), flags = "-Wignored-attributes -O3",DLLFLAGS="");
+dyn.load(dynlib(file.path("TMB","SimpleAgeBasedMovement")))
+```
+
+
+```{r SetupAgeBasedOM}
+M = 0.12
+R0 = 20000
+ages = 1:30
+n_regions = 3
+young_move_matrix = old_move_matrix = matrix(rnorm(n_regions * n_regions, 10, 3), nrow = n_regions, ncol = n_regions)
+## young movement
+## encouraged to stay closer to region 1
+young_move_matrix[1,1] = 0.75
+young_move_matrix[1,2] = 0.2
+young_move_matrix[1,3] = 0.05
+
+young_move_matrix[2,1] = 0.3
+young_move_matrix[2,2] = 0.6
+young_move_matrix[2,3] = 0.1
+
+young_move_matrix[3,1] = 0.6
+young_move_matrix[3,2] = 0.3
+young_move_matrix[3,3] = 0.1
+
+## old movement
+## encouraged to stay closer to region 3
+old_move_matrix[1,1] = 0.1
+old_move_matrix[1,2] = 0.4
+old_move_matrix[1,3] = 0.5
+
+old_move_matrix[2,1] = 0.1
+old_move_matrix[2,2] = 0.5
+old_move_matrix[2,3] = 0.4
+
+old_move_matrix[3,1] = 0.1
+old_move_matrix[3,2] = 0.2
+old_move_matrix[3,3] = 0.7
+
+true_young_molten_move = melt(young_move_matrix)
+true_old_molten_move = melt(old_move_matrix)
+
+colnames(true_young_molten_move) = colnames(true_old_molten_move) = c("From", "To", "movement")
+
+## age based movement ogive
+a50_move = 6.7
+a95_move = 1.7
+old_age_based_movement = logis(ages, a50_move, a95_move)
+young_age_based_movement = 1 - old_age_based_movement
+
+init_N_age = calculate_initial_numbers_at_age_age_based_movement(n_regions, n_ages = length(ages), R0, old_movement_matrix = old_move_matrix, young_movement_matrix = young_move_matrix, age_based_movement_ogive = young_age_based_movement, natural_mortality =rep(M, length(ages)))
+
+data = list()
+data$initial_age_tag_releases = t(init_N_age)
+data$natural_mortality = M
+data$n_years = 5
+data$n_ages = length(ages)
+data$n_regions = n_regions
+data$ages = ages
+data$tag_recovery_obs = array(100, dim = c(data$n_ages, n_regions, n_regions, data$n_years))
+data$a50_bounds = c(3, 15)
+parameters = list()
+parameters$logisitic_a50_movement = logit_general(a50_move, data$a50_bounds[1], data$a50_bounds[2])
+parameters$ln_ato95_movement = log(a95_move)
+
+parameters$transformed_movement_pars_young = array(0, dim = c(n_regions - 1, n_regions))
+parameters$transformed_movement_pars_old = array(0, dim = c(n_regions - 1, n_regions))
+
+for(r in 1:n_regions) {
+  parameters$transformed_movement_pars_young[,r] = simplex(young_move_matrix[r, ])
+  parameters$transformed_movement_pars_old[,r] = simplex(old_move_matrix[r, ])
+}
+```
+
+
+## Simulation with fixed age-based ogive {-}
+Run a simulation with age-based movement ogive is fixed at correct values
+
+```{r FixOgiveSim}
+###### set starting parameters
+start_movement_matrix = matrix(rlnorm(n = n_regions * n_regions, log(0.01), 0.1), n_regions, n_regions)
+# renormalise
+start_movement_matrix = sweep(start_movement_matrix, 1, STATS = rowSums(start_movement_matrix), "/")
+
+start_parameters = list()
+start_parameters$logisitic_a50_movement = logit_general(4, data$a50_bounds[1], data$a50_bounds[2])
+start_parameters$ln_ato95_movement = log(1)
+
+start_parameters$transformed_movement_pars_young = array(0, dim = c(n_regions - 1, n_regions))
+start_parameters$transformed_movement_pars_old = array(0, dim = c(n_regions - 1, n_regions))
+
+for(r in 1:n_regions) {
+  start_parameters$transformed_movement_pars_young[,r] = simplex(start_movement_matrix[r, ])
+  start_parameters$transformed_movement_pars_old[,r] = simplex(start_movement_matrix[r, ])
+}
+
+n_sims = 250;
+sim_ls = list();
+young_age_based_ogive_df = old_age_based_ogive_df = NULL
+young_matrix_df = old_matrix_df = NULL
+a50_vec = ato95_vec = NULL
+## fix selectivity parameters at true values
+na_map = fix_pars(par_list = start_parameters, pars_to_exclude = c("logisitic_a50_movement","ln_ato95_movement"))
+# fix at true values
+start_parameters$logisitic_a50_movement = logit_general(a50_move, data$a50_bounds[1], data$a50_bounds[2])
+start_parameters$ln_ato95_movement = log(a95_move)
+nll = vector()
+for(sim_iter in 1:n_sims){
+  ## simulate data
+  simdata = test_obj$simulate(complete = T)
+  
+  ## re-estimate
+  reest_obj <- MakeADFun(data = simdata, parameters = start_parameters, map = na_map, DLL="Simple",
+                         silent = T)
+  #reest_obj$fn()
+  #reest_obj$gr()
+  ## Estimate
+  mle_spatial = nlminb(start = reest_obj$par, objective = reest_obj$fn, gradient  = reest_obj$gr,
+                       control = list(iter.max = 10000, eval.max = 10000))
+  try_improve = tryCatch(expr =
+                           for(i in 1:2) {
+                             g = as.numeric(reest_obj$gr(mle_spatial$par))
+                             h = optimHess(mle_spatial$par, fn = reest_obj$fn, gr = reest_obj$gr)
+                             mle_spatial$par = mle_spatial$par - solve(h,g)
+                             mle_spatial$objective = reest_obj$fn(mle_spatial$par)
+                           }
+                         , error = function(e){e})
+  
+  try_improve
+  
+  mle_report = reest_obj$report(mle_spatial$par)
+  
+  a50_vec = c(a50_vec, mle_report$a50_movement)
+  ato95_vec = c(ato95_vec, mle_report$ato95_movement)
+  
+  
+  young_ogive = data.frame(age = data$ages, ogive = mle_report$young_age_based_movement_ogive, sim = sim_iter)
+  old_ogive = data.frame(age = data$ages, ogive = mle_report$old_age_based_movement_ogive, sim = sim_iter)
+  
+  young_age_based_ogive_df = rbind(young_age_based_ogive_df, young_ogive)
+  old_age_based_ogive_df = rbind(old_age_based_ogive_df, old_ogive)
+  
+  young_matrix = mle_report$movement_matrix_young
+  old_matrix = mle_report$movement_matrix_old
+  
+  young_molten_move = melt(young_matrix)
+  old_molten_move = melt(old_matrix)
+  
+  colnames(young_molten_move) = colnames(old_molten_move) = c("From", "To", "movement")
+  young_molten_move$sim = sim_iter
+  old_molten_move$sim = sim_iter
+  
+  young_matrix_df = rbind(young_matrix_df, young_molten_move)
+  old_matrix_df = rbind(old_matrix_df, old_molten_move)
+  
+  nll = c(nll, mle_spatial$objective)
+}
+
+
+## visualise young movement rates
+ggplot(young_matrix_df) +
+  geom_boxplot(aes(y = movement)) +
+  geom_hline(data = true_young_molten_move, aes(yintercept = movement, col = "OM"), 
+             linewidth = 1.1, linetype = "dashed") +
+  facet_grid(From~To) +
+  ggtitle("Young movement rates") +
+  ylim(0,1) +
+  theme_bw()
+
+
+ggplot(old_matrix_df) +
+  geom_boxplot(aes(y = movement)) +
+  geom_hline(data = true_old_molten_move, aes(yintercept = movement, col = "OM"), 
+             linewidth = 1.1, linetype = "dashed") +
+  facet_grid(From~To)  +
+  ggtitle("old movement rates") +
+  ylim(0,1) +
+  theme_bw()
+```
+
+
+
+## Simulation estimate a50 parameter of age-based ogive {-}
+
+
+```{r Esta50Ogive}
+###### set starting parameters
+sim_ls = list();
+young_age_based_ogive_df_a50 = old_age_based_ogive_df_a50 = NULL
+young_matrix_df_a50 = old_matrix_df_a50 = NULL
+a50_vec = ato95_vec = NULL
+## fix selectivity parameters at true values
+na_map = fix_pars(par_list = start_parameters, pars_to_exclude = c("ln_ato95_movement"))
+# fix at true values
+start_parameters$logisitic_a50_movement = logit_general(4, data$a50_bounds[1], data$a50_bounds[2])
+start_parameters$ln_ato95_movement = log(a95_move)
+nll_a50 = vector()
+for(sim_iter in 1:n_sims){
+  ## simulate data
+  simdata = test_obj$simulate(complete = T)
+  
+  ## re-estimate
+  reest_obj <- MakeADFun(data = simdata, parameters = start_parameters, map = na_map, DLL="Simple", silent = T)
+  #reest_obj$fn()
+  #reest_obj$gr()
+  ## Estimate
+  mle_spatial = nlminb(start = reest_obj$par, objective = reest_obj$fn, gradient  = reest_obj$gr, control = list(iter.max = 10000, eval.max = 10000))
+  try_improve = tryCatch(expr =
+                           for(i in 1:2) {
+                             g = as.numeric(reest_obj$gr(mle_spatial$par))
+                             h = optimHess(mle_spatial$par, fn = reest_obj$fn, gr = reest_obj$gr)
+                             mle_spatial$par = mle_spatial$par - solve(h,g)
+                             mle_spatial$objective = reest_obj$fn(mle_spatial$par)
+                           }
+                         , error = function(e){e})
+  
+  try_improve
+  
+  mle_report = reest_obj$report(mle_spatial$par)
+  
+  a50_vec = c(a50_vec, mle_report$a50_movement)
+  ato95_vec = c(ato95_vec, mle_report$ato95_movement)
+  
+  
+  young_ogive = data.frame(age = data$ages, ogive = mle_report$young_age_based_movement_ogive, sim = sim_iter)
+  old_ogive = data.frame(age = data$ages, ogive = mle_report$old_age_based_movement_ogive, sim = sim_iter)
+  
+  young_age_based_ogive_df_a50 = rbind(young_age_based_ogive_df_a50, young_ogive)
+  old_age_based_ogive_df_a50 = rbind(old_age_based_ogive_df_a50, old_ogive)
+  
+  young_matrix = mle_report$movement_matrix_young
+  old_matrix = mle_report$movement_matrix_old
+  
+  young_molten_move = melt(young_matrix)
+  old_molten_move = melt(old_matrix)
+  
+  colnames(young_molten_move) = colnames(old_molten_move) = c("From", "To", "movement")
+  young_molten_move$sim = sim_iter
+  old_molten_move$sim = sim_iter
+  
+  young_matrix_df_a50 = rbind(young_matrix_df_a50, young_molten_move)
+  old_matrix_df_a50 = rbind(old_matrix_df_a50, old_molten_move)
+  
+  nll_a50 = c(nll_a50, mle_spatial$objective)
+}
+
+ggplot(young_matrix_df_a50) +
+  geom_boxplot(aes(y = movement)) +
+  geom_hline(data = true_young_molten_move, aes(yintercept = movement, col = "OM"), linewidth = 1.1, linetype = "dashed") +
+  facet_grid(From~To) +
+  ggtitle("Young movement rates") +
+  ylim(0,1) +
+  theme_bw()
+
+
+ggplot(old_matrix_df_a50) +
+  geom_boxplot(aes(y = movement)) +
+  geom_hline(data = true_old_molten_move, aes(yintercept = movement, col = "OM"), linewidth = 1.1, linetype = "dashed") +
+  facet_grid(From~To)  +
+  ggtitle("Old movement rates") +
+
+  ylim(0,1) +
+  theme_bw()
+
+hist(a50_vec)
+abline(v = a50_move, col = "red", lty = 2, lwd = 3)
+
+```
+
+
+
+

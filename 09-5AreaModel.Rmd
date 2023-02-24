@@ -39,4 +39,12 @@ include_graphics(file.path("Figures", "Application" ,"5-Area","Comparison","Sele
 
 
 
+## Notes about this model {-}
+
+I need to set the delta selectivity parameters for the survey to be the same between male and females so that I get converged models. This is also done in the current assessment.
+
+
+The trawl selectivity parameters can be problematic. I am not scaling the selectivities by the max which is done in the assessment, this can result in selectivities not have max values close to one. When estimating separate male and female trawl selectivities, the female selectivity frequently is estimated at an usual shape. To stabilize the model I have forced male and females to have the same selectivity for the trawl fishery.
+
+
 

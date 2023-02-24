@@ -1,11 +1,10 @@
 # Next steps {#nextsteps}
 
-- Run log likelihood profiles on Female Trawl selectivity parameters
+- Run log likelihood profiles on Female Trawl selectivity parameters. Profiles are very sporadic, when I force males and females to have the same selectivity it does produce sensible answers selectivity curves.
+
 - Apply the Dirichlet-Multinomial likelihood for compositional data
 - Start model 1990
 - Generate reference points and ABCs
-
-
 
 
 ## Simulation Scenarios {-}
@@ -13,3 +12,10 @@
 
 - What effect loosing early time-periods has on the assessment advice. The spatial models started much later in the time-series than when significant exploitation occured, which is a common issue with spatial models due to historical data not haveing spatial resolution to be used. This early period coincides with the largest removals in the time-series which is thought to be valuable to observe for observering contrast and helping estimate stock production [@hilborn1979comparison] this claim is actually countered by @magnusson2007makes.
 
+- What bias can we expect when we assume a closed population when in fact there is emigration outside of the stock boundary
+
+- Consequence in assuming a three region model when in fact there is five regions based on the Regression break points.
+
+- Spatial recruitment process and reference point consequences. Time-varying recruit devs by region vs time-varying recruitment deviations constant across 
+
+- age-varying movement? spasm paper to reference time-vs age varying movement.
