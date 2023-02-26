@@ -10,7 +10,7 @@ T^k_{a, r,t + 1} & = T^k_{a, r,t} e^{-M}, \quad t > 0\\
 where, \(T_a^k\) is the initial number of tag releases for release event \(k\) and age \(a\), \(\boldsymbol{T}^k_{a, t + 1}\) is a matrix of numbers of tagged fish across all regions from release event \(k\) and age \(a\), \(\boldsymbol{M}^y\) is a \(n_r \times n_r\) movement matrix for young fish and \(\boldsymbol{M}^o\) is the movement matrix for older fish. \(S^o_a\) is a movement based logistic ogive that determines what proportion of age-cohorts move based on \(\boldsymbol{M}^o\) and \((1 - S^o_a)\) indicates what proportion of age-cohorts move based on \(\boldsymbol{M}^y\). The age-based selectivity is parametersised as a logistic ogive with estimable parameters \(a_{50}\) (age at which \(S^o_a = 0.5\)) and \(a_{to95}\) (difference age when \(S^o_a = 0.5\) and \(S^o_a = 0.95\)),
 
 \[
-S^o_a = \frac{1}{1 + 19^{(a_{50} - a) / a_{to95}}
+S^o_a = \frac{1}{1 + 19^{(a_{50} - a) / a_{to95}}}
 \]
 This selectivity is forced to have maximum value of one so that all fish in the partition move based on either \(\boldsymbol{M}^y\) and \(\boldsymbol{M}^o\)
 \[
@@ -33,14 +33,18 @@ Generating age-based observations
 
 
 The following section is code and plots from running the three follosing simulations,
-.1 Simulate tag-recoveries with the Poisson distribution, estimate \(\boldsymbol{M}^y\) and \(\boldsymbol{M}^o\) with \(S^o_a\) fixed at values assumed in the OM
-.2 Simulate tag-recoveries with the Poisson distribution, estimate \(\boldsymbol{M}^y\), \(\boldsymbol{M}^o\), and \(a_{50}\) from \(S^o_a\), with \(a_{to95}\) fixed at the value assumed in the OM
-.3 Simulate tag-recoveries with the Poisson distribution, estimate \(\boldsymbol{M}^y\), \(\boldsymbol{M}^o\), \(a_{50}\), and \(a_{to95}\)
+
+1. Simulate tag-recoveries with the Poisson distribution, estimate \(\boldsymbol{M}^y\) and \(\boldsymbol{M}^o\) with \(S^o_a\) fixed at values assumed in the OM
+2. Simulate tag-recoveries with the Poisson distribution, estimate \(\boldsymbol{M}^y\), \(\boldsymbol{M}^o\), and \(a_{50}\) from \(S^o_a\), with \(a_{to95}\) fixed at the value assumed in the OM
+3. Simulate tag-recoveries with the Poisson distribution, estimate \(\boldsymbol{M}^y\), \(\boldsymbol{M}^o\), \(a_{50}\), and \(a_{to95}\)
 
 
 Results from these simulations show when \(S^o_a\) is correctly specified you can estimate both \(\boldsymbol{M}^y\) and \(\boldsymbol{M}^o\) well (caveats = good data and correct likelihood). This was also true when estimating just the \(a_{50}\) parameter when \(a_{to95}\) is specified correctly. However, when trying to estimate both movement matrices and both \(a_{50}\) and \(a_{to95}\) we get parameter estimating problems. With both parameters running to lower bounds. Interestingly the \(\boldsymbol{M}^y\)  is estimated well, but \(\boldsymbol{M}^o\)  has large biases. This same result occurs when specifying \(a_{to95}\) at a low value (almost knife edge) and just estimating \(a_{50}\), results not shown here.
 
 
+
+
+## Setup simulations {-}
 
 
 ```{r loadagebasedTMBmodel, echo = F, eval = T, results = 'hide', warning=FALSE, message=FALSE, error = FALSE}
