@@ -272,6 +272,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="12" data-path="agebasedmovement.html"><a href="agebasedmovement.html"><i class="fa fa-check"></i><b>12</b> Estimating age-based movement</a>
 <ul>
+<li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#setup-simulations"><i class="fa fa-check"></i>Setup simulations</a></li>
 <li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#simulation-with-fixed-age-based-ogive"><i class="fa fa-check"></i>Simulation with fixed age-based ogive</a></li>
 <li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#simulation-estimate-a50-parameter-of-age-based-ogive"><i class="fa fa-check"></i>Simulation estimate a50 parameter of age-based ogive</a></li>
 <li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#simulation-estimate-a50-and-a-to95-parameter-of-age-based-ogive"><i class="fa fa-check"></i>Simulation estimate a50 and a to95 parameter of age-based ogive</a></li>
@@ -356,7 +357,7 @@ T^k_{a, r,t + 1} &amp; = T^k_{a, r,t} e^{-M}, \quad t &gt; 0\\
 \end{align*}\]</span>
 where, <span class="math inline">\(T_a^k\)</span> is the initial number of tag releases for release event <span class="math inline">\(k\)</span> and age <span class="math inline">\(a\)</span>, <span class="math inline">\(\boldsymbol{T}^k_{a, t + 1}\)</span> is a matrix of numbers of tagged fish across all regions from release event <span class="math inline">\(k\)</span> and age <span class="math inline">\(a\)</span>, <span class="math inline">\(\boldsymbol{M}^y\)</span> is a <span class="math inline">\(n_r \times n_r\)</span> movement matrix for young fish and <span class="math inline">\(\boldsymbol{M}^o\)</span> is the movement matrix for older fish. <span class="math inline">\(S^o_a\)</span> is a movement based logistic ogive that determines what proportion of age-cohorts move based on <span class="math inline">\(\boldsymbol{M}^o\)</span> and <span class="math inline">\((1 - S^o_a)\)</span> indicates what proportion of age-cohorts move based on <span class="math inline">\(\boldsymbol{M}^y\)</span>. The age-based selectivity is parametersised as a logistic ogive with estimable parameters <span class="math inline">\(a_{50}\)</span> (age at which <span class="math inline">\(S^o_a = 0.5\)</span>) and <span class="math inline">\(a_{to95}\)</span> (difference age when <span class="math inline">\(S^o_a = 0.5\)</span> and <span class="math inline">\(S^o_a = 0.95\)</span>),</p>
 <p><span class="math display">\[
-S^o_a = \frac{1}{1 + 19^{(a_{50} - a) / a_{to95}}
+S^o_a = \frac{1}{1 + 19^{(a_{50} - a) / a_{to95}}}
 \]</span>
 This selectivity is forced to have maximum value of one so that all fish in the partition move based on either <span class="math inline">\(\boldsymbol{M}^y\)</span> and <span class="math inline">\(\boldsymbol{M}^o\)</span>
 <span class="math display">\[
@@ -370,11 +371,15 @@ S^o_a = \frac{S^o_a}{max(\boldsymbol{S}^o)}
 {O}^k_{r,t} &amp; = \sum_a N^k_{a, r,t} \widehat{S}^o_a \\
 \end{align*}\]</span></p>
 <p><span class="math inline">\(\widehat{Y}^k_{r,t}\)</span> expected tag recoveries for young fish, and <span class="math inline">\(\widehat{O}^k_{r,t}\)</span> is the expected tag recoveries for old fish, and <span class="math inline">\(N^k_{a, r,t}\)</span> is the observed tag-recovery by age.</p>
-<p>The following section is code and plots from running the three follosing simulations,
-.1 Simulate tag-recoveries with the Poisson distribution, estimate <span class="math inline">\(\boldsymbol{M}^y\)</span> and <span class="math inline">\(\boldsymbol{M}^o\)</span> with <span class="math inline">\(S^o_a\)</span> fixed at values assumed in the OM
-.2 Simulate tag-recoveries with the Poisson distribution, estimate <span class="math inline">\(\boldsymbol{M}^y\)</span>, <span class="math inline">\(\boldsymbol{M}^o\)</span>, and <span class="math inline">\(a_{50}\)</span> from <span class="math inline">\(S^o_a\)</span>, with <span class="math inline">\(a_{to95}\)</span> fixed at the value assumed in the OM
-.3 Simulate tag-recoveries with the Poisson distribution, estimate <span class="math inline">\(\boldsymbol{M}^y\)</span>, <span class="math inline">\(\boldsymbol{M}^o\)</span>, <span class="math inline">\(a_{50}\)</span>, and <span class="math inline">\(a_{to95}\)</span></p>
+<p>The following section is code and plots from running the three follosing simulations,</p>
+<ol style="list-style-type: decimal">
+<li>Simulate tag-recoveries with the Poisson distribution, estimate <span class="math inline">\(\boldsymbol{M}^y\)</span> and <span class="math inline">\(\boldsymbol{M}^o\)</span> with <span class="math inline">\(S^o_a\)</span> fixed at values assumed in the OM</li>
+<li>Simulate tag-recoveries with the Poisson distribution, estimate <span class="math inline">\(\boldsymbol{M}^y\)</span>, <span class="math inline">\(\boldsymbol{M}^o\)</span>, and <span class="math inline">\(a_{50}\)</span> from <span class="math inline">\(S^o_a\)</span>, with <span class="math inline">\(a_{to95}\)</span> fixed at the value assumed in the OM</li>
+<li>Simulate tag-recoveries with the Poisson distribution, estimate <span class="math inline">\(\boldsymbol{M}^y\)</span>, <span class="math inline">\(\boldsymbol{M}^o\)</span>, <span class="math inline">\(a_{50}\)</span>, and <span class="math inline">\(a_{to95}\)</span></li>
+</ol>
 <p>Results from these simulations show when <span class="math inline">\(S^o_a\)</span> is correctly specified you can estimate both <span class="math inline">\(\boldsymbol{M}^y\)</span> and <span class="math inline">\(\boldsymbol{M}^o\)</span> well (caveats = good data and correct likelihood). This was also true when estimating just the <span class="math inline">\(a_{50}\)</span> parameter when <span class="math inline">\(a_{to95}\)</span> is specified correctly. However, when trying to estimate both movement matrices and both <span class="math inline">\(a_{50}\)</span> and <span class="math inline">\(a_{to95}\)</span> we get parameter estimating problems. With both parameters running to lower bounds. Interestingly the <span class="math inline">\(\boldsymbol{M}^y\)</span> is estimated well, but <span class="math inline">\(\boldsymbol{M}^o\)</span> has large biases. This same result occurs when specifying <span class="math inline">\(a_{to95}\)</span> at a low value (almost knife edge) and just estimating <span class="math inline">\(a_{50}\)</span>, results not shown here.</p>
+<div id="setup-simulations" class="section level2 unnumbered hasAnchor">
+<h2>Setup simulations<a href="agebasedmovement.html#setup-simulations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="agebasedmovement.html#cb4-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">=</span> <span class="fl">0.12</span></span>
 <span id="cb4-2"><a href="agebasedmovement.html#cb4-2" aria-hidden="true" tabindex="-1"></a>R0 <span class="ot">=</span> <span class="dv">20000</span></span>
 <span id="cb4-3"><a href="agebasedmovement.html#cb4-3" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span></span>
@@ -443,6 +448,7 @@ S^o_a = \frac{S^o_a}{max(\boldsymbol{S}^o)}
 <span id="cb4-66"><a href="agebasedmovement.html#cb4-66" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb4-67"><a href="agebasedmovement.html#cb4-67" aria-hidden="true" tabindex="-1"></a>test_obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(<span class="at">data =</span> data, <span class="at">parameters =</span> parameters, <span class="at">DLL=</span><span class="st">&quot;SimpleAgeBasedMovement&quot;</span>)</span></code></pre></div>
 <pre><code>## Constructing atomic D_lgamma</code></pre>
+</div>
 <div id="simulation-with-fixed-age-based-ogive" class="section level2 unnumbered hasAnchor">
 <h2>Simulation with fixed age-based ogive<a href="agebasedmovement.html#simulation-with-fixed-age-based-ogive" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Run a simulation with age-based movement ogive is fixed at correct values</p>
