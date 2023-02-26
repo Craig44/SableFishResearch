@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 12 Estimating age-based movement | Alaskan sablefish research</title>
+  <meta name="description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 12 Estimating age-based movement | Alaskan sablefish research" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 12 Estimating age-based movement | Alaskan sablefish research" />
+  
+  <meta name="twitter:description" content="This Gitbook documents my post-doctoral research relating to Alaskan sablefish." />
+  
+
+<meta name="author" content="C.Marsh" />
+
+
+<meta name="date" content="2023-02-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="nextsteps.html"/>
+<link rel="next" href="taglike.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Sablefish Research</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#gitbook-outline"><i class="fa fa-check"></i>Gitbook outline</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#future-things-to-consider"><i class="fa fa-check"></i>Future things to consider</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="objectives.html"><a href="objectives.html"><i class="fa fa-check"></i><b>2</b> A list of objectives/milestones that we have set along the project life</a></li>
+<li class="chapter" data-level="3" data-path="modeldescription.html"><a href="modeldescription.html"><i class="fa fa-check"></i><b>3</b> Current Alaskan sablefish stock assessment model</a>
+<ul>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#process-equations"><i class="fa fa-check"></i>Process equations</a>
+<ul>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#initialisation-gleft.right"><i class="fa fa-check"></i>Initialisation (<span class="math inline">\(g\left(.\right)\)</span>)</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#population-dynamics-fleft.right"><i class="fa fa-check"></i>Population dynamics (<span class="math inline">\(f\left(.\right)\)</span>)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#observation-equations-llleft-.-right"><i class="fa fa-check"></i>Observation equations (<span class="math inline">\(ll\left( . \right)\)</span>)</a>
+<ul>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-age"><i class="fa fa-check"></i>Catch at age</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#relative-abundance-indices"><i class="fa fa-check"></i>Relative abundance indices</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#catch-at-length"><i class="fa fa-check"></i>Catch at length</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#symbol-notation"><i class="fa fa-check"></i>Symbol Notation</a>
+<ul>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#inference"><i class="fa fa-check"></i>Inference</a></li>
+<li class="chapter" data-level="" data-path="modeldescription.html"><a href="modeldescription.html#todo"><i class="fa fa-check"></i>TODO</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html"><i class="fa fa-check"></i><b>4</b> Spatial stock assessment model for Alaskan sablefish</a>
+<ul>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#process-equations-1"><i class="fa fa-check"></i>Process equations</a>
+<ul>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#population-dynamics"><i class="fa fa-check"></i>Population dynamics</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#initialisation"><i class="fa fa-check"></i>Initialisation</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#growth"><i class="fa fa-check"></i>Growth</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#recruitment"><i class="fa fa-check"></i>Recruitment</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#fishing-mortality"><i class="fa fa-check"></i>Fishing mortality</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#tag-release-events"><i class="fa fa-check"></i>Tag release events</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#observation-equations"><i class="fa fa-check"></i>Observation equations</a>
+<ul>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#catch-at-age-1"><i class="fa fa-check"></i>Catch at age</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#catch-at-length-1"><i class="fa fa-check"></i>Catch at length</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#proportions-at-age"><i class="fa fa-check"></i>Proportions at age</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#relative-abundance-indices-1"><i class="fa fa-check"></i>Relative abundance indices</a></li>
+<li class="chapter" data-level="" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#tag-recovery-observations"><i class="fa fa-check"></i>Tag recovery observations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="surveydata.html"><a href="surveydata.html"><i class="fa fa-check"></i><b>5</b> Survey data</a>
+<ul>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#survey-design"><i class="fa fa-check"></i>Survey design</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#abundance-catch-rate-data"><i class="fa fa-check"></i>Abundance (catch rate) data</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-data"><i class="fa fa-check"></i>Age data</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#length-frequencies"><i class="fa fa-check"></i>Length frequencies</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-frequencies"><i class="fa fa-check"></i>Age frequencies</a>
+<ul>
+<li class="chapter" data-level="5.0.1" data-path="surveydata.html"><a href="surveydata.html#direct-ageing-estimators"><i class="fa fa-check"></i><b>5.0.1</b> Direct ageing estimators</a></li>
+<li class="chapter" data-level="5.0.2" data-path="surveydata.html"><a href="surveydata.html#age-length-key-estimators"><i class="fa fa-check"></i><b>5.0.2</b> Age length key estimators</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#continuation-ratio-logits-crl"><i class="fa fa-check"></i>Continuation ratio logits (CRL)</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#estimating-initial-input-sample-sizes-for-multinomial-composition-data"><i class="fa fa-check"></i>Estimating initial input sample sizes for multinomial composition data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#age-length-data"><i class="fa fa-check"></i>Age-length data</a></li>
+<li class="chapter" data-level="" data-path="surveydata.html"><a href="surveydata.html#appendix"><i class="fa fa-check"></i>Appendix</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="observerdata.html"><a href="observerdata.html"><i class="fa fa-check"></i><b>6</b> Fishery dependent data</a>
+<ul>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#catch-data"><i class="fa fa-check"></i>Catch data</a></li>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#length-data"><i class="fa fa-check"></i>Length data</a>
+<ul>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#catch-at-length-estimator"><i class="fa fa-check"></i>Catch at length estimator</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-data-1"><i class="fa fa-check"></i>Age data</a></li>
+<li class="chapter" data-level="" data-path="observerdata.html"><a href="observerdata.html#age-length-data-1"><i class="fa fa-check"></i>Age-length data</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tagdata.html"><a href="tagdata.html"><i class="fa fa-check"></i><b>7</b> Tagging data exploration</a>
+<ul>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#data-grooming"><i class="fa fa-check"></i>Data grooming</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#exploratory-analysis-of-the-tag-data"><i class="fa fa-check"></i>Exploratory analysis of the tag data</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#single-area-recovery-model"><i class="fa fa-check"></i>Single area recovery model</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#lincoln-peterson-estimator"><i class="fa fa-check"></i>Lincoln-Peterson estimator</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#integrating-tagging-observations-in-spatial-age-structured-models"><i class="fa fa-check"></i>Integrating tagging observations in spatial age-structured models</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#tagging-things-to-consider-with-relevant-references"><i class="fa fa-check"></i>Tagging things to consider with relevant references</a></li>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#releasing-tags"><i class="fa fa-check"></i>Releasing tags</a>
+<ul>
+<li class="chapter" data-level="" data-path="tagdata.html"><a href="tagdata.html#things-to-consider-for-tag-release"><i class="fa fa-check"></i>Things to consider for tag release</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html"><i class="fa fa-check"></i><b>8</b> Initial model setup</a>
+<ul>
+<li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#model-start-time"><i class="fa fa-check"></i>Model start time</a></li>
+<li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#model-spatial-resolution-of-the-model"><i class="fa fa-check"></i>Model spatial resolution of the model</a></li>
+<li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#fishery-structure"><i class="fa fa-check"></i>Fishery structure</a></li>
+<li class="chapter" data-level="" data-path="InitialModelSetup.html"><a href="InitialModelSetup.html#repeat-regression-analysis-on-survey-lf-data"><i class="fa fa-check"></i>Repeat regression analysis on survey LF data</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="modelIterations.html"><a href="modelIterations.html"><i class="fa fa-check"></i><b>9</b> Model iterations</a>
+<ul>
+<li class="chapter" data-level="" data-path="modelIterations.html"><a href="modelIterations.html#single-area-model"><i class="fa fa-check"></i>Single Area model</a>
+<ul>
+<li class="chapter" data-level="" data-path="modelIterations.html"><a href="modelIterations.html#include-tagging-data"><i class="fa fa-check"></i>Include tagging data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="modelIterations.html"><a href="modelIterations.html#three-area-model"><i class="fa fa-check"></i>Three area model</a></li>
+<li class="chapter" data-level="" data-path="modelIterations.html"><a href="modelIterations.html#five-area-model"><i class="fa fa-check"></i>Five area model</a>
+<ul>
+<li class="chapter" data-level="" data-path="modelIterations.html"><a href="modelIterations.html#issues"><i class="fa fa-check"></i>Issues</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="modelIterations.html"><a href="modelIterations.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="FiveAreaModel.html"><a href="FiveAreaModel.html"><i class="fa fa-check"></i><b>10</b> Five area model permutations</a>
+<ul>
+<li class="chapter" data-level="" data-path="FiveAreaModel.html"><a href="FiveAreaModel.html#notes-about-this-model"><i class="fa fa-check"></i>Notes about this model</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="nextsteps.html"><a href="nextsteps.html"><i class="fa fa-check"></i><b>11</b> Next steps</a>
+<ul>
+<li class="chapter" data-level="" data-path="nextsteps.html"><a href="nextsteps.html#simulation-scenarios"><i class="fa fa-check"></i>Simulation Scenarios</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="agebasedmovement.html"><a href="agebasedmovement.html"><i class="fa fa-check"></i><b>12</b> Estimating age-based movement</a>
+<ul>
+<li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#simulation-with-fixed-age-based-ogive"><i class="fa fa-check"></i>Simulation with fixed age-based ogive</a></li>
+<li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#simulation-estimate-a50-parameter-of-age-based-ogive"><i class="fa fa-check"></i>Simulation estimate a50 parameter of age-based ogive</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="taglike.html"><a href="taglike.html"><i class="fa fa-check"></i><b>13</b> Tag likelihoods</a>
+<ul>
+<li class="chapter" data-level="" data-path="taglike.html"><a href="taglike.html#likelihoods"><i class="fa fa-check"></i>Likelihoods</a>
+<ul>
+<li class="chapter" data-level="" data-path="taglike.html"><a href="taglike.html#poisson"><i class="fa fa-check"></i>Poisson</a></li>
+<li class="chapter" data-level="" data-path="taglike.html"><a href="taglike.html#negative-binomial"><i class="fa fa-check"></i>Negative Binomial</a></li>
+<li class="chapter" data-level="" data-path="taglike.html"><a href="taglike.html#multinomialrelease-conditioned"><i class="fa fa-check"></i>Multinomial:release conditioned</a></li>
+<li class="chapter" data-level="" data-path="taglike.html"><a href="taglike.html#recapture-conditioned"><i class="fa fa-check"></i>Recapture conditioned</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="taglike.html"><a href="taglike.html#simple-simulation"><i class="fa fa-check"></i>Simple simulation</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="spatialmodeldescription.html"><a href="spatialmodeldescription.html#growth"><i class="fa fa-check"></i><b>14</b> Growth</a>
+<ul>
+<li class="chapter" data-level="" data-path="growth.html"><a href="growth.html"><i class="fa fa-check"></i>Growth estimation using the Laslett–Eveson–Polacheck (LEP) method</a>
+<ul>
+<li class="chapter" data-level="" data-path="growth.html"><a href="growth.html#age-at-length-growth-model"><i class="fa fa-check"></i>Age-at-length growth model</a></li>
+<li class="chapter" data-level="" data-path="growth.html"><a href="growth.html#tag-recapture-growth-data"><i class="fa fa-check"></i>Tag recapture growth data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="growth.html"><a href="growth.html#simulation-test-the-lep-method"><i class="fa fa-check"></i>Simulation test the “LEP” method</a></li>
+<li class="chapter" data-level="" data-path="growth.html"><a href="growth.html#next-steps"><i class="fa fa-check"></i>Next steps</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="refpoints.html"><a href="refpoints.html"><i class="fa fa-check"></i><b>15</b> Review/summarise reference points</a>
+<ul>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#spatial-reference-points"><i class="fa fa-check"></i>Spatial reference points</a>
+<ul>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-kritzer2004metapopulation"><i class="fa fa-check"></i>summarise <span class="citation">Kritzer and Sale (2004)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-goethel2017accounting"><i class="fa fa-check"></i>summarise <span class="citation">D. R. Goethel and Berger (2017)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-kapur2021equilibrium"><i class="fa fa-check"></i>summarise <span class="citation">MS Kapur et al. (2021)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-fenske2022implications"><i class="fa fa-check"></i>summarise <span class="citation">Fenske (2022)</span></a></li>
+<li class="chapter" data-level="" data-path="refpoints.html"><a href="refpoints.html#summarise-reuchlin2016spatial"><i class="fa fa-check"></i>summarise <span class="citation">Reuchlin-Hugenholtz et al. (2016)</span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="sexratios.html"><a href="sexratios.html"><i class="fa fa-check"></i><b>16</b> Sex ratios in age and length composition data</a>
+<ul>
+<li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#a-simple-simulation"><i class="fa fa-check"></i>A simple simulation</a>
+<ul>
+<li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#results"><i class="fa fa-check"></i>Results</a></li>
+<li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#future-research-that-was-not-considered-in-this-simple-simulation"><i class="fa fa-check"></i>Future research that was not considered in this simple simulation</a></li>
+<li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#scenario-1"><i class="fa fa-check"></i>Scenario 1</a></li>
+<li class="chapter" data-level="" data-path="sexratios.html"><a href="sexratios.html#scenario-2"><i class="fa fa-check"></i>Scenario 2</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="Fexplore.html"><a href="Fexplore.html"><i class="fa fa-check"></i><b>17</b> Fishing mortality approaches</a>
+<ul>
+<li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#set-up-a-simulation"><i class="fa fa-check"></i>Set up a simulation</a></li>
+<li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#appendix---hybrid-approach"><i class="fa fa-check"></i>Appendix - Hybrid approach</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="spatialInit.html"><a href="spatialInit.html"><i class="fa fa-check"></i><b>18</b> Initialising the plus group in spatial models</a></li>
+<li class="chapter" data-level="19" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i><b>19</b> Glossary of terms</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment" target="blank">NOAA Website</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Alaskan sablefish research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="agebasedmovement" class="section level1 hasAnchor" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Estimating age-based movement<a href="agebasedmovement.html#agebasedmovement" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Simple tagging process model</p>
+<p><span class="math display">\[\begin{align*}
+T^k_{a, r,t} &amp; = T_a^k, \quad t = 0\\
+T^k_{a, r,t + 1} &amp; = T^k_{a, r,t} e^{-M}, \quad t &gt; 0\\
+\boldsymbol{T}^k_{a, t + 1} &amp; = \boldsymbol{T}^k_{a, t + 1} (1 - S^o_a)  \boldsymbol{M}^y + \boldsymbol{T}^k_{a, t + 1}  S^o_a \boldsymbol{M}^o
+\end{align*}\]</span>
+where, <span class="math inline">\(T_a^k\)</span> is the initial number of tag releases for release event <span class="math inline">\(k\)</span> and age <span class="math inline">\(a\)</span>, <span class="math inline">\(\boldsymbol{T}^k_{a, t + 1}\)</span> is a matrix of numbers of tagged fish across all regions and ages from release event <span class="math inline">\(k\)</span> and <span class="math inline">\(\boldsymbol{M}^y\)</span> is a <span class="math inline">\(n_r \times n_r\)</span> movement matrix for young fish and <span class="math inline">\(\boldsymbol{M}^o\)</span> is the movement matrix for older fish. <span class="math inline">\(S^o_a\)</span> is a movement based logistic ogive that determines what proportion of age-cohorts move based on <span class="math inline">\(\boldsymbol{M}^o\)</span> and <span class="math inline">\((1 - S^o_a)\)</span> indicates what proportion of age-cohorts move based on <span class="math inline">\(\boldsymbol{M}^y\)</span></p>
+<p>Generating age-based observation model</p>
+<p><span class="math display">\[\begin{align*}
+\widehat{Y}^k_{r,t} &amp; = \sum_a T^k_{a, r,t}(1 - S^o_a) \\
+\widehat{O}^k_{r,t} &amp; = \sum_a T^k_{a, r,t} S^o_a \\
+{Y}^k_{r,t} &amp; = \sum_a N^k_{a, r,t}(1 - S^o_a) \\
+{O}^k_{r,t} &amp; = \sum_a N^k_{a, r,t} S^o_a \\
+\end{align*}\]</span></p>
+<p><span class="math inline">\(\widehat{Y}^k_{r,t}\)</span> expected tag recoveries for young fish, and <span class="math inline">\(\widehat{O}^k_{r,t}\)</span> is the expected tag recoveries for old fish, and <span class="math inline">\(N^k_{a, r,t}\)</span> is the observed tag-recovery by age.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="agebasedmovement.html#cb4-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">=</span> <span class="fl">0.12</span></span>
+<span id="cb4-2"><a href="agebasedmovement.html#cb4-2" aria-hidden="true" tabindex="-1"></a>R0 <span class="ot">=</span> <span class="dv">20000</span></span>
+<span id="cb4-3"><a href="agebasedmovement.html#cb4-3" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span></span>
+<span id="cb4-4"><a href="agebasedmovement.html#cb4-4" aria-hidden="true" tabindex="-1"></a>n_regions <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb4-5"><a href="agebasedmovement.html#cb4-5" aria-hidden="true" tabindex="-1"></a>young_move_matrix <span class="ot">=</span> old_move_matrix <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n_regions <span class="sc">*</span> n_regions, <span class="dv">10</span>, <span class="dv">3</span>), <span class="at">nrow =</span> n_regions, <span class="at">ncol =</span> n_regions)</span>
+<span id="cb4-6"><a href="agebasedmovement.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">## young movement</span></span>
+<span id="cb4-7"><a href="agebasedmovement.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="do">## encouraged to stay closer to region 1</span></span>
+<span id="cb4-8"><a href="agebasedmovement.html#cb4-8" aria-hidden="true" tabindex="-1"></a>young_move_matrix[<span class="dv">1</span>,<span class="dv">1</span>] <span class="ot">=</span> <span class="fl">0.75</span></span>
+<span id="cb4-9"><a href="agebasedmovement.html#cb4-9" aria-hidden="true" tabindex="-1"></a>young_move_matrix[<span class="dv">1</span>,<span class="dv">2</span>] <span class="ot">=</span> <span class="fl">0.2</span></span>
+<span id="cb4-10"><a href="agebasedmovement.html#cb4-10" aria-hidden="true" tabindex="-1"></a>young_move_matrix[<span class="dv">1</span>,<span class="dv">3</span>] <span class="ot">=</span> <span class="fl">0.05</span></span>
+<span id="cb4-11"><a href="agebasedmovement.html#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="agebasedmovement.html#cb4-12" aria-hidden="true" tabindex="-1"></a>young_move_matrix[<span class="dv">2</span>,<span class="dv">1</span>] <span class="ot">=</span> <span class="fl">0.3</span></span>
+<span id="cb4-13"><a href="agebasedmovement.html#cb4-13" aria-hidden="true" tabindex="-1"></a>young_move_matrix[<span class="dv">2</span>,<span class="dv">2</span>] <span class="ot">=</span> <span class="fl">0.6</span></span>
+<span id="cb4-14"><a href="agebasedmovement.html#cb4-14" aria-hidden="true" tabindex="-1"></a>young_move_matrix[<span class="dv">2</span>,<span class="dv">3</span>] <span class="ot">=</span> <span class="fl">0.1</span></span>
+<span id="cb4-15"><a href="agebasedmovement.html#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="agebasedmovement.html#cb4-16" aria-hidden="true" tabindex="-1"></a>young_move_matrix[<span class="dv">3</span>,<span class="dv">1</span>] <span class="ot">=</span> <span class="fl">0.6</span></span>
+<span id="cb4-17"><a href="agebasedmovement.html#cb4-17" aria-hidden="true" tabindex="-1"></a>young_move_matrix[<span class="dv">3</span>,<span class="dv">2</span>] <span class="ot">=</span> <span class="fl">0.3</span></span>
+<span id="cb4-18"><a href="agebasedmovement.html#cb4-18" aria-hidden="true" tabindex="-1"></a>young_move_matrix[<span class="dv">3</span>,<span class="dv">3</span>] <span class="ot">=</span> <span class="fl">0.1</span></span>
+<span id="cb4-19"><a href="agebasedmovement.html#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="agebasedmovement.html#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="do">## old movement</span></span>
+<span id="cb4-21"><a href="agebasedmovement.html#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="do">## encouraged to stay closer to region 3</span></span>
+<span id="cb4-22"><a href="agebasedmovement.html#cb4-22" aria-hidden="true" tabindex="-1"></a>old_move_matrix[<span class="dv">1</span>,<span class="dv">1</span>] <span class="ot">=</span> <span class="fl">0.1</span></span>
+<span id="cb4-23"><a href="agebasedmovement.html#cb4-23" aria-hidden="true" tabindex="-1"></a>old_move_matrix[<span class="dv">1</span>,<span class="dv">2</span>] <span class="ot">=</span> <span class="fl">0.4</span></span>
+<span id="cb4-24"><a href="agebasedmovement.html#cb4-24" aria-hidden="true" tabindex="-1"></a>old_move_matrix[<span class="dv">1</span>,<span class="dv">3</span>] <span class="ot">=</span> <span class="fl">0.5</span></span>
+<span id="cb4-25"><a href="agebasedmovement.html#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="agebasedmovement.html#cb4-26" aria-hidden="true" tabindex="-1"></a>old_move_matrix[<span class="dv">2</span>,<span class="dv">1</span>] <span class="ot">=</span> <span class="fl">0.1</span></span>
+<span id="cb4-27"><a href="agebasedmovement.html#cb4-27" aria-hidden="true" tabindex="-1"></a>old_move_matrix[<span class="dv">2</span>,<span class="dv">2</span>] <span class="ot">=</span> <span class="fl">0.5</span></span>
+<span id="cb4-28"><a href="agebasedmovement.html#cb4-28" aria-hidden="true" tabindex="-1"></a>old_move_matrix[<span class="dv">2</span>,<span class="dv">3</span>] <span class="ot">=</span> <span class="fl">0.4</span></span>
+<span id="cb4-29"><a href="agebasedmovement.html#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="agebasedmovement.html#cb4-30" aria-hidden="true" tabindex="-1"></a>old_move_matrix[<span class="dv">3</span>,<span class="dv">1</span>] <span class="ot">=</span> <span class="fl">0.1</span></span>
+<span id="cb4-31"><a href="agebasedmovement.html#cb4-31" aria-hidden="true" tabindex="-1"></a>old_move_matrix[<span class="dv">3</span>,<span class="dv">2</span>] <span class="ot">=</span> <span class="fl">0.2</span></span>
+<span id="cb4-32"><a href="agebasedmovement.html#cb4-32" aria-hidden="true" tabindex="-1"></a>old_move_matrix[<span class="dv">3</span>,<span class="dv">3</span>] <span class="ot">=</span> <span class="fl">0.7</span></span>
+<span id="cb4-33"><a href="agebasedmovement.html#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="agebasedmovement.html#cb4-34" aria-hidden="true" tabindex="-1"></a>true_young_molten_move <span class="ot">=</span> <span class="fu">melt</span>(young_move_matrix)</span>
+<span id="cb4-35"><a href="agebasedmovement.html#cb4-35" aria-hidden="true" tabindex="-1"></a>true_old_molten_move <span class="ot">=</span> <span class="fu">melt</span>(old_move_matrix)</span>
+<span id="cb4-36"><a href="agebasedmovement.html#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="agebasedmovement.html#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(true_young_molten_move) <span class="ot">=</span> <span class="fu">colnames</span>(true_old_molten_move) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;From&quot;</span>, <span class="st">&quot;To&quot;</span>, <span class="st">&quot;movement&quot;</span>)</span>
+<span id="cb4-38"><a href="agebasedmovement.html#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="agebasedmovement.html#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="do">## age based movement ogive</span></span>
+<span id="cb4-40"><a href="agebasedmovement.html#cb4-40" aria-hidden="true" tabindex="-1"></a>a50_move <span class="ot">=</span> <span class="fl">6.7</span></span>
+<span id="cb4-41"><a href="agebasedmovement.html#cb4-41" aria-hidden="true" tabindex="-1"></a>a95_move <span class="ot">=</span> <span class="fl">1.7</span></span>
+<span id="cb4-42"><a href="agebasedmovement.html#cb4-42" aria-hidden="true" tabindex="-1"></a>old_age_based_movement <span class="ot">=</span> <span class="fu">logis</span>(ages, a50_move, a95_move)</span>
+<span id="cb4-43"><a href="agebasedmovement.html#cb4-43" aria-hidden="true" tabindex="-1"></a>young_age_based_movement <span class="ot">=</span> <span class="dv">1</span> <span class="sc">-</span> old_age_based_movement</span>
+<span id="cb4-44"><a href="agebasedmovement.html#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-45"><a href="agebasedmovement.html#cb4-45" aria-hidden="true" tabindex="-1"></a>init_N_age <span class="ot">=</span> <span class="fu">calculate_initial_numbers_at_age_age_based_movement</span>(n_regions, <span class="at">n_ages =</span> <span class="fu">length</span>(ages), R0, <span class="at">old_movement_matrix =</span> old_move_matrix, <span class="at">young_movement_matrix =</span> young_move_matrix, <span class="at">age_based_movement_ogive =</span> young_age_based_movement, <span class="at">natural_mortality =</span><span class="fu">rep</span>(M, <span class="fu">length</span>(ages)))</span>
+<span id="cb4-46"><a href="agebasedmovement.html#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-47"><a href="agebasedmovement.html#cb4-47" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb4-48"><a href="agebasedmovement.html#cb4-48" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>initial_age_tag_releases <span class="ot">=</span> <span class="fu">t</span>(init_N_age)</span>
+<span id="cb4-49"><a href="agebasedmovement.html#cb4-49" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>natural_mortality <span class="ot">=</span> M</span>
+<span id="cb4-50"><a href="agebasedmovement.html#cb4-50" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>n_years <span class="ot">=</span> <span class="dv">5</span></span>
+<span id="cb4-51"><a href="agebasedmovement.html#cb4-51" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>n_ages <span class="ot">=</span> <span class="fu">length</span>(ages)</span>
+<span id="cb4-52"><a href="agebasedmovement.html#cb4-52" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>n_regions <span class="ot">=</span> n_regions</span>
+<span id="cb4-53"><a href="agebasedmovement.html#cb4-53" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>ages <span class="ot">=</span> ages</span>
+<span id="cb4-54"><a href="agebasedmovement.html#cb4-54" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>tag_recovery_obs <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">100</span>, <span class="at">dim =</span> <span class="fu">c</span>(data<span class="sc">$</span>n_ages, n_regions, n_regions, data<span class="sc">$</span>n_years))</span>
+<span id="cb4-55"><a href="agebasedmovement.html#cb4-55" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>a50_bounds <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">15</span>)</span>
+<span id="cb4-56"><a href="agebasedmovement.html#cb4-56" aria-hidden="true" tabindex="-1"></a>parameters <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb4-57"><a href="agebasedmovement.html#cb4-57" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>logisitic_a50_movement <span class="ot">=</span> <span class="fu">logit_general</span>(a50_move, data<span class="sc">$</span>a50_bounds[<span class="dv">1</span>], data<span class="sc">$</span>a50_bounds[<span class="dv">2</span>])</span>
+<span id="cb4-58"><a href="agebasedmovement.html#cb4-58" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_ato95_movement <span class="ot">=</span> <span class="fu">log</span>(a95_move)</span>
+<span id="cb4-59"><a href="agebasedmovement.html#cb4-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-60"><a href="agebasedmovement.html#cb4-60" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>transformed_movement_pars_young <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(n_regions <span class="sc">-</span> <span class="dv">1</span>, n_regions))</span>
+<span id="cb4-61"><a href="agebasedmovement.html#cb4-61" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>transformed_movement_pars_old <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(n_regions <span class="sc">-</span> <span class="dv">1</span>, n_regions))</span>
+<span id="cb4-62"><a href="agebasedmovement.html#cb4-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-63"><a href="agebasedmovement.html#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(r <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_regions) {</span>
+<span id="cb4-64"><a href="agebasedmovement.html#cb4-64" aria-hidden="true" tabindex="-1"></a>  parameters<span class="sc">$</span>transformed_movement_pars_young[,r] <span class="ot">=</span> <span class="fu">simplex</span>(young_move_matrix[r, ])</span>
+<span id="cb4-65"><a href="agebasedmovement.html#cb4-65" aria-hidden="true" tabindex="-1"></a>  parameters<span class="sc">$</span>transformed_movement_pars_old[,r] <span class="ot">=</span> <span class="fu">simplex</span>(old_move_matrix[r, ])</span>
+<span id="cb4-66"><a href="agebasedmovement.html#cb4-66" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-67"><a href="agebasedmovement.html#cb4-67" aria-hidden="true" tabindex="-1"></a>test_obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(<span class="at">data =</span> data, <span class="at">parameters =</span> parameters, <span class="at">DLL=</span><span class="st">&quot;SimpleAgeBasedMovement&quot;</span>)</span></code></pre></div>
+<pre><code>## Constructing atomic D_lgamma</code></pre>
+<div id="simulation-with-fixed-age-based-ogive" class="section level2 unnumbered hasAnchor">
+<h2>Simulation with fixed age-based ogive<a href="agebasedmovement.html#simulation-with-fixed-age-based-ogive" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Run a simulation with age-based movement ogive is fixed at correct values</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="agebasedmovement.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">###### set starting parameters</span></span>
+<span id="cb6-2"><a href="agebasedmovement.html#cb6-2" aria-hidden="true" tabindex="-1"></a>start_movement_matrix <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">rlnorm</span>(<span class="at">n =</span> n_regions <span class="sc">*</span> n_regions, <span class="fu">log</span>(<span class="fl">0.01</span>), <span class="fl">0.1</span>), n_regions, n_regions)</span>
+<span id="cb6-3"><a href="agebasedmovement.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># renormalise</span></span>
+<span id="cb6-4"><a href="agebasedmovement.html#cb6-4" aria-hidden="true" tabindex="-1"></a>start_movement_matrix <span class="ot">=</span> <span class="fu">sweep</span>(start_movement_matrix, <span class="dv">1</span>, <span class="at">STATS =</span> <span class="fu">rowSums</span>(start_movement_matrix), <span class="st">&quot;/&quot;</span>)</span>
+<span id="cb6-5"><a href="agebasedmovement.html#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="agebasedmovement.html#cb6-6" aria-hidden="true" tabindex="-1"></a>start_parameters <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb6-7"><a href="agebasedmovement.html#cb6-7" aria-hidden="true" tabindex="-1"></a>start_parameters<span class="sc">$</span>logisitic_a50_movement <span class="ot">=</span> <span class="fu">logit_general</span>(<span class="dv">4</span>, data<span class="sc">$</span>a50_bounds[<span class="dv">1</span>], data<span class="sc">$</span>a50_bounds[<span class="dv">2</span>])</span>
+<span id="cb6-8"><a href="agebasedmovement.html#cb6-8" aria-hidden="true" tabindex="-1"></a>start_parameters<span class="sc">$</span>ln_ato95_movement <span class="ot">=</span> <span class="fu">log</span>(<span class="dv">1</span>)</span>
+<span id="cb6-9"><a href="agebasedmovement.html#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="agebasedmovement.html#cb6-10" aria-hidden="true" tabindex="-1"></a>start_parameters<span class="sc">$</span>transformed_movement_pars_young <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(n_regions <span class="sc">-</span> <span class="dv">1</span>, n_regions))</span>
+<span id="cb6-11"><a href="agebasedmovement.html#cb6-11" aria-hidden="true" tabindex="-1"></a>start_parameters<span class="sc">$</span>transformed_movement_pars_old <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(n_regions <span class="sc">-</span> <span class="dv">1</span>, n_regions))</span>
+<span id="cb6-12"><a href="agebasedmovement.html#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="agebasedmovement.html#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(r <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_regions) {</span>
+<span id="cb6-14"><a href="agebasedmovement.html#cb6-14" aria-hidden="true" tabindex="-1"></a>  start_parameters<span class="sc">$</span>transformed_movement_pars_young[,r] <span class="ot">=</span> <span class="fu">simplex</span>(start_movement_matrix[r, ])</span>
+<span id="cb6-15"><a href="agebasedmovement.html#cb6-15" aria-hidden="true" tabindex="-1"></a>  start_parameters<span class="sc">$</span>transformed_movement_pars_old[,r] <span class="ot">=</span> <span class="fu">simplex</span>(start_movement_matrix[r, ])</span>
+<span id="cb6-16"><a href="agebasedmovement.html#cb6-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-17"><a href="agebasedmovement.html#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="agebasedmovement.html#cb6-18" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">=</span> <span class="dv">250</span>;</span>
+<span id="cb6-19"><a href="agebasedmovement.html#cb6-19" aria-hidden="true" tabindex="-1"></a>sim_ls <span class="ot">=</span> <span class="fu">list</span>();</span>
+<span id="cb6-20"><a href="agebasedmovement.html#cb6-20" aria-hidden="true" tabindex="-1"></a>young_age_based_ogive_df <span class="ot">=</span> old_age_based_ogive_df <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb6-21"><a href="agebasedmovement.html#cb6-21" aria-hidden="true" tabindex="-1"></a>young_matrix_df <span class="ot">=</span> old_matrix_df <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb6-22"><a href="agebasedmovement.html#cb6-22" aria-hidden="true" tabindex="-1"></a>a50_vec <span class="ot">=</span> ato95_vec <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb6-23"><a href="agebasedmovement.html#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="do">## fix selectivity parameters at true values</span></span>
+<span id="cb6-24"><a href="agebasedmovement.html#cb6-24" aria-hidden="true" tabindex="-1"></a>na_map <span class="ot">=</span> <span class="fu">fix_pars</span>(<span class="at">par_list =</span> start_parameters, <span class="at">pars_to_exclude =</span> <span class="fu">c</span>(<span class="st">&quot;logisitic_a50_movement&quot;</span>,<span class="st">&quot;ln_ato95_movement&quot;</span>))</span>
+<span id="cb6-25"><a href="agebasedmovement.html#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co"># fix at true values</span></span>
+<span id="cb6-26"><a href="agebasedmovement.html#cb6-26" aria-hidden="true" tabindex="-1"></a>start_parameters<span class="sc">$</span>logisitic_a50_movement <span class="ot">=</span> <span class="fu">logit_general</span>(a50_move, data<span class="sc">$</span>a50_bounds[<span class="dv">1</span>], data<span class="sc">$</span>a50_bounds[<span class="dv">2</span>])</span>
+<span id="cb6-27"><a href="agebasedmovement.html#cb6-27" aria-hidden="true" tabindex="-1"></a>start_parameters<span class="sc">$</span>ln_ato95_movement <span class="ot">=</span> <span class="fu">log</span>(a95_move)</span>
+<span id="cb6-28"><a href="agebasedmovement.html#cb6-28" aria-hidden="true" tabindex="-1"></a>nll <span class="ot">=</span> <span class="fu">vector</span>()</span>
+<span id="cb6-29"><a href="agebasedmovement.html#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(sim_iter <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sims){</span>
+<span id="cb6-30"><a href="agebasedmovement.html#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="do">## simulate data</span></span>
+<span id="cb6-31"><a href="agebasedmovement.html#cb6-31" aria-hidden="true" tabindex="-1"></a>  simdata <span class="ot">=</span> test_obj<span class="sc">$</span><span class="fu">simulate</span>(<span class="at">complete =</span> T)</span>
+<span id="cb6-32"><a href="agebasedmovement.html#cb6-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-33"><a href="agebasedmovement.html#cb6-33" aria-hidden="true" tabindex="-1"></a>  <span class="do">## re-estimate</span></span>
+<span id="cb6-34"><a href="agebasedmovement.html#cb6-34" aria-hidden="true" tabindex="-1"></a>  reest_obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(<span class="at">data =</span> simdata, <span class="at">parameters =</span> start_parameters, <span class="at">map =</span> na_map, <span class="at">DLL=</span><span class="st">&quot;SimpleAgeBasedMovement&quot;</span>,</span>
+<span id="cb6-35"><a href="agebasedmovement.html#cb6-35" aria-hidden="true" tabindex="-1"></a>                         <span class="at">silent =</span> T)</span>
+<span id="cb6-36"><a href="agebasedmovement.html#cb6-36" aria-hidden="true" tabindex="-1"></a>  <span class="co">#reest_obj$fn()</span></span>
+<span id="cb6-37"><a href="agebasedmovement.html#cb6-37" aria-hidden="true" tabindex="-1"></a>  <span class="co">#reest_obj$gr()</span></span>
+<span id="cb6-38"><a href="agebasedmovement.html#cb6-38" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Estimate</span></span>
+<span id="cb6-39"><a href="agebasedmovement.html#cb6-39" aria-hidden="true" tabindex="-1"></a>  mle_spatial <span class="ot">=</span> <span class="fu">nlminb</span>(<span class="at">start =</span> reest_obj<span class="sc">$</span>par, <span class="at">objective =</span> reest_obj<span class="sc">$</span>fn, <span class="at">gradient  =</span> reest_obj<span class="sc">$</span>gr,</span>
+<span id="cb6-40"><a href="agebasedmovement.html#cb6-40" aria-hidden="true" tabindex="-1"></a>                       <span class="at">control =</span> <span class="fu">list</span>(<span class="at">iter.max =</span> <span class="dv">10000</span>, <span class="at">eval.max =</span> <span class="dv">10000</span>))</span>
+<span id="cb6-41"><a href="agebasedmovement.html#cb6-41" aria-hidden="true" tabindex="-1"></a>  try_improve <span class="ot">=</span> <span class="fu">tryCatch</span>(<span class="at">expr =</span></span>
+<span id="cb6-42"><a href="agebasedmovement.html#cb6-42" aria-hidden="true" tabindex="-1"></a>                           <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) {</span>
+<span id="cb6-43"><a href="agebasedmovement.html#cb6-43" aria-hidden="true" tabindex="-1"></a>                             g <span class="ot">=</span> <span class="fu">as.numeric</span>(reest_obj<span class="sc">$</span><span class="fu">gr</span>(mle_spatial<span class="sc">$</span>par))</span>
+<span id="cb6-44"><a href="agebasedmovement.html#cb6-44" aria-hidden="true" tabindex="-1"></a>                             h <span class="ot">=</span> <span class="fu">optimHess</span>(mle_spatial<span class="sc">$</span>par, <span class="at">fn =</span> reest_obj<span class="sc">$</span>fn, <span class="at">gr =</span> reest_obj<span class="sc">$</span>gr)</span>
+<span id="cb6-45"><a href="agebasedmovement.html#cb6-45" aria-hidden="true" tabindex="-1"></a>                             mle_spatial<span class="sc">$</span>par <span class="ot">=</span> mle_spatial<span class="sc">$</span>par <span class="sc">-</span> <span class="fu">solve</span>(h,g)</span>
+<span id="cb6-46"><a href="agebasedmovement.html#cb6-46" aria-hidden="true" tabindex="-1"></a>                             mle_spatial<span class="sc">$</span>objective <span class="ot">=</span> reest_obj<span class="sc">$</span><span class="fu">fn</span>(mle_spatial<span class="sc">$</span>par)</span>
+<span id="cb6-47"><a href="agebasedmovement.html#cb6-47" aria-hidden="true" tabindex="-1"></a>                           }</span>
+<span id="cb6-48"><a href="agebasedmovement.html#cb6-48" aria-hidden="true" tabindex="-1"></a>                         , <span class="at">error =</span> <span class="cf">function</span>(e){e})</span>
+<span id="cb6-49"><a href="agebasedmovement.html#cb6-49" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-50"><a href="agebasedmovement.html#cb6-50" aria-hidden="true" tabindex="-1"></a>  try_improve</span>
+<span id="cb6-51"><a href="agebasedmovement.html#cb6-51" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-52"><a href="agebasedmovement.html#cb6-52" aria-hidden="true" tabindex="-1"></a>  mle_report <span class="ot">=</span> reest_obj<span class="sc">$</span><span class="fu">report</span>(mle_spatial<span class="sc">$</span>par)</span>
+<span id="cb6-53"><a href="agebasedmovement.html#cb6-53" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-54"><a href="agebasedmovement.html#cb6-54" aria-hidden="true" tabindex="-1"></a>  a50_vec <span class="ot">=</span> <span class="fu">c</span>(a50_vec, mle_report<span class="sc">$</span>a50_movement)</span>
+<span id="cb6-55"><a href="agebasedmovement.html#cb6-55" aria-hidden="true" tabindex="-1"></a>  ato95_vec <span class="ot">=</span> <span class="fu">c</span>(ato95_vec, mle_report<span class="sc">$</span>ato95_movement)</span>
+<span id="cb6-56"><a href="agebasedmovement.html#cb6-56" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-57"><a href="agebasedmovement.html#cb6-57" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-58"><a href="agebasedmovement.html#cb6-58" aria-hidden="true" tabindex="-1"></a>  young_ogive <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">age =</span> data<span class="sc">$</span>ages, <span class="at">ogive =</span> mle_report<span class="sc">$</span>young_age_based_movement_ogive, <span class="at">sim =</span> sim_iter)</span>
+<span id="cb6-59"><a href="agebasedmovement.html#cb6-59" aria-hidden="true" tabindex="-1"></a>  old_ogive <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">age =</span> data<span class="sc">$</span>ages, <span class="at">ogive =</span> mle_report<span class="sc">$</span>old_age_based_movement_ogive, <span class="at">sim =</span> sim_iter)</span>
+<span id="cb6-60"><a href="agebasedmovement.html#cb6-60" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-61"><a href="agebasedmovement.html#cb6-61" aria-hidden="true" tabindex="-1"></a>  young_age_based_ogive_df <span class="ot">=</span> <span class="fu">rbind</span>(young_age_based_ogive_df, young_ogive)</span>
+<span id="cb6-62"><a href="agebasedmovement.html#cb6-62" aria-hidden="true" tabindex="-1"></a>  old_age_based_ogive_df <span class="ot">=</span> <span class="fu">rbind</span>(old_age_based_ogive_df, old_ogive)</span>
+<span id="cb6-63"><a href="agebasedmovement.html#cb6-63" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-64"><a href="agebasedmovement.html#cb6-64" aria-hidden="true" tabindex="-1"></a>  young_matrix <span class="ot">=</span> mle_report<span class="sc">$</span>movement_matrix_young</span>
+<span id="cb6-65"><a href="agebasedmovement.html#cb6-65" aria-hidden="true" tabindex="-1"></a>  old_matrix <span class="ot">=</span> mle_report<span class="sc">$</span>movement_matrix_old</span>
+<span id="cb6-66"><a href="agebasedmovement.html#cb6-66" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-67"><a href="agebasedmovement.html#cb6-67" aria-hidden="true" tabindex="-1"></a>  young_molten_move <span class="ot">=</span> <span class="fu">melt</span>(young_matrix)</span>
+<span id="cb6-68"><a href="agebasedmovement.html#cb6-68" aria-hidden="true" tabindex="-1"></a>  old_molten_move <span class="ot">=</span> <span class="fu">melt</span>(old_matrix)</span>
+<span id="cb6-69"><a href="agebasedmovement.html#cb6-69" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-70"><a href="agebasedmovement.html#cb6-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(young_molten_move) <span class="ot">=</span> <span class="fu">colnames</span>(old_molten_move) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;From&quot;</span>, <span class="st">&quot;To&quot;</span>, <span class="st">&quot;movement&quot;</span>)</span>
+<span id="cb6-71"><a href="agebasedmovement.html#cb6-71" aria-hidden="true" tabindex="-1"></a>  young_molten_move<span class="sc">$</span>sim <span class="ot">=</span> sim_iter</span>
+<span id="cb6-72"><a href="agebasedmovement.html#cb6-72" aria-hidden="true" tabindex="-1"></a>  old_molten_move<span class="sc">$</span>sim <span class="ot">=</span> sim_iter</span>
+<span id="cb6-73"><a href="agebasedmovement.html#cb6-73" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-74"><a href="agebasedmovement.html#cb6-74" aria-hidden="true" tabindex="-1"></a>  young_matrix_df <span class="ot">=</span> <span class="fu">rbind</span>(young_matrix_df, young_molten_move)</span>
+<span id="cb6-75"><a href="agebasedmovement.html#cb6-75" aria-hidden="true" tabindex="-1"></a>  old_matrix_df <span class="ot">=</span> <span class="fu">rbind</span>(old_matrix_df, old_molten_move)</span>
+<span id="cb6-76"><a href="agebasedmovement.html#cb6-76" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-77"><a href="agebasedmovement.html#cb6-77" aria-hidden="true" tabindex="-1"></a>  nll <span class="ot">=</span> <span class="fu">c</span>(nll, mle_spatial<span class="sc">$</span>objective)</span>
+<span id="cb6-78"><a href="agebasedmovement.html#cb6-78" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-79"><a href="agebasedmovement.html#cb6-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-80"><a href="agebasedmovement.html#cb6-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-81"><a href="agebasedmovement.html#cb6-81" aria-hidden="true" tabindex="-1"></a><span class="do">## visualise young movement rates</span></span>
+<span id="cb6-82"><a href="agebasedmovement.html#cb6-82" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(young_matrix_df) <span class="sc">+</span></span>
+<span id="cb6-83"><a href="agebasedmovement.html#cb6-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> movement)) <span class="sc">+</span></span>
+<span id="cb6-84"><a href="agebasedmovement.html#cb6-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">data =</span> true_young_molten_move, <span class="fu">aes</span>(<span class="at">yintercept =</span> movement, <span class="at">col =</span> <span class="st">&quot;OM&quot;</span>), </span>
+<span id="cb6-85"><a href="agebasedmovement.html#cb6-85" aria-hidden="true" tabindex="-1"></a>             <span class="at">linewidth =</span> <span class="fl">1.1</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-86"><a href="agebasedmovement.html#cb6-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(From<span class="sc">~</span>To) <span class="sc">+</span></span>
+<span id="cb6-87"><a href="agebasedmovement.html#cb6-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Young movement rates&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-88"><a href="agebasedmovement.html#cb6-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb6-89"><a href="agebasedmovement.html#cb6-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/FixOgiveSim-1.png" width="672" /></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="agebasedmovement.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(old_matrix_df) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="agebasedmovement.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> movement)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="agebasedmovement.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">data =</span> true_old_molten_move, <span class="fu">aes</span>(<span class="at">yintercept =</span> movement, <span class="at">col =</span> <span class="st">&quot;OM&quot;</span>), </span>
+<span id="cb7-4"><a href="agebasedmovement.html#cb7-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">linewidth =</span> <span class="fl">1.1</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="agebasedmovement.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(From<span class="sc">~</span>To)  <span class="sc">+</span></span>
+<span id="cb7-6"><a href="agebasedmovement.html#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;old movement rates&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="agebasedmovement.html#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="agebasedmovement.html#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/FixOgiveSim-2.png" width="672" /></p>
+</div>
+<div id="simulation-estimate-a50-parameter-of-age-based-ogive" class="section level2 unnumbered hasAnchor">
+<h2>Simulation estimate a50 parameter of age-based ogive<a href="agebasedmovement.html#simulation-estimate-a50-parameter-of-age-based-ogive" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="agebasedmovement.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">###### set starting parameters</span></span>
+<span id="cb8-2"><a href="agebasedmovement.html#cb8-2" aria-hidden="true" tabindex="-1"></a>sim_ls <span class="ot">=</span> <span class="fu">list</span>();</span>
+<span id="cb8-3"><a href="agebasedmovement.html#cb8-3" aria-hidden="true" tabindex="-1"></a>young_age_based_ogive_df_a50 <span class="ot">=</span> old_age_based_ogive_df_a50 <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb8-4"><a href="agebasedmovement.html#cb8-4" aria-hidden="true" tabindex="-1"></a>young_matrix_df_a50 <span class="ot">=</span> old_matrix_df_a50 <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb8-5"><a href="agebasedmovement.html#cb8-5" aria-hidden="true" tabindex="-1"></a>a50_vec <span class="ot">=</span> ato95_vec <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb8-6"><a href="agebasedmovement.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="do">## fix selectivity parameters at true values</span></span>
+<span id="cb8-7"><a href="agebasedmovement.html#cb8-7" aria-hidden="true" tabindex="-1"></a>na_map <span class="ot">=</span> <span class="fu">fix_pars</span>(<span class="at">par_list =</span> start_parameters, <span class="at">pars_to_exclude =</span> <span class="fu">c</span>(<span class="st">&quot;ln_ato95_movement&quot;</span>))</span>
+<span id="cb8-8"><a href="agebasedmovement.html#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># fix at true values</span></span>
+<span id="cb8-9"><a href="agebasedmovement.html#cb8-9" aria-hidden="true" tabindex="-1"></a>start_parameters<span class="sc">$</span>logisitic_a50_movement <span class="ot">=</span> <span class="fu">logit_general</span>(<span class="dv">4</span>, data<span class="sc">$</span>a50_bounds[<span class="dv">1</span>], data<span class="sc">$</span>a50_bounds[<span class="dv">2</span>])</span>
+<span id="cb8-10"><a href="agebasedmovement.html#cb8-10" aria-hidden="true" tabindex="-1"></a>start_parameters<span class="sc">$</span>ln_ato95_movement <span class="ot">=</span> <span class="fu">log</span>(a95_move)</span>
+<span id="cb8-11"><a href="agebasedmovement.html#cb8-11" aria-hidden="true" tabindex="-1"></a>nll_a50 <span class="ot">=</span> <span class="fu">vector</span>()</span>
+<span id="cb8-12"><a href="agebasedmovement.html#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(sim_iter <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_sims){</span>
+<span id="cb8-13"><a href="agebasedmovement.html#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="do">## simulate data</span></span>
+<span id="cb8-14"><a href="agebasedmovement.html#cb8-14" aria-hidden="true" tabindex="-1"></a>  simdata <span class="ot">=</span> test_obj<span class="sc">$</span><span class="fu">simulate</span>(<span class="at">complete =</span> T)</span>
+<span id="cb8-15"><a href="agebasedmovement.html#cb8-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-16"><a href="agebasedmovement.html#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="do">## re-estimate</span></span>
+<span id="cb8-17"><a href="agebasedmovement.html#cb8-17" aria-hidden="true" tabindex="-1"></a>  reest_obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(<span class="at">data =</span> simdata, <span class="at">parameters =</span> start_parameters, <span class="at">map =</span> na_map, <span class="at">DLL=</span><span class="st">&quot;SimpleAgeBasedMovement&quot;</span>, <span class="at">silent =</span> T)</span>
+<span id="cb8-18"><a href="agebasedmovement.html#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">#reest_obj$fn()</span></span>
+<span id="cb8-19"><a href="agebasedmovement.html#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">#reest_obj$gr()</span></span>
+<span id="cb8-20"><a href="agebasedmovement.html#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Estimate</span></span>
+<span id="cb8-21"><a href="agebasedmovement.html#cb8-21" aria-hidden="true" tabindex="-1"></a>  mle_spatial <span class="ot">=</span> <span class="fu">nlminb</span>(<span class="at">start =</span> reest_obj<span class="sc">$</span>par, <span class="at">objective =</span> reest_obj<span class="sc">$</span>fn, <span class="at">gradient  =</span> reest_obj<span class="sc">$</span>gr, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">iter.max =</span> <span class="dv">10000</span>, <span class="at">eval.max =</span> <span class="dv">10000</span>))</span>
+<span id="cb8-22"><a href="agebasedmovement.html#cb8-22" aria-hidden="true" tabindex="-1"></a>  try_improve <span class="ot">=</span> <span class="fu">tryCatch</span>(<span class="at">expr =</span></span>
+<span id="cb8-23"><a href="agebasedmovement.html#cb8-23" aria-hidden="true" tabindex="-1"></a>                           <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) {</span>
+<span id="cb8-24"><a href="agebasedmovement.html#cb8-24" aria-hidden="true" tabindex="-1"></a>                             g <span class="ot">=</span> <span class="fu">as.numeric</span>(reest_obj<span class="sc">$</span><span class="fu">gr</span>(mle_spatial<span class="sc">$</span>par))</span>
+<span id="cb8-25"><a href="agebasedmovement.html#cb8-25" aria-hidden="true" tabindex="-1"></a>                             h <span class="ot">=</span> <span class="fu">optimHess</span>(mle_spatial<span class="sc">$</span>par, <span class="at">fn =</span> reest_obj<span class="sc">$</span>fn, <span class="at">gr =</span> reest_obj<span class="sc">$</span>gr)</span>
+<span id="cb8-26"><a href="agebasedmovement.html#cb8-26" aria-hidden="true" tabindex="-1"></a>                             mle_spatial<span class="sc">$</span>par <span class="ot">=</span> mle_spatial<span class="sc">$</span>par <span class="sc">-</span> <span class="fu">solve</span>(h,g)</span>
+<span id="cb8-27"><a href="agebasedmovement.html#cb8-27" aria-hidden="true" tabindex="-1"></a>                             mle_spatial<span class="sc">$</span>objective <span class="ot">=</span> reest_obj<span class="sc">$</span><span class="fu">fn</span>(mle_spatial<span class="sc">$</span>par)</span>
+<span id="cb8-28"><a href="agebasedmovement.html#cb8-28" aria-hidden="true" tabindex="-1"></a>                           }</span>
+<span id="cb8-29"><a href="agebasedmovement.html#cb8-29" aria-hidden="true" tabindex="-1"></a>                         , <span class="at">error =</span> <span class="cf">function</span>(e){e})</span>
+<span id="cb8-30"><a href="agebasedmovement.html#cb8-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-31"><a href="agebasedmovement.html#cb8-31" aria-hidden="true" tabindex="-1"></a>  try_improve</span>
+<span id="cb8-32"><a href="agebasedmovement.html#cb8-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-33"><a href="agebasedmovement.html#cb8-33" aria-hidden="true" tabindex="-1"></a>  mle_report <span class="ot">=</span> reest_obj<span class="sc">$</span><span class="fu">report</span>(mle_spatial<span class="sc">$</span>par)</span>
+<span id="cb8-34"><a href="agebasedmovement.html#cb8-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-35"><a href="agebasedmovement.html#cb8-35" aria-hidden="true" tabindex="-1"></a>  a50_vec <span class="ot">=</span> <span class="fu">c</span>(a50_vec, mle_report<span class="sc">$</span>a50_movement)</span>
+<span id="cb8-36"><a href="agebasedmovement.html#cb8-36" aria-hidden="true" tabindex="-1"></a>  ato95_vec <span class="ot">=</span> <span class="fu">c</span>(ato95_vec, mle_report<span class="sc">$</span>ato95_movement)</span>
+<span id="cb8-37"><a href="agebasedmovement.html#cb8-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-38"><a href="agebasedmovement.html#cb8-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-39"><a href="agebasedmovement.html#cb8-39" aria-hidden="true" tabindex="-1"></a>  young_ogive <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">age =</span> data<span class="sc">$</span>ages, <span class="at">ogive =</span> mle_report<span class="sc">$</span>young_age_based_movement_ogive, <span class="at">sim =</span> sim_iter)</span>
+<span id="cb8-40"><a href="agebasedmovement.html#cb8-40" aria-hidden="true" tabindex="-1"></a>  old_ogive <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">age =</span> data<span class="sc">$</span>ages, <span class="at">ogive =</span> mle_report<span class="sc">$</span>old_age_based_movement_ogive, <span class="at">sim =</span> sim_iter)</span>
+<span id="cb8-41"><a href="agebasedmovement.html#cb8-41" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-42"><a href="agebasedmovement.html#cb8-42" aria-hidden="true" tabindex="-1"></a>  young_age_based_ogive_df_a50 <span class="ot">=</span> <span class="fu">rbind</span>(young_age_based_ogive_df_a50, young_ogive)</span>
+<span id="cb8-43"><a href="agebasedmovement.html#cb8-43" aria-hidden="true" tabindex="-1"></a>  old_age_based_ogive_df_a50 <span class="ot">=</span> <span class="fu">rbind</span>(old_age_based_ogive_df_a50, old_ogive)</span>
+<span id="cb8-44"><a href="agebasedmovement.html#cb8-44" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-45"><a href="agebasedmovement.html#cb8-45" aria-hidden="true" tabindex="-1"></a>  young_matrix <span class="ot">=</span> mle_report<span class="sc">$</span>movement_matrix_young</span>
+<span id="cb8-46"><a href="agebasedmovement.html#cb8-46" aria-hidden="true" tabindex="-1"></a>  old_matrix <span class="ot">=</span> mle_report<span class="sc">$</span>movement_matrix_old</span>
+<span id="cb8-47"><a href="agebasedmovement.html#cb8-47" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-48"><a href="agebasedmovement.html#cb8-48" aria-hidden="true" tabindex="-1"></a>  young_molten_move <span class="ot">=</span> <span class="fu">melt</span>(young_matrix)</span>
+<span id="cb8-49"><a href="agebasedmovement.html#cb8-49" aria-hidden="true" tabindex="-1"></a>  old_molten_move <span class="ot">=</span> <span class="fu">melt</span>(old_matrix)</span>
+<span id="cb8-50"><a href="agebasedmovement.html#cb8-50" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-51"><a href="agebasedmovement.html#cb8-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(young_molten_move) <span class="ot">=</span> <span class="fu">colnames</span>(old_molten_move) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;From&quot;</span>, <span class="st">&quot;To&quot;</span>, <span class="st">&quot;movement&quot;</span>)</span>
+<span id="cb8-52"><a href="agebasedmovement.html#cb8-52" aria-hidden="true" tabindex="-1"></a>  young_molten_move<span class="sc">$</span>sim <span class="ot">=</span> sim_iter</span>
+<span id="cb8-53"><a href="agebasedmovement.html#cb8-53" aria-hidden="true" tabindex="-1"></a>  old_molten_move<span class="sc">$</span>sim <span class="ot">=</span> sim_iter</span>
+<span id="cb8-54"><a href="agebasedmovement.html#cb8-54" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-55"><a href="agebasedmovement.html#cb8-55" aria-hidden="true" tabindex="-1"></a>  young_matrix_df_a50 <span class="ot">=</span> <span class="fu">rbind</span>(young_matrix_df_a50, young_molten_move)</span>
+<span id="cb8-56"><a href="agebasedmovement.html#cb8-56" aria-hidden="true" tabindex="-1"></a>  old_matrix_df_a50 <span class="ot">=</span> <span class="fu">rbind</span>(old_matrix_df_a50, old_molten_move)</span>
+<span id="cb8-57"><a href="agebasedmovement.html#cb8-57" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-58"><a href="agebasedmovement.html#cb8-58" aria-hidden="true" tabindex="-1"></a>  nll_a50 <span class="ot">=</span> <span class="fu">c</span>(nll_a50, mle_spatial<span class="sc">$</span>objective)</span>
+<span id="cb8-59"><a href="agebasedmovement.html#cb8-59" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-60"><a href="agebasedmovement.html#cb8-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-61"><a href="agebasedmovement.html#cb8-61" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(young_matrix_df_a50) <span class="sc">+</span></span>
+<span id="cb8-62"><a href="agebasedmovement.html#cb8-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> movement)) <span class="sc">+</span></span>
+<span id="cb8-63"><a href="agebasedmovement.html#cb8-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">data =</span> true_young_molten_move, <span class="fu">aes</span>(<span class="at">yintercept =</span> movement, <span class="at">col =</span> <span class="st">&quot;OM&quot;</span>), <span class="at">linewidth =</span> <span class="fl">1.1</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb8-64"><a href="agebasedmovement.html#cb8-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(From<span class="sc">~</span>To) <span class="sc">+</span></span>
+<span id="cb8-65"><a href="agebasedmovement.html#cb8-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Young movement rates&quot;</span>) <span class="sc">+</span></span>
+<span id="cb8-66"><a href="agebasedmovement.html#cb8-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb8-67"><a href="agebasedmovement.html#cb8-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/Esta50Ogive-1.png" width="672" /></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="agebasedmovement.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(old_matrix_df_a50) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="agebasedmovement.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> movement)) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="agebasedmovement.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">data =</span> true_old_molten_move, <span class="fu">aes</span>(<span class="at">yintercept =</span> movement, <span class="at">col =</span> <span class="st">&quot;OM&quot;</span>), <span class="at">linewidth =</span> <span class="fl">1.1</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="agebasedmovement.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(From<span class="sc">~</span>To)  <span class="sc">+</span></span>
+<span id="cb9-5"><a href="agebasedmovement.html#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Old movement rates&quot;</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="agebasedmovement.html#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="agebasedmovement.html#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="agebasedmovement.html#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/Esta50Ogive-2.png" width="672" /></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="agebasedmovement.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(a50_vec)</span>
+<span id="cb10-2"><a href="agebasedmovement.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> a50_move, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Esta50Ogive-3.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="nextsteps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="taglike.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment/13-EstimatingAgeBasedTagMovement.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection",
+"depth": 1
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
