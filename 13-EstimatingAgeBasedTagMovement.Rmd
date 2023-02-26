@@ -96,7 +96,7 @@ for(r in 1:n_regions) {
   parameters$transformed_movement_pars_young[,r] = simplex(young_move_matrix[r, ])
   parameters$transformed_movement_pars_old[,r] = simplex(old_move_matrix[r, ])
 }
-test_obj <- MakeADFun(data = data, parameters = parameters, DLL="Simple")
+test_obj <- MakeADFun(data = data, parameters = parameters, DLL="SimpleAgeBasedMovement")
 
 ```
 
