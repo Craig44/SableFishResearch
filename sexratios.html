@@ -274,6 +274,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#simulation-with-fixed-age-based-ogive"><i class="fa fa-check"></i>Simulation with fixed age-based ogive</a></li>
 <li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#simulation-estimate-a50-parameter-of-age-based-ogive"><i class="fa fa-check"></i>Simulation estimate a50 parameter of age-based ogive</a></li>
+<li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#simulation-estimate-a50-and-a-to95-parameter-of-age-based-ogive"><i class="fa fa-check"></i>Simulation estimate a50 and a to95 parameter of age-based ogive</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="taglike.html"><a href="taglike.html"><i class="fa fa-check"></i><b>13</b> Tag likelihoods</a>
 <ul>
@@ -393,58 +394,58 @@ where, <span class="math inline">\(N^{eff, k}_{y,s}\)</span> is the effective sa
 <li>Look at some residuals to see if that is a way to discredit some of these models
 ### Operating Model (OM) Parameters {-}</li>
 </ul>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="sexratios.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb19-2"><a href="sexratios.html#cb19-2" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">=</span> <span class="dv">5</span></span>
-<span id="cb19-3"><a href="sexratios.html#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="sexratios.html#cb19-4" aria-hidden="true" tabindex="-1"></a>bio_params <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb19-5"><a href="sexratios.html#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ages =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
-<span id="cb19-6"><a href="sexratios.html#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">L_inf_m =</span> <span class="dv">58</span>,</span>
-<span id="cb19-7"><a href="sexratios.html#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">K_m =</span> <span class="fl">0.133</span>,</span>
-<span id="cb19-8"><a href="sexratios.html#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">t0_m =</span> <span class="dv">0</span>,</span>
-<span id="cb19-9"><a href="sexratios.html#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">L_inf_f =</span> <span class="dv">62</span>,</span>
-<span id="cb19-10"><a href="sexratios.html#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">K_f =</span> <span class="fl">0.143</span>,</span>
-<span id="cb19-11"><a href="sexratios.html#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">t0_f =</span> <span class="dv">0</span>,</span>
-<span id="cb19-12"><a href="sexratios.html#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">M =</span> <span class="fl">0.15</span>,</span>
-<span id="cb19-13"><a href="sexratios.html#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">a_m =</span> <span class="fl">2.18e-9</span>, <span class="do">## tonnes</span></span>
-<span id="cb19-14"><a href="sexratios.html#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">b_m =</span> <span class="fl">3.2</span>,</span>
-<span id="cb19-15"><a href="sexratios.html#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">a_f =</span> <span class="fl">2.08e-9</span>, <span class="do">## tonnes</span></span>
-<span id="cb19-16"><a href="sexratios.html#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">b_f =</span> <span class="fl">3.3</span>,</span>
-<span id="cb19-17"><a href="sexratios.html#cb19-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_a50 =</span> <span class="fl">2.3</span>,</span>
-<span id="cb19-18"><a href="sexratios.html#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_ato95 =</span> <span class="fl">1.2</span>,</span>
-<span id="cb19-19"><a href="sexratios.html#cb19-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma =</span> <span class="fl">0.6</span>,</span>
-<span id="cb19-20"><a href="sexratios.html#cb19-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">h =</span> <span class="fl">0.85</span>,</span>
-<span id="cb19-21"><a href="sexratios.html#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma_r =</span> <span class="fl">0.6</span>,</span>
-<span id="cb19-22"><a href="sexratios.html#cb19-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">R0 =</span> <span class="dv">8234132</span>,</span>
-<span id="cb19-23"><a href="sexratios.html#cb19-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">plus_group =</span> <span class="dv">1</span> <span class="co"># 0 = No, 1 = Yes</span></span>
-<span id="cb19-24"><a href="sexratios.html#cb19-24" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-25"><a href="sexratios.html#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-26"><a href="sexratios.html#cb19-26" aria-hidden="true" tabindex="-1"></a>other_params <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb19-27"><a href="sexratios.html#cb19-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_a50_m =</span> <span class="fl">3.6</span>,</span>
-<span id="cb19-28"><a href="sexratios.html#cb19-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_ato95_m =</span> <span class="dv">2</span>,</span>
-<span id="cb19-29"><a href="sexratios.html#cb19-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_a50_f =</span> <span class="fl">4.6</span>,</span>
-<span id="cb19-30"><a href="sexratios.html#cb19-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_ato95_f =</span> <span class="fl">1.4</span>,</span>
-<span id="cb19-31"><a href="sexratios.html#cb19-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_q =</span> <span class="fl">0.2</span>,</span>
-<span id="cb19-32"><a href="sexratios.html#cb19-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_alpha =</span> <span class="dv">1</span>,</span>
-<span id="cb19-33"><a href="sexratios.html#cb19-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_a50_m =</span> <span class="fl">4.2</span>,</span>
-<span id="cb19-34"><a href="sexratios.html#cb19-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_ato95_m =</span> <span class="fl">1.17</span>,</span>
-<span id="cb19-35"><a href="sexratios.html#cb19-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_a50_f =</span> <span class="fl">4.7</span>,</span>
-<span id="cb19-36"><a href="sexratios.html#cb19-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_ato95_f =</span> <span class="fl">1.76</span>,</span>
-<span id="cb19-37"><a href="sexratios.html#cb19-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_alpha =</span> <span class="dv">1</span>,</span>
-<span id="cb19-38"><a href="sexratios.html#cb19-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">ssb_prop_Z =</span> <span class="fl">0.5</span>,</span>
-<span id="cb19-39"><a href="sexratios.html#cb19-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_prop_Z =</span> <span class="fl">0.5</span>,</span>
-<span id="cb19-40"><a href="sexratios.html#cb19-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_age_error =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.4</span>),  <span class="do">## sd, rho (ignored if iid)</span></span>
-<span id="cb19-41"><a href="sexratios.html#cb19-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">fishery_age_error =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.4</span>),  <span class="do">## sd, rho (ignored if iid)</span></span>
-<span id="cb19-42"><a href="sexratios.html#cb19-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_bio_cv =</span> <span class="fu">c</span>(<span class="fl">0.1</span>)</span>
-<span id="cb19-43"><a href="sexratios.html#cb19-43" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-44"><a href="sexratios.html#cb19-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-45"><a href="sexratios.html#cb19-45" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">=</span> bio_params<span class="sc">$</span>ages</span>
-<span id="cb19-46"><a href="sexratios.html#cb19-46" aria-hidden="true" tabindex="-1"></a>max_age <span class="ot">=</span> <span class="fu">max</span>(bio_params<span class="sc">$</span>ages)</span>
-<span id="cb19-47"><a href="sexratios.html#cb19-47" aria-hidden="true" tabindex="-1"></a>n_years <span class="ot">=</span> <span class="dv">30</span></span>
-<span id="cb19-48"><a href="sexratios.html#cb19-48" aria-hidden="true" tabindex="-1"></a>years <span class="ot">=</span> (<span class="dv">2020</span> <span class="sc">-</span> n_years <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="dv">2020</span></span>
-<span id="cb19-49"><a href="sexratios.html#cb19-49" aria-hidden="true" tabindex="-1"></a>n_ages <span class="ot">=</span> <span class="fu">length</span>(ages)</span>
-<span id="cb19-50"><a href="sexratios.html#cb19-50" aria-hidden="true" tabindex="-1"></a><span class="do">## annual fishing mortality</span></span>
-<span id="cb19-51"><a href="sexratios.html#cb19-51" aria-hidden="true" tabindex="-1"></a>start_F <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.02</span>, <span class="at">to =</span> <span class="fl">0.1</span>, <span class="at">length =</span> <span class="dv">10</span>)), <span class="fl">0.1</span>), <span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fl">0.1</span>), <span class="fl">0.1</span>), <span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fl">0.07</span>), <span class="fl">0.1</span>))</span>
-<span id="cb19-52"><a href="sexratios.html#cb19-52" aria-hidden="true" tabindex="-1"></a>recruit_devs <span class="ot">=</span> <span class="fu">log</span>(<span class="fu">rlnorm</span>(n_years, <span class="sc">-</span><span class="fl">0.5</span> <span class="sc">*</span> bio_params<span class="sc">$</span>sigma_r <span class="sc">*</span> bio_params<span class="sc">$</span>sigma_r, bio_params<span class="sc">$</span>sigma_r))</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="sexratios.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb14-2"><a href="sexratios.html#cb14-2" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">=</span> <span class="dv">5</span></span>
+<span id="cb14-3"><a href="sexratios.html#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="sexratios.html#cb14-4" aria-hidden="true" tabindex="-1"></a>bio_params <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb14-5"><a href="sexratios.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ages =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb14-6"><a href="sexratios.html#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">L_inf_m =</span> <span class="dv">58</span>,</span>
+<span id="cb14-7"><a href="sexratios.html#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">K_m =</span> <span class="fl">0.133</span>,</span>
+<span id="cb14-8"><a href="sexratios.html#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">t0_m =</span> <span class="dv">0</span>,</span>
+<span id="cb14-9"><a href="sexratios.html#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">L_inf_f =</span> <span class="dv">62</span>,</span>
+<span id="cb14-10"><a href="sexratios.html#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">K_f =</span> <span class="fl">0.143</span>,</span>
+<span id="cb14-11"><a href="sexratios.html#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">t0_f =</span> <span class="dv">0</span>,</span>
+<span id="cb14-12"><a href="sexratios.html#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">M =</span> <span class="fl">0.15</span>,</span>
+<span id="cb14-13"><a href="sexratios.html#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">a_m =</span> <span class="fl">2.18e-9</span>, <span class="do">## tonnes</span></span>
+<span id="cb14-14"><a href="sexratios.html#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">b_m =</span> <span class="fl">3.2</span>,</span>
+<span id="cb14-15"><a href="sexratios.html#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">a_f =</span> <span class="fl">2.08e-9</span>, <span class="do">## tonnes</span></span>
+<span id="cb14-16"><a href="sexratios.html#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">b_f =</span> <span class="fl">3.3</span>,</span>
+<span id="cb14-17"><a href="sexratios.html#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_a50 =</span> <span class="fl">2.3</span>,</span>
+<span id="cb14-18"><a href="sexratios.html#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">m_ato95 =</span> <span class="fl">1.2</span>,</span>
+<span id="cb14-19"><a href="sexratios.html#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma =</span> <span class="fl">0.6</span>,</span>
+<span id="cb14-20"><a href="sexratios.html#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">h =</span> <span class="fl">0.85</span>,</span>
+<span id="cb14-21"><a href="sexratios.html#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">sigma_r =</span> <span class="fl">0.6</span>,</span>
+<span id="cb14-22"><a href="sexratios.html#cb14-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">R0 =</span> <span class="dv">8234132</span>,</span>
+<span id="cb14-23"><a href="sexratios.html#cb14-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">plus_group =</span> <span class="dv">1</span> <span class="co"># 0 = No, 1 = Yes</span></span>
+<span id="cb14-24"><a href="sexratios.html#cb14-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-25"><a href="sexratios.html#cb14-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-26"><a href="sexratios.html#cb14-26" aria-hidden="true" tabindex="-1"></a>other_params <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb14-27"><a href="sexratios.html#cb14-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_a50_m =</span> <span class="fl">3.6</span>,</span>
+<span id="cb14-28"><a href="sexratios.html#cb14-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_ato95_m =</span> <span class="dv">2</span>,</span>
+<span id="cb14-29"><a href="sexratios.html#cb14-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_a50_f =</span> <span class="fl">4.6</span>,</span>
+<span id="cb14-30"><a href="sexratios.html#cb14-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_ato95_f =</span> <span class="fl">1.4</span>,</span>
+<span id="cb14-31"><a href="sexratios.html#cb14-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_q =</span> <span class="fl">0.2</span>,</span>
+<span id="cb14-32"><a href="sexratios.html#cb14-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">s_alpha =</span> <span class="dv">1</span>,</span>
+<span id="cb14-33"><a href="sexratios.html#cb14-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_a50_m =</span> <span class="fl">4.2</span>,</span>
+<span id="cb14-34"><a href="sexratios.html#cb14-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_ato95_m =</span> <span class="fl">1.17</span>,</span>
+<span id="cb14-35"><a href="sexratios.html#cb14-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_a50_f =</span> <span class="fl">4.7</span>,</span>
+<span id="cb14-36"><a href="sexratios.html#cb14-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_ato95_f =</span> <span class="fl">1.76</span>,</span>
+<span id="cb14-37"><a href="sexratios.html#cb14-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">f_alpha =</span> <span class="dv">1</span>,</span>
+<span id="cb14-38"><a href="sexratios.html#cb14-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">ssb_prop_Z =</span> <span class="fl">0.5</span>,</span>
+<span id="cb14-39"><a href="sexratios.html#cb14-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_prop_Z =</span> <span class="fl">0.5</span>,</span>
+<span id="cb14-40"><a href="sexratios.html#cb14-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_age_error =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.4</span>),  <span class="do">## sd, rho (ignored if iid)</span></span>
+<span id="cb14-41"><a href="sexratios.html#cb14-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">fishery_age_error =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.4</span>),  <span class="do">## sd, rho (ignored if iid)</span></span>
+<span id="cb14-42"><a href="sexratios.html#cb14-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">survey_bio_cv =</span> <span class="fu">c</span>(<span class="fl">0.1</span>)</span>
+<span id="cb14-43"><a href="sexratios.html#cb14-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-44"><a href="sexratios.html#cb14-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-45"><a href="sexratios.html#cb14-45" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">=</span> bio_params<span class="sc">$</span>ages</span>
+<span id="cb14-46"><a href="sexratios.html#cb14-46" aria-hidden="true" tabindex="-1"></a>max_age <span class="ot">=</span> <span class="fu">max</span>(bio_params<span class="sc">$</span>ages)</span>
+<span id="cb14-47"><a href="sexratios.html#cb14-47" aria-hidden="true" tabindex="-1"></a>n_years <span class="ot">=</span> <span class="dv">30</span></span>
+<span id="cb14-48"><a href="sexratios.html#cb14-48" aria-hidden="true" tabindex="-1"></a>years <span class="ot">=</span> (<span class="dv">2020</span> <span class="sc">-</span> n_years <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="dv">2020</span></span>
+<span id="cb14-49"><a href="sexratios.html#cb14-49" aria-hidden="true" tabindex="-1"></a>n_ages <span class="ot">=</span> <span class="fu">length</span>(ages)</span>
+<span id="cb14-50"><a href="sexratios.html#cb14-50" aria-hidden="true" tabindex="-1"></a><span class="do">## annual fishing mortality</span></span>
+<span id="cb14-51"><a href="sexratios.html#cb14-51" aria-hidden="true" tabindex="-1"></a>start_F <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.02</span>, <span class="at">to =</span> <span class="fl">0.1</span>, <span class="at">length =</span> <span class="dv">10</span>)), <span class="fl">0.1</span>), <span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fl">0.1</span>), <span class="fl">0.1</span>), <span class="fu">rlnorm</span>(<span class="dv">10</span>, <span class="fu">log</span>(<span class="fl">0.07</span>), <span class="fl">0.1</span>))</span>
+<span id="cb14-52"><a href="sexratios.html#cb14-52" aria-hidden="true" tabindex="-1"></a>recruit_devs <span class="ot">=</span> <span class="fu">log</span>(<span class="fu">rlnorm</span>(n_years, <span class="sc">-</span><span class="fl">0.5</span> <span class="sc">*</span> bio_params<span class="sc">$</span>sigma_r <span class="sc">*</span> bio_params<span class="sc">$</span>sigma_r, bio_params<span class="sc">$</span>sigma_r))</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:compilesexplot"></span>
 <img src="_main_files/figure-html/compilesexplot-1.png" alt="Examples of the two approaches for the survey (top row) and fishery (bottom row). The black and red line in approach 1 will sum to one, where as the black line and red line in approach will each sum to one. Approach 2 has an extra observation which is the proportion male (not shown)." width="672" />
 <p class="caption">
@@ -522,7 +523,7 @@ Figure 16.7: Annual fishing mortality, red line OM (truth), black lines are the 
 <div id="scenario-2" class="section level3 unnumbered hasAnchor">
 <h3>Scenario 2<a href="sexratios.html#scenario-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The second scenario assumed sex ratio was 50:50 at recruitment and females were more selective than males to the fishery. This was done by setting <span class="math inline">\(\alpha\)</span> = 1.2 in Equation <a href="sexratios.html#eq:femaleselectivity">(16.2)</a>.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="sexratios.html#cb23-1" aria-hidden="true" tabindex="-1"></a>true_pars<span class="sc">$</span>logit_f_alpha_f <span class="ot">=</span> <span class="fu">logit_general</span>(<span class="fl">1.2</span>, TMB_data<span class="sc">$</span>sel_alpha_bounds[<span class="dv">1</span>], TMB_data<span class="sc">$</span>sel_alpha_bounds[<span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="sexratios.html#cb18-1" aria-hidden="true" tabindex="-1"></a>true_pars<span class="sc">$</span>logit_f_alpha_f <span class="ot">=</span> <span class="fu">logit_general</span>(<span class="fl">1.2</span>, TMB_data<span class="sc">$</span>sel_alpha_bounds[<span class="dv">1</span>], TMB_data<span class="sc">$</span>sel_alpha_bounds[<span class="dv">2</span>])</span></code></pre></div>
 <div id="em-1-using-approach-1-1" class="section level4 unnumbered hasAnchor">
 <h4>EM 1 (using approach 1)<a href="sexratios.html#em-1-using-approach-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <pre><code>## max gradient from 100 simualtions =  6.54662e-07</code></pre>
