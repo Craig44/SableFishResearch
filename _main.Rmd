@@ -1,3 +1,208 @@
+--- 
+title: "Alaskan sablefish research"
+author: "C.Marsh"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+includes:
+ before_body: preamble-mathjax.tex
+#url: https:///r4Casal2/
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This Gitbook documents my post-doctoral research relating to Alaskan sablefish.
+link-citations: yes
+
+---
+
+# cover-image: path to the social sharing image like images/cover.jpg
+
+Placeholder
+
+
+## Gitbook outline  {-}
+## Future things to consider {-}
+
+<!--chapter:end:index.Rmd-->
+
+# A list of objectives/milestones that we have set along the project life {#objectives}
+
+
+- [x]  Translate current stock assessment (Chapter \@ref(modeldescription)) from ADMB to TMB. Planned date of completion is December 1 2022
+- [ ]  ~~Conduct self test using TMB stock assessment model. Planned date of completion is December 1 2022~~ I decided not to do this because the assessment had too many bespoke likelihoods
+- [x]  Consider improvements i.e., sex disaggregated composition data or sex ratio observations (look at the rock lobster assessment) including age-length observations or tag-increment observations to estimate growth internally. (Chapter \@ref(sexratios))
+- [x]  Characterize both fishery and survey data to get an idea of data limitations when considering spatially explicit stock assessment model.
+- [x]  Develop a spatially explicit estimation model in TMB that generalizes the current assessment model. This requires a lot of thought, especially how we want to integrate the tagging data (Chapter \@ref(tagdata)). Self test has been complete without tagging data.
+- [x]  Generate observation error values for composition data. either boostrap or use SE methods
+- [ ]  ~~Calculate mean length at age for each year - perhaps use the growth model, but this may be double using some of the datasets? This is an interesting idea cause if we take the tag data for example it would be used to estimate mean length at age just using increment and time at liberty, where as when it is internally used in the model it would be using age-frequency to estimate ontogenetic movement.~~ I decided to default to the current assessment length at age and mean length assumptions
+
+- [x]  Outline key model decisions based on data exploration (Chapter \@ref(InitialModelSetup))
+- [x]  Display initial model runs (Chapter \@ref(modelIterations))
+- [x]  Develop projections and reference point calculations for spatial models 
+- [ ]  Develop summary diagnostics to better identify model misfits summarise over dimensions
+- [ ]  Start running model permutations and conducting model comparisons
+
+
+
+
+<!--chapter:end:01-Objectives.Rmd-->
+
+
+# Current Alaskan sablefish stock assessment model {#modeldescription}
+
+Placeholder
+
+
+## Process equations {-}
+### Initialisation \left(\(g\left(.\right)\)\right) {-}
+### Population dynamics \left(\(f\left(.\right)\)\right) {-}
+## Observation equations (\(ll\left( . \right)\)) {-}
+### Catch at age {-}
+### Relative abundance indices {-}
+### Catch at length {-}
+## Symbol Notation {-}
+### Inference {-}
+### TODO {-}
+
+<!--chapter:end:02-CurrentAssessmentModel.Rmd-->
+
+
+# Spatial stock assessment model for Alaskan sablefish {#spatialmodeldescription}
+
+Placeholder
+
+
+## Process equations {-}
+### Population dynamics {-}
+### Initialisation {-}
+### Growth {-}
+### Recruitment {-}
+### Fishing mortality {-}
+### Tag release events {-}
+## Observation equations {-}
+### Catch at age {-}
+### Catch at length {-}
+### Proportions at age {-}
+### Relative abundance indices {-}
+### Tag recovery observations {-}
+
+<!--chapter:end:03-SpatialAssessmentModel.Rmd-->
+
+
+# Survey data {#surveydata}
+
+Placeholder
+
+
+## Survey design {-}
+## Abundance (catch rate) data {-}
+## Age data {-}
+## Length frequencies {-}
+## Age frequencies {-}
+### Direct ageing estimators
+### Age length key estimators
+### Continuation ratio logits (CRL) {-}
+### Estimating initial input sample sizes for multinomial composition data {-}
+## Age-length data {-}
+## Appendix {-}
+
+<!--chapter:end:04-SurveyData.Rmd-->
+
+
+# Fishery dependent data {#observerdata}
+
+Placeholder
+
+
+## Catch data {-}
+## Length data {-}
+### Catch at length estimator {-}
+## Age data {-}
+## Age-length data {-}
+
+<!--chapter:end:05-FisheryDependentData.Rmd-->
+
+
+# Tagging data exploration {#tagdata}
+
+Placeholder
+
+
+## Data grooming {-}
+## Exploratory analysis of the tag data {-}
+## Single area recovery model {-}
+## Lincoln-Peterson estimator {-}
+## Integrating tagging observations in spatial age-structured models {-}
+## Tagging things to consider with relevant references {-}
+## Releasing tags {-}
+#### Internal method {-}
+#### External method (Age-length key method) {-}
+### Things to consider for tag release {-}
+
+<!--chapter:end:06-TaggingData.Rmd-->
+
+
+# Initial model setup {#InitialModelSetup}
+
+Placeholder
+
+
+## Model start time {-}
+## Model spatial resolution of the model {-}
+## Fishery structure {-}
+## Repeat regression analysis on survey LF data {-}
+
+<!--chapter:end:07-SpatialModelConfiguration.Rmd-->
+
+
+# Model iterations {#modelIterations}
+
+Placeholder
+
+
+## Single Area model {-}
+### Include tagging data {-}
+## Three area model {-}
+## Five area model {-}
+### Issues {-}
+## Comparison {-}
+
+<!--chapter:end:08-ModelIterations.Rmd-->
+
+
+# Five area model permutations {#FiveAreaModel}
+
+Placeholder
+
+
+## Notes about this model {-}
+
+<!--chapter:end:09-5AreaModel.Rmd-->
+
+# Next steps {#nextsteps}
+
+- Run log likelihood profiles on Female Trawl selectivity parameters. Profiles are very sporadic, when I force males and females to have the same selectivity it does produce sensible answers selectivity curves.
+
+- Apply the Dirichlet-Multinomial likelihood for compositional data
+- Start model 1990
+- Generate reference points and ABCs
+
+
+## Simulation Scenarios {-}
+
+
+- What effect loosing early time-periods has on the assessment advice. The spatial models started much later in the time-series than when significant exploitation occured, which is a common issue with spatial models due to historical data not haveing spatial resolution to be used. This early period coincides with the largest removals in the time-series which is thought to be valuable to observe for observering contrast and helping estimate stock production [@hilborn1979comparison] this claim is actually countered by @magnusson2007makes.
+
+- What bias can we expect when we assume a closed population when in fact there is emigration outside of the stock boundary
+
+- Consequence in assuming a three region model when in fact there is five regions based on the Regression break points.
+
+- Spatial recruitment process and reference point consequences. Time-varying recruit devs by region vs time-varying recruitment deviations constant across 
+
+- age-varying movement? spasm paper to reference time-vs age varying movement.
+
+<!--chapter:end:12-NextSteps.Rmd-->
+
 # Estimating age-based movement {#agebasedmovement}
 
 To explore estimating age-based movement a simple age-based tagging process model was coded, which assumed
@@ -7,18 +212,11 @@ T^k_{a, r,t} & = T_a^k, \quad t = 0\\
 T^k_{a, r,t + 1} & = T^k_{a, r,t} e^{-M}, \quad t > 0\\
 \boldsymbol{T}^k_{a, t + 1} & = \boldsymbol{T}^k_{a, t + 1} (1 - S^o_a)  \boldsymbol{M}^y + \boldsymbol{T}^k_{a, t + 1}  S^o_a \boldsymbol{M}^o
 \end{align*}
-where, \(T_a^k\) is the initial number of tag releases for release event \(k\) and age \(a\), \(\boldsymbol{T}^k_{a, t + 1}\) is a matrix of numbers of tagged fish across all regions from release event \(k\) and age \(a\), \(\boldsymbol{M}^y\) is a \(n_r \times n_r\) movement matrix for young fish and \(\boldsymbol{M}^o\) is the movement matrix for older fish. \(S^o_a\) is a movement based logistic ogive that determines what proportion of age-cohorts move based on \(\boldsymbol{M}^o\) and \((1 - S^o_a)\) indicates what proportion of age-cohorts move based on \(\boldsymbol{M}^y\). The age-based selectivity is parametersised as a logistic ogive with estimable parameters \(a_{50}\) (age at which \(S^o_a = 0.5\)) and \(a_{to95}\) (difference age when \(S^o_a = 0.5\) and \(S^o_a = 0.95\)),
-
-\[
-S^o_a = \frac{1}{1 + 19^{(a_{50} - a) / a_{to95}}
-\]
-This selectivity is forced to have maximum value of one so that all fish in the partition move based on either \(\boldsymbol{M}^y\) and \(\boldsymbol{M}^o\)
-\[
-S^o_a = \frac{S^o_a}{max(\boldsymbol{S}^o)}
-\]
+where, \(T_a^k\) is the initial number of tag releases for release event \(k\) and age \(a\), \(\boldsymbol{T}^k_{a, t + 1}\) is a matrix of numbers of tagged fish across all regions from release event \(k\) and age \(a\), \(\boldsymbol{M}^y\) is a \(n_r \times n_r\) movement matrix for young fish and \(\boldsymbol{M}^o\) is the movement matrix for older fish. \(S^o_a\) is a movement based logistic ogive that determines what proportion of age-cohorts move based on \(\boldsymbol{M}^o\) and \((1 - S^o_a)\) indicates what proportion of age-cohorts move based on \(\boldsymbol{M}^y\)
 
 
-Generating age-based observations
+
+Generating age-based observation model 
 
 \begin{align*}
 \widehat{Y}^k_{r,t} & = \sum_a \widehat{T}^k_{a, r,t}(1 - \widehat{S}^o_a) \\
@@ -32,13 +230,10 @@ Generating age-based observations
 
 
 
-The following section is code and plots from running the three follosing simulations,
-.1 Simulate tag-recoveries with the Poisson distribution, estimate \(\boldsymbol{M}^y\) and \(\boldsymbol{M}^o\) with \(S^o_a\) fixed at values assumed in the OM
-.2 Simulate tag-recoveries with the Poisson distribution, estimate \(\boldsymbol{M}^y\), \(\boldsymbol{M}^o\), and \(a_{50}\) from \(S^o_a\), with \(a_{to95}\) fixed at the value assumed in the OM
-.3 Simulate tag-recoveries with the Poisson distribution, estimate \(\boldsymbol{M}^y\), \(\boldsymbol{M}^o\), \(a_{50}\), and \(a_{to95}\)
+The following section is code and plots from running three simulations,
 
-
-Results from these simulations show when \(S^o_a\) is correctly specified you can estimate both \(\boldsymbol{M}^y\) and \(\boldsymbol{M}^o\) well (caveats = good data and correct likelihood). This was also true when estimating just the \(a_{50}\) parameter when \(a_{to95}\) is specified correctly. However, when trying to estimate both movement matrices and both \(a_{50}\) and \(a_{to95}\) we get parameter estimating problems. With both parameters running to lower bounds. Interestingly the \(\boldsymbol{M}^y\)  is estimated well, but \(\boldsymbol{M}^o\)  has large biases. This same result occurs when specifying \(a_{to95}\) at a low value (almost knife edge) and just estimating \(a_{50}\), results not shown here.
+1.  Estimate movement matrix for young (\(\boldsymbol{M}^y\)) and old  (\(\boldsymbol{M}^o\)) with age-based ogive fixed at OM values
+2.  Estimate movement matrix for young (\(\boldsymbol{M}^y\)) and old  (\(\boldsymbol{M}^o\)) with age-based ogive fixed at OM values
 
 
 
@@ -411,4 +606,107 @@ abline(v = a95_move, col = "red", lty = 2, lwd = 3)
 ```
 
 
+
+
+<!--chapter:end:13-EstimatingAgeBasedTagMovement.Rmd-->
+
+
+# Tag likelihoods {#taglike}
+
+Placeholder
+
+
+## Likelihoods {-}
+### Poisson {-}
+### Negative Binomial {-}
+### Multinomial:release conditioned {-}
+### Recapture conditioned {-}
+## Simple simulation {-}
+
+<!--chapter:end:14-TagLikelihoods.Rmd-->
+
+
+# Growth {#growth}
+
+Placeholder
+
+
+## Growth estimation using the Laslett–Eveson–Polacheck (LEP) method  {-}
+### Age-at-length growth model {-}
+### Tag recapture growth data {-}
+## Simulation test the "LEP" method {-}
+## Next steps {-}
+
+<!--chapter:end:15-Growth.Rmd-->
+
+
+# Review/summarise reference points {#refpoints}
+
+Placeholder
+
+
+## Spatial reference points {-}
+### summarise @kritzer2004metapopulation {-}
+### summarise @goethel2017accounting {-}
+### summarise @kapur2021equilibrium {-}
+### summarise @fenske2022implications {-}
+### summarise @reuchlin2016spatial {-}
+
+<!--chapter:end:16-ReferencePoints.Rmd-->
+
+
+# Sex ratios in age and length composition data {#sexratios}
+
+Placeholder
+
+
+## A simple simulation {-}
+### Results {-}
+### Future research that was not considered in this simple simulation {-}
+### Operating Model (OM) Parameters  {-}
+### Scenario 1  {-}
+#### EM 1 (using approach 1) {-}
+#### EM 2 (using approach 2) {-}
+#### EM 3 (using approach 1 with female fixed at \(\alpha = 1\)) {-}
+### Scenario 2  {-}
+#### EM 1 (using approach 1) {-}
+#### EM 2 (using approach 2) {-}
+#### EM 3 (using approach 1 with female fixed at \(\alpha = 1\)) {-}
+
+<!--chapter:end:17-DealWithSexRatios.Rmd-->
+
+
+# Fishing mortality approaches {#Fexplore}
+
+Placeholder
+
+
+## Set up a simulation {-}
+## Appendix - Hybrid approach {-}
+
+<!--chapter:end:18-ExploreFParameterisations.Rmd-->
+
+
+# Initialising the plus group in spatial models {#spatialInit}
+
+Placeholder
+
+
+
+<!--chapter:end:19-InitialisingTheSpatialModel.Rmd-->
+
+
+# Glossary of terms {#glossary}
+
+Placeholder
+
+
+
+<!--chapter:end:20-Glossary.Rmd-->
+
+`r if (knitr::is_html_output()) '
+# References {-}
+'`
+
+<!--chapter:end:22-references.Rmd-->
 
