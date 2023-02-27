@@ -12,10 +12,7 @@ where, \(T_a^k\) is the initial number of tag releases for release event \(k\) a
 \[
 S^o_a = \frac{1}{1 + 19^{(a_{50} - a) / a_{to95}}}
 \]
-This selectivity is forced to have maximum value of one so that all fish in the partition move based on either \(\boldsymbol{M}^y\) and \(\boldsymbol{M}^o\)
-\[
-S^o_a = \frac{S^o_a}{max(\boldsymbol{S}^o)}
-\]
+
 
 
 Generating age-based observations
@@ -29,8 +26,8 @@ The first attempt was to use the age based ogive to split our observed tag recov
 \widehat{O}^k_{r,t} & = \sum_a \widehat{T}^k_{a, r,t} \widehat{S}^o_a \\
 {Y}^k_{r,t} & = \sum_a N^k_{a, r,t}(1 - \widehat{S}^o_a) \\
 {O}^k_{r,t} & = \sum_a N^k_{a, r,t} \widehat{S}^o_a \\
-{Y}^k_{r,t} \sim \mathcal{Poisson}\left(\widehat{Y}^k_{r,t}\right)\\
-{O}^k_{r,t} \sim \mathcal{Poisson}\left(\widehat{O}^k_{r,t}\right)
+{Y}^k_{r,t} &\sim \mathcal{Poisson}\left(\widehat{Y}^k_{r,t}\right)\\
+{O}^k_{r,t} &\sim \mathcal{Poisson}\left(\widehat{O}^k_{r,t}\right)
 \end{align*}
 
 \(\widehat{Y}^k_{r,t}\) expected tag recoveries for young fish, and \(\widehat{O}^k_{r,t}\) is the expected tag recoveries for old fish, and \( N^k_{a, r,t}\) is the observed tag-recovery by age.
@@ -42,11 +39,13 @@ The problem with this approach is we are using model estimated quantities (\(\wi
 The second attempt was to assume the age-structure was multinomial as,
 
 \begin{align*}
-\widehat{\theta}^k_{a, r,t} = \frac{\widehat{T}^k_{a, r,t}}{\sum_a \widehat{T}^k_{a, r,t}}
-N^k_{a, r,t} \sim \mathcal{Multinomial}\left(\widehat{\theta}^k_{a, r,t}\right)\\
+\widehat{\theta}^k_{a, r,t} &= \frac{\widehat{T}^k_{a, r,t}}{\sum_a \widehat{T}^k_{a, r,t}}\\
+N^k_{a, r,t} &\sim \mathcal{Multinomial}\left(\widehat{\theta}^k_{a, r,t}\right)\\
 \end{align*}
 with the effective sample size being the sum of the observations. This treatment of the data resulted in much more robust estimation of movement rates and all parameters of the movement ogive.
 
+
+## Simulation summary {-}
 
 The following section is code and plots from running the three following simulations,
 
