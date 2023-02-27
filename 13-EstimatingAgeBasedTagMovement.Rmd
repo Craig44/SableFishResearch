@@ -20,27 +20,45 @@ S^o_a = \frac{S^o_a}{max(\boldsymbol{S}^o)}
 
 Generating age-based observations
 
+### First attempt {-}
+
+The first attempt was to use the age based ogive to split our observed tag recoveries by age (\(N^k_{a, r,t}\)) into the young tag recoveries (\({Y}^k_{r,t}\)) and old tag recoveries (\({O}^k_{r,t}\)) and assume these are Poisson distributed. 
+
 \begin{align*}
 \widehat{Y}^k_{r,t} & = \sum_a \widehat{T}^k_{a, r,t}(1 - \widehat{S}^o_a) \\
 \widehat{O}^k_{r,t} & = \sum_a \widehat{T}^k_{a, r,t} \widehat{S}^o_a \\
 {Y}^k_{r,t} & = \sum_a N^k_{a, r,t}(1 - \widehat{S}^o_a) \\
 {O}^k_{r,t} & = \sum_a N^k_{a, r,t} \widehat{S}^o_a \\
+{Y}^k_{r,t} \sim \mathcal{Poisson}\left(\widehat{Y}^k_{r,t}\right)\\
+{O}^k_{r,t} \sim \mathcal{Poisson}\left(\widehat{O}^k_{r,t}\right)
 \end{align*}
 
 \(\widehat{Y}^k_{r,t}\) expected tag recoveries for young fish, and \(\widehat{O}^k_{r,t}\) is the expected tag recoveries for old fish, and \( N^k_{a, r,t}\) is the observed tag-recovery by age.
 
+The problem with this approach is we are using model estimated quantities (\(\widehat{S}^o_a\)) to classify observed values as young and old, which is a no no. Simulations also showed that we could not estimate both parameters of \(\widehat{S}^o_a\).
+
+### Second attempt {-}
+
+The second attempt was to assume the age-structure was multinomial as,
+
+\begin{align*}
+\widehat{\theta}^k_{a, r,t} = \frac{\widehat{T}^k_{a, r,t}}{\sum_a \widehat{T}^k_{a, r,t}}
+N^k_{a, r,t} \sim \mathcal{Multinomial}\left(\widehat{\theta}^k_{a, r,t}\right)\\
+\end{align*}
+with the effective sample size being the sum of the observations. This treatment of the data resulted in much more robust estimation of movement rates and all parameters of the movement ogive.
 
 
-
-The following section is code and plots from running the three follosing simulations,
+The following section is code and plots from running the three following simulations,
 
 1. Simulate tag-recoveries with the Poisson distribution, estimate \(\boldsymbol{M}^y\) and \(\boldsymbol{M}^o\) with \(S^o_a\) fixed at values assumed in the OM
 2. Simulate tag-recoveries with the Poisson distribution, estimate \(\boldsymbol{M}^y\), \(\boldsymbol{M}^o\), and \(a_{50}\) from \(S^o_a\), with \(a_{to95}\) fixed at the value assumed in the OM
 3. Simulate tag-recoveries with the Poisson distribution, estimate \(\boldsymbol{M}^y\), \(\boldsymbol{M}^o\), \(a_{50}\), and \(a_{to95}\)
 
 
-Results from these simulations show when \(S^o_a\) is correctly specified you can estimate both \(\boldsymbol{M}^y\) and \(\boldsymbol{M}^o\) well (caveats = good data and correct likelihood). This was also true when estimating just the \(a_{50}\) parameter when \(a_{to95}\) is specified correctly. However, when trying to estimate both movement matrices and both \(a_{50}\) and \(a_{to95}\) we get parameter estimating problems. With both parameters running to lower bounds. Interestingly the \(\boldsymbol{M}^y\)  is estimated well, but \(\boldsymbol{M}^o\)  has large biases. This same result occurs when specifying \(a_{to95}\) at a low value (almost knife edge) and just estimating \(a_{50}\), results not shown here.
 
+Results from these simulations using the first likelihood attempt show when \(S^o_a\) is correctly specified you can estimate both \(\boldsymbol{M}^y\) and \(\boldsymbol{M}^o\) well (caveats = good data and correct likelihood). This was also true when estimating just the \(a_{50}\) parameter when \(a_{to95}\) is specified correctly. However, when trying to estimate both movement matrices and both \(a_{50}\) and \(a_{to95}\) we get parameter estimating problems. With both parameters running to lower bounds. Interestingly the \(\boldsymbol{M}^y\)  is estimated well, but \(\boldsymbol{M}^o\)  has large biases. This same result occurs when specifying \(a_{to95}\) at a low value (almost knife edge) and just estimating \(a_{50}\), results not shown here.
+
+Results from these simulations using the second likelihood attempt show under all three simulations we can get resonable estimates of both movement matriceis and age-based movement ogive parameters. 
 
 
 
@@ -109,6 +127,7 @@ data$n_regions = n_regions
 data$ages = ages
 data$tag_recovery_obs = array(100, dim = c(data$n_ages, n_regions, n_regions, data$n_years))
 data$a50_bounds = c(3, 15)
+data$tag_likelihood_type = 1 ## multinomial
 parameters = list()
 parameters$logisitic_a50_movement = logit_general(a50_move, data$a50_bounds[1], data$a50_bounds[2])
 parameters$ln_ato95_movement = log(a95_move)
@@ -383,7 +402,7 @@ for(sim_iter in 1:n_sims){
   nll_a50_ato95 = c(nll_a50_ato95, mle_spatial$objective)
 }
 ggplot()+
-  geom_line(data = young_age_based_ogive_df_a50_ato95, aes(x = age, y = ogive, col = "Young"), linewidth = 1.1, alpha = 0.4) +
+  geom_line(data = young_age_based_ogive_df_a50_ato95, aes(x = age, y = ogive, col = "Young", group = sim), linewidth = 1.1, alpha = 0.4) +
   theme_bw()
 
 ggplot(young_matrix_df_a50_ato95) +

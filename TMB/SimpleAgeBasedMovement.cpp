@@ -1,10 +1,10 @@
 // LEP growth model
 /*
-  * LEP growth model using both age and length data and tag-increment data
-*/
-  
+ * LEP growth model using both age and length data and tag-increment data
+ */
+
 #include <TMB.hpp>
-  
+
 // logistic ogive function parametersised with a_50 and a_to95
 template <class Type>
 vector<Type> logistic_ogive(vector<Type>& ages, Type& sel_50, Type& sel_95) {
@@ -40,12 +40,42 @@ vector<Type> invlogit_general(vector<Type>& Y, Type& lb, Type& ub) {
   }
   return(X);
 }
+
+
+/*
+ * rmultinomm - for simulate call
+ */
+template <class Type>
+vector<Type> rmultinom(vector<Type> prob, Type N) {
+  vector<Type> sim_X(prob.size());
+  sim_X.setZero();
+  // Now simulate using the uniform random variable
+  Type rng_uniform;
+  Type cumulative_expect;
+  while(N > 0) {
+    rng_uniform = runif(Type(0),Type(1));
+    //std::cout << rng_uniform << " ";
+    cumulative_expect = 0.0;
+    for (unsigned i = 0; i < prob.size(); ++i) {
+      cumulative_expect += prob[i];
+      if (cumulative_expect >= rng_uniform) {
+        sim_X[i] += 1.0;
+        break;
+      }
+      //sim_X[prob.size() - 1] += 1.0;
+    }
+    N -= 1;
+  }
+  //std::cout << "\n";
+  return(sim_X);
+}
+
 template<class Type>
-  Type objective_function<Type>::operator() ()
+Type objective_function<Type>::operator() ()
 {
   /*
-    * Declare Namespace
-  */
+   * Declare Namespace
+   */
   using namespace density;
   
   // Input parameters
@@ -58,16 +88,21 @@ template<class Type>
   DATA_VECTOR(a50_bounds);
   
   DATA_ARRAY(tag_recovery_obs);                     // n_ages x n_release_regions x n_recovery_region x n_recovery_year 
+  array<Type> pred_tag_recovery_obs(tag_recovery_obs.dim);
   
+  // containers for Poisson Likelihood
   array<Type> young_pred_tag_recovery_obs(tag_recovery_obs.dim[1], tag_recovery_obs.dim[2], tag_recovery_obs.dim[3]);
   array<Type> old_pred_tag_recovery_obs(tag_recovery_obs.dim[1], tag_recovery_obs.dim[2], tag_recovery_obs.dim[3]);
   array<Type> young_obs_tag_recovery_obs(tag_recovery_obs.dim[1], tag_recovery_obs.dim[2], tag_recovery_obs.dim[3]);
   array<Type> old_obs_tag_recovery_obs(tag_recovery_obs.dim[1], tag_recovery_obs.dim[2], tag_recovery_obs.dim[3]);
   
+  DATA_INTEGER(tag_likelihood_type);                                  // 0 Poisson, 1 = Multinomial
+  
   PARAMETER(logisitic_a50_movement);                               // a50 parameter for age based selectivity movement
   PARAMETER(ln_ato95_movement);                                   // ato95 parameter for age based selectivity movement
   PARAMETER_ARRAY(transformed_movement_pars_young);              // transformed parameters for movmenet (consider both simplex and logistic? or what ever it is). dimension:  (n_regions - 1) x n_regions
   PARAMETER_ARRAY(transformed_movement_pars_old);                // transformed parameters for movmenet (consider both simplex and logistic? or what ever it is). dimension:  (n_regions - 1) x n_regions
+  
   
   // Deal with parameter transformations
   Type ato95_movement = exp(ln_ato95_movement);
@@ -111,22 +146,20 @@ template<class Type>
   Type eps_for_posfun = 0.00001; // used for the posfun object to scale values above zero
   Type young_predicted_tags;
   Type old_predicted_tags;
-  vector<Type> nll(3);
+  vector<Type> nll(4);
   nll.setZero();
   // age-based movement ogive
   vector<Type> young_age_based_movement_ogive(n_ages);                       // selectivity for young movement matrix
   vector<Type> old_age_based_movement_ogive(n_ages);                         // selectivity for old movement matrix
   old_age_based_movement_ogive = logistic_ogive(ages, a50_movement, ato95_movement);
-  // A max call can cause AD issues.
-  Type max_sel = max(old_age_based_movement_ogive);
-  for(int age_ndx = 0; age_ndx < n_ages; ++age_ndx)
-    old_age_based_movement_ogive(age_ndx) /= max_sel;
   young_age_based_movement_ogive = 1.0 - old_age_based_movement_ogive;
+  vector<Type> temp_pred_numbers_at_age(n_ages);
+  vector<Type> temp_obs_numbers_at_age(n_ages);
   
   // Initialise
   for(int release_region_ndx = 0; release_region_ndx < n_regions; ++release_region_ndx)
     tag_numbers_at_age.col(0).col(release_region_ndx).col(release_region_ndx) = initial_age_tag_releases.col(release_region_ndx);
-  
+  Type effective_sample_size;
   /*
    * Annual cycle
    */
@@ -155,6 +188,10 @@ template<class Type>
     // n_release_regions x n_recovery_region x n_recovery_year 
     for(int release_region_ndx = 0; release_region_ndx < n_regions; ++release_region_ndx) {
       for(int current_region_ndx = 0; current_region_ndx < n_regions; ++current_region_ndx) {
+        
+        pred_tag_recovery_obs.col(year_ndx).col(release_region_ndx).col(current_region_ndx) = tag_numbers_at_age.col(year_ndx).col(release_region_ndx).col(current_region_ndx);
+        
+        
         young_numbers_at_age = tag_numbers_at_age.col(year_ndx).col(release_region_ndx).col(current_region_ndx).vec() * young_age_based_movement_ogive;
         old_numbers_at_age = tag_numbers_at_age.col(year_ndx).col(release_region_ndx).col(current_region_ndx).vec() * old_age_based_movement_ogive;
         
@@ -170,24 +207,42 @@ template<class Type>
         // Reformat observations
         young_obs_tag_recovery_obs(release_region_ndx, current_region_ndx, year_ndx) = (tag_recovery_obs.col(year_ndx).col(current_region_ndx).col(release_region_ndx).vec() * young_age_based_movement_ogive).sum();
         old_obs_tag_recovery_obs(release_region_ndx, current_region_ndx, year_ndx) = (tag_recovery_obs.col(year_ndx).col(current_region_ndx).col(release_region_ndx).vec() * old_age_based_movement_ogive).sum();
-      
-        //
-        nll(0) -= dpois(young_obs_tag_recovery_obs(release_region_ndx, current_region_ndx, year_ndx), young_pred_tag_recovery_obs(release_region_ndx, current_region_ndx, year_ndx), true);
-        nll(1) -= dpois(old_obs_tag_recovery_obs(release_region_ndx, current_region_ndx, year_ndx), old_pred_tag_recovery_obs(release_region_ndx, current_region_ndx, year_ndx), true);
         
-        SIMULATE {
-          Type sim_tag_recoveries = rpois(young_pred_tag_recovery_obs(release_region_ndx, current_region_ndx, year_ndx));
-          tag_recovery_obs.col(year_ndx).col(current_region_ndx).col(release_region_ndx) = sim_tag_recoveries * (young_numbers_at_age / young_numbers_at_age.sum());
+        if(tag_likelihood_type == 0) {
+          // Poisson likelihood in groups
+          nll(0) -= dpois(young_obs_tag_recovery_obs(release_region_ndx, current_region_ndx, year_ndx), young_pred_tag_recovery_obs(release_region_ndx, current_region_ndx, year_ndx), true);
+          nll(1) -= dpois(old_obs_tag_recovery_obs(release_region_ndx, current_region_ndx, year_ndx), old_pred_tag_recovery_obs(release_region_ndx, current_region_ndx, year_ndx), true);
           
-          sim_tag_recoveries = rpois(old_pred_tag_recovery_obs(release_region_ndx, current_region_ndx, year_ndx));
-          tag_recovery_obs.col(year_ndx).col(current_region_ndx).col(release_region_ndx) += sim_tag_recoveries * (old_numbers_at_age / old_numbers_at_age.sum());
+          SIMULATE {
+            Type sim_tag_recoveries = rpois(young_pred_tag_recovery_obs(release_region_ndx, current_region_ndx, year_ndx));
+            tag_recovery_obs.col(year_ndx).col(current_region_ndx).col(release_region_ndx) = sim_tag_recoveries * (young_numbers_at_age / young_numbers_at_age.sum());
+            
+            sim_tag_recoveries = rpois(old_pred_tag_recovery_obs(release_region_ndx, current_region_ndx, year_ndx));
+            tag_recovery_obs.col(year_ndx).col(current_region_ndx).col(release_region_ndx) += sim_tag_recoveries * (old_numbers_at_age / old_numbers_at_age.sum());
+            
+          }
+        } else if (tag_likelihood_type == 1) {
+          // Multinomial likelihood
+          // Check predicted values are all non-zero using the posfun
+          for(int age_ndx = 0; age_ndx < n_ages; ++age_ndx)
+            temp_pred_numbers_at_age(age_ndx) = posfun(pred_tag_recovery_obs(age_ndx, release_region_ndx, current_region_ndx, year_ndx), eps_for_posfun, pen_posfun);
+          // normalise sum to one
+          temp_pred_numbers_at_age /= temp_pred_numbers_at_age.sum();
+          pred_tag_recovery_obs.col(year_ndx).col(release_region_ndx).col(current_region_ndx) = temp_pred_numbers_at_age;
           
-        }                                 
+          temp_obs_numbers_at_age = tag_recovery_obs.col(year_ndx).col(release_region_ndx).col(current_region_ndx);
+          nll(2) -= dmultinom(temp_obs_numbers_at_age, temp_pred_numbers_at_age, true);
+          SIMULATE {
+            effective_sample_size = temp_obs_numbers_at_age.sum();
+            temp_obs_numbers_at_age = rmultinom(temp_pred_numbers_at_age, effective_sample_size);
+            tag_recovery_obs.col(year_ndx).col(release_region_ndx).col(current_region_ndx) = temp_obs_numbers_at_age;
+          }
+        }
       }
     }
   }
   // pos fun penalty for
-  nll(2) = pen_posfun;
+  nll(3) = pen_posfun;
   
   /*
    * REPORT
@@ -202,12 +257,12 @@ template<class Type>
   REPORT(old_pred_tag_recovery_obs);
   REPORT(young_obs_tag_recovery_obs);
   REPORT(old_obs_tag_recovery_obs);
-
-  REPORT(tag_recovery_obs);
   
+  REPORT(tag_recovery_obs);
+  REPORT(pred_tag_recovery_obs);
   REPORT( ato95_movement );
   REPORT( a50_movement );
   
   return nll.sum();
-  }
+}
 
