@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2023-02-26" />
+<meta name="date" content="2023-02-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -272,6 +272,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="12" data-path="agebasedmovement.html"><a href="agebasedmovement.html"><i class="fa fa-check"></i><b>12</b> Estimating age-based movement</a>
 <ul>
+<li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#first-attempt"><i class="fa fa-check"></i>First attempt</a></li>
+<li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#second-attempt"><i class="fa fa-check"></i>Second attempt</a></li>
 <li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#setup-simulations"><i class="fa fa-check"></i>Setup simulations</a></li>
 <li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#simulation-with-fixed-age-based-ogive"><i class="fa fa-check"></i>Simulation with fixed age-based ogive</a></li>
 <li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#simulation-estimate-a50-parameter-of-age-based-ogive"><i class="fa fa-check"></i>Simulation estimate a50 parameter of age-based ogive</a></li>
@@ -364,20 +366,37 @@ This selectivity is forced to have maximum value of one so that all fish in the 
 S^o_a = \frac{S^o_a}{max(\boldsymbol{S}^o)}
 \]</span></p>
 <p>Generating age-based observations</p>
+<div id="first-attempt" class="section level3 unnumbered hasAnchor">
+<h3>First attempt<a href="agebasedmovement.html#first-attempt" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The first attempt was to use the age based ogive to split our observed tag recoveries by age (<span class="math inline">\(N^k_{a, r,t}\)</span>) into the young tag recoveries (<span class="math inline">\({Y}^k_{r,t}\)</span>) and old tag recoveries (<span class="math inline">\({O}^k_{r,t}\)</span>) and assume these are Poisson distributed.</p>
 <p><span class="math display">\[\begin{align*}
 \widehat{Y}^k_{r,t} &amp; = \sum_a \widehat{T}^k_{a, r,t}(1 - \widehat{S}^o_a) \\
 \widehat{O}^k_{r,t} &amp; = \sum_a \widehat{T}^k_{a, r,t} \widehat{S}^o_a \\
 {Y}^k_{r,t} &amp; = \sum_a N^k_{a, r,t}(1 - \widehat{S}^o_a) \\
 {O}^k_{r,t} &amp; = \sum_a N^k_{a, r,t} \widehat{S}^o_a \\
+{Y}^k_{r,t} \sim \mathcal{Poisson}\left(\widehat{Y}^k_{r,t}\right)\\
+{O}^k_{r,t} \sim \mathcal{Poisson}\left(\widehat{O}^k_{r,t}\right)
 \end{align*}\]</span></p>
 <p><span class="math inline">\(\widehat{Y}^k_{r,t}\)</span> expected tag recoveries for young fish, and <span class="math inline">\(\widehat{O}^k_{r,t}\)</span> is the expected tag recoveries for old fish, and <span class="math inline">\(N^k_{a, r,t}\)</span> is the observed tag-recovery by age.</p>
-<p>The following section is code and plots from running the three follosing simulations,</p>
+<p>The problem with this approach is we are using model estimated quantities (<span class="math inline">\(\widehat{S}^o_a\)</span>) to classify observed values as young and old, which is a no no. Simulations also showed that we could not estimate both parameters of <span class="math inline">\(\widehat{S}^o_a\)</span>.</p>
+</div>
+<div id="second-attempt" class="section level3 unnumbered hasAnchor">
+<h3>Second attempt<a href="agebasedmovement.html#second-attempt" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The second attempt was to assume the age-structure was multinomial as,</p>
+<p><span class="math display">\[\begin{align*}
+\widehat{\theta}^k_{a, r,t} = \frac{\widehat{T}^k_{a, r,t}}{\sum_a \widehat{T}^k_{a, r,t}}
+N^k_{a, r,t} \sim \mathcal{Multinomial}\left(\widehat{\theta}^k_{a, r,t}\right)\\
+\end{align*}\]</span>
+with the effective sample size being the sum of the observations. This treatment of the data resulted in much more robust estimation of movement rates and all parameters of the movement ogive.</p>
+<p>The following section is code and plots from running the three following simulations,</p>
 <ol style="list-style-type: decimal">
 <li>Simulate tag-recoveries with the Poisson distribution, estimate <span class="math inline">\(\boldsymbol{M}^y\)</span> and <span class="math inline">\(\boldsymbol{M}^o\)</span> with <span class="math inline">\(S^o_a\)</span> fixed at values assumed in the OM</li>
 <li>Simulate tag-recoveries with the Poisson distribution, estimate <span class="math inline">\(\boldsymbol{M}^y\)</span>, <span class="math inline">\(\boldsymbol{M}^o\)</span>, and <span class="math inline">\(a_{50}\)</span> from <span class="math inline">\(S^o_a\)</span>, with <span class="math inline">\(a_{to95}\)</span> fixed at the value assumed in the OM</li>
 <li>Simulate tag-recoveries with the Poisson distribution, estimate <span class="math inline">\(\boldsymbol{M}^y\)</span>, <span class="math inline">\(\boldsymbol{M}^o\)</span>, <span class="math inline">\(a_{50}\)</span>, and <span class="math inline">\(a_{to95}\)</span></li>
 </ol>
-<p>Results from these simulations show when <span class="math inline">\(S^o_a\)</span> is correctly specified you can estimate both <span class="math inline">\(\boldsymbol{M}^y\)</span> and <span class="math inline">\(\boldsymbol{M}^o\)</span> well (caveats = good data and correct likelihood). This was also true when estimating just the <span class="math inline">\(a_{50}\)</span> parameter when <span class="math inline">\(a_{to95}\)</span> is specified correctly. However, when trying to estimate both movement matrices and both <span class="math inline">\(a_{50}\)</span> and <span class="math inline">\(a_{to95}\)</span> we get parameter estimating problems. With both parameters running to lower bounds. Interestingly the <span class="math inline">\(\boldsymbol{M}^y\)</span> is estimated well, but <span class="math inline">\(\boldsymbol{M}^o\)</span> has large biases. This same result occurs when specifying <span class="math inline">\(a_{to95}\)</span> at a low value (almost knife edge) and just estimating <span class="math inline">\(a_{50}\)</span>, results not shown here.</p>
+<p>Results from these simulations using the first likelihood attempt show when <span class="math inline">\(S^o_a\)</span> is correctly specified you can estimate both <span class="math inline">\(\boldsymbol{M}^y\)</span> and <span class="math inline">\(\boldsymbol{M}^o\)</span> well (caveats = good data and correct likelihood). This was also true when estimating just the <span class="math inline">\(a_{50}\)</span> parameter when <span class="math inline">\(a_{to95}\)</span> is specified correctly. However, when trying to estimate both movement matrices and both <span class="math inline">\(a_{50}\)</span> and <span class="math inline">\(a_{to95}\)</span> we get parameter estimating problems. With both parameters running to lower bounds. Interestingly the <span class="math inline">\(\boldsymbol{M}^y\)</span> is estimated well, but <span class="math inline">\(\boldsymbol{M}^o\)</span> has large biases. This same result occurs when specifying <span class="math inline">\(a_{to95}\)</span> at a low value (almost knife edge) and just estimating <span class="math inline">\(a_{50}\)</span>, results not shown here.</p>
+<p>Results from these simulations using the second likelihood attempt show under all three simulations we can get resonable estimates of both movement matriceis and age-based movement ogive parameters.</p>
+</div>
 <div id="setup-simulations" class="section level2 unnumbered hasAnchor">
 <h2>Setup simulations<a href="agebasedmovement.html#setup-simulations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="agebasedmovement.html#cb4-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">=</span> <span class="fl">0.12</span></span>
@@ -435,18 +454,19 @@ S^o_a = \frac{S^o_a}{max(\boldsymbol{S}^o)}
 <span id="cb4-53"><a href="agebasedmovement.html#cb4-53" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>ages <span class="ot">=</span> ages</span>
 <span id="cb4-54"><a href="agebasedmovement.html#cb4-54" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>tag_recovery_obs <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">100</span>, <span class="at">dim =</span> <span class="fu">c</span>(data<span class="sc">$</span>n_ages, n_regions, n_regions, data<span class="sc">$</span>n_years))</span>
 <span id="cb4-55"><a href="agebasedmovement.html#cb4-55" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>a50_bounds <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">15</span>)</span>
-<span id="cb4-56"><a href="agebasedmovement.html#cb4-56" aria-hidden="true" tabindex="-1"></a>parameters <span class="ot">=</span> <span class="fu">list</span>()</span>
-<span id="cb4-57"><a href="agebasedmovement.html#cb4-57" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>logisitic_a50_movement <span class="ot">=</span> <span class="fu">logit_general</span>(a50_move, data<span class="sc">$</span>a50_bounds[<span class="dv">1</span>], data<span class="sc">$</span>a50_bounds[<span class="dv">2</span>])</span>
-<span id="cb4-58"><a href="agebasedmovement.html#cb4-58" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_ato95_movement <span class="ot">=</span> <span class="fu">log</span>(a95_move)</span>
-<span id="cb4-59"><a href="agebasedmovement.html#cb4-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-60"><a href="agebasedmovement.html#cb4-60" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>transformed_movement_pars_young <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(n_regions <span class="sc">-</span> <span class="dv">1</span>, n_regions))</span>
-<span id="cb4-61"><a href="agebasedmovement.html#cb4-61" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>transformed_movement_pars_old <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(n_regions <span class="sc">-</span> <span class="dv">1</span>, n_regions))</span>
-<span id="cb4-62"><a href="agebasedmovement.html#cb4-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-63"><a href="agebasedmovement.html#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(r <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_regions) {</span>
-<span id="cb4-64"><a href="agebasedmovement.html#cb4-64" aria-hidden="true" tabindex="-1"></a>  parameters<span class="sc">$</span>transformed_movement_pars_young[,r] <span class="ot">=</span> <span class="fu">simplex</span>(young_move_matrix[r, ])</span>
-<span id="cb4-65"><a href="agebasedmovement.html#cb4-65" aria-hidden="true" tabindex="-1"></a>  parameters<span class="sc">$</span>transformed_movement_pars_old[,r] <span class="ot">=</span> <span class="fu">simplex</span>(old_move_matrix[r, ])</span>
-<span id="cb4-66"><a href="agebasedmovement.html#cb4-66" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-67"><a href="agebasedmovement.html#cb4-67" aria-hidden="true" tabindex="-1"></a>test_obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(<span class="at">data =</span> data, <span class="at">parameters =</span> parameters, <span class="at">DLL=</span><span class="st">&quot;SimpleAgeBasedMovement&quot;</span>)</span></code></pre></div>
+<span id="cb4-56"><a href="agebasedmovement.html#cb4-56" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>tag_likelihood_type <span class="ot">=</span> <span class="dv">1</span> <span class="do">## multinomial</span></span>
+<span id="cb4-57"><a href="agebasedmovement.html#cb4-57" aria-hidden="true" tabindex="-1"></a>parameters <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb4-58"><a href="agebasedmovement.html#cb4-58" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>logisitic_a50_movement <span class="ot">=</span> <span class="fu">logit_general</span>(a50_move, data<span class="sc">$</span>a50_bounds[<span class="dv">1</span>], data<span class="sc">$</span>a50_bounds[<span class="dv">2</span>])</span>
+<span id="cb4-59"><a href="agebasedmovement.html#cb4-59" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>ln_ato95_movement <span class="ot">=</span> <span class="fu">log</span>(a95_move)</span>
+<span id="cb4-60"><a href="agebasedmovement.html#cb4-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-61"><a href="agebasedmovement.html#cb4-61" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>transformed_movement_pars_young <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(n_regions <span class="sc">-</span> <span class="dv">1</span>, n_regions))</span>
+<span id="cb4-62"><a href="agebasedmovement.html#cb4-62" aria-hidden="true" tabindex="-1"></a>parameters<span class="sc">$</span>transformed_movement_pars_old <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(n_regions <span class="sc">-</span> <span class="dv">1</span>, n_regions))</span>
+<span id="cb4-63"><a href="agebasedmovement.html#cb4-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-64"><a href="agebasedmovement.html#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(r <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_regions) {</span>
+<span id="cb4-65"><a href="agebasedmovement.html#cb4-65" aria-hidden="true" tabindex="-1"></a>  parameters<span class="sc">$</span>transformed_movement_pars_young[,r] <span class="ot">=</span> <span class="fu">simplex</span>(young_move_matrix[r, ])</span>
+<span id="cb4-66"><a href="agebasedmovement.html#cb4-66" aria-hidden="true" tabindex="-1"></a>  parameters<span class="sc">$</span>transformed_movement_pars_old[,r] <span class="ot">=</span> <span class="fu">simplex</span>(old_move_matrix[r, ])</span>
+<span id="cb4-67"><a href="agebasedmovement.html#cb4-67" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-68"><a href="agebasedmovement.html#cb4-68" aria-hidden="true" tabindex="-1"></a>test_obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(<span class="at">data =</span> data, <span class="at">parameters =</span> parameters, <span class="at">DLL=</span><span class="st">&quot;SimpleAgeBasedMovement&quot;</span>)</span></code></pre></div>
 <pre><code>## Constructing atomic D_lgamma</code></pre>
 </div>
 <div id="simulation-with-fixed-age-based-ogive" class="section level2 unnumbered hasAnchor">
