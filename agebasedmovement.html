@@ -274,6 +274,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#first-attempt"><i class="fa fa-check"></i>First attempt</a></li>
 <li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#second-attempt"><i class="fa fa-check"></i>Second attempt</a></li>
+<li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#simulation-summary"><i class="fa fa-check"></i>Simulation summary</a></li>
 <li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#setup-simulations"><i class="fa fa-check"></i>Setup simulations</a></li>
 <li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#simulation-with-fixed-age-based-ogive"><i class="fa fa-check"></i>Simulation with fixed age-based ogive</a></li>
 <li class="chapter" data-level="" data-path="agebasedmovement.html"><a href="agebasedmovement.html#simulation-estimate-a50-parameter-of-age-based-ogive"><i class="fa fa-check"></i>Simulation estimate a50 parameter of age-based ogive</a></li>
@@ -360,10 +361,6 @@ T^k_{a, r,t + 1} &amp; = T^k_{a, r,t} e^{-M}, \quad t &gt; 0\\
 where, <span class="math inline">\(T_a^k\)</span> is the initial number of tag releases for release event <span class="math inline">\(k\)</span> and age <span class="math inline">\(a\)</span>, <span class="math inline">\(\boldsymbol{T}^k_{a, t + 1}\)</span> is a matrix of numbers of tagged fish across all regions from release event <span class="math inline">\(k\)</span> and age <span class="math inline">\(a\)</span>, <span class="math inline">\(\boldsymbol{M}^y\)</span> is a <span class="math inline">\(n_r \times n_r\)</span> movement matrix for young fish and <span class="math inline">\(\boldsymbol{M}^o\)</span> is the movement matrix for older fish. <span class="math inline">\(S^o_a\)</span> is a movement based logistic ogive that determines what proportion of age-cohorts move based on <span class="math inline">\(\boldsymbol{M}^o\)</span> and <span class="math inline">\((1 - S^o_a)\)</span> indicates what proportion of age-cohorts move based on <span class="math inline">\(\boldsymbol{M}^y\)</span>. The age-based selectivity is parametersised as a logistic ogive with estimable parameters <span class="math inline">\(a_{50}\)</span> (age at which <span class="math inline">\(S^o_a = 0.5\)</span>) and <span class="math inline">\(a_{to95}\)</span> (difference age when <span class="math inline">\(S^o_a = 0.5\)</span> and <span class="math inline">\(S^o_a = 0.95\)</span>),</p>
 <p><span class="math display">\[
 S^o_a = \frac{1}{1 + 19^{(a_{50} - a) / a_{to95}}}
-\]</span>
-This selectivity is forced to have maximum value of one so that all fish in the partition move based on either <span class="math inline">\(\boldsymbol{M}^y\)</span> and <span class="math inline">\(\boldsymbol{M}^o\)</span>
-<span class="math display">\[
-S^o_a = \frac{S^o_a}{max(\boldsymbol{S}^o)}
 \]</span></p>
 <p>Generating age-based observations</p>
 <div id="first-attempt" class="section level3 unnumbered hasAnchor">
@@ -374,8 +371,8 @@ S^o_a = \frac{S^o_a}{max(\boldsymbol{S}^o)}
 \widehat{O}^k_{r,t} &amp; = \sum_a \widehat{T}^k_{a, r,t} \widehat{S}^o_a \\
 {Y}^k_{r,t} &amp; = \sum_a N^k_{a, r,t}(1 - \widehat{S}^o_a) \\
 {O}^k_{r,t} &amp; = \sum_a N^k_{a, r,t} \widehat{S}^o_a \\
-{Y}^k_{r,t} \sim \mathcal{Poisson}\left(\widehat{Y}^k_{r,t}\right)\\
-{O}^k_{r,t} \sim \mathcal{Poisson}\left(\widehat{O}^k_{r,t}\right)
+{Y}^k_{r,t} &amp;\sim \mathcal{Poisson}\left(\widehat{Y}^k_{r,t}\right)\\
+{O}^k_{r,t} &amp;\sim \mathcal{Poisson}\left(\widehat{O}^k_{r,t}\right)
 \end{align*}\]</span></p>
 <p><span class="math inline">\(\widehat{Y}^k_{r,t}\)</span> expected tag recoveries for young fish, and <span class="math inline">\(\widehat{O}^k_{r,t}\)</span> is the expected tag recoveries for old fish, and <span class="math inline">\(N^k_{a, r,t}\)</span> is the observed tag-recovery by age.</p>
 <p>The problem with this approach is we are using model estimated quantities (<span class="math inline">\(\widehat{S}^o_a\)</span>) to classify observed values as young and old, which is a no no. Simulations also showed that we could not estimate both parameters of <span class="math inline">\(\widehat{S}^o_a\)</span>.</p>
@@ -384,10 +381,13 @@ S^o_a = \frac{S^o_a}{max(\boldsymbol{S}^o)}
 <h3>Second attempt<a href="agebasedmovement.html#second-attempt" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The second attempt was to assume the age-structure was multinomial as,</p>
 <p><span class="math display">\[\begin{align*}
-\widehat{\theta}^k_{a, r,t} = \frac{\widehat{T}^k_{a, r,t}}{\sum_a \widehat{T}^k_{a, r,t}}
-N^k_{a, r,t} \sim \mathcal{Multinomial}\left(\widehat{\theta}^k_{a, r,t}\right)\\
+\widehat{\theta}^k_{a, r,t} &amp;= \frac{\widehat{T}^k_{a, r,t}}{\sum_a \widehat{T}^k_{a, r,t}}\\
+N^k_{a, r,t} &amp;\sim \mathcal{Multinomial}\left(\widehat{\theta}^k_{a, r,t}\right)\\
 \end{align*}\]</span>
 with the effective sample size being the sum of the observations. This treatment of the data resulted in much more robust estimation of movement rates and all parameters of the movement ogive.</p>
+</div>
+<div id="simulation-summary" class="section level2 unnumbered hasAnchor">
+<h2>Simulation summary<a href="agebasedmovement.html#simulation-summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The following section is code and plots from running the three following simulations,</p>
 <ol style="list-style-type: decimal">
 <li>Simulate tag-recoveries with the Poisson distribution, estimate <span class="math inline">\(\boldsymbol{M}^y\)</span> and <span class="math inline">\(\boldsymbol{M}^o\)</span> with <span class="math inline">\(S^o_a\)</span> fixed at values assumed in the OM</li>
