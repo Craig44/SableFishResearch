@@ -23,7 +23,7 @@ This Gitbook documents my/our research on Alaskan sablefish (*Anoplopoma fimbria
 ## Gitbook outline  {-}
 - Chapter \@ref(objectives) outlines a list of objectives that we have set or accomplished during this research project
 
-- Chapter \@ref(modeldescription) documents the current stock assessment model and assumptions (work in progress). This is the first step of the project. Its purpose is to helo me understand the data and important process dynamics assumed in the current assessment. Most models applied in this research were written in TMB [@kristensen2015tmb], many of the assessemnt models are available in the [`SpatialSablefishAssessment` R package](https://github.com/Craig44/SpatialSablefishAssessment), which was developed during this research.
+- Chapter \@ref(modeldescription) documents the current stock assessment model and assumptions (work in progress). This is the first step of the project. Its purpose is to help me understand the data and important process dynamics assumed in the current assessment. Most models applied in this research were written in TMB [@kristensen2015tmb], many of the assessment models are available in the [`SpatialSablefishAssessment` R package](https://github.com/Craig44/SpatialSablefishAssessment), which was developed during this research.
 
 - Chapter \@ref(spatialmodeldescription) documents a generalized spatial assessment model used as both an OM and EM.
 
@@ -45,6 +45,9 @@ This Gitbook documents my/our research on Alaskan sablefish (*Anoplopoma fimbria
 
 
 - Chapter \@ref(nextsteps) outlines future model assumptions/considerations.
+
+
+- Chapter \@ref(agebasedmovement) explores estimating age-based movement rates using a simple age-structured simulation.
 
 
 - Chapter \@ref(taglike) describes different tag likelihoods that I considered in the spatial model and does a simple simulation estimating annual movement rates with the different likelihoods.
