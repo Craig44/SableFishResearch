@@ -36,6 +36,8 @@ fig:TagReleases
 fig:recoveriebygear
 fig:TagRecoveriesOutsideRegion
 fig:EmpiricalRecoveries
+fig:EmpiricalRecoveriesAlt
+fig:EmpiricalRecoveriesByGrowth
 fig:TagByReleaseYear
 fig:RelativeTagByReleaseYear
 fig:TagReleasessimplePrediction
