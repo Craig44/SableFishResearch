@@ -43,11 +43,23 @@ include_graphics(file.path("Figures", "out_of_region_recoveries.png"))
 
 
 
-We can crudely look at the proportion of recoveries across recovery regions that were released in a given region shown in Figure \@ref(fig:EmpiricalRecoveries). Care must be taken when interpreting these numbers because recovery rates among regions will differ which this plot is ignoring.
+We can crudely look at the proportion of recoveries across recovery regions that were released in a given region, which is shown in Figure \@ref(fig:EmpiricalRecoveries). Care must be taken when interpreting these numbers because recovery rates among regions will differ which this plot is ignoring such as time-at-liberty, spatially varyin reporting rates due to different fishing mortality.
 
 ```{r EmpiricalRecoveries, out.width = '100%', fig.height= 6, fig.cap="Tag recoveries by release and recovery region pooled over all years. Colors are number of tags recovered and text indicates the proportion.", echo = F, eval = T}
 include_graphics(file.path("Figures", "empirical_tag_recoveries.png"))
 ```
+
+
+```{r EmpiricalRecoveriesAlt, out.width = '100%', fig.height= 6, fig.cap="Tag recoveries by release and recovery region pooled over all years. Colors proportion of recoveries and text is the number of recoveries among recovery regions.", echo = F, eval = T}
+include_graphics(file.path("Figures", "empirical_tag_recoveries_with_releases.png"))
+```
+
+
+```{r EmpiricalRecoveriesByGrowth, out.width = '100%', fig.height= 6, fig.cap="Tag recoveries by release and recovery region pooled over all years for different length groups. Colors are number of tags recovered and text indicates the proportion.", echo = F, eval = T}
+include_graphics(file.path("Figures", "empirical_tag_recoveries_by_length_group.png"))
+```
+
+
 
 
 
