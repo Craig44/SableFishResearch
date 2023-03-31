@@ -8,12 +8,21 @@ Most of my experience with reference points are spawning biomass related i.e., \
 +============================+=============================================================================+
 | \(SSB^{\%B_0}_{y}\)        | *Percent \(B_0\)* \(= \frac{SSB_y}{B_0}\)
 +----------------------------+-----------------------------------------------------------------------------+
-| \(SPR\)                    | *Spawner per recruit* a measure/proxy of population fecundity
+| \(SPR\)                    | *Spawner per recruit* a measure of a single individuals potential fecundity
+|                            | over its entire life, also called spawner potential ratio
++----------------------------+-----------------------------------------------------------------------------+
+| \(YPR\)                    | *yield per recruit* The hypothetical yield of a single individual 
+|                            | over its entire life, also called spawner potential ratio
 +----------------------------+-----------------------------------------------------------------------------+
 | \(F_{35\%spr}\)            | *\(F\) 35\%* The Fishing mortality that results in a 35\% SPR
 +----------------------------+-----------------------------------------------------------------------------+
-| \(SPR_{msy}\)              | *SPR at MSY*
+| \(F_{msy\)                 | 
 +----------------------------+-----------------------------------------------------------------------------+
+| \(F_{max\)                 | Fishing mortality that maximizes the \(YPR\)
++----------------------------+-----------------------------------------------------------------------------+
+| \(F_{0.1\)                 | *SPR at MSY*
++----------------------------+-----------------------------------------------------------------------------+
+
 
 
 
