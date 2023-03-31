@@ -23,7 +23,7 @@
 <meta name="author" content="C.Marsh" />
 
 
-<meta name="date" content="2023-03-14" />
+<meta name="date" content="2023-03-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -328,8 +328,19 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="Fexplore.html"><a href="Fexplore.html#appendix---hybrid-approach"><i class="fa fa-check"></i>Appendix - Hybrid approach</a></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="spatialInit.html"><a href="spatialInit.html"><i class="fa fa-check"></i><b>18</b> Initialising the plus group in spatial models</a></li>
-<li class="chapter" data-level="19" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i><b>19</b> Glossary of terms</a></li>
+<li class="chapter" data-level="19" data-path="BHRecruitment.html"><a href="BHRecruitment.html"><i class="fa fa-check"></i><b>19</b> Beverton-Holt stock recruitment relationship</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="BHRecruitment.html"><a href="BHRecruitment.html#formulation-1"><i class="fa fa-check"></i><b>19.1</b> Formulation 1</a></li>
+<li class="chapter" data-level="19.2" data-path="BHRecruitment.html"><a href="BHRecruitment.html#formulation-2"><i class="fa fa-check"></i><b>19.2</b> Formulation 2</a></li>
+<li class="chapter" data-level="19.3" data-path="BHRecruitment.html"><a href="BHRecruitment.html#formulation-3"><i class="fa fa-check"></i><b>19.3</b> Formulation 3</a></li>
+<li class="chapter" data-level="19.4" data-path="BHRecruitment.html"><a href="BHRecruitment.html#formulation-4"><i class="fa fa-check"></i><b>19.4</b> Formulation 4</a>
+<ul>
+<li class="chapter" data-level="19.4.1" data-path="BHRecruitment.html"><a href="BHRecruitment.html#reparameterisation-to-formulation-1"><i class="fa fa-check"></i><b>19.4.1</b> Reparameterisation to formulation 1</a></li>
+<li class="chapter" data-level="19.4.2" data-path="BHRecruitment.html"><a href="BHRecruitment.html#reparameterisation-to-formulation-2"><i class="fa fa-check"></i><b>19.4.2</b> Reparameterisation to formulation 2</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="20" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i><b>20</b> Glossary of terms</a></li>
 <li class="divider"></li>
 <li><a href="https://www.fisheries.noaa.gov/alaska/science-data/alaska-sablefish-fisheries-and-assessment" target="blank">NOAA Website</a></li>
 
@@ -371,14 +382,28 @@ div.csl-indent {
 </tr>
 <tr class="even">
 <td><span class="math inline">\(SPR\)</span></td>
-<td><em>Spawner per recruit</em> a measure/proxy of population fecundity</td>
+<td><em>Spawner per recruit</em> a measure of a single individuals potential fecundity
+over its entire life, also called spawner potential ratio</td>
 </tr>
 <tr class="odd">
+<td><span class="math inline">\(YPR\)</span></td>
+<td><em>yield per recruit</em> The hypothetical yield of a single individual
+over its entire life, also called spawner potential ratio</td>
+</tr>
+<tr class="even">
 <td><span class="math inline">\(F_{35\%spr}\)</span></td>
 <td><em><span class="math inline">\(F\)</span> 35%</em> The Fishing mortality that results in a 35% SPR</td>
 </tr>
+<tr class="odd">
+<td><span class="math inline">\(F_{msy\)</span></td>
+<td></td>
+</tr>
 <tr class="even">
-<td><span class="math inline">\(SPR_{msy}\)</span></td>
+<td><span class="math inline">\(F_{max\)</span></td>
+<td>Fishing mortality that maximizes the <span class="math inline">\(YPR\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(F_{0.1\)</span></td>
 <td><em>SPR at MSY</em></td>
 </tr>
 </tbody>
@@ -413,7 +438,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-fenske2022implications" class="csl-entry">
 Fenske, Kari Hammarsten. 2022. <span>“Implications of Spatial Population Dynamics for Abundance Estimation and Catch Apportionment of Alaska Sablefish (Anoplopoma Fimbria).”</span> PhD thesis, University of Alaska Fairbanks.

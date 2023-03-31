@@ -121,4 +121,11 @@ refpoints
 sexratios
 Fexplore
 spatialInit
+BHRecruitment
+formulation-1
+formulation-2
+formulation-3
+formulation-4
+reparameterisation-to-formulation-1
+reparameterisation-to-formulation-2
 glossary
